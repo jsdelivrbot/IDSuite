@@ -15,18 +15,9 @@ class TimePeriod extends Model
         'start', 'end'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'duration'
+    protected $guarded = [
+        'duration', 'created_at', 'updated_at'
     ];
-
-//    protected $guarded = [
-//        'classcode'
-//    ];
 
     /**
      * Define table to be used with this model. It defaults and assumes table names will have an s added to the end.
@@ -34,27 +25,19 @@ class TimePeriod extends Model
      */
     protected $table = "timeperiod";
 
+    public $incrementing = false;
 
     /**
      * timeperiod constructor.
-     * @param array $start
-     * @param $end
      * @param array $attributes
      */
-    public function __construct($start = null, $end = null, $attributes = array())  {
+    public function __construct($attributes = array())  {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 
-        $this->start    = $start;
-        $this->end      = $end;
-
-        if($this->start === null || $this->end === null) {
-            $this->duration = null;
-        } else {
-            $this->duration = $end - $start;
-        }
-
         $this->save();
+
+        return $this;
 
     }
 }

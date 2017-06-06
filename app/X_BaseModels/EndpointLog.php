@@ -4,7 +4,7 @@ namespace App;
 
 use App\Model as Model;
 
-class Location extends Model
+class EndpointLog extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,33 +12,24 @@ class Location extends Model
      * @var array
      */
     protected $fillable = [
-        'coordinates', 'address', 'city', 'state', 'zipcode'
+        'message', 'event_type',
     ];
 
-
     protected $guarded = [
-        'created_at', 'updated_at'
+        'updated_at', 'created_at'
     ];
 
     /**
      * Define table to be used with this model. It defaults and assumes table names will have an s added to the end.
      *for instance App\User table by default would be users
      */
-    protected $table = "location";
+    protected $table = "endpoint_log";
 
     public $incrementing = false;
 
-    /**
-     * relationships
-     */
-    public function coordinate(){
-        return $this->hasOne('App\Coordinate', 'mrge_id', 'coordinate_id');
-    }
-
-
 
     /**
-     * Location constructor.
+     * EndpointLog constructor.
      * @param array $attributes
      */
     public function __construct($attributes = array())  {
@@ -50,6 +41,5 @@ class Location extends Model
         return $this;
 
     }
-
 
 }

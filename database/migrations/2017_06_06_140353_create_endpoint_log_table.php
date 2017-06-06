@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLocationTable extends Migration
+class CreateEndpointLogTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,22 +15,16 @@ class CreateLocationTable extends Migration
     {
         Schema::enableForeignKeyConstraints();
 
-        Schema::create('location', function (Blueprint $table) {
+        Schema::create('endpoint_log', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->uuid('mrge_id');
             $table->primary('mrge_id');
             $table->string('class_code');
-            $table->uuid('coordinate_id')->nullable();
-            $table->string('address')->nullable();
-            $table->string('city')->nullable();
-            $table->string('state')->nullable();
-            $table->string('zipcode')->nullable();
+            $table->text('message')->nullable();
+            $table->string('event_type')->nullable();
             $table->timestamps();
         });
 
-        Schema::table('location', function(Blueprint $table){
-            $table->foreign('coordinate_id')->references('mrge_id')->on('coordinate')->onDelete('cascade')->onUpdate('cascade');
-        });
     }
 
     /**
@@ -40,6 +34,6 @@ class CreateLocationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('location');
+        Schema::dropIfExists('endpoint_log');
     }
 }

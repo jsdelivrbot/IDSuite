@@ -20,8 +20,8 @@ class CreatePersonNameTable extends Migration
             $table->uuid('mrge_id');
             $table->primary('mrge_id');
             $table->string('class_code');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->string('middle_name')->nullable();
             $table->string('preferred_name')->nullable();
             $table->string('title')->nullable();

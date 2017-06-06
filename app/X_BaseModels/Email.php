@@ -15,12 +15,8 @@ class Email extends Model
         'address', 'username_prefix', 'host', 'top_level_domain'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
+    protected $guarded = [
+        'created_at', 'updated_at'
     ];
 
     /**
@@ -29,29 +25,22 @@ class Email extends Model
      */
     protected $table = "email";
 
-//    protected $guarded = [
-//        'class_code'
-//    ];
+    public $incrementing = false;
 
     /**
      * Email constructor.
-     * @param string $email_address
      * @param array $attributes
      */
-    public function __construct($email_address, $attributes = array())  {
+    public function __construct($attributes = array())  {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
-
-        $this->address = $email_address;
-
-        $this->username_prefix = null;
-        $this->host = null;
-        $this->top_level_domain = null;
 
 
         // TODO split string stuff to get the rest of the attributes.
 
         $this->save();
+
+        return $this;
 
     }
 }

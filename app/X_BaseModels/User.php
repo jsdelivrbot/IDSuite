@@ -2,11 +2,11 @@
 
 namespace App;
 
-use App\Contact;
-use App\Model as Model;
-use App\PersonName;
+
 use Mockery\Exception;
 use Illuminate\Support\Facades\Hash;
+
+use App\Model as Model;
 
 class User extends Model
 {
@@ -28,12 +28,17 @@ class User extends Model
         'remember_token', 'active'
     ];
 
+    protected $guarded = [
+        'created_at', 'updated_at'
+    ];
+
     /**
      * Define table to be used with this model. It defaults and assumes table names will have an s added to the end.
      *for instance App\User table by default would be users
      */
     protected $table = "user";
 
+    public $incrementing = false;
 
     /**
      * relationships
@@ -42,34 +47,21 @@ class User extends Model
         return $this->hasOne('App\Contact', 'mrge_id');
     }
 
-//    protected $guarded = [
-//        'class_code'
-//    ];
-
     /**
      * User constructor.
-     * @param $contact /App/Contact
-     * @param $password string
      * @param array $attributes
      */
-    public function __construct(Contact $contact = null, $password, $attributes = array())  {
+    public function __construct($attributes = array())  {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 
         $this->active = 1;
 
-        if($contact !== null) {
-            $this->contact = $contact->mrge_id;
-        } else {
-            $this->contact = null;
-        }
-        $this->setPassword($password);
-
         $this->save();
 
+        return $this;
+
     }
-
-
 
 
     /**

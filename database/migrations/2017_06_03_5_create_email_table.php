@@ -20,7 +20,7 @@ class CreateEmailTable extends Migration
             $table->uuid('mrge_id');
             $table->primary('mrge_id');
             $table->string('class_code');
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('username_prefix')->nullable();
             $table->string('host')->nullable();
             $table->string('top_level_domain')->nullable();

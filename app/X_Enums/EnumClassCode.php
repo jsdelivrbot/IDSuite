@@ -14,14 +14,21 @@ class EnumClassCode extends Enum
     public static $class_code = 'ECC';
 
     public static $enum = [
-        'Contact'           => 'CON',
-        'Coordinate'        => 'COR',
-        'Customer'          => 'CUS',
-        'Email'             => 'EML',
-        'Location'          => 'LOC',
-        'PersonName'        => 'NAM',
-        'TimePeriod'        => 'TMP',
-        'User'              => 'USR',
-        'EnumClassCode'     => 'ECC'
+        'Contact'           =>  'CON',
+        'Coordinate'        =>  'COR',
+        'Customer'          =>  'CUS',
+        'Email'             =>  'EML',
+        'Location'          =>  'LOC',
+        'PersonName'        =>  'NAM',
+        'TimePeriod'        =>  'TMP',
+        'User'              =>  'USR',
+        'EnumClassCode'     =>  'ECC',
+        'EnumEventType'     =>  'ETT',
+        'EnumModelType'     =>  'EMT',
+        'Record'            =>  'REC',
+        'Proxy'             =>  'PRX',
+        'Endpoint'          =>  'END',
+        'EndpointModel'     =>  'ENM',
+        'EndpointLog'       =>  'ENL'
     ];
 }

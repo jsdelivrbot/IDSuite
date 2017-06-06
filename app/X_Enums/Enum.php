@@ -22,15 +22,14 @@ abstract class Enum
     static function getValueByKey($key){
 
         $class = get_called_class();
-        dump(strpos($key, 'Enums'));
-        dump(strpos($key, 'App'));
+
         if( strpos($key, 'Enums') || (strpos($key, 'Enum') === 0)){
             $split = explode('Enums\\', $key);
-            dump($split);
+
             $class_key = $split[1];
         } elseif( strpos($key, 'App') || (strpos($key, 'App') === 0)){
             $split = explode('App\\', $key);
-            dump($split);
+
             $class_key = $split[1];
         } else {
             Throw new Exception('The key does not match the current namespace $class : ' . $class , 500);

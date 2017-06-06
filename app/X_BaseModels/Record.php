@@ -4,7 +4,7 @@ namespace App;
 
 use App\Model as Model;
 
-class Location extends Model
+class Record extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,9 +12,8 @@ class Location extends Model
      * @var array
      */
     protected $fillable = [
-        'coordinates', 'address', 'city', 'state', 'zipcode'
+        'endpoint', 'timeperiod', 'local_id', 'conf_id', 'local_name', 'local_number', 'remote_name', 'remote_number', 'dialed_digits', 'direction', 'protocol'
     ];
-
 
     protected $guarded = [
         'created_at', 'updated_at'
@@ -24,21 +23,24 @@ class Location extends Model
      * Define table to be used with this model. It defaults and assumes table names will have an s added to the end.
      *for instance App\User table by default would be users
      */
-    protected $table = "location";
+    protected $table = "record";
 
     public $incrementing = false;
 
     /**
      * relationships
      */
-    public function coordinate(){
-        return $this->hasOne('App\Coordinate', 'mrge_id', 'coordinate_id');
+    public function endpoint(){
+        return $this->hasOne('App\Endpoint', 'mrge_id', 'endpoint_id');
+    }
+
+    public function timeperiod(){
+        return $this->hasOne('App\TimePeriod', 'mrge_id', 'timeperiod_id');
     }
 
 
-
     /**
-     * Location constructor.
+     * User constructor.
      * @param array $attributes
      */
     public function __construct($attributes = array())  {
@@ -50,6 +52,4 @@ class Location extends Model
         return $this;
 
     }
-
-
 }

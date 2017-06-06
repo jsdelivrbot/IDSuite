@@ -15,17 +15,8 @@ class Coordinate extends Model
         'lat', 'long'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-
-    ];
-
     protected $guarded = [
-        'class_code'
+        'updated_at', 'created_at'
     ];
 
     /**
@@ -34,9 +25,7 @@ class Coordinate extends Model
      */
     protected $table = "coordinate";
 
-
     public $incrementing = false;
-
 
     protected $keyType = 'uuid';
 
@@ -51,6 +40,10 @@ class Coordinate extends Model
     public function __construct( $attributes = array())  {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
+
+        $this->save();
+
+        return $this;
 
 
     }

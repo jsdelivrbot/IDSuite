@@ -4,7 +4,7 @@ namespace App;
 
 use App\Model as Model;
 
-class Location extends Model
+class Proxy extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,9 +12,8 @@ class Location extends Model
      * @var array
      */
     protected $fillable = [
-        'coordinates', 'address', 'city', 'state', 'zipcode'
+        'customer', 'address', 'name', 'port', 'target', 'token', 'key'
     ];
-
 
     protected $guarded = [
         'created_at', 'updated_at'
@@ -24,21 +23,20 @@ class Location extends Model
      * Define table to be used with this model. It defaults and assumes table names will have an s added to the end.
      *for instance App\User table by default would be users
      */
-    protected $table = "location";
+    protected $table = "proxy";
 
     public $incrementing = false;
 
     /**
      * relationships
      */
-    public function coordinate(){
-        return $this->hasOne('App\Coordinate', 'mrge_id', 'coordinate_id');
+    public function customer(){
+        return $this->hasOne('App\Customer', 'mrge_id', 'customer_id');
     }
 
 
-
     /**
-     * Location constructor.
+     * User constructor.
      * @param array $attributes
      */
     public function __construct($attributes = array())  {
@@ -50,6 +48,4 @@ class Location extends Model
         return $this;
 
     }
-
-
 }

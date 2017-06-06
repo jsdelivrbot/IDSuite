@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: amac
- * Date: 6/5/17
- * Time: 2:54 AM
- */
 
 namespace App;
 
@@ -12,7 +6,7 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Model as Model;
 
-class Customer extends Model
+class Endpoint extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -20,7 +14,12 @@ class Customer extends Model
      * @var array
      */
     protected $fillable = [
-        'contact'
+        'customer', 'manufacturer', 'model', 'username', 'name', 'ipaddress', 'macaddress', 'proxy', 'sync_time', 'reboot_time', 'last_reboot', 'status', 'model_type', 'status_at'
+    ];
+
+
+    protected $guarded = [
+        'password_hash', 'updated_at', 'created_at'
     ];
 
     /**
@@ -29,33 +28,35 @@ class Customer extends Model
      * @var array
      */
     protected $hidden = [
-        'remember_token', 'password_hash', 'active'
+        'active'
     ];
-
-    protected $guarded = [
-        'updated_at', 'created_at'
-    ];
-
 
     /**
-     * The table associated with the model.
-     *
-     * @var string
+     * Define table to be used with this model. It defaults and assumes table names will have an s added to the end.
+     *for instance App\User table by default would be users
      */
-    protected $table = 'customer';
+    protected $table = "endpoint";
 
     public $incrementing = false;
 
     /**
      * relationships
      */
-    public function contact(){
-        return $this->hasOne('App\Contact', 'mrge_id', 'contact_id');
+    public function customer(){
+        return $this->hasOne('App\Customer', 'mrge_id', 'customer_id');
+    }
+
+    public function model(){
+        return $this->hasOne('App\EndpointModel', 'mrge_id', 'model_id');
+    }
+
+    public function proxy(){
+        return $this->hasOne('App\Proxy', 'mrge_id', 'proxy_id');
     }
 
 
     /**
-     * Customer constructor.
+     * Endpoint constructor.
      * @param array $attributes
      */
     public function __construct($attributes = array())  {
@@ -67,12 +68,13 @@ class Customer extends Model
         $this->save();
 
         return $this;
+
     }
 
 
     /**
      * @param $password string
-     * set customer password_hash
+     * set user password_hash
      */
     public function setPassword($password){
         // TODO Password Validation
@@ -86,5 +88,4 @@ class Customer extends Model
             dump($e->getMessage());
         }
     }
-
 }
