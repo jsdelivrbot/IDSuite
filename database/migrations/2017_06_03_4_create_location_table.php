@@ -17,8 +17,8 @@ class CreateLocationTable extends Migration
 
         Schema::create('location', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->uuid('mrge_id');
-            $table->primary('mrge_id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('class_code');
             $table->uuid('coordinate_id')->nullable();
             $table->string('address')->nullable();
@@ -29,7 +29,7 @@ class CreateLocationTable extends Migration
         });
 
         Schema::table('location', function(Blueprint $table){
-            $table->foreign('coordinate_id')->references('mrge_id')->on('coordinate')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('coordinate_id')->references('id')->on('coordinate');
         });
     }
 

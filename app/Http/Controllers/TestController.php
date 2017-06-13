@@ -3,87 +3,141 @@
 namespace App\Http\Controllers;
 
 
+use App\Contact;
+use App\Coordinate;
+use App\Customer;
+use App\Email;
+use App\Endpoint;
+use App\EndpointModel;
+use App\Location;
+use App\Model;
+use App\PersonName;
+use App\Proxy;
+use Mockery\Exception;
+use PhpParser\Node\Expr\AssignOp\Mod;
+
 class TestController extends Controller
 {
     
 	public function test(){
 
-        $personname = new \App\PersonName();
+	    $email_address = 'aa@asd.com';
 
-        $coordinates = new \App\Coordinate();
+	    $email = new Email($email_address);
+
+	    $email->save();
+
+	    $name = new PersonName([
+	       'first_name'         =>  'Alex',
+            'last_name'         =>  'Mac',
+            'middle_name'       =>  'Duke',
+            'preferred_name'    =>  'Al',
+            'title'             =>  'Mr.'
+        ]);
+
+	    $name->save();
+
+	    $name->first_name = 'Tim';
+
+	    $name->save();
+
+	    $location = new Location([
+            'address'       =>  '363 east greyhound pass',
+            'city'          =>  'carmel',
+            'state'         =>  'Indiana',
+            'zipcode'       =>  '46032',
+        ]);
 
 
-        $location = new \App\Location();
-        $location->coordinate_id = $coordinates->mrge_id;
+	    $location->save();
+
+
+
+
+        $location->createCoordinates();
+
+
+//        $coordinate->location()->associate($location);
+
+//        $location->coordinate()->save($coordinate);
+
+
+
+//        dd($location);
+
         $location->save();
 
-        $email = new \App\Email();
-	    $contact = new \App\Contact();
+        dd($location);
 
-	    $contact->person_name_id = $personname->mrge_id;
-	    $contact->location_id = $location->mrge_id;
-	    $contact->email_id = $email->mrge_id;
-	    $contact->save();
+        $contact = new Contact();
+        $contact->lopcation = $location;
+        $contact->personname = $name;
+        $contact->email = $email;
+        $contact->save();
 
-	    $customer = new \App\Customer();
+        dd($contact);
 
-	    $customer->contact_id = $contact->mrge_id;
-        $customer->save();
+//        $contact = Contact::getObjectById($contact->mrge_id);
 
-        dump($customer);
-        dump($customer->contact->location->coordinate);
-//
-//
-//        $user = new \App\User();
-//
-//        $user->contact_id = $contact->mrge_id;
-//        $user->save();
-//
-//        dump($user);
-//
-//
-//        $endpointmodel = new \App\EndpointModel();
-//
-//        dump($endpointmodel);
-//
-//        $proxy = new \App\Proxy();
-//
-//        $proxy->customer_id = $customer->mrge_id;
-//        $proxy->save();
-//
-//        dump($proxy);
-//
-//        $endpoint = new \App\Endpoint();
-//
-//	    $endpoint->customer_id = $customer->mrge_id;
-//	    $endpoint->model_id    = $endpointmodel->mrge_id;
-//        $endpoint->proxy_id    = $proxy->mrge_id;
-//	    $endpoint->save();
-//
-//        dump($endpoint);
-//
-//        $endpointlog = new \App\EndpointLog();
-//
-//        $endpointlog->message = 'Hello World';
-//        $endpointlog->save();
-//
-//        dump($endpointlog);
-//
-//        $timeperiod = new \App\TimePeriod();
-//
-//        dump($timeperiod);
-//
-//        $record = new \App\Record();
-//
-//        $record->endpoint_id   = $endpoint->mrge_id;
-//        $record->timeperiod_id = $timeperiod->mrge_id;
-//
-//        $record->save();
-//        dump($record);
+	    $customer = new Customer();
 
+	    $customer->contact_id = $contact->id;
 
+	    $customer->save();
+
+        $location = new Location([
+            'address'   =>  '3740 indigo blue blvd',
+            'city'      =>  'whitetown',
+            'state'     =>  'Indiana',
+            'zipcode'   =>  '46075'
+        ]);
+
+        $location = $location->createCoordinates();
+
+        $model = new EndpointModel([
+            'manufacturer'  => 'test',
+            'name'          => 'testing',
+            'architecture'  => 'testy',
+            'key'           => 'tey'
+        ]);
+
+        $model->save();
+
+        $proxy = new Proxy([
+            'address'   => '123.123.123.123',
+            'name'      => 'test_proxy',
+            'port'      => '30360',
+            'target'    => 'test_target',
+            'token'     => 'tasdfasdfasldkfjsalkf',
+            'key'       => 'jalskasdfsadfaslsjfas'
+        ]);
+
+        $proxy->customer_id = $customer->id;
+
+        $proxy->save();
+
+	    $endpoint = new Endpoint([
+	        'manufacturer'  =>  'test',
+            'username'      =>  'testusername',
+            'name'          =>  'testname',
+            'ipaddress'     =>  '123.123.123.122',
+            'macaddress'    =>  'AC:AE:BC:CB',
+        ]);
+
+	    $endpoint->location_id  = $location->id;
+        $endpoint->customer_id  = $customer->id;
+        $endpoint->model_id     = $model->id;
+        $endpoint->proxy_id     = $proxy->id;
+
+        $endpoint->setPassword('testing');
+
+        $endpoint->save();
+
+        $endpoint = Endpoint::getObjectById($endpoint->id);
+
+        return response()->json([
+            'response'  =>  $endpoint
+        ]);
 
     }
-
-
 }

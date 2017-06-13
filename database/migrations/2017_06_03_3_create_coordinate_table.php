@@ -17,13 +17,18 @@ class CreateCoordinateTable extends Migration
 
         Schema::create('coordinate', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->uuid('mrge_id');
-            $table->primary('mrge_id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('class_code');
-            $table->decimal('lat')->default('00.00');
-            $table->decimal('long')->default('00.00');
+            $table->float('lat', 10, 6)->default(0);
+            $table->float('lng', 10, 6)->default(0);
+//            $table->uuid('location_id')->nullable();
             $table->timestamps();
         });
+
+//        Schema::table('coordinate', function(Blueprint $table){
+//            $table->foreign('location_id')->references('id')->on('location')->onDelete('cascade')->onUpdate('cascade');
+//        });
     }
 
     /**

@@ -17,8 +17,8 @@ class CreateEndpointmodelTable extends Migration
 
         Schema::create('endpointmodel', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->uuid('mrge_id');
-            $table->primary('mrge_id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('class_code');
             $table->string('manufacturer')->nullable();
             $table->string('name')->nullable();

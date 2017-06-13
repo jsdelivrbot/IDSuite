@@ -17,8 +17,8 @@ class CreateTimePeriodTable extends Migration
 
         Schema::create('timeperiod', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->uuid('mrge_id');
-            $table->primary('mrge_id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('class_code');
             $table->timestamp('start')->nullable();
             $table->timestamp('end')->nullable();

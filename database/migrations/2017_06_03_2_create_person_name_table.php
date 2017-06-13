@@ -17,8 +17,8 @@ class CreatePersonNameTable extends Migration
 
         Schema::create('personname', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->uuid('mrge_id');
-            $table->primary('mrge_id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('class_code');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();

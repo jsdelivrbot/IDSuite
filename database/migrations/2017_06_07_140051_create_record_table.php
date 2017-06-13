@@ -17,8 +17,8 @@ class CreateRecordTable extends Migration
 
         Schema::create('record', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->uuid('mrge_id');
-            $table->primary('mrge_id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('class_code');
             $table->uuid('endpoint_id')->nullable();
             $table->uuid('timeperiod_id')->nullable();
@@ -35,8 +35,8 @@ class CreateRecordTable extends Migration
         });
 
         Schema::table('record', function(Blueprint $table) {
-            $table->foreign('endpoint_id')->references('mrge_id')->on('endpoint')->onDelete('cascade');
-            $table->foreign('timeperiod_id')->references('mrge_id')->on('timeperiod')->onDelete('cascade');
+            $table->foreign('endpoint_id')->references('id')->on('endpoint')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('timeperiod_id')->references('id')->on('timeperiod')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

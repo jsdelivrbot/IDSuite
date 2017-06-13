@@ -17,8 +17,8 @@ class CreateEmailTable extends Migration
 
         Schema::create('email', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->uuid('mrge_id');
-            $table->primary('mrge_id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('class_code');
             $table->string('address')->nullable();
             $table->string('username_prefix')->nullable();

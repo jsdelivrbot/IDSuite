@@ -14,7 +14,7 @@ class Endpoint extends Model
      * @var array
      */
     protected $fillable = [
-        'customer', 'manufacturer', 'model', 'username', 'name', 'ipaddress', 'macaddress', 'proxy', 'sync_time', 'reboot_time', 'last_reboot', 'status', 'model_type', 'status_at'
+        'customer', 'location', 'manufacturer', 'model', 'username', 'name', 'ipaddress', 'macaddress', 'proxy', 'sync_time', 'reboot_time', 'last_reboot', 'status', 'model_type', 'status_at'
     ];
 
 
@@ -43,17 +43,24 @@ class Endpoint extends Model
      * relationships
      */
     public function customer(){
-        return $this->hasOne('App\Customer', 'mrge_id', 'customer_id');
+//        return $this->hasOne(Customer::class, 'id', 'customer_id');
+        return $this->hasOne(Customer::class);
     }
 
-    public function model(){
-        return $this->hasOne('App\EndpointModel', 'mrge_id', 'model_id');
+    public function endpointmodel(){
+//        return $this->hasOne(EndpointModel::class, 'id', 'model_id');
+        return $this->hasOne(EndpointModel::class);
     }
 
     public function proxy(){
-        return $this->hasOne('App\Proxy', 'mrge_id', 'proxy_id');
+//        return $this->hasOne(Proxy::class, 'id', 'proxy_id');
+        return $this->hasOne(Proxy::class);
     }
 
+    public function location(){
+//        return $this->hasOne(Location::class, 'id', 'location_id');
+        return $this->hasOne(Location::class);
+    }
 
     /**
      * Endpoint constructor.
@@ -65,8 +72,6 @@ class Endpoint extends Model
 
         $this->active = 1;
 
-        $this->save();
-
         return $this;
 
     }
@@ -75,17 +80,31 @@ class Endpoint extends Model
     /**
      * @param $password string
      * set user password_hash
+     * @return $this
      */
     public function setPassword($password){
         // TODO Password Validation
         try{
             $this->isActive();
             $this->password_hash = Hash::make($password);
-            if($this->exists) {
-                $this->save();
-            }
+
+            return $this;
         } catch(\Exception $e) {
             dump($e->getMessage());
+        }
+    }
+
+    /**
+     * @return bool
+     *
+     * is Active
+     * returns whether or not the user is active.
+     */
+    public function isActive(){
+        if($this->active) {
+            return true;
+        } else {
+            Throw new Exception('This user is not active. Therefore you cannot change the password', 409);
         }
     }
 }

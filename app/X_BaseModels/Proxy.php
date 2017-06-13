@@ -31,7 +31,8 @@ class Proxy extends Model
      * relationships
      */
     public function customer(){
-        return $this->hasOne('App\Customer', 'mrge_id', 'customer_id');
+//        return $this->hasOne(Customer::class, 'id', 'customer_id');
+        return $this->hasOne(Customer::class);
     }
 
 
@@ -42,8 +43,6 @@ class Proxy extends Model
     public function __construct($attributes = array())  {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
-
-        $this->save();
 
         return $this;
 

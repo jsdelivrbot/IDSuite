@@ -12,11 +12,11 @@ class Email extends Model
      * @var array
      */
     protected $fillable = [
-        'address', 'username_prefix', 'host', 'top_level_domain'
+        'address'
     ];
 
     protected $guarded = [
-        'created_at', 'updated_at'
+        'username_prefix', 'host', 'top_level_domain', 'created_at', 'updated_at'
     ];
 
     /**
@@ -35,12 +35,42 @@ class Email extends Model
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 
-
         // TODO split string stuff to get the rest of the attributes.
-
-        $this->save();
 
         return $this;
 
+    }
+
+
+    /**
+     *
+     *  setEmail on Email class object. it will also fill out the rest of the properties.
+     *
+     * @param string $address
+     * @return $this
+     */
+    public function setEmail($address){
+
+        $email_valid = filter_var($address, FILTER_VALIDATE_EMAIL);
+
+        if($email_valid) {
+            $address_split = explode('@', $address);
+            $postfix = $address_split[1];
+            $postfix_split = explode('.', $postfix);
+
+            $username = $address_split[0];
+            $host = $postfix_split[0];
+            $tld = $postfix_split[1];
+
+            $this->address = $address;
+            $this->username_prefix = $username;
+            $this->host = $host;
+            $this->top_level_domain = $tld;
+
+            $this->save();
+        }
+
+
+        return $this;
     }
 }

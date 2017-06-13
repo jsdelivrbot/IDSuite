@@ -17,19 +17,19 @@ class CreateContactTable extends Migration
 
         Schema::create('contact', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->uuid('mrge_id');
-            $table->primary('mrge_id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('class_code');
-            $table->uuid('person_name_id')->nullable();
+            $table->uuid('personname_id')->nullable();
             $table->uuid('email_id')->nullable();
             $table->uuid('location_id')->nullable();
             $table->timestamps();
         });
 
         Schema::table('contact', function(Blueprint $table) {
-            $table->foreign('email_id')->references('mrge_id')->on('email')->onDelete('cascade');
-            $table->foreign('location_id')->references('mrge_id')->on('location')->onDelete('cascade');
-            $table->foreign('person_name_id')->references('mrge_id')->on('personname')->onDelete('cascade');
+            $table->foreign('email_id')->references('id')->on('email')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('location_id')->references('id')->on('location')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('personname_id')->references('id')->on('personname')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

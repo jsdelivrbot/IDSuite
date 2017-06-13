@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Model as Model;
+use Mockery\Exception;
 
 class Location extends Model
 {
@@ -12,7 +13,7 @@ class Location extends Model
      * @var array
      */
     protected $fillable = [
-        'coordinates', 'address', 'city', 'state', 'zipcode'
+        'coordinate', 'address', 'city', 'state', 'zipcode'
     ];
 
 
@@ -32,7 +33,7 @@ class Location extends Model
      * relationships
      */
     public function coordinate(){
-        return $this->hasOne('App\Coordinate', 'mrge_id', 'coordinate_id');
+        return $this->hasOne(Coordinate::class, 'id', 'coordinate_id');
     }
 
 
@@ -45,11 +46,34 @@ class Location extends Model
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 
-        $this->save();
 
         return $this;
 
     }
 
+
+    /**
+     *
+     * Create Coordinates from a Instance Method.
+     * @return $this|bool $mixed
+     */
+    public function createCoordinates(){
+        try {
+            $coordinates = Coordinate::createCoordinatesFromLocation($this);
+
+            $coordinates->save();
+
+//            $this->coordinate = $coordinates;
+            $this->coordinate_id = $coordinates->id;
+            $this->save();
+            $this->coordinate = $coordinates;
+            $this->save();
+
+        } catch (\Exception $e){
+            \Log::warning("Class: Location \n Method: createCoordinates \n Location: " . $this->mrge_id . " failed to create coordinates. \n Error Message: " . $e->getMessage());
+        }
+
+        return $this;
+    }
 
 }

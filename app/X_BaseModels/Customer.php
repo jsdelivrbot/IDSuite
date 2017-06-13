@@ -33,7 +33,7 @@ class Customer extends Model
     ];
 
     protected $guarded = [
-        'updated_at', 'created_at'
+        'created_at', 'updated_at'
     ];
 
 
@@ -50,7 +50,8 @@ class Customer extends Model
      * relationships
      */
     public function contact(){
-        return $this->hasOne('App\Contact', 'mrge_id', 'contact_id');
+//        return $this->hasOne(Contact::class, 'id', 'contact_id');
+        return $this->hasOne(Contact::class);
     }
 
 
@@ -63,8 +64,6 @@ class Customer extends Model
         // Your construct code.
 
         $this->active = 1;
-
-        $this->save();
 
         return $this;
     }

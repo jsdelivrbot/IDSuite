@@ -17,10 +17,13 @@ class CreateProxyTable extends Migration
 
         Schema::create('proxy', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->uuid('mrge_id');
-            $table->primary('mrge_id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('class_code');
+
             $table->uuid('customer_id')->nullable();
+            $table->uuid('location_id')->nullable();
+
             $table->string('name')->nullable();
             $table->string('address')->nullable();
             $table->string('port')->nullable();
@@ -31,7 +34,8 @@ class CreateProxyTable extends Migration
         });
 
         Schema::table('proxy', function(Blueprint $table) {
-            $table->foreign('customer_id')->references('mrge_id')->on('customer')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('customer_id')->references('id')->on('customer')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('location_id')->references('id')->on('location')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

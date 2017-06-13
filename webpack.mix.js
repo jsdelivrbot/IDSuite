@@ -11,17 +11,17 @@ const { mix } = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js');
+mix.js('resources/assets/js/app.js', 'public/assets/js');
 
-mix.js('resources/assets/js/admin_custom_2.js', 'public/js');
+mix.scripts([
+    'resources/assets/js/enum_gender_select.js',
+    'resources/assets/js/enum_title_select.js'
+], 'public/assets/js/enum_select.js');
 
-mix.js('resources/assets/js/metis.js', 'public/js');
 
 mix.sass('resources/assets/sass/app.scss', '../resources/assets/css/sass.css');
 
-mix.combine([
+mix.styles([
     'resources/assets/css/app.css',
-    'resources/assets/css/metismenu.css',
-    'resources/assets/css/admin_custom_2.css',
     'resources/assets/css/sass.css'
-], 'public/css/all.css');
+], 'public/assets/css/all.css');

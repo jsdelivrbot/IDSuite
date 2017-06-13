@@ -10,15 +10,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Model extends Eloquent
+abstract class Model extends Eloquent
 {
 
     protected $guarded = [
         'class_code',
-        'mrge_id'
+        'id'
     ];
 
-    public $primaryKey = 'mrge_id';
+    public $primaryKey = 'id';
 
     public $incrementing = false;
 
@@ -27,11 +27,26 @@ class Model extends Eloquent
 
         $this->class_code = \App\Enums\EnumClassCode::getValueByKey(get_class($this));
 
-        $this->mrge_id = $this->class_code . uniqid();
+        $this->id = $this->class_code . uniqid();
+
+        return $this;
 
     }
 
-//
+
+    public static function getObjectById($id){
+        $class = get_called_class();
+        $results = $class::find($id);
+        return $results;
+
+    }
+
+    public static function getAllObjects(){
+        $class = get_called_class();
+        return $class::all();
+    }
+
+
 //    public function __set($property, $value)
 //    {
 //
@@ -70,5 +85,7 @@ class Model extends Eloquent
 //            return $this->$property;
 //        }
 //    }
+
+
 
 }

@@ -31,11 +31,13 @@ class Record extends Model
      * relationships
      */
     public function endpoint(){
-        return $this->hasOne('App\Endpoint', 'mrge_id', 'endpoint_id');
+//        return $this->hasOne(Endpoint::class, 'id', 'endpoint_id');
+        return $this->hasOne(Endpoint::class);
     }
 
     public function timeperiod(){
-        return $this->hasOne('App\TimePeriod', 'mrge_id', 'timeperiod_id');
+//        return $this->hasOne(TimePeriod::class, 'id', 'timeperiod_id');
+        return $this->hasOne(TimePeriod::class);
     }
 
 
@@ -46,8 +48,6 @@ class Record extends Model
     public function __construct($attributes = array())  {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
-
-        $this->save();
 
         return $this;
 

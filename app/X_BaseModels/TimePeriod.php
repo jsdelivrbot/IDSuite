@@ -35,8 +35,6 @@ class TimePeriod extends Model
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 
-        $this->save();
-
         return $this;
 
     }

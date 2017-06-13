@@ -17,9 +17,11 @@ class CreateUserTable extends Migration
 
         Schema::create('user', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->uuid('mrge_id');
-            $table->primary('mrge_id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('class_code');
+            $table->string('username')->nullable();
+            $table->string('email_address')->nullable();
             $table->uuid('contact_id')->nullable();
             $table->char('password_hash', 64)->nullable();
             $table->boolean('active')->nullable();
@@ -28,7 +30,7 @@ class CreateUserTable extends Migration
         });
 
         Schema::table('user', function(Blueprint $table) {
-            $table->foreign('contact_id')->references('mrge_id')->on('contact')->onDelete('cascade');
+            $table->foreign('contact_id')->references('id')->on('contact')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

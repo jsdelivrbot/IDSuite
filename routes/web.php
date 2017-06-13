@@ -11,51 +11,37 @@
 |
 */
 
-Route::get('/', function () {
-    return view('login');
+Route::get('/', function(){
+   return view('auth.login');
 });
 
-Route::get('/login', function () {
-    return view('login');
+Auth::routes();
+
+Route::post('login', 'Auth\LoginController@loginNameOrEmail');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+Route::get('/titleEnum', 'EnumController@title');
+
+Route::get('/genderEnum', 'EnumController@gender');
+
+
+
+// auth middleware //
+
+Route::group(['middleware' => ['auth']], function () {
+
+    // Enums Route //
+
+    Route::get('/modelTypeEnum', 'EnumController@modelType');
+
+    Route::get('/classCodeEnum', 'EnumController@classCode');
+
+    Route::get('/statusEnum', 'EnumController@status');
+
+    // test routes //
+
+    Route::get('/test', 'TestController@test');
 });
-
-Route::post('/login', 'UserController@login');
-
-
-
-Route::get('/index', function(){
-	return view('index');
-});
-
-Route::get('/cdr', function(){
-	return view('cdr_reporting');
-});
-
-Route::get('/reports', function(){
-	return view('reports');
-});
-
-Route::get('/endpoints', function(){
-	return view('endpoints');
-});
-
-Route::get('/proxies', function(){
-	return view('proxies');
-});
-
-Route::get('/customers', function(){
-	return view('customers');
-});
-
-Route::get('/alerts', function(){
-	return view('alerts');
-});
-
-
-
-
-// test routes //
-
-Route::get('/test-data', 'TestController@testData');
-
-Route::get('/test', 'TestController@test');

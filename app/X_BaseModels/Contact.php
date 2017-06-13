@@ -8,24 +8,6 @@ use App\Model as Model;
 
 class Contact extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'personname', 'email', 'location'
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-
-    ];
-
 
     protected $guarded = [
         'updated_at', 'created_at'
@@ -43,16 +25,20 @@ class Contact extends Model
      * relationships
      */
     public function personname(){
-        return $this->hasOne('App\PersonName', 'mrge_id', 'person_name_id');
+//        return $this->hasOne('App\PersonName', 'id', 'personname_id');
+        return $this->hasOne(PersonName::class, 'id', 'personname_id');
     }
 
     public function email(){
-        return $this->hasOne('App\Email', 'mrge_id', 'email_id');
+//        return $this->hasOne(Email::class, 'id', 'email_id');
+        return $this->hasOne(Email::class, 'id', 'email_id');
     }
 
     public function location(){
-        return $this->hasOne('App\Location', 'mrge_id', 'location_id');
+//        return $this->hasOne(Location::class, 'id', 'location_id');
+        return $this->hasOne(Location::class, 'id', 'location_id');
     }
+
 
 
 
@@ -63,9 +49,6 @@ class Contact extends Model
     public function __construct($attributes = array())  {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
-
-
-        $this->save();
 
         return $this;
     }

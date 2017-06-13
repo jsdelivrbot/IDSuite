@@ -16,7 +16,14 @@ abstract class Enum
 
     static function getKeys(){
         $class = get_called_class();
-        return array_keys($class->enum);
+        $enum_array = $class::$enum;
+        return array_keys($enum_array);
+    }
+
+    static function getValues(){
+        $class = get_called_class();
+        $enum_array = $class::$enum;
+        return array_values($enum_array);
     }
 
     static function getValueByKey($key){
