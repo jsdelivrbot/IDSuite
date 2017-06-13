@@ -151,6 +151,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->getKeyName();
 
     }
+    
 
     /**
      * Get the unique identifier for the user.
