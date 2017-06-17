@@ -30,9 +30,6 @@ class Coordinate extends Model
 
     protected $keyType = 'uuid';
 
-//    public function location(){
-//        return this->$this->belongsTo()
-//    }
 
     /**
      * Coordinate constructor.

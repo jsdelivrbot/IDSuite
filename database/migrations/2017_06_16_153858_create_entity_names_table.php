@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEndpointLogTable extends Migration
+class CreateEntityNamesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,14 @@ class CreateEndpointLogTable extends Migration
      */
     public function up()
     {
-        Schema::enableForeignKeyConstraints();
-
-        Schema::create('endpointlog', function (Blueprint $table) {
+        Schema::create('entityname', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->uuid('id');
             $table->primary('id');
             $table->string('class_code');
-            $table->text('message')->nullable();
-            $table->string('event_type')->nullable();
+            $table->string('name')->nullable();
             $table->timestamps();
         });
-
     }
 
     /**
@@ -34,6 +30,6 @@ class CreateEndpointLogTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('endpointlog');
+        Schema::dropIfExists('entity_names');
     }
 }

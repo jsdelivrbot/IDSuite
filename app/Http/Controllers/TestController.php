@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\User;
 use App\Contact;
 use App\Coordinate;
 use App\Customer;
@@ -16,10 +16,274 @@ use App\Proxy;
 use Mockery\Exception;
 use PhpParser\Node\Expr\AssignOp\Mod;
 
+
 class TestController extends Controller
 {
     
 	public function test(){
+
+
+	    $customer = Customer::getObjectById('CUS59408640ab393');
+
+	    dd($customer->endpoints);
+
+
+	    $user = User::getObjectById('USR594079ca59746');
+
+	    $customers = array();
+
+	    foreach ($user->customers as $customer){
+
+	        $contact = Contact::getObjectById($customer->contact_id);
+
+	        $name = PersonName::getObjectById($contact->personname_id);
+
+	        $c = new \stdClass();
+
+	        $c->id = $customer->id;
+	        $c->name = $name->preferred_name;
+
+	        $customers[] = $c;
+        }
+
+        $response = response()->json($customers);
+
+	    return $response;
+
+
+
+
+        dump($user);
+	    dd($user->customers);
+
+
+
+        $faker = \Faker\Factory::create();
+
+        $company_email_address = $faker->companyEmail;
+
+        $email = new Email();
+
+        $email->setEmail($company_email_address);
+
+
+        $address = $faker->address;
+
+        $explode_address = explode("\n", $address);
+        $street_address = $explode_address[0];
+        $rest_of_address = explode(',', $explode_address[1]);
+        $city = $rest_of_address[0];
+        $rest_of_address = explode(' ', $rest_of_address[1]);
+        $state = $rest_of_address[1];
+        $zip = $rest_of_address[2];
+
+
+        $location = new Location([
+            'address'   =>  $street_address,
+            'city'      =>  $city,
+            'state'     =>  $state,
+            'zipcode'   =>  $zip
+        ]);
+
+        $location->save();
+
+        $coordinates = new Coordinate([
+            'lat'   =>  $faker->latitude,
+            'lng'   =>  $faker->longitude
+        ]);
+
+        $coordinates->save();
+
+
+        $location->coordinate_id = $coordinates->id;
+
+        $location->save();
+
+        $personname = new PersonName([
+            'preferred_name'    =>  $faker->company,
+        ]);
+
+        $personname->save();
+
+        $contact = new Contact();
+
+        $contact->email_id = $email->id;
+        $contact->location_id = $location->id;
+        $contact->personname_id = $personname->id;
+
+        $contact->save();
+
+        $customer_one = new Customer();
+        $customer_one->contact_id = $contact->id;
+        $customer_one->email_address = $company_email_address;
+        $customer_one->setPassword('ids_14701');
+        $customer_one->username = $customer_one->getEmailUsername();
+        $customer_one->save();
+
+
+
+        $faker = \Faker\Factory::create();
+
+        $company_email_address = $faker->companyEmail;
+
+        $email = new Email();
+
+        $email->setEmail($company_email_address);
+
+
+        $address = $faker->address;
+
+        $explode_address = explode("\n", $address);
+        $street_address = $explode_address[0];
+        $rest_of_address = explode(',', $explode_address[1]);
+        $city = $rest_of_address[0];
+        $rest_of_address = explode(' ', $rest_of_address[1]);
+        $state = $rest_of_address[1];
+        $zip = $rest_of_address[2];
+
+
+        $location = new Location([
+            'address'   =>  $street_address,
+            'city'      =>  $city,
+            'state'     =>  $state,
+            'zipcode'   =>  $zip
+        ]);
+
+        $location->save();
+
+        $coordinates = new Coordinate([
+            'lat'   =>  $faker->latitude,
+            'lng'   =>  $faker->longitude
+        ]);
+
+        $coordinates->save();
+
+
+        $location->coordinate_id = $coordinates->id;
+
+        $location->save();
+
+        $personname = new PersonName([
+            'preferred_name'    =>  $faker->company,
+        ]);
+
+        $personname->save();
+
+        $contact = new Contact();
+
+        $contact->email_id = $email->id;
+        $contact->location_id = $location->id;
+        $contact->personname_id = $personname->id;
+
+        $contact->save();
+
+        $customer_two = new Customer();
+        $customer_two->contact_id = $contact->id;
+        $customer_two->email_address = $company_email_address;
+        $customer_two->setPassword('ids_14701');
+        $customer_two->username = $customer_two->getEmailUsername();
+        $customer_two->save();
+
+
+
+
+
+
+
+        $email_address = $faker->email;
+
+        $email = new Email();
+
+        $email->setEmail($email_address);
+
+
+        $address = $faker->address;
+
+        $explode_address = explode("\n", $address);
+        $street_address = $explode_address[0];
+        $rest_of_address = explode(',', $explode_address[1]);
+        $city = $rest_of_address[0];
+        $rest_of_address = explode(' ', $rest_of_address[1]);
+        $state = $rest_of_address[1];
+        $zip = $rest_of_address[2];
+
+
+        $location = new Location([
+            'address'   =>  $street_address,
+            'city'      =>  $city,
+            'state'     =>  $state,
+            'zipcode'   =>  $zip
+        ]);
+
+        $location->save();
+
+        $coordinates = new Coordinate([
+            'lat'   =>  $faker->latitude,
+            'lng'   =>  $faker->longitude
+        ]);
+
+        $coordinates->save();
+
+
+        $location->coordinate_id = $coordinates->id;
+
+        $location->save();
+
+
+        $first_name = $faker->firstName;
+
+        $personname = new PersonName([
+            'first_name'        =>  $first_name,
+            'last_name'         =>  $faker->lastName,
+            'middle_name'       =>  $faker->firstName,
+            'preferred_name'    =>  $first_name,
+            'title'             =>  $faker->title
+        ]);
+
+        $personname->save();
+
+        $contact = new Contact();
+
+        $contact->email_id = $email->id;
+        $contact->location_id = $location->id;
+        $contact->personname_id = $personname->id;
+
+        $contact->save();
+
+        $user = new User();
+        $user->contact_id = $contact->id;
+        $user->email_address = $email_address;
+        $user->setPassword('ids_14701');
+        $user->username = $user->getEmailUsername();
+
+        $user->customers()->save($customer_one);
+        $user->customers()->save($customer_two);
+
+//        $user->customer_id = $customers;
+        $user->save();
+
+
+
+
+        $user = User::getObjectById($user->id);
+
+        $customers = Customer::getAllObjects();
+
+        foreach ($customers as $customer){
+            $user->customers()->save($customer);
+        }
+
+
+	    dd($user->customers);
+
+
+
+
+
+
+
+
+
 
 	    $email_address = 'aa@asd.com';
 
@@ -138,6 +402,11 @@ class TestController extends Controller
         return response()->json([
             'response'  =>  $endpoint
         ]);
+
+    }
+
+
+    public function addCustomersToUser(){
 
     }
 }

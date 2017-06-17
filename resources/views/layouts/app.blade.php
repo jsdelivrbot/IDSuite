@@ -12,10 +12,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('assets/css/all.css') }}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0 !important;">
             <div class="container">
                 <div class="navbar-header">
 
@@ -40,7 +41,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right" >
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
@@ -64,6 +65,10 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+
+                                    <li><a href="#">Endpoint Control</a></li>
+                                    <li><a href="#">Proxy Control</a></li>
+                                    <li><a href="#">Customer Control</a></li>
                                 </ul>
                             </li>
                         @endif
@@ -71,12 +76,29 @@
                 </div>
             </div>
         </nav>
+        @if (!auth::guest())
+        <div class="col-sm-3 col-md-2 sidebar" style="background-color: white;padding-right: 0px !important;padding-left: 0px !important;">
+            <ul class="nav nav-sidebar">
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/customer">Customers</a></li>
+                <li><a href="/endpoint">Devices</a></li>
+                <li><a href="/record">Calls</a></li>
+                <li><a href="/alert">Alerts</a></li>
+                <li><a href="/support">Support</a></li>
+            </ul>
+        </div>
+        @else
 
+        @endif
+        <div class="container" style="margin-top: 15px;">
         @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    {{--<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>--}}
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="{{asset('assets/js/enum_select.js')}}"></script>
 </body>
 </html>

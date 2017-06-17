@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserTable extends Migration
+class CreateCustomerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreateUserTable extends Migration
     {
         Schema::enableForeignKeyConstraints();
 
-        Schema::create('user', function (Blueprint $table) {
+        Schema::create('customer', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->uuid('id');
             $table->primary('id');
@@ -23,16 +23,16 @@ class CreateUserTable extends Migration
             $table->string('username')->nullable();
             $table->string('email_address')->nullable();
             $table->uuid('contact_id')->nullable();
-            $table->uuid('customer_id')->nullable();
+//            $table->uuid('user_id')->nullable();
             $table->char('password_hash', 64)->nullable();
             $table->boolean('active')->nullable();
             $table->string('remember_token', 100)->nullable();
             $table->timestamps();
         });
 
-        Schema::table('user', function(Blueprint $table) {
+        Schema::table('customer', function(Blueprint $table) {
             $table->foreign('contact_id')->references('id')->on('contact')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('customer_id')->references('id')->on('customer')->onDelete('cascade')->onUpdate('cascade');
+//            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -43,6 +43,6 @@ class CreateUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user');
+        Schema::dropIfExists('customer');
     }
 }

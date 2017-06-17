@@ -15,7 +15,7 @@ class CreateContactTable extends Migration
     {
         Schema::enableForeignKeyConstraints();
 
-        Schema::create('contact', function (Blueprint $table) {
+        Schema::create('personcontact', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->uuid('id');
             $table->primary('id');
@@ -26,7 +26,7 @@ class CreateContactTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('contact', function(Blueprint $table) {
+        Schema::table('personcontact', function(Blueprint $table) {
             $table->foreign('email_id')->references('id')->on('email')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('location_id')->references('id')->on('location')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('personname_id')->references('id')->on('personname')->onDelete('cascade')->onUpdate('cascade');

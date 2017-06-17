@@ -73,6 +73,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasOne(Contact::class);
     }
 
+
+    public function customers(){
+//        return $this->hasOne(Contact::class, 'id', 'contact_id');
+        return $this->hasMany(Customer::class);
+    }
+
     /**
      * User constructor.
      * @param array $attributes
@@ -120,9 +126,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     public function getEmailUsername(){
-
-
-
         $contact = Contact::getObjectById($this->contact_id);
 
         $email = Email::getObjectById($contact->email_id);
@@ -151,7 +154,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->getKeyName();
 
     }
-    
 
     /**
      * Get the unique identifier for the user.

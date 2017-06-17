@@ -60,15 +60,12 @@ class Location extends Model
     public function createCoordinates(){
         try {
             $coordinates = Coordinate::createCoordinatesFromLocation($this);
-
-            $coordinates->save();
-
+            if ($coordinates !== false) {
+                $coordinates->save();
+            }
 //            $this->coordinate = $coordinates;
             $this->coordinate_id = $coordinates->id;
             $this->save();
-            $this->coordinate = $coordinates;
-            $this->save();
-
         } catch (\Exception $e){
             \Log::warning("Class: Location \n Method: createCoordinates \n Location: " . $this->mrge_id . " failed to create coordinates. \n Error Message: " . $e->getMessage());
         }

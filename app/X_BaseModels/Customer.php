@@ -20,7 +20,7 @@ class Customer extends Model
      * @var array
      */
     protected $fillable = [
-        'contact'
+        'contact', 'username', 'email_address'
     ];
 
     /**
@@ -50,8 +50,11 @@ class Customer extends Model
      * relationships
      */
     public function contact(){
-//        return $this->hasOne(Contact::class, 'id', 'contact_id');
         return $this->hasOne(Contact::class);
+    }
+
+    public function endpoints(){
+        return $this->hasMany(Endpoint::class);
     }
 
 
@@ -69,6 +72,14 @@ class Customer extends Model
     }
 
 
+    public function getEmailUsername(){
+        $contact = Contact::getObjectById($this->contact_id);
+
+        $email = Email::getObjectById($contact->email_id);
+
+        return $email->username_prefix;
+    }
+
     /**
      * @param $password string
      * set customer password_hash
@@ -83,6 +94,19 @@ class Customer extends Model
             }
         } catch(\Exception $e) {
             dump($e->getMessage());
+        }
+    }
+
+    /**
+     * Returns whether or not this customer is active.
+     * @return bool
+     * @throws \Exception
+     */
+    public function isActive(){
+        if($this->active) {
+            return true;
+        } else {
+            Throw new \Exception('This user is not active. Therefore you cannot change the password', 409);
         }
     }
 
