@@ -14,9 +14,8 @@ class EnumClassCode extends Enum
     public static $class_code = 'ECC';
 
     public static $enum = [
-        'Contact'           =>  'CON',
+        'PersonContact'     =>  'PCN',
         'Coordinate'        =>  'COR',
-        'Customer'          =>  'CUS',
         'Email'             =>  'EML',
         'Location'          =>  'LOC',
         'PersonName'        =>  'NAM',
@@ -28,7 +27,12 @@ class EnumClassCode extends Enum
         'Record'            =>  'REC',
         'Proxy'             =>  'PRX',
         'Endpoint'          =>  'END',
+        'Entity'            =>  'ENT',
         'EndpointModel'     =>  'ENM',
-        'EndpointLog'       =>  'ENL'
+        'EndpointLog'       =>  'ENL',
+        'EntityName'        =>  'ENN',
+        'PhoneNumber'       =>  'PHN',
+        'EntityContact'     =>  'ECN'
+
     ];
 }

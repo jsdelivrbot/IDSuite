@@ -36,6 +36,10 @@ class PersonContact extends Model
         return $this->hasOne(Location::class, 'id', 'location_id');
     }
 
+    public function phonenumber(){
+        return $this->hasOne(PhoneNumber::class, 'id', 'phonenumber_id');
+    }
+
 
     /**
      * Contact constructor.
@@ -46,6 +50,10 @@ class PersonContact extends Model
         // Your construct code.
 
         return $this;
+    }
+
+    public static function getContactByEmail($email     ){
+        return PersonContact::where('email_id', $email->id)->first();
     }
 
 }

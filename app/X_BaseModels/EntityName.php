@@ -4,7 +4,7 @@ namespace App;
 
 use App\Model as Model;
 
-class PhoneNumber extends Model
+class EntityName extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class PhoneNumber extends Model
      * @var array
      */
     protected $fillable = [
-        'number'
+        'name'
     ];
 
     protected $guarded = [
@@ -23,19 +23,17 @@ class PhoneNumber extends Model
      * Define table to be used with this model. It defaults and assumes table names will have an s added to the end.
      *for instance App\User table by default would be users
      */
-    protected $table = "phonenumber";
+    protected $table = "entityname";
 
     public $incrementing = false;
 
     /**
-     * Email constructor.
+     * personname constructor.
      * @param array $attributes
      */
     public function __construct($attributes = array())  {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
-
-        // TODO split string stuff to get the rest of the attributes.
 
         return $this;
 

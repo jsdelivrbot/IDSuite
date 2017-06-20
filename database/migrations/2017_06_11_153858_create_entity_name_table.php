@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEntityNamesTable extends Migration
+class CreateEntityNameTable extends Migration
 {
     /**
      * Run the migrations.
@@ -30,6 +30,6 @@ class CreateEntityNamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('entity_names');
+        Schema::dropIfExists('entityname');
     }
 }

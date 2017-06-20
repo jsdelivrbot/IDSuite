@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEntityContactsTable extends Migration
+class CreateEntityContactTable extends Migration
 {
     /**
      * Run the migrations.
@@ -21,6 +21,7 @@ class CreateEntityContactsTable extends Migration
             $table->uuid('entityname_id')->nullable();
             $table->uuid('email_id')->nullable();
             $table->uuid('location_id')->nullable();
+            $table->uuid('phonenumber_id')->nullable();
             $table->timestamps();
         });
 
@@ -28,6 +29,7 @@ class CreateEntityContactsTable extends Migration
             $table->foreign('entityname_id')->references('id')->on('entityname');
             $table->foreign('email_id')->references('id')->on('email');
             $table->foreign('location_id')->references('id')->on('location');
+            $table->foreign('phonenumber_id')->references('id')->on('phonenumber');
         });
     }
 

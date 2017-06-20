@@ -26,7 +26,10 @@ class CustomerController extends Controller
     }
 
 
-    public function all(){
+    public function all(Request $request){
+
+
+//        dd('tewst');
 
 
         $user = Auth::user();

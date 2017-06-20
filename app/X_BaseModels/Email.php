@@ -49,7 +49,7 @@ class Email extends Model
      * @param string $address
      * @return $this
      */
-    public function setEmail($address){
+    public function setEmail($address = null){
 
         $email_valid = filter_var($address, FILTER_VALIDATE_EMAIL);
 
@@ -68,9 +68,18 @@ class Email extends Model
             $this->top_level_domain = $tld;
 
             $this->save();
+
+            return $this;
+        } else {
+            $this->address = $address;
+            $this->save();
+            return $this;
         }
+    }
 
 
-        return $this;
+
+    public static function getEmailByAddress($address){
+        return Email::where('address', $address)->first();
     }
 }

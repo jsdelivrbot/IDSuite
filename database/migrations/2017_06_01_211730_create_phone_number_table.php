@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePhoneNumbersTable extends Migration
+class CreatePhoneNumberTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,12 +16,12 @@ class CreatePhoneNumbersTable extends Migration
 
         Schema::enableForeignKeyConstraints();
 
-        Schema::create('phonenumbers', function (Blueprint $table) {
+        Schema::create('phonenumber', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->uuid('id');
             $table->primary('id');
             $table->string('class_code');
-            $table->uuid('number')->nullable();
+            $table->string('number')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ class CreatePhoneNumbersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phonenumbers');
+        Schema::dropIfExists('phonenumber');
     }
 }

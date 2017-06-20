@@ -21,7 +21,7 @@ class CreateEndpointTable extends Migration
             $table->primary('id');
             $table->string('class_code');
 
-            $table->uuid('customer_id')->nullable();
+            $table->uuid('entity_id')->nullable();
             $table->uuid('model_id')->nullable();
             $table->uuid('proxy_id')->nullable();
             $table->uuid('location_id')->nullable();
@@ -46,7 +46,7 @@ class CreateEndpointTable extends Migration
 
 
         Schema::table('endpoint', function (Blueprint $table){
-            $table->foreign('customer_id')->references('id')->on('customer')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('entity_id')->references('id')->on('entity')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('model_id')->references('id')->on('endpointmodel')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('proxy_id')->references('id')->on('proxy')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('location_id')->references('id')->on('location')->onDelete('cascade')->onUpdate('cascade');

@@ -24,7 +24,7 @@ class EntityContact extends Model
     /**
      * relationships
      */
-    public function personname(){
+    public function entityname(){
         return $this->hasOne(EntityName::class, 'id', 'entityname_id');
     }
 
@@ -34,6 +34,10 @@ class EntityContact extends Model
 
     public function location(){
         return $this->hasOne(Location::class, 'id', 'location_id');
+    }
+
+    public function phonenumber(){
+        return $this->hasOne(PhoneNumber::class, 'id', 'phonenumber_id');
     }
 
 

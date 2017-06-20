@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContactTable extends Migration
+class CreatePersonContactTable extends Migration
 {
     /**
      * Run the migrations.
@@ -23,6 +23,7 @@ class CreateContactTable extends Migration
             $table->uuid('personname_id')->nullable();
             $table->uuid('email_id')->nullable();
             $table->uuid('location_id')->nullable();
+            $table->uuid('phonenumber_id')->nullable();
             $table->timestamps();
         });
 
@@ -30,6 +31,7 @@ class CreateContactTable extends Migration
             $table->foreign('email_id')->references('id')->on('email')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('location_id')->references('id')->on('location')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('personname_id')->references('id')->on('personname')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('phonenumber_id')->references('id')->on('phonenumber');
         });
     }
 
@@ -40,6 +42,6 @@ class CreateContactTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contact');
+        Schema::dropIfExists('personcontact');
     }
 }

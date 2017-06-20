@@ -42,10 +42,6 @@ class Endpoint extends Model
     /**
      * relationships
      */
-    public function customer(){
-//        return $this->hasOne(Customer::class, 'id', 'customer_id');
-        return $this->hasOne(Customer::class);
-    }
 
     public function endpointmodel(){
 //        return $this->hasOne(EndpointModel::class, 'id', 'model_id');

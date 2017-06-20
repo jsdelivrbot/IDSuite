@@ -13,6 +13,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 use App\Model as Model;
+use Symfony\Component\HttpKernel\Tests\Controller\ContainerControllerResolverTest;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -69,14 +70,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * relationships
      */
     public function contact(){
-//        return $this->hasOne(Contact::class, 'id', 'contact_id');
-        return $this->hasOne(Contact::class);
+        return $this->hasOne(PersonContact::class);
     }
 
-
-    public function customers(){
-//        return $this->hasOne(Contact::class, 'id', 'contact_id');
-        return $this->hasMany(Customer::class);
+    public function accounts(){
+        return $this->hasMany(Entity::class);
     }
 
     /**
@@ -126,13 +124,32 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     public function getEmailUsername(){
-        $contact = Contact::getObjectById($this->contact_id);
+        $contact = PersonContact::getObjectById($this->contact_id);
 
         $email = Email::getObjectById($contact->email_id);
 
         return $email->username_prefix;
     }
 
+    public static function getUserByContact($contact){
+        return User::where('contact_id', $contact->id)->first();
+    }
+
+    public static function getUserByEmail($email){
+        $email = Email::getEmailByAddress($email);
+
+        if(is_object($email)){
+            $contact = PersonContact::getContactByEmail($email);
+            if(is_object($contact)){
+                $user = User::getUserByContact($contact);
+                if(is_object($user)){
+                    return $user;
+                }
+            }
+        }
+
+        return false;
+    }
 
     /**
      * @return string

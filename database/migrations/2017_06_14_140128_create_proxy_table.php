@@ -21,7 +21,7 @@ class CreateProxyTable extends Migration
             $table->primary('id');
             $table->string('class_code');
 
-            $table->uuid('customer_id')->nullable();
+            $table->uuid('entity_id')->nullable();
             $table->uuid('location_id')->nullable();
 
             $table->string('name')->nullable();
@@ -34,7 +34,7 @@ class CreateProxyTable extends Migration
         });
 
         Schema::table('proxy', function(Blueprint $table) {
-            $table->foreign('customer_id')->references('id')->on('customer')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('entity_id')->references('id')->on('entity')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('location_id')->references('id')->on('location')->onDelete('cascade')->onUpdate('cascade');
         });
     }
