@@ -16,7 +16,7 @@
 </head>
 <body class="raleway" style="background-color: #293a46">
 
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top" style="background-color: #434857 !important; border-bottom: 1px solid rgba(255, 255, 255, 0.2)">
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top" style="background-color: #434857 !important; border-bottom: 2px solid rgba(255, 255, 255, 0.2)">
             <button class="navbar-toggler navbar-toggler-right" style="border-color: #5cb85c" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -65,7 +65,7 @@
 
         @if (!auth::guest() && $viewname !== 'App Selection')
             <div class="row">
-                <nav class="col-sm-3 col-md-1 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important;padding-right: 0px;!important;background-color: #434857 !important;">
+                <nav class="col-sm-3 col-md-1 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important;padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item ">
                             <a class="nav-link btn-outline-teal" style="color: white !important;" href="/accounts">Dashboard</a>
@@ -84,10 +84,16 @@
                         </li>
                     </ul>
                 </nav>
-        @endif
+
                 <main class="col-sm-9 offset-sm-3 col-md-11 offset-md-1 col-lg-11 offset-lg-1 pt-3">
                     @yield('content')
                 </main>
+                @else
+                    <main class="col-sm-1 col-md-12  col-lg-12  pt-3">
+                        @yield('content')
+                    </main>
+        @endif
+
             </div>
     </div>
     <!-- Scripts -->

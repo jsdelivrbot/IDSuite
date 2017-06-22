@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-lg-5">
     <div class="row">
-        <div class="col-lg-10 offset-1">
+        <div class="col-lg-10 ">
             <div class="card card-inverse" style="background-color: #434857; border-color: rgba(255, 255, 255, 0.2); ">
                 <h3 class="card-header" style="background-color: #434857;">Login</h3>
                 <div class="card-block">
