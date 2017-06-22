@@ -4,12 +4,90 @@
     <div class="container p-lg-1">
         <div class="row">
             <div class="col-lg-12 col-md-12 offset-md-2 offset-lg-0">
-                <div class="card card-inverse card-square" style="background-color: transparent;border-bottom-width: 2px; border-bottom-color: rgba(255, 255, 255, 0.2); border-right-width: 2px; border-right-color: rgba(255, 255, 255, 0.2); border-top: none; border-left: none; height: 300px;">
-                    <div class="card-block">
-                        <h4 class="card-title">{{$name}}</h4>
-                        <p class="card-text">This is customer {{$name}}</p>
+                @php
+                    $number = rand(1,5);
+                @endphp
+                @if($number === 1)
+
+                    <div class="card card-inverse card-square border-bottom-pink border-right-pink" style="border-top: none; border-left: none; background-color: transparent;">
+                        <div class="card-block">
+                            <h4 class="card-title pink">{{$name}}</h4>
+                            <p class="card-text text-white">This is customer {{$name}}</p>
+
+                            <div class="col-md-10 offset-1">
+                                <div class="chart-container">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
+
+                @elseif($number === 2)
+
+                    <div class="card card-inverse card-square border-bottom-teal border-right-teal" style="border-top: none; border-left: none; background-color: transparent; ">
+                        <div class="card-block">
+                            <h4 class="card-title teal">{{$name}}</h4>
+                            <p class="card-text text-white">This is customer {{$name}}</p>
+
+                            <div class="col-md-10 offset-1">
+                                <div class="chart-container">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                @elseif($number === 3)
+
+                    <div class="card card-inverse card-square border-bottom-purple border-right-purple" style="border-top: none; border-left: none; background-color: transparent;">
+                        <div class="card-block">
+                            <h4 class="card-title purple">{{$name}}</h4>
+                            <p class="card-text text-white">This is customer {{$name}}</p>
+
+                            <div class="col-md-10 offset-1">
+                                <div class="chart-container">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                @elseif($number === 4)
+
+                    <div class="card card-inverse card-square border-bottom-yellow border-right-yellow" style="border-top: none; border-left: none; background-color: transparent;">
+                        <div class="card-block">
+                            <h4 class="card-title yellow">{{$name}}</h4>
+                            <p class="card-text text-white">This is customer {{$name}}</p>
+
+                            <div class="col-md-10 offset-1">
+                                <div class="chart-container">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                @else
+
+                    <div class="card card-inverse card-square border-bottom-blue border-right-blue" style="border-top: none; border-left: none; background-color: transparent;">
+                        <div class="card-block">
+                            <h4 class="card-title blue">{{$name}}</h4>
+                            <p class="card-text text-white">This is customer {{$name}}</p>
+
+                            <div class="col-md-10 offset-1">
+                                <div class="chart-container">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                @endif
             </div>
         </div>
 
@@ -17,18 +95,7 @@
             <hr class="mt-5" style="border-color: rgba(255, 255, 255, 0.2);">
         </div>
 
-        {{--<div class="row mt-lg-5">--}}
-            {{--<div class="col-lg-12 col-md-12 offset-md-2 offset-lg-0">--}}
-                {{--<div class="card card-inverse card-square" style="background-color: transparent;border-top-width: 2px; border-top-color: rgba(255, 255, 255, 0.2); border-left-width: 2px; border-left-color: rgba(255, 255, 255, 0.2); border-bottom: none; border-right: none; height: 300px;">--}}
-                    {{--<div class="card-block">--}}
-                        {{--<h4 class="card-title"></h4>--}}
-                        {{--<p class="card-text">This is customer {{$name}}</p>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-
-        <div class="card card-square" style="background-color: transparent; border: none; height: 400px;">
+        <div class="card card-square mb-lg-5" style="background-color: transparent; border: none; height: 400px;">
             <div id="account-card-header" class="card-header active-outline-card-header-pink" style="background-color: transparent;">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li id="insights" class="nav-item">

@@ -8,6 +8,10 @@
     transition: transform 0.3s, opacity 0.2s;
 }
 
+.chart-container{
+    width: 100%
+}
+
 .sidebar a::before {
     margin-right: 10px;
     content: '[';
@@ -52,6 +56,8 @@
     font-family: "Raleway", sans-serif !important;
     font-weight: 100 !important;
 }
+
+
 
 .btn-outline-pink {
     color: #E64759;
@@ -499,6 +505,90 @@
     color: #fff;
     background-color: #1ca8dd;
     border-color: #1ca8dd !important;
+}
+
+.border-bottom-pink{
+    border-bottom: 1px solid #E64759 !important;
+}
+
+.border-bottom-teal{
+    border-bottom: 1px solid #1BC98E !important;
+}
+
+.border-bottom-purple{
+    border-bottom: 1px solid #9F86FF !important;
+}
+
+.border-bottom-yellow{
+    border-bottom: 1px solid #E4D836 !important;
+}
+
+.border-bottom-blue{
+    border-bottom: 1px solid #1ca8dd !important;
+}
+
+.border-right-pink{
+    border-right: 1px solid #E64759 !important;
+}
+
+.border-right-teal{
+    border-right: 1px solid #1BC98E !important;
+}
+
+.border-right-purple{
+    border-right: 1px solid #9F86FF !important;
+}
+
+.border-right-yellow{
+    border-right: 1px solid #E4D836 !important;
+}
+
+.border-right-blue{
+    border-right: 1px solid #1ca8dd !important;
+}
+
+.border-bottom-blue{
+    border-bottom: 1px solid #1ca8dd !important;
+}
+
+.border-left-pink{
+    border-left: 1px solid #E64759 !important;
+}
+
+.border-left-teal{
+    border-left: 1px solid #1BC98E !important;
+}
+
+.border-left-purple{
+    border-left: 1px solid #9F86FF !important;
+}
+
+.border-left-yellow{
+    border-left: 1px solid #E4D836 !important;
+}
+
+.border-left-blue{
+    border-left: 1px solid #1ca8dd !important;
+}
+
+.border-top-pink{
+    border-top: 1px solid #E64759 !important;
+}
+
+.border-top-teal{
+    border-top: 1px solid #1BC98E !important;
+}
+
+.border-top-purple{
+    border-top: 1px solid #9F86FF !important;
+}
+
+.border-top-yellow{
+    border-top: 1px solid #E4D836 !important;
+}
+
+.border-top-blue{
+    border-top: 1px solid #1ca8dd !important;
 }
 /*
  * Base structure
