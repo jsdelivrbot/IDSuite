@@ -29,9 +29,7 @@ class CreateUserTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('user', function(Blueprint $table) {
-            $table->foreign('contact_id')->references('id')->on('personcontact')->onDelete('cascade')->onUpdate('cascade');
-        });
+
     }
 
     /**

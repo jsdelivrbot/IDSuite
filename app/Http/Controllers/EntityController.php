@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Entity;
+use App\User;
+use App\EntityContact;
+use App\EntityName;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EntityController extends Controller
 {
@@ -14,7 +18,33 @@ class EntityController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+
+//        $user = User::getObjectById($user->id);
+//
+//        $accounts = $user->orderAccountsByName();
+
+        $accounts = $user->accounts;
+
+        $accounts_array = array();
+
+        foreach ($accounts as $a){
+            $account    = new \stdClass();
+            $contact    = EntityContact::getObjectById($a->contact_id);
+            $name       = EntityName::getObjectById($contact->entityname_id);
+
+            $account->name  = $name->name;
+            $account->id    = $a->id;
+
+
+            $accounts_array[] = $account;
+        }
+
+
+
+
+        return view('accounts', ['accounts' => $accounts_array, 'viewname' => 'Accounts']);
+
     }
 
     /**
@@ -41,12 +71,18 @@ class EntityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Entity  $entity
+     * @param String $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Entity $entity)
+    public function show($id)
     {
-        //
+        $entity = Entity::getObjectById($id);
+
+        $contact = EntityContact::getObjectById($entity->contact_id);
+
+        $name = EntityName::getObjectById($contact->entityname_id);
+
+        return view('account', [ 'name' => $name->name, 'id' => $id, 'viewname' => $name->name]);
     }
 
     /**

@@ -12,49 +12,33 @@
 */
 
 Route::get('/', function(){
-   return view('auth.login');
+   return view('auth.login', ['viewname' => 'Login']);
+});
+
+Route::get('login', function(){
+    return view('auth.login', ['viewname' => 'Login']);
 });
 
 Auth::routes();
 
 Route::post('login', 'Auth\LoginController@loginNameOrEmail');
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 
 
-Route::get('/endpoint/{id}', 'EndpointController@show');
 
-
-Route::get('/endpoint' , 'EndpointController@index');
-
-
-Route::get('/proxy/{id}', 'ProxyController@show');
-
-Route::get('/model/{id}', 'ModelController@show');
-
-
-
-Route::get('/customer/endpoints/{id}', 'EndpointController@byCustomer');
-
-Route::get('/customer', 'CustomerController@index');
-
-Route::get('/customer/all', 'CustomerController@all');
-
-Route::get('/customer/{id}', 'CustomerController@show');
+//Route::get('/customer/endpoints/{id}', 'EndpointController@byCustomer');
+//
+//Route::get('/customer', 'CustomerController@index');
+//
+//Route::get('/customer/all', 'CustomerController@all');
+//
+//Route::get('/customer/{id}', 'CustomerController@show');
 
 
 Route::get('/user/current', 'UserController@getCurrentUser');
 
 
-
-Route::get('/titleEnum', 'EnumController@title');
-
-Route::get('/genderEnum', 'EnumController@gender');
-
-Route::get('/test', 'TestController@test');
 
 //Route::get('/test')
 
@@ -70,7 +54,41 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/statusEnum', 'EnumController@status');
 
+    Route::get('/titleEnum', 'EnumController@title');
+
+    Route::get('/genderEnum', 'EnumController@gender');
+
     // test routes //
+
+    Route::get('/test', 'TestController@test');
+
+
+    // rest routes //
+
+
+    Route::get('/apps', function(){
+       return view('apppicker', ['viewname' => 'App Selection']);
+    });
+
+    Route::get('/devices/{id}', 'EndpointController@show');
+
+
+    Route::get('/devices' , 'EndpointController@index');
+
+
+    Route::get('/proxy/{id}', 'ProxyController@show');
+
+    Route::get('/model/{id}', 'ModelController@show');
+
+
+    Route::get('/accounts/devices/{id}', 'EndpointController@byAccount');
+
+    Route::get('/accounts', 'EntityController@index');
+
+    Route::get('/accounts/all', 'EntityController@all');
+
+    Route::get('/account/{id}', 'EntityController@show');
+
 
 
 });

@@ -33,10 +33,7 @@ class CreateProxyTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('proxy', function(Blueprint $table) {
-            $table->foreign('entity_id')->references('id')->on('entity')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('location_id')->references('id')->on('location')->onDelete('cascade')->onUpdate('cascade');
-        });
+
     }
 
     /**

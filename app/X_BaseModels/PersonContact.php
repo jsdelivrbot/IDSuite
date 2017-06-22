@@ -13,13 +13,17 @@ class PersonContact extends Model
         'updated_at', 'created_at'
     ];
 
-    public $incrementing = false;
+
 
     /**
      * Define table to be used with this model. It defaults and assumes table names will have an s added to the end.
      *for instance App\User table by default would be users
      */
     protected $table = "personcontact";
+
+    public $incrementing = false;
+
+    protected $keyType = 'uuid';
 
     /**
      * relationships

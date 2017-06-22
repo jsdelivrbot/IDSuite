@@ -33,7 +33,7 @@ class EndpointController extends Controller
 
         }
 
-        return view('endpoints', ['endpoints' => $endpoint_array]);
+        return view('endpoints', ['endpoints' => $endpoint_array, 'viewname' => 'Devices']);
     }
 
 

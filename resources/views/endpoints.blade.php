@@ -3,34 +3,19 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Endpoint</div>
+            @foreach($endpoints as $endpoint)
+                <div class="col-lg-4" style="margin-top: 15px;">
+                    <div class="card" style="width: 20rem;">
+                        <div class="card-block">
+                            <h4 class="card-title">{{$endpoint->name}}</h4>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="account/{{$endpoint->id}}" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
                 </div>
-
-                <table class="table table-bordered" id="endpoint-table">
-                    <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>name</th>
-                        <th>ip</th>
-                        <th>mac</th>
-                        <th>proxy</th>
-                        <th>model</th>
-                    </tr>
-                    </thead>
-                    <tbody id="endpoint-table-body">
-                        @foreach($endpoints as $endpoint)
-
-                            <tr><td><a href="/endpoint/{{$endpoint->id}}">{{$endpoint->id}}</a></td><td>{{$endpoint->name}}</td><td>{{$endpoint->ip}}</td><td>{{$endpoint->mac}}</td><td><a href="/proxy/{{$endpoint->proxy}}">{{$endpoint->proxy}}</a></td><td><a href="/model/{{$endpoint->model}}">{{$endpoint->model}}</a></td></tr>
-
-                        @endforeach
-                    </tbody>
-                </table>
-
-
-            </div>
+            @endforeach
         </div>
+    </div>
     </div>
 
 @endsection

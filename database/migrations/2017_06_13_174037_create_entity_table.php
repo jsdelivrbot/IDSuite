@@ -28,11 +28,6 @@ class CreateEntityTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('entity', function(Blueprint $table){
-            $table->foreign('contact_id')->references('id')->on('entitycontact');
-            $table->foreign('parent_id')->references('id')->on('entity');
-            $table->foreign('user_id')->references('id')->on('user');
-        });
     }
 
     /**

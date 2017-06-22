@@ -27,6 +27,7 @@ class Email extends Model
 
     public $incrementing = false;
 
+    protected $keyType = 'uuid';
     /**
      * Email constructor.
      * @param array $attributes

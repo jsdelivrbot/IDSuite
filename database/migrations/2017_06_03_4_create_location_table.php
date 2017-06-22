@@ -28,9 +28,7 @@ class CreateLocationTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('location', function(Blueprint $table){
-            $table->foreign('coordinate_id')->references('id')->on('coordinate');
-        });
+
     }
 
     /**

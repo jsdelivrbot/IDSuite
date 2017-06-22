@@ -4,7 +4,7 @@ namespace App;
 
 use App\Model as Model;
 
-class Record extends Model
+class Note extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class Record extends Model
      * @var array
      */
     protected $fillable = [
-        'endpoint', 'timeperiod', 'local_id', 'conf_id', 'local_name', 'local_number', 'remote_name', 'remote_number', 'dialed_digits', 'direction', 'protocol'
+        'text'
     ];
 
     protected $guarded = [
@@ -23,28 +23,14 @@ class Record extends Model
      * Define table to be used with this model. It defaults and assumes table names will have an s added to the end.
      *for instance App\User table by default would be users
      */
-    protected $table = "record";
+    protected $table = "note";
 
     public $incrementing = false;
 
     protected $keyType = 'uuid';
 
     /**
-     * relationships
-     */
-    public function endpoint(){
-//        return $this->hasOne(Endpoint::class, 'id', 'endpoint_id');
-        return $this->hasOne(Endpoint::class);
-    }
-
-    public function timeperiod(){
-//        return $this->hasOne(TimePeriod::class, 'id', 'timeperiod_id');
-        return $this->hasOne(TimePeriod::class);
-    }
-
-
-    /**
-     * User constructor.
+     * personname constructor.
      * @param array $attributes
      */
     public function __construct($attributes = array())  {

@@ -45,12 +45,6 @@ class CreateEndpointTable extends Migration
         });
 
 
-        Schema::table('endpoint', function (Blueprint $table){
-            $table->foreign('entity_id')->references('id')->on('entity')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('model_id')->references('id')->on('endpointmodel')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('proxy_id')->references('id')->on('proxy')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('location_id')->references('id')->on('location')->onDelete('cascade')->onUpdate('cascade');
-        });
 
     }
 

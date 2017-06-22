@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePersonContactTable extends Migration
+class CreateNoteTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,18 @@ class CreatePersonContactTable extends Migration
      */
     public function up()
     {
+
         Schema::enableForeignKeyConstraints();
 
-        Schema::create('personcontact', function (Blueprint $table) {
+        Schema::create('note', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->uuid('id');
             $table->primary('id');
             $table->string('class_code');
-            $table->uuid('personname_id')->nullable();
-            $table->uuid('email_id')->nullable();
-            $table->uuid('location_id')->nullable();
-            $table->uuid('phonenumber_id')->nullable();
+            $table->text('text')->nullable();
+            $table->uuid('object')->nullable();
             $table->timestamps();
         });
-
-
     }
 
     /**
@@ -37,6 +34,6 @@ class CreatePersonContactTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personcontact');
+        Schema::dropIfExists('notes');
     }
 }

@@ -27,6 +27,8 @@ class EntityName extends Model
 
     public $incrementing = false;
 
+    protected $keyType = 'uuid';
+
     /**
      * personname constructor.
      * @param array $attributes

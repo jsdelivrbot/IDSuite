@@ -27,6 +27,7 @@ class EndpointLog extends Model
 
     public $incrementing = false;
 
+    protected $keyType = 'uuid';
 
     /**
      * EndpointLog constructor.

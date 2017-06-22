@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/customer';
+    protected $redirectTo = '/apps';
 
     /**
      * Create a new controller instance.
@@ -43,6 +43,7 @@ class LoginController extends Controller
 
     public function loginNameOrEmail(Request $request)
     {
+
         $field = filter_var($request->input('email'), FILTER_VALIDATE_EMAIL) ? 'email_address' : 'username';
 
         $request->merge([$field => $request->input('email')]);
@@ -50,13 +51,22 @@ class LoginController extends Controller
         $this->username = $field;
 
         return $this->login($request);
-
     }
 
 
     public function username()
     {
         return $this->username;
+    }
+
+    /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        return view('auth.login', ['viewname' => 'Login']);
     }
 
 }

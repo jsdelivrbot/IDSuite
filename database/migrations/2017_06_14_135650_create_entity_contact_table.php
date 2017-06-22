@@ -13,6 +13,8 @@ class CreateEntityContactTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
+
         Schema::create('entitycontact', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->uuid('id');
@@ -22,15 +24,10 @@ class CreateEntityContactTable extends Migration
             $table->uuid('email_id')->nullable();
             $table->uuid('location_id')->nullable();
             $table->uuid('phonenumber_id')->nullable();
+            $table->uuid('entity_id')->nullable();
             $table->timestamps();
         });
 
-        Schema::table('entitycontact', function (Blueprint $table){
-            $table->foreign('entityname_id')->references('id')->on('entityname');
-            $table->foreign('email_id')->references('id')->on('email');
-            $table->foreign('location_id')->references('id')->on('location');
-            $table->foreign('phonenumber_id')->references('id')->on('phonenumber');
-        });
     }
 
     /**

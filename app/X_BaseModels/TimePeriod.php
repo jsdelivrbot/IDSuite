@@ -27,6 +27,8 @@ class TimePeriod extends Model
 
     public $incrementing = false;
 
+    protected $keyType = 'uuid';
+
     /**
      * timeperiod constructor.
      * @param array $attributes

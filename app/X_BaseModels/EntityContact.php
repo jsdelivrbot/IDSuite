@@ -9,6 +9,15 @@ use App\Model as Model;
 class EntityContact extends Model
 {
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'entity_id'
+    ];
+
     protected $guarded = [
         'updated_at', 'created_at'
     ];
@@ -20,6 +29,8 @@ class EntityContact extends Model
      *for instance App\User table by default would be users
      */
     protected $table = "entitycontact";
+
+    protected $keyType = 'uuid';
 
     /**
      * relationships
@@ -38,6 +49,10 @@ class EntityContact extends Model
 
     public function phonenumber(){
         return $this->hasOne(PhoneNumber::class, 'id', 'phonenumber_id');
+    }
+
+    public function entity(){
+        return $this->belongsTo(Entity::class, 'id', 'entity_id');
     }
 
 

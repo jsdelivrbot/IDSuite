@@ -47,14 +47,13 @@ class NsSeeder extends Seeder
                 echo "First Pass : [**********]  $progress% \r";
             }
 
-
             if ($c[0] === null) {
                 $count++;
                 continue;
             }
             $count++;
 
-            if ($c[5] === "") {
+            if ($c[5] === '' && $c[15] === 'No' && $c[2] !== '') {
                 $results = self::processRowIntoEntity($c, true);
                 if(!$results){
                     continue;
@@ -64,50 +63,54 @@ class NsSeeder extends Seeder
             }
         }
 
-        $count = 1;
+//        $count = 1;
+//
+//        foreach ($companies as $c) {
+//
+//            $progress = round(100 * ($count / count($companies)));
+//
+//            if ($progress > 0 && $progress < 10) {
+//                echo "Second Pass : [*---------]  $progress% \r";
+//            } elseif ($progress > 10 && $progress < 20) {
+//                echo "Second Pass : [**--------]  $progress% \r";
+//            } elseif ($progress > 20 && $progress < 30) {
+//                echo "Second Pass : [***-------]  $progress% \r";
+//            } elseif ($progress > 30 && $progress < 40) {
+//                echo "Second Pass : [****------]  $progress% \r";
+//            } elseif ($progress > 40 && $progress < 50) {
+//                echo "Second Pass : [*****-----]  $progress% \r";
+//            } elseif ($progress > 50 && $progress < 60) {
+//                echo "Second Pass : [******----]  $progress% \r";
+//            } elseif ($progress > 60 && $progress < 70) {
+//                echo "Second Pass : [*******---]  $progress% \r";
+//            } elseif ($progress > 70 && $progress < 80) {
+//                echo "Second Pass : [********--]  $progress% \r";
+//            } elseif ($progress > 80 && $progress < 90) {
+//                echo "Second Pass : [*********-]  $progress% \r";
+//            } elseif ($progress > 90 && $progress < 100) {
+//                echo "Second Pass : [**********]  $progress% \r";
+//            }
+//
+//
+//            if ($c[0] === null) {
+//                $count++;
+//                continue;
+//            }
+//            $count++;
+//
+//            if ($c[5] !== "") {
+//                continue;
+//            }
 
-        foreach ($companies as $c) {
-
-            $progress = round(100 * ($count / count($companies)));
-
-            if ($progress > 0 && $progress < 10) {
-                echo "Second Pass : [*---------]  $progress% \r";
-            } elseif ($progress > 10 && $progress < 20) {
-                echo "Second Pass : [**--------]  $progress% \r";
-            } elseif ($progress > 20 && $progress < 30) {
-                echo "Second Pass : [***-------]  $progress% \r";
-            } elseif ($progress > 30 && $progress < 40) {
-                echo "Second Pass : [****------]  $progress% \r";
-            } elseif ($progress > 40 && $progress < 50) {
-                echo "Second Pass : [*****-----]  $progress% \r";
-            } elseif ($progress > 50 && $progress < 60) {
-                echo "Second Pass : [******----]  $progress% \r";
-            } elseif ($progress > 60 && $progress < 70) {
-                echo "Second Pass : [*******---]  $progress% \r";
-            } elseif ($progress > 70 && $progress < 80) {
-                echo "Second Pass : [********--]  $progress% \r";
-            } elseif ($progress > 80 && $progress < 90) {
-                echo "Second Pass : [*********-]  $progress% \r";
-            } elseif ($progress > 90 && $progress < 100) {
-                echo "Second Pass : [**********]  $progress% \r";
-            }
-
-
-            if ($c[0] === null) {
-                $count++;
-                continue;
-            }
-            $count++;
-
-            if ($c[5] !== "") {
-                $results = self::processRowIntoEntity($c, false);
-                if(!$results){
-                    continue;
-                }
-            } else {
-                continue;
-            }
-        }
+//            if ($c[5] !== "") {
+//                $results = self::processRowIntoEntity($c, false);
+//                if(!$results){
+//                    continue;
+//                }
+//            } else {
+//                continue;
+//            }
+//        }
     }
 
     public static function isEmailValid($c)
@@ -139,7 +142,6 @@ class NsSeeder extends Seeder
     {
         $isvalidemail = self::isEmailValid($c);
 
-        dump($c[3]);
         if ($isvalidemail) {
             $email = \App\Email::getEmailByAddress($c[3]);
             $email->save();
@@ -157,7 +159,6 @@ class NsSeeder extends Seeder
     {
         $isvalidemail = self::isPersonEmailValid($c);
 
-        dump($c[13]);
         if ($isvalidemail) {
             $email = \App\Email::getEmailByAddress($c[13]);
             $email->save();
@@ -176,7 +177,7 @@ class NsSeeder extends Seeder
 
         $name = new \App\EntityName();
 
-        $name->name = $c[1];
+        $name->name = $c[2];
 
         $name->save();
 
@@ -321,60 +322,61 @@ class NsSeeder extends Seeder
         return $user_contact;
     }
 
-    public static function processEntity($c, $entity_contact)
+    public static function processEntity($c, \App\EntityContact $entity_contact)
     {
         $entity = new \App\Entity();
 
         $entity->contact_id = $entity_contact->id;
 
+        $entity_contact->entity_id = $entity->id;
+
         $entity->save();
+
+        $entity_contact->save();
+
 
         return $entity;
     }
 
     public static function processUser($c, $entity)
     {
+        $user = \App\User::getUserByEmail($c[13]);
+        if (is_object($user)) {
+            $user->accounts()->save($entity);
+            $user->save();
+            return $user;
+        } else {
 
-            $user = \App\User::getUserByEmail($c[13]);
-            if (is_object($user)) {
-                $user->accounts()->save($entity);
-                $user->save();
-                return $user;
-            } else {
+            $email = self::processUserEmail($c);
 
-                $email = self::processUserEmail($c);
-
-                if($email->address === ""){
-                    $email->address = null;
-                    return false;
-                }
-
-                $name = self::processUserName($c);
-
-                $location = self::processUserLocation();
-
-                $phone = self::processUserPhone($c);
-
-                $contact = self::processUserContact($c, $location, $name, $email, $phone);
-
-                $user = new \App\User();
-
-                $user->save();
-
-                $user->contact_id = $contact->id;
-                $user->email_address = $email->address;
-                $user->getEmailUsername();
-                $user->setPassword('ids_14701');
-
-                $user->accounts()->save($entity);
-
-                $user->save();
-
-                return $user;
+            if($email->address === ""){
+                $email->address = null;
+                return false;
             }
 
+            $name = self::processUserName($c);
 
+            $location = self::processUserLocation();
 
+            $phone = self::processUserPhone($c);
+
+            $contact = self::processUserContact($c, $location, $name, $email, $phone);
+
+            $user = new \App\User();
+
+            $user->save();
+
+            $user->contact_id = $contact->id;
+            $user->email_address = $email->address;
+            $user->getEmailUsername();
+            $user->setPassword('ids_14701');
+
+            $user->accounts()->save($entity);
+
+            $user->save();
+
+            return $user;
+        }
     }
 
     public static function processRowIntoEntity($c, $isparent)
@@ -417,7 +419,7 @@ class NsSeeder extends Seeder
 
                 $entity = self::processEntity($c, $entity_contact);
 
-                $entity->parent_id = $parent->id;
+//                $entity->parent_id = $parent->id;
 
                 $user = self::processUser($c, $entity);
 

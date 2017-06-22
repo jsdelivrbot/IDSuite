@@ -11,6 +11,10 @@ const { mix } = require('laravel-mix');
  |
  */
 
+
+// mix.copy('vendor/twbs/bootstrap/docs/examples/dashboard/dashboard.css', 'resources/assets/css/sidebar.css');
+
+
 mix.js('resources/assets/js/app.js', 'public/assets/js');
 
 mix.scripts([
@@ -23,5 +27,7 @@ mix.sass('resources/assets/sass/app.scss', '../resources/assets/css/sass.css');
 
 mix.styles([
     'resources/assets/css/app.css',
+    'resources/assets/css/sidebar.css',
+    'resources/assets/css/bootstrap.css',
     'resources/assets/css/sass.css'
 ], 'public/assets/css/all.css');

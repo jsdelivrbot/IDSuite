@@ -34,10 +34,7 @@ class CreateRecordTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('record', function(Blueprint $table) {
-            $table->foreign('endpoint_id')->references('id')->on('endpoint')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('timeperiod_id')->references('id')->on('timeperiod')->onDelete('cascade')->onUpdate('cascade');
-        });
+
     }
 
     /**

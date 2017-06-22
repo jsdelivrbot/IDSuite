@@ -67,6 +67,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public $incrementing = false;
 
     /**
+     * We are using UUID for primary key
+     *
+     * @var bool
+     */
+    protected $keyType = 'uuid';
+
+    /**
      * relationships
      */
     public function contact(){
@@ -108,6 +115,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this;
     }
 
+
+    public function orderAccountsByName(){
+//        dd($this->accounts[0]);
+
+        $sorted = $this->accounts->sortBy('name');
+
+        dd($sorted);
+
+        return $sorted;
+
+    }
 
     /**
      * Returns whether or not this use is active.

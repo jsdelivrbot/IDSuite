@@ -27,12 +27,17 @@ class Entity extends Model
 
     public $incrementing = false;
 
+    protected $keyType = 'uuid';
 
     /**
      * relationships
      */
     public function contact(){
         return $this->hasOne(EntityContact::class);
+    }
+
+    public function persons(){
+        return $this->hasMany(PersonContact::class);
     }
 
     public function parent(){
