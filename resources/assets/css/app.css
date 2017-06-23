@@ -590,3 +590,9 @@
 .border-top-blue{
     border-top: 1px solid #1ca8dd !important;
 }
+
+#container {
+    margin: 20px;
+    width: 400px;
+    height: 8px;
+}

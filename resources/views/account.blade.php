@@ -91,21 +91,30 @@
             </div>
         </div>
 
-        <div class="col-lg-4 offset-4">
-            <hr class="mt-5" style="border-color: rgba(255, 255, 255, 0.2);">
+        <div class="col-lg-12 mt-5 mb-4" style="padding: 0;">
+            {{--<hr class="mt-5" style="border-color: rgba(255, 255, 255, 0.2);">--}}
+            <div class="row no-gutters">
+                <div class="col-lg-6">
+                    <div id="container_two"></div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div id="container_one"></div>
+                </div>
+            </div>
         </div>
 
         <div class="card card-square mb-lg-5" style="background-color: transparent; border: none; height: 400px;">
             <div id="account-card-header" class="card-header active-outline-card-header-pink" style="background-color: transparent;">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li id="insights" class="nav-item">
-                        <a id="insights-a" class="nav-link active active-outline-tab-pink text-white" href="#">Insights</a>
+                        <a id="insights-a" class="nav-link active active-outline-tab-pink text-white" href="#" onclick="return false;">Insights</a>
                     </li>
                     <li id="locations" class="nav-item">
-                        <a id="locations-a" class="nav-link teal" href="#">Locations</a>
+                        <a id="locations-a" class="nav-link teal" href="#" onclick="return false;">Locations</a>
                     </li>
                     <li id="contacts" class="nav-item">
-                        <a id="contacts-a" class="nav-link blue" href="#">Contacts</a>
+                        <a id="contacts-a" class="nav-link blue" href="#" onclick="return false;">Contacts</a>
                     </li>
                 </ul>
             </div>

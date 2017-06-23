@@ -379,6 +379,7 @@ class NsSeeder extends Seeder
         }
     }
 
+
     public static function processRowIntoEntity($c, $isparent)
     {
         if ($isparent) {

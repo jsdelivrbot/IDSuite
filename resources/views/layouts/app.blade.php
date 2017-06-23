@@ -14,6 +14,8 @@
     <link href="{{ asset('assets/css/all.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/css/font-awesome.css')}}">
+
+
 </head>
 <body class="raleway" style="background-color: #293a46">
 
@@ -107,7 +109,7 @@
 
         @if (!auth::guest() && $viewname !== 'App Selection')
             <div class="row">
-                <nav class="col-sm-3 col-md-1 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important;padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
+                <nav class="col-sm-3 col-md-2 col-lg-1 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important;padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item ">
                             <a class="nav-link btn-outline-teal" style="color: white !important;" href="/accounts">Dashboard</a>
@@ -142,6 +144,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+    <script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="{{asset('assets/js/enum_select.js')}}"></script>
 </body>

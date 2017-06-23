@@ -43,6 +43,11 @@ $( "#insights" ).click(function() {
 
     $("#insights-a").addClass('active active-outline-tab-pink text-white');
 
+    bar_one.set(0);
+    bar_two.set(0);
+    bar_one.animate(1.0);  // Number from 0.0 to 1.0
+    bar_two.animate(-1.0);  // Number from 0.0 to 1.0
+
 });
 
 $( "#contacts" ).click(function() {
@@ -70,6 +75,11 @@ $( "#contacts" ).click(function() {
 
     $("#contacts-a").addClass('active active-outline-tab-blue text-white');
 
+    bar_one.set(0);
+    bar_two.set(0);
+    bar_one.animate(1.0);  // Number from 0.0 to 1.0
+    bar_two.animate(-1.0);  // Number from 0.0 to 1.0
+
 });
 
 $( "#locations" ).click(function() {
@@ -96,6 +106,11 @@ $( "#locations" ).click(function() {
     $('#account-card-block-a').addClass('btn-nav-teal');
 
     $("#locations-a").addClass('active active-outline-tab-teal text-white');
+
+    bar_one.set(0);
+    bar_two.set(0);
+    bar_one.animate(1.0);  // Number from 0.0 to 1.0
+    bar_two.animate(-1.0);  // Number from 0.0 to 1.0
 
 });
 
@@ -158,3 +173,44 @@ $( document ).ready(function() {
         }
     });
 });
+
+
+
+// progressbar.js@1.0.0 version is used
+// Docs: http://progressbarjs.readthedocs.org/en/1.0.0/
+
+var bar_one = new ProgressBar.Line(container_one, {
+    strokeWidth: 1,
+    easing: 'easeInOut',
+    duration: 1400,
+    color: '#E4D836',
+    trailColor: 'transparent',
+    trailWidth: 1,
+    svgStyle: {width: '100%', height: '100%'},
+    from: {color: '#E4D836'},
+    to: {color: '#E64759'},
+    step: (state, bar) => {
+        bar.path.setAttribute('stroke', state.color);
+    }
+});
+
+
+
+
+var bar_two = new ProgressBar.Line(container_two, {
+    strokeWidth: 1,
+    easing: 'easeInOut',
+    duration: 1400,
+    color: '#E4D836',
+    trailColor: 'transparent',
+    trailWidth: 1,
+    svgStyle: {width: '100%', height: '100%'},
+    from: {color: '#E4D836'},
+    to: {color: '#E64759'},
+    step: (state, bar) => {
+        bar.path.setAttribute('stroke', state.color);
+    }
+});
+
+bar_one.animate(1.0);  // Number from 0.0 to 1.0
+bar_two.animate(-1.0);  // Number from 0.0 to 1.0

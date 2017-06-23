@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <section class="row">
+    <section class="row mb-lg-5 mt-lg-5">
 
         <div class="col-lg-2">
             <h6 class="ml-lg-3 subtle-text" style="color: #434857">SALES</h6>
@@ -17,7 +17,12 @@
         </div>
 
     </section>
+    <div class="col-lg-6 offset-3">
+        {{--<hr style="border-top: 2px solid rgba(255, 255, 255, 0.2) !important;">--}}
 
+        <div id="container"></div>
+
+    </div>
     <section class="row">
 
         <div class="card-deck">

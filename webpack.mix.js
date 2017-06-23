@@ -16,6 +16,7 @@ const { mix } = require('laravel-mix');
 
 
 mix.js('resources/assets/js/app.js', 'public/assets/js');
+mix.js('resources/assets/js/progressbar.js', 'public/assets/js');
 
 mix.scripts([
     'resources/assets/js/enum_gender_select.js',
