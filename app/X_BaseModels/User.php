@@ -76,7 +76,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * relationships
      */
-    public function contact(){
+    public function contact(PersonContact $p = null){
+        if($p !== null){
+            $this->contact_id = $p->id;
+        }
         return $this->hasOne(PersonContact::class);
     }
 

@@ -12,7 +12,7 @@ class Entity extends Model
      * @var array
      */
     protected $fillable = [
-        'contact_id', 'parent_id', 'user_id'
+        'contact_id', 'parent_id'
     ];
 
     protected $guarded = [
@@ -32,21 +32,46 @@ class Entity extends Model
     /**
      * relationships
      */
-    public function contact(){
+
+    // one to one //
+    public function contact(EntityContact $c = null){
+
+        if($c !== null) {
+            $this->contact_id = $c->id;
+        }
+
         return $this->hasOne(EntityContact::class);
     }
 
+    public function parent(Entity $e = null){
+
+        if($e !== null) {
+            $this->parent_id = $e->id;
+        }
+
+        return $this->hasOne(Entity::class);
+    }
+
+    // one to many
     public function persons(){
         return $this->hasMany(PersonContact::class);
     }
 
-    public function parent(){
-        return $this->hasOne(Entity::class);
+    public function sites(){
+        return $this->hasMany(EntityContact::class);
     }
 
-    public function user(){
-        return $this->hasOne(User::class);
+    // many to one
+    public function user(User $u = null){
+
+        if($u !== null) {
+            $this->user_id = $u->id;
+        }
+
+        return $this->belongsTo(User::class);
     }
+
+
 
     /**
      * personname constructor.

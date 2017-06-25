@@ -14,7 +14,6 @@ class PersonContact extends Model
     ];
 
 
-
     /**
      * Define table to be used with this model. It defaults and assumes table names will have an s added to the end.
      *for instance App\User table by default would be users
@@ -28,19 +27,39 @@ class PersonContact extends Model
     /**
      * relationships
      */
-    public function personname(){
+    public function personname(PersonName $p = null){
+        if($p !== null) {
+            $this->personname_id = $p->id;
+        }
         return $this->hasOne(PersonName::class, 'id', 'personname_id');
     }
 
-    public function email(){
+    public function entityname(EntityName $e = null){
+        if($e !== null){
+            $this->entityname_id = $e->id;
+        }
+
+        return $this->hasOne(EntityName::class, 'id', 'entityname_id');
+    }
+
+    public function email(Email $e = null){
+        if($e !== null) {
+            $this->email_id = $e->id;
+        }
         return $this->hasOne(Email::class, 'id', 'email_id');
     }
 
-    public function location(){
+    public function location(Location $l = null){
+        if($l !== null) {
+            $this->location_id = $l->id;
+        }
         return $this->hasOne(Location::class, 'id', 'location_id');
     }
 
-    public function phonenumber(){
+    public function phonenumber(PhoneNumber $p = null){
+        if($p !== null) {
+            $this->phonenumber_id = $p->id;
+        }
         return $this->hasOne(PhoneNumber::class, 'id', 'phonenumber_id');
     }
 

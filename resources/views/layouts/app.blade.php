@@ -146,6 +146,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
     <script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
-    <script src="{{asset('assets/js/enum_select.js')}}"></script>
+    <script src="{{ asset('assets/js/enum_select.js') }}"></script>
+    <script src="{{ asset('assets/js/chart_placeholder.js') }}"></script>
+    <script src="{{ asset('assets/js/custom_tabs.js') }}"></script>
 </body>
 </html>

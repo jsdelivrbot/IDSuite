@@ -14,7 +14,7 @@ class Endpoint extends Model
      * @var array
      */
     protected $fillable = [
-        'customer', 'location', 'manufacturer', 'model', 'username', 'name', 'ipaddress', 'macaddress', 'proxy', 'sync_time', 'reboot_time', 'last_reboot', 'status', 'model_type', 'status_at'
+
     ];
 
 
@@ -44,18 +44,30 @@ class Endpoint extends Model
      * relationships
      */
 
-    public function endpointmodel(){
-//        return $this->hasOne(EndpointModel::class, 'id', 'model_id');
+    public function endpointmodel(EndpointModel $e = null){
+
+        if($e !== null) {
+            $this->model_id = $e->id;
+        }
+
         return $this->hasOne(EndpointModel::class);
     }
 
-    public function proxy(){
-//        return $this->hasOne(Proxy::class, 'id', 'proxy_id');
+    public function proxy(Proxy $p = null){
+
+        if($p !== null) {
+            $this->proxy_id = $p->id;
+        }
+
         return $this->hasOne(Proxy::class);
     }
 
-    public function location(){
-//        return $this->hasOne(Location::class, 'id', 'location_id');
+    public function location(Location $l = null){
+
+        if($l !== null) {
+            $this->location_id = $l->id;
+        }
+
         return $this->hasOne(Location::class);
     }
 

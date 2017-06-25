@@ -34,8 +34,13 @@ class Location extends Model
     /**
      * relationships
      */
-    public function coordinate(){
-        return $this->hasOne(Coordinate::class, 'id', 'coordinate_id');
+    public function coordinate(Coordinate $c = null){
+
+        if($c !== null) {
+            $this->coordinate_id = $c->id;
+        }
+
+        return $this->hasOne(Coordinate::class);
     }
 
 

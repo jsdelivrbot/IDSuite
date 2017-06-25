@@ -15,7 +15,7 @@ class EntityContact extends Model
      * @var array
      */
     protected $fillable = [
-        'entity_id'
+
     ];
 
     protected $guarded = [
@@ -35,27 +35,45 @@ class EntityContact extends Model
     /**
      * relationships
      */
-    public function entityname(){
+    public function entityname(EntityName $e = null){
+        if($e !== null){
+            $this->entityname_id = $e->id;
+        }
+
         return $this->hasOne(EntityName::class, 'id', 'entityname_id');
     }
 
-    public function email(){
+    public function email(Email $e = null){
+        if($e !== null){
+            $this->email_id = $e->id;
+        }
+
         return $this->hasOne(Email::class, 'id', 'email_id');
     }
 
-    public function location(){
+    public function location(Location $l = null){
+
+        if($l !== null){
+            $this->location_id = $l->id;
+        }
+
         return $this->hasOne(Location::class, 'id', 'location_id');
     }
 
-    public function phonenumber(){
+    public function phonenumber(PhoneNumber $p = null){
+        if($p !== null){
+            $this->phonenumber_id = $p->id;
+        }
+
         return $this->hasOne(PhoneNumber::class, 'id', 'phonenumber_id');
     }
 
-    public function entity(){
+    public function entity(Entity $e = null){
+        if($e !== null){
+            $this->entity_id = $e->id;
+        }
         return $this->belongsTo(Entity::class, 'id', 'entity_id');
     }
-
-
 
 
     /**

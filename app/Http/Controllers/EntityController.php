@@ -78,11 +78,40 @@ class EntityController extends Controller
     {
         $entity = Entity::getObjectById($id);
 
-        $contact = EntityContact::getObjectById($entity->contact_id);
+        $name = $entity->contact->entityname;
 
-        $name = EntityName::getObjectById($contact->entityname_id);
+//        dd($name);
 
-        return view('account', [ 'name' => $name->name, 'id' => $id, 'viewname' => $name->name]);
+        $sites = $entity->sites;
+
+//        dd($sites[0]->location);
+
+        $sites_array = array();
+
+        foreach ($sites as $s){
+
+            $site = new \stdClass();
+
+            $l = $s->location;
+
+            $site->address = $l->address;
+            $site->city = $l->city;
+            $site->state = $l->state;
+            $site->zip = $l->zipcode;
+            $site->name = $s->entityname->name;
+
+            if($s->phonenumber->number !== null) {
+                $site->number = $s->phonenumber->number;
+            } else{
+                $site->number = "Number is not listed.";
+            }
+
+            $sites_array[] = $site;
+        }
+
+
+
+        return view('account', [ 'name' => $name->name, 'id' => $id, 'viewname' => $name->name, 'sites' => $sites_array]);
     }
 
     /**

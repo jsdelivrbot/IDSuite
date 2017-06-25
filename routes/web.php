@@ -42,6 +42,9 @@ Route::get('/user/current', 'UserController@getCurrentUser');
 
 //Route::get('/test')
 
+Route::get('/test', 'TestController@test');
+
+
 // auth middleware //
 
 Route::group(['middleware' => ['auth']], function () {
@@ -60,7 +63,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     // test routes //
 
-    Route::get('/test', 'TestController@test');
 
 
     // rest routes //

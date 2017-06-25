@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Entity;
+use App\EntityContact;
+use App\PersonContact;
 use App\User;
 use App\Contact;
 use App\Coordinate;
@@ -21,6 +24,77 @@ class TestController extends Controller
 {
     
 	public function test(){
+
+
+
+        $user = User::getObjectById('USR594d749828db3');
+
+        dd($user->accounts[0]->sites[0]->location);
+
+	    $location = new Location();
+
+	    $location->save();
+
+        $location_two = new Location();
+
+        $location_two->save();
+
+        $contact = new EntityContact();
+
+        $contact->location($location);
+
+        $contact->save();
+
+        dd($contact->location);
+
+        $contact_two = new EntityContact();
+
+        $contact_two->save();
+
+        $entity = new Entity();
+
+        $entity->save();
+
+        $entity->contact($contact_two)->save();
+
+        $entity->save();
+
+        dd($entity->contact);
+
+
+
+
+
+        dd($entity);
+
+        dd($entity->contact);
+
+        $entity->sites()->save($contact);
+
+        $entity->sites()->save($contact_two);
+
+        $entity = Entity::getObjectById($entity->id);
+
+        dump($entity->id);
+
+        dd($entity->sites);
+
+        $user = new User();
+
+        $user->save();
+
+        dump($user);
+
+        $user->accounts()->save($entity);
+
+
+
+        dd($user->accounts);
+
+
+
+
+
 
 
 	    $customer = Customer::getObjectById('CUS59408640ab393');

@@ -29,6 +29,13 @@ class PersonName extends Model
 
     protected $keyType = 'uuid';
 
+    public function personcontact(PersonContact $p = null){
+        if($p !== null) {
+            $this->personcontact_id = $p->id;
+        }
+        return $this->hasOne(PersonContact::class, 'id', 'personcontact_id');
+    }
+
     /**
      * personname constructor.
      * @param array $attributes

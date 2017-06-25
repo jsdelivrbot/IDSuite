@@ -12,7 +12,7 @@ class Proxy extends Model
      * @var array
      */
     protected $fillable = [
-        'customer', 'address', 'name', 'port', 'target', 'token', 'key'
+        'address', 'name', 'port', 'target', 'token', 'key'
     ];
 
     protected $guarded = [
@@ -32,9 +32,14 @@ class Proxy extends Model
     /**
      * relationships
      */
-    public function customer(){
-//        return $this->hasOne(Customer::class, 'id', 'customer_id');
-        return $this->hasOne(Customer::class);
+    public function entity(Entity $e = null){
+        if($e !== null){
+            $this->entity_id = $e->id;
+        }
+
+
+    return $this->hasOne(Entity::class);
+
     }
 
 
