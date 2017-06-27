@@ -133,7 +133,7 @@ class EntityController extends Controller
 
             }
         }
-        return view('account', [ 'name' => $name->name, 'id' => $id, 'viewname' => $name->name, 'sites' => $sites_array, 'persons' => $persons_array]);
+        return view('account', [ 'name' => $name->name, 'id' => $id, 'viewname' => 'account', 'sites' => $sites_array, 'persons' => $persons_array]);
     }
 
     /**
