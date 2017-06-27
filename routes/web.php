@@ -23,24 +23,7 @@ Auth::routes();
 
 Route::post('login', 'Auth\LoginController@loginNameOrEmail');
 
-
-
-
-
-//Route::get('/customer/endpoints/{id}', 'EndpointController@byCustomer');
-//
-//Route::get('/customer', 'CustomerController@index');
-//
-//Route::get('/customer/all', 'CustomerController@all');
-//
-//Route::get('/customer/{id}', 'CustomerController@show');
-
-
-Route::get('/user/current', 'UserController@getCurrentUser');
-
-
-
-//Route::get('/test')
+Route::get('/getAuthUser', 'UserController@getCurrentUser');
 
 Route::get('/test', 'TestController@test');
 

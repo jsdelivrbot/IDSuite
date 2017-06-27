@@ -78,13 +78,11 @@ class EntityController extends Controller
     {
         $entity = Entity::getObjectById($id);
 
+//        dd($entity->persons);
+
         $name = $entity->contact->entityname;
 
-//        dd($name);
-
         $sites = $entity->sites;
-
-//        dd($sites[0]->location);
 
         $sites_array = array();
 
@@ -100,6 +98,11 @@ class EntityController extends Controller
             $site->zip = $l->zipcode;
             $site->name = $s->entityname->name;
 
+            if($s->email->address !== "") {
+                $site->email = $s->email->address;
+            } else {
+                $site->email = "Email is not listed.";
+            }
             if($s->phonenumber->number !== null) {
                 $site->number = $s->phonenumber->number;
             } else{
@@ -109,9 +112,28 @@ class EntityController extends Controller
             $sites_array[] = $site;
         }
 
+        $persons_array = array();
 
+        if(count($entity->persons) > 0) {
+            foreach ($entity->persons as $p) {
 
-        return view('account', [ 'name' => $name->name, 'id' => $id, 'viewname' => $name->name, 'sites' => $sites_array]);
+                $person = new \stdClass();
+
+                $person->fullname = $p->personname->first_name . ' ' . $p->personname->last_name;
+
+                $person->number = $p->phonenumber->number;
+
+                $person->address = $p->location->address;
+
+                $person->city = $p->location->city;
+                $person->state = $p->location->state;
+                $person->zip = $p->location->zipcode;
+
+                $persons_array[] = $person;
+
+            }
+        }
+        return view('account', [ 'name' => $name->name, 'id' => $id, 'viewname' => $name->name, 'sites' => $sites_array, 'persons' => $persons_array]);
     }
 
     /**

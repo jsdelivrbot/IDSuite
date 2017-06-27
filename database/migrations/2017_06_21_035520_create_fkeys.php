@@ -48,6 +48,7 @@ class CreateFkeys extends Migration
             $table->foreign('personname_id')->references('id')->on('personname')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('phonenumber_id')->references('id')->on('phonenumber')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('entity_id')->references('id')->on('entity')->onDelete('cascade')->onUpdate('cascade');
         });
 
         Schema::table('proxy', function(Blueprint $table) {

@@ -251,20 +251,40 @@
     background-color: transparent !important;
     border-color: #E64759 !important;
     border-bottom: none !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .active-outline-card-header-pink{
     border-bottom-color: #E64759 !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .active-outline-card-block-pink{
     border-bottom: solid 1px #E64759 !important;
     border-left: solid 1px #E64759 !important;
     border-right: solid 1px #E64759 !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .pink{
     color: #E64759 !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .active-outline-tab-teal{
@@ -272,20 +292,40 @@
     background-color: transparent !important;
     border-color: #1BC98E !important;
     border-bottom: none !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .active-outline-card-header-teal{
     border-bottom-color: #1BC98E !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .active-outline-card-block-teal{
     border-bottom: solid 1px #1BC98E !important;
     border-left: solid 1px #1BC98E !important;
     border-right: solid 1px #1BC98E !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .teal{
     color: #1BC98E !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .active-outline-tab-purple{
@@ -293,20 +333,40 @@
     background-color: transparent !important;
     border-color: #9F86FF !important;
     border-bottom: none !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .active-outline-card-header-purple{
     border-bottom-color: #9F86FF !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .active-outline-card-block-purple{
     border-bottom: solid 1px #9F86FF !important;
     border-left: solid 1px #9F86FF !important;
     border-right: solid 1px #9F86FF !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .purple{
     color: #9F86FF !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .active-outline-tab-yellow{
@@ -314,20 +374,40 @@
     background-color: transparent !important;
     border-color: #E4D836 !important;
     border-bottom: none !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .active-outline-card-header-yellow{
     border-bottom-color: #E4D836 !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .active-outline-card-block-yellow{
     border-bottom: solid 1px #E4D836 !important;
     border-left: solid 1px #E4D836 !important;
     border-right: solid 1px #E4D836 !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .yellow{
     color: #E4D836 !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .active-outline-tab-blue{
@@ -335,20 +415,41 @@
     background-color: transparent !important;
     border-color: #1ca8dd !important;
     border-bottom: none !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+
 }
 
 .active-outline-card-header-blue{
     border-bottom-color: #1ca8dd !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .active-outline-card-block-blue{
     border-bottom: solid 1px #1ca8dd !important;
     border-left: solid 1px #1ca8dd !important;
     border-right: solid 1px #1ca8dd !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .blue{
     color: #1ca8dd !important;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 

@@ -442,19 +442,9 @@ class NsSeeder extends Seeder
 
             $parent_entity->sites($entity_contact)->save($entity_contact);
 
-//            dump($parent_entity->sites);
-
             $parent_entity->save();
 
-//            dump($parent_entity->sites);
-
             $entity = \App\Entity::getObjectById($parent_entity->id);
-
-//            dump($entity_contact);
-
-//            dump($entity);
-
-//            dump($entity->sites);
 
             $parent_entity->save();
 

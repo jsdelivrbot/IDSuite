@@ -104,7 +104,7 @@
             </div>
         </div>
 
-        <div class="card card-square mb-lg-5" style="background-color: transparent; border: none; height: 400px;">
+        <div class="card card-square mb-lg-5" style="background-color: transparent; border: none;">
             <ul id="account-card-header" class="nav nav-tabs active-outline-card-header-pink" role="tablist">
                 <li id="insights" class="nav-item">
                     <a id="insights-a" class="nav-link active-outline-tab-pink text-white" data-toggle="tab" href="#account-card-block-insights-tab" role="tab">Insights</a>
@@ -114,6 +114,9 @@
                 </li>
                 <li id="contacts" class="nav-item">
                     <a id="contacts-a" class="nav-link blue" data-toggle="tab" href="#account-card-block-contacts-tab" role="tab">Contacts</a>
+                </li>
+                <li id="notes" class="nav-item">
+                    <a id="notes-a" class="nav-link yellow" data-toggle="tab" href="#account-card-block-notes-tab" role="tab">Notes</a>
                 </li>
             </ul>
 
@@ -125,27 +128,74 @@
                     <a id="account-card-block-a" href="#" class="btn btn-nav-pink ">Go somewhere</a>
                 </div>
                 <div class="tab-pane card-block active-outline-card-block-teal" id="account-card-block-locations-tab" role="tabpanel">
+
+                    <h3 class="card-title teal mb-3">Sites</h3>
+
                     @foreach($sites as $s)
 
-                            <h4 class="card-title mt-2 text-white">{{$s->name}}</h4>
+                            <h5 class="card-title mt-2 text-white">{{$s->name}}</h5>
                             <div class="card-text text-white">
                                 <ul class="list-group row" style="background-color: transparent;">
-                                    <li for="name" class="col-lg-6 list-group-item" style="background-color: transparent; border: none;">
+                                    <li class="col-lg-6 list-group-item" style="background-color: transparent; border: none;">
+                                        <div class="col-lg-4">Email</div>
+                                        <div class="col-lg-8">{{$s->email}}</div>
                                         <div class="col-lg-4">Phone Number</div>
-                                        <div class="col-lg-6">{{$s->number}}</div>
+                                        <div class="col-lg-8">{{$s->number}}</div>
+                                        <div class="col-lg-4">Address</div>
+                                        <div class="col-lg-8">{{$s->address}}</div>
+                                        <div class="col-lg-4">City</div>
+                                        <div class="col-lg-8">{{$s->city}}</div>
+                                        <div class="col-lg-4">State</div>
+                                        <div class="col-lg-8">{{$s->state}}</div>
+                                        <div class="col-lg-4">Postal Code</div>
+                                        <div class="col-lg-8">{{$s->zip}}</div>
                                     </li>
-
                                 </ul>
                             </div>
 
+                    @if(!$loop->last)
+                        <hr class="mb-4" style="border-color: #1BC98E">
+                    @endif
                     @endforeach
                 </div>
 
                 <div class="tab-pane card-block active-outline-card-block-blue" id="account-card-block-contacts-tab" role="tabpanel">
-                    <h4 class="card-title text-white">Special title treatment</h4>
-                    <p class="card-text text-white">With supporting text below as a natural lead-in to additional content.</p>
-                    <a id="account-card-block-a" href="#" class="btn btn-nav-pink ">Go somewhere</a>
+
+                    @if(count($persons) === 0)
+
+                        <h4 class="card-title text-white">Hrm...</h4>
+
+                        <p class="card-text text-white">We currentyl do not have any contacts associated with this account.</p>
+                        <a id="account-card-block-a" href="#" class="btn btn-nav-blue ">Add one.</a>
+
+                    @endif
+
+                    @foreach($persons as $p)
+
+
+
+                    @endforeach
                 </div>
+
+
+                <div class="tab-pane card-block active-outline-card-block-yellow" id="account-card-block-notes-tab" role="tabpanel">
+
+                    @if(count($persons) === 0)
+
+                        <h4 class="card-title text-white">Hrm...</h4>
+
+                        <p class="card-text text-white">We currentyl do not have any notes associated with this account.</p>
+                        <a id="account-card-block-a" href="#" class="btn btn-nav-yellow ">Add one.</a>
+
+                    @endif
+
+                    @foreach($persons as $p)
+
+
+
+                    @endforeach
+                </div>
+
             </div>
 
 

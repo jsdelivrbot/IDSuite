@@ -7,9 +7,6 @@ $( document ).ready(function() {
         url: '/genderEnum',
         success: function (data) {
             data = data.data;
-
-            console.log(data);
-
             $.each(data, function (key, value) {
                 $('#gender').append('<option value=' + value + '>' + value + '</option>');
             });
@@ -26,9 +23,6 @@ $( document ).ready(function() {
         url: '/titleEnum',
         success: function (data) {
             data = data.data;
-
-            console.log(data);
-
             $.each(data, function (key, value) {
                 $('#title').append('<option value=' + value + '>' + value + '</option>');
             });

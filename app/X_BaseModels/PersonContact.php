@@ -34,14 +34,6 @@ class PersonContact extends Model
         return $this->hasOne(PersonName::class, 'id', 'personname_id');
     }
 
-    public function entityname(EntityName $e = null){
-        if($e !== null){
-            $this->entityname_id = $e->id;
-        }
-
-        return $this->hasOne(EntityName::class, 'id', 'entityname_id');
-    }
-
     public function email(Email $e = null){
         if($e !== null) {
             $this->email_id = $e->id;
@@ -63,6 +55,12 @@ class PersonContact extends Model
         return $this->hasOne(PhoneNumber::class, 'id', 'phonenumber_id');
     }
 
+    public function entity(Entity $e = null){
+        if($e !== null){
+            $this->entity_id = $e->id;
+        }
+        return $this->belongsTo(Entity::class, 'id', 'entity_id');
+    }
 
     /**
      * Contact constructor.

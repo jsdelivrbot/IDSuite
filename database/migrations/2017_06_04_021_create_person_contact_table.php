@@ -25,6 +25,7 @@ class CreatePersonContactTable extends Migration
             $table->uuid('location_id')->nullable();
             $table->uuid('phonenumber_id')->nullable();
             $table->uuid('user_id')->nullable();
+            $table->uuid('entity_id')->nullable();
             $table->timestamps();
         });
 
