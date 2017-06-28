@@ -49,9 +49,9 @@
                             <div class="card mb-3 text-center" style="background-color: #1BC98E;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">
                                 <div class="card-block">
                                     {{--<h4 class="card-title">{{$account->name}}</h4>--}}
-                                    <h4 class="card-title">{{$trunc_name}}</h4>
+                                    <h4 class="card-title text-truncate">{{$account->name}}</h4>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="account/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                    <a href="accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                                 </div>
                             </div>
                         </div>
@@ -62,9 +62,9 @@
                             <div class="card mb-3 text-center" style="background-color: #E64759;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">
                                 <div class="card-block">
                                     {{--<h4 class="card-title ">{{$account->name}}</h4>--}}
-                                    <h4 class="card-title">{{$trunc_name}}</h4>
+                                    <h4 class="card-title text-truncate">{{$account->name}}</h4>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="account/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                    <a href="accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                                 </div>
                             </div>
                         </div>
@@ -75,9 +75,9 @@
                             <div class="card mb-3 text-center" style="background-color: #9F86FF;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">
                                 <div class="card-block">
                                     {{--<h4 class="card-title ">{{$account->name}}</h4>--}}
-                                    <h4 class="card-title">{{$trunc_name}}</h4>
+                                    <h4 class="card-title text-truncate">{{$account->name}}</h4>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="account/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                    <a href="accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                                 </div>
                             </div>
                         </div>
@@ -88,9 +88,9 @@
                             <div class="card mb-3 text-center" style="background-color: #E4D836;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">
                                 <div class="card-block">
                                     {{--<h4 class="card-title ">{{$account->name}}</h4>--}}
-                                    <h4 class="card-title">{{$trunc_name}}</h4>
+                                    <h4 class="card-title text-truncate">{{$account->name}}</h4>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="account/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                    <a href="accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                                 </div>
                             </div>
                         </div>
@@ -101,9 +101,9 @@
                             <div class="card mb-3 text-center" style="background-color: #1ca8dd;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">
                                 <div class="card-block">
                                     {{--<h4 class="card-title ">{{$account->name}}</h4>--}}
-                                    <h4 class="card-title">{{$trunc_name}}</h4>
+                                    <h4 class="card-title text-truncate">{{$account->name}}</h4>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="account/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                    <a href="accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                                 </div>
                             </div>
                         </div>

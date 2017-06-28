@@ -50,7 +50,7 @@ class Endpoint extends Model
             $this->model_id = $e->id;
         }
 
-        return $this->hasOne(EndpointModel::class);
+        return $this->hasOne(EndpointModel::class, 'id', 'model_id');
     }
 
     public function proxy(Proxy $p = null){
@@ -59,16 +59,24 @@ class Endpoint extends Model
             $this->proxy_id = $p->id;
         }
 
-        return $this->hasOne(Proxy::class);
+        return $this->hasOne(Proxy::class, 'id', 'proxy_id');
     }
 
     public function location(Location $l = null){
-
-        if($l !== null) {
+        if($l !== null){
             $this->location_id = $l->id;
         }
 
-        return $this->hasOne(Location::class);
+        return $this->hasOne(Location::class, 'id', 'location_id');
+    }
+
+    public function entity(Entity $e = null){
+
+        if($e !== null) {
+            $this->entity_id = $e->id;
+        }
+
+        return $this->hasOne(Entity::class, 'id', 'entity_id');
     }
 
     /**
@@ -96,11 +104,11 @@ class Endpoint extends Model
         try{
             $this->isActive();
             $this->password_hash = Hash::make($password);
-
-            return $this;
+            $this->save();
         } catch(\Exception $e) {
             dump($e->getMessage());
         }
+        return $this;
     }
 
     /**

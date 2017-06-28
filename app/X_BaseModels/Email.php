@@ -72,7 +72,7 @@ class Email extends Model
 
             return $this;
         } else {
-            $this->address = $address;
+            $this->address = null;
             $this->save();
             return $this;
         }

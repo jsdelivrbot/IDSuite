@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 17);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -124,7 +124,8 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 1 */
+/* 1 */,
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -134,9 +135,9 @@ module.exports = function normalizeComponent (
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(8);
+__webpack_require__(9);
 
-window.Vue = __webpack_require__(13);
+window.Vue = __webpack_require__(14);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -144,9 +145,9 @@ window.Vue = __webpack_require__(13);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', __webpack_require__(9));
+Vue.component('example', __webpack_require__(10));
 
-Vue.component('appheader', __webpack_require__(10));
+Vue.component('appheader', __webpack_require__(11));
 
 var app = new Vue({
   el: '#app'
@@ -164,16 +165,16 @@ $.ajaxSetup({
 });
 
 /***/ }),
-/* 2 */,
 /* 3 */,
 /* 4 */,
-/* 5 */
+/* 5 */,
+/* 6 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -202,7 +203,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -223,7 +224,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -3786,14 +3787,14 @@ if (typeof jQuery === 'undefined') {
 }();
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(6),
+  __webpack_require__(7),
   /* template */
-  __webpack_require__(12),
+  __webpack_require__(13),
   /* scopeId */
   null,
   /* cssModules */
@@ -3820,14 +3821,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(7),
+  __webpack_require__(8),
   /* template */
-  __webpack_require__(11),
+  __webpack_require__(12),
   /* scopeId */
   null,
   /* cssModules */
@@ -3854,7 +3855,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -3871,7 +3872,7 @@ if (false) {
 }
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -3900,7 +3901,7 @@ if (false) {
 }
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13596,10 +13597,10 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 var g;
@@ -13626,11 +13627,12 @@ module.exports = g;
 
 
 /***/ }),
-/* 15 */
+/* 16 */,
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(1);
-module.exports = __webpack_require__(5);
+__webpack_require__(2);
+module.exports = __webpack_require__(6);
 
 
 /***/ })

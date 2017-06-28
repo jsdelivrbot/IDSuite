@@ -25,7 +25,7 @@ class CreatePersonNameTable extends Migration
             $table->string('middle_name')->nullable();
             $table->string('preferred_name')->nullable();
             $table->string('title')->nullable();
-            $table->string('personcontact_id')->nullable();
+            $table->uuid('personcontact_id')->nullable();
             $table->timestamps();
         });
     }

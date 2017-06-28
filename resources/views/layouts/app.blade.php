@@ -58,7 +58,7 @@
                 <ul class="navbar-nav ml-lg-3 mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link">
-                            @if($viewname === 'account')
+                            @if($viewname === 'account' || $viewname === 'device')
                                 {{$name}}
                             @else
                                 {{$viewname}}
@@ -103,16 +103,16 @@
 
         @if (!auth::guest() && $viewname !== 'App Selection')
             <div class="row">
-                <nav class="col-sm-3 col-md-2 col-lg-1 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important;padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
+                <nav class="col-sm-3 col-md-2 col-lg-2 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important;padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item ">
-                            <a class="nav-link btn-outline-teal" style="color: white !important;" href="/accounts">Dashboard</a>
+                            <a class="nav-link btn-outline-teal" style="color: white !important;" href="/accounts">Accounts</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn-outline-pink" style="color: white !important;white-space: nowrap;" href="#">Transactions</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn-outline-purple" style="color: white !important;" href="#">Devices</a>
+                            <a class="nav-link btn-outline-purple" style="color: white !important;" href="/devices">Devices</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn-outline-yellow" style="color: white !important;" href="#">Reports</a>
@@ -123,7 +123,7 @@
                     </ul>
                 </nav>
 
-                <main class="col-sm-9 offset-sm-3 col-md-11 offset-md-1 col-lg-11 offset-lg-1 pt-3">
+                <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 col-lg-10 offset-lg-2 pt-3">
                     @yield('content')
                 </main>
         @else
@@ -145,6 +145,9 @@
 
     @if($viewname === 'account')
     <script src="{{ asset('assets/js/chart_placeholder.js') }}"></script>
+
+    <script src="{{ asset('assets/js/account_charts.js') }}"></script>
+
     <script src="{{ asset('assets/js/custom_tabs.js') }}"></script>
     @endif
 

@@ -49,7 +49,7 @@ class Entity extends Model
             $this->parent_id = $e->id;
         }
 
-        return $this->hasOne(Entity::class);
+        return $this->hasOne(Entity::class, 'id', 'parent_id');
     }
 
     // one to many
@@ -59,6 +59,10 @@ class Entity extends Model
 
     public function sites(){
         return $this->hasMany(EntityContact::class);
+    }
+
+    public function children(){
+        return $this->hasMany(Entity::class, 'parent_id', 'id');
     }
 
     // many to one
@@ -71,6 +75,10 @@ class Entity extends Model
         return $this->belongsTo(User::class);
     }
 
+
+    public function endpoints(){
+        return $this->hasMany(Endpoint::class, 'entity_id', 'id');
+    }
 
 
     /**
@@ -89,16 +97,13 @@ class Entity extends Model
 
     public static function getByName($name){
         $name = EntityName::where('name', $name)->first();
-        if(is_object($name)){
-            $contact = EntityContact::where('entityname_id', $name->id)->first();
-            if(is_object($contact)){
-                $entity = Entity::where('contact_id', $contact->id)->first();
-            } else {
-                return false;
-            }
+
+        if($name === null){
+            return $name;
         } else {
-            return false;
+            $entity = $name->entitycontact->entity;
+            return $entity;
         }
-        return $entity;
+
     }
 }

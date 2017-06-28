@@ -1,41 +1,78 @@
 /**
  * Created by amac on 6/24/17.
  */
-var ctx = document.getElementById("myChart").getContext('2d');
 
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
+
+
+$( document ).ready(function() {
+    $.ajax({
+        type: "GET",
+        url: '/getRandomNumber',
+        success: function (number) {
+
+            let bgcolor;
+            let bordercolor;
+
+            let ctx = document.getElementById("myChart").getContext('2d');
+
+            switch(number){
+                case '1' :
+                    bgcolor = 'rgba(230, 71, 89, .2)';
+                    bordercolor = 'rgba(230, 71, 89, 1)';
+                    break;
+
+                case '2' :
+                    bgcolor = 'rgba(27, 201, 142, .2)';
+                    bordercolor = 'rgba(27, 201, 142, 1)';
+                    break;
+
+                case '3' :
+                    bgcolor = 'rgba(159, 134, 255, .2)';
+                    bordercolor = 'rgba(159, 134, 255, 1)';
+                    break;
+
+                case '4' :
+                    bgcolor = 'rgba(228, 216, 54, .2)';
+                    bordercolor = 'rgba(228, 216, 54, 1)';
+                    break;
+
+                case '5' :
+                    bgcolor = 'rgba(28, 168, 221, .2)';
+                    bordercolor = 'rgba(28, 168, 221, 1)';
+                    break;
+            }
+
+            let myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                    datasets: [{
+                        label: '# of Votes',
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: [
+                            bgcolor,
+                        ],
+                        borderColor: [
+                            bordercolor,
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
                 }
-            }]
+            });
         }
-    }
+    });
 });
+
+
+
+
+

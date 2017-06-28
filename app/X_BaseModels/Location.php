@@ -13,7 +13,7 @@ class Location extends Model
      * @var array
      */
     protected $fillable = [
-        'coordinate', 'address', 'city', 'state', 'zipcozipcodede'
+        'coordinate', 'address', 'city', 'state', 'zipcode'
     ];
 
 
@@ -42,6 +42,8 @@ class Location extends Model
 
         return $this->hasOne(Coordinate::class);
     }
+
+    // we may want to have a proxies relationship //
 
 
 

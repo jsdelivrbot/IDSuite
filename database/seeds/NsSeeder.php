@@ -10,7 +10,7 @@ class NsSeeder extends Seeder
 {
     public function run()
     {
-        $file_name = 'ns_customerrow.csv';
+        $file_name = 'ns_customers.csv';
 
         $csv = file_get_contents("$file_name");
 
@@ -18,7 +18,7 @@ class NsSeeder extends Seeder
         $companies = array_map("str_getcsv", explode("\n", $csv));
 
 
-        $count = 1;
+        $count = 0;
 
 
         foreach ($companies as $c) {
@@ -47,73 +47,33 @@ class NsSeeder extends Seeder
                 echo "First Pass : [**********]  $progress% \r";
             }
 
-            if ($c[0] === null) {
-                $count++;
-                continue;
-            }
-            $count++;
 
-            if ($c[5] === '' && $c[15] === 'No' && $c[2] !== '') {
-                $results = self::processRowIntoEntity($c);
-                if(!$results){
-                    continue;
+
+            if($count > 0){
+                if ($c[0] === null) {
+                    $count++;
+                } else {
+                    $results = self::processRowIntoEntity($c);
+                    $count++;
                 }
             } else {
-                continue;
-            }
-        }
-
-        $count = 1;
-
-        foreach ($companies as $c) {
-
-            $progress = round(100 * ($count / count($companies)));
-
-            if ($progress > 0 && $progress < 10) {
-                echo "Second Pass : [*---------]  $progress% \r";
-            } elseif ($progress > 10 && $progress < 20) {
-                echo "Second Pass : [**--------]  $progress% \r";
-            } elseif ($progress > 20 && $progress < 30) {
-                echo "Second Pass : [***-------]  $progress% \r";
-            } elseif ($progress > 30 && $progress < 40) {
-                echo "Second Pass : [****------]  $progress% \r";
-            } elseif ($progress > 40 && $progress < 50) {
-                echo "Second Pass : [*****-----]  $progress% \r";
-            } elseif ($progress > 50 && $progress < 60) {
-                echo "Second Pass : [******----]  $progress% \r";
-            } elseif ($progress > 60 && $progress < 70) {
-                echo "Second Pass : [*******---]  $progress% \r";
-            } elseif ($progress > 70 && $progress < 80) {
-                echo "Second Pass : [********--]  $progress% \r";
-            } elseif ($progress > 80 && $progress < 90) {
-                echo "Second Pass : [*********-]  $progress% \r";
-            } elseif ($progress > 90 && $progress < 100) {
-                echo "Second Pass : [**********]  $progress% \r";
-            }
-
-
-            if ($c[0] === null) {
                 $count++;
-                continue;
-            }
-            $count++;
-
-            if ($c[5] !== "") {
-                $results = self::processSite($c);
-                if(!$results){
-                    continue;
-                }
-            } else {
-                continue;
             }
         }
     }
 
+    /**
+     *
+     * Validate email
+     *
+     * @param $c
+     * @return bool
+     */
     public static function isEmailValid($c)
     {
-        $email = \App\Email::getEmailByAddress($c[3]);
+        $email = \App\Email::getEmailByAddress($c[1]);
 
-        if( $email === "" || $email === null || $c[3] === null || $c[3] === ""){
+        if( $email === "" || $email === null || $c[1] === null || $c[1] === ""){
             return false;
         }
 
@@ -122,11 +82,18 @@ class NsSeeder extends Seeder
     }
 
 
+    /**
+     *
+     * validate email lol does the same as above just more semantics
+     *
+     * @param $c
+     * @return bool
+     */
     public static function isPersonEmailValid($c)
     {
-        $email = \App\Email::getEmailByAddress($c[13]);
+        $email = \App\Email::getEmailByAddress($c[10]);
 
-        if( $email === "" || $email === null || $c[13] === null || $c[13] === ""){
+        if( $email === "" || $email === null || $c[10] === null || $c[10] === ""){
             return false;
         }
 
@@ -134,33 +101,47 @@ class NsSeeder extends Seeder
 
     }
 
+    /**
+     *
+     * Process entity email
+     *
+     *
+     * @param $c
+     * @return \App\Email
+     */
     public static function processEmail($c)
     {
         $isvalidemail = self::isEmailValid($c);
 
+
         if ($isvalidemail) {
-            $email = \App\Email::getEmailByAddress($c[3]);
+            $email = \App\Email::getEmailByAddress($c[1]);
             $email->save();
         } else {
             $email = new \App\Email();
-            if(!$email->setEmail($c[3])){
-                $email->save();
-            }
+            $email->setEmail($c[1]);
         }
 
         return $email;
     }
 
+    /**
+     *
+     * process user email
+     *
+     * @param $c
+     * @return \App\Email
+     */
     public static function processUserEmail($c)
     {
         $isvalidemail = self::isPersonEmailValid($c);
 
         if ($isvalidemail) {
-            $email = \App\Email::getEmailByAddress($c[13]);
+            $email = \App\Email::getEmailByAddress($c[10]);
             $email->save();
         } else {
             $email = new \App\Email();
-            if(!$email->setEmail($c[13])){
+            if(!$email->setEmail($c[10])){
                 $email->save();
             }
         }
@@ -168,24 +149,90 @@ class NsSeeder extends Seeder
         return $email;
     }
 
+    /**
+     *
+     * process entity name
+     *
+     *
+     * @param $c
+     * @return \App\EntityName
+     */
     public static function processName($c)
     {
+        $company_name = $c[0];
 
-        $name = new \App\EntityName();
+        $iscontractor = strpos($company_name, ':');
 
-        $name->name = $c[2];
+//        if(!$iscontractor){
+//
+//            $entity_name = \App\Entity::getByName($c[0]);
+//
+//            if($entity_name === null) {
+//                $name = new \App\EntityName();
+//                $name->name = $c[0];
+//                $name->save();
+//            } else {
+//                $name = $entity_name->contact->entityname;
+//            }
+//
+//        } else {
+//            $company_name = substr($company_name, $iscontractor + 2);
+//
+//            $entity_name = \App\Entity::getByName($company_name);
+//
+//            if($entity_name === null) {
+//                $name = new \App\EntityName();
+//                $name->name = $company_name;
+//                $name->save();
+//            } else {
+//                $name = $entity_name->contact->entityname;
+//            }
+//        }
 
-        $name->save();
+        $iscolon_index = strpos($company_name, ':');
+
+        if(!$iscolon_index){
+
+            $entity_name = \App\Entity::getByName($c[0]);
+
+            if($entity_name === null) {
+                $name = new \App\EntityName();
+                $name->name = $c[0];
+                $name->save();
+            } else {
+                $name = $entity_name->contact->entityname;
+            }
+        } else {
+            $company_name = substr($company_name, $iscolon_index + 2, strlen($company_name));
+
+            $entity_name = \App\Entity::getByName($company_name);
+
+            if($entity_name === null) {
+                $name = new \App\EntityName();
+                $name->name = $company_name;
+                $name->save();
+            } else {
+                $name = $entity_name->contact->entityname;
+            }
+        }
+
 
         return $name;
     }
 
+    /**
+     *
+     * process Person Name
+     *
+     * @param $c
+     * @return \App\PersonName
+     */
     public static function processUserName($c)
     {
 
         $name = new \App\PersonName();
 
-        $split = explode(' ', $c[11]);
+        $split = explode(' ', $c[8]);
 
         $firstname = $split[0];
         $middle_name = null;
@@ -213,27 +260,34 @@ class NsSeeder extends Seeder
         return $name;
     }
 
+    /**
+     *
+     * process location
+     *
+     * @param $c
+     * @return \App\Location
+     */
     public static function processLocation($c)
     {
         $location = new \App\Location();
 
-        if ($c[7] !== "") {
-            $location->address = $c[7];
+        if ($c[4] !== "") {
+            $location->address = $c[4];
         } else {
             $location->address = null;
         }
-        if ($c[8] !== "") {
-            $location->city = $c[8];
+        if ($c[5] !== "") {
+            $location->city = $c[5];
         } else {
             $location->city = null;
         }
-        if ($c[9] !== "") {
-            $location->state = $c[9];
+        if ($c[6] !== "") {
+            $location->state = $c[6];
         } else {
             $location->state = null;
         }
-        if ($c[10] !== "") {
-            $location->zipcode = $c[10];
+        if ($c[7] !== "") {
+            $location->zipcode = $c[7];
         } else {
             $location->zipcode = null;
         }
@@ -244,6 +298,12 @@ class NsSeeder extends Seeder
 
     }
 
+    /**
+     *
+     * process user location
+     *
+     * @return \App\Location
+     */
     public static function processUserLocation()
     {
         $location = new \App\Location();
@@ -259,12 +319,19 @@ class NsSeeder extends Seeder
 
     }
 
+    /**
+     *
+     * process phone number
+     *
+     * @param $c
+     * @return \App\PhoneNumber
+     */
     public static function processPhone($c)
     {
         $phone = new \App\PhoneNumber();
 
-        if ($c[6] !== "") {
-            $phone->number = $c[6];
+        if ($c[2] !== "") {
+            $phone->number = $c[2];
         } else {
             $phone->number = null;
         }
@@ -275,21 +342,42 @@ class NsSeeder extends Seeder
     }
 
 
+    /**
+     *
+     * process user phone number
+     *
+     * @param $c
+     * @return \App\PhoneNumber
+     */
     public static function processUserPhone($c)
     {
         $phone = new \App\PhoneNumber();
 
-        if ($c[14] !== "") {
-            $phone->number = $c[14];
-        } else {
-            $phone->number = null;
-        }
+        $phone->number = null;
+
+//        if ($c[14] !== "") {
+//            $phone->number = $c[14];
+//        } else {
+//            $phone->number = null;
+//        }
 
         $phone->save();
 
         return $phone;
     }
 
+    /**
+     *
+     * process entity contact
+     *
+     *
+     * @param $c
+     * @param \App\Location $location
+     * @param \App\EntityName $name
+     * @param \App\Email $email
+     * @param \App\PhoneNumber $phone
+     * @return \App\EntityContact
+     */
     public static function processContact($c, \App\Location $location, \App\EntityName $name, \App\Email $email, \App\PhoneNumber $phone)
     {
         $entity_contact = new \App\EntityContact();
@@ -304,6 +392,17 @@ class NsSeeder extends Seeder
         return $entity_contact;
     }
 
+    /**
+     *
+     * process user contact
+     *
+     * @param $c
+     * @param \App\Location $location
+     * @param \App\PersonName $name
+     * @param \App\Email $email
+     * @param \App\PhoneNumber $phone
+     * @return \App\PersonContact
+     */
     public static function processUserContact($c, \App\Location $location, \App\PersonName $name, \App\Email $email, \App\PhoneNumber $phone)
     {
         $user_contact = new \App\PersonContact();
@@ -317,6 +416,14 @@ class NsSeeder extends Seeder
         return $user_contact;
     }
 
+    /**
+     *
+     * process entity
+     *
+     * @param $c
+     * @param \App\EntityContact $entity_contact
+     * @return \App\Entity
+     */
     public static function processEntity($c, \App\EntityContact $entity_contact)
     {
         $entity = new \App\Entity();
@@ -342,47 +449,58 @@ class NsSeeder extends Seeder
      */
     public static function processUser($c, $entity)
     {
-        $user = \App\User::getUserByEmail($c[13]);
+        $user = \App\User::getUserByEmail($c[10]);
         if (is_object($user)) {
 
-            $user->accounts($entity)->save($entity);
-            $user->save();
+            if($entity === null) {
 
-            return $user;
+            } else {
+
+                $user->accounts($entity)->save($entity);
+                $user->save();
+
+                return $user;
+            }
         } else {
 
-            $email = self::processUserEmail($c);
+            if ($c[10] !== "") {
 
-            if($email->address === ""){
-                $email->address = null;
-                return false;
+                $email = self::processUserEmail($c);
+
+                if ($email->address === "") {
+                    $email->address = null;
+                    return false;
+                }
+
+                $name = self::processUserName($c);
+
+                $location = self::processUserLocation();
+
+                $phone = self::processUserPhone($c);
+
+                $contact = self::processUserContact($c, $location, $name, $email, $phone);
+
+                $user = new \App\User();
+
+                $user->save();
+
+                $user->contact($contact)->save($contact);
+
+                $user->email_address = $email->address;
+
+                $user->getEmailUsername();
+                $user->setPassword('ids_14701');
+
+                $user->accounts($entity)->save($entity);
+
+                $user->save();
+
+                return $user;
+            } else {
             }
-
-            $name = self::processUserName($c);
-
-            $location = self::processUserLocation();
-
-            $phone = self::processUserPhone($c);
-
-            $contact = self::processUserContact($c, $location, $name, $email, $phone);
-
-            $user = new \App\User();
-
-            $user->save();
-
-            $user->contact($contact)->save($contact);
-
-            $user->email_address = $email->address;
-
-            $user->getEmailUsername();
-            $user->setPassword('ids_14701');
-
-            $user->accounts($entity)->save($entity);
-
-            $user->save();
-
-            return $user;
         }
+
+        return false;
     }
 
 
@@ -407,7 +525,31 @@ class NsSeeder extends Seeder
 
         $entity_contact = self::processContact($c, $location, $name, $email, $phone);
 
-        $entity = self::processEntity($c, $entity_contact);
+
+        $company_name = $c[0];
+
+        $iscolon_index = strpos($company_name, ':');
+
+        if(!$iscolon_index){
+            $entity = self::processEntity($c, $entity_contact);
+        } else {
+
+            $entity = self::processEntity($c, $entity_contact);
+
+            $company_name = substr($company_name, 0, $iscolon_index);
+
+            $parent_entity = \App\Entity::getByName($company_name);
+
+            if($parent_entity === null){
+                dump($company_name);
+            } else {
+
+                $parent_entity->children($entity)->save($entity);
+
+                $parent_entity->save();
+            }
+
+        }
 
         $user = self::processUser($c, $entity);
 
@@ -452,5 +594,7 @@ class NsSeeder extends Seeder
         } else {
             false;
         }
+
+        return false;
     }
 }

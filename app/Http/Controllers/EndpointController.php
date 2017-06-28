@@ -78,14 +78,9 @@ class EndpointController extends Controller
         $e->model = $endpoint->model_id;
         $e->proxy = $endpoint->proxy_id;
 
-        $endpoint = $e;
+        session(['randomnumber' => rand(1,5)]);
 
-        $endpoints = array();
-
-        $endpoints[] = $endpoint;
-
-        return view('endpoints', ['endpoints' => $endpoints]);
-
+        return view('endpoint', ['endpoint' => $e,'name' => $e->name, 'viewname' => 'device', 'number' => session('randomnumber')]);
     }
 
     /**
@@ -136,7 +131,6 @@ class EndpointController extends Controller
             $e->mac = $endpoint->macaddress;
             $e->model = $endpoint->model_id;
             $e->proxy = $endpoint->proxy_id;
-
 
             $endpoints[] = $e;
         }

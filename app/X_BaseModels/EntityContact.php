@@ -72,7 +72,7 @@ class EntityContact extends Model
         if($e !== null){
             $this->entity_id = $e->id;
         }
-        return $this->belongsTo(Entity::class, 'id', 'entity_id');
+        return $this->belongsTo(Entity::class, 'id', 'contact_id');
     }
 
 

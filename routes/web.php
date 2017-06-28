@@ -61,7 +61,23 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/devices' , 'EndpointController@index');
 
 
+    Route::get('/getRandomNumber', 'RandomNumberController@getRandomNumber');
+
+
+    // chart routes //
+    Route::get('/getChartDeviceByType', 'EntityController@getChartDeviceByType');
+
+    Route::get('/getChartDeviceUpStatusAll', 'EntityController@getChartDeviceUpStatusAll');
+
+    Route::get('/getChartDeviceUpStatusPercentAll', 'EntityController@getChartDeviceUpStatusPercentAll');
+
+
+    // proxy routes //
+
     Route::get('/proxy/{id}', 'ProxyController@show');
+
+
+    // model routes //
 
     Route::get('/model/{id}', 'ModelController@show');
 
@@ -72,7 +88,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/accounts/all', 'EntityController@all');
 
-    Route::get('/account/{id}', 'EntityController@show');
+    Route::get('/accounts/{id}', 'EntityController@show');
 
 
 

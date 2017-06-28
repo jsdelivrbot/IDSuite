@@ -19,6 +19,7 @@ class CreateEntityNameTable extends Migration
             $table->primary('id');
             $table->string('class_code');
             $table->string('name')->nullable();
+            $table->uuid('entitycontact_id')->nullable();
             $table->timestamps();
         });
     }

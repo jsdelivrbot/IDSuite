@@ -29,5 +29,7 @@
   "/assets/js/progressbar.js": "/assets/js/progressbar.js",
   "/assets/js/custom_tabs.js": "/assets/js/custom_tabs.js",
   "/assets/js/custom_progress_bar.js": "/assets/js/custom_progress_bar.js",
-  "/assets/js/chart_placeholder.js": "/assets/js/chart_placeholder.js"
+  "/assets/js/chart_placeholder.js": "/assets/js/chart_placeholder.js",
+  "/assets/js/account_chart.js": "/assets/js/account_chart.js",
+  "/assets/js/account_charts.js": "/assets/js/account_charts.js"
 }

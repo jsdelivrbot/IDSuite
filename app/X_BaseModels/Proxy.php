@@ -37,9 +37,19 @@ class Proxy extends Model
             $this->entity_id = $e->id;
         }
 
+        return $this->hasOne(Entity::class, 'id', 'entity_id');
+    }
 
-    return $this->hasOne(Entity::class);
+    public function location(Location $l = null){
+        if($l !== null){
+            $this->location_id = $l->id;
+        }
 
+        return $this->hasOne(Location::class, 'id', 'location_id');
+    }
+
+    public function endpoints(){
+        return $this->hasMany(Endpoint::class, 'proxy_id', 'id');
     }
 
 
@@ -53,5 +63,11 @@ class Proxy extends Model
 
         return $this;
 
+    }
+
+    public static function getByName($name){
+        $proxy = Proxy::where('name', $name)->first();
+
+        return $proxy;
     }
 }

@@ -30,6 +30,18 @@ class Coordinate extends Model
 
     protected $keyType = 'uuid';
 
+    /**
+     * relationships
+     */
+    public function location(Location $l = null){
+
+        if($l !== null) {
+            $this->location_id = $l->id;
+        }
+
+        return $this->belongsTo(Location::class,'id','coordinate_id');
+    }
+
 
     /**
      * Coordinate constructor.

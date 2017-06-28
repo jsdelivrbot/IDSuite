@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entity;
 use App\EntityContact;
+use App\EntityName;
 use App\PersonContact;
 use App\User;
 use App\Contact;
@@ -25,6 +26,23 @@ class TestController extends Controller
     
 	public function test(){
 
+
+
+	    $entityname = new EntityName();
+
+	    $entityname->name = 'test';
+
+	    $entityname->save();
+
+	    $entitycontact = new EntityContact();
+
+	    $entitycontact->save();
+
+        $entitycontact->entityname($entityname)->save($entityname);
+
+        $entitycontact->save();
+
+        dd($entityname->entitycontact);
 
 
         $user = User::getObjectById('USR594d749828db3');

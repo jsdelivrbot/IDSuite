@@ -29,6 +29,14 @@ class EntityName extends Model
 
     protected $keyType = 'uuid';
 
+    public function entitycontact(EntityContact $ec = null){
+        if($ec !== null) {
+            $this->entitycontact_id = $ec->id;
+        }
+        return $this->belongsTo(EntityContact::class, 'id', 'entityname_id');
+    }
+
+
     /**
      * personname constructor.
      * @param array $attributes

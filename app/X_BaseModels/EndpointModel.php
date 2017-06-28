@@ -29,6 +29,10 @@ class EndpointModel extends Model
 
     protected $keyType = 'uuid';
 
+    public function endpoints(){
+        return $this->hasMany(Endpoint::class, 'model_id', 'id');
+    }
+
     /**
      * EndpointModel constructor.
      * @param array $attributes
@@ -40,4 +44,16 @@ class EndpointModel extends Model
         return $this;
 
     }
+
+
+    public static function getByName($name){
+        $model = EndpointModel::where('name', $name)->first();
+        return $model;
+    }
+
+    public static function getAllModels(){
+        return $models = EndpointModel::all();
+    }
+
+
 }

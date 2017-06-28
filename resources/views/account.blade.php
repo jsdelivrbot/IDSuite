@@ -4,9 +4,6 @@
     <div class="container p-lg-1">
         <div class="row">
             <div class="col-lg-12 col-md-12 offset-md-2 offset-lg-0">
-                @php
-                    $number = rand(1,5);
-                @endphp
                 @if($number === 1)
 
                     <div class="card card-inverse card-square border-bottom-pink border-right-pink" style="border-top: none; border-left: none; background-color: transparent;">
@@ -123,9 +120,19 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane card-block active active-outline-card-block-pink" id="account-card-block-insights-tab" role="tabpanel">
-                    <h4 class="card-title text-white">Special title treatment</h4>
-                    <p class="card-text text-white">With supporting text below as a natural lead-in to additional content.</p>
-                    <a id="account-card-block-a" href="#" class="btn btn-nav-pink ">Go somewhere</a>
+                    {{--<div id="chart-container" class="chart-container">--}}
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <canvas id="devicebytype"></canvas>
+                        </div>
+                        <div class="col-lg-6">
+                            <canvas id="deviceupstatus"></canvas>
+                        </div>
+                        <div class="col-lg-6 mt-4">
+                            <canvas id="deviceupstatuspercentall"></canvas>
+                        </div>
+                    </div>
+                    {{--</div>--}}
                 </div>
                 <div class="tab-pane card-block active-outline-card-block-teal" id="account-card-block-locations-tab" role="tabpanel">
 

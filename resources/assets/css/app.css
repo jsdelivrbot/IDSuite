@@ -65,7 +65,6 @@
     background-color: transparent;
     border-color: #E64759;
 }
-
 .btn-outline-pink:hover {
     color: #fff;
     background-color: #E64759;
@@ -696,4 +695,9 @@
     margin: 20px;
     width: 400px;
     height: 8px;
+}
+
+#chart-container{
+    margin: 20px;
+    width: 450px;
 }

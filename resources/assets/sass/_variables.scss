@@ -36,3 +36,10 @@ $input-color-placeholder: lighten($text-color, 30%);
 
 // Panels
 $panel-default-heading-bg: #fff;
+
+
+$grid-breakpoints: (
+        sm: 480px,
+        md: 768px,
+        lg: 1024px
+);

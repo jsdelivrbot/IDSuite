@@ -26,7 +26,6 @@ class CreateEndpointTable extends Migration
             $table->uuid('proxy_id')->nullable();
             $table->uuid('location_id')->nullable();
 
-            $table->string('manufacturer')->nullable();
             $table->string('username')->nullable();
             $table->char('password_hash', 64)->nullable();
             $table->string('name')->nullable();
@@ -36,7 +35,6 @@ class CreateEndpointTable extends Migration
             $table->time('reboot_time')->nullable();;
             $table->time('last_reboot')->nullable();
             $table->string('status')->nullable();
-            $table->string('model_type')->nullable();
             $table->time('status_at')->nullable();
             $table->boolean('active')->nullable();
             $table->timestamps();
