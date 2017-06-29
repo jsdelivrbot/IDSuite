@@ -22,7 +22,8 @@ class CreateNoteTable extends Migration
             $table->primary('id');
             $table->string('class_code');
             $table->text('text')->nullable();
-            $table->uuid('object')->nullable();
+            $table->uuid('noteable_id')->nullable();
+            $table->string('noteable_type')->nullable();
             $table->timestamps();
         });
     }

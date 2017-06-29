@@ -55,11 +55,16 @@ Route::group(['middleware' => ['auth']], function () {
        return view('apppicker', ['viewname' => 'App Selection']);
     });
 
-    Route::get('/devices/{id}', 'EndpointController@show');
+    // device routes //
 
+    Route::get('/devices/{id}', 'EndpointController@show');
 
     Route::get('/devices' , 'EndpointController@index');
 
+    Route::get('/getDeviceStatus', 'EndpointController@getDeviceStatus');
+
+
+    // Random Number Route //
 
     Route::get('/getRandomNumber', 'RandomNumberController@getRandomNumber');
 
@@ -89,6 +94,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/accounts/all', 'EntityController@all');
 
     Route::get('/accounts/{id}', 'EntityController@show');
+
+
+    Route::post('/notes', 'NoteController@create');
 
 
 

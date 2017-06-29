@@ -701,3 +701,17 @@
     margin: 20px;
     width: 450px;
 }
+
+.modal-content{
+    background-color: #293a46 !important;
+    color: white;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.modal-header{
+    border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.modal-footer{
+    border-top-color: rgba(255, 255, 255, 0.2) !important;
+}

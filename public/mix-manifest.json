@@ -31,5 +31,7 @@
   "/assets/js/custom_progress_bar.js": "/assets/js/custom_progress_bar.js",
   "/assets/js/chart_placeholder.js": "/assets/js/chart_placeholder.js",
   "/assets/js/account_chart.js": "/assets/js/account_chart.js",
-  "/assets/js/account_charts.js": "/assets/js/account_charts.js"
+  "/assets/js/account_charts.js": "/assets/js/account_charts.js",
+  "/assets/js/device_status.js": "/assets/js/device_status.js",
+  "/assets/js/account_note.js": "/assets/js/account_note.js"
 }

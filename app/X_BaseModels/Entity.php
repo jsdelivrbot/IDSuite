@@ -80,6 +80,14 @@ class Entity extends Model
         return $this->hasMany(Endpoint::class, 'entity_id', 'id');
     }
 
+    /**
+     * Get all of the entity's notes.
+     */
+    public function notes()
+    {
+        return $this->morphMany(Note::class, 'noteable');
+    }
+
 
     /**
      * personname constructor.

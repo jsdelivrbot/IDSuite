@@ -131,9 +131,23 @@ class EntityController extends Controller
             }
         }
 
+        $notes_array = array();
+
+
+
+        foreach ($entity->notes->sortByDesc('created_at') as $n){
+
+            $note = new \stdClass();
+
+            $note->text = $n->text;
+            $note->created = $n->created_at;
+
+            $notes_array[] = $note;
+        }
+
         session(['randomnumber' => rand(1,5)]);
 
-        return view('account', ['name' => $name->name, 'id' => $id, 'viewname' => 'account', 'sites' => $sites_array, 'persons' => $persons_array, 'number' => session('randomnumber')]);
+        return view('account', ['name' => $name->name, 'id' => $id, 'viewname' => 'account', 'sites' => $sites_array, 'persons' => $persons_array, 'notes' => $notes_array , 'number' => session('randomnumber')]);
     }
 
 

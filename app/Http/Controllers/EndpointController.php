@@ -66,8 +66,11 @@ class EndpointController extends Controller
      */
     public function show($id)
     {
+        session(['currentendpoint' => $id]);
 
         $endpoint = Endpoint::getObjectById($id);
+
+        session(['currentendpointobject' => $endpoint]);
 
         $e = new \stdClass();
 
@@ -79,6 +82,8 @@ class EndpointController extends Controller
         $e->proxy = $endpoint->proxy_id;
 
         session(['randomnumber' => rand(1,5)]);
+
+
 
         return view('endpoint', ['endpoint' => $e,'name' => $e->name, 'viewname' => 'device', 'number' => session('randomnumber')]);
     }
@@ -136,5 +141,25 @@ class EndpointController extends Controller
         }
 
         return view('endpoints', ['endpoints' => $endpoints]);
+    }
+
+
+    /**
+     *
+     * get an endpoints status
+     *
+     */
+    public function getDeviceStatus(){
+
+        $endpoint = session('currentendpointobject');
+
+        if($endpoint->status === 'u'){
+            $result = true;
+        } else {
+            $result = false;
+        }
+
+        return response()->json($result);
+
     }
 }

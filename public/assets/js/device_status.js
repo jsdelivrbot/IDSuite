@@ -63,88 +63,61 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 21);
+/******/ 	return __webpack_require__(__webpack_require__.s = 23);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 21:
+/***/ 23:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(4);
+module.exports = __webpack_require__(6);
 
 
 /***/ }),
 
-/***/ 4:
+/***/ 6:
 /***/ (function(module, exports) {
 
 /**
- * Created by amac on 6/24/17.
+ * Created by amac on 6/28/17.
  */
+$.ajax({
+    type: "GET",
+    url: '/getDeviceStatus',
+    success: function success(data) {
 
-$(document).ready(function () {
-    $.ajax({
-        type: "GET",
-        url: '/getRandomNumber',
-        success: function success(number) {
+        if (data === true) {
+            var canvas = document.getElementById('device-status-circle');
+            var context = canvas.getContext('2d');
+            var centerX = canvas.width / 2;
+            var centerY = canvas.height / 2;
+            var radius = 10;
 
-            var bgcolor = void 0;
-            var bordercolor = void 0;
+            context.beginPath();
+            context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+            context.fillStyle = 'rgba(27, 201, 142, .3)';
+            context.fill();
+            context.lineWidth = 2;
+            context.strokeStyle = 'rgba(27, 201, 142, 1)';
+            context.stroke();
+        } else {
 
-            var ctx = document.getElementById("myChart").getContext('2d');
+            var canvas = document.getElementById('device-status-circle');
+            var context = canvas.getContext('2d');
+            var centerX = canvas.width / 2;
+            var centerY = canvas.height / 2;
+            var radius = 10;
 
-            switch (number) {
-                case '1':
-                    bgcolor = 'rgba(230, 71, 89, .2)';
-                    bordercolor = 'rgba(230, 71, 89, 1)';
-                    break;
-
-                case '2':
-                    bgcolor = 'rgba(27, 201, 142, .2)';
-                    bordercolor = 'rgba(27, 201, 142, 1)';
-                    break;
-
-                case '3':
-                    bgcolor = 'rgba(159, 134, 255, .2)';
-                    bordercolor = 'rgba(159, 134, 255, 1)';
-                    break;
-
-                case '4':
-                    bgcolor = 'rgba(228, 216, 54, .2)';
-                    bordercolor = 'rgba(228, 216, 54, 1)';
-                    break;
-
-                case '5':
-                    bgcolor = 'rgba(28, 168, 221, .2)';
-                    bordercolor = 'rgba(28, 168, 221, 1)';
-                    break;
-            }
-
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        backgroundColor: [bgcolor],
-                        borderColor: [bordercolor],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
+            context.beginPath();
+            context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+            context.fillStyle = 'rgba(230, 71, 89, .3)';
+            context.fill();
+            context.lineWidth = 2;
+            context.strokeStyle = 'rgba(230, 71, 89, 1)';
+            context.stroke();
         }
-    });
+    }
 });
 
 /***/ })

@@ -20,6 +20,14 @@ class Note extends Model
     ];
 
     /**
+     * Get all of the owning noteable models.
+     */
+    public function noteable()
+    {
+        return $this->morphTo();
+    }
+
+    /**
      * Define table to be used with this model. It defaults and assumes table names will have an s added to the end.
      *for instance App\User table by default would be users
      */

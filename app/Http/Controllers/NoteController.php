@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Entity;
 use App\Note;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class NoteController extends Controller
 {
@@ -24,7 +26,22 @@ class NoteController extends Controller
      */
     public function create()
     {
-        //
+
+        $text = Input::get('text');
+        $entity = session('currentaccount');
+
+        $entity = Entity::getObjectById($entity);
+
+        $note = new Note();
+
+        $note->text = $text;
+
+        $note->save();
+
+        $entity->notes()->save($note);
+
+        return response()->json($note);
+
     }
 
     /**

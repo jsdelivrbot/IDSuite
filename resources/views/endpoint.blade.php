@@ -9,7 +9,9 @@
                     <div class="card card-inverse card-square border-bottom-pink border-right-pink" style="border-top: none; border-left: none; background-color: transparent;">
                         <div class="card-block">
 
-                            <h4 class="card-title pink">{{$name}}</h4>
+                            <h4 class="card-title pink">{{$name}}
+                                <canvas id="device-status-circle" class="ml-2" width="30" height="25" data-toggle="tooltip" data-placement="top" title="Status"></canvas>
+                            </h4>
                             <p class="card-text text-white">This is endpoint {{$name}}</p>
 
                             <div class="float-right mr-4">
@@ -22,17 +24,17 @@
                             <h5 class="card-title mt-2 text-white">{{$endpoint->name}}</h5>
                             <div class="card-text text-white">
                                 <ul class="list-group row" style="background-color: transparent;">
-                                    <li class="col-lg-6 list-group-item" style="background-color: transparent; border: none;">
-                                        <div class="col-lg-4">Name</div>
-                                        <div class="col-lg-8">{{$endpoint->name}}</div>
-                                        <div class="col-lg-4">IP Address</div>
-                                        <div class="col-lg-8">{{$endpoint->ip}}</div>
-                                        <div class="col-lg-4">Mac Address</div>
-                                        <div class="col-lg-8">{{$endpoint->mac}}</div>
-                                        <div class="col-lg-4">Model</div>
-                                        <div class="col-lg-8">{{$endpoint->model}}</div>
-                                        <div class="col-lg-4">Proxy</div>
-                                        <div class="col-lg-8">{{$endpoint->proxy}}</div>
+                                    <li class="col-lg-8 list-group-item" style="background-color: transparent; border: none;">
+                                        <div class="col-lg-5">Name</div>
+                                        <div class="col-lg-7">{{$endpoint->name}}</div>
+                                        <div class="col-lg-5">IP Address</div>
+                                        <div class="col-lg-7">{{$endpoint->ip}}</div>
+                                        <div class="col-lg-5">Mac Address</div>
+                                        <div class="col-lg-7">{{$endpoint->mac}}</div>
+                                        <div class="col-lg-5">Model</div>
+                                        <div class="col-lg-7">{{$endpoint->model}}</div>
+                                        <div class="col-lg-5">Proxy</div>
+                                        <div class="col-lg-7">{{$endpoint->proxy}}</div>
                                     </li>
                                 </ul>
                             </div>
@@ -44,7 +46,9 @@
                     <div class="card card-inverse card-square border-bottom-teal border-right-teal" style="border-top: none; border-left: none; background-color: transparent; ">
                         <div class="card-block">
 
-                            <h4 class="card-title teal">{{$name}}</h4>
+                            <h4 class="card-title teal">{{$name}}
+                                <canvas id="device-status-circle" class="ml-2" width="30" height="25" data-toggle="tooltip" data-placement="top" title="Status"></canvas>
+                            </h4>
                             <p class="card-text text-white">This is endpoint {{$name}}</p>
 
                             <div class="float-right mr-4">
@@ -58,17 +62,17 @@
                             <h5 class="card-title mt-2 text-white">{{$endpoint->name}}</h5>
                             <div class="card-text text-white">
                                 <ul class="list-group row" style="background-color: transparent;">
-                                    <li class="col-lg-6 list-group-item" style="background-color: transparent; border: none;">
-                                        <div class="col-lg-4">Name</div>
-                                        <div class="col-lg-8">{{$endpoint->name}}</div>
-                                        <div class="col-lg-4">IP Address</div>
-                                        <div class="col-lg-8">{{$endpoint->ip}}</div>
-                                        <div class="col-lg-4">Mac Address</div>
-                                        <div class="col-lg-8">{{$endpoint->mac}}</div>
-                                        <div class="col-lg-4">Model</div>
-                                        <div class="col-lg-8">{{$endpoint->model}}</div>
-                                        <div class="col-lg-4">Proxy</div>
-                                        <div class="col-lg-8">{{$endpoint->proxy}}</div>
+                                    <li class="col-lg-8 list-group-item" style="background-color: transparent; border: none;">
+                                        <div class="col-lg-5">Name</div>
+                                        <div class="col-lg-7">{{$endpoint->name}}</div>
+                                        <div class="col-lg-5">IP Address</div>
+                                        <div class="col-lg-7">{{$endpoint->ip}}</div>
+                                        <div class="col-lg-5">Mac Address</div>
+                                        <div class="col-lg-7">{{$endpoint->mac}}</div>
+                                        <div class="col-lg-5">Model</div>
+                                        <div class="col-lg-7">{{$endpoint->model}}</div>
+                                        <div class="col-lg-5">Proxy</div>
+                                        <div class="col-lg-7">{{$endpoint->proxy}}</div>
                                     </li>
                                 </ul>
                             </div>
@@ -80,7 +84,9 @@
                     <div class="card card-inverse card-square border-bottom-purple border-right-purple" style="border-top: none; border-left: none; background-color: transparent;">
                         <div class="card-block">
 
-                            <h4 class="card-title purple">{{$name}}</h4>
+                            <h4 class="card-title purple">{{$name}}
+                                <canvas id="device-status-circle" class="ml-2" width="30" height="25" data-toggle="tooltip" data-placement="top" title="Status"></canvas>
+                            </h4>
                             <p class="card-text text-white">This is endpoint {{$name}}</p>
 
                             <div class="float-right mr-4">
@@ -93,17 +99,17 @@
                             <h5 class="card-title mt-2 text-white">{{$endpoint->name}}</h5>
                             <div class="card-text text-white">
                                 <ul class="list-group row" style="background-color: transparent;">
-                                    <li class="col-lg-6 list-group-item" style="background-color: transparent; border: none;">
-                                        <div class="col-lg-4">Name</div>
-                                        <div class="col-lg-8">{{$endpoint->name}}</div>
-                                        <div class="col-lg-4">IP Address</div>
-                                        <div class="col-lg-8">{{$endpoint->ip}}</div>
-                                        <div class="col-lg-4">Mac Address</div>
-                                        <div class="col-lg-8">{{$endpoint->mac}}</div>
-                                        <div class="col-lg-4">Model</div>
-                                        <div class="col-lg-8">{{$endpoint->model}}</div>
-                                        <div class="col-lg-4">Proxy</div>
-                                        <div class="col-lg-8">{{$endpoint->proxy}}</div>
+                                    <li class="col-lg-8 list-group-item" style="background-color: transparent; border: none;">
+                                        <div class="col-lg-5">Name</div>
+                                        <div class="col-lg-7">{{$endpoint->name}}</div>
+                                        <div class="col-lg-5">IP Address</div>
+                                        <div class="col-lg-7">{{$endpoint->ip}}</div>
+                                        <div class="col-lg-5">Mac Address</div>
+                                        <div class="col-lg-7">{{$endpoint->mac}}</div>
+                                        <div class="col-lg-5">Model</div>
+                                        <div class="col-lg-7">{{$endpoint->model}}</div>
+                                        <div class="col-lg-5">Proxy</div>
+                                        <div class="col-lg-7">{{$endpoint->proxy}}</div>
                                     </li>
                                 </ul>
                             </div>
@@ -115,7 +121,9 @@
                     <div class="card card-inverse card-square border-bottom-yellow border-right-yellow" style="border-top: none; border-left: none; background-color: transparent;">
                         <div class="card-block">
 
-                            <h4 class="card-title yellow">{{$name}}</h4>
+                            <h4 class="card-title yellow">{{$name}}
+                                <canvas id="device-status-circle" class="ml-2" width="30" height="25" data-toggle="tooltip" data-placement="top" title="Status"></canvas>
+                            </h4>
                             <p class="card-text text-white">This is endpoint {{$name}}</p>
 
                             <div class="float-right mr-4">
@@ -128,17 +136,17 @@
                             <h5 class="card-title mt-2 text-white">{{$endpoint->name}}</h5>
                             <div class="card-text text-white">
                                 <ul class="list-group row" style="background-color: transparent;">
-                                    <li class="col-lg-6 list-group-item" style="background-color: transparent; border: none;">
-                                        <div class="col-lg-4">Name</div>
-                                        <div class="col-lg-8">{{$endpoint->name}}</div>
-                                        <div class="col-lg-4">IP Address</div>
-                                        <div class="col-lg-8">{{$endpoint->ip}}</div>
-                                        <div class="col-lg-4">Mac Address</div>
-                                        <div class="col-lg-8">{{$endpoint->mac}}</div>
-                                        <div class="col-lg-4">Model</div>
-                                        <div class="col-lg-8">{{$endpoint->model}}</div>
-                                        <div class="col-lg-4">Proxy</div>
-                                        <div class="col-lg-8">{{$endpoint->proxy}}</div>
+                                    <li class="col-lg-8 list-group-item" style="background-color: transparent; border: none;">
+                                        <div class="col-lg-5">Name</div>
+                                        <div class="col-lg-7">{{$endpoint->name}}</div>
+                                        <div class="col-lg-5">IP Address</div>
+                                        <div class="col-lg-7">{{$endpoint->ip}}</div>
+                                        <div class="col-lg-5">Mac Address</div>
+                                        <div class="col-lg-7">{{$endpoint->mac}}</div>
+                                        <div class="col-lg-5">Model</div>
+                                        <div class="col-lg-7">{{$endpoint->model}}</div>
+                                        <div class="col-lg-5">Proxy</div>
+                                        <div class="col-lg-7">{{$endpoint->proxy}}</div>
                                     </li>
                                 </ul>
                             </div>
@@ -150,7 +158,9 @@
                     <div class="card card-inverse card-square border-bottom-blue border-right-blue" style="border-top: none; border-left: none; background-color: transparent;">
                         <div class="card-block">
 
-                            <h4 class="card-title blue">{{$name}}</h4>
+                            <h4 class="card-title blue">{{$name}}
+                                <canvas id="device-status-circle" class="ml-2" width="30" height="25" data-toggle="tooltip" data-placement="top" title="Status"></canvas>
+                            </h4>
                             <p class="card-text text-white">This is endpoint {{$name}}</p>
 
                             <div class="float-right mr-4">
@@ -163,17 +173,17 @@
                             <h5 class="card-title mt-2 text-white">{{$endpoint->name}}</h5>
                             <div class="card-text text-white">
                                 <ul class="list-group row" style="background-color: transparent;">
-                                    <li class="col-lg-6 list-group-item" style="background-color: transparent; border: none;">
-                                        <div class="col-lg-4">Name</div>
-                                        <div class="col-lg-8">{{$endpoint->name}}</div>
-                                        <div class="col-lg-4">IP Address</div>
-                                        <div class="col-lg-8">{{$endpoint->ip}}</div>
-                                        <div class="col-lg-4">Mac Address</div>
-                                        <div class="col-lg-8">{{$endpoint->mac}}</div>
-                                        <div class="col-lg-4">Model</div>
-                                        <div class="col-lg-8">{{$endpoint->model}}</div>
-                                        <div class="col-lg-4">Proxy</div>
-                                        <div class="col-lg-8">{{$endpoint->proxy}}</div>
+                                    <li class="col-lg-8 list-group-item" style="background-color: transparent; border: none;">
+                                        <div class="col-lg-5">Name</div>
+                                        <div class="col-lg-7">{{$endpoint->name}}</div>
+                                        <div class="col-lg-5">IP Address</div>
+                                        <div class="col-lg-7">{{$endpoint->ip}}</div>
+                                        <div class="col-lg-5">Mac Address</div>
+                                        <div class="col-lg-7">{{$endpoint->mac}}</div>
+                                        <div class="col-lg-5">Model</div>
+                                        <div class="col-lg-7">{{$endpoint->model}}</div>
+                                        <div class="col-lg-5">Proxy</div>
+                                        <div class="col-lg-7">{{$endpoint->proxy}}</div>
                                     </li>
                                 </ul>
                             </div>

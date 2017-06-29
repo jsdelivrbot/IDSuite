@@ -32,7 +32,8 @@ class EnumClassCode extends Enum
         'EndpointLog'       =>  'ENL',
         'EntityName'        =>  'ENN',
         'PhoneNumber'       =>  'PHN',
-        'EntityContact'     =>  'ECN'
+        'EntityContact'     =>  'ECN',
+        'Note'              =>  'NOT'
 
     ];
 }

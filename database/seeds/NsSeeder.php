@@ -163,32 +163,6 @@ class NsSeeder extends Seeder
 
         $iscontractor = strpos($company_name, ':');
 
-//        if(!$iscontractor){
-//
-//            $entity_name = \App\Entity::getByName($c[0]);
-//
-//            if($entity_name === null) {
-//                $name = new \App\EntityName();
-//                $name->name = $c[0];
-//                $name->save();
-//            } else {
-//                $name = $entity_name->contact->entityname;
-//            }
-//
-//        } else {
-//            $company_name = substr($company_name, $iscontractor + 2);
-//
-//            $entity_name = \App\Entity::getByName($company_name);
-//
-//            if($entity_name === null) {
-//                $name = new \App\EntityName();
-//                $name->name = $company_name;
-//                $name->save();
-//            } else {
-//                $name = $entity_name->contact->entityname;
-//            }
-//        }
-
         $iscolon_index = strpos($company_name, ':');
 
         if(!$iscolon_index){
@@ -416,6 +390,31 @@ class NsSeeder extends Seeder
         return $user_contact;
     }
 
+
+    /**
+     *
+     * process note for entity
+     *
+     * @param $c
+     * @return \App\Note
+     */
+    public static function processNote($c)
+    {
+
+        if($c[9] !== ""){
+            $note = new \App\Note();
+
+            $note->text = $c[9];
+
+            $note->save();
+        } else {
+            $note = null;
+        }
+
+        return $note;
+
+    }
+
     /**
      *
      * process entity
@@ -424,7 +423,7 @@ class NsSeeder extends Seeder
      * @param \App\EntityContact $entity_contact
      * @return \App\Entity
      */
-    public static function processEntity($c, \App\EntityContact $entity_contact)
+    public static function processEntity($c, \App\EntityContact $entity_contact, $note)
     {
         $entity = new \App\Entity();
 
@@ -433,6 +432,10 @@ class NsSeeder extends Seeder
         $entity->contact($entity_contact)->save($entity_contact);
 
         $entity->save();
+
+        if($note !== null){
+            $entity->notes()->save($note);
+        }
 
         return $entity;
     }
@@ -525,16 +528,17 @@ class NsSeeder extends Seeder
 
         $entity_contact = self::processContact($c, $location, $name, $email, $phone);
 
+        $note = self::processNote($c);
 
         $company_name = $c[0];
 
         $iscolon_index = strpos($company_name, ':');
 
         if(!$iscolon_index){
-            $entity = self::processEntity($c, $entity_contact);
+            $entity = self::processEntity($c, $entity_contact, $note);
         } else {
 
-            $entity = self::processEntity($c, $entity_contact);
+            $entity = self::processEntity($c, $entity_contact, $note);
 
             $company_name = substr($company_name, 0, $iscolon_index);
 

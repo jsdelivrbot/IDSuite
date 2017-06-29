@@ -20,6 +20,8 @@ mix.js('resources/assets/js/progressbar.js', 'public/assets/js');
 mix.js('resources/assets/js/chart_placeholder.js', 'public/assets/js');
 mix.js('resources/assets/js/custom_tabs.js', 'public/assets/js');
 mix.js('resources/assets/js/account_charts.js', 'public/assets/js');
+mix.js('resources/assets/js/device_status.js', 'public/assets/js');
+mix.js('resources/assets/js/account_note.js', 'public/assets/js');
 
 
 mix.scripts([

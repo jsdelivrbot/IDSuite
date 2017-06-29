@@ -144,11 +144,17 @@
     {{--<script src="{{ asset('assets/js/enum_select.js') }}"></script>--}}
 
     @if($viewname === 'account')
-    <script src="{{ asset('assets/js/chart_placeholder.js') }}"></script>
+        <script src="{{ asset('assets/js/chart_placeholder.js') }}"></script>
 
-    <script src="{{ asset('assets/js/account_charts.js') }}"></script>
+        <script src="{{ asset('assets/js/account_charts.js') }}"></script>
 
-    <script src="{{ asset('assets/js/custom_tabs.js') }}"></script>
+        <script src="{{ asset('assets/js/custom_tabs.js') }}"></script>
+
+        <script src="{{ asset('assets/js/account_note.js') }}"></script>
+    @endif
+
+    @if($viewname === 'device')
+        <script src="{{ asset('assets/js/device_status.js') }}"></script>
     @endif
 
     <script>
@@ -197,9 +203,8 @@
         });
 
 
-
-
     </script>
+
 
 </body>
 </html>

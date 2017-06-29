@@ -63,88 +63,58 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 21);
+/******/ 	return __webpack_require__(__webpack_require__.s = 19);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 21:
+/***/ 19:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(4);
+module.exports = __webpack_require__(2);
 
 
 /***/ }),
 
-/***/ 4:
+/***/ 2:
 /***/ (function(module, exports) {
 
+/**
+ * Created by amac on 6/29/17.
+ */
+/**
+ * Created by amac on 6/28/17.
+ */
 /**
  * Created by amac on 6/24/17.
  */
 
-$(document).ready(function () {
+$('#note-submit').click(function () {
+
+    var text = $('#note-text').val();
+
     $.ajax({
-        type: "GET",
-        url: '/getRandomNumber',
-        success: function success(number) {
+        type: "POST",
+        url: '/notes',
+        data: {
+            text: text
+        },
+        success: function success(data) {
+            // add note dynamically to note list //
 
-            var bgcolor = void 0;
-            var bordercolor = void 0;
+            $('#noteModal').modal('hide');
 
-            var ctx = document.getElementById("myChart").getContext('2d');
-
-            switch (number) {
-                case '1':
-                    bgcolor = 'rgba(230, 71, 89, .2)';
-                    bordercolor = 'rgba(230, 71, 89, 1)';
-                    break;
-
-                case '2':
-                    bgcolor = 'rgba(27, 201, 142, .2)';
-                    bordercolor = 'rgba(27, 201, 142, 1)';
-                    break;
-
-                case '3':
-                    bgcolor = 'rgba(159, 134, 255, .2)';
-                    bordercolor = 'rgba(159, 134, 255, 1)';
-                    break;
-
-                case '4':
-                    bgcolor = 'rgba(228, 216, 54, .2)';
-                    bordercolor = 'rgba(228, 216, 54, 1)';
-                    break;
-
-                case '5':
-                    bgcolor = 'rgba(28, 168, 221, .2)';
-                    bordercolor = 'rgba(28, 168, 221, 1)';
-                    break;
+            if ($('#note-default').length === 0) {
+                $('#note-default').hide();
             }
 
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        backgroundColor: [bgcolor],
-                        borderColor: [bordercolor],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
+            $('#notes-title').after('<div class="card-text text-white"><div>' + data.text + '</div><small>created - ' + data.created_at + '</small></div><hr class="mb-4" style="border-color: #E4D836">');
         }
     });
+});
+
+$('#note-cancel').click(function () {
+    $('#noteModal').modal('hide');
 });
 
 /***/ })
