@@ -31,11 +31,11 @@ class CreateEndpointTable extends Migration
             $table->string('name')->nullable();
             $table->string('ipaddress')->nullable();
             $table->string('macaddress')->nullable();
-            $table->timestamp('sync_time')->nullable();
-            $table->timestamp('reboot_time')->nullable();;
-            $table->timestamp('last_reboot')->nullable();
+            $table->dateTime('sync_time')->nullable();
+            $table->dateTime('reboot_time')->nullable();;
+            $table->dateTime('last_reboot')->nullable();
             $table->string('status')->nullable();
-            $table->timestamp('status_at')->nullable();
+            $table->dateTime('status_at')->nullable();
             $table->boolean('active')->nullable();
             $table->timestamps();
 
