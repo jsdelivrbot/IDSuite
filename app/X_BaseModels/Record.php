@@ -36,14 +36,14 @@ class Record extends Model
         if($e !== null){
             $this->endpoint_id = $e->id;
         }
-        return $this->hasOne(Endpoint::class, 'id', 'endpoint_id');
+        return $this->hasOne(Endpoint::class);
     }
 
     public function timeperiod(TimePeriod $t = null){
         if($t !== null){
             $this->timeperiod_id = $t->id;
         }
-        return $this->hasOne(TimePeriod::class, 'id','timeperiod_id');
+        return $this->hasOne(TimePeriod::class);
     }
 
 

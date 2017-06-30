@@ -8,7 +8,6 @@ use Illuminate\Database\Seeder;
  */
 
 class EndpointSeeder extends Seeder{
-
     public function run(){
 
         $this->processProxies();
@@ -28,7 +27,7 @@ class EndpointSeeder extends Seeder{
 
         $file_name = 'endpoint_proxy.csv';
 
-        $csv = file_get_contents($file_name);
+        $csv = file_get_contents("$file_name");
 
         $proxies = array_map("str_getcsv", explode("\n", $csv));
 
@@ -202,18 +201,7 @@ class EndpointSeeder extends Seeder{
 
             $endpoint->save();
 
-            $mrge_id = $e[0];
-
-            $smrge_id = $endpoint->id;
-
-            $endpoint_map = $mrge_id . ',' . $smrge_id;
-
-            file_put_contents('x_mrge_endpoints_smrge_endpoints.csv', $endpoint_map.PHP_EOL , FILE_APPEND);
-
         }
-
-
-
 
         dump('end of endpoints');
 

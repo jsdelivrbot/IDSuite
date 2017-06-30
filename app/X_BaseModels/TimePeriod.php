@@ -40,15 +40,4 @@ class TimePeriod extends Model
         return $this;
 
     }
-
-
-    public function setDuration(){
-        $start  = strtotime($this->start);
-        $end = strtotime($this->end);
-
-        $this->duration = $end - $start;
-        $this->save();
-
-        return $this;
-    }
 }

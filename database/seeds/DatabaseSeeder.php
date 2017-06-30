@@ -11,8 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call('NsSeeder');
-        $this->call('EndpointSeeder');
-        $this->call('RecordSeeder');
+        $this->call('LoginTableSeeder');
     }
 }
