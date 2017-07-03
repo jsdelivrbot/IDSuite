@@ -79,6 +79,10 @@ class Endpoint extends Model
         return $this->hasOne(Entity::class, 'id', 'entity_id');
     }
 
+    public function records(){
+        return $this->hasMany(Record::class, 'endpoint_id', 'id');
+    }
+
     /**
      * Endpoint constructor.
      * @param array $attributes

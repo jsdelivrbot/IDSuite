@@ -27,6 +27,10 @@ class TestController extends Controller
 	public function test(){
 
 
+	    $endpoint = Endpoint::getObjectById('END5956da4b1215c');
+
+	    dd($endpoint->records);
+
 
 	    $entityname = new EntityName();
 

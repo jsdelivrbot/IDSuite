@@ -21,6 +21,7 @@
                                 <button class="btn btn-nav-blue my-2 my-sm-0" type="submit">Sync Records</button>
                             </div>
 
+
                             <h5 class="card-title mt-2 text-white">{{$endpoint->name}}</h5>
                             <div class="card-text text-white">
                                 <ul class="list-group row" style="background-color: transparent;">
@@ -35,6 +36,10 @@
                                         <div class="col-lg-7">{{$endpoint->model}}</div>
                                         <div class="col-lg-5">Proxy</div>
                                         <div class="col-lg-7">{{$endpoint->proxy}}</div>
+                                        <div class="col-lg-5">Call Count</div>
+                                        <div class="col-lg-7">{{$recordcount}}</div>
+                                        <div class="col-lg-5">Avg Call Time</div>
+                                        <div class="col-lg-7">{{$durationaverage}} seconds</div>
                                     </li>
                                 </ul>
                             </div>
@@ -73,6 +78,10 @@
                                         <div class="col-lg-7">{{$endpoint->model}}</div>
                                         <div class="col-lg-5">Proxy</div>
                                         <div class="col-lg-7">{{$endpoint->proxy}}</div>
+                                        <div class="col-lg-5">Call Count</div>
+                                        <div class="col-lg-7">{{$recordcount}}</div>
+                                        <div class="col-lg-5">Avg Call Time</div>
+                                        <div class="col-lg-7">{{$durationaverage}} seconds</div>
                                     </li>
                                 </ul>
                             </div>
@@ -110,6 +119,10 @@
                                         <div class="col-lg-7">{{$endpoint->model}}</div>
                                         <div class="col-lg-5">Proxy</div>
                                         <div class="col-lg-7">{{$endpoint->proxy}}</div>
+                                        <div class="col-lg-5">Call Count</div>
+                                        <div class="col-lg-7">{{$recordcount}}</div>
+                                        <div class="col-lg-5">Avg Call Time</div>
+                                        <div class="col-lg-7">{{$durationaverage}} seconds</div>
                                     </li>
                                 </ul>
                             </div>
@@ -147,6 +160,10 @@
                                         <div class="col-lg-7">{{$endpoint->model}}</div>
                                         <div class="col-lg-5">Proxy</div>
                                         <div class="col-lg-7">{{$endpoint->proxy}}</div>
+                                        <div class="col-lg-5">Call Count</div>
+                                        <div class="col-lg-7">{{$recordcount}}</div>
+                                        <div class="col-lg-5">Avg Call Time</div>
+                                        <div class="col-lg-7">{{$durationaverage}} seconds</div>
                                     </li>
                                 </ul>
                             </div>
@@ -184,6 +201,10 @@
                                         <div class="col-lg-7">{{$endpoint->model}}</div>
                                         <div class="col-lg-5">Proxy</div>
                                         <div class="col-lg-7">{{$endpoint->proxy}}</div>
+                                        <div class="col-lg-5">Call Count</div>
+                                        <div class="col-lg-7">{{$recordcount}}</div>
+                                        <div class="col-lg-5">Avg Call Time</div>
+                                        <div class="col-lg-7">{{$durationaverage}} seconds</div>
                                     </li>
                                 </ul>
                             </div>

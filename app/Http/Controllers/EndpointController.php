@@ -83,9 +83,17 @@ class EndpointController extends Controller
 
         session(['randomnumber' => rand(1,5)]);
 
+        $recordcount = count($endpoint->records);
 
+        $duration_total = 0;
 
-        return view('endpoint', ['endpoint' => $e,'name' => $e->name, 'viewname' => 'device', 'number' => session('randomnumber')]);
+        foreach ($endpoint->records as $record){
+            $duration_total = $duration_total + $record->timeperiod->duration;
+        }
+
+        $duration_average = round($duration_total/$recordcount);
+
+        return view('endpoint', ['endpoint' => $e,'name' => $e->name, 'viewname' => 'device', 'number' => session('randomnumber'), 'recordcount' => $recordcount, 'durationaverage' => $duration_average]);
     }
 
     /**
