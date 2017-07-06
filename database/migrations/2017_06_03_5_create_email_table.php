@@ -24,6 +24,7 @@ class CreateEmailTable extends Migration
             $table->string('username_prefix')->nullable();
             $table->string('host')->nullable();
             $table->string('top_level_domain')->nullable();
+            $table->boolean('active')->nullable();
             $table->timestamps();
         });
     }

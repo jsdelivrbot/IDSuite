@@ -30,6 +30,9 @@ class CreateProxyTable extends Migration
             $table->string('target')->nullable();
             $table->string('token')->nullable();
             $table->string('key')->nullable();
+
+            $table->boolean('active')->nullable();
+
             $table->timestamps();
         });
 

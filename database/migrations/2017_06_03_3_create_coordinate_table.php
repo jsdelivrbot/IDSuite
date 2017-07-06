@@ -23,6 +23,7 @@ class CreateCoordinateTable extends Migration
             $table->float('lat', 10, 6)->default(0);
             $table->float('lng', 10, 6)->default(0);
             $table->uuid('location_id')->nullable();
+            $table->boolean('active')->nullable();
             $table->timestamps();
         });
 

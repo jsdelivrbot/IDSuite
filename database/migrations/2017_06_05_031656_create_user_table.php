@@ -24,8 +24,8 @@ class CreateUserTable extends Migration
             $table->string('email_address')->nullable();
             $table->uuid('contact_id')->nullable();
             $table->char('password_hash', 64)->nullable();
-            $table->boolean('active')->nullable();
             $table->string('remember_token', 100)->nullable();
+            $table->boolean('active')->nullable();
             $table->timestamps();
         });
 

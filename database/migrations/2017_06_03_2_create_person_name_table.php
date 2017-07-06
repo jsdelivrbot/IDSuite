@@ -26,6 +26,7 @@ class CreatePersonNameTable extends Migration
             $table->string('preferred_name')->nullable();
             $table->string('title')->nullable();
             $table->uuid('personcontact_id')->nullable();
+            $table->boolean('active')->nullable();
             $table->timestamps();
         });
     }

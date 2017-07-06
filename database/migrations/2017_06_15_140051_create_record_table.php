@@ -31,6 +31,7 @@ class CreateRecordTable extends Migration
             $table->string('dialed_digits')->nullable();
             $table->string('direction')->nullable();
             $table->string('protocol')->nullable();
+            $table->boolean('active')->nullable();
             $table->timestamps();
         });
 

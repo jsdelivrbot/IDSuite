@@ -25,6 +25,7 @@ class CreateEntityContactTable extends Migration
             $table->uuid('location_id')->nullable();
             $table->uuid('phonenumber_id')->nullable();
             $table->uuid('entity_id')->nullable();
+            $table->boolean('active')->nullable();
             $table->timestamps();
         });
 

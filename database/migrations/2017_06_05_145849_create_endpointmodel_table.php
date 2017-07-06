@@ -24,6 +24,7 @@ class CreateEndpointmodelTable extends Migration
             $table->string('name')->nullable();
             $table->string('series')->nullable();
             $table->string('architecture')->nullable();
+            $table->boolean('active')->nullable();
             $table->timestamps();
         });
 

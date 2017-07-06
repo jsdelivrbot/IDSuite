@@ -23,6 +23,7 @@ class CreateTimePeriodTable extends Migration
             $table->timestamp('start')->nullable();
             $table->timestamp('end')->nullable();
             $table->integer('duration')->nullable();
+            $table->boolean('active')->nullable();
             $table->timestamps();
         });
     }

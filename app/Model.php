@@ -15,6 +15,7 @@ abstract class Model extends Eloquent
 
     protected $guarded = [
         'class_code',
+        'active',
         'id'
     ];
 
@@ -29,13 +30,14 @@ abstract class Model extends Eloquent
 
         $this->id = $this->class_code . uniqid();
 
+        $this->active = 1;
+
         return $this;
 
     }
 
 
     public static function getObjectById($id){
-
         $class = get_called_class();
         $results = $class::find($id);
         return $results;
@@ -47,6 +49,18 @@ abstract class Model extends Eloquent
         return $class::all();
     }
 
+    /**
+     * Returns whether or not this use is active.
+     * @return bool
+     * @internal param $id
+     */
+    public function isActive(){
+        if($this->active) {
+            return true;
+        } else {
+            Throw new Exception('This Object is not active.', 409);
+        }
+    }
 
 //    public function __set($property, $value)
 //    {

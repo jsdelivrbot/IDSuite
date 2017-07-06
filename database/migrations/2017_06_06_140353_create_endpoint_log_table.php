@@ -22,6 +22,7 @@ class CreateEndpointLogTable extends Migration
             $table->string('class_code');
             $table->text('message')->nullable();
             $table->string('event_type')->nullable();
+            $table->boolean('active')->nullable();
             $table->timestamps();
         });
 

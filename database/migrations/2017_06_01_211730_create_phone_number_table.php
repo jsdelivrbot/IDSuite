@@ -22,6 +22,7 @@ class CreatePhoneNumberTable extends Migration
             $table->primary('id');
             $table->string('class_code');
             $table->string('number')->nullable();
+            $table->boolean('active')->nullable();
             $table->timestamps();
         });
     }
