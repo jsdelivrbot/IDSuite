@@ -3,6 +3,7 @@
 @section('content')
 <div class="container mt-lg-5">
     <div class="row">
+        @if (auth::guest() && $viewname === 'Login')
         <div class="col-lg-10 offset-1">
             <div class="card card-inverse" style="background-color: #434857; border-color: rgba(255, 255, 255, 0.2); ">
                 <h3 class="card-header" style="background-color: #434857;">Login</h3>
@@ -60,6 +61,15 @@
                 </div>
             </div>
         </div>
+        @else
+            <div class="col-lg-10 offset-1">
+                <div class="card card-inverse" style="background-color: #434857; border-color: rgba(255, 255, 255, 0.2); ">
+                    <h3 class="card-header" style="background-color: #434857;">Login</h3>
+                    <div class="card-block">
+                        <p class="card-text">Hey you are home.</p>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 @endsection

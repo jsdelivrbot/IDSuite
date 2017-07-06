@@ -83,6 +83,10 @@ class Endpoint extends Model
         return $this->hasMany(Record::class, 'endpoint_id', 'id');
     }
 
+    public function analytics(){
+        return $this->hasMany(Analytic::class, 'endpoint_id', 'id');
+    }
+
     /**
      * Endpoint constructor.
      * @param array $attributes

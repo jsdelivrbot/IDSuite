@@ -48,11 +48,21 @@ abstract class Enum
             dd($e->getMessage());
         }
 
+        return false;
 
     }
 
     static function getKeyByValue($value){
         $class = get_called_class();
-        array_search($value, $class::$enum);
+
+        $value = strtolower($value);
+
+        $result = array_search($value, $class::$enum);
+
+        if($result || $result === 0){
+           return $result;
+        } else {
+            Throw new Exception('The Value does not match the current namespace $class : ' . $class , 500);
+        }
     }
 }
