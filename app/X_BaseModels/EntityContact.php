@@ -35,7 +35,7 @@ class EntityContact extends Model
     /**
      * relationships
      */
-    public function entityname(EntityName $e = null){
+    public function name(EntityName $e = null){
         if($e !== null){
             $this->entityname_id = $e->id;
         }

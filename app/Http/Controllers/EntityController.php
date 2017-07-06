@@ -28,14 +28,21 @@ class EntityController extends Controller
 
         $accounts_array = array();
 
-        foreach ($accounts as $a){
+        foreach ($accounts as $a) {
+
+            if (count($a->children) > 0) {
+                foreach ($a->children as $child) {
+                    $account = new \stdClass();
+                    $account->name = $child->contact->name->name;
+                    $account->id = $child->id;
+
+                    $accounts_array[] = $account;
+                }
+            }
+
             $account    = new \stdClass();
-            $contact    = EntityContact::getObjectById($a->contact_id);
-            $name       = EntityName::getObjectById($contact->entityname_id);
-
-            $account->name  = $name->name;
+            $account->name  = $a->contact->name->name;
             $account->id    = $a->id;
-
 
             $accounts_array[] = $account;
         }
@@ -77,7 +84,7 @@ class EntityController extends Controller
 
         $entity = Entity::getObjectById($id);
 
-        $name = $entity->contact->entityname;
+        $name = $entity->contact->name;
 
         $sites = $entity->sites;
 
@@ -93,7 +100,7 @@ class EntityController extends Controller
             $site->city = $l->city;
             $site->state = $l->state;
             $site->zip = $l->zipcode;
-            $site->name = $s->entityname->name;
+            $site->name = $s->name->name;
 
             if($s->email->address !== "") {
                 $site->email = $s->email->address;

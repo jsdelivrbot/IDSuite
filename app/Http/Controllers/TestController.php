@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Analytic;
 use App\Entity;
 use App\EntityContact;
 use App\EntityName;
 use App\PersonContact;
+use App\Record;
 use App\User;
 use App\Contact;
 use App\Coordinate;
@@ -23,14 +25,45 @@ use PhpParser\Node\Expr\AssignOp\Mod;
 
 class TestController extends Controller
 {
-    
+
+    public function microtime_float()
+    {
+        list($usec, $sec) = explode(" ", microtime());
+        return ((float)$usec + (float)$sec);
+    }
+
 	public function test(){
 
+	    $endpoint = Endpoint::getObjectById('END595d3c210a370');
 
-	    $endpoint = Endpoint::getObjectById('END5956da4b1215c');
+        $start_time = $this->microtime_float();
+        $recordcount = count($endpoint->records);
 
-	    dd($endpoint->records);
+        $duration_total = 0;
 
+        foreach ($endpoint->records as $record){
+            $duration_total = $duration_total + $record->timeperiod->duration;
+        }
+
+        $duration_average = $duration_total/$recordcount;
+
+
+        $end_time = $this->microtime_float();
+
+        dump($duration_average);
+        dump($end_time - $start_time );
+
+        $start_time = $this->microtime_float();
+
+        dump($endpoint->analytics[2]->value);
+
+        $end_time = $this->microtime_float();
+
+        dd($end_time - $start_time);
+
+        $analytic = Analytic::getObjectById('ANA595d30ce4ccec');
+
+	    dd(!is_null($analytic->numerator) && !is_null($analytic->denominator));
 
 	    $entityname = new EntityName();
 

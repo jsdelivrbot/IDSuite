@@ -81,17 +81,19 @@ class EndpointController extends Controller
         $e->model = $endpoint->model_id;
         $e->proxy = $endpoint->proxy_id;
 
+        $account = new \stdClass();
+
+        $account->name = $endpoint->entity->contact->name->name;
+        $account->id = $endpoint->entity_id;
+
+        $e->account = $account;
+
+
         session(['randomnumber' => rand(1,5)]);
 
         $recordcount = count($endpoint->records);
 
-        $duration_total = 0;
-
-        foreach ($endpoint->records as $record){
-            $duration_total = $duration_total + $record->timeperiod->duration;
-        }
-
-        $duration_average = round($duration_total/$recordcount);
+        $duration_average = round($endpoint->analytics[2]->value, 2);
 
         return view('endpoint', ['endpoint' => $e,'name' => $e->name, 'viewname' => 'device', 'number' => session('randomnumber'), 'recordcount' => $recordcount, 'durationaverage' => $duration_average]);
     }
