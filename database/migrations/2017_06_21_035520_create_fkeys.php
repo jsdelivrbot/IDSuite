@@ -13,6 +13,16 @@ class CreateFkeys extends Migration
      */
     public function up()
     {
+
+        Schema::table('analytic', function(Blueprint $table){
+            $table->foreign('numerator_id')->references('id')->on('analytic')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('denominator_id')->references('id')->on('analytic')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('addend_one_id')->references('id')->on('analytic')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('addend_two_id')->references('id')->on('analytic')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('minuend_id')->references('id')->on('analytic')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('subtrahend_id')->references('id')->on('analytic')->onDelete('cascade')->onUpdate('cascade');
+        });
+
         Schema::table('coordinate', function(Blueprint $table){
             $table->foreign('location_id')->references('id')->on('location')->onDelete('cascade')->onUpdate('cascade');
         });

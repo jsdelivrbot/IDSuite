@@ -12,7 +12,7 @@ class Record extends Model
      * @var array
      */
     protected $fillable = [
-        'endpoint', 'timeperiod', 'local_id', 'conf_id', 'local_name', 'local_number', 'remote_name', 'remote_number', 'dialed_digits', 'direction', 'protocol'
+        'endpoint', 'timeperiod', 'local_id', 'conf_id', 'local_name', 'local_number', 'remote_name', 'remote_number', 'dialed_digits', 'direction', 'protocol', 'id'
     ];
 
     protected $guarded = [
@@ -57,5 +57,60 @@ class Record extends Model
 
         return $this;
 
+    }
+
+
+    public function process(){
+        $analytics = $this->endpoint->analytics;
+
+        foreach ($analytics as $analytic){
+
+            $property_relationship = $analytic->analytic_object_relationship;
+            $property_name = $analytic->analytic_object_property;
+
+            switch ($analytic->analytic_type){
+                case 0:
+                    if(is_null($property_relationship)) {
+                        if(!is_null($this->$property_name)) {
+                            $analytic->value++;
+                            $analytic->save();
+                        }
+                    } else {
+                        if(!is_null($this->$property_relationship->$property_name)){
+                            $analytic->value++;
+                            $analytic->save();
+                        }
+                    }
+                    break;
+                case 1:
+                    if(is_null($property_relationship)) {
+                        if(!is_null($this->$property_name)) {
+                            $analytic->value = $analytic->value + $this->$property_name;
+                            $analytic->save();
+                        }
+                    } else {
+                        if(!is_null($this->$property_relationship->$property_name)){
+                            $analytic->value = $analytic->value + $this->$property_relationship->$property_name;
+                            $analytic->save();
+                        }
+                    }
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+
+                    break;
+                case 5:
+                    if(!is_null($analytic->numerator) && !is_null($analytic->denominator)){
+                        $analytic->value = round($analytic->numerator->value / $analytic->denominator->value, 8);
+                        $analytic->save();
+                    }
+                    break;
+            }
+        }
     }
 }
