@@ -130,18 +130,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
-    /**
-     * Returns whether or not this use is active.
-     *
-     * @return bool
-     */
-    public function isActive(){
-        if($this->active) {
-            return true;
-        } else {
-            Throw new Exception('This user is not active. Therefore you cannot change the password', 409);
-        }
-    }
+//    /**
+//     * Returns whether or not this use is active.
+//     *
+//     * @return bool
+//     */
+//    public function isActive(){
+//        if($this->active) {
+//            return true;
+//        } else {
+//            Throw new Exception('This user is not active. Therefore you cannot change the password', 409);
+//        }
+//    }
 
 
     public function getEmailUsername(){
