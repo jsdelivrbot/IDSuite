@@ -11,10 +11,6 @@ const { mix } = require('laravel-mix');
  |
  */
 
-
-// mix.copy('vendor/twbs/bootstrap/docs/examples/dashboard/dashboard.css', 'resources/assets/css/sidebar.css');
-
-
 mix.js('resources/assets/js/app.js', 'public/assets/js');
 mix.js('resources/assets/js/progressbar.js', 'public/assets/js');
 mix.js('resources/assets/js/chart_placeholder.js', 'public/assets/js');
@@ -23,12 +19,10 @@ mix.js('resources/assets/js/account_charts.js', 'public/assets/js');
 mix.js('resources/assets/js/device_status.js', 'public/assets/js');
 mix.js('resources/assets/js/account_note.js', 'public/assets/js');
 
-
 mix.scripts([
     'resources/assets/js/enum_gender_select.js',
     'resources/assets/js/enum_title_select.js'
 ], 'public/assets/js/enum_select.js');
-
 
 mix.sass('resources/assets/sass/app.scss', '../resources/assets/css/sass.css');
 

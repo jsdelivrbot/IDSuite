@@ -46,6 +46,31 @@ class RecordSeeder extends Seeder
 
         foreach ($records as $r){
 
+            $progress = round(100 * ($count / count($records)));
+
+            if ($progress > 0 && $progress < 10) {
+                echo "records : [*---------]  $progress% \r";
+            } elseif ($progress > 10 && $progress < 20) {
+                echo "records : [**--------]  $progress% \r";
+            } elseif ($progress > 20 && $progress < 30) {
+                echo "records : [***-------]  $progress% \r";
+            } elseif ($progress > 30 && $progress < 40) {
+                echo "records : [****------]  $progress% \r";
+            } elseif ($progress > 40 && $progress < 50) {
+                echo "records : [*****-----]  $progress% \r";
+            } elseif ($progress > 50 && $progress < 60) {
+                echo "records : [******----]  $progress% \r";
+            } elseif ($progress > 60 && $progress < 70) {
+                echo "records : [*******---]  $progress% \r";
+            } elseif ($progress > 70 && $progress < 80) {
+                echo "records : [********--]  $progress% \r";
+            } elseif ($progress > 80 && $progress < 90) {
+                echo "records : [*********-]  $progress% \r";
+            } elseif ($progress > 90 && $progress < 100) {
+                echo "records : [**********]  $progress% \r";
+            }
+
+
             if($count === 0 || $r[0] === null){
                 $count++;
                 continue;
@@ -88,6 +113,15 @@ class RecordSeeder extends Seeder
             $record->protocol =$r[14];
 
             $record->save();
+
+            $record->process();
+
+//            $avc = new \App\AnalyticValueCache();
+//            $avc->name = 'total';
+//            $avc->value = 1
+
+            $count++;
+
 
         }
 

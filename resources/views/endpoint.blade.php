@@ -25,7 +25,9 @@
                             <h5 class="card-title mt-2 text-white">{{$endpoint->name}}</h5>
                             <div class="card-text text-white">
                                 <ul class="list-group row" style="background-color: transparent;">
-                                    <li class="col-lg-8 list-group-item" style="background-color: transparent; border: none;">
+                                    <li class="col-lg-10 list-group-item" style="background-color: transparent; border: none;">
+                                        <div class="col-lg-5">Account Name</div>
+                                        <div class="col-lg-7"><a href="/accounts/{{$endpoint->account->id}}">{{$endpoint->account->name}}</a></div>
                                         <div class="col-lg-5">Name</div>
                                         <div class="col-lg-7">{{$endpoint->name}}</div>
                                         <div class="col-lg-5">IP Address</div>
@@ -67,7 +69,9 @@
                             <h5 class="card-title mt-2 text-white">{{$endpoint->name}}</h5>
                             <div class="card-text text-white">
                                 <ul class="list-group row" style="background-color: transparent;">
-                                    <li class="col-lg-8 list-group-item" style="background-color: transparent; border: none;">
+                                    <li class="col-lg-10 list-group-item" style="background-color: transparent; border: none;">
+                                        <div class="col-lg-5">Account Name</div>
+                                        <div class="col-lg-7"><a href="/accounts/{{$endpoint->account->id}}">{{$endpoint->account->name}}</a></div>
                                         <div class="col-lg-5">Name</div>
                                         <div class="col-lg-7">{{$endpoint->name}}</div>
                                         <div class="col-lg-5">IP Address</div>
@@ -108,7 +112,9 @@
                             <h5 class="card-title mt-2 text-white">{{$endpoint->name}}</h5>
                             <div class="card-text text-white">
                                 <ul class="list-group row" style="background-color: transparent;">
-                                    <li class="col-lg-8 list-group-item" style="background-color: transparent; border: none;">
+                                    <li class="col-lg-10 list-group-item" style="background-color: transparent; border: none;">
+                                        <div class="col-lg-5">Account Name</div>
+                                        <div class="col-lg-7"><a href="/accounts/{{$endpoint->account->id}}">{{$endpoint->account->name}}</a></div>
                                         <div class="col-lg-5">Name</div>
                                         <div class="col-lg-7">{{$endpoint->name}}</div>
                                         <div class="col-lg-5">IP Address</div>
@@ -149,7 +155,9 @@
                             <h5 class="card-title mt-2 text-white">{{$endpoint->name}}</h5>
                             <div class="card-text text-white">
                                 <ul class="list-group row" style="background-color: transparent;">
-                                    <li class="col-lg-8 list-group-item" style="background-color: transparent; border: none;">
+                                    <li class="col-lg-10 list-group-item" style="background-color: transparent; border: none;">
+                                        <div class="col-lg-5">Account Name</div>
+                                        <div class="col-lg-7"><a href="/accounts/{{$endpoint->account->id}}">{{$endpoint->account->name}}</a></div>
                                         <div class="col-lg-5">Name</div>
                                         <div class="col-lg-7">{{$endpoint->name}}</div>
                                         <div class="col-lg-5">IP Address</div>
@@ -190,7 +198,9 @@
                             <h5 class="card-title mt-2 text-white">{{$endpoint->name}}</h5>
                             <div class="card-text text-white">
                                 <ul class="list-group row" style="background-color: transparent;">
-                                    <li class="col-lg-8 list-group-item" style="background-color: transparent; border: none;">
+                                    <li class="col-lg-10 list-group-item" style="background-color: transparent; border: none;">
+                                        <div class="col-lg-5">Account Name</div>
+                                        <div class="col-lg-7"><a href="/accounts/{{$endpoint->account->id}}">{{$endpoint->account->name}}</a></div>
                                         <div class="col-lg-5">Name</div>
                                         <div class="col-lg-7">{{$endpoint->name}}</div>
                                         <div class="col-lg-5">IP Address</div>
