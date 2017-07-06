@@ -174,7 +174,7 @@ class NsSeeder extends Seeder
                 $name->name = $c[0];
                 $name->save();
             } else {
-                $name = $entity_name->contact->entityname;
+                $name = $entity_name->contact->name;
             }
         } else {
             $company_name = substr($company_name, $iscolon_index + 2, strlen($company_name));
@@ -186,7 +186,7 @@ class NsSeeder extends Seeder
                 $name->name = $company_name;
                 $name->save();
             } else {
-                $name = $entity_name->contact->entityname;
+                $name = $entity_name->contact->name;
             }
         }
 
@@ -357,7 +357,7 @@ class NsSeeder extends Seeder
         $entity_contact = new \App\EntityContact();
 
         $entity_contact->location($location)->save($location);
-        $entity_contact->entityname($name)->save($name);
+        $entity_contact->name($name)->save($name);
         $entity_contact->email($email)->save($email);
         $entity_contact->phonenumber($phone)->save($phone);
 
@@ -382,7 +382,7 @@ class NsSeeder extends Seeder
         $user_contact = new \App\PersonContact();
 
         $user_contact->location($location)->save($location);
-        $user_contact->personname($name)->save($name);
+        $user_contact->name($name)->save($name);
         $user_contact->email($email)->save($email);
         $user_contact->phonenumber($phone)->save($phone);
 

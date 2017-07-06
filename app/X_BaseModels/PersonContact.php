@@ -27,7 +27,7 @@ class PersonContact extends Model
     /**
      * relationships
      */
-    public function personname(PersonName $p = null){
+    public function name(PersonName $p = null){
         if($p !== null) {
             $this->personname_id = $p->id;
         }
