@@ -2150,8 +2150,8 @@ if (typeof jQuery === 'undefined') {
       Modal.prototype._enforceFocus = function _enforceFocus() {
         var _this12 = this;
 
-        $(document).off(Event.FOCUSIN // guard against infinite focus loop
-        ).on(Event.FOCUSIN, function (event) {
+        $(document).off(Event.FOCUSIN) // guard against infinite focus loop
+        .on(Event.FOCUSIN, function (event) {
           if (document !== event.target && _this12._element !== event.target && !$(_this12._element).has(event.target).length) {
             _this12._element.focus();
           }
@@ -3802,7 +3802,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/vagrant/LaravelApp/resources/assets/js/components/Example.vue"
+Component.options.__file = "/home/vagrant/smrge/resources/assets/js/components/Example.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -3813,9 +3813,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b54fe504", Component.options)
+    hotAPI.createRecord("data-v-5dea1908", Component.options)
   } else {
-    hotAPI.reload("data-v-b54fe504", Component.options)
+    hotAPI.reload("data-v-5dea1908", Component.options)
   }
 })()}
 
@@ -3836,7 +3836,7 @@ var Component = __webpack_require__(0)(
   /* cssModules */
   null
 )
-Component.options.__file = "/home/vagrant/LaravelApp/resources/assets/js/components/appheader.vue"
+Component.options.__file = "/home/vagrant/smrge/resources/assets/js/components/appheader.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] appheader.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -3847,9 +3847,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-617089bc", Component.options)
+    hotAPI.createRecord("data-v-4c4dccc0", Component.options)
   } else {
-    hotAPI.reload("data-v-617089bc", Component.options)
+    hotAPI.reload("data-v-4c4dccc0", Component.options)
   }
 })()}
 
@@ -3869,7 +3869,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-617089bc", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-4c4dccc0", module.exports)
   }
 }
 
@@ -3898,7 +3898,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-b54fe504", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-5dea1908", module.exports)
   }
 }
 

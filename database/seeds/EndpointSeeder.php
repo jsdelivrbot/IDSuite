@@ -36,6 +36,7 @@ class EndpointSeeder extends Seeder{
 
         foreach ($proxies as $p) {
 
+
             if($count === 0 || $p[0] === null){
                 $count++;
                 continue;
