@@ -15,6 +15,8 @@ Route::get('/', function(){
    return view('auth.login', ['viewname' => 'Login']);
 });
 
+
+
 Route::get('login', function(){
     return view('auth.login', ['viewname' => 'Login']);
 });
@@ -49,8 +51,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     // rest routes //
-
-
     Route::get('/apps', function(){
        return view('apppicker', ['viewname' => 'App Selection']);
     });
@@ -100,4 +100,23 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
+    // record routes //
+
+    Route::get('/transactions', 'RecordController@index');
+
+    Route::get('/getRecordDetails', 'RecordController@getRecordDetails');
+
+    Route::get('/getTransactions', 'RecordController@getTransactions');
+
+
+    Route::resource('datatables', 'DatatablesController', [
+        'getIndex' => 'datatables'
+    ]);
+
+    Route::get('/getRecordsDataTables', 'DataTablesController@getRecordsDataTables');
+
+
 });
+
+
+

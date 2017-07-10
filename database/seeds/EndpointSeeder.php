@@ -24,8 +24,6 @@ class EndpointSeeder extends Seeder{
 
     public function processProxies(){
 
-        dump('start of proxies');
-
         $file_name = 'endpoint_proxy.csv';
 
         $csv = file_get_contents($file_name);
@@ -35,6 +33,32 @@ class EndpointSeeder extends Seeder{
         $count = 0;
 
         foreach ($proxies as $p) {
+
+
+            $progress = round(100 * ($count / count($proxies)));
+
+            if ($progress > 0 && $progress < 10) {
+                echo "proxies : [*---------]  $progress% \r";
+            } elseif ($progress > 10 && $progress < 20) {
+                echo "proxies : [**--------]  $progress% \r";
+            } elseif ($progress > 20 && $progress < 30) {
+                echo "proxies : [***-------]  $progress% \r";
+            } elseif ($progress > 30 && $progress < 40) {
+                echo "proxies : [****------]  $progress% \r";
+            } elseif ($progress > 40 && $progress < 50) {
+                echo "proxies : [*****-----]  $progress% \r";
+            } elseif ($progress > 50 && $progress < 60) {
+                echo "proxies : [******----]  $progress% \r";
+            } elseif ($progress > 60 && $progress < 70) {
+                echo "proxies : [*******---]  $progress% \r";
+            } elseif ($progress > 70 && $progress < 80) {
+                echo "proxies : [********--]  $progress% \r";
+            } elseif ($progress > 80 && $progress < 90) {
+                echo "proxies : [*********-]  $progress% \r";
+            } elseif ($progress > 90 && $progress < 100) {
+                echo "proxies : [**********]  $progress% \r";
+            }
+
 
             if($count === 0 || $p[0] === null){
                 $count++;
@@ -76,16 +100,13 @@ class EndpointSeeder extends Seeder{
 
             $proxy->save();
 
+            $count++;
+
         }
-
-        dump('end of proxies');
-
     }
 
 
     public function processEndpointModels(){
-
-        dump('start of endpoint models');
 
         $file_name = 'endpoint_model.csv';
 
@@ -96,6 +117,31 @@ class EndpointSeeder extends Seeder{
         $count = 0;
 
         foreach ($models as $m){
+
+
+            $progress = round(100 * ($count / count($models)));
+
+            if ($progress > 0 && $progress < 10) {
+                echo "models : [*---------]  $progress% \r";
+            } elseif ($progress > 10 && $progress < 20) {
+                echo "models : [**--------]  $progress% \r";
+            } elseif ($progress > 20 && $progress < 30) {
+                echo "models : [***-------]  $progress% \r";
+            } elseif ($progress > 30 && $progress < 40) {
+                echo "models : [****------]  $progress% \r";
+            } elseif ($progress > 40 && $progress < 50) {
+                echo "models : [*****-----]  $progress% \r";
+            } elseif ($progress > 50 && $progress < 60) {
+                echo "models : [******----]  $progress% \r";
+            } elseif ($progress > 60 && $progress < 70) {
+                echo "models : [*******---]  $progress% \r";
+            } elseif ($progress > 70 && $progress < 80) {
+                echo "models : [********--]  $progress% \r";
+            } elseif ($progress > 80 && $progress < 90) {
+                echo "models : [*********-]  $progress% \r";
+            } elseif ($progress > 90 && $progress < 100) {
+                echo "models : [**********]  $progress% \r";
+            }
 
             if($count === 0 || $m[0] === null){
                 $count++;
@@ -113,15 +159,12 @@ class EndpointSeeder extends Seeder{
 
             $model->save();
 
+            $count++;
+
         }
-
-        dump('end of endpoint models');
-
     }
 
     public function processEndpoints(){
-
-        dump('start of endpoints');
 
         $file_name = 'endpoint.csv';
 
@@ -132,6 +175,32 @@ class EndpointSeeder extends Seeder{
         $count = 0;
 
         foreach ($endpoints as $e) {
+
+
+            $progress = round(100 * ($count / count($endpoints)));
+
+            if ($progress > 0 && $progress < 10) {
+                echo "endpoints : [*---------]  $progress% \r";
+            } elseif ($progress > 10 && $progress < 20) {
+                echo "endpoints : [**--------]  $progress% \r";
+            } elseif ($progress > 20 && $progress < 30) {
+                echo "endpoints : [***-------]  $progress% \r";
+            } elseif ($progress > 30 && $progress < 40) {
+                echo "endpoints : [****------]  $progress% \r";
+            } elseif ($progress > 40 && $progress < 50) {
+                echo "endpoints : [*****-----]  $progress% \r";
+            } elseif ($progress > 50 && $progress < 60) {
+                echo "endpoints : [******----]  $progress% \r";
+            } elseif ($progress > 60 && $progress < 70) {
+                echo "endpoints : [*******---]  $progress% \r";
+            } elseif ($progress > 70 && $progress < 80) {
+                echo "endpoints : [********--]  $progress% \r";
+            } elseif ($progress > 80 && $progress < 90) {
+                echo "endpoints : [*********-]  $progress% \r";
+            } elseif ($progress > 90 && $progress < 100) {
+                echo "endpoints : [**********]  $progress% \r";
+            }
+
 
             if($count === 0 || $e[0] === null){
                 $count++;
@@ -212,9 +281,6 @@ class EndpointSeeder extends Seeder{
 
 
 
-
-
-
             $count_records_analytic = new \App\Analytic();
 
             $count_records_analytic->save();
@@ -230,6 +296,8 @@ class EndpointSeeder extends Seeder{
             $count_records_analytic->name = 'Total Call Data Records';
 
             $count_records_analytic->value = 0;
+
+            $count_records_analytic->stringvalue = null;
 
             $count_records_analytic->save();
 
@@ -251,9 +319,11 @@ class EndpointSeeder extends Seeder{
 
             $total_call_time_analytic->analytic_object_property = "duration";
 
-            $total_call_time_analytic->name = 'Total Call duration';
+            $total_call_time_analytic->name = 'Total Call Duration';
 
             $total_call_time_analytic->value = 0;
+
+            $total_call_time_analytic->stringvalue = null;
 
             $total_call_time_analytic->save();
 
@@ -275,7 +345,7 @@ class EndpointSeeder extends Seeder{
 
             $average_call_time_analytic->analytic_object_property = null;
 
-            $average_call_time_analytic->name = 'Average Call duration';
+            $average_call_time_analytic->name = 'Average Call Duration';
 
             $average_call_time_analytic->denominator($count_records_analytic)->save($count_records_analytic);
 
@@ -283,19 +353,44 @@ class EndpointSeeder extends Seeder{
 
             $average_call_time_analytic->value = 0;
 
+            $average_call_time_analytic->stringvalue = null;
+
             $average_call_time_analytic->save();
 
             $average_call_time_analytic->endpoint($endpoint)->save($endpoint);
 
             $average_call_time_analytic->save();
 
+
+
+            $most_common_local_name_analytic = new \App\Analytic();
+
+            $most_common_local_name_analytic->save();
+
+            $most_common_local_name_analytic->analytic_type = \App\Enums\EnumAnalyticType::getKeyByValue('frequent');
+
+            $most_common_local_name_analytic->analytic_object_class = \App\Record::class;
+
+            $most_common_local_name_analytic->analytic_object_relationship = null;
+
+            $most_common_local_name_analytic->analytic_object_property = "local_name";
+
+            $most_common_local_name_analytic->name = "Most Frequent Local Name";
+
+            $most_common_local_name_analytic->value = null;
+
+            $most_common_local_name_analytic->stringvalue = null;
+
+            $most_common_local_name_analytic->save();
+
+            $most_common_local_name_analytic->endpoint($endpoint)->save($endpoint);
+
+            $most_common_local_name_analytic->save();
+
+
+            $count++;
+
         }
-
-
-
-
-        dump('end of endpoints');
-
     }
 
 

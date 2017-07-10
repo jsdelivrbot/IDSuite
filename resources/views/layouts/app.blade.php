@@ -99,7 +99,7 @@
             </div>
         </nav>
 
-    <div id="app" class="container-fluid">
+    <div class="container-fluid">
 
         @if (!auth::guest() && $viewname !== 'App Selection')
             <div class="row">
@@ -109,7 +109,7 @@
                             <a class="nav-link btn-outline-teal" style="color: white !important;" href="/accounts">Accounts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn-outline-pink" style="color: white !important;white-space: nowrap;" href="#">Transactions</a>
+                            <a class="nav-link btn-outline-pink" style="color: white !important;white-space: nowrap;" href="/transactions">Transactions</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn-outline-purple" style="color: white !important;" href="/devices">Devices</a>
@@ -151,10 +151,17 @@
         <script src="{{ asset('assets/js/custom_tabs.js') }}"></script>
 
         <script src="{{ asset('assets/js/account_note.js') }}"></script>
-    @endif
 
-    @if($viewname === 'device')
+    @elseif($viewname === 'device')
         <script src="{{ asset('assets/js/device_status.js') }}"></script>
+
+    @elseif($viewname === 'Transactions' || $viewname === 'DataTables')
+
+        <link href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet"></link>
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+        @stack('scripts')
+
     @endif
 
     <script>

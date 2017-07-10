@@ -26,25 +26,25 @@ class NsSeeder extends Seeder
             $progress = round(100 * ($count / count($companies)));
 
             if ($progress > 0 && $progress < 10) {
-                echo "First Pass : [*---------]  $progress% \r";
+                echo "Entities : [*---------]  $progress% \r";
             } elseif ($progress > 10 && $progress < 20) {
-                echo "First Pass : [**--------]  $progress% \r";
+                echo "Entities : [**--------]  $progress% \r";
             } elseif ($progress > 20 && $progress < 30) {
-                echo "First Pass : [***-------]  $progress% \r";
+                echo "Entities : [***-------]  $progress% \r";
             } elseif ($progress > 30 && $progress < 40) {
-                echo "First Pass : [****------]  $progress% \r";
+                echo "Entities : [****------]  $progress% \r";
             } elseif ($progress > 40 && $progress < 50) {
-                echo "First Pass : [*****-----]  $progress% \r";
+                echo "Entities : [*****-----]  $progress% \r";
             } elseif ($progress > 50 && $progress < 60) {
-                echo "First Pass : [******----]  $progress% \r";
+                echo "Entities : [******----]  $progress% \r";
             } elseif ($progress > 60 && $progress < 70) {
-                echo "First Pass : [*******---]  $progress% \r";
+                echo "Entities : [*******---]  $progress% \r";
             } elseif ($progress > 70 && $progress < 80) {
-                echo "First Pass : [********--]  $progress% \r";
+                echo "Entities : [********--]  $progress% \r";
             } elseif ($progress > 80 && $progress < 90) {
-                echo "First Pass : [*********-]  $progress% \r";
+                echo "Entities : [*********-]  $progress% \r";
             } elseif ($progress > 90 && $progress < 100) {
-                echo "First Pass : [**********]  $progress% \r";
+                echo "Entities : [**********]  $progress% \r";
             }
 
 

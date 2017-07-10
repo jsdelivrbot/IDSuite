@@ -23,7 +23,6 @@ class CreateAnalyticTable extends Migration
             $table->uuid('endpoint_id')->nullable();
             $table->integer('analytic_type');
             $table->string('name');
-//            $table->uuid('analytic_object_id')->nullable();
             $table->string('analytic_object_class')->nullable();
             $table->string('analytic_object_relationship')->nullable();
             $table->string('analytic_object_property')->nullable();
@@ -33,7 +32,8 @@ class CreateAnalyticTable extends Migration
             $table->uuid('addend_two_id')->nullable();
             $table->uuid('minuend_id')->nullable();
             $table->uuid('subtrahend_id')->nullable();
-            $table->double('value');
+            $table->double('value')->nullable();
+            $table->string('stringvalue')->nullable();
             $table->boolean('active')->nullable();
             $table->timestamps();
         });

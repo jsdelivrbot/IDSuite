@@ -34,7 +34,17 @@ class TestController extends Controller
 
 	public function test(){
 
-	    $endpoint = Endpoint::getObjectById('END595d3c210a370');
+//        $records = Record::all();
+//
+//        dd($records);
+
+//        $record = Record::getObjectById('REC595f920b2fbe6');
+//
+//        $record->process();
+//
+//        dd('done');
+
+	    $endpoint = Endpoint::getObjectById('END595f938b4dad8');
 
         $start_time = $this->microtime_float();
         $recordcount = count($endpoint->records);

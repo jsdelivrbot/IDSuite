@@ -71,7 +71,7 @@ class Record extends Model
             switch ($analytic->analytic_type){
                 case 0:
                     if(is_null($property_relationship)) {
-                        if(!is_null($this->$property_name)) {
+                        if(!is_null($property_name)) {
                             $analytic->value++;
                             $analytic->save();
                         }
@@ -84,7 +84,7 @@ class Record extends Model
                     break;
                 case 1:
                     if(is_null($property_relationship)) {
-                        if(!is_null($this->$property_name)) {
+                        if(!is_null($property_name)) {
                             $analytic->value = $analytic->value + $this->$property_name;
                             $analytic->save();
                         }
@@ -110,6 +110,24 @@ class Record extends Model
                         $analytic->save();
                     }
                     break;
+                case 6:
+                    if(!is_null($property_name)){
+                        $stringvalsarray = array();
+
+                        foreach ($this->endpoint->records as $record){
+                            $stringvalsarray[] = $record->$property_name;
+                        }
+
+                        $count = array_count_values($stringvalsarray);
+
+                        arsort($count);
+
+                        $keys = array_keys($count);
+
+                        $analytic->stringvalue = $keys[0];
+                        $analytic->value = $count[$keys[0]];
+                        $analytic->save();
+                   }
             }
         }
     }

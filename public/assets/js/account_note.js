@@ -63,18 +63,10 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 19);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ({
-
-/***/ 19:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(2);
-
-
-/***/ }),
 
 /***/ 2:
 /***/ (function(module, exports) {
@@ -116,6 +108,14 @@ $('#note-submit').click(function () {
 $('#note-cancel').click(function () {
     $('#noteModal').modal('hide');
 });
+
+/***/ }),
+
+/***/ 20:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(2);
+
 
 /***/ })
 

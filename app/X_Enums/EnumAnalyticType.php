@@ -19,6 +19,8 @@ class EnumAnalyticType extends Enum
         2   =>  'sum',
         3   =>  'difference',
         4   =>  'multiplication',
-        5   =>  'division'
+        5   =>  'division',
+        6   =>  'frequent',
+        7   =>  'infrequent'
     ];
 }
