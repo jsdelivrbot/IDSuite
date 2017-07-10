@@ -153,7 +153,10 @@
         <script src="{{ asset('assets/js/account_note.js') }}"></script>
 
     @elseif($viewname === 'device')
+
         <script src="{{ asset('assets/js/device_status.js') }}"></script>
+
+        <script src="{{ asset('assets/js/custom_tabs.js') }}"></script>
 
     @elseif($viewname === 'Transactions' || $viewname === 'DataTables')
 

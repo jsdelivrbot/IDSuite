@@ -273,7 +273,6 @@
                     <a id="account-card-block-a" href="#" class="btn btn-nav-blue ">Go somewhere</a>
                 </div>
 
-
                 <div class="tab-pane card-block active-outline-card-block-yellow" id="account-card-block-notes-tab" role="tabpanel">
                     <h4 class="card-title text-white">Special title treatment</h4>
                     <p class="card-text text-white">With supporting text below as a natural lead-in to additional content.</p>

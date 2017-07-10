@@ -241,18 +241,13 @@
                                     </div>
                                     <div class="modal-footer">
                                         <a id="note-cancel" class="btn btn-nav-pink" data-dismiss="modal" style="cursor: pointer !important;">Close</a>
-                                        {{--<button type="button" class="btn btn-primary">Add Note</button>--}}
                                         <a id="note-submit" class="btn btn-nav-yellow" style="cursor: pointer !important;"><i class="fa fa-plus"></i> Add Note</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                 </div>
-
             </div>
-
 
         </div>
 
