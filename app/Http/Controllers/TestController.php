@@ -34,10 +34,7 @@ class TestController extends Controller
 
 	public function test(){
 
-        Record::recomputeAnalytics();
-
-        dd('done');
-
+        die("test controller");
 //        $records = Record::all();
 //
 //        dd($records);
