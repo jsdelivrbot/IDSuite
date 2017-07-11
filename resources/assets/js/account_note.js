@@ -24,19 +24,22 @@
 
                 $('#noteModal').modal('hide');
 
-                if($('#note-default').length === 0){
+                console.log($('#note-default').length);
+
+                if($('#note-default').length === 1){
                     $('#note-default').hide();
+                    $('#note-last-hr').hide();
+                    $('#notes-title').after('<div class="card-text text-white"><div>' + data.text + '</div><small>created - '+ data.created_at +'</small></div><hr class="mb-4" style="border-color: #E4D836">')
+                } else {
+                    $('#notes-title').after('<div class="card-text text-white"><div>' + data.text + '</div><small>created - '+ data.created_at +'</small></div><hr class="mb-4" style="border-color: #E4D836">')
                 }
 
-                $('#notes-title').after('<div class="card-text text-white"><div>' + data.text + '</div><small>created - '+ data.created_at +'</small></div><hr class="mb-4" style="border-color: #E4D836">')
+
 
             }
         });
 
     });
-
-
-
 
 
     $('#note-cancel').click(function(){

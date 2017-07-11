@@ -19,6 +19,7 @@ mix.js('resources/assets/js/account_charts.js', 'public/assets/js');
 mix.js('resources/assets/js/device_status.js', 'public/assets/js');
 mix.js('resources/assets/js/account_note.js', 'public/assets/js');
 mix.js('resources/assets/js/records.js', 'public/assets/js');
+mix.js('resources/assets/js/device_charts.js', 'public/assets/js');
 
 
 mix.scripts([

@@ -46,6 +46,8 @@ class RecordSeeder extends Seeder
 
         foreach ($records as $r){
 
+
+
             $progress = round(100 * ($count / count($records)));
 
             if ($progress > 0 && $progress < 10) {
@@ -70,6 +72,11 @@ class RecordSeeder extends Seeder
                 echo "records : [**********]  $progress% \r";
             }
 
+
+            if($r[11] === "0000-00-00 00:00:00"){
+                dump($r);
+                continue;
+            }
 
             if($count === 0 || $r[0] === null){
                 $count++;

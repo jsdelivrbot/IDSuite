@@ -158,6 +158,8 @@
 
         <script src="{{ asset('assets/js/custom_tabs.js') }}"></script>
 
+        <script src="{{ asset('assets/js/device_charts.js') }}"></script>
+
     @elseif($viewname === 'Transactions' || $viewname === 'DataTables')
 
         <link href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet"></link>

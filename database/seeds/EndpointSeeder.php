@@ -11,6 +11,8 @@ class EndpointSeeder extends Seeder{
 
     public function run(){
 
+        $this->cleanUpEndpointData();
+
         $this->processProxies();
 
         $this->processEndpointModels();
@@ -18,9 +20,92 @@ class EndpointSeeder extends Seeder{
         $this->processEndpoints();
 
 
-
     }
 
+
+    public function cleanUpEndpointData(){
+        $endpoint_file_name = 'endpoint.csv';
+        $endpoint_csv = file_get_contents($endpoint_file_name);
+        $endpoints = array_map("str_getcsv", explode("\n", $endpoint_csv));
+
+        $endpoints_array = array();
+
+        $customer_file_name = 'customer.csv';
+        $customer_csv = file_get_contents($customer_file_name);
+        $customers = array_map("str_getcsv", explode("\n", $customer_csv));
+
+
+        $proxy_file_name = 'endpoint_proxy.csv';
+        $proxy_csv = file_get_contents($proxy_file_name);
+        $proxies = array_map("str_getcsv", explode("\n", $proxy_csv));
+
+
+        $count = 0;
+
+        foreach ($endpoints as $endpoint){
+
+            $progress = round(100 * ($count / count($endpoints)));
+
+            if ($progress > 0 && $progress < 10) {
+                echo "cleaning : [*---------]  $progress% \r";
+            } elseif ($progress > 10 && $progress < 20) {
+                echo "cleaning : [**--------]  $progress% \r";
+            } elseif ($progress > 20 && $progress < 30) {
+                echo "cleaning : [***-------]  $progress% \r";
+            } elseif ($progress > 30 && $progress < 40) {
+                echo "cleaning : [****------]  $progress% \r";
+            } elseif ($progress > 40 && $progress < 50) {
+                echo "cleaning : [*****-----]  $progress% \r";
+            } elseif ($progress > 50 && $progress < 60) {
+                echo "cleaning : [******----]  $progress% \r";
+            } elseif ($progress > 60 && $progress < 70) {
+                echo "cleaning : [*******---]  $progress% \r";
+            } elseif ($progress > 70 && $progress < 80) {
+                echo "cleaning : [********--]  $progress% \r";
+            } elseif ($progress > 80 && $progress < 90) {
+                echo "cleaning : [*********-]  $progress% \r";
+            } elseif ($progress > 90 && $progress < 100) {
+                echo "cleaning : [**********]  $progress% \r";
+            }
+
+            if($count === 0 || $endpoint[0] === null){
+                $count++;
+                continue;
+            }
+
+
+            $customer_index = $endpoint[1];
+
+            $customer_row = $customers[$customer_index];
+
+            $customer_name = $customer_row[1];
+
+            $endpoint[1] = $customer_name;
+
+            $proxy_index = $endpoint[10];
+
+            if($proxy_index !== "0"){
+                $proxy_row = $proxies[$proxy_index];
+
+                $proxy_name = $proxy_row[2];
+
+                $endpoint[10] = $proxy_name;
+
+                $endpoints_array[] = $endpoint;
+            } else {
+                $count++;
+            }
+        }
+
+        $file_input = fopen('cleaned_endpoints.csv', "w");
+
+        foreach ($endpoints_array as $row) {
+            fputcsv($file_input, $row);
+        }
+
+        fclose($file_input);
+
+    }
 
     public function processProxies(){
 
@@ -166,7 +251,7 @@ class EndpointSeeder extends Seeder{
 
     public function processEndpoints(){
 
-        $file_name = 'endpoint.csv';
+        $file_name = 'cleaned_endpoints.csv';
 
         $csv = file_get_contents("$file_name");
 
@@ -202,7 +287,7 @@ class EndpointSeeder extends Seeder{
             }
 
 
-            if($count === 0 || $e[0] === null){
+            if($e[0] === null || $e[10] === "0"){
                 $count++;
                 continue;
             }
@@ -406,7 +491,6 @@ class EndpointSeeder extends Seeder{
 
     public static function processProxy($proxy_name){
         $proxy = \App\Proxy::getByName($proxy_name);
-
         if($proxy === null){
             return false;
         } else {

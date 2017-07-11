@@ -236,7 +236,11 @@ class EntityController extends Controller
         $status[] = $up_value;
         $status[] = $down_value;
 
-        $value = $up_value/$down_value;
+        if($down_value !== 0) {
+            $value = $up_value / $down_value;
+        } else {
+            return response()->json(['status' => false]);
+        }
 
         return response()->json([
             'status'    => $status,
@@ -275,17 +279,24 @@ class EntityController extends Controller
 
         $total = $up_value + $down_value;
 
-        $up_value = round(($up_value/$total) * 100);
-        $down_value = round(($down_value/$total) * 100);
 
-        $status[] = $up_value;
-        $status[] = $down_value;
+        if($total !== 0) {
+            $up_value = round(($up_value / $total) * 100);
+            $down_value = round(($down_value / $total) * 100);
+            $status[] = $up_value;
+            $status[] = $down_value;
 
-        return response()->json([
-            'status'    => $status
-//            'up'        => $up_value,
-//            'down'      => $down_value
-        ]);
+            return response()->json([
+                'status'    => $status
+            ]);
+
+        } else{
+            return response()->json([
+                'status'    => false
+            ]);
+        }
+
+
 
     }
 

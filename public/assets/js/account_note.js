@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 21);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -96,11 +96,15 @@ $('#note-submit').click(function () {
 
             $('#noteModal').modal('hide');
 
-            if ($('#note-default').length === 0) {
-                $('#note-default').hide();
-            }
+            console.log($('#note-default').length);
 
-            $('#notes-title').after('<div class="card-text text-white"><div>' + data.text + '</div><small>created - ' + data.created_at + '</small></div><hr class="mb-4" style="border-color: #E4D836">');
+            if ($('#note-default').length === 1) {
+                $('#note-default').hide();
+                $('#note-last-hr').hide();
+                $('#notes-title').after('<div class="card-text text-white"><div>' + data.text + '</div><small>created - ' + data.created_at + '</small></div><hr class="mb-4" style="border-color: #E4D836">');
+            } else {
+                $('#notes-title').after('<div class="card-text text-white"><div>' + data.text + '</div><small>created - ' + data.created_at + '</small></div><hr class="mb-4" style="border-color: #E4D836">');
+            }
         }
     });
 });
@@ -111,7 +115,7 @@ $('#note-cancel').click(function () {
 
 /***/ }),
 
-/***/ 20:
+/***/ 21:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(2);

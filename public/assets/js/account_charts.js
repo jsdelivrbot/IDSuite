@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 19);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -87,6 +87,9 @@ $(document).ready(function () {
             var names = data.names;
 
             var values = data.values;
+
+            console.log(names);
+            console.log(values);
 
             var devicebytype = document.getElementById("devicebytype").getContext('2d');
 
@@ -193,7 +196,7 @@ $(document).ready(function () {
 
 /***/ }),
 
-/***/ 19:
+/***/ 20:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(1);

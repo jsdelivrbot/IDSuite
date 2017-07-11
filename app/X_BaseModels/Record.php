@@ -131,4 +131,35 @@ class Record extends Model
             }
         }
     }
+
+
+    public static function recomputeAnalytics(){
+
+        ini_set('memory_limit', '-1');
+
+        Analytic::resetAnalytics();
+
+        $records = Record::all();
+
+        $records_length = count($records);
+
+        unset($records);
+
+        for ($count = 0; $count < $records_length; $count++)
+        {
+            $records = Record::all();
+
+            $record = $records[0];
+
+            if($record->timeperiod->duration < 0){
+                continue;
+            }
+
+            $record->process();
+
+            unset($records);
+            unset($record);
+
+        }
+    }
 }

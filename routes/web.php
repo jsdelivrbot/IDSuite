@@ -76,6 +76,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/getChartDeviceUpStatusPercentAll', 'EntityController@getChartDeviceUpStatusPercentAll');
 
+    Route::get('/getChartDeviceCostPerCallAvg', 'EndpointController@getChartDeviceCostPerCallAvg');
+
 
     // proxy routes //
 

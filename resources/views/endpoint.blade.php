@@ -256,9 +256,11 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div class="tab-pane card-block active active-outline-card-block-pink" id="account-card-block-insights-tab" role="tabpanel">
-                    <h4 class="card-title text-white">Special title treatment</h4>
-                    <p class="card-text text-white">With supporting text below as a natural lead-in to additional content.</p>
-                    <a id="account-card-block-a" href="#" class="btn btn-nav-pink ">Go somewhere</a>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <canvas id="devicecallcostavg"></canvas>
+                        </div>
+                    </div>
                 </div>
                 <div class="tab-pane card-block active-outline-card-block-teal" id="account-card-block-locations-tab" role="tabpanel">
                     <h4 class="card-title text-white">Special title treatment</h4>

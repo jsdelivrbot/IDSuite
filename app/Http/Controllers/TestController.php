@@ -34,6 +34,10 @@ class TestController extends Controller
 
 	public function test(){
 
+        Record::recomputeAnalytics();
+
+        dd('done');
+
 //        $records = Record::all();
 //
 //        dd($records);
@@ -44,7 +48,18 @@ class TestController extends Controller
 //
 //        dd('done');
 
-	    $endpoint = Endpoint::getObjectById('END595f938b4dad8');
+	    $endpoint = Endpoint::getObjectById('END5964d88ec88bd');
+
+	    foreach ($endpoint->records as $record){
+	        dump($record->timeperiod->duration);
+
+	        if($record->timeperiod->duration < 0){
+	            dump($record);
+	            dd($record->timeperiod);
+            }
+        }
+
+	    dd($endpoint->records);
 
         $start_time = $this->microtime_float();
         $recordcount = count($endpoint->records);

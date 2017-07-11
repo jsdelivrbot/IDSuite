@@ -205,7 +205,7 @@
 
 
                             @if(!$loop->last)
-                                <hr class="mb-4" style="border-color: #E4D836">
+                                <hr id="note-last-hr" class="mb-4" style="border-color: #E4D836">
                             @endif
 
                         @endforeach

@@ -148,4 +148,15 @@ class Analytic extends Model
 
         return $total;
     }
+
+
+    public static function resetAnalytics(){
+        $analytics = Analytic::all();
+
+        foreach ($analytics as $analytic){
+            $analytic->value = 0;
+            $analytic->save();
+
+        }
+    }
 }
