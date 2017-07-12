@@ -46,8 +46,6 @@ class RecordSeeder extends Seeder
 
         foreach ($records as $r){
 
-
-
             $progress = round(100 * ($count / count($records)));
 
             if ($progress > 0 && $progress < 10) {
@@ -71,68 +69,55 @@ class RecordSeeder extends Seeder
             } elseif ($progress > 90 && $progress < 100) {
                 echo "records : [**********]  $progress% \r";
             }
+            
 
+            if($r[0] !== null) {
 
-            if($r[11] === "0000-00-00 00:00:00"){
-                dump($r);
-                continue;
-            }
+                $end_id = $r[2];
 
-            if($count === 0 || $r[0] === null){
+                if ($count === 0 || $r[0] === null || $r[11] === "0000-00-00 00:00:00" || !array_key_exists($end_id, $this->endpoint_map)) {
+                    $count++;
+                    file_put_contents('bad_records.csv', $r[0] . PHP_EOL, FILE_APPEND);
+                    continue;
+                }
+
+                $endpoint_id = $this->endpoint_map[$end_id];
+                $endpoint = \App\Endpoint::getObjectById($endpoint_id);
+
+                $timeperiod = new \App\TimePeriod();
+                $timeperiod->start = $r[10];
+                $timeperiod->end = $r[11];
+                $timeperiod->save();
+                $timeperiod->setDuration();
+
+                $record = new \App\Record();
+
+                $record->save();
+
+                $record->timeperiod($timeperiod)->save($timeperiod);
+
+                $record->endpoint($endpoint)->save($endpoint);
+
+                $record->local_id =$r[3];
+                $record->conference_id =$r[4];
+                $record->local_name =$r[5];
+                $record->local_number =$r[6];
+                $record->remote_name =$r[7];
+                $record->remote_number =$r[8];
+                $record->dialed_digits =$r[9];
+                $record->direction =$r[13];
+                $record->protocol =$r[14];
+
+                $record->save();
+
+                $record->process();
+
+                $count++;
+
+            } else {
                 $count++;
                 continue;
             }
-
-            $end_id = $r[2];
-
-            if(array_key_exists($end_id, $this->endpoint_map)){
-                $endpoint_id = $this->endpoint_map[$end_id];
-                $endpoint = \App\Endpoint::getObjectById($endpoint_id);
-            } else {
-
-                file_put_contents('bad_records.csv', $r[0].PHP_EOL , FILE_APPEND);
-
-                continue;
-            }
-
-            $timeperiod = new \App\TimePeriod();
-            $timeperiod->start = $r[10];
-            $timeperiod->end = $r[11];
-            $timeperiod->save();
-            $timeperiod->setDuration();
-
-            $record = new \App\Record();
-
-            $record->save();
-
-            $record->timeperiod($timeperiod)->save($timeperiod);
-
-            $record->endpoint($endpoint)->save($endpoint);
-
-            $record->local_id =$r[3];
-            $record->conference_id =$r[4];
-            $record->local_name =$r[5];
-            $record->local_number =$r[6];
-            $record->remote_name =$r[7];
-            $record->remote_number =$r[8];
-            $record->dialed_digits =$r[9];
-            $record->direction =$r[13];
-            $record->protocol =$r[14];
-
-            $record->save();
-
-            $record->process();
-
-//            $avc = new \App\AnalyticValueCache();
-//            $avc->name = 'total';
-//            $avc->value = 1
-
-            $count++;
-
-
         }
-
     }
-
-
 }
