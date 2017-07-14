@@ -17,11 +17,15 @@ class CreateRecordTable extends Migration
 
         Schema::create('record', function (Blueprint $table) {
             $table->engine = 'InnoDB';
+
             $table->uuid('id');
             $table->primary('id');
             $table->string('class_code');
+
             $table->uuid('endpoint_id')->nullable();
             $table->uuid('timeperiod_id')->nullable();
+            $table->uuid('remote_location_id')->nullable();
+
             $table->string('local_id')->nullable();
             $table->string('conference_id')->nullable();
             $table->string('local_name')->nullable();
@@ -31,7 +35,9 @@ class CreateRecordTable extends Migration
             $table->string('dialed_digits')->nullable();
             $table->string('direction')->nullable();
             $table->string('protocol')->nullable();
+
             $table->boolean('active')->nullable();
+
             $table->timestamps();
         });
 
