@@ -11,31 +11,36 @@ namespace App\Enums;
 
 class EnumClassCode extends Enum
 {
-    public static $class_code = 'ECC';
-
     public static $enum = [
         'Analytic'              =>  'ANA',
         'AnalyticValueCache'    =>  'AVC',
-        'PersonContact'         =>  'PCN',
         'Coordinate'            =>  'COR',
-        'Email'                 =>  'EML',
-        'Location'              =>  'LOC',
-        'PersonName'            =>  'NAM',
-        'TimePeriod'            =>  'TMP',
-        'User'                  =>  'USR',
-        'EnumClassCode'         =>  'ECC',
-        'EnumEventType'         =>  'ETT',
+        'EnumAnalyticType'      =>  'EAT',
+        'EnumEventType'         =>  'EET',
+        'EnumGenderType'        =>  'EGT',
         'EnumModelType'         =>  'EMT',
-        'Record'                =>  'REC',
-        'Proxy'                 =>  'PRX',
+        'EnumOriginType'        =>  'EOT',
+        'EnumPriorityType'      =>  'EPT',
+        'EnumStatusType'        =>  'EST',
+        'EnumTicketStatusType'  =>  'ETS',
+        'EnumTicketType'        =>  'ETT',
+        'EnumTitleType'         =>  'ETI',
+        'Email'                 =>  'EML',
         'Endpoint'              =>  'END',
-        'Entity'                =>  'ENT',
-        'EndpointModel'         =>  'ENM',
         'EndpointLog'           =>  'ENL',
-        'EntityName'            =>  'ENN',
-        'PhoneNumber'           =>  'PHN',
+        'EndpointModel'         =>  'ENM',
+        'Entity'                =>  'ENT',
         'EntityContact'         =>  'ECN',
-        'Note'                  =>  'NOT'
-
+        'EntityName'            =>  'ENN',
+        'Location'              =>  'LOC',
+        'Note'                  =>  'NOT',
+        'PersonContact'         =>  'PCN',
+        'PersonName'            =>  'NAM',
+        'PhoneNumber'           =>  'PHN',
+        'Proxy'                 =>  'PRX',
+        'Record'                =>  'REC',
+        'Ticket'                =>  'TIC',
+        'TimePeriod'            =>  'TMP',
+        'User'                  =>  'USR'
     ];
 }

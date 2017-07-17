@@ -11,7 +11,7 @@ namespace App\Enums;
 
 class EnumEventType extends Enum
 {
-    public static $class_code = 'ETT';
+    public static $class_code = 'EET';
 
     public static $enum = [
         0   =>  'status',

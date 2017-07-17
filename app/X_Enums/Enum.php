@@ -26,7 +26,7 @@ abstract class Enum
         return array_values($enum_array);
     }
 
-    static function getValueByKey($key){
+    static function getClassCode($key){
 
         $class = get_called_class();
 
@@ -44,11 +44,21 @@ abstract class Enum
         try{
             return $class::$enum[$class_key];
         } catch (Exception $e){
-            dump($class_key);
             dd($e->getMessage());
         }
 
         return false;
+
+    }
+
+    static function getValueByKey($key){
+        $class = get_called_class();
+
+        if(array_key_exists($key, $class::$enum)){
+            return $class::$enum[$key];
+        } else {
+            throw new Exception('The key does not match the current namespace $class : ' . $class , 500);
+        }
 
     }
 
@@ -62,7 +72,11 @@ abstract class Enum
         if($result || $result === 0){
            return $result;
         } else {
-            Throw new Exception('The Value does not match the current namespace $class : ' . $class , 500);
+            if($class::$enum[0] === "unknown"){
+                return array_search("unknown", $class::$enum);
+            } else {
+                Throw new Exception('The Value does not match the current namespace $class : ' . $class, 500);
+            }
         }
     }
 }

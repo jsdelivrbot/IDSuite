@@ -11,6 +11,7 @@ namespace App\Enums;
 
 class EnumModelType extends Enum
 {
+
     public static $class_code = 'EMT';
 
     public static $enum = [

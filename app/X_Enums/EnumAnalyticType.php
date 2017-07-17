@@ -11,7 +11,7 @@ namespace App\Enums;
 
 class EnumAnalyticType extends Enum
 {
-    public static $class_code = 'EAN';
+    public static $class_code = 'EAT';
 
     public static $enum = [
         0   =>  'count',
