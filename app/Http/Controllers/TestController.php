@@ -8,6 +8,7 @@ use App\EntityContact;
 use App\EntityName;
 use App\PersonContact;
 use App\Record;
+use App\Ticket;
 use App\User;
 use App\Contact;
 use App\Coordinate;
@@ -33,6 +34,11 @@ class TestController extends Controller
     }
 
 	public function test(){
+
+        $ticket = Ticket::getObjectById('TIC59675cd57ae4a');
+
+        dd(intval(floor($ticket->duration()/60/60/24)));
+
 
         die("test controller");
 //        $records = Record::all();
