@@ -21,6 +21,7 @@ class CreateFkeys extends Migration
             $table->foreign('addend_two_id')->references('id')->on('analytic')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('minuend_id')->references('id')->on('analytic')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('subtrahend_id')->references('id')->on('analytic')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('endpoint_id')->references('id')->on('endpoint')->onDelete('cascade')->onUpdate('cascade');
         });
 
         Schema::table('coordinate', function(Blueprint $table){
@@ -69,6 +70,12 @@ class CreateFkeys extends Migration
         Schema::table('record', function(Blueprint $table) {
             $table->foreign('endpoint_id')->references('id')->on('endpoint')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('timeperiod_id')->references('id')->on('timeperiod')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
+        });
+
+        Schema::table('ticket', function(Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('entity_id')->references('id')->on('entity')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('personcontact_id')->references('id')->on('personcontact')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
         });
 
         Schema::table('user', function(Blueprint $table) {

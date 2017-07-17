@@ -17,29 +17,34 @@ class CreateEndpointTable extends Migration
 
         Schema::create('endpoint', function (Blueprint $table) {
             $table->engine = 'InnoDB';
+
             $table->uuid('id');
             $table->primary('id');
-            $table->string('class_code');
 
             $table->uuid('entity_id')->nullable();
             $table->uuid('model_id')->nullable();
             $table->uuid('proxy_id')->nullable();
             $table->uuid('location_id')->nullable();
 
-            $table->string('username')->nullable();
             $table->char('password_hash', 64)->nullable();
+
+            $table->string('class_code');
+            $table->string('username')->nullable();
             $table->string('name')->nullable();
             $table->string('ipaddress')->nullable();
             $table->string('macaddress')->nullable();
+
             $table->time('sync_time')->nullable();
             $table->time('reboot_time')->nullable();;
+
             $table->dateTime('last_reboot')->nullable();
-            $table->string('status')->nullable();
             $table->dateTime('status_at')->nullable();
+
+            $table->integer('status')->nullable();
+
             $table->boolean('active')->nullable();
+
             $table->timestamps();
-
-
         });
 
 

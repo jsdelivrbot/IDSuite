@@ -118,7 +118,7 @@
                             <a class="nav-link btn-outline-yellow" style="color: white !important;" href="#">Reports</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn-outline-blue" style="color: white !important; white-space: nowrap;" href="#">Support-Data</a>
+                            <a class="nav-link btn-outline-blue" style="color: white !important; white-space: nowrap;" href="/tickets">Support-Data</a>
                         </li>
                     </ul>
                 </nav>
@@ -141,8 +141,6 @@
     <script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
 
-    {{--<script src="{{ asset('assets/js/enum_select.js') }}"></script>--}}
-
     @if($viewname === 'account')
         <script src="{{ asset('assets/js/chart_placeholder.js') }}"></script>
 
@@ -162,10 +160,21 @@
 
     @elseif($viewname === 'Transactions' || $viewname === 'DataTables')
 
-        <link href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet"></link>
+        <link href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet"/>
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         @stack('scripts')
+
+    @elseif($viewname === 'ticket')
+
+        <script src="{{ asset('assets/js/chart_placeholder.js') }}"></script>
+
+        <script src="{{ asset('assets/js/account_charts.js') }}"></script>
+
+        <script src="{{ asset('assets/js/custom_tabs.js') }}"></script>
+
+        <script src="{{ asset('assets/js/account_note.js') }}"></script>
+
 
     @endif
 

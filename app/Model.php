@@ -26,7 +26,7 @@ abstract class Model extends Eloquent
     public function __construct($attributes = array())  {
         parent::__construct($attributes); // Eloquent
 
-        $this->class_code = \App\Enums\EnumClassCode::getValueByKey(get_class($this));
+        $this->class_code = \App\Enums\EnumClassCode::getClassCode(get_class($this));
 
         $this->id = $this->class_code . uniqid();
 

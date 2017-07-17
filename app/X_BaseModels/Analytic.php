@@ -70,11 +70,6 @@ class Analytic extends Model
         return $this->hasOne(Analytic::class, 'subtrahend_id', 'id');
     }
 
-    // TODO make this a one to many relationship
-//    public function addends(){
-//        return $this->hasMany(Analytic::class, 'addends_id', 'id');
-//    }
-
     public function addend_one(Analytic $a = null){
 
         if($a !== null) {
@@ -101,17 +96,6 @@ class Analytic extends Model
         return $this->hasOne(Endpoint::class, 'id', 'endpoint_id');
     }
 
-//    public function avcs(){
-//        return $this->hasMany()
-//    }
-
-//    /**
-//     * Get all of the owning analytic models.
-//     */
-//    public function analytic_object()
-//    {
-//        return $this->morphTo();
-//    }
 
     /**
      * personname constructor.
@@ -137,8 +121,6 @@ class Analytic extends Model
         $avc = new AnalyticValueCache();
 
         $avc->value = $total;
-
-//        $avc->name = $this->name;
 
         $avc->save();
 

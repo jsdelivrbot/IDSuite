@@ -161,8 +161,6 @@ class NsSeeder extends Seeder
     {
         $company_name = $c[0];
 
-        $iscontractor = strpos($company_name, ':');
-
         $iscolon_index = strpos($company_name, ':');
 
         if(!$iscolon_index){

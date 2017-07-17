@@ -157,6 +157,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public static function getUserByEmail($email){
+
         $email = Email::getEmailByAddress($email);
 
         if(is_object($email)){

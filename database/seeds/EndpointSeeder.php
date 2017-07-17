@@ -84,29 +84,6 @@ class EndpointSeeder extends Seeder{
 
             $proxy_index = $endpoint[10];
 
-            $proxy_index = $proxy_index;
-
-
-            if($endpoint[0] === '62'){
-
-                $proxy_row = $proxies[$proxy_index];
-
-                dump($proxy_index);
-
-                $proxy_name = $proxy_row[2];
-
-                dump($proxy_name);
-
-                $endpoint[10] = $proxy_name;
-
-
-
-
-
-                $endpoints_array[] = $endpoint;
-
-            }
-
             if($proxy_index > 0){
                 $proxy_row = $proxies[$proxy_index];
 
@@ -371,7 +348,14 @@ class EndpointSeeder extends Seeder{
 
             $endpoint->last_reboot = $e[13];
 
-            $endpoint->status = $e[15];
+
+            if($e[15] === "d"){
+                $endpoint->status = \App\Enums\EnumStatusType::getKeyByValue('down');
+            } elseif ($e[15] === "u"){
+                $endpoint->status = \App\Enums\EnumStatusType::getKeyByValue('up');
+            }
+
+
 
             $endpoint->status_at = $e[16];
 
