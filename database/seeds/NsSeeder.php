@@ -300,12 +300,22 @@ class NsSeeder extends Seeder
      */
     public static function processPhone($c)
     {
-        $phone = new \App\PhoneNumber();
+        $number = null;
 
         if ($c[2] !== "") {
-            $phone->number = $c[2];
+
+            preg_match_all('/\d/', $c[2], $matches);
+
+            foreach ($matches as $match){
+                $number = implode("", $match);
+            }
+
+            $phone = new \App\PhoneNumber($number);
+
         } else {
-            $phone->number = null;
+
+            $phone = new \App\PhoneNumber();
+
         }
 
         $phone->save();
@@ -323,16 +333,7 @@ class NsSeeder extends Seeder
      */
     public static function processUserPhone($c)
     {
-        $phone = new \App\PhoneNumber();
-
-        $phone->number = null;
-
-//        if ($c[14] !== "") {
-//            $phone->number = $c[14];
-//        } else {
-//            $phone->number = null;
-//        }
-
+        $phone = new \App\PhoneNumber('3177703500');
         $phone->save();
 
         return $phone;

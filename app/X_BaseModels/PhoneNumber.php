@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Model as Model;
+use Mockery\Exception;
 
 class PhoneNumber extends Model
 {
@@ -32,13 +33,52 @@ class PhoneNumber extends Model
      * Email constructor.
      * @param array $attributes
      */
-    public function __construct($attributes = array())  {
-        parent::__construct($attributes); // Eloquent
+    public function __construct($phonenumber = null,$attributes = array())  {
+        parent::__construct($attributes);
         // Your construct code.
 
-        // TODO split string stuff to get the rest of the attributes.
+        if($phonenumber !== null){
+            if(strlen($phonenumber) === 10){
+                $this->rawnumber = $phonenumber;
 
+                $area_code          = substr($phonenumber, 0, 3);
+                $exchange           = substr($phonenumber, 3, 3);
+                $number             = substr($phonenumber, 6, 4);
+
+                $this->area_code    = $area_code;
+                $this->exchange     = $exchange;
+                $this->number       = $number;
+
+                $this->formnumber   = "($this->area_code) $this->exchange-$this->number";
+
+            } elseif(strlen($phonenumber) === 8) {
+
+                $this->rawnumber    = $phonenumber;
+                $this->area_code    = null;
+                $this->exchange     = substr($phonenumber, 0, 3);
+                $this->number       = substr($phonenumber, 3, 4);
+                $this->formnumber   = "$this->exchange-$this->number";
+
+            } else{
+
+                $this->rawnumber    = $phonenumber;
+                $this->area_code    = null;
+                $this->exchange     = null;
+                $this->number       = null;
+                $this->formnumber   = null;
+
+//                throw new Exception("The number passed in needs to be 8 or 10 digits in length", 200);
+            }
+        } else {
+
+            $this->rawnumber    = $phonenumber;
+            $this->area_code    = $phonenumber;
+            $this->exchange     = $phonenumber;
+            $this->number       = $phonenumber;
+            $this->formnumber   = $phonenumber;
+
+        }
         return $this;
-
     }
+
 }

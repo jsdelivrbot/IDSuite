@@ -218,9 +218,7 @@ class CaseSeeder extends Seeder
      *
      */
     public static function defaultUserPhoneNumber(){
-        $number = new \App\PhoneNumber();
-
-        $number->number = '877-774-3526';
+        $number = new \App\PhoneNumber('8877743526');
 
         $number->save();
 
