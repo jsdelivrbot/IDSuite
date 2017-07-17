@@ -118,6 +118,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/getRecordsDataTables', 'DataTablesController@getRecordsDataTables');
 
 
+
+    // tickets routes //
+
+    Route::get('/tickets', 'TicketController@index');
+
+    Route::get('/tickets/{id}', 'TicketController@show');
+
+
 });
 
 
