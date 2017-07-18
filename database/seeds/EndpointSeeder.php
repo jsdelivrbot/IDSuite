@@ -34,7 +34,6 @@ class EndpointSeeder extends Seeder{
 
         foreach ($proxies as $p) {
 
-
             $progress = round(100 * ($count / count($proxies)));
 
             if ($progress > 0 && $progress < 10) {
@@ -58,7 +57,6 @@ class EndpointSeeder extends Seeder{
             } elseif ($progress > 90 && $progress < 100) {
                 echo "proxies : [**********]  $progress% \r";
             }
-
 
             if($count === 0 || $p[0] === null){
                 $count++;

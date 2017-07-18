@@ -12,7 +12,7 @@ class Record extends Model
      * @var array
      */
     protected $fillable = [
-        'endpoint', 'timeperiod', 'local_id', 'conf_id', 'local_name', 'local_number', 'remote_name', 'remote_number', 'dialed_digits', 'direction', 'protocol', 'id'
+        'endpoint', 'timeperiod', 'local_id', 'conf_id','location_id', 'local_name', 'local_number', 'remote_name', 'remote_number', 'dialed_digits', 'direction', 'protocol', 'id'
     ];
 
     protected $guarded = [
@@ -45,7 +45,12 @@ class Record extends Model
         }
         return $this->hasOne(TimePeriod::class, 'id','timeperiod_id');
     }
-
+    public function remote_location(Location $l = null){
+        if($l !== null){
+            $this->location_id = $l->id;
+        }
+        return $this->hasOne(Location::class, 'id','remote_location_id');
+    }
 
     /**
      * User constructor.
