@@ -25,6 +25,9 @@ class CreateLocationTable extends Migration
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('zipcode')->nullable();
+            $table->string('country_code', '2')->nullable();
+            $table->string('time_zone', '8')->nullable();
+
             $table->boolean('active')->nullable();
             $table->timestamps();
         });

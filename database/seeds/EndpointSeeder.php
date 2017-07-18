@@ -145,7 +145,9 @@ class EndpointSeeder extends Seeder{
             }
 
 
-            if($count === 0 || $p[0] === null || $p[1] === 'bs'){
+            if($count === 0 || $p[0] === null || $p[1] === 'bs') {
+
+
                 $count++;
                 continue;
             }

@@ -70,6 +70,8 @@ class CreateFkeys extends Migration
         Schema::table('record', function(Blueprint $table) {
             $table->foreign('endpoint_id')->references('id')->on('endpoint')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('timeperiod_id')->references('id')->on('timeperiod')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('remote_location_id')->references('id')->on('location')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
+
         });
 
         Schema::table('ticket', function(Blueprint $table) {

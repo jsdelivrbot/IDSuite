@@ -27,6 +27,15 @@ mix.scripts([
     'resources/assets/js/enum_title_select.js'
 ], 'public/assets/js/enum_select.js');
 
+// chart stuff
+
+mix.scripts([
+    'resources/assets/js/chart/util.js',
+    'resources/assets/js/chart/api.js',
+    'resources/assets/js/chart/yarinit.js',
+], 'public/assets/js/chart_custom.js');
+
+
 mix.sass('resources/assets/sass/app.scss', '../resources/assets/css/sass.css');
 
 mix.styles([
