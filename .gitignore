@@ -9,3 +9,8 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
+public/assets/js/chart_custom.js
+yarn-error.log
+package-lock.json
+npm-debug.log.3577405681
+ip2location.csv

@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+       // $this->call('ip2LocationSeeder');
         $this->call('NsSeeder');
         $this->call('CaseSeeder');
         $this->call('EndpointSeeder');

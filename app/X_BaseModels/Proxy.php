@@ -33,7 +33,7 @@ class Proxy extends Model
      * relationships
      */
     public function entity(Entity $e = null){
-        if($e !== null){
+        if($e !== null) {
             $this->entity_id = $e->id;
         }
 
@@ -60,14 +60,11 @@ class Proxy extends Model
     public function __construct($attributes = array())  {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
-
         return $this;
-
     }
 
     public static function getByName($name){
         $proxy = Proxy::where('name', $name)->first();
-
         return $proxy;
     }
 }
