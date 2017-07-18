@@ -13,7 +13,7 @@ class CreateIp2locationTable extends Migration
      */
 
 
-    const table_name = 'ip2locationseeder';
+    const table_name = 'ip2location';
 
     public function up()
     {
