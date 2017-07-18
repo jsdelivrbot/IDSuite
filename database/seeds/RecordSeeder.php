@@ -106,10 +106,11 @@ class RecordSeeder extends Seeder
 
 
             $location = new \App\Location();
+            $location->save();
             $location->address = null;
-            $location->city =$ip2location->city;
-            $location->state =$ip2location->state;
-            $location->zipcode =$ip2location->zipcode;
+            $location->city =$ip2location->city_name;
+            $location->state =$ip2location->region_name;
+            $location->zipcode =$ip2location->zip_code;
             $location->country_code = $ip2location->country_code;
             $location->time_zone = $ip2location->time_zone;
             $location->coordinate($coordinate)->save($coordinate);

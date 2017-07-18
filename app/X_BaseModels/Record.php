@@ -47,7 +47,7 @@ class Record extends Model
     }
     public function remote_location(Location $l = null){
         if($l !== null){
-            $this->location_id = $l->id;
+            $this->remote_location_id = $l->id;
         }
         return $this->hasOne(Location::class, 'id','remote_location_id');
     }

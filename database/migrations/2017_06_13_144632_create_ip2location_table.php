@@ -13,10 +13,12 @@ class CreateIp2locationTable extends Migration
      */
 
 
-    const table_name = 'ip2locationseeder';
+    const table_name = 'ip2location';
 
     public function up()
     {
+
+        return;
         Schema::create($this::table_name, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             //$table->charset = "utf8";

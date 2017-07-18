@@ -31,7 +31,7 @@ mix.scripts([
 mix.scripts([
     'resources/assets/js/chart/util.js',
     'resources/assets/js/chart/api.js',
-    'resources/assets/js/chart/yarinit.js',
+    'resources/assets/js/chart/init.js',
 ], 'public/assets/js/chart_custom.js');
 
 
