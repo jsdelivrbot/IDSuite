@@ -35,6 +35,45 @@ class TestController extends Controller
 
 	public function test(){
 
+
+        $url = 'https://innobidsnms2.e-idsolutions.local/zabbix/api_jsonrpc.php';
+
+        $params = array(
+            'user'      =>  'mrge_api',
+            'password'  =>  'Awa8BeUbnEw8hY'
+        );
+
+
+        $data = array();
+
+        $post_parameters = array(
+            'jsonrpc'       =>  '2.0',
+            'method'        =>  'user.login',
+            'params'        =>  $params,
+            'id'            =>  '1',
+            'auth'          =>  null
+        );
+
+        $post_parameters = json_encode($post_parameters);
+
+//        $post_parameters = http_build_query($post_parameters, '', '&');
+
+        $request_url = $url . $post_parameters;
+
+        dd($request_url);
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $request_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+
+        $response = json_decode($response);
+
+        dd($response);
+
+
         $ticket = Ticket::getObjectById('TIC59675cd57ae4a');
 
         dd(intval(floor($ticket->duration()/60/60/24)));
