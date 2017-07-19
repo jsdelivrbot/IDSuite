@@ -99,29 +99,39 @@ class RecordSeeder extends Seeder
             $ip2location = \App\Ip2Location::getByIp($remote_number);
 
 
-            $coordinate = new \App\Coordinate();
-            $coordinate->lng = $ip2location->longitude;
-            $coordinate->lat = $ip2location->latitude;
-            $coordinate->save();
+            if($ip2location !== null){
+                $coordinate = new \App\Coordinate();
+                $coordinate->lng = $ip2location->longitude;
+                $coordinate->lat = $ip2location->latitude;
+                $coordinate->save();
 
 
-            $location = new \App\Location();
-            $location->save();
+                $location = new \App\Location();
+                $location->save();
 
-            $location->address = null;
-            $location->city =$ip2location->city_name;
-            $location->state =$ip2location->region_name;
-            $location->zipcode =$ip2location->zip_code;
-            $location->country_code = $ip2location->country_code;
-            $location->time_zone = $ip2location->time_zone;
-            $location->coordinate($coordinate)->save($coordinate);
-            $location->save();
+                $location->address = null;
+                $location->city =$ip2location->city_name;
+                $location->state =$ip2location->region_name;
+                $location->zipcode =$ip2location->zip_code;
+                $location->country_code = $ip2location->country_code;
+                $location->time_zone = $ip2location->time_zone;
+                $location->coordinate($coordinate)->save($coordinate);
+                $location->save();
 
+            } else {
+                $coordinate = new \App\Coordinate();
+                $coordinate->save();
+
+                $location = new \App\Location();
+                $location->save();
+
+                $location->coordinate($coordinate)->save($coordinate);
+
+            }
 
             $record = new \App\Record();
 
-
-                $record->save();
+            $record->save();
 
             $record->timeperiod($timeperiod)->save($timeperiod);
             $record->remote_location($location)->save($location);
@@ -139,11 +149,11 @@ class RecordSeeder extends Seeder
 
 
 
-                $record->save();
+            $record->save();
 
-                $record->process();
+            $record->process();
 
-                $count++;
+            $count++;
 
             } else {
                 $count++;
