@@ -6,6 +6,7 @@ use App\Analytic;
 use App\Entity;
 use App\EntityContact;
 use App\EntityName;
+use App\Ip2Location;
 use App\PersonContact;
 use App\Record;
 use App\Ticket;
@@ -20,8 +21,12 @@ use App\Location;
 use App\Model;
 use App\PersonName;
 use App\Proxy;
+use Faker\Provider\DateTime;
+use GuzzleHttp\Psr7\Request;
 use Mockery\Exception;
 use PhpParser\Node\Expr\AssignOp\Mod;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 
 
 class TestController extends Controller
@@ -34,6 +39,126 @@ class TestController extends Controller
     }
 
 	public function test(){
+
+
+//        $ip = '172.16.0.134';
+//
+//        dump($ip);
+//
+//
+//        $loc = Ip2Location::getByIp($ip);
+//
+//        dd($loc);
+
+
+
+
+        $params = array(
+            "user"      => "mrge_api",
+            "password"  => "Awa8BeUbnEw8hY"
+        );
+
+        $headers = array(
+            'content-type' => 'application/json'
+        );
+
+        $body = json_encode([
+            "jsonrpc" => "2.0",
+            "method"=> "user.login",
+            "params"=> $params,
+            "id"=> 1,
+            "auth"=> null
+        ]);
+
+
+        $url = 'https://innobidsnms2.e-idsolutions.local/zabbix/api_jsonrpc.php';
+
+        $client = new \GuzzleHttp\Client(['verify' => false]);
+
+        $request = new \GuzzleHttp\Psr7\Request('POST', $url, $headers, $body);
+
+        $results = json_decode($client->send($request)->getBody()->getContents());
+
+        $auth_token = $results->result;
+
+        dump($results);
+
+
+        $params = array(
+            "output"    => "extend",
+            "history"   => 0,
+            "itemids"   => "59337",
+            "sortfield" => "clock",
+            "sortorder" => "DESC",
+            "limit"     => 100
+        );
+
+        $headers = array(
+            'content-type' => 'application/json'
+        );
+
+        $body = json_encode([
+            "jsonrpc" => "2.0",
+            "method"=> "history.get",
+            "params"=> $params,
+            "id"=> 1,
+            "auth"=> $auth_token
+        ]);
+
+        $url = 'https://innobidsnms2.e-idsolutions.local/zabbix/api_jsonrpc.php';
+
+        $client = new \GuzzleHttp\Client(['verify' => false]);
+
+        $request = new \GuzzleHttp\Psr7\Request('POST', $url, $headers, $body);
+
+        $results = json_decode($client->send($request)->getBody()->getContents());
+
+        foreach($results->result as $result){
+
+            if($result->value < 100){
+
+                dump($result->itemid);
+                dump($result->clock);
+                dump($result->value);
+            }
+
+        }
+
+        dd($results);
+
+
+        $request = $client->createRequest("POST", $url, [
+            'json' => $body
+        ]);
+
+
+        $response = $client->send($request);
+
+        dd($response->getBody());
+
+        $request = new Request();
+        dd($request->url());
+        $request->setUrl('https://innobidsnms2.e-idsolutions.local/zabbix/api_jsonrpc.php');
+        $request->setMethod(HTTP_METH_POST);
+
+//        $request->setHeaders(array(
+//            'postman-token' => '00b0117a-84af-5373-8aba-3c5184d12034',
+//            'cache-control' => 'no-cache',
+//            'content-type' => 'application/x-www-form-urlencoded'
+//        ));
+
+        $request->setContentType('application/x-www-form-urlencoded');
+        $request->setPostFields(null);
+
+        try {
+            $response = $request->send();
+
+            dd($response->getBody());
+        } catch (HttpException $ex) {
+            echo $ex;
+        }
+
+        dd('done');
 
 
         $url = 'https://innobidsnms2.e-idsolutions.local/zabbix/api_jsonrpc.php';

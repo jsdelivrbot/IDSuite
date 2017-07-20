@@ -67,8 +67,22 @@
                             <div class="col-lg-5">Protocol</div>
                             <div class="col-lg-7" id="protocol"></div>
 
+                            <div class="col-lg-5">Distance by Car</div>
+                            <div class="col-lg-7" id="distance-text"></div>
+
+                            <div class="col-lg-5">Drive Duration</div>
+                            <div class="col-lg-7" id="drive-duration"></div>
+
+                            <div class="col-lg-5">Mileage Cost</div>
+                            <div class="col-lg-7" id="mileage"></div>
+
                         </li>
                     </ul>
+                    <div class="row">
+                        <div class="col-lg-12" style="height: 300px;">
+                            <div id="map" style="width: 100%; height: 100%"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <a id="note-cancel" class="btn btn-nav-pink" data-dismiss="modal" style="cursor: pointer !important;">Close</a>
@@ -78,7 +92,10 @@
     </div>
 
 @push('scripts')
-<script>
+    {{--<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer></script>--}}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=geometry"></script>
+
+        <script>
     $(function() {
 
         $('#records-table').DataTable({
@@ -184,8 +201,102 @@
                 $('#protocol').text(data.protocol);
 
 
+                console.log(data);
+
+                let local_location = new google.maps.LatLng(data.local_lat, data.local_lng);
+
+                let remote_location = new google.maps.LatLng(data.remote_lat, data.remote_lng);
+
+                let center = google.maps.geometry.spherical.interpolate(local_location,remote_location, .5);
+
+                let distance = Math.round(0.000621371192 * google.maps.geometry.spherical.computeDistanceBetween(local_location, remote_location));
+
+                let mileage_cost = .54 * distance;
+
+                let map;
+
+                console.log('local_location : ' + local_location);
+                console.log('remote_location : ' + remote_location);
+                console.log(center.lat());
+
+                console.log("distance : " + distance);
+
+                console.log("mileage costs : $" + mileage_cost);
+
+                let service = new google.maps.DistanceMatrixService();
+
+                service.getDistanceMatrix(
+                    {
+                        origins: [local_location],
+                        destinations: [remote_location],
+                        travelMode: 'DRIVING',
+                        unitSystem: google.maps.UnitSystem.IMPERIAL,
+                        avoidHighways: false,
+                        avoidTolls: true,
+                    }, getDistance);
+
+                function getDistance(response, status) {
+                    if (status == 'OK') {
+                        let origins = response.originAddresses;
+                        let destinations = response.destinationAddresses;
+
+                        for (let i = 0; i < origins.length; i++) {
+                            let results = response.rows[i].elements;
+                            for (let j = 0; j < results.length; j++) {
+                                let element = results[j];
+                                let distance_text = element.distance.text;
+
+                                let distance_val = element.distance.value * 0.000621371192;
+                                let duration = element.duration.text;
+                                let mileage_cost = Math.round(.54 * distance_val);
+                                let from = origins[i];
+                                let to = destinations[j];
+
+                                $('#distance-text').text(distance_text);
+                                $('#mileage').text("$" + mileage_cost + ".00");
+                                $('#drive-duration').text(duration);
+                            }
+                        }
+                    }
+                }
+
+                initMap(local_location, remote_location, center);
+
+                function initMap(local_location, remote_location, center) {
+                    let directionsService = new google.maps.DirectionsService;
+                    let directionsDisplay = new google.maps.DirectionsRenderer;
+
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: {lat: center.lat(),lng: center.lng()},
+                        zoom: 8
+                    });
+
+                    directionsDisplay.setMap(map);
+
+                    let bounds = new google.maps.LatLngBounds(local_location, remote_location);
+
+                    map.fitBounds(bounds);
+
+                    calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+                    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+                        directionsService.route({
+                            origin: local_location,
+                            destination: remote_location,
+                            travelMode: 'DRIVING'
+                        }, function(response, status) {
+                            if (status === 'OK') {
+                                directionsDisplay.setDirections(response);
+                            } else {
+                                window.alert('Directions request failed due to ' + status);
+                            }
+                        });
+                    }
+                }
             },
-        })
+        });
+
+
     }
 </script>
 

@@ -42,30 +42,37 @@ class EndpointSeeder extends Seeder{
 
         $count = 0;
 
+        $progress_count = 0;
+
         foreach ($endpoints as $endpoint){
 
             $progress = round(100 * ($count / count($endpoints)));
 
-            if ($progress > 0 && $progress < 10) {
-                echo "cleaning : [*---------]  $progress% \r";
-            } elseif ($progress > 10 && $progress < 20) {
-                echo "cleaning : [**--------]  $progress% \r";
-            } elseif ($progress > 20 && $progress < 30) {
-                echo "cleaning : [***-------]  $progress% \r";
-            } elseif ($progress > 30 && $progress < 40) {
-                echo "cleaning : [****------]  $progress% \r";
-            } elseif ($progress > 40 && $progress < 50) {
-                echo "cleaning : [*****-----]  $progress% \r";
-            } elseif ($progress > 50 && $progress < 60) {
-                echo "cleaning : [******----]  $progress% \r";
-            } elseif ($progress > 60 && $progress < 70) {
-                echo "cleaning : [*******---]  $progress% \r";
-            } elseif ($progress > 70 && $progress < 80) {
-                echo "cleaning : [********--]  $progress% \r";
-            } elseif ($progress > 80 && $progress < 90) {
-                echo "cleaning : [*********-]  $progress% \r";
-            } elseif ($progress > 90 && $progress < 100) {
-                echo "cleaning : [**********]  $progress% \r";
+            if ($progress >= 0 && $progress < 10) {
+                echo "Cleaning : [*---------]  $progress% \r";
+            } elseif ($progress >= 10 && $progress < 20) {
+                echo "Cleaning : [**--------]  $progress% \r";
+            } elseif ($progress >= 20 && $progress < 30) {
+                echo "Cleaning : [***-------]  $progress% \r";
+            } elseif ($progress >= 30 && $progress < 40) {
+                echo "Cleaning : [****------]  $progress% \r";
+            } elseif ($progress >= 40 && $progress < 50) {
+                echo "Cleaning : [*****-----]  $progress% \r";
+            } elseif ($progress >= 50 && $progress < 60) {
+                echo "Cleaning : [******----]  $progress% \r";
+            } elseif ($progress >= 60 && $progress < 70) {
+                echo "Cleaning : [*******---]  $progress% \r";
+            } elseif ($progress >= 70 && $progress < 80) {
+                echo "Cleaning : [********--]  $progress% \r";
+            } elseif ($progress >= 80 && $progress < 90) {
+                echo "Cleaning : [*********-]  $progress% \r";
+            } elseif ($progress >= 90 && $progress < 100) {
+                echo "Cleaning : [**********]  $progress% \r";
+            } else {
+                if($progress_count === 0) {
+                    echo "Cleaning : [**********]  $progress% \n";
+                    $progress_count++;
+                }
             }
 
             if($count === 0 || $endpoint[0] === null){
@@ -117,37 +124,42 @@ class EndpointSeeder extends Seeder{
 
         $count = 0;
 
+        $progress_count = 0;
+
         foreach ($proxies as $p) {
 
 
             $progress = round(100 * ($count / count($proxies)));
 
-            if ($progress > 0 && $progress < 10) {
-                echo "proxies : [*---------]  $progress% \r";
-            } elseif ($progress > 10 && $progress < 20) {
-                echo "proxies : [**--------]  $progress% \r";
-            } elseif ($progress > 20 && $progress < 30) {
-                echo "proxies : [***-------]  $progress% \r";
-            } elseif ($progress > 30 && $progress < 40) {
-                echo "proxies : [****------]  $progress% \r";
-            } elseif ($progress > 40 && $progress < 50) {
-                echo "proxies : [*****-----]  $progress% \r";
-            } elseif ($progress > 50 && $progress < 60) {
-                echo "proxies : [******----]  $progress% \r";
-            } elseif ($progress > 60 && $progress < 70) {
-                echo "proxies : [*******---]  $progress% \r";
-            } elseif ($progress > 70 && $progress < 80) {
-                echo "proxies : [********--]  $progress% \r";
-            } elseif ($progress > 80 && $progress < 90) {
-                echo "proxies : [*********-]  $progress% \r";
-            } elseif ($progress > 90 && $progress < 100) {
-                echo "proxies : [**********]  $progress% \r";
+            if ($progress >= 0 && $progress < 10) {
+                echo "Proxies : [*---------]  $progress% \r";
+            } elseif ($progress >= 10 && $progress < 20) {
+                echo "Proxies : [**--------]  $progress% \r";
+            } elseif ($progress >= 20 && $progress < 30) {
+                echo "Proxies : [***-------]  $progress% \r";
+            } elseif ($progress >= 30 && $progress < 40) {
+                echo "Proxies : [****------]  $progress% \r";
+            } elseif ($progress >= 40 && $progress < 50) {
+                echo "Proxies : [*****-----]  $progress% \r";
+            } elseif ($progress >= 50 && $progress < 60) {
+                echo "Proxies : [******----]  $progress% \r";
+            } elseif ($progress >= 60 && $progress < 70) {
+                echo "Proxies : [*******---]  $progress% \r";
+            } elseif ($progress >= 70 && $progress < 80) {
+                echo "Proxies : [********--]  $progress% \r";
+            } elseif ($progress >= 80 && $progress < 90) {
+                echo "Proxies : [*********-]  $progress% \r";
+            } elseif ($progress >= 90 && $progress < 100) {
+                echo "Proxies : [**********]  $progress% \r";
+            } else {
+                if($progress_count === 0) {
+                    echo "Proxies : [**********]  $progress% \n";
+                    $progress_count++;
+                }
             }
 
 
             if($count === 0 || $p[0] === null || $p[1] === 'bs') {
-
-
                 $count++;
                 continue;
             }
@@ -171,17 +183,38 @@ class EndpointSeeder extends Seeder{
             } else {
                 dd('$entity not an object');
             }
-            $location = new \App\Location();
 
-            $location->save();
+            $ip2location = \App\Ip2Location::getByIp($proxy->address);
 
-            $coordinate = new \App\Coordinate();
+            if($ip2location !== null){
+                $coordinate = new \App\Coordinate();
+                $coordinate->lng = $ip2location->longitude;
+                $coordinate->lat = $ip2location->latitude;
+                $coordinate->save();
 
-            $coordinate->save();
 
-            $location->coordinate($coordinate)->save($coordinate);
+                $location = new \App\Location();
+                $location->save();
 
-            $location->save();
+                $location->address = null;
+                $location->city =$ip2location->city_name;
+                $location->state =$ip2location->region_name;
+                $location->zipcode =$ip2location->zip_code;
+                $location->country_code = $ip2location->country_code;
+                $location->time_zone = $ip2location->time_zone;
+                $location->coordinate($coordinate)->save($coordinate);
+                $location->save();
+
+            } else {
+                $coordinate = new \App\Coordinate();
+                $coordinate->save();
+
+                $location = new \App\Location();
+                $location->save();
+
+                $location->coordinate($coordinate)->save($coordinate);
+
+            }
 
             $proxy->location($location)->save($location);
 
@@ -203,31 +236,38 @@ class EndpointSeeder extends Seeder{
 
         $count = 0;
 
+        $progress_count = 0;
+
         foreach ($models as $m){
 
 
             $progress = round(100 * ($count / count($models)));
 
-            if ($progress > 0 && $progress < 10) {
-                echo "models : [*---------]  $progress% \r";
-            } elseif ($progress > 10 && $progress < 20) {
-                echo "models : [**--------]  $progress% \r";
-            } elseif ($progress > 20 && $progress < 30) {
-                echo "models : [***-------]  $progress% \r";
-            } elseif ($progress > 30 && $progress < 40) {
-                echo "models : [****------]  $progress% \r";
-            } elseif ($progress > 40 && $progress < 50) {
-                echo "models : [*****-----]  $progress% \r";
-            } elseif ($progress > 50 && $progress < 60) {
-                echo "models : [******----]  $progress% \r";
-            } elseif ($progress > 60 && $progress < 70) {
-                echo "models : [*******---]  $progress% \r";
-            } elseif ($progress > 70 && $progress < 80) {
-                echo "models : [********--]  $progress% \r";
-            } elseif ($progress > 80 && $progress < 90) {
-                echo "models : [*********-]  $progress% \r";
-            } elseif ($progress > 90 && $progress < 100) {
-                echo "models : [**********]  $progress% \r";
+            if ($progress >= 0 && $progress < 10) {
+                echo "Models : [*---------]  $progress% \r";
+            } elseif ($progress >= 10 && $progress < 20) {
+                echo "Models : [**--------]  $progress% \r";
+            } elseif ($progress >= 20 && $progress < 30) {
+                echo "Models : [***-------]  $progress% \r";
+            } elseif ($progress >= 30 && $progress < 40) {
+                echo "Models : [****------]  $progress% \r";
+            } elseif ($progress >= 40 && $progress < 50) {
+                echo "Models : [*****-----]  $progress% \r";
+            } elseif ($progress >= 50 && $progress < 60) {
+                echo "Models : [******----]  $progress% \r";
+            } elseif ($progress >= 60 && $progress < 70) {
+                echo "Models : [*******---]  $progress% \r";
+            } elseif ($progress >= 70 && $progress < 80) {
+                echo "Models : [********--]  $progress% \r";
+            } elseif ($progress >= 80 && $progress < 90) {
+                echo "Models : [*********-]  $progress% \r";
+            } elseif ($progress >= 90 && $progress < 100) {
+                echo "Models : [**********]  $progress% \r";
+            } else {
+                if($progress_count === 0) {
+                    echo "Models : [**********]  $progress% \n";
+                    $progress_count++;
+                }
             }
 
             if($count === 0 || $m[0] === null){
@@ -261,31 +301,37 @@ class EndpointSeeder extends Seeder{
 
         $count = 0;
 
-        foreach ($endpoints as $e) {
+        $progress_count = 0;
 
+        foreach ($endpoints as $e) {
 
             $progress = round(100 * ($count / count($endpoints)));
 
-            if ($progress > 0 && $progress < 10) {
-                echo "endpoints : [*---------]  $progress% \r";
-            } elseif ($progress > 10 && $progress < 20) {
-                echo "endpoints : [**--------]  $progress% \r";
-            } elseif ($progress > 20 && $progress < 30) {
-                echo "endpoints : [***-------]  $progress% \r";
-            } elseif ($progress > 30 && $progress < 40) {
-                echo "endpoints : [****------]  $progress% \r";
-            } elseif ($progress > 40 && $progress < 50) {
-                echo "endpoints : [*****-----]  $progress% \r";
-            } elseif ($progress > 50 && $progress < 60) {
-                echo "endpoints : [******----]  $progress% \r";
-            } elseif ($progress > 60 && $progress < 70) {
-                echo "endpoints : [*******---]  $progress% \r";
-            } elseif ($progress > 70 && $progress < 80) {
-                echo "endpoints : [********--]  $progress% \r";
-            } elseif ($progress > 80 && $progress < 90) {
-                echo "endpoints : [*********-]  $progress% \r";
-            } elseif ($progress > 90 && $progress < 100) {
-                echo "endpoints : [**********]  $progress% \r";
+            if ($progress >= 0 && $progress < 10) {
+                echo "Endpoints : [*---------]  $progress% \r";
+            } elseif ($progress >= 10 && $progress < 20) {
+                echo "Endpoints : [**--------]  $progress% \r";
+            } elseif ($progress >= 20 && $progress < 30) {
+                echo "Endpoints : [***-------]  $progress% \r";
+            } elseif ($progress >= 30 && $progress < 40) {
+                echo "Endpoints : [****------]  $progress% \r";
+            } elseif ($progress >= 40 && $progress < 50) {
+                echo "Endpoints : [*****-----]  $progress% \r";
+            } elseif ($progress >= 50 && $progress < 60) {
+                echo "Endpoints : [******----]  $progress% \r";
+            } elseif ($progress >= 60 && $progress < 70) {
+                echo "Endpoints : [*******---]  $progress% \r";
+            } elseif ($progress >= 70 && $progress < 80) {
+                echo "Endpoints : [********--]  $progress% \r";
+            } elseif ($progress >= 80 && $progress < 90) {
+                echo "Endpoints : [*********-]  $progress% \r";
+            } elseif ($progress >= 90 && $progress < 100) {
+                echo "Endpoints : [**********]  $progress% \r";
+            } else {
+                if($progress_count === 0) {
+                    echo "Endpoints : [**********]  $progress% \n";
+                    $progress_count++;
+                }
             }
 
 
@@ -318,19 +364,36 @@ class EndpointSeeder extends Seeder{
 
             $endpoint->save();
 
-            $location = new \App\Location();
+            $ip2location = \App\Ip2Location::getByIp($e[8]);
 
-            $location->save();
+            if($ip2location->latitude !== 0.0 && $ip2location->longitude !== 0.0){
+                $coordinate = new \App\Coordinate();
+                $coordinate->lng = $ip2location->longitude;
+                $coordinate->lat = $ip2location->latitude;
+                $coordinate->save();
 
-            $coordinate = new \App\Coordinate();
 
-            $coordinate->save();
+                $location = new \App\Location();
+                $location->save();
 
-            $location->coordinate($coordinate)->save($coordinate);
+                $location->address = null;
+                $location->city =$ip2location->city_name;
+                $location->state =$ip2location->region_name;
+                $location->zipcode =$ip2location->zip_code;
+                $location->country_code = $ip2location->country_code;
+                $location->time_zone = $ip2location->time_zone;
 
-            $location->save();
+                $location->coordinate($coordinate)->save($coordinate);
 
-            $endpoint->location($location)->save($location);
+                $location->save();
+
+                $endpoint->location($location)->save($location);
+
+            } else {
+
+                $endpoint->location($proxy->location)->save($proxy->location);
+
+            }
 
             $endpoint->save();
 

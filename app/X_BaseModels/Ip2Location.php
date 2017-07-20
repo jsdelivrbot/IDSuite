@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Mockery\Exception;
 
 
 class Ip2Location extends Model
@@ -38,9 +39,15 @@ class Ip2Location extends Model
     public static function getByIp($ip){
 
         $ip_long = ip2long($ip);
-        $location_details = Ip2Location::where('ip_to', '>=', $ip_long)->limit(1)->first();
 
+        if($ip_long) {
+            $location_details = Ip2Location::where('ip_to', '>=', $ip_long)->limit(1)->first();
+        } else {
+            // TODO throw exceptions
+//            throw new Exception('Ip must be numeric');
 
+            return false;
+        }
         return $location_details;
     }
 

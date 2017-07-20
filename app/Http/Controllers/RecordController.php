@@ -73,7 +73,20 @@ class RecordController
         $r->direction = $record->direction;
         $r->protocol = $record->protocol;
 
-        return response()->json($record);
+
+        if($record->remote_location->coordinate->lat !== $record->endpoint->location->coordinate->lat && $record->remote_location->coordinate->lng !== $record->endpoint->location->coordinate->lng) {
+            $r->remote_lat = $record->remote_location->coordinate->lat;
+            $r->remote_lng = $record->remote_location->coordinate->lng;
+            $r->local_lat = $record->endpoint->location->coordinate->lat;
+            $r->local_lng = $record->endpoint->location->coordinate->lng;
+        } else {
+            $r->remote_lat = $record->remote_location->coordinate->lat + .00002;
+            $r->remote_lng = $record->remote_location->coordinate->lng + .00002;
+            $r->local_lat = $record->endpoint->location->coordinate->lat;
+            $r->local_lng = $record->endpoint->location->coordinate->lng;
+        }
+
+        return response()->json($r);
 
     }
 

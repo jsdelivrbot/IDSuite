@@ -22,23 +22,43 @@ class TicketController extends Controller
     {
 //        $tickets = DB::table('ticket')->orderBy('ticket_type')->get();
 
-        $tickets = Ticket::orderBy('status_type')->get();
+        $tickets = Ticket::where('status_type','<', 6)
+            ->orderBy('status_type')
+            ->get();
 
-//        foreach ($tickets as $t){
-//            $ticket = new \stdClass();
-//
-//            $ticket->id = $t->id;
-//            $ticket->entity_name = $t->entity->contact->name->name;
-//            $ticket->origin = EnumOriginType::getValueByKey($t->origin_type);
-//            $ticket->type = EnumTicketType::getValueByKey($t->ticket_type);
-//            $ticket->priority = EnumPriorityType::getValueByKey($t->origin_type);
-//            $ticket->status = EnumTicketStatusType::getValueByKey($t->origin_type);
-//
-//            dd($ticket);
-//
-//        }
+        $tickets_array = array();
 
-        return view('tickets', ['tickets' => $tickets, 'viewname' => 'Cases']);
+        foreach ($tickets as $t){
+
+            $ticket = new \stdClass();
+
+            $ticket->id = $t->id;
+
+            if($t->entity === null){
+                $ticket->entity_name = "Unassigned";
+            } else {
+                $ticket->entity_name = $t->entity->contact->name->name;
+            }
+
+            $ticket->origin = EnumOriginType::getValueByKey($t->origin_type);
+            $ticket->type = EnumTicketType::getValueByKey($t->ticket_type);
+            $ticket->priority = EnumPriorityType::getValueByKey($t->priority_type);
+            $ticket->status = EnumTicketStatusType::getValueByKey($t->status_type);
+
+
+
+            $ticket->subject = $t->subject;
+            $ticket->status_type = $t->status_type;
+            $ticket->reference_id = $t->reference_id;
+
+            $ticket->duration = $t->duration();
+
+
+            $tickets_array[] = $ticket;
+
+        }
+
+        return view('tickets', ['tickets' => $tickets_array, 'viewname' => 'Cases']);
     }
 
     /**

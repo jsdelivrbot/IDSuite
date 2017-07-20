@@ -32,13 +32,13 @@
                 @php
                     $number = $ticket->status_type;
 
-                    if(strlen($ticket->entity->contact->name->name) > 23 ){
-                        $trunc_name = substr($ticket->entity->contact->name->name, 0, 20);
+                    if(strlen($ticket->entity_name) > 23 ){
+                        $trunc_name = substr($ticket->entity_name, 0, 20);
 
                         $trunc_name = $trunc_name . '...';
 
                     } else {
-                        $trunc_name = $ticket->entity->contact->name->name;
+                        $trunc_name = $ticket->entity_name;
                     }
 
                 @endphp
@@ -50,8 +50,8 @@
                             <div class="card-block">
                                 <h4 class="card-title text-truncate">{{$ticket->reference_id}}</h4>
                                 <p class="card-text">{{\App\Enums\EnumTicketStatusType::getValueByKey($ticket->status_type)}}</p>
-                                <p class="card-text">{{intval(floor($ticket->duration()/60/60/24))}} Day(s)</p>
-                                <p class="card-text">{{$ticket->entity->contact->name->name}}</p>
+                                <p class="card-text">{{intval(floor($ticket->duration/60/60/24))}} Day(s)</p>
+                                <p class="card-text">{{$ticket->entity_name}}</p>
                                 <p class="card-text">{{$ticket->subject}}</p>
                                 <a href="tickets/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>
@@ -65,8 +65,8 @@
                             <div class="card-block">
                                 <h4 class="card-title text-truncate">{{$ticket->reference_id}}</h4>
                                 <p class="card-text">{{\App\Enums\EnumTicketStatusType::getValueByKey($ticket->status_type)}}</p>
-                                <p class="card-text">{{intval(floor($ticket->duration()/60/60/24))}} Day(s)</p>
-                                <p class="card-text">{{$ticket->entity->contact->name->name}}</p>
+                                <p class="card-text">{{intval(floor($ticket->duration/60/60/24))}} Day(s)</p>
+                                <p class="card-text">{{$ticket->entity_name}}</p>
                                 <p class="card-text">{{$ticket->subject}}</p>
                                 <a href="tickets/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>
@@ -80,8 +80,8 @@
                             <div class="card-block">
                                 <h4 class="card-title text-truncate">{{$ticket->reference_id}}</h4>
                                 <p class="card-text">{{\App\Enums\EnumTicketStatusType::getValueByKey($ticket->status_type)}}</p>
-                                <p class="card-text">{{intval(floor($ticket->duration()/60/60/24))}} Day(s)</p>
-                                <p class="card-text">{{$ticket->entity->contact->name->name}}</p>
+                                <p class="card-text">{{intval(floor($ticket->duration/60/60/24))}} Day(s)</p>
+                                <p class="card-text">{{$ticket->entity_name}}</p>
                                 <p class="card-text">{{$ticket->subject}}</p>
                                 <a href="tickets/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>
@@ -95,8 +95,8 @@
                             <div class="card-block">
                                 <h4 class="card-title text-truncate">{{$ticket->reference_id}}</h4>
                                 <p class="card-text">{{\App\Enums\EnumTicketStatusType::getValueByKey($ticket->status_type)}}</p>
-                                <p class="card-text">{{intval(floor($ticket->duration()/60/60/24))}} Day(s)</p>
-                                <p class="card-text">{{$ticket->entity->contact->name->name}}</p>
+                                <p class="card-text">{{intval(floor($ticket->duration/60/60/24))}} Day(s)</p>
+                                <p class="card-text">{{$ticket->entity_name}}</p>
                                 <p class="card-text">{{$ticket->subject}}</p>
                                 <a href="tickets/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>
@@ -110,8 +110,8 @@
                             <div class="card-block">
                                 <h4 class="card-title text-truncate">{{$ticket->reference_id}}</h4>
                                 <p class="card-text">{{\App\Enums\EnumTicketStatusType::getValueByKey($ticket->status_type)}}</p>
-                                <p class="card-text">{{intval(floor($ticket->duration()/60/60/24))}} Day(s)</p>
-                                <p class="card-text">{{$ticket->entity->contact->name->name}}</p>
+                                <p class="card-text">{{intval(floor($ticket->duration/60/60/24))}} Day(s)</p>
+                                <p class="card-text">{{$ticket->entity_name}}</p>
                                 <p class="card-text">{{$ticket->subject}}</p>
                                 <a href="tickets/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>

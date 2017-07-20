@@ -25,30 +25,37 @@ class CaseSeeder extends Seeder
 
         $count = 0;
 
+        $progress_count = 0;
+
         foreach ($tickets as $t) {
 
             $progress = round(100 * ($count / count($tickets)));
 
-            if ($progress > 0 && $progress < 10) {
+            if ($progress >= 0 && $progress < 10) {
                 echo "Tickets : [*---------]  $progress% \r";
-            } elseif ($progress > 10 && $progress < 20) {
+            } elseif ($progress >= 10 && $progress < 20) {
                 echo "Tickets : [**--------]  $progress% \r";
-            } elseif ($progress > 20 && $progress < 30) {
+            } elseif ($progress >= 20 && $progress < 30) {
                 echo "Tickets : [***-------]  $progress% \r";
-            } elseif ($progress > 30 && $progress < 40) {
+            } elseif ($progress >= 30 && $progress < 40) {
                 echo "Tickets : [****------]  $progress% \r";
-            } elseif ($progress > 40 && $progress < 50) {
+            } elseif ($progress >= 40 && $progress < 50) {
                 echo "Tickets : [*****-----]  $progress% \r";
-            } elseif ($progress > 50 && $progress < 60) {
+            } elseif ($progress >= 50 && $progress < 60) {
                 echo "Tickets : [******----]  $progress% \r";
-            } elseif ($progress > 60 && $progress < 70) {
+            } elseif ($progress >= 60 && $progress < 70) {
                 echo "Tickets : [*******---]  $progress% \r";
-            } elseif ($progress > 70 && $progress < 80) {
+            } elseif ($progress >= 70 && $progress < 80) {
                 echo "Tickets : [********--]  $progress% \r";
-            } elseif ($progress > 80 && $progress < 90) {
+            } elseif ($progress >= 80 && $progress < 90) {
                 echo "Tickets : [*********-]  $progress% \r";
-            } elseif ($progress > 90 && $progress < 100) {
+            } elseif ($progress >= 90 && $progress < 100) {
                 echo "Tickets : [**********]  $progress% \r";
+            } else {
+                if($progress_count === 0) {
+                    echo "Tickets : [**********]  $progress% \n";
+                    $progress_count++;
+                }
             }
 
 

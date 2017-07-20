@@ -17,6 +17,8 @@ class CreateIp2locationTable extends Migration
 
     public function up()
     {
+        return;
+
         Schema::create($this::table_name, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             //$table->charset = "utf8";

@@ -41,6 +41,7 @@ class EntityController extends Controller
             }
 
             $account    = new \stdClass();
+
             $account->name  = $a->contact->name->name;
             $account->id    = $a->id;
 
@@ -90,6 +91,8 @@ class EntityController extends Controller
 
         $sites_array = array();
 
+
+
         foreach ($sites as $s){
 
             $site = new \stdClass();
@@ -102,11 +105,15 @@ class EntityController extends Controller
             $site->zip = $l->zipcode;
             $site->name = $s->name->name;
 
+
+
             if($s->email->address !== "") {
                 $site->email = $s->email->address;
             } else {
                 $site->email = "Email is not listed.";
             }
+
+
             if($s->phonenumber->number !== null) {
                 $site->number = $s->phonenumber->number;
             } else{
