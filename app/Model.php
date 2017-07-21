@@ -37,6 +37,10 @@ abstract class Model extends Eloquent
     }
 
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public static function getObjectById($id){
         $class = get_called_class();
         $results = $class::find($id);
@@ -44,63 +48,19 @@ abstract class Model extends Eloquent
 
     }
 
-    public static function getAllObjects(){
-        $class = get_called_class();
-        return $class::all();
-    }
 
     /**
      * Returns whether or not this use is active.
      * @return bool
      * @internal param $id
      */
-    public function isActive(){
-        if($this->active) {
+    public function isActive()
+    {
+        if ($this->active) {
             return true;
         } else {
             Throw new Exception('This Object is not active.', 409);
         }
     }
-
-//    public function __set($property, $value)
-//    {
-//
-//        if(strpos($property, '_id' ) && $property !== 'mrge_id'){
-//
-//
-//
-//            $this->$property = $value->mrge_id;
-//        } else {
-////            echo 'false';
-//            $this->$property = $value;
-//        }
-//    }
-//
-//    public function __get($property)
-//    {
-//
-//
-//
-//        if(strpos($property, '_o')){
-//
-//            $split = explode('_o', $property);
-//            $property_id = $split[0] . '_id';
-//
-//            $class_path = $this->relations[$property];
-//
-//            dd( $this->$property_id);
-//
-//            $object = $class_path::find($this->$property_id);
-//
-//            dd($object);
-//
-//            return $object;
-//
-//        } else {
-//            return $this->$property;
-//        }
-//    }
-
-
-
+    
 }

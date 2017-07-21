@@ -211,7 +211,7 @@
 
                 let distance = Math.round(0.000621371192 * google.maps.geometry.spherical.computeDistanceBetween(local_location, remote_location));
 
-                let mileage_cost = .54 * distance;
+                let mileage_cost = .535 * distance;
 
                 let map;
 
@@ -248,7 +248,7 @@
 
                                 let distance_val = element.distance.value * 0.000621371192;
                                 let duration = element.duration.text;
-                                let mileage_cost = Math.round(.54 * distance_val);
+                                let mileage_cost = Math.round(.535 * distance_val);
                                 let from = origins[i];
                                 let to = destinations[j];
 
