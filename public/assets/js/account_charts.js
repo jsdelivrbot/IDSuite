@@ -84,35 +84,38 @@ $(document).ready(function () {
         url: '/getChartDeviceByType',
         success: function success(data) {
 
-            var names = data.names;
+            if (data !== false) {
 
-            var values = data.values;
+                var names = data.names;
 
-            console.log(names);
-            console.log(values);
+                var values = data.values;
 
-            var devicebytype = document.getElementById("devicebytype").getContext('2d');
+                console.log(names);
+                console.log(values);
 
-            var myChart = new Chart(devicebytype, {
-                type: 'pie',
-                data: {
-                    datasets: [{
-                        data: values,
-                        backgroundColor: ['rgba(230, 71, 89, .2)', 'rgba(27, 201, 142, .2)', 'rgba(159, 134, 255, .2)', 'rgba(228, 216, 54, .2)', 'rgba(28, 168, 221, .21)', 'rgba(28, 168, 221, .21)', 'rgba(28, 168, 221, .21)'],
-                        borderColor: ['rgba(230, 71, 89, 1)', 'rgba(27, 201, 142, 1)', 'rgba(159, 134, 255, 1)', 'rgba(228, 216, 54, 1)', 'rgba(28, 168, 221, 1)', 'rgba(28, 168, 221, 1)', 'rgba(28, 168, 221, 1)']
-                    }],
-                    labels: names
-                },
-                options: {
-                    responsive: true,
-                    title: {
-                        display: true,
-                        text: 'Devices by Type',
-                        fontColor: 'rgba(255,255,255,1)',
-                        fontSize: 24
+                var devicebytype = document.getElementById("devicebytype").getContext('2d');
+
+                var myChart = new Chart(devicebytype, {
+                    type: 'pie',
+                    data: {
+                        datasets: [{
+                            data: values,
+                            backgroundColor: ['rgba(230, 71, 89, .2)', 'rgba(27, 201, 142, .2)', 'rgba(159, 134, 255, .2)', 'rgba(228, 216, 54, .2)', 'rgba(28, 168, 221, .21)', 'rgba(28, 168, 221, .21)', 'rgba(28, 168, 221, .21)'],
+                            borderColor: ['rgba(230, 71, 89, 1)', 'rgba(27, 201, 142, 1)', 'rgba(159, 134, 255, 1)', 'rgba(228, 216, 54, 1)', 'rgba(28, 168, 221, 1)', 'rgba(28, 168, 221, 1)', 'rgba(28, 168, 221, 1)']
+                        }],
+                        labels: names
+                    },
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: 'Devices by Type',
+                            fontColor: 'rgba(255,255,255,1)',
+                            fontSize: 24
+                        }
                     }
-                }
-            });
+                });
+            }
         }
     });
 
@@ -121,32 +124,35 @@ $(document).ready(function () {
         url: '/getChartDeviceUpStatusAll',
         success: function success(data) {
 
-            var status = data.status;
+            if (data !== false) {
 
-            var value = data.value;
+                var status = data.status;
 
-            var devicebystatus = document.getElementById("deviceupstatus").getContext('2d');
+                var value = data.value;
 
-            var myChart = new Chart(devicebystatus, {
-                type: 'bar',
-                data: {
-                    datasets: [{
-                        data: status,
-                        backgroundColor: ['rgba(27, 201, 142, .2)', 'rgba(230, 71, 89, .2)'],
-                        borderColor: ['rgba(27, 201, 142, 1)', 'rgba(230, 71, 89, 1)']
-                    }],
-                    labels: ["Devices Up", "Devices Down"]
-                },
-                options: {
-                    responsive: true,
-                    title: {
-                        display: true,
-                        text: 'Current Device Statuses',
-                        fontColor: 'rgba(255,255,255,1)',
-                        fontSize: 24
+                var devicebystatus = document.getElementById("deviceupstatus").getContext('2d');
+
+                var myChart = new Chart(devicebystatus, {
+                    type: 'bar',
+                    data: {
+                        datasets: [{
+                            data: status,
+                            backgroundColor: ['rgba(27, 201, 142, .2)', 'rgba(230, 71, 89, .2)'],
+                            borderColor: ['rgba(27, 201, 142, 1)', 'rgba(230, 71, 89, 1)']
+                        }],
+                        labels: ["Devices Up", "Devices Down"]
+                    },
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: 'Current Device Statuses',
+                            fontColor: 'rgba(255,255,255,1)',
+                            fontSize: 24
+                        }
                     }
-                }
-            });
+                });
+            }
         }
     });
 
@@ -155,41 +161,44 @@ $(document).ready(function () {
         url: '/getChartDeviceUpStatusPercentAll',
         success: function success(data) {
 
-            var status = data.status;
+            if (data !== false) {
 
-            var deviceupstatuspercentall = document.getElementById("deviceupstatuspercentall").getContext('2d');
+                var status = data.status;
 
-            var myChart = new Chart(deviceupstatuspercentall, {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: status,
-                        backgroundColor: ['rgba(27, 201, 142, .2)', 'rgba(230, 71, 89, .2)'],
-                        borderColor: ['rgba(27, 201, 142, 1)', 'rgba(230, 71, 89, 1)']
-                    }],
-                    labels: ["Devices Up", "Devices Down"]
-                },
-                options: {
-                    responsive: true,
-                    title: {
-                        display: true,
-                        text: 'Current Device Statuses',
-                        fontColor: 'rgba(255,255,255,1)',
-                        fontSize: 24
+                var deviceupstatuspercentall = document.getElementById("deviceupstatuspercentall").getContext('2d');
+
+                var myChart = new Chart(deviceupstatuspercentall, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: status,
+                            backgroundColor: ['rgba(27, 201, 142, .2)', 'rgba(230, 71, 89, .2)'],
+                            borderColor: ['rgba(27, 201, 142, 1)', 'rgba(230, 71, 89, 1)']
+                        }],
+                        labels: ["Devices Up", "Devices Down"]
                     },
-                    tooltips: {
-                        callbacks: {
-                            label: function label(tooltipItem, data) {
-                                var dataset = data.datasets[tooltipItem.datasetIndex];
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: 'Current Device Statuses',
+                            fontColor: 'rgba(255,255,255,1)',
+                            fontSize: 24
+                        },
+                        tooltips: {
+                            callbacks: {
+                                label: function label(tooltipItem, data) {
+                                    var dataset = data.datasets[tooltipItem.datasetIndex];
 
-                                var dataitem = dataset.data[tooltipItem.index];
+                                    var dataitem = dataset.data[tooltipItem.index];
 
-                                return dataitem + "%";
+                                    return dataitem + "%";
+                                }
                             }
                         }
                     }
-                }
-            });
+                });
+            }
         }
     });
 });
