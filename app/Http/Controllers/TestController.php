@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Analytic;
+use App\DynamicEnum;
+use App\DynamicEnumValue;
 use App\Entity;
 use App\EntityContact;
 use App\EntityName;
+use App\Enums\EnumDataSourceType;
 use App\Ip2Location;
 use App\PersonContact;
 use App\Record;
@@ -23,6 +26,7 @@ use App\PersonName;
 use App\Proxy;
 use Faker\Provider\DateTime;
 use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Auth;
 use Mockery\Exception;
 use PhpParser\Node\Expr\AssignOp\Mod;
 use GuzzleHttp\Exception\GuzzleException;
@@ -38,8 +42,68 @@ class TestController extends Controller
         return ((float)$usec + (float)$sec);
     }
 
-	public function test(){
 
+    /**
+     *
+     * User $user
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function test(){
+
+        $history = ZabbixController::getHistory('59337', 'clock');
+
+        dd($history);
+
+//        $object = User::getObjectByID();
+
+
+
+//        $entity = new Entity();
+//        $entity->save();
+//
+//
+//        $array = [0 => "Zabbix", 1 => "NetSuite", 2 => "MRGE"];
+//
+//        $de = new DynamicEnum();
+//
+//        $de->name = "Reference_Type";
+//
+//        $de->setValues($array);
+//
+//        $de->save();
+//
+//        $dev1 = new DynamicEnumValue();
+//
+//        $dev1->save();
+//
+//        $dev1->value_type = 1;
+//
+//        $dev1->value = $array[$dev1->value_type];
+//
+//        $dev1->definition($de)->save($de);
+//
+//        $dev1->save();
+//
+//        $dev2 = new DynamicEnumValue();
+//
+//        $dev2->save();
+//
+//        $dev2->value_type = 1;
+//
+//        $dev2->value = $array[$dev2->value_type];
+//
+//        $dev2->definition($de)->save($de);
+//
+//        $dev2->save();
+//
+//        $entity->references = $dev1;
+//
+//        $entity->references = $dev2;
+//
+//        $entity->save();
+//
+//        dd($entity);
 
 //        $ip = '172.16.0.134';
 //
@@ -49,8 +113,6 @@ class TestController extends Controller
 //        $loc = Ip2Location::getByIp($ip);
 //
 //        dd($loc);
-
-
 
 
         $params = array(
