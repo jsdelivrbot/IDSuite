@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Model as Model;
+use App\Enums\EnumDataSourceType;
 
 class Record extends Model
 {
@@ -51,6 +52,19 @@ class Record extends Model
         }
         return $this->hasOne(Location::class, 'id','remote_location_id');
     }
+
+    public function references(){
+        $references = $this->morphToMany(DynamicEnumValue::class, 'object','x_object_dev')->withTimestamps();
+
+        $ref_array = array();
+
+        foreach($references->get() as $reference){
+            $ref_array[EnumDataSourceType::getValueByKey($reference->value_type)] = $reference->value;
+        }
+
+        return $ref_array;
+    }
+
 
     /**
      * User constructor.

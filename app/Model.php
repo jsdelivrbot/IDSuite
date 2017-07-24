@@ -8,6 +8,7 @@
 
 namespace App;
 
+use App\Enums\EnumDataSourceType;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 abstract class Model extends Eloquent
@@ -46,7 +47,10 @@ abstract class Model extends Eloquent
         $results = $class::find($id);
         return $results;
 
+
+
     }
+
 
 
     /**
@@ -62,5 +66,18 @@ abstract class Model extends Eloquent
             Throw new Exception('This Object is not active.', 409);
         }
     }
-    
+
+
+    public function getReference($type_value){
+
+        if(in_array($type_value, EnumDataSourceType::$enum))
+        {
+            return $this->references[EnumDataSourceType::getKeyByValue($type_value)];
+        } else {
+            $notfound = new \stdClass();
+            $notfound->value = null;
+            return $notfound;
+        }
+
+    }
 }

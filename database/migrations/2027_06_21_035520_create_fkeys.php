@@ -28,6 +28,11 @@ class CreateFkeys extends Migration
             $table->foreign('location_id')->references('id')->on('location')->onDelete('cascade')->onUpdate('cascade');
         });
 
+
+        Schema::table('dynamic_enum_value', function (Blueprint $table){
+            $table->foreign('dynamicenum_id')->references('id')->on('dynamic_enum')->onDelete('cascade')->onUpdate('cascade');
+        });
+
         Schema::table('endpoint', function (Blueprint $table){
             $table->foreign('entity_id')->references('id')->on('entity')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('model_id')->references('id')->on('endpointmodel')->onDelete('cascade')->onUpdate('cascade');
@@ -82,6 +87,11 @@ class CreateFkeys extends Migration
 
         Schema::table('user', function(Blueprint $table) {
             $table->foreign('contact_id')->references('id')->on('personcontact')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
+        });
+
+        Schema::table('x_object_dev', function(Blueprint $table){
+            $table->foreign('dynamic_enum_value_id')->references('id')->on('dynamic_enum_value')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('dynamic_enum_id')->references('id')->on('dynamic_enum')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -60,11 +60,30 @@ class CaseSeeder extends Seeder
 
 
             if($t[0] === null || $count === 0){
+
+
                 $count++;
                 continue;
             }
 
             $ticket = new \App\Ticket();
+
+            $dynamic_enum_value = new \App\DynamicEnumValue();
+
+            $dynamic_enum_value->save();
+
+            $dynamic_enum_value->definition(DatabaseSeeder::$dynamic_enum)->save(DatabaseSeeder::$dynamic_enum);
+
+            $dynamic_enum_value->value = $t[0];
+
+            $dynamic_enum_value->value_type = \App\Enums\EnumDataSourceType::getKeyByValue('netsuite');
+
+            $dynamic_enum_value->save();
+
+            $ticket->references($dynamic_enum_value);
+
+            $ticket->save();
+
 
             $entity = self::processEntity($t);
 

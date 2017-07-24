@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Model as Model;
+use App\Enums\EnumDataSourceType;
 
 class Proxy extends Model
 {
@@ -50,6 +51,18 @@ class Proxy extends Model
 
     public function endpoints(){
         return $this->hasMany(Endpoint::class, 'proxy_id', 'id');
+    }
+
+    public function references(){
+        $references = $this->morphToMany(DynamicEnumValue::class, 'object','x_object_dev')->withTimestamps();
+
+        $ref_array = array();
+
+        foreach($references->get() as $reference){
+            $ref_array[EnumDataSourceType::getValueByKey($reference->value_type)] = $reference->value;
+        }
+
+        return $ref_array;
     }
 
 

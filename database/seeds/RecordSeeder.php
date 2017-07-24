@@ -90,6 +90,24 @@ class RecordSeeder extends Seeder
 
                 $record = new \App\Record();
 
+
+                $dynamic_enum_value = new \App\DynamicEnumValue();
+
+                $dynamic_enum_value->save();
+
+                $dynamic_enum_value->definition(DatabaseSeeder::$dynamic_enum)->save(DatabaseSeeder::$dynamic_enum);
+
+                $dynamic_enum_value->value = $r[0];
+
+                $dynamic_enum_value->value_type = \App\Enums\EnumDataSourceType::getKeyByValue('mrge');
+
+                $dynamic_enum_value->save();
+
+                $record->references($dynamic_enum_value);
+
+                $record->save();
+
+
                 $endpoint_id = $this->endpoint_map[$end_id];
                 $endpoint = \App\Endpoint::getObjectById($endpoint_id);
 

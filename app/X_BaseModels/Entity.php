@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Model as Model;
+use App\Enums\EnumDataSourceType;
 
 class Entity extends Model
 {
@@ -86,6 +87,18 @@ class Entity extends Model
     public function notes()
     {
         return $this->morphMany(Note::class, 'noteable');
+    }
+
+    public function references(){
+        $references = $this->morphToMany(DynamicEnumValue::class, 'object','x_object_dev')->withTimestamps();
+
+        $ref_array = array();
+
+        foreach($references->get() as $reference){
+            $ref_array[EnumDataSourceType::getValueByKey($reference->value_type)] = $reference->value;
+        }
+
+        return $ref_array;
     }
 
 

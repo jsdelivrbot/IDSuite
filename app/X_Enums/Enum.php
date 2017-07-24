@@ -54,6 +54,7 @@ abstract class Enum
     static function getValueByKey($key){
         $class = get_called_class();
 
+
         if(array_key_exists($key, $class::$enum)){
             return $class::$enum[$key];
         } else {
@@ -68,7 +69,6 @@ abstract class Enum
         $value = strtolower($value);
 
         $result = array_search($value, $class::$enum);
-
         if($result || $result === 0){
            return $result;
         } else {

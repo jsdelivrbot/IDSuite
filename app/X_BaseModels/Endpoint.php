@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Enums\EnumDataSourceType;
 use Illuminate\Support\Facades\Hash;
 
 use App\Model as Model;
@@ -85,6 +86,18 @@ class Endpoint extends Model
 
     public function analytics(){
         return $this->hasMany(Analytic::class, 'endpoint_id', 'id');
+    }
+
+    public function references(){
+        $references = $this->morphToMany(DynamicEnumValue::class, 'object','x_object_dev')->withTimestamps();
+
+        $ref_array = array();
+
+        foreach($references->get() as $reference){
+            $ref_array[EnumDataSourceType::getValueByKey($reference->value_type)] = $reference->value;
+        }
+
+        return $ref_array;
     }
 
     /**

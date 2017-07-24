@@ -166,6 +166,24 @@ class EndpointSeeder extends Seeder{
 
             $proxy = new \App\Proxy();
 
+
+            $dynamic_enum_value = new \App\DynamicEnumValue();
+
+            $dynamic_enum_value->save();
+
+            $dynamic_enum_value->definition(DatabaseSeeder::$dynamic_enum)->save(DatabaseSeeder::$dynamic_enum);
+
+            $dynamic_enum_value->value = $p[0];
+
+            $dynamic_enum_value->value_type = \App\Enums\EnumDataSourceType::getKeyByValue('mrge');
+
+            $dynamic_enum_value->save();
+
+            $proxy->references($dynamic_enum_value);
+
+            $proxy->save();
+
+
             $proxy->name    = $p[2];
             $proxy->address = $p[3];
             $proxy->port    = $p[4];
@@ -277,6 +295,26 @@ class EndpointSeeder extends Seeder{
 
             $model = new \App\EndpointModel();
 
+
+
+            $dynamic_enum_value = new \App\DynamicEnumValue();
+
+            $dynamic_enum_value->save();
+
+            $dynamic_enum_value->definition(DatabaseSeeder::$dynamic_enum)->save(DatabaseSeeder::$dynamic_enum);
+
+            $dynamic_enum_value->value = $m[0];
+
+            $dynamic_enum_value->value_type = \App\Enums\EnumDataSourceType::getKeyByValue('mrge');
+
+            $dynamic_enum_value->save();
+
+            $model->references($dynamic_enum_value);
+
+            $model->save();
+
+
+
             $series = explode(' ', $m[2]);
 
             $model->manufacturer    = $m[1];
@@ -341,6 +379,20 @@ class EndpointSeeder extends Seeder{
             }
 
             $endpoint  = new \App\Endpoint();
+
+            $dynamic_enum_value = new \App\DynamicEnumValue();
+
+            $dynamic_enum_value->save();
+
+            $dynamic_enum_value->definition(DatabaseSeeder::$dynamic_enum)->save(DatabaseSeeder::$dynamic_enum);
+
+            $dynamic_enum_value->value = $e[0];
+
+            $dynamic_enum_value->value_type = \App\Enums\EnumDataSourceType::getKeyByValue('mrge');
+
+            $dynamic_enum_value->save();
+
+            $endpoint->references($dynamic_enum_value);
 
             $endpoint->save();
 
