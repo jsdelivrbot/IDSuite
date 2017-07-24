@@ -54,7 +54,7 @@ class ZabbixController extends Controller
     /**
      *
      */
-    public static function loginUser(){
+    private static function loginUser(){
 
         $params = array(
             "user"      => self::user(),

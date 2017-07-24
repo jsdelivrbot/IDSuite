@@ -9,6 +9,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+require('vue-resource');
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -19,8 +21,16 @@ Vue.component('example', require('./components/Example.vue'));
 
 Vue.component('appheader', require('./components/appheader.vue'));
 
+Vue.component('custom-tabs', require('./components/custom_tabs.vue'));
+
 const app = new Vue({
-    el: '#app'
+    el: '#root'
+});
+
+Vue.http.interceptors.push((request, next) =>{
+    request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+
+    next();
 });
 
 
