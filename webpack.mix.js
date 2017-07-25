@@ -45,6 +45,9 @@ mix.styles([
     'resources/assets/css/sass.css'
 ], 'public/assets/css/all.css');
 
+mix.styles([
+    'resources/assets/css/custom_tabs.css'
+], 'public/assets/css/custom_tabs.css');
 
 
 

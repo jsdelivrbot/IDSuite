@@ -31,16 +31,21 @@ class EntityController extends Controller
         foreach ($accounts as $a) {
 
             if (count($a->children) > 0) {
-                foreach ($a->children as $child) {
-                    $account = new \stdClass();
-                    $account->name = $child->contact->name->name;
-                    $account->id = $child->id;
 
-                    $accounts_array[] = $account;
+                foreach ($a->children as $child) {
+
+                    if ($user->id !== $child->user->id){
+
+                        $account = new \stdClass();
+                        $account->name = $child->contact->name->name;
+                        $account->id = $child->id;
+
+                        $accounts_array[] = $account;
+                    }
                 }
             }
 
-            $account    = new \stdClass();
+            $account  = new \stdClass();
 
             $account->name  = $a->contact->name->name;
             $account->id    = $a->id;
@@ -90,6 +95,8 @@ class EntityController extends Controller
         $sites = $entity->sites;
 
         $sites_array = array();
+
+
 
 
 
@@ -161,7 +168,7 @@ class EntityController extends Controller
 
         session(['randomnumber' => rand(1,5)]);
 
-        return view('account', ['name' => $name->name, 'id' => $id, 'viewname' => 'account', 'sites' => $sites_array, 'persons' => $persons_array, 'notes' => $notes_array , 'number' => session('randomnumber')]);
+        return view('account', ['name' => $name->name, 'tickets' => $entity->tickets, 'id' => $id, 'viewname' => 'account', 'sites' => $sites_array, 'persons' => $persons_array, 'notes' => $notes_array , 'number' => session('randomnumber')]);
     }
 
 

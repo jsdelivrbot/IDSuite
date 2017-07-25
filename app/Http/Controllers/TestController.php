@@ -51,9 +51,14 @@ class TestController extends Controller
      */
     public function test(){
 
-        $history = ZabbixController::getHistory('59337', 'clock');
+        $entity = Entity::getObjectById('ENT59741d86f0db9');
 
-        dd($history);
+        dd($entity->children);
+
+
+//        $history = ZabbixController::getHistory('59337', 'clock');
+//
+//        dd($history);
 
 //        $object = User::getObjectByID();
 

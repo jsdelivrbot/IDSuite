@@ -90,14 +90,36 @@ class TicketController extends Controller
      */
     public function show($id)
     {
-
         session(['currentticket' => $id]);
 
-        $ticket = Ticket::getObjectById($id);
+        $tic = Ticket::getObjectById($id);
+
+        $ticket = new \stdClass();
+
+        $ticket->id = $tic->id;
+
+        if($tic->entity === null){
+            $ticket->entity_name = "Unassigned";
+        } else {
+            $ticket->entity_name = $tic->entity->contact->name->name;
+        }
+
+        $ticket->origin = EnumOriginType::getValueByKey($tic->origin_type);
+        $ticket->type = EnumTicketType::getValueByKey($tic->ticket_type);
+        $ticket->priority = EnumPriorityType::getValueByKey($tic->priority_type);
+        $ticket->status = EnumTicketStatusType::getValueByKey($tic->status_type);
+
+        $ticket->subject = $tic->subject;
+        $ticket->status_type = $tic->status_type;
+        $ticket->reference_id = $tic->reference_id;
+
+        $ticket->duration = $tic->duration();
+
+        $tickets_array[] = $ticket;
 
         session(['randomnumber' => rand(1,5)]);
 
-        return view('ticket', ['viewname' => 'ticket','ticket' => $ticket, 'number' => session('randomnumber')]);
+        return view('ticket', ['viewname' => 'case','name' => $ticket->reference_id, 'ticket' => $ticket, 'number' => session('randomnumber')]);
     }
 
     /**

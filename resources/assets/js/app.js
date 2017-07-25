@@ -7,9 +7,7 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
 
-require('vue-resource');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -17,21 +15,23 @@ require('vue-resource');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+// window.Vue = require('vue');
+//
+// require('vue-resource');
 
-Vue.component('appheader', require('./components/appheader.vue'));
-
-Vue.component('custom-tabs', require('./components/custom_tabs.vue'));
-
-const app = new Vue({
-    el: '#root'
-});
-
-Vue.http.interceptors.push((request, next) =>{
-    request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
-
-    next();
-});
+// Vue.component('example', require('./components/Example.vue'));
+//
+// Vue.component('appheader', require('./components/appheader.vue'));
+//
+// const app = new Vue({
+//     el: '#root'
+// });
+//
+// Vue.http.interceptors.push((request, next) =>{
+//     request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+//
+//     next();
+// });
 
 
 /**

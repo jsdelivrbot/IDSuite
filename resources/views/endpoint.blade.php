@@ -222,6 +222,7 @@
                     </div>
 
                 @endif
+
             </div>
         </div>
 
@@ -237,54 +238,7 @@
             </div>
         </div>
 
-        <div class="card card-square mb-lg-5" style="background-color: transparent; border: none;">
-            <ul id="account-card-header" class="nav nav-tabs active-outline-card-header-pink" role="tablist">
-                <li id="insights" class="nav-item">
-                    <a id="insights-a" class="nav-link active-outline-tab-pink text-white" data-toggle="tab" href="#account-card-block-insights-tab" role="tab">Insights</a>
-                </li>
-                <li id="locations" class="nav-item">
-                    <a id="locations-a" class="nav-link teal" data-toggle="tab" href="#account-card-block-locations-tab" role="tab">Location(s)</a>
-                </li>
-                <li id="contacts" class="nav-item">
-                    <a id="contacts-a" class="nav-link blue" data-toggle="tab" href="#account-card-block-contacts-tab" role="tab">Contacts</a>
-                </li>
-                <li id="notes" class="nav-item">
-                    <a id="notes-a" class="nav-link yellow" data-toggle="tab" href="#account-card-block-notes-tab" role="tab">Notes</a>
-                </li>
-            </ul>
-
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div class="tab-pane card-block active active-outline-card-block-pink" id="account-card-block-insights-tab" role="tabpanel">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <canvas id="devicecallcostavg"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane card-block active-outline-card-block-teal" id="account-card-block-locations-tab" role="tabpanel">
-                    <h4 class="card-title text-white">Special title treatment</h4>
-                    <p class="card-text text-white">With supporting text below as a natural lead-in to additional content.</p>
-                    <a id="account-card-block-a" href="#" class="btn btn-nav-teal ">Go somewhere</a>
-
-                </div>
-
-                <div class="tab-pane card-block active-outline-card-block-blue" id="account-card-block-contacts-tab" role="tabpanel">
-                    <h4 class="card-title text-white">Special title treatment</h4>
-                    <p class="card-text text-white">With supporting text below as a natural lead-in to additional content.</p>
-                    <a id="account-card-block-a" href="#" class="btn btn-nav-blue ">Go somewhere</a>
-                </div>
-
-                <div class="tab-pane card-block active-outline-card-block-yellow" id="account-card-block-notes-tab" role="tabpanel">
-                    <h4 class="card-title text-white">Special title treatment</h4>
-                    <p class="card-text text-white">With supporting text below as a natural lead-in to additional content.</p>
-                    <a id="account-card-block-a" href="#" class="btn btn-nav-yellow ">Go somewhere</a>
-                </div>
-
-            </div>
-
-
-        </div>
+        @include('partials.custom_tabs.custom_tabs')
 
     </div>
 

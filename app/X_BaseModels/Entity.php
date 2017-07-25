@@ -62,6 +62,10 @@ class Entity extends Model
         return $this->hasMany(EntityContact::class);
     }
 
+    public function tickets(){
+        return $this->hasMany(Ticket::class);
+    }
+
     public function children(){
         return $this->hasMany(Entity::class, 'parent_id', 'id');
     }

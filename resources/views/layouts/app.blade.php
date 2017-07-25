@@ -15,6 +15,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/css/font-awesome.css')}}">
 
+    @if($viewname === 'account' || $viewname === 'device' || $viewname === 'case')
+        <link rel="stylesheet" href="{{asset('assets/css/custom_tabs.css')}}">
+    @endif
+
+
 </head>
 <body class="raleway" style="background-color: #293a46">
 
@@ -58,7 +63,7 @@
                 <ul class="navbar-nav ml-lg-3 mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link">
-                            @if($viewname === 'account' || $viewname === 'device')
+                            @if($viewname === 'account' || $viewname === 'device' || $viewname === 'case')
                                 {{$name}}
                             @else
                                 {{$viewname}}
@@ -135,97 +140,8 @@
             </div>
     </div>
     <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
-    <script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script>
-    <script src="{{ asset('assets/js/app.js') }}"></script>
 
-    @if($viewname === 'account')
-        <script src="{{ asset('assets/js/chart_placeholder.js') }}"></script>
-
-        <script src="{{ asset('assets/js/account_charts.js') }}"></script>
-
-        <script src="{{ asset('assets/js/custom_tabs.js') }}"></script>
-
-        <script src="{{ asset('assets/js/account_note.js') }}"></script>
-
-    @elseif($viewname === 'device')
-
-        <script src="{{ asset('assets/js/device_status.js') }}"></script>
-
-        <script src="{{ asset('assets/js/custom_tabs.js') }}"></script>
-
-        <script src="{{ asset('assets/js/device_charts.js') }}"></script>
-
-    @elseif($viewname === 'Transactions' || $viewname === 'DataTables')
-
-        <link href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet"/>
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-        @stack('scripts')
-
-    @elseif($viewname === 'ticket')
-
-        <script src="{{ asset('assets/js/chart_placeholder.js') }}"></script>
-
-        <script src="{{ asset('assets/js/account_charts.js') }}"></script>
-
-        <script src="{{ asset('assets/js/custom_tabs.js') }}"></script>
-
-        <script src="{{ asset('assets/js/account_note.js') }}"></script>
-
-
-    @endif
-
-    <script>
-        (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=[];
-            v=['initialize','identify','updateOptions','pageLoad'];for(w=0,x=v.length;w<x;++w)(function(m){
-                o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
-            y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/00a9f372-c943-49d0-468a-e4e89d73262c/pendo.js';
-            z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
-
-
-        $.ajax({
-            type: "GET",
-            url: '/getAuthUser',
-            success: function (data) {
-
-                var user = data;
-
-                if(user !== false){
-                    // Call this whenever information about your visitors becomes available
-                    // Please use Strings, Numbers, or Bools for value types.
-                    pendo.initialize({
-                        apiKey: '00a9f372-c943-49d0-468a-e4e89d73262c',
-
-                        visitor: {
-                            id:         user.id,
-                            email:      user.email
-                            // role:         // Optional
-
-                            // You can add any additional visitor level key-values here,
-                            // as long as it's not one of the above reserved names.
-                        },
-
-                        account: {
-                             id:           user.id,
-                             name:         user.email
-                            // planLevel:    // Optional
-                            // planPrice:    // Optional
-                            // creationDate: // Optional
-
-                            // You can add any additional account level key-values here,
-                            // as long as it's not one of the above reserved names.
-                        }
-                    });
-                }
-            }
-        });
-
-
-    </script>
-
+    @include('scripts.app')
 
 </body>
 </html>
