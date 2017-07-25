@@ -22,6 +22,8 @@
     "heatmap.js": "^2.0.5",
     "select2": "^4.0.3",
     "gmaps-heatmap": "^1.0.2"
-
+  },
+  "dependencies": {
+    "amcharts3": "github:amcharts/amcharts3"
   }
 }
