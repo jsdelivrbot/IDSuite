@@ -108,76 +108,71 @@
     @endphp
 
     <script>
-    $(function() {
+    $( document ).ready(function() {
 
         $('#records-table').DataTable({
-                processing: true,
-                serverSide: true,
-                iDisplayLength: 10,
-                ajax: '/getRecordsDataTables',
-                success: function(result){
-                    if(result === false){
-                        $('#records-table').hide();
-                    } else {
-                        $('#records-table').show();
+            processing: true,
+            serverSide: true,
+            iDisplayLength: 10,
+            ajax: '/getRecordsDataTables',
+            columnDefs: [
+                {
+                    targets: 0,
+                    data: 'local_name',
+                    name: 'local_name',
+                    defaultContent: "<i>Not Available<i>",
+                    render: function (data) {
+                        if (data === "") {
+                            return '<i>Not Available<i>';
+                        } else {
+                            return data;
+                        }
                     }
                 },
-                columnDefs: [
-                    {
-                        targets: 0,
-                        data: 'local_name',
-                        name: 'local_name',
-                        defaultContent: "<i>Not Available<i>",
-                        render: function (data) {
-                            if (data === "") {
-                                return '<i>Not Available<i>';
-                            } else {
-                                return data;
-                            }
+                {
+                    targets: 1,
+                    data: 'remote_name',
+                    name: 'remote_name',
+                    defaultContent: "<i>Not Available<i>",
+                    render: function (data) {
+                        if (data === "") {
+                            return '<i>Not Available<i>';
+                        } else {
+                            return data;
                         }
-                    },
-                    {
-                        targets: 1,
-                        data: 'remote_name',
-                        name: 'remote_name',
-                        defaultContent: "<i>Not Available<i>",
-                        render: function (data) {
-                            if (data === "") {
-                                return '<i>Not Available<i>';
-                            } else {
-                                return data;
-                            }
-                        }
-                    },
-                    {
-                        targets: 2,
-                        data: 'start',
-                        name: 'timeperiod.start',
-                        defaultContent: "<i>Not Available<i>",
-                    },
-                    {
-                        targets: 3,
-                        data: 'duration',
-                        name: 'timeperiod.duration',
-                        defaultContent: "<i>Not Available<i>",
-                    },
-                    {
-                        targets: 4,
-                        data: 'record_id',
-                        name: 'id',
-                        className: "text-center",
-                        render: function (data, type, full, meta) {
+                    }
+                },
+                {
+                    targets: 2,
+                    data: 'start',
+                    name: 'timeperiod.start',
+                    defaultContent: "<i>Not Available<i>",
+                },
+                {
+                    targets: 3,
+                    data: 'duration',
+                    name: 'timeperiod.duration',
+                    defaultContent: "<i>Not Available<i>",
+                },
+                {
+                    targets: 4,
+                    data: 'record_id',
+                    name: 'id',
+                    className: "text-center",
+                    render: function (data, type, full, meta) {
 
-                            console.log();
-                            return '<button class="btn btn-nav-teal" data-toggle="modal" data-target="#detailModal" onclick="getRecordDetails(\'' + data + '\')">Details</button>';
-                        }
-                    },
+                        console.log('data : ' + data);
 
-                ],
-            });
+                        return '<button class="btn btn-nav-teal" data-toggle="modal" data-target="#detailModal" onclick="getRecordDetails(\'' + data + '\')">Details</button>';
+                    }
+                },
+            ]
+        });
     });
 
     function getRecordDetails(id) {
+
+        console.log('id : ' + id)
 
         $('#record-id').text("");
         $('#start-time').text("");

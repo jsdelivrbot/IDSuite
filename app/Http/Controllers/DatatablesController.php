@@ -40,6 +40,7 @@ class DatatablesController extends Controller
             $records = DB::table('record')
                 ->leftjoin('timeperiod', 'record.timeperiod_id', '=', 'timeperiod.id')
                 ->leftjoin('endpoint', 'record.endpoint_id', '=', 'endpoint.id')
+                ->select('record.id as record_id', 'local_name', 'remote_name', 'start', 'duration')
                 ->where('endpoint.entity_id', '=', $id);
         }
 
