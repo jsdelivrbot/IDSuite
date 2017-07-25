@@ -46,6 +46,7 @@
             @php
                 $tab_count++;
             @endphp
+            @include('partials.custom_tabs.account_transactions_tab')
 
         @elseif($viewname === 'device')
 

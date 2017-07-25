@@ -14,3 +14,14 @@ yarn-error.log
 package-lock.json
 npm-debug.log.3577405681
 ip2location.csv
+public/assets/css/all.css
+public/assets/css/custom_tabs.css
+public/assets/js/account_charts.js
+public/assets/js/account_note.js
+public/assets/js/app.js
+public/assets/js/chart_placeholder.js
+public/assets/js/custom_tabs.js
+public/assets/js/device_charts.js
+public/assets/js/device_status.js
+public/assets/js/progressbar.js
+public/assets/js/records.js

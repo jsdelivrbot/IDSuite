@@ -29,9 +29,28 @@ class DatatablesController extends Controller
      */
     public function getRecordsDataTables()
     {
-        $records = DB::table('record')
-            ->leftjoin('timeperiod', 'record.timeperiod_id', '=', 'timeperiod.id')
-            ->select('record.id as record_id', 'local_name', 'remote_name', 'start', 'duration');
+
+        $id = session('data_table_id');
+
+        if($id === null) {
+            $records = DB::table('record')
+                ->leftjoin('timeperiod', 'record.timeperiod_id', '=', 'timeperiod.id')
+                ->select('record.id as record_id', 'local_name', 'remote_name', 'start', 'duration');
+        } else {
+            $records = DB::table('record')
+                ->leftjoin('timeperiod', 'record.timeperiod_id', '=', 'timeperiod.id')
+                ->leftjoin('endpoint', 'record.endpoint_id', '=', 'endpoint.id')
+                ->where('endpoint.entity_id', '=', $id);
+        }
+
+        $rec_count = $records->get()->count();
+
+        session(['trans_count' => $rec_count]);
+
+        if( $rec_count === 0){
+            return response()->json(false);
+        };
+
 
         return Datatables::of($records)->make(true);
     }

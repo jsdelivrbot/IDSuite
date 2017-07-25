@@ -1,5 +1,5 @@
     <section class="offset-lg-1 col-lg-10">
-        <table class="table table-bordered" id="records-table">
+        <table class="table table-bordered hide" id="records-table">
             <thead>
             <tr>
                 <th>Local Name</th>
@@ -91,72 +91,90 @@
         </div>
     </div>
 
-@push('transaction_scripts')
+@push('transaction_data_table_scripts')
     {{--<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer></script>--}}
     <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=geometry"></script>
+
+
+    @php
+
+        if($viewname === 'account'){
+            session(['data_table_id' => session('currentaccount')]);
+
+        } else {
+            session(['data_table_id' => null]);
+        }
+
+    @endphp
 
     <script>
     $(function() {
 
         $('#records-table').DataTable({
-            processing: true,
-            serverSide: true,
-            iDisplayLength: 10,
-            ajax: '/getRecordsDataTables',
-
-            columnDefs: [
-                {
-                    targets: 0,
-                    data: 'local_name',
-                    name: 'local_name',
-                    defaultContent: "<i>Not Available<i>",
-                    render: function(data){
-                        if(data === ""){
-                            return '<i>Not Available<i>';
-                        } else {
-                            return data;
+                processing: true,
+                serverSide: true,
+                iDisplayLength: 10,
+                ajax: '/getRecordsDataTables',
+                success: function(result){
+                    if(result === false){
+                        $('#records-table').hide();
+                    } else {
+                        $('#records-table').show();
+                    }
+                },
+                columnDefs: [
+                    {
+                        targets: 0,
+                        data: 'local_name',
+                        name: 'local_name',
+                        defaultContent: "<i>Not Available<i>",
+                        render: function (data) {
+                            if (data === "") {
+                                return '<i>Not Available<i>';
+                            } else {
+                                return data;
+                            }
                         }
-                    }
-                },
-                {
-                    targets: 1,
-                    data: 'remote_name',
-                    name: 'remote_name',
-                    defaultContent: "<i>Not Available<i>",
-                    render: function(data){
-                        if(data === ""){
-                            return '<i>Not Available<i>';
-                        } else {
-                            return data;
+                    },
+                    {
+                        targets: 1,
+                        data: 'remote_name',
+                        name: 'remote_name',
+                        defaultContent: "<i>Not Available<i>",
+                        render: function (data) {
+                            if (data === "") {
+                                return '<i>Not Available<i>';
+                            } else {
+                                return data;
+                            }
                         }
-                    }
-                },
-                {
-                    targets: 2,
-                    data: 'start',
-                    name: 'timeperiod.start',
-                    defaultContent: "<i>Not Available<i>",
-                },
-                {
-                    targets: 3,
-                    data: 'duration',
-                    name: 'timeperiod.duration',
-                    defaultContent: "<i>Not Available<i>",
-                },
-                {
-                    targets: 4,
-                    data: 'record_id',
-                    name: 'id',
-                    className: "text-center",
-                    render: function(data, type, full, meta){
+                    },
+                    {
+                        targets: 2,
+                        data: 'start',
+                        name: 'timeperiod.start',
+                        defaultContent: "<i>Not Available<i>",
+                    },
+                    {
+                        targets: 3,
+                        data: 'duration',
+                        name: 'timeperiod.duration',
+                        defaultContent: "<i>Not Available<i>",
+                    },
+                    {
+                        targets: 4,
+                        data: 'record_id',
+                        name: 'id',
+                        className: "text-center",
+                        render: function (data, type, full, meta) {
 
-                        console.log();
-                        return '<button class="btn btn-nav-teal" data-toggle="modal" data-target="#detailModal" onclick="getRecordDetails(\''+ data +'\')">Details</button>';
-                    }
-                },
+                            console.log();
+                            return '<button class="btn btn-nav-teal" data-toggle="modal" data-target="#detailModal" onclick="getRecordDetails(\'' + data + '\')">Details</button>';
+                        }
+                    },
 
-            ],
-        });
+                ],
+            });
     });
 
     function getRecordDetails(id) {

@@ -15,4 +15,6 @@
 <li id="li-tab-5" class="nav-item">
     <a id="tab-a-5" class="nav-link color-5" data-toggle="tab" href="#card-block-tab-5" role="tab">Cases</a>
 </li>
-
+<li id="li-tab-6" class="nav-item">
+    <a id="tab-a-6" class="nav-link color-6" data-toggle="tab" href="#card-block-tab-6" role="tab">Transactions</a>
+</li>
