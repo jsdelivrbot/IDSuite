@@ -5,7 +5,8 @@
 
 @stack('custom_tabs')
 @stack('account_scripts')
-@stack('transaction_data_table_scripts')
-@stack('account_devicebytype_chart_script')
-@stack('account_deviceupstatus_chart_script')
-@stack('account_deviceupstatuspercent_chart_script')
+@stack('transaction_data_table')
+@stack('account_devicebytype_chart')
+@stack('account_deviceupstatus_chart')
+@stack('account_deviceupstatuspercent_chart')
+@stack('account_ping_line_chart')

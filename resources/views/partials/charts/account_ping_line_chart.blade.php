@@ -1,23 +1,25 @@
-<canvas id="deviceupstatuspercentall"></canvas>
+<div id="ping-line-chart"></div>
 
-@push('account_deviceupstatuspercent_chart')
+@push('account_ping_line_chart')
 
 <script>
 
     $( document ).ready(function() {
         $.ajax({
             type: "GET",
-            url: '/api/deviceUpStatusPercentAll',
+            url: '/api/deviceUpStatusAll',
             success: function (data) {
 
-                if(data !== false) {
+                if (data !== false) {
 
                     let status = data.status;
 
-                    let deviceupstatuspercentall = document.getElementById("deviceupstatuspercentall").getContext('2d');
+                    let value = data.value;
 
-                    let myChart = new Chart(deviceupstatuspercentall, {
-                        type: 'doughnut',
+                    let devicebystatus = document.getElementById("deviceupstatus").getContext('2d');
+
+                    let myChart = new Chart(devicebystatus, {
+                        type: 'bar',
                         data: {
                             datasets: [{
                                 data: status,
@@ -42,17 +44,6 @@
                                 text: 'Current Device Statuses',
                                 fontColor: 'rgba(255,255,255,1)',
                                 fontSize: 24
-                            },
-                            tooltips: {
-                                callbacks: {
-                                    label: function (tooltipItem, data) {
-                                        let dataset = data.datasets[tooltipItem.datasetIndex];
-
-                                        let dataitem = dataset.data[tooltipItem.index];
-
-                                        return dataitem + "%";
-                                    }
-                                }
                             }
                         }
                     });

@@ -6,4 +6,5 @@
 @endpush
 
 @stack('custom_tabs')
-@stack('device_scripts')
+@stack('device_devicecostperavg_chart')
+@stack('device_ping_line_chart')

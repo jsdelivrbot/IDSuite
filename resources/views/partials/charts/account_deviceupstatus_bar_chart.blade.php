@@ -1,13 +1,13 @@
 <canvas id="deviceupstatus"></canvas>
 
-@push('account_deviceupstatus_chart_script')
+@push('account_deviceupstatus_chart')
 
 <script>
 
     $( document ).ready(function() {
         $.ajax({
             type: "GET",
-            url: '/getChartDeviceUpStatusAll',
+            url: '/api/deviceUpStatusAll',
             success: function (data) {
 
                 if (data !== false) {

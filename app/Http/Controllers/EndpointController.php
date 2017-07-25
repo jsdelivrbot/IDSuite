@@ -174,38 +174,4 @@ class EndpointController extends Controller
     }
 
 
-    public function getChartDeviceCostPerCallAvg(){
-        $endpoint = Endpoint::getObjectById(session('currentendpoint'));
-
-        $records = $endpoint->records;
-
-        $start_time_array = array();
-
-        $count = 1;
-
-        $cost = 3000;
-
-        $label_array = array();
-        $data_array = array();
-
-        foreach ($records as $record){
-
-            $r = new \stdClass();
-
-            $label_array[] = $record->timeperiod->start;
-
-            $data_array[] = $cost/$count;
-
-            $count++;
-
-        }
-
-
-
-        return response()->json([
-            'labels'    => $label_array,
-            'data'    => $data_array
-        ]);
-
-    }
 }

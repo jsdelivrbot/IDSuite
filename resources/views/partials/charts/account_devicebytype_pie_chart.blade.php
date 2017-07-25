@@ -1,12 +1,12 @@
 <canvas id="devicebytype"></canvas>
 
-@push('account_devicebytype_chart_script')
+@push('account_devicebytype_chart')
 <script>
 
     $( document ).ready(function() {
         $.ajax({
             type: "GET",
-            url: '/getChartDeviceByType',
+            url: '/api/deviceByType',
             success: function (data) {
 
                 if (data !== false) {

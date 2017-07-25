@@ -11,6 +11,8 @@
 |
 */
 
+// Non authed routes //
+
 Route::get('/', function(){
    return view('auth.login', ['viewname' => 'Login']);
 });
@@ -27,12 +29,53 @@ Route::post('login', 'Auth\LoginController@loginNameOrEmail');
 
 Route::get('/getAuthUser', 'UserController@getCurrentUser');
 
+// test routes //
 Route::get('/test', 'TestController@test');
 
 
 // auth middleware //
 
 Route::group(['middleware' => ['auth']], function () {
+
+    // apppicker routes //
+
+    Route::get('/apps', function(){
+        return view('apppicker', ['viewname' => 'App Selection']);
+    });
+
+    // chart routes //
+
+    Route::get('/api/deviceByType', 'ChartController@deviceByType');
+
+    Route::get('/api/deviceUpStatusAll', 'ChartController@deviceUpStatusAll');
+
+    Route::get('/api/deviceUpStatusPercentAll', 'ChartController@deviceUpStatusPercentAll');
+
+    Route::get('/api/deviceCostPerCallAvg', 'ChartController@deviceCostPerCallAvg');
+
+
+    // Endpoint routes //
+
+    Route::get('/devices/{id}', 'EndpointController@show');
+
+    Route::get('/devices' , 'EndpointController@index');
+
+    Route::get('/getDeviceStatus', 'EndpointController@getDeviceStatus');
+
+
+    // EndpointModel routes //
+
+    Route::get('/model/{id}', 'EndpointModelController@show');
+
+
+    // Entity routes //
+
+    Route::get('/accounts', 'EntityController@index');
+
+    Route::get('/accounts/all', 'EntityController@all');
+
+    Route::get('/accounts/{id}', 'EntityController@show');
+
 
     // Enums Route //
 
@@ -46,60 +89,19 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/genderEnum', 'EnumController@gender');
 
-    // test routes //
 
+    // Note Routes //
 
-
-    // rest routes //
-    Route::get('/apps', function(){
-       return view('apppicker', ['viewname' => 'App Selection']);
-    });
-
-    // device routes //
-
-    Route::get('/devices/{id}', 'EndpointController@show');
-
-    Route::get('/devices' , 'EndpointController@index');
-
-    Route::get('/getDeviceStatus', 'EndpointController@getDeviceStatus');
-
-
-    // Random Number Route //
-
-    Route::get('/getRandomNumber', 'RandomNumberController@getRandomNumber');
-
-
-    // chart routes //
-    Route::get('/getChartDeviceByType', 'EntityController@getChartDeviceByType');
-
-    Route::get('/getChartDeviceUpStatusAll', 'EntityController@getChartDeviceUpStatusAll');
-
-    Route::get('/getChartDeviceUpStatusPercentAll', 'EntityController@getChartDeviceUpStatusPercentAll');
-
-    Route::get('/getChartDeviceCostPerCallAvg', 'EndpointController@getChartDeviceCostPerCallAvg');
-
+    Route::post('/notes', 'NoteController@create');
 
     // proxy routes //
 
     Route::get('/proxy/{id}', 'ProxyController@show');
 
 
-    // model routes //
+    // Random Number Route //
 
-    Route::get('/model/{id}', 'ModelController@show');
-
-
-    Route::get('/accounts/devices/{id}', 'EndpointController@byAccount');
-
-    Route::get('/accounts', 'EntityController@index');
-
-    Route::get('/accounts/all', 'EntityController@all');
-
-    Route::get('/accounts/{id}', 'EntityController@show');
-
-
-    Route::post('/notes', 'NoteController@create');
-
+    Route::get('/getRandomNumber', 'RandomNumberController@getRandomNumber');
 
 
     // record routes //
@@ -118,12 +120,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/getRecordsDataTables', 'DataTablesController@getRecordsDataTables');
 
 
-
-    // tickets routes //
+    // Tickets routes //
 
     Route::get('/tickets', 'TicketController@index');
 
     Route::get('/tickets/{id}', 'TicketController@show');
+
 
 
 });

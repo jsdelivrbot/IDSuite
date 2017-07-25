@@ -91,7 +91,7 @@
         </div>
     </div>
 
-@push('transaction_data_table_scripts')
+@push('transaction_data_table')
     {{--<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap" async defer></script>--}}
     <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&libraries=geometry"></script>
 
@@ -172,8 +172,6 @@
 
     function getRecordDetails(id) {
 
-        console.log('id : ' + id)
-
         $('#record-id').text("");
         $('#start-time').text("");
         $('#end-time').text("");
@@ -196,8 +194,6 @@
             },
             success: function (data) {
 
-                console.log(data.endpoint_id);
-
                 $('#record-id').text(data.id);
                 $('#endpoint-id').html('<a href="/devices/'+data.endpoint_id+'">'+data.endpoint_id+'</a>');
                 $('#start-time').text(data.timeperiod.start);
@@ -214,8 +210,6 @@
                 $('#protocol').text(data.protocol);
 
 
-                console.log(data);
-
                 let local_location = new google.maps.LatLng(data.local_lat, data.local_lng);
 
                 let remote_location = new google.maps.LatLng(data.remote_lat, data.remote_lng);
@@ -228,13 +222,13 @@
 
                 let map;
 
-                console.log('local_location : ' + local_location);
-                console.log('remote_location : ' + remote_location);
-                console.log(center.lat());
-
-                console.log("distance : " + distance);
-
-                console.log("mileage costs : $" + mileage_cost);
+//                console.log('local_location : ' + local_location);
+//                console.log('remote_location : ' + remote_location);
+//                console.log(center.lat());
+//
+//                console.log("distance : " + distance);
+//
+//                console.log("mileage costs : $" + mileage_cost);
 
                 let service = new google.maps.DistanceMatrixService();
 
