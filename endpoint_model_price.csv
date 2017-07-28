@@ -1,0 +1,139 @@
+Item ,Manufacturer ,Item Desc. ,Sales Price ,Internal ID
+1000-0000-0001,Lifesize,LifeSize Phone - IP,"1,999.00",74955
+1000-0000-0199,LifeSize,Lifesize Express- Codec Only,"4,999.00",78771
+1000-0000-0200,LifeSize,Lifesize MicPod,349.00,11534
+1000-0000-0220,LifeSize,LifeSize Room 200 (Codec Only),"13,799.00",108496
+1000-0000-0311,LifeSize,LifeSize Room 220 - Codec only,"17,899.00",6443
+1000-0000-0312,LifeSize,LifeSize Team 220 - Codec only,"12,899.00",6446
+1000-0000-0313,LifeSize,LifeSize Express 220 - Codec only,"6,999.00",6449
+1000-0000-0372,LifeSize,LifeSize Video Center 2200,"29,999.00",98446
+1000-0000-0410,LifeSize,Lifesize Camera 10x,"2,999.00",11531
+1000-0000-0454,Lifesize,Lifesize Softphone - Windows 1-9 licenses (price per license),199.00,36558
+1000-0000-0459,Lifesize,Lifesize Softphone - Mac 1-9 licenses (price per license),199.00,114094
+1000-0000-0592,LifeSize,"Lifesize Phone, 2nd Generation (220 Series)","1,399.00",11529
+1000-0000-0593,LifeSize,Lifesize Digital Micpod,399.00,11533
+1000-0000-0675,LifeSize,LifeSize Room 220i - Codec Only,"18,999.00",6438
+1000-0000-0676,LifeSize,LifeSize Unity 50,"3,999.00",6450
+1000-0000-0798,LifeSize,"Lifesize Phone, 2nd Generation (Icon Series)","1,399.00",11530
+1000-0000-0888,LifeSize,Lifesize Camera S,"2,399.00",11532
+1000-0000-0889,LifeSize,"Lifesize Icon 600 - Codec Only, Single Display, 1080P","4,099.00",6431
+1000-0000-0890,LifeSize,"Lifesize Icon 800 -  Dual Display, 1080P  - Codec Only","11,699.00",6435
+1000-0000-1001,Lifesize,Lifesize Room,"11,999.00",77063
+1000-0000-1106,LifeSize,LifeSize Express,"5,999.00",78363
+1000-0000-1107,Lifesize,LifeSize Team MP - Phone,"9,999.00",77062
+1000-0000-1111,Lifesize,LifeSize Express - Focus,"4,999.00",114813
+1000-0000-1113,Lifesize,LifeSize Room 200,"16,999.00",74954
+1000-0000-1116,Lifesize,LifeSize Team 200 - Phone,"9,999.00",100107
+1000-0000-1124,LifeSize,LifeSize Passport - MicPod with camera,"3,499.00",114097
+1000-0000-1125,LifeSize,LifeSize Passport - Focus camera with built in microphone,"2,499.00",110937
+1000-0000-1126,LifeSize,LifeSize Room 220 - Camera 200 - Phone,"16,999.00",80977
+1000-0000-1130,LifeSize,LifeSize Team 220 - Camera 200 - Dual MicPod,"11,999.00",89700
+1000-0000-1131,LifeSize,LifeSize Express 220  - Phone,"7,999.00",28846
+1000-0000-1132,LifeSize,LifeSize Express 220 - Camera 200 - MicPod,"6,999.00",98443
+1000-0000-1135,LifeSize,LifeSize Room 220 - 10x - Integrator - No Phone,"18,999.00",6441
+1000-0000-1137,LifeSize,LifeSize Team 220 - 10x - Dual MicPod,"14,999.00",6445
+1000-0000-1138,LifeSize,LifeSize Express 220 - 10x - Phone,"8,499.00",115719
+1000-0000-1139,LifeSize,LifeSize Express 220 - 10x - MicPod,"8,999.00",6448
+1000-0000-1151,LifeSize,"LifeSize Room 220 - 10x - Phone, 2nd Generation","19,999.00",6440
+1000-0000-1152,LifeSize,"LifeSize Room 220 - Integrator - No Camera - Phone, 2nd Generation","17,999.00",6442
+1000-0000-1153,LifeSize,"LifeSize Team 220 - 10x - Phone, 2nd Generation","16,399.00",6444
+1000-0000-1154,LifeSize,"LifeSize Express 220 - 10x - Phone, 2nd Generation","10,499.00",6447
+1000-0000-1155,LifeSize,"LifeSize Room 220i - 10x - Phone, 2nd Generation","22,999.00",6436
+1000-0000-1156,LifeSize,LifeSize Room 220i - 10x - No Phone,"20,999.00",6437
+1000-0000-1158,LifeSize,"LifeSize Icon 600 - 10x Optical PTZ Camera - Digital MicPod, Single Display, 720P","3,999.00",6427
+1000-0000-1159,LifeSize,"LifeSize Icon 600-10x Opt PTZ Cam-Digital Micpod, Dual Disp.","7,999.00",28844
+1000-0000-1160,LifeSize,"LifeSize Icon 600 - 10x Optical PTZ Camera - Phone, 2nd Generation, Single Display, 1080P","5,415.00",109267
+1000-0000-1161,LifeSize,"LifeSize Icon 600 - 10x Optical PTZ Camera - Phone, 2nd Generation, Dual Display, 1080P","9,399.00",6432
+1000-0000-1162,LifeSize,"LIFESIZE ICON 600,4X OPTICAL PTZ CAM,DIGITAL MICPOD,SGL DSPL,720P","9,399.00",115028
+1000-0000-1166,LifeSize,LifeSize Icon 600 4X PTZ Camera 720P Single Display,"9,399.00",115029
+1000-0000-1168,LifeSize,"LifeSize Icon 600 - 10x Optical PTZ Camera - Phone, 2nd Generation, Single Display, 1080P","6,999.00",6428
+1000-0000-1169,LifeSize,"Lifesize Icon 600 - Camera S - Digital MicPod, Single Display, 1080P","4,499.00",6429
+1000-0000-1170,LifeSize,"Lifesize Icon 600 - Camera S - Phone, 2nd Generation, Single Display, 1080P","5,799.00",10530
+1000-0000-1171,LifeSize,"Lifesize Icon 600 - 10x Optical PTZ Camera - Digital MicPod, Single Display, 1080P","5,799.00",10529
+1000-0000-1172,LifeSize,"Lifesize Icon 800 - 10x Optical PTZ Camera - Phone, 2nd Generation, Dual Display, 1080P (includes Link Adapter)","13,999.00",6433
+1000-0000-1173,LifeSize,"Lifesize Icon 800 - 10x Optical PTZ Camera - Dual Display, 1080P","12,899.00",6434
+1000-0000-1175,LifeSize,"Lifesize Icon 400 -  Phone, 2nd Generation","3,499.00",37763
+1000-0000-1176,LifeSize,Lifesize Icon 400 -  Digital Micpod,"2,499.00",37764
+1000-0000-1180,LifeSize,"Lifesize Icon 600 - 10x Optical PTZ Camera - Phone HD, Single Display, 1080P ","6,999.00",114079
+1000-0000-1181,LifeSize,"LifeSize Icon 600 - 10x Optical PTZ Camera - Phone HD, Dual Display, 1080p ","9,399.00",115746
+1000-0000-1182,LifeSize,"Lifesize Icon 800 - 10x Optical PTZ Camera - Phone, 2nd Generation, Dual Display, 1080P (includes Link Adapter)","13,999.00",115717
+1000-000C-1159,LifeSize,"LifeSize Icon 600-10x Opt PTZ Cam-Digital Micpod, Dual Disp. (Demo Unit)","7,999.00",28845
+1000-000C-1175,LifeSize,"Lifesize Icon 400 -  Phone, 2nd Generation","3,499.00",38063
+1000-000H-0384,LifeSize,LG Executive All in One,"3,499.00",110091
+1000-000R-1157,LifeSize,"LifeSize Room 220i - No Camera- Phone, 2nd Generation","19,999.00",6439
+117445,Cisco,Tandberg Integrator Package C60,"26,900.00",105312
+1891898-DNU,Vidyo,SOFTWARE - VIDYO USB PKG-RM-SE100-SC (includes license and 1-yr maintenance),"2,000.00",3732
+5150-23912-001,Polycom,HDX MPPlus Multipoint Software License. Allows for 4 site MP video calls with HDX systems 7000 Series,"3,099.00",65408
+5230-51011-000,Polycom,"RealPresence Clariti - Concurrent User License, Perpetual (Maintenance Contract Required) (Qty 5-14 only)","3,750.00",109785
+7200-23150-001,Polycom,"HDX 8000-720: HDX 8000  HD codec, EagleEye camera, HDX mic array, Eng rmt. Cables: 2 component video (DVI-RCA), audio (RCA-RCA), LAN, NA pwr. NTSC (Maintenance Contract Required)","15,999.00",96222
+7200-23160-001,Polycom,"HDX 8000-1080: HDX 8000  HD codec, EagleEye camera&license, HDX mic array, Eng rmt. Cables: 2 component video (DVI-RCA), audio (RCA-RCA), LAN, NA pwr. NTSC (Maintenance Contract Required)","18,999.00",96223
+7200-26820-001,Polycom,"HDX Media Center 8000-720 2WC50 (see 7200-23150-001, less mic array), 2 HDX Media Center wall mounts, 2-50"" 1080p plasma, 2 soundbars, White HDX ceiling mic array, EagleEye HD camera mount, cable bundle,  (Maintenance Contract Required) ","35,999.00",114487
+7200-26930-001,Polycom,HDX 8000 Series,"21,799.00",114490
+7200-29910-001,Polycom,HDX Media Center 6000 Series w/ 1 display,"16,399.00",114491
+7200-61860-002,Polycom,"Polycom HDX 8000 Dual Tabletop Media Center 2TT, 2-42 1080p tabletop displays ","21,799.00",114645
+7200-61930-001,Polycom,HDX 8000-1080 and EagleEye Director Bundle - includes HDX 8000-1080 (7200-23160-001) RealPresence room system and EagleEye Director (7200-82631-001).Order camera mount solution separately (2215-24143-001) (Maint Contract Reqd),"26,349.00",96224
+7200-63430-001,Polycom,"RealPresence Group 500-720p: Group 500 HD codec, EagleEye III camera, mic array","10,999.00",114329
+7200-64270-001,Polycom,"RealPresence Group 700-720p: Group 700 HD codec, EagleEyeIV-12x camera, mic array, univ. remote, NTSC/PAL. Cables: 1 HDMI 1.8m, 1CAT 5E LAN 3.6m, 1 HDCI digital 3m, Power: AMER-Type B, NEMA 5-15. Maintenance Contract Required.","16,999.00",75956
+7200-64510-001,Polycom,"RealPresence Group 500 - 720p, Group 500 HD codec, EagleEyeIV-4x camera, mic array, univ. remote ","9,599.00",113459
+7200-65250-001,Polycom,"EagleEye Director / RealPresence Group Series bundle.  Includes 1 GS 500 (7200-63430-001 with codec, accessories and 1-EagleEye III) and 1 EagleEye Director (7200-69180-001 with 1-EagleEye III). Maintenance required. ","22,998.00",114295
+7200-65320-001,Polycom,"RealPresence Group 310 - 720p: Group 310 HD codec, EagleEye Acoustic cam., univ. remote, NTSC/PAL. Cables: 1 HDMI 1.8m, 1 CAT 5E LAN  3.6m, Power: AMER - Type B, NEMA 5-15. Maintenance Contract Required ","2,999.00",113767
+7200-65340-001,Polycom,"RealPresence Group 310-720p Group 310 HD codec, EagleEyeIV-4x camera, mic array, univ. remote, NTSC/PAL Cables: 1 HDMI 1.8m, 1 CAT","5,599.00",112990
+7200-654466-001,Polycom,"Group 700 CODEC ONLY SKU (no camera, no power cord) - 720p, NTSC/PAL.Includes remote control and 2 cables: 1.8m HDMI, 3.6m CAT 5E LAN. CALAincludes Service in price. ROW require purchase of separate ServiceProduct ID.","12,999.00",84089
+7230-24060-001,Polycom,"RP Medialign 270. Includes: GS 500 (7200-64250-001 w/out EEIV-12x), 2-70"" 1080 LED displays, speaker, RP Touch, EE Director w/ 2*EE III, tabletop content interface, 1080 and S4B licenses, stand, NA pwr cord and cable bundle. (Maintenance Contract Reqd) ","82,000.00",115177
+7230-60888-001,Polycom,"RealPresence Debut - 1080p: all-in-one HD codec with built-in mechanical pan/tilt cam & mic, remote, NTSC/PAL. Cables: 1 HDMI 1.8m, 1 CAT 5E LAN 3.6m, Power:AMER-Type B, NEMA 5-15. Maintenance Contract Required. ","1,899.00",115176
+7230-69421-001,Polycom,"EagleEye Director II with 1-EagleEye IV-12x camera, power supply & NA power cord. Requires HDCI input on codec, RP Group series syst ems with software v6.1 or later and 1 additional EagleEye IV-12x camera. Maintenance Contract Required ","11,999.00",115180
+7230-69725-001,Polycom,"RealPresence Debut - 1080p: all-in-one HD codec with built-in mechanical pan/tilt cam & mic, remote ","1,999.00",113482
+C3850-NM-4-10G,Cisco,Cisco Catalyst 3850 4 x 10GE Network Module,"4,000.00",38166
+COD-4501-HD-MCU,TANDBERG,Codian 6 Port High Definition MCU (including Web Conferencing Option and 12 Port SD Mode),"51,900.00",114964
+COD-4505-HD-MCU-X,TANDBERG,CODIAN 12 PORT HIGH DEFINITION MCU,"79,000.00",109784
+COD-GW-PRI-1,TANDBERG,CODIAN QUAD PRI H.323 TO H.320 GATEWAY,"17,000.00",109783
+CP-DX80-K9=,Cisco,Cisco DX80,"3,990.00",114792
+CS1-CISCO1841-T1-V2,Cisco,Cisco Integrated Services Router,"2,395.00",114338
+CTI-3241-GWISDNK9,Cisco,ISDN GW 3241 - PRI ISDN H.320 To H.323 Gateway,"21,360.00",91300
+CTS-CAM-P60,Cisco,Cisco TelePresence Precision 60 Camera,"8,900.00",36662
+CTS-CTRL-DVC8=,,Touch Control Device for C Series  Profile - no handset,"2,587.00",34357
+CTS-CTRL-DVX-10,Cisco,Touch 10 Control Device - selectable option,"1,500.00",34356
+CTS-MX300-K9,Cisco,Cisco TelePresence MX300 55 Gen 2  PHD 1080p 8x   Touch  Mic,"23,900.00",41366
+CTS-SX20-PHD12X-K9,,SX20 Quick Set HD  NPP  12xPHDCam  1 mic  remote cntrl,"11,900.00",34355
+CTS-SX20-PHD4X-K9,Cisco,SX20 Quick Set HD  NPP  4x PHDCam  1 mic  remote cntrl,"9,900.00",49972
+CTS-SX80-IP40-K9,Cisco,Cisco SX80 Codec Precision 4x Cam Touch 10,"21,900.00",66821
+CTS-SX80-IP60-K9,Cisco,Cisco SX80 Codec  Precision 60 Cam  Touch 10,"24,900.00",36661
+CTS-SX80-K9,Cisco,Cisco SX80 Codec kit (Codec Only),"17,900.00",114738
+DEV-RM-HD100-D9020-SA,Vidyo,HD room appliance 720p up to 30fps with external IR receiver included (DEV-ACC-RM-EIR). HD PTZ camera and speakerphone NOT INCLUDED. Optional DVI to USB adapter to connect non-USB PTZ cameras sold separately.,"2,995.00",3324
+DEV-RM-HD110-SA,Vidyo,"HD room appliance that delivers 1080p up to 30fps or 720p up to 60fps encode and decode. Supports one HD monitor for participant video and a second HD monitor for shared content, HD PTZ camera and speakerphone. Monitors, HD PTZ camera and speakerphon","4,995.00",92901
+DEV-RM-HD2-SA,Vidyo,VidyoRoom HD2 - endpoint only - HD room system appliance supporting up to one display at 4K at 30fps decode per screen or two monitors at 1080P at 60fps. Supports encode from a camera up to 1080p up to 60fps and from a content share device up to 1080p at 30fps.,"2,995.00",114423
+DEV-RM-HD220-SA,Vidyo,"HD room appliance 1080p up to 30fps or 720p up to 60fps, supports two HD Monitors (not included), HD PTZ camera and speakerphone NOT INCLUDED. NOTE: This VidyoRoom does NOT consume VidyoLine software licenses for connectivity through the VidyoRouter. Vidyo reserves the right to fulfill any part of an order with same or better products offering the same set of functionality or more at the prices quoted here in.","5,495.00",3323
+DEV-RM-HD230-SA,Vidyo,"HD room system appliance supporting 1080p up to 30fps or 720p up to 60fps encode from professional PTZ camera and a second input port for 1080p up to 15fps content encoding. Supports two HD Monitors (not included) with flexibility in layout including participants in continuous presence across both screens, active speaker on one screen and continuous presence on other, or content on one screen and continous presence on other. HD PTZ camera and speakerphone NOT INCLUDED. ","5,995.00",3322
+DEV-RM-HD3-SA,Vidyo,HD room system appliance supporting up to two displays at 4K at 30fps decode per screen or four monitors at 1080P at 60fps. Supports encode from a camera up to 1080p up to 60fps and from a content share device up to 4K at 10fps. Camera and speakerphone NOT INCLUDED. NOT FOR SALE IN CHINA OR RUSSIA.,"5,995.00",113841
+DEV-RM-HD40-B-SA,Vidyo,"Ultra small form factor HD room appliance that encodes 720p up to 30fps and decodes 1080p up to 30fps on a single screen with support for a second screen for shared content viewing. The appliance is VESA 1 mountable to the back of a display. Display, USB camera, speakerphone and tablet hardware for Vidyo Remote control software NOT INCLUDED. NOTE: The RF QWERTY Remote Control (PN DEV-ACC-RM-RF-REMOTE) may be purchased separately for customers in the US, Canada and EU. For a complete list of countries where the remote is qualified for sale see the RF QWERTY REMOTE ","1,895.00",3326
+DEV-RM-HD40-C-SA-0A,Vidyo,"Ultra small form factor HD room appliance that encodes 720p up to 30fps and decodes 1080p up to 30fps on a single screen with support for a second screen for shared content viewing. The appliance is VESA 1 mountable to the back of a display. Display, USB camera, speakerphone and tablet hardware for Vidyo Remote control software NOT INCLUDED.  ","1,895.00",69131
+DEV-RM-HD50-SA,Vidyo,HD room appliance 720p up to 30fps with external IR receiver included (DEV-ACC-RM-EIR). USB camera and speakerphone NOT INCLUDED. NOTE: This VidyoRoom does NOT consume VidyoLine software licenses for connectivity through the VidyoRouter.,"1,995.00",3325
+DEV-RM-VP600-SA,Vidyo,"VidyoPanorama telepresence room codec hardware and software license, supporting up to six HD displays, with up to 1080P60 decode per screen and up to 1080P60 encode. Supports flexible screen layouts including multi-screen continuous presence, multiple full screen single participant and multiple full screen content. Displays, HD PTZ camera, audio device, and remote control tablet hardware are required but NOT INCLUDED. NOTE: The RF QWERTY Remote Control (PN DEV-ACC-RM-RF-REMOTE) may be purchased separately for customers in the US, Canada and EU. For a complete list of countries where the remote is qualified for sale see the RF QWERTY REMOTE","24,995.00",3321
+EPR9A00X55-000,Newline,TRUTOUCH X5 Unified Collaboration System (on-board computer included),"7,249.00",114775
+EPR9A00X70-000,Newline,TRUTOUCH X7 Unified Collaboration System (on-board computer included) (delivered),"11,999.00",114339
+PKG-ACC-RM-PRO,Vidyo,"VidyoRoom HD-40 Pro Pack is a bundle of accessories that enables the addition of the professional non-USB PTZ camera with more capable audio to the VidyoRoom HD-40 to cover larger rooms than the standard VidyoRoom HD-40 with PTZ webcam offering. The Pro Pack includes the Sony EVI HD-7 camera, Phoenix Quattro speakerphone, and Dextera DVI to USB3 adapter. Not for sale for applications other than VidyoRoom HD-40 systems (sold separately).","2,845.00",3327
+PKG-ACC-RM-SN-USB-PHX,Vidyo,Professional PTZ 1090p60 USB 3.0 Camera and Speakerphone Bundle for VidyoRoom Systems,"2,445.00",108057
+PKG-RM-HD100-CT,Vidyo,HD room appliance 720p up to 30fps with external IR receiver included (DEV-ACC-RM-EIR). Sony EVI-HD7 camera and ClearOne Chat150 speakerphone INCLUDED.,"5,894.00",74952
+PKG-RM-HD100-SN-CAM,Vidyo,HD100 room appliance 720p up to 30fps bundled with Sony EVI-HD7 PTZ camera. Supports one HD monitor for participant video and a second HD monitor for shared content. Monitors and speakerphone NOT INCLUDED.,"5,495.00",98428
+PKG-RM-HD110-SN-CAM,Vidyo,VidyoRoom HD 110 with PTZ Camera,"5,995.00",108163
+PKG-RM-HD2-GROUP,Vidyo,"VidyoRoom HD2 - Bundle - HD room system appliance supporting up to one display at 4K at 30fps decode per screen or two monitors at 1080P at 60fps. Supports encode from a camera up to 1080p up to 60fps and from a content share device up to 1080p at 30fps. Camera, speakerphone and a content share device are Included. ","5,395.00",114442
+PKG-RM-HD220-SN-CAM,Vidyo,HD220 room appliance 1080p up to 30fps or 720p up to 60fps bundled with Sony EVI-HD7 PTZ camera. Supports two HD monitors. Monitors and speakerphone NOT INCLUDED.,"9,495.00",98430
+PKG-RM-HD220-SN-PHX,Vidyo,"HD220 1080P up to 30FPS, Sony EVI-HD7, Phoenix Quattro speaker phone   ","9,895.00",102781
+PKG-RM-HD3-GROUP,Vidyo,"VidyoRoom HD3 - Bundle HD room system appliance supporting up to two displays at 4K at 30fps decode per screen or four monitors at 1080P at 60fps. Supports encode from a camera up to 1080p up to 60fps and from a content share device up to 4K at 10fps. Camera, speakerphone and a content share device are Included.   ","7,995.00",114571
+PKG-RM-HD40-GROUP,Vidyo,VidyoRoom HD40 with Logitech Group - Bundle,"2,995.00",113864
+PKG-RM-HD50-CS,Vidyo,HD room appliance 720p up to 30fps with USB HD camera and speakerphone bundle INCLUDED.,"1,265.00",75554
+PROMO-VRM-HD40-RFRSH,Vidyo,"Promotional VidyoRoom HD-40 hardware refresh offer for EOL VidyoRoom HD-50, HD-100 ","1,895.00",113008
+PSU-12VDC-40W=,Cisco,Power Supply 12 VDC 40W,180.00,36663
+SBC-1K-SIP,Sonus,SONUS SBC1000W DSP SIP LIC,"2,577.99",80673
+TAB-3000M-NPP-OPT,TANDBERG,TANDBERG 3000 MXP - NATURAL PRESENTOR PACKAGE OPTION,"2,000.00",109782
+TAB-3000M-P32,TANDBERG,"TANDBERG 3000 MXP PROFILE - SINGLE 32"" WXGA PLASMA WITH TANDBERG PRECISIONHD CAMERA ","18,900.00",109781
+TAB-C20,TANDBERG,"Tanberg Quick Set C20 Codec including NPP, Precision HD 1080p 4X Camera, Performance mic 20 Microphones, and TRC Remote control","7,900.00",109780
+TAB-C20-PLUS,TANDBERG,"Tandberg Quick Set C20 Plus includes Codec C20 including NPP, Precision HD 1080P 12X Camera, Performance Mic 20 Microphones & TRC Remote Control","9,900.00",114967
+TAB-C40-INT-4x,Tanberg,Tandberg Integrator Package C40 4x Dual Display Option,"16,900.00",114354
+TAB-C40-INT-4x-DD,Tanberg,Tandberg Integrator Package C40 4x Dual Display Option,"2,000.00",114353
+TAB-CONTENT-SV,TANDBERG,Tandberg Content Server - 5 recording ports and 2 live output,"36,600.00",114965
+TC410ALA,NewTek,Tricaster 410 Without Control Surface,"9,995.00",107948
+TC8000,NewTek,"8x3 HD-SDI, Component, Composite Production Switcher w/ Control Surface ","39,995.00",113402
+TT-8616UB,Newline,TRUTOUCH 860 Ultra-HD LED Multi-touch Display,"11,899.00",114612
+WS-C2960X-48FPD-L,Cisco,Catalyst 2960-X 48 GigE PoE 740W  2 x 10G SFP+  LAN Base,"7,995.00",38167
+WS-C3850-48T-S,Cisco,Cisco Catalyst 3850 48 Port Data IP Base,"11,500.00",38165
