@@ -33,8 +33,8 @@ window.amcharts = require('amcharts3');
 //     next();
 // });
 
-
 /**
+ *
  * attach csrf token to all ajax request
  *
  */

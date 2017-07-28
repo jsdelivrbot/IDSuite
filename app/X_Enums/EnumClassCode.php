@@ -19,6 +19,7 @@ class EnumClassCode extends Enum
         'DynamicEnumValue'      =>  'DEV',
         'EnumAnalyticType'      =>  'EAT',
         'EnumDataSourceType'    =>  'EDS',
+        'EnumDeviceType'        =>  'EDT',
         'EnumEventType'         =>  'EET',
         'EnumGenderType'        =>  'EGT',
         'EnumModelType'         =>  'EMT',

@@ -11,9 +11,11 @@ class EndpointSeeder extends Seeder{
 
     public function run(){
 
-        $this->cleanUpEndpointData();
+//        $this->cleanUpEndpointData();
 
-        $this->processProxies();
+//        $this->processProxies();
+
+        $this->preprocessEndpointModels();
 
         $this->processEndpointModels();
 
@@ -244,6 +246,321 @@ class EndpointSeeder extends Seeder{
     }
 
 
+    public function preprocessEndpointModels(){
+
+        $file_name = 'endpoint_model_price.csv';
+
+        $csv = file_get_contents("$file_name");
+
+        $models = array_map("str_getcsv", explode("\n", $csv));
+
+        $count = 0;
+
+        $progress_count = 0;
+
+        foreach ($models as $m){
+
+
+            $progress = round(100 * ($count / count($models)));
+
+            if ($progress >= 0 && $progress < 10) {
+                echo "NetSuite Models : [*---------]  $progress% \r";
+            } elseif ($progress >= 10 && $progress < 20) {
+                echo "NetSuite Models : [**--------]  $progress% \r";
+            } elseif ($progress >= 20 && $progress < 30) {
+                echo "NetSuite Models : [***-------]  $progress% \r";
+            } elseif ($progress >= 30 && $progress < 40) {
+                echo "NetSuite Models : [****------]  $progress% \r";
+            } elseif ($progress >= 40 && $progress < 50) {
+                echo "NetSuite Models : [*****-----]  $progress% \r";
+            } elseif ($progress >= 50 && $progress < 60) {
+                echo "NetSuite Models : [******----]  $progress% \r";
+            } elseif ($progress >= 60 && $progress < 70) {
+                echo "NetSuite Models : [*******---]  $progress% \r";
+            } elseif ($progress >= 70 && $progress < 80) {
+                echo "NetSuite Models : [********--]  $progress% \r";
+            } elseif ($progress >= 80 && $progress < 90) {
+                echo "NetSuite Models : [*********-]  $progress% \r";
+            } elseif ($progress >= 90 && $progress < 100) {
+                echo "NetSuite Models : [**********]  $progress% \r";
+            } else {
+                if($progress_count === 0) {
+                    echo "NetSuite Models : [**********]  $progress% \n";
+                    $progress_count++;
+                }
+            }
+
+
+            if ($count === count($models) - 1 || $m[0] === "" || $m[1] === "" || $m[2] === "") {
+                $count++;
+                continue;
+            }
+
+            $model = new \App\EndpointModel();
+
+            $model->save();
+
+            $model->manpnumber = $m[0];
+
+            $model->manufacturer = $m[1];
+
+            $item_description = $m[2];
+
+            if ($pos = strpos($item_description, '-')) {
+
+                $man_modelname = trim(substr($item_description, 0, $pos), ' - ');
+
+                dump($man_modelname);
+
+                $p = strpos(strtolower($man_modelname), strtolower($model->manufacturer));
+
+                if ($p !== false) {
+
+                    $description = trim(substr($item_description, $pos, strlen($item_description)), ' - ');
+
+                    dump($description);
+
+                    $model_explode = explode(' ', trim($man_modelname));
+
+                    dump($model_explode);
+
+                    $name = $model_explode[1];
+
+
+                    dump($name);
+
+
+                    if (count($model_explode) > 2){
+                        $edition = $model_explode[2];
+                    } else {
+                        $edition = null;
+                    }
+
+                    dump($edition);
+
+                } else {
+
+                    $model_explode = explode(' ', trim($man_modelname));
+
+                    if(array_search(strtolower($model_explode[0]), \App\Enums\EnumDeviceType::getValues())){
+
+                        $man_modelname = trim(substr($item_description, $pos, strlen($item_description)), ' - ');
+
+                        $model_explode = explode(' ', trim($man_modelname));
+                    }
+
+                    $name = $model_explode[0];
+
+                    dump($man_modelname);
+
+                    dump($count);
+
+
+                    dump($model_explode);
+
+                    $edition = $model_explode[1];
+
+                    $description = ltrim(trim(substr($item_description, strlen($name) + 1 + strlen($edition), strlen($item_description))), '- ');
+                }
+
+                $type = null;
+
+                foreach (explode(' ', preg_replace('/[^A-Za-z0-9\-]/', ' ', str_replace('-', ' ', $item_description))) as $property) {
+                    $isno = false;
+                    foreach (\App\Enums\EnumDeviceType::getValues() as $type_of_device) {
+
+                        if (strtolower($property) === "no") {
+                            $isno = true;
+                        }
+
+                        dump('property : ' . $property . ' === ' . $type_of_device);
+
+                        if (strtolower($property) === strtolower($type_of_device)) {
+                            if (!$isno) {
+                                $type = $type_of_device;
+                            } else {
+                                $type = null;
+                            }
+                        }
+                    }
+                }
+
+            } elseif ($pos = strpos($item_description, ',')) {
+
+                $man_modelname = trim(substr($item_description, 0, $pos), ' , ');
+
+                $p = strpos(strtolower($man_modelname), strtolower($model->manufacturer));
+
+                if ($p !== false) {
+
+                    $description = trim(substr($item_description, $pos, strlen($item_description)), ' , ');
+
+                    dump($description);
+
+                    $model_explode = explode(' ', trim($man_modelname));
+
+                    dump($model_explode);
+
+                    $name = $model_explode[1];
+
+                    dump($name);
+
+                    if (count($model_explode) > 2){
+                        $edition = $model_explode[2];
+                    } else {
+                        $edition = null;
+                    }
+
+                    dump($edition);
+
+                } else {
+
+                    $model_explode = explode(' ', trim($man_modelname));
+
+                    if(array_search(strtolower($model_explode[0]), \App\Enums\EnumDeviceType::getValues())){
+
+                        $man_modelname = trim(substr($item_description, $pos, strlen($item_description)), ' - ');
+
+                        $model_explode = explode(' ', trim($man_modelname));
+
+                    }
+
+                    $name = $model_explode[0];
+
+                    $edition = $model_explode[1];
+
+                    $description = trim(substr($item_description, strlen($name) + 1 + strlen($edition), strlen($item_description)));
+                }
+
+                $type = null;
+
+                foreach (explode(' ', preg_replace('/[^A-Za-z0-9\-]/', ' ', str_replace('-', ' ', $item_description))) as $property) {
+
+                    $isno = false;
+
+                    foreach (\App\Enums\EnumDeviceType::getValues() as $type_of_device) {
+                        dump('property : ' . $property . ' === ' . $type_of_device);
+
+                        if (strtolower($property) === "no") {
+                            $isno = true;
+                        }
+
+                        if (strtolower($property) === strtolower($type_of_device)) {
+                            if (!$isno) {
+                                $type = $type_of_device;
+                            } else {
+                                $type = null;
+                            }
+                        }
+                    }
+                }
+
+            } else {
+
+                $model_explode = explode(' ', preg_replace('/\s\s/', ' ', trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $item_description))));
+
+                if ($p = strpos($item_description, strtolower($model->manufacturer))) {
+
+                    $name = $model_explode[1];
+
+                    $description = trim(substr($item_description, strlen($model_explode[0]) + 1 + strlen($name), strlen($item_description)));
+
+                    $desc_explode = explode(' ',preg_replace('/\s\s/', ' ', trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $description))));
+
+
+                } else {
+
+                    $model_explode = explode(' ', trim($item_description));
+
+                    $name = $model_explode[0];
+
+                    $edition = $model_explode[1];
+
+                    $description = trim(substr($item_description, strlen($name) + 1 + strlen($edition), strlen($item_description)));
+
+                    $desc_explode = explode(' ',preg_replace('/\s\s/', ' ', trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $description))));
+                }
+
+
+                $pos_of_type = null;
+                $item_count = 0;
+
+                $type = null;
+
+                foreach ($desc_explode as $item) {
+
+                    foreach (\App\Enums\EnumDeviceType::getValues() as $device_type) {
+                        dump($item . ' === ' . $device_type);
+                        if (strtolower($item) === strtolower($device_type) || $item === "no") {
+                            $pos_of_type = $item_count;
+                            $type = $device_type;
+                            break;
+                        }
+                    }
+
+                    if ($pos_of_type !== null) {
+                        break;
+                    } else {
+                        $item_count++;
+                    }
+                }
+
+
+                if ($pos_of_type !== null) {
+                    $edition = trim(substr($description, 0, strpos($description, $desc_explode[$pos_of_type]) - 1));
+                } else {
+//                    $edition = trim($description);
+                    $type = null;
+                }
+
+            }
+
+            $model->name = ucfirst(strtolower($name));
+
+            $model->description = ucfirst(strtolower($description));
+
+
+            if($edition !== null) {
+                $model->edition = ucfirst(strtolower($edition));
+            } else {
+                $model->edition = $edition;
+            }
+
+            if ($type !== null) {
+                $model->type = \App\Enums\EnumDeviceType::getKeyByValue(ucfirst(strtolower($type)));
+            } else {
+                $model->type = $type;
+            }
+
+            $model->price = floatval(preg_replace('/,/', '', $m[3]));
+
+            $model->save();
+
+            $dynamic_enum_value = new \App\DynamicEnumValue();
+
+            $dynamic_enum_value->save();
+
+//            $dynamic_enum_value->definition(DatabaseSeeder::$dynamic_enum)->save(DatabaseSeeder::$dynamic_enum);
+
+            $dynamic_enum = \App\DynamicEnum::getByName('reference_key');
+
+            $dynamic_enum_value->definition($dynamic_enum);
+
+            $dynamic_enum_value->value = $m[4];
+
+            $dynamic_enum_value->value_type = \App\Enums\EnumDataSourceType::getKeyByValue('mrge');
+
+            $dynamic_enum_value->save();
+
+            $model->references($dynamic_enum_value);
+
+            $model->save();
+
+            $count++;
+
+        }
+    }
+
     public function processEndpointModels(){
 
         $file_name = 'endpoint_model.csv';
@@ -295,8 +612,6 @@ class EndpointSeeder extends Seeder{
 
             $model = new \App\EndpointModel();
 
-
-
             $dynamic_enum_value = new \App\DynamicEnumValue();
 
             $dynamic_enum_value->save();
@@ -319,7 +634,7 @@ class EndpointSeeder extends Seeder{
 
             $model->manufacturer    = $m[1];
             $model->name            = $m[2];
-            $model->architecture    = $m[3];
+            $model->platform        = $m[3];
             $model->series          = $series[0];
 
             $model->save();

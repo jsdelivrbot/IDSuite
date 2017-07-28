@@ -69,7 +69,9 @@ abstract class Enum
         $value = strtolower($value);
 
         $result = array_search($value, $class::$enum);
+
         if($result || $result === 0){
+
            return $result;
         } else {
             if($class::$enum[0] === "unknown"){

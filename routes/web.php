@@ -53,6 +53,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/api/deviceCostPerCallAvg', 'ChartController@deviceCostPerCallAvg');
 
+    Route::get('/api/devicePingData', 'ChartController@devicePingData');
+
 
     // Endpoint routes //
 

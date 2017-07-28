@@ -21,9 +21,12 @@ class CreateEndpointmodelTable extends Migration
             $table->primary('id');
             $table->string('class_code');
             $table->string('manufacturer')->nullable();
+            $table->string('manpnumber')->nullable();
             $table->string('name')->nullable();
-            $table->string('series')->nullable();
-            $table->string('architecture')->nullable();
+            $table->text('description')->nullable();
+            $table->decimal('price', 10, 2)->nullable();
+            $table->string('edition')->nullable();
+            $table->integer('type')->nullable();
             $table->boolean('active')->nullable();
             $table->timestamps();
         });

@@ -144,10 +144,6 @@ class CaseSeeder extends Seeder
                 $ticket->assigned_user($user)->save($user);
             }
 
-            $reference_id = $t[0];
-
-            $ticket->reference_id = $reference_id;
-
             $ticket->save();
 
             $count++;

@@ -93,8 +93,13 @@ class Entity extends Model
         return $this->morphMany(Note::class, 'noteable');
     }
 
-    public function references(){
+    public function references(DynamicEnumValue $dynamic_enum_value = null){
+
         $references = $this->morphToMany(DynamicEnumValue::class, 'object','x_object_dev')->withTimestamps();
+
+        if($dynamic_enum_value !== null) {
+            $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id]);
+        }
 
         $ref_array = array();
 

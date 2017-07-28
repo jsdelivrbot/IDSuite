@@ -94,9 +94,6 @@
                 } else {
                     $('#notes-title').after('<div class="card-text text-white"><div>' + data.text + '</div><small>created - '+ data.created_at +'</small></div><hr class="mb-4" style="border-color: #E4D836">')
                 }
-
-
-
             }
         });
 

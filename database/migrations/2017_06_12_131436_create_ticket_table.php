@@ -32,7 +32,6 @@ class CreateTicketTable extends Migration
 
             $table->string('class_code');
             $table->string('subject')->nullable();
-            $table->string('reference_id')->nullable();
 
             $table->dateTime('incident_date')->nullable();
             $table->dateTime('last_message_date')->nullable();
