@@ -163,14 +163,19 @@ class EndpointController extends Controller
 
         $endpoint = session('currentendpointobject');
 
-        dd($endpoint->references());
 
-        $result = ZabbixController::getItemsByHost();
+        if(array_key_exists( 'zabbix' ,$endpoint->references())){
+            $response = ZabbixController::getItemsByHost($endpoint->references()['zabbix']);
 
-        if($endpoint->status === 'u'){
-            $result = true;
+            if($response[6]->lastvalue === "1"){
+                $result = true;
+            } else {
+                $result = false;
+            }
+
         } else {
             $result = false;
+
         }
 
         return response()->json($result);
