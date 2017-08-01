@@ -21,6 +21,9 @@ class Location extends Model
         'created_at', 'updated_at'
     ];
 
+    protected $relationships = [
+        'coordinate'
+    ];
     /**
      * Define table to be used with this model. It defaults and assumes table names will have an s added to the end.
      *for instance App\User table by default would be users

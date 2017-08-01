@@ -15,7 +15,7 @@
 
 Route::get('/', function(){
    return view('auth.login', ['viewname' => 'Login']);
-});
+})->name('home');
 
 
 
@@ -31,6 +31,7 @@ Route::get('/getAuthUser', 'UserController@getCurrentUser');
 
 // test routes //
 Route::get('/test', 'TestController@test');
+Route::get('/test/ns', 'TestController@test_netsuite');
 
 
 // auth middleware //
@@ -54,6 +55,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/api/deviceCostPerCallAvg', 'ChartController@deviceCostPerCallAvg');
 
     Route::get('/api/devicePingData', 'ChartController@devicePingData');
+
+    Route::get('api/chart/', 'ChartController@index');
+
+    Route::get('api/chart/getCustomers', 'ChartController@getCustomers');
+
+    Route::post('api/chart/vot', 'ChartController@vot');
+
+    Route::post('api/chart/locp', 'ChartController@locp');
 
 
     // Endpoint routes //
@@ -127,6 +136,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/tickets', 'TicketController@index');
 
     Route::get('/tickets/{id}', 'TicketController@show');
+
 
 
 

@@ -24,7 +24,8 @@ abstract class Model extends Eloquent
 
     public $incrementing = false;
 
-    public function __construct($attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
 
         $this->class_code = \App\Enums\EnumClassCode::getClassCode(get_class($this));
@@ -38,18 +39,16 @@ abstract class Model extends Eloquent
     }
 
 
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public static function getObjectById($id){
+
+    public static function getObjectById($id)
+    {
+
         $class = get_called_class();
         $results = $class::find($id);
         return $results;
 
-
-
     }
+
 
 
 
@@ -80,4 +79,56 @@ abstract class Model extends Eloquent
         }
 
     }
+
+
+    public function getObject($depth = 2)
+    {
+        $result = $this;
+
+        for($i=0; $i<$depth; $i++) {
+            $result = $this::getObjectFirst($result, $depth-1);
+        }
+
+        return $result;
+
+
+    }
+
+    private function getObjectFirst($this_object, $level)
+    {
+
+      //  echo "in level ".$level;
+       // dump($this_object);
+
+        if(!property_exists ($this_object, 'relationships' ))
+            return $this_object;
+
+        $relationships = array_values($this_object->relationships);
+        $attributes = array_keys($this_object->getAttributes());
+        $property_keys = array_merge($attributes, $relationships);
+
+        $object = new \stdClass();
+        foreach ($property_keys as $property_key) {
+
+
+            if($level != 0 && in_array($property_key, $this_object->relationships) && $this_object->$property_key != null) { //&& property_exists($object, $property_key)
+
+              //  echo "recursive for ".$property_key."...\n";
+
+                $sub_object = $this->getObjectFirst($this_object->$property_key, $level-1);
+            //    echo "sub object";
+             //   dump($sub_object);
+                $object->$property_key = $sub_object;
+            }else {
+                $object->$property_key = $this_object->$property_key;
+            }
+
+
+        }
+
+        return $object;
+
+    }
+
+
 }

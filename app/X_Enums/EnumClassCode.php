@@ -45,6 +45,8 @@ class EnumClassCode extends Enum
         'Record'                =>  'REC',
         'Ticket'                =>  'TIC',
         'TimePeriod'            =>  'TMP',
-        'User'                  =>  'USR'
+        'User'                  =>  'USR',
+        'Website'               =>  'WEB'
+
     ];
 }

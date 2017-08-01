@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         self::$dynamic_enum = $dynamic_enum;
 
        // $this->call('ip2LocationSeeder');
+
         $this->call('NsSeeder');
         $this->call('CaseSeeder');
         $this->call('EndpointSeeder');

@@ -87,6 +87,7 @@ class TicketController extends Controller
      *
      * @param $id
      * @return \Illuminate\Http\Response
+     *
      */
     public function show($id)
     {

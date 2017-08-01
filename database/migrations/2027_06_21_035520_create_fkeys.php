@@ -44,6 +44,7 @@ class CreateFkeys extends Migration
             $table->foreign('contact_id')->references('id')->on('entitycontact')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('parent_id')->references('id')->on('entity')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
+
         });
 
         Schema::table('entitycontact', function (Blueprint $table){
@@ -52,6 +53,8 @@ class CreateFkeys extends Migration
             $table->foreign('location_id')->references('id')->on('location')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('phonenumber_id')->references('id')->on('phonenumber')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('entity_id')->references('id')->on('entity')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('website_id')->references('id')->on('website')->onDelete('cascade')->onUpdate('cascade');
+
         });
 
         Schema::table('location', function(Blueprint $table){
