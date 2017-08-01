@@ -8,12 +8,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'IDSuite') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('assets/css/all.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/css/font-awesome.css')}}">
+    <link rel="shortcut icon" href="{{{ asset('img/favicon.png') }}}">
 
     @if($viewname === 'account' || $viewname === 'device' || $viewname === 'case')
         <link rel="stylesheet" href="{{asset('assets/css/custom_tabs.css')}}">
@@ -66,7 +67,11 @@
                             @if($viewname === 'account' || $viewname === 'device' || $viewname === 'case')
                                 {{$name}}
                             @else
-                                {{$viewname}}
+                                {{--{{$viewname}} --}}
+
+
+                                {!!Breadcrumbs::render('home') !!}
+
                             @endif
                             <span class="sr-only">(current)</span></a>
                     </li>
@@ -108,7 +113,10 @@
 
         @if (!auth::guest() && $viewname !== 'App Selection')
             <div class="row">
-                <nav class="col-sm-3 col-md-2 col-lg-2 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important;padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
+
+                <div class="col-sm-3 col-md-2 col-lg-2 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important;padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
+
+                <nav>
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item ">
                             <a class="nav-link btn-outline-teal" style="color: white !important;" href="/accounts">Accounts</a>
@@ -125,12 +133,28 @@
                         <li class="nav-item">
                             <a class="nav-link btn-outline-blue" style="color: white !important; white-space: nowrap;" href="/tickets">Support-Data</a>
                         </li>
+
+
+
                     </ul>
+
+
+
+
                 </nav>
+
+                    <div style="color:red; position: absolute;bottom: 50px;left:20px;width: 100%;padding-right: 30px;">
+                        <embed type="image/svg+xml" src="{{ asset('img/logo_white.svg') }}" style="width: 100%" />
+
+                    </div>
+                </div>
+
 
                 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 col-lg-10 offset-lg-2 pt-3">
                     @yield('content')
                 </main>
+
+
         @else
                     <main class="col-sm-1 col-md-12  col-lg-12  pt-3">
                         @yield('content')
@@ -138,6 +162,8 @@
         @endif
 
             </div>
+
+
     </div>
     <!-- Scripts -->
 

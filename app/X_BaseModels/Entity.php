@@ -15,7 +15,9 @@ class Entity extends Model
     protected $fillable = [
         'contact_id', 'parent_id'
     ];
-
+    protected $relationships = [
+        'contact', 'parent', 'user', 'persons', 'sites'
+    ];
     protected $guarded = [
         'created_at', 'updated_at'
     ];
@@ -126,7 +128,7 @@ class Entity extends Model
 
     }
 
-    public static function getByName($name){
+    public static function getByName($name) {
         $name = EntityName::where('name', $name)->first();
 
         if($name === null){
@@ -137,4 +139,5 @@ class Entity extends Model
         }
 
     }
+
 }

@@ -22,6 +22,10 @@ class EntityContact extends Model
         'updated_at', 'created_at'
     ];
 
+
+    protected $relationships = [
+        'phonenumber', 'email', 'location','website'
+    ];
     public $incrementing = false;
 
     /**
@@ -49,6 +53,14 @@ class EntityContact extends Model
         }
 
         return $this->hasOne(Email::class, 'id', 'email_id');
+    }
+
+    public function website(Website $w = null){
+        if($w !== null){
+            $this->website_id = $w->id;
+        }
+
+        return $this->hasOne(Website::class, 'id', 'website_id');
     }
 
     public function location(Location $l = null){

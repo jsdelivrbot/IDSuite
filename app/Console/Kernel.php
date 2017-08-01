@@ -13,7 +13,10 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        '\App\Console\Commands\GetUpdateCustomers',
+        '\App\Console\Commands\GetUpdateEmployees',
+        '\App\Console\Commands\GetUpdateSalesRep',
+
     ];
 
     /**
@@ -24,8 +27,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // netsuite fetches
+        $schedule->command('GetUpdateEmployees:getemployees') ->dailyAt("3:00");
+        $schedule->command('GetUpdateCustomers:getcustomers') ->hourly();
+        $schedule->command('GetUpdateSalesRep:getsalesrep') ->everyThirtyMinutes();
+
     }
 
     /**
