@@ -163,6 +163,10 @@ class EndpointController extends Controller
 
         $endpoint = session('currentendpointobject');
 
+        dd($endpoint->references());
+
+        $result = ZabbixController::getItemsByHost();
+
         if($endpoint->status === 'u'){
             $result = true;
         } else {

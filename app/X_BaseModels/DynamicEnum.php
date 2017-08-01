@@ -18,6 +18,10 @@ class DynamicEnum extends Model
         'created_at', 'updated_at'
     ];
 
+    protected $casts = [
+        'values' => 'array'
+    ];
+
     protected $table = "dynamic_enum";
 
     public $incrementing = false;
@@ -40,7 +44,6 @@ class DynamicEnum extends Model
         $this->values = json_encode($values);
         return $this;
     }
-
 
     public static function getByName($name){
 

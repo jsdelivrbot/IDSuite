@@ -106,6 +106,11 @@ class Endpoint extends Model
         return $ref_array;
     }
 
+
+    public function devs(DynamicEnumValue $dynamic_enum_value = null, $getAllDev = false){
+        return $this->morphToMany(DynamicEnumValue::class, 'object','x_object_dev');
+    }
+
     /**
      * Endpoint constructor.
      * @param array $attributes
@@ -151,4 +156,41 @@ class Endpoint extends Model
             Throw new Exception('This user is not active. Therefore you cannot change the password', 409);
         }
     }
+
+
+    public static function getByName($name){
+        return self::where('name', $name)->first();
+    }
+
+    public function hasReference($reference_key){
+        $result = array_key_exists($reference_key, $this->references());
+        return $result;
+    }
+
+    public function updateDev($key, $value, $de){
+
+        if($this->hasReference($key)){
+            foreach($this->devs as $dev){
+                if ($dev->dynamicenum_id === $de->id){
+                    if($de->values[$dev->value_type] === $key){
+                        if($dev->value === $value){
+                            return $dev;
+                        } else {
+                            $dev->value = $value;
+                            $dev->save();
+                            return $dev;
+                        }
+                    } else {
+                        continue;
+                    }
+                }
+            }
+        }
+
+        return false;
+
+    }
+
+
+
 }
