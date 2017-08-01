@@ -34,10 +34,7 @@
   "/assets/js/account_charts.js": "/assets/js/account_charts.js",
   "/assets/js/device_status.js": "/assets/js/device_status.js",
   "/assets/js/account_note.js": "/assets/js/account_note.js",
-<<<<<<< HEAD
   "/assets/js/records.js": "/assets/js/records.js",
-  "/assets/js/device_charts.js": "/assets/js/device_charts.js"
-=======
+  "/assets/js/device_charts.js": "/assets/js/device_charts.js",
   "/assets/js/chart_custom.js": "/assets/js/chart_custom.js"
->>>>>>> charts
 }
