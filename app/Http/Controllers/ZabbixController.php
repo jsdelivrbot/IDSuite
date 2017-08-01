@@ -147,7 +147,7 @@ class ZabbixController extends Controller
 
 
 
-    public static function getHost($host_id = null, $sortfield = null, $limit = 10, $sortorder = "DESC", $output = "extend"){
+    public static function getHost($host_id , $sortfield = null, $limit = 10, $sortorder = "DESC", $output = "extend"){
 
 
 //        $t=   {
@@ -215,7 +215,6 @@ class ZabbixController extends Controller
             "lastvalue"
         );
 
-
         $params = array(
             "output"    =>  $output,
             "hostids"   =>  $hostid,
@@ -238,7 +237,7 @@ class ZabbixController extends Controller
 
     public static function getRefDe(){
         return DynamicEnum::getByName(ZabbixController::$de);
-    }
+}
 
 
     public static function mapEndpoints(){

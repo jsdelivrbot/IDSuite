@@ -67,11 +67,7 @@
                             @if($viewname === 'account' || $viewname === 'device' || $viewname === 'case')
                                 {{$name}}
                             @else
-                                {{--{{$viewname}} --}}
-
-
-                                {!!Breadcrumbs::render('home') !!}
-
+                                {{$viewname}}
                             @endif
                             <span class="sr-only">(current)</span></a>
                     </li>
@@ -133,14 +129,7 @@
                         <li class="nav-item">
                             <a class="nav-link btn-outline-blue" style="color: white !important; white-space: nowrap;" href="/tickets">Support-Data</a>
                         </li>
-
-
-
                     </ul>
-
-
-
-
                 </nav>
 
                     <div style="color:red; position: absolute;bottom: 50px;left:20px;width: 100%;padding-right: 30px;">
