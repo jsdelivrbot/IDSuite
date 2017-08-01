@@ -339,6 +339,20 @@ class TestController extends Controller
         dd($model_array);
     }
 
+    public function mapZabbixEndpointsToEndpoints(){
+        ZabbixController::mapEndpoints();
+    }
+
+    public function endpointHasReference(Endpoint $endpoint, $key){
+
+        return $endpoint->hasReference($key);
+
+    }
+
+    public function getDynaimcEnumsArray($de){
+        return $de->values;
+    }
+
     /**
      *
      * User $user
@@ -348,7 +362,26 @@ class TestController extends Controller
     public function test()
     {
 
-        dd('test');
+
+
+
+//        dd(EndpointController::getDeviceStatus());
+
+//        dd(ZabbixController::getItemsByHost('10526'));
+
+//        $endpoint = Endpoint::all()->first();
+
+
+//        $de = DynamicEnum::getObjectById('DEN597f85c85a222');
+//
+//        dd($this->getDynaimcEnumsArray($de));
+
+//        dd($this->endpointHasReference($endpoint, 'zabbix'));
+
+        $this->mapZabbixEndpointsToEndpoints();
+
+
+        dd('done');
 
 
         $model = EndpointModel::getObjectById('ENM59741f4cbfae7');
