@@ -28,3 +28,5 @@ public/assets/js/records.js
 cleaned_endpoints.csv
 mrge_2017-07-17.sql
 unknown_types.csv
+*.csv
+*.lock
