@@ -11,13 +11,11 @@ class EndpointSeeder extends Seeder{
 
     public function run(){
 
-//        $this->cleanUpEndpointData();
-
-//        $this->processProxies();
-
-        $this->preprocessEndpointModels();
+        $this->processProxies();
 
         $this->processEndpointModels();
+
+        $this->cleanUpEndpointData();
 
         $this->processEndpoints();
 
@@ -41,6 +39,9 @@ class EndpointSeeder extends Seeder{
         $proxy_csv = file_get_contents($proxy_file_name);
         $proxies = array_map("str_getcsv", explode("\n", $proxy_csv));
 
+        $model_file_name = 'endpoint_model.csv';
+        $model_csv = file_get_contents($model_file_name);
+        $models = array_map("str_getcsv", explode("\n", $model_csv));
 
         $count = 0;
 
@@ -83,6 +84,8 @@ class EndpointSeeder extends Seeder{
             }
 
 
+//            dd($models);
+
             $customer_index = $endpoint[1];
 
             $customer_row = $customers[$customer_index];
@@ -93,6 +96,8 @@ class EndpointSeeder extends Seeder{
 
             $proxy_index = $endpoint[10];
 
+
+
             if($proxy_index > 0){
                 $proxy_row = $proxies[$proxy_index];
 
@@ -100,11 +105,55 @@ class EndpointSeeder extends Seeder{
 
                 $endpoint[10] = $proxy_name;
 
-                $endpoints_array[] = $endpoint;
+
             } else {
                 $count++;
             }
+
+            $model_index = $endpoint[3];
+
+
+            switch ($model_index){
+
+                case "Room":
+                    $model_index = 1;
+                    $endpoint[18] = $models[$model_index][4];
+                    break;
+                case "Room 220":
+                    $model_index = 2;
+                    $endpoint[18] = $models[$model_index][4];
+                    break;
+                case "Room 220i":
+                    $model_index = 3;
+                    $endpoint[18] = $models[$model_index][4];
+                    break;
+                case "Icon 600":
+                    $model_index = 4;
+                    $endpoint[18] = $models[$model_index][4];
+                    break;
+                case "UVC ClearSea":
+                    $model_index = 5;
+                    $endpoint[18] = 0;
+                    break;
+                case "UVC Multipoint":
+                    $model_index = 6;
+                    $endpoint[18] = $models[$model_index][4];
+                    break;
+                case "Group 500":
+                    $model_index = 7;
+                    $endpoint[18] = $models[$model_index][4];
+                    break;
+
+                default:
+                    $model_index = 0;
+                    $endpoint[18] = 0;
+                break;
+            }
+
+            $endpoints_array[] = $endpoint;
+
         }
+
 
         $file_input = fopen('cleaned_endpoints.csv', "w");
 
@@ -169,11 +218,18 @@ class EndpointSeeder extends Seeder{
             $proxy = new \App\Proxy();
 
 
+            $proxy->save();
+
+
             $dynamic_enum_value = new \App\DynamicEnumValue();
 
             $dynamic_enum_value->save();
 
-            $dynamic_enum_value->definition(DatabaseSeeder::$dynamic_enum)->save(DatabaseSeeder::$dynamic_enum);
+//            $dynamic_enum_value->definition(DatabaseSeeder::$dynamic_enum)->save(DatabaseSeeder::$dynamic_enum);
+
+            $dynamic_enum = \App\DynamicEnum::getByName('reference_key');
+
+            $dynamic_enum_value->definition($dynamic_enum)->save($dynamic_enum);
 
             $dynamic_enum_value->value = $p[0];
 
@@ -246,7 +302,7 @@ class EndpointSeeder extends Seeder{
     }
 
 
-    public function preprocessEndpointModels(){
+    public function processEndpointModels(){
 
         $file_name = 'endpoint_model_price.csv';
 
@@ -310,7 +366,7 @@ class EndpointSeeder extends Seeder{
 
                 $man_modelname = trim(substr($item_description, 0, $pos), ' - ');
 
-                dump($man_modelname);
+//                dump($man_modelname);
 
                 $p = strpos(strtolower($man_modelname), strtolower($model->manufacturer));
 
@@ -318,16 +374,16 @@ class EndpointSeeder extends Seeder{
 
                     $description = trim(substr($item_description, $pos, strlen($item_description)), ' - ');
 
-                    dump($description);
+//                    dump($description);
 
                     $model_explode = explode(' ', trim($man_modelname));
 
-                    dump($model_explode);
+//                    dump($model_explode);
 
                     $name = $model_explode[1];
 
 
-                    dump($name);
+//                    dump($name);
 
 
                     if (count($model_explode) > 2){
@@ -336,7 +392,7 @@ class EndpointSeeder extends Seeder{
                         $edition = null;
                     }
 
-                    dump($edition);
+//                    dump($edition);
 
                 } else {
 
@@ -351,12 +407,12 @@ class EndpointSeeder extends Seeder{
 
                     $name = $model_explode[0];
 
-                    dump($man_modelname);
+//                    dump($man_modelname);
 
-                    dump($count);
+//                    dump($count);
 
 
-                    dump($model_explode);
+//                    dump($model_explode);
 
                     $edition = $model_explode[1];
 
@@ -373,7 +429,7 @@ class EndpointSeeder extends Seeder{
                             $isno = true;
                         }
 
-                        dump('property : ' . $property . ' === ' . $type_of_device);
+//                        dump('property : ' . $property . ' === ' . $type_of_device);
 
                         if (strtolower($property) === strtolower($type_of_device)) {
                             if (!$isno) {
@@ -395,15 +451,15 @@ class EndpointSeeder extends Seeder{
 
                     $description = trim(substr($item_description, $pos, strlen($item_description)), ' , ');
 
-                    dump($description);
+//                    dump($description);
 
                     $model_explode = explode(' ', trim($man_modelname));
 
-                    dump($model_explode);
+//                    dump($model_explode);
 
                     $name = $model_explode[1];
 
-                    dump($name);
+//                    dump($name);
 
                     if (count($model_explode) > 2){
                         $edition = $model_explode[2];
@@ -411,7 +467,7 @@ class EndpointSeeder extends Seeder{
                         $edition = null;
                     }
 
-                    dump($edition);
+//                    dump($edition);
 
                 } else {
 
@@ -439,7 +495,7 @@ class EndpointSeeder extends Seeder{
                     $isno = false;
 
                     foreach (\App\Enums\EnumDeviceType::getValues() as $type_of_device) {
-                        dump('property : ' . $property . ' === ' . $type_of_device);
+//                        dump('property : ' . $property . ' === ' . $type_of_device);
 
                         if (strtolower($property) === "no") {
                             $isno = true;
@@ -490,7 +546,7 @@ class EndpointSeeder extends Seeder{
                 foreach ($desc_explode as $item) {
 
                     foreach (\App\Enums\EnumDeviceType::getValues() as $device_type) {
-                        dump($item . ' === ' . $device_type);
+//                        dump($item . ' === ' . $device_type);
                         if (strtolower($item) === strtolower($device_type) || $item === "no") {
                             $pos_of_type = $item_count;
                             $type = $device_type;
@@ -540,11 +596,9 @@ class EndpointSeeder extends Seeder{
 
             $dynamic_enum_value->save();
 
-//            $dynamic_enum_value->definition(DatabaseSeeder::$dynamic_enum)->save(DatabaseSeeder::$dynamic_enum);
-
             $dynamic_enum = \App\DynamicEnum::getByName('reference_key');
 
-            $dynamic_enum_value->definition($dynamic_enum);
+            $dynamic_enum_value->definition($dynamic_enum)->save($dynamic_enum);
 
             $dynamic_enum_value->value = $m[4];
 
@@ -561,88 +615,6 @@ class EndpointSeeder extends Seeder{
         }
     }
 
-    public function processEndpointModels(){
-
-        $file_name = 'endpoint_model.csv';
-
-        $csv = file_get_contents("$file_name");
-
-        $models = array_map("str_getcsv", explode("\n", $csv));
-
-        $count = 0;
-
-        $progress_count = 0;
-
-        foreach ($models as $m){
-
-
-            $progress = round(100 * ($count / count($models)));
-
-            if ($progress >= 0 && $progress < 10) {
-                echo "Models : [*---------]  $progress% \r";
-            } elseif ($progress >= 10 && $progress < 20) {
-                echo "Models : [**--------]  $progress% \r";
-            } elseif ($progress >= 20 && $progress < 30) {
-                echo "Models : [***-------]  $progress% \r";
-            } elseif ($progress >= 30 && $progress < 40) {
-                echo "Models : [****------]  $progress% \r";
-            } elseif ($progress >= 40 && $progress < 50) {
-                echo "Models : [*****-----]  $progress% \r";
-            } elseif ($progress >= 50 && $progress < 60) {
-                echo "Models : [******----]  $progress% \r";
-            } elseif ($progress >= 60 && $progress < 70) {
-                echo "Models : [*******---]  $progress% \r";
-            } elseif ($progress >= 70 && $progress < 80) {
-                echo "Models : [********--]  $progress% \r";
-            } elseif ($progress >= 80 && $progress < 90) {
-                echo "Models : [*********-]  $progress% \r";
-            } elseif ($progress >= 90 && $progress < 100) {
-                echo "Models : [**********]  $progress% \r";
-            } else {
-                if($progress_count === 0) {
-                    echo "Models : [**********]  $progress% \n";
-                    $progress_count++;
-                }
-            }
-
-            if($count === 0 || $m[0] === null){
-                $count++;
-                continue;
-            }
-
-            $model = new \App\EndpointModel();
-
-            $dynamic_enum_value = new \App\DynamicEnumValue();
-
-            $dynamic_enum_value->save();
-
-            $dynamic_enum_value->definition(DatabaseSeeder::$dynamic_enum)->save(DatabaseSeeder::$dynamic_enum);
-
-            $dynamic_enum_value->value = $m[0];
-
-            $dynamic_enum_value->value_type = \App\Enums\EnumDataSourceType::getKeyByValue('mrge');
-
-            $dynamic_enum_value->save();
-
-            $model->references($dynamic_enum_value);
-
-            $model->save();
-
-
-
-            $series = explode(' ', $m[2]);
-
-            $model->manufacturer    = $m[1];
-            $model->name            = $m[2];
-            $model->platform        = $m[3];
-            $model->series          = $series[0];
-
-            $model->save();
-
-            $count++;
-
-        }
-    }
 
     public function processEndpoints(){
 
@@ -695,11 +667,15 @@ class EndpointSeeder extends Seeder{
 
             $endpoint  = new \App\Endpoint();
 
+            $endpoint->save();
+
             $dynamic_enum_value = new \App\DynamicEnumValue();
 
             $dynamic_enum_value->save();
 
-            $dynamic_enum_value->definition(DatabaseSeeder::$dynamic_enum)->save(DatabaseSeeder::$dynamic_enum);
+            $dynamic_enum = \App\DynamicEnum::getByName('reference_key');
+
+            $dynamic_enum_value->definition($dynamic_enum)->save($dynamic_enum);
 
             $dynamic_enum_value->value = $e[0];
 
@@ -725,11 +701,20 @@ class EndpointSeeder extends Seeder{
 
             $endpoint->save();
 
-            $model = static::processModel($e[3]);
+            $model = static::processModel($e[18]);
 
-            $endpoint->endpointmodel($model)->save($model);
+//            if($model !== false || $model !== null){
+            if($model !== false){
+//                dump($model);
+                $endpoint->endpointmodel($model)->save($model);
+            }
+
+
 
             $endpoint->save();
+
+
+
 
             $ip2location = \App\Ip2Location::getByIp($e[8]);
 
@@ -937,8 +922,8 @@ class EndpointSeeder extends Seeder{
         }
     }
 
-    public static function processModel($model_name){
-        $model = \App\EndpointModel::getByName($model_name);
+    public static function processModel($model_mpn){
+        $model = \App\EndpointModel::getByMpn($model_mpn);
 
         if($model === null){
             return false;

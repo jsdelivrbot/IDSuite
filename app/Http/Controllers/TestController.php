@@ -9,6 +9,7 @@ use App\Entity;
 use App\EntityContact;
 use App\EntityName;
 use App\Enums\EnumDataSourceType;
+use App\Enums\EnumDeviceType;
 use App\Ip2Location;
 use App\PersonContact;
 use App\Record;
@@ -26,11 +27,13 @@ use App\PersonName;
 use App\Proxy;
 use Faker\Provider\DateTime;
 use GuzzleHttp\Psr7\Request;
+use function GuzzleHttp\Psr7\str;
 use Illuminate\Support\Facades\Auth;
 use Mockery\Exception;
 use PhpParser\Node\Expr\AssignOp\Mod;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
+use Symfony\Component\HttpKernel\DataCollector\DumpDataCollector;
 
 
 class TestController extends Controller
@@ -43,17 +46,322 @@ class TestController extends Controller
     }
 
 
+    public function getDevParentByDevName(){
+        $dev = DynamicEnumValue::getByValue('12');
+
+        dd($dev->referable(Entity::class));
+
+    }
+
+
+    public function buildDevTicketRelationship(){
+        $ticket = new Ticket();
+
+        $ticket->save();
+
+        $dev = new DynamicEnumValue();
+
+        $dev->value = "SC_12312";
+
+        $de = DynamicEnum::getByName('reference_key');
+
+        $dev->value_type = \App\Enums\EnumDataSourceType::getKeyByValue('netsuite');
+
+        $dev->definition($de)->save($de);
+
+        $dev->save();
+
+        $ticket->references($dev);
+
+        dump($ticket->references());
+
+        dd($dev->referable);
+
+    }
+
+    public function getEndpointByMpn(){
+        $results = EndpointModel::getByMpn('7200-65250-001');
+
+        dd($results);
+
+    }
+
+
+    public function getZabbixHostData(){
+        $data = ZabbixController::getHosts();
+
+        dd($data);
+
+    }
+
+
+    public function modelParsingTest(){
+        $item_descriptions[] = "HDX Media Center 6000 Series w/ 1 display";
+
+        $type_of_devices = ['cam', 'camera', 'phone', 'module', 'codec', 'softphone', 'software'];
+
+        $model_array = array();
+
+        foreach ($item_descriptions as $item_description) {
+
+            $model = new \stdClass();
+
+            $model->manufacturer = "Polycom";
+
+            $item_description_low = strtolower($item_description);
+
+            dump($item_description);
+
+            if ($pos = strpos($item_description, '-')) {
+
+                $man_modelname = trim(substr($item_description, 0, $pos), ' - ');
+
+                dump($man_modelname);
+
+                $p = strpos(strtolower($man_modelname), strtolower($model->manufacturer));
+
+                if ($p !== false) {
+
+                    $description = trim(substr($item_description, $pos, strlen($item_description)), ' - ');
+
+                    dump($description);
+
+                    $model_explode = explode(' ', trim($man_modelname));
+
+                    dump($model_explode);
+
+                    $name = $model_explode[1];
+
+
+                    dump($name);
+
+
+                    if (count($model_explode) > 2){
+                        $edition = $model_explode[2];
+                    } else {
+                        $edition = null;
+                    }
+
+                    dump($edition);
+
+                } else {
+
+                    $model_explode = explode(' ', trim($man_modelname));
+
+                    if(array_search(strtolower($model_explode[0]), $type_of_devices)){
+
+                        $man_modelname = trim(substr($item_description, $pos, strlen($item_description)), ' - ');
+
+                        $model_explode = explode(' ', trim($man_modelname));
+
+                    }
+
+
+                    $name = $model_explode[0];
+
+                    $edition = $model_explode[1];
+
+                    $description = ltrim(trim(substr($item_description, strlen($name) + 1 + strlen($edition), strlen($item_description))), '- ');
+                }
+
+                $type = null;
+
+                foreach (explode(' ', preg_replace('/[^A-Za-z0-9\-]/', ' ', str_replace('-', ' ', $item_description))) as $property) {
+                    $isno = false;
+                    foreach ($type_of_devices as $type_of_device) {
+
+                        if (strtolower($property) === "no") {
+                            $isno = true;
+                        }
+
+                        dump('property : ' . $property . ' === ' . $type_of_device);
+
+                        if (strtolower($property) === strtolower($type_of_device)) {
+                            if (!$isno) {
+                                $type = $type_of_device;
+                            } else {
+                                $type = null;
+                            }
+                        }
+                    }
+                }
+
+            } elseif ($pos = strpos($item_description, ',')) {
+
+                $man_modelname = trim(substr($item_description, 0, $pos), ' , ');
+
+                $p = strpos(strtolower($man_modelname), strtolower($model->manufacturer));
+
+                if ($p !== false) {
+
+                    $description = trim(substr($item_description, $pos, strlen($item_description)), ' , ');
+
+                    dump($description);
+
+                    $model_explode = explode(' ', trim($man_modelname));
+
+                    dump($model_explode);
+
+                    $name = $model_explode[1];
+
+                    dump($name);
+
+                    if (count($model_explode) > 2){
+                        $edition = $model_explode[2];
+                    } else {
+                        $edition = null;
+                    }
+
+                    dump($edition);
+
+                } else {
+
+                    $model_explode = explode(' ', trim($man_modelname));
+
+                    if(array_search(strtolower($model_explode[0]), $type_of_devices)){
+
+                        $man_modelname = trim(substr($item_description, $pos, strlen($item_description)), ' - ');
+
+                        $model_explode = explode(' ', trim($man_modelname));
+
+                    }
+
+                    $name = $model_explode[0];
+
+                    $edition = $model_explode[1];
+
+                    $description = trim(substr($item_description, strlen($name) + 1 + strlen($edition), strlen($item_description)));
+                }
+
+                $type = null;
+
+                foreach (explode(' ', preg_replace('/[^A-Za-z0-9\-]/', ' ', str_replace('-', ' ', $item_description))) as $property) {
+
+                    $isno = false;
+
+                    foreach ($type_of_devices as $type_of_device) {
+                        dump('property : ' . $property . ' === ' . $type_of_device);
+
+                        if (strtolower($property) === "no") {
+                            $isno = true;
+                        }
+
+                        if (strtolower($property) === strtolower($type_of_device)) {
+                            if (!$isno) {
+                                $type = $type_of_device;
+                            } else {
+                                $type = null;
+                            }
+                        }
+                    }
+                }
+
+            } else {
+
+                $model_explode = explode(' ', preg_replace('/\s\s/', ' ', trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $item_description))));
+
+                if ($p = strpos($item_description, strtolower($model->manufacturer))) {
+
+                    $name = $model_explode[1];
+
+                    $description = trim(substr($item_description, strlen($model_explode[0]) + 1 + strlen($name), strlen($item_description)));
+
+                    $desc_explode = explode(' ',preg_replace('/\s\s/', ' ', trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $description))));
+
+
+                } else {
+
+                    $model_explode = explode(' ', trim($item_description));
+
+                    $name = $model_explode[0];
+
+                    $edition = $model_explode[1];
+
+                    $description = trim(substr($item_description, strlen($name) + 1 + strlen($edition), strlen($item_description)));
+
+                    $desc_explode = explode(' ',preg_replace('/\s\s/', ' ', trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $description))));
+                }
+
+
+                $pos_of_type = null;
+                $item_count = 0;
+
+                $type = null;
+
+                foreach ($desc_explode as $item) {
+
+                    foreach ($type_of_devices as $device_type) {
+                        dump($item . ' === ' . $device_type);
+                        if (strtolower($item) === strtolower($device_type) || $item === "no") {
+                            $pos_of_type = $item_count;
+                            $type = $device_type;
+                            break;
+                        }
+                    }
+
+                    if ($pos_of_type !== null) {
+                        break;
+                    } else {
+                        $item_count++;
+                    }
+                }
+
+
+                if ($pos_of_type !== null) {
+                    $edition = trim(substr($description, 0, strpos($description, $desc_explode[$pos_of_type]) - 1));
+                } else {
+                    $type = null;
+                }
+
+            }
+
+            $model->name = ucfirst(strtolower($name));
+
+            $model->description = ucfirst(strtolower($description));
+
+
+            if($edition !== null) {
+                $model->edition = ucfirst(strtolower($edition));
+            } else {
+                $model->edition = $edition;
+            }
+
+            if ($type !== null) {
+                $model->type = ucfirst(strtolower($type));
+            } else {
+                $model->type = $type;
+            }
+
+            $model_array[] = $model;
+
+        }
+
+        dd($model_array);
+    }
+
     /**
      *
      * User $user
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function test(){
+    public function test()
+    {
 
-        $entity = Entity::getObjectById('ENT59741d86f0db9');
+        dd('test');
 
-        dd($entity->children);
+
+        $model = EndpointModel::getObjectById('ENM59741f4cbfae7');
+
+        dd($model->references());
+
+        $ticket = Ticket::getObjectById('TIC59741d946de74');
+
+        dd($ticket->references());
+
+        $endpoint = Endpoint::getObjectById('END59741f4ce04b6');
+
+        dd($endpoint->references());
 
 
 //        $history = ZabbixController::getHistory('59337', 'clock');

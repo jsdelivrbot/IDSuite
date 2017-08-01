@@ -68,11 +68,18 @@ class CaseSeeder extends Seeder
 
             $ticket = new \App\Ticket();
 
+            $ticket->save();
+
             $dynamic_enum_value = new \App\DynamicEnumValue();
 
             $dynamic_enum_value->save();
 
-            $dynamic_enum_value->definition(DatabaseSeeder::$dynamic_enum)->save(DatabaseSeeder::$dynamic_enum);
+//            $dynamic_enum_value->definition(DatabaseSeeder::$dynamic_enum)->save(DatabaseSeeder::$dynamic_enum);
+
+            $dynamic_enum = \App\DynamicEnum::getByName('reference_key');
+
+
+            $dynamic_enum_value->definition($dynamic_enum)->save($dynamic_enum);
 
             $dynamic_enum_value->value = $t[0];
 

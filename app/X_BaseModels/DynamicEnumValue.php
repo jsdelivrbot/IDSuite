@@ -29,13 +29,12 @@ class DynamicEnumValue extends Model
         if($d !== null) {
             $this->dynamicenum_id = $d->id;
         }
-
         return $this->hasOne(DynamicEnum::class, 'id', 'dynamicenum_id');
     }
 
-    public function referable()
+    public function referable($type)
     {
-        return $this->morphTo();
+        return $this->morphedByMany($type, 'object', 'x_object_dev', 'dynamic_enum_value_id', 'object_id')->first();
     }
 
     /**
@@ -47,6 +46,12 @@ class DynamicEnumValue extends Model
         // Your construct code.
 
         return $this;
+    }
+
+
+    public static function getByValue($ref_id){
+        $result = DynamicEnumValue::where('value', '=', $ref_id)->first();
+        return $result;
     }
 
 }

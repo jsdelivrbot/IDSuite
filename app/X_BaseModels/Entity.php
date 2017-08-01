@@ -95,7 +95,7 @@ class Entity extends Model
 
     public function references(DynamicEnumValue $dynamic_enum_value = null){
 
-        $references = $this->morphToMany(DynamicEnumValue::class, 'object','x_object_dev')->withTimestamps();
+        $references = $this->morphToMany(DynamicEnumValue::class, 'object','x_object_dev');
 
         if($dynamic_enum_value !== null) {
             $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id]);
@@ -104,6 +104,7 @@ class Entity extends Model
         $ref_array = array();
 
         foreach($references->get() as $reference){
+
             $ref_array[EnumDataSourceType::getValueByKey($reference->value_type)] = $reference->value;
         }
 

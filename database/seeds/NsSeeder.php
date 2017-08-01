@@ -442,6 +442,24 @@ class NsSeeder extends Seeder
             $entity->notes()->save($note);
         }
 
+        $dynamic_enum_value = new \App\DynamicEnumValue();
+
+        $dynamic_enum_value->save();
+
+        $dynamic_enum = \App\DynamicEnum::getByName('reference_key');
+
+        $dynamic_enum_value->definition($dynamic_enum)->save($dynamic_enum);
+
+        $dynamic_enum_value->value = $c[10];
+
+        $dynamic_enum_value->value_type = \App\Enums\EnumDataSourceType::getKeyByValue('netsuite');
+
+        $dynamic_enum_value->save();
+
+        $entity->references($dynamic_enum_value);
+
+        $entity->save();
+
         return $entity;
     }
 
