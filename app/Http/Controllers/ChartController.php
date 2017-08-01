@@ -12,6 +12,8 @@ namespace App\Http\Controllers;
 use App\Endpoint;
 use App\EndpointModel;
 use App\Entity;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class ChartController
 {
@@ -23,6 +25,9 @@ class ChartController
      * @return \Illuminate\Http\JsonResponse
      */
     public function deviceByType(){
+
+        $user = Auth::user();
+
         $entity = Entity::getObjectById(session('currentaccount'));
 
         $endpoints = $entity->endpoints;
@@ -191,6 +196,16 @@ class ChartController
 
 
 
+    public function devicePingData(){
 
+        //TODO waiting for brick to give me zabbix endpoint list.
+        $isAggregate    = Input::get('isAggregate');
+        $id             = Input::get('isAggregate');
+        $sortfield      = Input::get('isAggregate');
+
+        ZabbixController::getHistory($id, $sortfield);
+
+
+    }
 
 }
