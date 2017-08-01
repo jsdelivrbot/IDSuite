@@ -14,3 +14,6 @@ yarn-error.log
 package-lock.json
 npm-debug.log.3577405681
 ip2location.csv
+*.csv
+*.sql
+app/Http/Controllers/ChartController.php
