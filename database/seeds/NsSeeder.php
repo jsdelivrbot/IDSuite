@@ -14,7 +14,6 @@ class NsSeeder extends Seeder
 
         $csv = file_get_contents("$file_name");
 
-
         $companies = array_map("str_getcsv", explode("\n", $csv));
 
 
@@ -92,14 +91,14 @@ class NsSeeder extends Seeder
      *
      * validate email lol does the same as above just more semantics
      *
-     * @param $c
+     * @param $user_email
      * @return bool
      */
-    public static function isPersonEmailValid($c)
+    public static function isPersonEmailValid($user_email)
     {
-        $email = \App\Email::getEmailByAddress($c[10]);
+        $email = \App\Email::getEmailByAddress($user_email);
 
-        if( $email === "" || $email === null || $c[10] === null || $c[10] === ""){
+        if( $email === "" || $email === null || $user_email === null || $user_email === ""){
             return false;
         }
 
@@ -119,7 +118,6 @@ class NsSeeder extends Seeder
     {
         $isvalidemail = self::isEmailValid($c);
 
-
         if ($isvalidemail) {
             $email = \App\Email::getEmailByAddress($c[1]);
             $email->save();
@@ -135,19 +133,19 @@ class NsSeeder extends Seeder
      *
      * process user email
      *
-     * @param $c
+     * @param $user
      * @return \App\Email
      */
-    public static function processUserEmail($c)
+    public static function processUserEmail($user)
     {
-        $isvalidemail = self::isPersonEmailValid($c);
+        $isvalidemail = self::isPersonEmailValid($user[1]);
 
         if ($isvalidemail) {
-            $email = \App\Email::getEmailByAddress($c[10]);
+            $email = \App\Email::getEmailByAddress($user[1]);
             $email->save();
         } else {
             $email = new \App\Email();
-            if(!$email->setEmail($c[10])){
+            if(!$email->setEmail($user[1])){
                 $email->save();
             }
         }
@@ -205,12 +203,12 @@ class NsSeeder extends Seeder
      * @param $c
      * @return \App\PersonName
      */
-    public static function processUserName($c)
+    public static function processUserName($user)
     {
 
         $name = new \App\PersonName();
 
-        $split = explode(' ', $c[8]);
+        $split = explode(' ', $user[0]);
 
         $firstname = $split[0];
         $middle_name = null;
@@ -227,11 +225,23 @@ class NsSeeder extends Seeder
             $preferred_name = $firstname;
         }
 
+        if($user[3] !== ""){
+            $title = $user[3];
+        } else {
+            $title = null;
+        }
 
-        $name->first_name = $firstname;
+
+        if($firstname !== "") {
+            $name->first_name = $firstname;
+        } else {
+            $name->first_name = null;
+        }
         $name->middle_name = $middle_name;
         $name->last_name = $last_name;
         $name->preferred_name = $preferred_name;
+        $name->title = $title;
+
 
         $name->save();
 
@@ -463,6 +473,30 @@ class NsSeeder extends Seeder
         return $entity;
     }
 
+
+    public static function getUser($name){
+
+        if($name !== "") {
+            $file_name = 'users.csv';
+
+            $csv = file_get_contents("$file_name");
+
+            $users = array_map("str_getcsv", explode("\n", $csv));
+
+            foreach ($users as $user){
+                if($user[0] === $name){
+                    return $user;
+                }
+            }
+
+        } else {
+            return false;
+        }
+
+        return false;
+
+    }
+
     /**
      *
      * Process User
@@ -475,30 +509,32 @@ class NsSeeder extends Seeder
      */
     public static function processUser($c, $entity)
     {
-        $user = \App\User::getUserByEmail($c[10]);
-        if (is_object($user)) {
+        $ns_user = self::getUser($c[8]);
 
-            if($entity === null) {
+        if($ns_user !== false) {
+            $user = \App\User::getUserByEmail($ns_user[1]);
 
+            if (is_object($user)) {
+
+                if ($entity === null) {
+
+                } else {
+
+                    $user->accounts($entity)->save($entity);
+                    $user->save();
+
+                    return $user;
+                }
             } else {
 
-                $user->accounts($entity)->save($entity);
-                $user->save();
-
-                return $user;
-            }
-        } else {
-
-            if ($c[10] !== "") {
-
-                $email = self::processUserEmail($c);
+                $email = self::processUserEmail($ns_user);
 
                 if ($email->address === "") {
                     $email->address = null;
                     return false;
                 }
 
-                $name = self::processUserName($c);
+                $name = self::processUserName($ns_user);
 
                 $location = self::processUserLocation();
 
@@ -522,11 +558,11 @@ class NsSeeder extends Seeder
                 $user->save();
 
                 return $user;
-            } else {
             }
         }
 
         return false;
+
     }
 
 
@@ -568,7 +604,6 @@ class NsSeeder extends Seeder
             $parent_entity = \App\Entity::getByName($company_name);
 
             if($parent_entity === null){
-                dump($company_name);
             } else {
 
                 $parent_entity->children($entity)->save($entity);
@@ -581,8 +616,6 @@ class NsSeeder extends Seeder
         $user = self::processUser($c, $entity);
 
         return $entity;
-
-
     }
 
     /**

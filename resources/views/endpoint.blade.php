@@ -10,7 +10,7 @@
                         <div class="card-block">
 
                             <h4 class="card-title pink">{{$name}}
-                                <canvas id="device-status-circle" class="ml-2" width="30" height="25" data-toggle="tooltip" data-placement="top" title="Status"></canvas>
+                                @include('partials.device_status.device_status')
                             </h4>
                             <p class="card-text text-white">This is endpoint {{$name}}</p>
 
@@ -54,7 +54,7 @@
                         <div class="card-block">
 
                             <h4 class="card-title teal">{{$name}}
-                                <canvas id="device-status-circle" class="ml-2" width="30" height="25" data-toggle="tooltip" data-placement="top" title="Status"></canvas>
+                                @include('partials.device_status.device_status')
                             </h4>
                             <p class="card-text text-white">This is endpoint {{$name}}</p>
 
@@ -98,7 +98,7 @@
                         <div class="card-block">
 
                             <h4 class="card-title purple">{{$name}}
-                                <canvas id="device-status-circle" class="ml-2" width="30" height="25" data-toggle="tooltip" data-placement="top" title="Status"></canvas>
+                                @include('partials.device_status.device_status')
                             </h4>
                             <p class="card-text text-white">This is endpoint {{$name}}</p>
 
@@ -141,7 +141,7 @@
                         <div class="card-block">
 
                             <h4 class="card-title yellow">{{$name}}
-                                <canvas id="device-status-circle" class="ml-2" width="30" height="25" data-toggle="tooltip" data-placement="top" title="Status"></canvas>
+                                @include('partials.device_status.device_status')
                             </h4>
                             <p class="card-text text-white">This is endpoint {{$name}}</p>
 
@@ -184,7 +184,7 @@
                         <div class="card-block">
 
                             <h4 class="card-title blue">{{$name}}
-                                <canvas id="device-status-circle" class="ml-2" width="30" height="25" data-toggle="tooltip" data-placement="top" title="Status"></canvas>
+                                @include('partials.device_status.device_status')
                             </h4>
                             <p class="card-text text-white">This is endpoint {{$name}}</p>
 

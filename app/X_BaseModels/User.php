@@ -120,28 +120,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     public function orderAccountsByName(){
-//        dd($this->accounts[0]);
-
         $sorted = $this->accounts->sortBy('name');
-
-        dd($sorted);
 
         return $sorted;
 
     }
 
-//    /**
-//     * Returns whether or not this use is active.
-//     *
-//     * @return bool
-//     */
-//    public function isActive(){
-//        if($this->active) {
-//            return true;
-//        } else {
-//            Throw new Exception('This user is not active. Therefore you cannot change the password', 409);
-//        }
-//    }
 
 
     public function getEmailUsername(){

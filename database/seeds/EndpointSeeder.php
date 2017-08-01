@@ -703,9 +703,7 @@ class EndpointSeeder extends Seeder{
 
             $model = static::processModel($e[18]);
 
-//            if($model !== false || $model !== null){
             if($model !== false){
-//                dump($model);
                 $endpoint->endpointmodel($model)->save($model);
             }
 
