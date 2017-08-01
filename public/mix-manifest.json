@@ -1,0 +1,43 @@
+{
+  "/js/app.js": "/js/app.42200fbd1754b45243da.js",
+  "/css/app.css": "/css/app.css",
+  "/css/custom.css": "/css/custom.css",
+  "/css/new.app.css": "/css/new.app.css",
+  "resources/assets/css/new.css": "resources/assets/css/new.css",
+  "/resouces/assets/css/test.css": "/resouces/assets/css/test.css",
+  "/resouces/assets/css/custom.css": "/resouces/assets/css/custom.css",
+  "resources/assets/css/all.css": "resources/assets/css/all.css",
+  "/css/all.css": "/css/all.3d82cc26b418708e423807cc44df2641.css",
+  "/mix.js": "/mix.js",
+  "/../resources/assets/css/app.css": "/../resources/assets/css/app.css",
+  "/../resources/assets/css/sass.css": "/../resources/assets/css/sass.css",
+  "/css/welcome.css": "/css/welcome.css",
+  "/css/test.css": "/css/test.css",
+  "/js/admin_custom_2.js": "/js/admin_custom_2.js",
+  "/js/metis.js": "/js/metis.js",
+  "/js/test.js": "/js/test.js",
+  "/js/all.js": "/js/all.js",
+  "/assets/js/app.js": "/assets/js/app.js",
+  "/js/enum_title_select.js": "/js/enum_title_select.2b13dc04abaedbee4eb6.js",
+  "/js/enum_gender_select.js": "/js/enum_gender_select.c7de3eb904ba5e899b23.js",
+  "/js/vendor.js": "/js/vendor.33adf6ae44b1d9110a76.js",
+  "/js/manifest.js": "/js/manifest.d41d8cd98f00b204e980.js",
+  "/assets/js/enum_title_select.js": "/assets/js/enum_title_select.js",
+  "/assets/js/enum_gender_select.js": "/assets/js/enum_gender_select.js",
+  "/assets/css/all.css": "/assets/css/all.css",
+  "/assets/js/enum_select.js": "/assets/js/enum_select.js",
+  "/assets/js/progressbar.js": "/assets/js/progressbar.js",
+  "/assets/js/custom_tabs.js": "/assets/js/custom_tabs.js",
+  "/assets/js/custom_progress_bar.js": "/assets/js/custom_progress_bar.js",
+  "/assets/js/chart_placeholder.js": "/assets/js/chart_placeholder.js",
+  "/assets/js/account_chart.js": "/assets/js/account_chart.js",
+  "/assets/js/account_charts.js": "/assets/js/account_charts.js",
+  "/assets/js/device_status.js": "/assets/js/device_status.js",
+  "/assets/js/account_note.js": "/assets/js/account_note.js",
+<<<<<<< HEAD
+  "/assets/js/records.js": "/assets/js/records.js",
+  "/assets/js/device_charts.js": "/assets/js/device_charts.js"
+=======
+  "/assets/js/chart_custom.js": "/assets/js/chart_custom.js"
+>>>>>>> charts
+}
