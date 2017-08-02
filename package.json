@@ -12,7 +12,7 @@
   "devDependencies": {
     "axios": "^0.15.3",
     "bootstrap-sass": "^3.3.7",
-    "cross-env": "^3.2.3",
+    "cross-env": "^5.0.2",
     "jquery": "^3.1.1",
     "laravel-mix": "0.*",
     "lodash": "^4.17.4",
@@ -24,6 +24,9 @@
     "gmaps-heatmap": "^1.0.2"
   },
   "dependencies": {
-    "amcharts3": "github:amcharts/amcharts3"
+    "amcharts3": "github:amcharts/amcharts3",
+    "vue": "^2.1.10",
+    "babel": "^6.23.0",
+    "webpack": "^3.4.1"
   }
 }
