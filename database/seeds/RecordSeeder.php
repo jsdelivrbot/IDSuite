@@ -10,8 +10,8 @@ class RecordSeeder extends Seeder
 {
 
     // files //
-    public $endpoint_map_file = 'x_mrge_endpoints_smrge_endpoints.csv';
-    public $record_file = 'records.csv';
+    public $endpoint_map_file = 'data_imports/x_mrge_endpoints_smrge_endpoints.csv';
+    public $record_file = 'data_imports/records.csv';
 
 
     public $endpoint_map;
@@ -84,7 +84,7 @@ class RecordSeeder extends Seeder
 
                 if ($count === 0 || $r[0] === null || $r[11] === "0000-00-00 00:00:00" || !array_key_exists($end_id, $this->endpoint_map)) {
                     $count++;
-                    file_put_contents('bad_records.csv', $r[0] . PHP_EOL, FILE_APPEND);
+                    file_put_contents('data_imports/bad_records.csv', $r[0] . PHP_EOL, FILE_APPEND);
                     continue;
                 }
 

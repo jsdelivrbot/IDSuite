@@ -22,7 +22,7 @@ class Ip2LocationSeeder extends Seeder
 
         dump("opening file..");
 
-        $handle = fopen('ip2location.csv', "r");
+        $handle = fopen('data_imports/ip2location.csv', "r");
         $header = true;
 
         while ($csvLine = fgetcsv($handle, 1000, ",")) {

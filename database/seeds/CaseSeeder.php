@@ -17,7 +17,7 @@ class CaseSeeder extends Seeder
 
     public function processCases(){
 
-        $file_name = 'case.csv';
+        $file_name = 'data_imports/case.csv';
 
         $csv = file_get_contents($file_name);
 
@@ -104,7 +104,7 @@ class CaseSeeder extends Seeder
             $orgin_type = \App\Enums\EnumOriginType::getKeyByValue($t[2]);
 
             if($orgin_type === 0){
-                file_put_contents('unknown_types.csv', '$orgin_type : ' . $t[2] . PHP_EOL, FILE_APPEND);
+                file_put_contents('data_imports/unknown_types.csv', '$orgin_type : ' . $t[2] . PHP_EOL, FILE_APPEND);
             }
 
             $ticket->origin_type = $orgin_type;
@@ -112,7 +112,7 @@ class CaseSeeder extends Seeder
             $ticket_type = \App\Enums\EnumTicketType::getKeyByValue($t[3]);
 
             if($ticket_type === 0){
-                file_put_contents('unknown_types.csv', '$ticket_type : ' . $t[3] . PHP_EOL, FILE_APPEND);
+                file_put_contents('data_imports/unknown_types.csv', '$ticket_type : ' . $t[3] . PHP_EOL, FILE_APPEND);
             }
 
             $ticket->ticket_type = $ticket_type;
@@ -120,7 +120,7 @@ class CaseSeeder extends Seeder
             $priority_type = \App\Enums\EnumPriorityType::getKeyByValue($t[4]);
 
             if($priority_type === 0){
-                file_put_contents('unknown_types.csv', '$priority_type : ' . $t[4] . PHP_EOL, FILE_APPEND);
+                file_put_contents('data_imports/unknown_types.csv', '$priority_type : ' . $t[4] . PHP_EOL, FILE_APPEND);
             }
 
             $ticket->priority_type = $priority_type;
@@ -128,7 +128,7 @@ class CaseSeeder extends Seeder
             $status_type = \App\Enums\EnumTicketStatusType::getKeyByValue($t[10]);
 
             if($status_type === 0){
-                file_put_contents('unknown_types.csv', '$status_type : ' . $t[10] . PHP_EOL, FILE_APPEND);
+                file_put_contents('data_imports/unknown_types.csv', '$status_type : ' . $t[10] . PHP_EOL, FILE_APPEND);
             }
 
             $ticket->status_type = $status_type;

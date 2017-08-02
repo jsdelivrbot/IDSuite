@@ -10,7 +10,7 @@ class NsSeeder extends Seeder
 {
     public function run()
     {
-        $file_name = 'ns_customers.csv';
+        $file_name = 'data_imports/ns_customers.csv';
 
         $csv = file_get_contents("$file_name");
 
@@ -477,7 +477,7 @@ class NsSeeder extends Seeder
     public static function getUser($name){
 
         if($name !== "") {
-            $file_name = 'users.csv';
+            $file_name = 'data_imports/users.csv';
 
             $csv = file_get_contents("$file_name");
 

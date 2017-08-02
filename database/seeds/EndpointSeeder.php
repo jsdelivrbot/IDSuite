@@ -24,22 +24,22 @@ class EndpointSeeder extends Seeder{
 
 
     public function cleanUpEndpointData(){
-        $endpoint_file_name = 'endpoint.csv';
+        $endpoint_file_name = 'data_imports/endpoint.csv';
         $endpoint_csv = file_get_contents($endpoint_file_name);
         $endpoints = array_map("str_getcsv", explode("\n", $endpoint_csv));
 
         $endpoints_array = array();
 
-        $customer_file_name = 'customer.csv';
+        $customer_file_name = 'data_imports/customer.csv';
         $customer_csv = file_get_contents($customer_file_name);
         $customers = array_map("str_getcsv", explode("\n", $customer_csv));
 
 
-        $proxy_file_name = 'endpoint_proxy.csv';
+        $proxy_file_name = 'data_imports/endpoint_proxy.csv';
         $proxy_csv = file_get_contents($proxy_file_name);
         $proxies = array_map("str_getcsv", explode("\n", $proxy_csv));
 
-        $model_file_name = 'endpoint_model.csv';
+        $model_file_name = 'data_imports/endpoint_model.csv';
         $model_csv = file_get_contents($model_file_name);
         $models = array_map("str_getcsv", explode("\n", $model_csv));
 
@@ -155,7 +155,7 @@ class EndpointSeeder extends Seeder{
         }
 
 
-        $file_input = fopen('cleaned_endpoints.csv', "w");
+        $file_input = fopen('data_imports/cleaned_endpoints.csv', "w");
 
         foreach ($endpoints_array as $row) {
             fputcsv($file_input, $row);
@@ -167,7 +167,7 @@ class EndpointSeeder extends Seeder{
 
     public function processProxies(){
 
-        $file_name = 'endpoint_proxy.csv';
+        $file_name = 'data_imports/endpoint_proxy.csv';
 
         $csv = file_get_contents($file_name);
 
@@ -304,7 +304,7 @@ class EndpointSeeder extends Seeder{
 
     public function processEndpointModels(){
 
-        $file_name = 'endpoint_model_price.csv';
+        $file_name = 'data_imports/endpoint_model_price.csv';
 
         $csv = file_get_contents("$file_name");
 
@@ -618,7 +618,7 @@ class EndpointSeeder extends Seeder{
 
     public function processEndpoints(){
 
-        $file_name = 'cleaned_endpoints.csv';
+        $file_name = 'data_imports/cleaned_endpoints.csv';
 
         $csv = file_get_contents("$file_name");
 
@@ -784,7 +784,7 @@ class EndpointSeeder extends Seeder{
 
             $endpoint_map = $mrge_id . ',' . $smrge_id;
 
-            file_put_contents('x_mrge_endpoints_smrge_endpoints.csv', $endpoint_map.PHP_EOL , FILE_APPEND);
+            file_put_contents('data_imports/x_mrge_endpoints_smrge_endpoints.csv', $endpoint_map.PHP_EOL , FILE_APPEND);
 
 
 
