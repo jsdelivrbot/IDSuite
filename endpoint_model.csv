@@ -1,8 +1,0 @@
-model_id,"model_mfg","model_name","model_architecture","mpn"
-1,"LifeSize","Room","room",1000-0000-0220
-2,"LifeSize","Room 220","room",1000-0000-0311
-3,"LifeSize","Room 220i","room",1000-0000-0675
-4,"LifeSize","Icon 600","icon", 1000-0000-0889
-5,"LifeSize","UVC ClearSea","clearsea"
-6,"LifeSize","UVC Multipoint","multipoint", 5150-23912-001
-7,"Polycom","Group 500","group",7200-63430-001
