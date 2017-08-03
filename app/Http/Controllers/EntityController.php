@@ -96,10 +96,6 @@ class EntityController extends Controller
 
         $sites_array = array();
 
-
-
-
-
         foreach ($sites as $s){
 
             $site = new \stdClass();
@@ -168,7 +164,7 @@ class EntityController extends Controller
 
         session(['randomnumber' => rand(1,5)]);
 
-        return view('account', ['name' => $name->name, 'tickets' => $entity->tickets, 'id' => $id, 'viewname' => 'account', 'sites' => $sites_array, 'persons' => $persons_array, 'notes' => $notes_array , 'number' => session('randomnumber')]);
+        return view('account', ['name' => $name->name, 'tickets' => $entity->tickets->sortByDesc('incident_date'), 'id' => $id, 'viewname' => 'account', 'sites' => $sites_array, 'persons' => $persons_array, 'notes' => $notes_array , 'number' => session('randomnumber')]);
     }
 
 
