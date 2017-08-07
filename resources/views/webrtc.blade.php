@@ -99,7 +99,7 @@
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
         function getVideo(callback){
-            navigator.getUserMedia({audio: false, video: true}, callback, function(error){
+            navigator.getUserMedia({audio: true, video: true}, callback, function(error){
                 console.log(error);
                 alert('An error occured. Please try again');
             });
