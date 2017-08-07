@@ -158,37 +158,6 @@
                         bordercolor = 'rgba(28, 168, 221, 1)';
                         break;
                 }
-
-
-
-//                chart.makeChart();
-
-//                let myChart = new Chart(ctx, {
-//                    type: 'line',
-//                    data: {
-//                        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-//                        datasets: [{
-//                            label: '# of Votes',
-//                            data: [12, 19, 3, 5, 2, 3],
-//                            backgroundColor: [
-//                                bgcolor,
-//                            ],
-//                            borderColor: [
-//                                bordercolor,
-//                            ],
-//                            borderWidth: 1
-//                        }]
-//                    },
-//                    options: {
-//                        scales: {
-//                            yAxes: [{
-//                                ticks: {
-//                                    beginAtZero:true
-//                                }
-//                            }]
-//                        }
-//                    }
-//                });
             }
         });
 
@@ -454,10 +423,6 @@
             canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
 
             canvas.getContext('2d').drawImage(this, 0, 0);
-
-            // Get raw image data
-//            callback(canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, ''));
-
             // ... or get as Data URI
             callback(canvas.toDataURL('image/png'));
         };
@@ -477,11 +442,6 @@
          layout_1 = {
             pageMargins: [ 40, 100, 40, 40 ],
 
-             background: function(currentPage) {
-                 
-             },
-
-
             /*
              ** Header; Shown on every page
              */
@@ -499,7 +459,7 @@
                  ** PAGE 1
                  */
                 {
-                    text: "This is our basic IDS header",
+                    text: "Fawzi is awesome",
                     style: ["header","safetyDistance"]
                 }, {
                     text: "This is just a paragraph to see if your actually reading it.",
@@ -607,19 +567,10 @@
     function createReport() {
         let pdf_images = 0;
         let pdf_layout = layout_1; // loaded from another JS file
-
-        console.log(charts);
-
         for ( index in charts ) {
-
-
             let chartobject = charts[index];
-
-            console.log(chartobject);
-
             // Capture current state of the chart
             chartobject.AmExport.capture( {}, function() {
-
                 // Export to PNG
                 this.toPNG( {
                     multiplier: 2 // pretend to be lossless
@@ -638,9 +589,6 @@
                         } );
                     }
                 } );
-
-
-
             } );
         }
     }

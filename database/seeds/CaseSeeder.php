@@ -376,7 +376,7 @@ class CaseSeeder extends Seeder
 
         if(!$iscolon_index){
 
-            $entity = \App\Entity::getByName($t[0]);
+            $entity = \App\Entity::getByName($t[1]);
 
             if($entity === null) {
 
