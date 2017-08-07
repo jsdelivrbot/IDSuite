@@ -43,9 +43,6 @@
 
         </div>
 
-
-
-
         <script id="messages-template" type="text/x-handlebars-template">
             @{{#each messages}}
             <li>
