@@ -33,26 +33,11 @@
                     </div>
                 </div>
 
-                <!-- Display video of the current user -->
-                <div id="my-camera" class="camera">
-                    <video width="200" height="200" autoplay></video>
-                </div>
 
-                <div id="peer-camera-zero" class="camera">
+                <div id="peer-camera" class="camera">
                     <video width="300" height="300" autoplay></video>
                 </div>
 
-                <div id="peer-camera-one" class="camera">
-                    <video width="300" height="300" autoplay></video>
-                </div>
-
-                <div id="peer-camera-two" class="camera">
-                    <video width="300" height="300" autoplay></video>
-                </div>
-
-                <div id="peer-camera-three" class="camera">
-                    <video width="300" height="300" autoplay></video>
-                </div>
             </div>
 
 
@@ -99,7 +84,7 @@
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
         function getVideo(callback){
-            navigator.getUserMedia({audio: true, video: true}, callback, function(error){
+            navigator.getUserMedia({audio: false, video: true}, callback, function(error){
                 console.log(error);
                 alert('An error occured. Please try again');
             });
@@ -177,7 +162,7 @@
             let call = peer.call(peer_id, window.localStream);
             call.on('stream', function(stream){
                 window.peer_stream = stream;
-                onReceiveStream(stream, 'peer-camera-zero');
+                onReceiveStream(stream, 'peer-camera');
             });
         });
 
@@ -189,7 +174,7 @@
             call.answer(window.localStream);
             call.on('stream', function(stream){
                 window.peer_stream = stream;
-                onReceiveStream(stream, 'peer-camera-one');
+                onReceiveStream(stream, 'peer-camera');
             });
         }
 
