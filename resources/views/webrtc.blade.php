@@ -178,9 +178,6 @@
             call.on('stream', function(stream){
                 window.peer_stream = stream;
                 onReceiveStream(stream, 'peer-camera-zero');
-                onReceiveStream(stream, 'peer-camera-one');
-                onReceiveStream(stream, 'peer-camera-two');
-                onReceiveStream(stream, 'peer-camera-three');
             });
         });
 
@@ -192,7 +189,7 @@
             call.answer(window.localStream);
             call.on('stream', function(stream){
                 window.peer_stream = stream;
-                onReceiveStream(stream, 'peer-camera');
+                onReceiveStream(stream, 'peer-camera-one');
             });
         }
 
