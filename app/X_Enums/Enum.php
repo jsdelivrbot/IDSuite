@@ -66,9 +66,7 @@ abstract class Enum
     static function getKeyByValue($value){
         $class = get_called_class();
 
-        $value = strtolower($value);
-
-        $result = array_search($value, $class::$enum);
+        $result = array_search(strtolower($value), array_map('strtolower', $class::$enum));
 
         if($result || $result === 0){
 
