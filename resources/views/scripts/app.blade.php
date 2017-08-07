@@ -8,5 +8,7 @@
     @include('scripts.transaction')
 @elseif($viewname === 'case')
     @include('scripts.ticket')
+@elseif($viewname === 'webrtc')
+    @include('scripts.webrtc')
 @endif
 
