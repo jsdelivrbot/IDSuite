@@ -38,7 +38,7 @@
             @php
                 $tab_count++;
             @endphp
-            @include('partials.custom_tabs.account_notes_tab')
+            @include('partials.custom_tabs.account_transactions_tab')
             @php
                 $tab_count++;
             @endphp
@@ -46,7 +46,8 @@
             @php
                 $tab_count++;
             @endphp
-            @include('partials.custom_tabs.account_transactions_tab')
+            @include('partials.custom_tabs.account_notes_tab')
+
 
         @elseif($viewname === 'device')
 
@@ -67,10 +68,6 @@
         @elseif($viewname === 'case')
 
             @include('partials.custom_tabs.device_insights_tab')
-            @php
-                $tab_count++;
-            @endphp
-            @include('partials.custom_tabs.device_locations_tab')
             @php
                 $tab_count++;
             @endphp

@@ -10,11 +10,11 @@
     <a id="tab-a-3" class="nav-link color-3" data-toggle="tab" href="#card-block-tab-3" role="tab">Contacts</a>
 </li>
 <li id="li-tab-4" class="nav-item">
-    <a id="tab-a-4" class="nav-link color-4" data-toggle="tab" href="#card-block-tab-4" role="tab">Notes</a>
+    <a id="tab-a-4" class="nav-link color-4" data-toggle="tab" href="#card-block-tab-4" role="tab">Cases</a>
 </li>
 <li id="li-tab-5" class="nav-item">
-    <a id="tab-a-5" class="nav-link color-5" data-toggle="tab" href="#card-block-tab-5" role="tab">Cases</a>
+    <a id="tab-a-5" class="nav-link color-5" data-toggle="tab" href="#card-block-tab-5" role="tab">Transactions</a>
 </li>
 <li id="li-tab-6" class="nav-item">
-    <a id="tab-a-6" class="nav-link color-6" data-toggle="tab" href="#card-block-tab-6" role="tab">Transactions</a>
+    <a id="tab-a-6" class="nav-link color-6" data-toggle="tab" href="#card-block-tab-6" role="tab">Notes</a>
 </li>
