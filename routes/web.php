@@ -139,6 +139,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
+    Route::get('/webrtc', 'WebRtcController@index');
+
 
 });
 

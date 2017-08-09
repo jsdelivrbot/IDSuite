@@ -36,5 +36,6 @@
   "/assets/js/account_note.js": "/assets/js/account_note.js",
   "/assets/js/records.js": "/assets/js/records.js",
   "/assets/js/device_charts.js": "/assets/js/device_charts.js",
-  "/assets/js/chart_custom.js": "/assets/js/chart_custom.js"
+  "/assets/js/chart_custom.js": "/assets/js/chart_custom.js",
+  "/assets/css/custom_tabs.css": "/assets/css/custom_tabs.css"
 }
