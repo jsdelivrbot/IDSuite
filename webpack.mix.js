@@ -21,6 +21,7 @@ mix.js('resources/assets/js/account_note.js', 'public/assets/js');
 mix.js('resources/assets/js/records.js', 'public/assets/js');
 mix.js('resources/assets/js/device_charts.js', 'public/assets/js');
 
+mix.copy('node_modules/amcharts3/amcharts', 'public/assets/amcharts');
 
 mix.scripts([
     'resources/assets/js/enum_gender_select.js',

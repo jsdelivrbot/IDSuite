@@ -392,9 +392,9 @@ class TestController extends Controller
      */
     public function test()
     {
+        dd(ChartController::deviceByType());
 
-
-
+            $this->mapZabbixEndpointsToEndpoints();
 
 //        dd(EndpointController::getDeviceStatus());
 

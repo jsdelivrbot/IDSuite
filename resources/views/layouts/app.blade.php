@@ -14,7 +14,7 @@
     <link href="{{ asset('assets/css/all.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/css/tether.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/css/font-awesome.css')}}">
-    <link rel="shortcut icon" href="{{{ asset('img/favicon.png') }}}">
+    <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
 
     @if($viewname === 'account' || $viewname === 'device' || $viewname === 'case')
         <link rel="stylesheet" href="{{asset('assets/css/custom_tabs.css')}}">
@@ -131,8 +131,7 @@
                 </nav>
 
                     <div style="color:red; position: absolute;bottom: 50px;left:20px;width: 100%;padding-right: 30px;">
-                        <embed type="image/svg+xml" src="{{ asset('img/logo_white.svg') }}" style="width: 100%" />
-
+                        <embed id="white-logo" type="image/svg+xml" src="{{ asset('img/logo_white.svg') }}" style="width: 100%" />
                     </div>
                 </div>
 

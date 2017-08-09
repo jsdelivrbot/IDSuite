@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container p-lg-1">
         <div class="row">
             <div class="col-lg-12 col-md-12 offset-md-2 offset-lg-0">
@@ -12,9 +13,8 @@
                             <p class="card-text text-white">This is customer {{$name}}</p>
 
                             <div class="col-md-10 offset-1">
-                                <div class="chart-container">
-                                    <canvas id="myChart"></canvas>
-                                </div>
+                                <input type="button" value="Export charts to PDF" onclick="createReport();" />
+                                <div id="chart1" style="width: 100%; height: 400px;"></div>
                             </div>
 
                         </div>
@@ -28,8 +28,9 @@
                             <p class="card-text text-white">This is customer {{$name}}</p>
 
                             <div class="col-md-10 offset-1">
+                                <input type="button" value="Export charts to PDF" onclick="createReport();" />
                                 <div class="chart-container">
-                                    <canvas id="myChart"></canvas>
+                                    <div id="chart1" style="width: 100%; height: 400px;"></div>
                                 </div>
                             </div>
 
@@ -44,8 +45,9 @@
                             <p class="card-text text-white">This is customer {{$name}}</p>
 
                             <div class="col-md-10 offset-1">
+                                <input type="button" value="Export charts to PDF" onclick="createReport();" />
                                 <div class="chart-container">
-                                    <canvas id="myChart"></canvas>
+                                    <div id="chart1" style="width: 100%; height: 400px;"></div>
                                 </div>
                             </div>
 
@@ -60,8 +62,9 @@
                             <p class="card-text text-white">This is customer {{$name}}</p>
 
                             <div class="col-md-10 offset-1">
+                                <input type="button" value="Export charts to PDF" onclick="createReport();" />
                                 <div class="chart-container">
-                                    <canvas id="myChart"></canvas>
+                                    <div id="chart1" style="width: 100%; height: 400px;"></div>
                                 </div>
                             </div>
 
@@ -76,8 +79,9 @@
                             <p class="card-text text-white">This is customer {{$name}}</p>
 
                             <div class="col-md-10 offset-1">
+                                <input type="button" value="Export charts to PDF" onclick="createReport();" />
                                 <div class="chart-container">
-                                    <canvas id="myChart"></canvas>
+                                    <div id="chart1" style="width: 100%; height: 400px;"></div>
                                 </div>
                             </div>
 
@@ -435,7 +439,7 @@
         header_img = dataurl;
 
 
-        layout_1 = {
+         layout_1 = {
             pageMargins: [ 40, 100, 40, 40 ],
 
             /*
@@ -558,8 +562,7 @@
         };
 
     });
-
-
+    
     function createReport() {
         let pdf_images = 0;
         let pdf_layout = layout_1; // loaded from another JS file

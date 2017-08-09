@@ -32,7 +32,14 @@ class ChartController
         return $output;
     }
 
-    public function deviceByType(){
+
+    /**
+     *
+     * Returns for an account the devices it has.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public static function deviceByType(){
 
         $user = Auth::user();
 
@@ -48,11 +55,11 @@ class ChartController
 
         $values = array();
 
-        foreach ($models as $model){
+        foreach ($models as $model) {
 
             $m = new \stdClass();
 
-            $m->name = $model->name;
+            $m->name = $model->manufacturer . " " . $model->name . " " . $model->edition;
             $m->value = 0;
 
             $model_names_value_array[] = $m;
@@ -60,21 +67,24 @@ class ChartController
 
         foreach ($endpoints as $endpoint){
             foreach ($model_names_value_array as $name) {
-                if($endpoint->endpointmodel->name === $name->name){
-                    $name->value = $name->value + 1;
+                if($endpoint->endpointmodel !== null) {
+                    if ($endpoint->endpointmodel->manufacturer . " " . $endpoint->endpointmodel->name . " " . $endpoint->endpointmodel->edition === $name->name) {
+                        $name->value = $name->value + 1;
+                    }
                 }
             }
         }
 
-        foreach ($model_names_value_array as $name_val){
-            $names[] = $name_val->name;
-            $values[] = $name_val->value;
+        $cleaned_values = array();
+
+        foreach ($model_names_value_array as $name){
+            if($name->value > 0){
+                $cleaned_values[] = $name;
+            }
+
         }
 
-        return response()->json([
-            'names'     => $names,
-            'values'    => $values
-        ]);
+        return response()->json($cleaned_values);
 
     }
 
@@ -181,7 +191,12 @@ class ChartController
 
         $count = 1;
 
-        $cost = 3000;
+
+        if($endpoint->endpointmodel !== null) {
+            $cost = $endpoint->endpointmodel->price;
+        } else {
+            $cost = 3000;
+        }
 
         $label_array = array();
         $data_array = array();
@@ -261,8 +276,8 @@ location.city, location.state, location.zipcode, location.country_code, location
          LEFT JOIN coordiante ON coordinate.id = location.coordinate_id
       LEFT JOIN customer ON customer.cust_id = endpoint.customer
 			WHERE $customer_string
-			AND date(timeperiod.start) >= '$date_from'
-			AND date(timeperiod.end) <= '$date_to'
+        AND date(timeperiod.start) >= '$date_from'
+        AND date(timeperiod.end) <= '$date_to'
 	GROUP BY ".$interval_group_by."
 	ORDER BY  DATE(timeperiod.start) ASC	
 		";
