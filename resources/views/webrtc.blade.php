@@ -58,6 +58,19 @@
 @push('webrtc')
 
 <script>
+
+    $.ajax({
+        type: "GET",
+        url: '/getAuthUser',
+        success: function(data){
+            console.log(data);
+        },
+        error: function(message){
+
+        }
+    });
+
+
     $(function(){
 
         let messages = [];

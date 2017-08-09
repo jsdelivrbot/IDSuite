@@ -22,9 +22,9 @@
 
 
 </head>
-<body class="raleway" style="background-color: #293a46">
+<body class="raleway" style="background-color: #293a46;">
 
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top" style="background-color: #434857 !important; border-bottom: 2px solid rgba(255, 255, 255, 0.2)">
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top" style="background-color: #434857 !important; border-bottom: 2px solid rgba(255, 255, 255, 0.2);">
             <button class="navbar-toggler navbar-toggler-right" style="border-color: #5cb85c" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -89,9 +89,7 @@
                                     {{ csrf_field() }}
                                 </form>
 
-                                <a class="dropdown-item" href="#">Endpoint Control</a>
-                                <a class="dropdown-item" href="#">Proxy Control</a>
-                                <a class="dropdown-item" href="#">Customer Control</a>
+                                <a class="dropdown-item" href="/apps">App Select</a>
                             </div>
                         </li>
 
