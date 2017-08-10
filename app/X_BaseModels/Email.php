@@ -67,6 +67,7 @@ class Email extends Model
             $this->username_prefix = $username;
             $this->host = $host;
             $this->top_level_domain = $tld;
+
             $this->save();
 
             return $this;

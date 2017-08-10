@@ -16,8 +16,7 @@ class EnumDataSourceType extends Enum
     public static $enum = [
         0   =>  'netsuite',
         1   =>  'zabbix',
-        2   =>  'mrge',
-        3 => 'polycom'
+        2   =>  'mrge'
     ];
 
 }

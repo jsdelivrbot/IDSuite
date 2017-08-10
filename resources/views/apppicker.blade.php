@@ -49,7 +49,7 @@
                 <div class="card" style="background-color: #E4D836;color: #252830;">
                     <div class="card-block text-right">
                         <h4 class="card-title">MedSitter</h4>
-                        <p class="card-text">This is our patient observation application.</p>
+                        <p class="card-text">Remote patient monitoring application; Webstore - IDS eCommerce front-end.</p>
                         <a href="accounts" class="btn btn-outline-blue float-right disabled" style="color: white !important; border-color: white !important;"><i class="fa fa-lock" aria-hidden="true" style="color: white !important;"></i>&nbsp Launch</a>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                 <div class="card" style="background-color: #1ca8dd;color: #252830;">
                     <div class="card-block text-right">
                         <h4 class="card-title">WebStore</h4>
-                        <p class="card-text">Remote patient monitoring application; Webstore - IDS eCommerce front-end.</p>
+                        <p class="card-text">This is our patient observation application.</p>
                         <a href="accounts" class="btn btn-outline-blue float-right disabled" style="color: white !important; border-color: white !important;"><i class="fa fa-lock" aria-hidden="true" style="color: white !important;"></i>&nbsp Launch</a>
                     </div>
                 </div>
