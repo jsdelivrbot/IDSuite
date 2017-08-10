@@ -132,7 +132,7 @@
                     </ul>
                 </nav>
 
-                    <div style="color:red; position: absolute;bottom: 50px;left:20px;width: 100%;padding-right: 30px;">
+                    <div style="color:red; position: absolute;bottom: 10px;left:20px;width: 100%;padding-right: 30px;">
                         <embed type="image/svg+xml" src="{{ asset('img/logo_white.svg') }}" style="width: 100%" />
 
                     </div>

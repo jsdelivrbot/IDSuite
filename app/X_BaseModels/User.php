@@ -123,10 +123,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $sorted = $this->accounts->sortBy('name');
 
         return $sorted;
-
     }
-
-
 
     public function getEmailUsername(){
         $contact = PersonContact::getObjectById($this->contact_id);

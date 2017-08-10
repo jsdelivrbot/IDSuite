@@ -30,6 +30,11 @@ class CreateDynamicEnumValueTable extends Migration
             $table->uuid('dynamicenum_id')->nullable();
 
             $table->timestamps();
+
+            $table->index("value_type");
+            $table->index("value");
+
+
         });
     }
 
