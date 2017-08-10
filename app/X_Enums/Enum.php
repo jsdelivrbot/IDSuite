@@ -75,7 +75,8 @@ abstract class Enum
             if($class::$enum[0] === "unknown"){
                 return array_search("unknown", $class::$enum);
             } else {
-                Throw new Exception('The Value does not match the current namespace $class : ' . $class, 500);
+                return false;
+//                Throw new Exception('The Value does not match the current namespace $class : ' . $class, 500);
             }
         }
     }

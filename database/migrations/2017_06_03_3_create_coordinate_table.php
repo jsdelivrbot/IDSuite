@@ -20,8 +20,8 @@ class CreateCoordinateTable extends Migration
             $table->uuid('id');
             $table->primary('id');
             $table->string('class_code');
-            $table->float('lat', 10, 6)->default(0);
-            $table->float('lng', 10, 6)->default(0);
+            $table->float('lat', 10, 6)->nullable();
+            $table->float('lng', 10, 6)->nullable();
             $table->uuid('location_id')->nullable();
             $table->boolean('active')->nullable();
             $table->timestamps();

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Netsuite;
-
+use Illuminate\Support\Facades\Log;
 
 use App\Analytic;
 use App\Http\Controllers\Helper\Process;
@@ -17,9 +17,6 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
 
     /* grab all customers from netsuite and add or update current customer in database */
     public static function AddUpdateAllCustomers() {
-
-
-
 
         $service = new NetsuiteController();
 
@@ -37,8 +34,7 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
         from user
         LEFT  JOIN x_object_dev ON user.id = x_object_dev.object_id
         LEFT  JOIN dynamic_enum_value ON x_object_dev.dynamic_enum_value_id = dynamic_enum_value.id
-        WHERE dynamic_enum_value.value_type = 0 AND dynamic_enum_value.value IS NOT NULL
-        ";
+        WHERE dynamic_enum_value.value_type = 0 AND dynamic_enum_value.value IS NOT NULL";
 
         $local_netsuite_employee = DB::select($query);
 
@@ -52,6 +48,8 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
 
         $internal_ids = array_column($local_netsuite_employee, 'value');
 
+
+        $users_created = array();
         foreach ($records as $record) {
 
 
@@ -59,75 +57,97 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
                 //insert to database if employee not found
 
 
-                $email = Process::processEmail($record->email);
+                $user_email = \App\User::getUserByEmail($record->email);
 
-                $name = Process::processName($record->firstName,$record->middleName,$record->lastName);
+                // just an extra check for the email
+                if (!is_object($user_email)) {
 
+                    $email = Process::processEmail($record->email);
 
-                $phone_numbers = array(
-                    'default' => $record->phone,
-                    'fax' => $record->fax,
-                    'officePhone' => $record->officePhone,
-                    'homePhone' => $record->homePhone,
+                    if($email) {
+                    $name = Process::processName($record->firstName,$record->middleName,$record->lastName, $record->title);
 
-                );
+                    $phone_numbers = array(
+                        'default' => $record->phone,
+                        'fax' => $record->fax,
+                        'officePhone' => $record->officePhone,
+                        'homePhone' => $record->homePhone,
 
-                $location = Process::processLocation();
+                    );
 
-                //$location->createCoordinates();
-
-                $phones = Process::processPhone($phone_numbers);
-
-                $entity_contact = Process::processContact($location, $name, $email, $phones);
-
-                $note = Process::processNote();
+                    $location = Process::processLocation(); // will create coordiante object as well
 
 
-                /*
-                $company_name = $c[0];
 
-                $iscolon_index = strpos($company_name, ':');
+                    $phones = Process::processPhone($phone_numbers); // returns an array of PhoneNumber class
 
-                if(!$iscolon_index){
-                    $entity = Process::processEntity($c, $entity_contact, $note);
-                } else {
 
-                    $entity = Process::processEntity($c, $entity_contact, $note);
+                    $dynamic_enum = \App\DynamicEnum::getByName('reference_key'); // grabbing the dynamic enum object that has name reference_key
 
-                    $company_name = substr($company_name, 0, $iscolon_index);
+                    $dynamic_enum_value = Process::processDev($record->internalId, 'netsuite', $dynamic_enum);
 
-                    $parent_entity = \App\Entity::getByName($company_name);
+                    $person_contact = Process::processContact($location, $name, $email, $phones);
 
-                    if($parent_entity === null){
+                    $user = Process::processUser($person_contact, $dynamic_enum_value);
+
+
+                    $users_created[] = $user;
+                    }else{
+                        // invalid email! what netsuite. seriously?
+                        Log::error("Invalid email", array("record" =>$record));
+
+                    }
+                    /*
+                     *
+                     *  $note = Process::processNote();
+
+                    $company_name = $c[0];
+
+                    $iscolon_index = strpos($company_name, ':');
+
+                    if(!$iscolon_index){
+                        $entity = Process::processEntity($c, $entity_contact, $note);
                     } else {
 
-                        $parent_entity->children($entity)->save($entity);
+                        $entity = Process::processEntity($c, $entity_contact, $note);
 
-                        $parent_entity->save();
+                        $company_name = substr($company_name, 0, $iscolon_index);
+
+                        $parent_entity = \App\Entity::getByName($company_name);
+
+                        if($parent_entity === null){
+                        } else {
+
+                            $parent_entity->children($entity)->save($entity);
+
+                            $parent_entity->save();
+                        }
+
                     }
+    */
 
+
+                    //end of insert
+
+
+                }else{
+                    // ns record exist and email also exist.. update proccess
+
+                    echo 'ns record exist and email also exist.. update proccess';
                 }
-*/
-
-                $user = Process::processUser($c, $entity);
-
-
-                return $entity;
-
-
-                //end of insert
 
 
             }else {
-                // found
+                // ns record found in database
+                echo 'ns record found in database';
             }
 
 
 
-
-
         }
-dd("end");
+        echo "users created";
+        dd($users_created);
+
     }
 
     /* grab customers in db and select last x not modified and grab and update sales team */

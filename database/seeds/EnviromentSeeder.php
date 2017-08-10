@@ -2,10 +2,13 @@
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+/**
+ * Class EnviromentSeeder
+ *
+ * Initialize the database with information and settings to make the application functional
+ */
+class EnviromentSeeder extends Seeder
 {
-
-    public static $dynamic_enum;
     /**
      * Run the database seeds.
      *
@@ -14,23 +17,16 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
+        // create default dynamic enum datasource type
         $dynamic_enum = new \App\DynamicEnum();
-
         $dynamic_enum->name = 'reference_key';
-
         $reference_keys = \App\Enums\EnumDataSourceType::getValues();
-
         $dynamic_enum->values = json_encode($reference_keys);
-
         $dynamic_enum->save();
-        dd("done");
-        self::$dynamic_enum = $dynamic_enum;
 
-       // $this->call('ip2LocationSeeder');
+        // more initializations to follow
 
-        $this->call('NsSeeder');
-        $this->call('CaseSeeder');
-        $this->call('EndpointSeeder');
-        $this->call('RecordSeeder');
+
+        echo ("** EnviromentSeeder done **\r\n");
     }
 }

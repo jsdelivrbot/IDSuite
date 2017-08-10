@@ -54,8 +54,10 @@ class Website extends Model
 
 
 
-        if (filter_var(trim($url), FILTER_VALIDATE_URL) === FALSE) {
-                return null;
+        if (\App\Http\Controllers\Helper\Validation::isUrlValid($url) == false) {
+            $this->url = null;
+            $this->save();
+            return $this;
 
        }else {
             $url = trim($url);

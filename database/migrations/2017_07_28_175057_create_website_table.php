@@ -33,6 +33,7 @@ class CreateWebsiteTable extends Migration
             $table->text('path')->nullable();
             $table->text('parameters')->nullable();
             $table->text('fragment')->nullable();
+            $table->boolean('active')->nullable();
 
             $table->timestamps();
         });

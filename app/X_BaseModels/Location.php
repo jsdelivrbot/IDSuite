@@ -69,7 +69,7 @@ class Location extends Model
      * Create Coordinates from a Instance Method.
      * @return $this|bool $mixed
      */
-    public function createCoordinates(){
+    public function createCoordinatesGoogle(){
         try {
             $coordinates = Coordinate::createCoordinatesFromLocation($this);
             if ($coordinates !== false) {

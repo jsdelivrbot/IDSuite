@@ -21,7 +21,7 @@ class CreateDynamicEnumTable extends Migration
             $table->primary('id');
             $table->string('class_code');
             $table->boolean('active')->nullable();
-            $table->json('values')->nullable();
+            $table->text('values')->nullable();
             $table->string('name')->nullable();
             $table->timestamps();
 

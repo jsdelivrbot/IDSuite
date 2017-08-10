@@ -3,6 +3,7 @@
 namespace App;
 
 
+use App\Enums\EnumDataSourceType;
 use Mockery\Exception;
 use Illuminate\Support\Facades\Hash;
 
@@ -25,7 +26,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $fillable = [
-        'contact', 'username', 'email_address'
+        'contact', 'email_address'
     ];
 
     /**
@@ -85,6 +86,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function accounts(){
         return $this->hasMany(Entity::class);
+    }
+
+    public function references(DynamicEnumValue $dynamic_enum_value = null){
+
+        $references = $this->morphToMany(DynamicEnumValue::class, 'object','x_object_dev');
+
+        if($dynamic_enum_value !== null) {
+            $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id]);
+        }
+
+        $ref_array = array();
+
+        foreach($references->get() as $reference){
+
+            $ref_array[EnumDataSourceType::getValueByKey($reference->value_type)] = $reference->value;
+        }
+
+        return $ref_array;
     }
 
     /**
@@ -153,6 +172,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         return false;
     }
+
 
     /**
      * @return string

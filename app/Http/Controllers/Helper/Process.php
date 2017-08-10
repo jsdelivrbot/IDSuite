@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Helper;
 
-use InvalidArgumentException;
-use Illuminate\Console\Command;
-use Illuminate\Container\Container;
 
+use App\DynamicEnumValue;
+use Illuminate\Support\Facades\App;
 
-
-public class Process {
+class Process {
 
 
     /**
@@ -21,14 +19,15 @@ public class Process {
      */
     public static function processEmail($email_r)
     {
-        $isvalidemail = ($email_r);
+        $isvalidemail = Validation::isEmailValid($email_r);
 
         if ($isvalidemail) {
-            $email = \App\Email::getEmailByAddress($email_r);
-            $email->save();
-        } else {
             $email = new \App\Email();
             $email->setEmail($email_r);
+        } else {
+            return false;
+          //  throw new \Exception('invalid email inside processEmail '.$email_r, 500);
+
         }
 
         return $email;
@@ -63,42 +62,25 @@ public class Process {
      * process entity name
      *
      *
-     * @param $c
-     * @return \App\EntityName
+     * @param null $first_name
+     * @param null $middle_name
+     * @param null $last_name
+     * @param null $title
+     * @return \App\PersonName
      */
-    public static function processName($c)
+    public static function processName($first_name=null, $middle_name=null, $last_name=null, $title=null)
     {
-        $company_name = $c[0];
+        $name = new \App\PersonName();
+        $name->first_name = $first_name;
+        $name->middle_name = $middle_name;
+        $name->last_name = $last_name;
+        $name->preferred_name = $first_name;
+        $name->title = $title; // programmer
 
-        $iscolon_index = strpos($company_name, ':');
-
-        if(!$iscolon_index){
-
-            $entity_name = \App\Entity::getByName($c[0]);
-
-            if($entity_name === null) {
-                $name = new \App\EntityName();
-                $name->name = $c[0];
-                $name->save();
-            } else {
-                $name = $entity_name->contact->name;
-            }
-        } else {
-            $company_name = substr($company_name, $iscolon_index + 2, strlen($company_name));
-
-            $entity_name = \App\Entity::getByName($company_name);
-
-            if($entity_name === null) {
-                $name = new \App\EntityName();
-                $name->name = $company_name;
-                $name->save();
-            } else {
-                $name = $entity_name->contact->name;
-            }
-        }
-
+        $name->save();
 
         return $name;
+
     }
 
     /**
@@ -157,10 +139,15 @@ public class Process {
      *
      * process location
      *
-     * @param $c
+     * @param null $address
+     * @param null $city
+     * @param null $state
+     * @param null $zipcode
+     * @param \App\Coordinate|null $coors
      * @return \App\Location
+     * @internal param $c
      */
-    public static function processLocation($address=null, $city=null, $state=null, $zipcode=null)
+    public static function processLocation($address=null, $city=null, $state=null, $zipcode=null, \App\Coordinate $coors=null)
     {
         $location = new \App\Location();
 
@@ -170,6 +157,15 @@ public class Process {
         $location->zipcode = $zipcode;
         $location->save();
 
+        if($coors == null) {
+            $coors = Process::processCoordinate();
+            $location->coordinate($coors)->save($coors);
+
+
+        }else {
+            $location->coordinate($coors)->save($coors);
+        }
+        $location->save();
         return $location;
 
     }
@@ -254,34 +250,48 @@ public class Process {
         return $phone;
     }
 
-    /**
-     *
-     * process entity contact
-     *
-     *
-     * @param $c
-     * @param \App\Location $location
-     * @param \App\EntityName $name
-     * @param \App\Email $email
-     * @param \App\PhoneNumber $phone
-     * @return \App\EntityContact
-     */
-    public static function processContact( \App\Location $location, \App\EntityName $name, \App\Email $email, \App\PhoneNumber $phones, \App\Website $website)
-    {
-        $entity_contact = new \App\EntityContact();
 
-        $entity_contact->location($location)->save($location);
-        $entity_contact->name($name)->save($name);
-        $entity_contact->email($email)->save($email);
+    /**
+     * @param \App\Location $location
+     * @param \App\PersonName $name
+     * @param \App\Email $email
+     * @param $phones array
+     * @param \App\Website $website
+     * @return \App\PersonContact
+     */
+    public static function processContact(\App\Location $location, \App\PersonName $name, \App\Email $email, array $phones)
+    {
+        $person_contact = new \App\PersonContact();
+
+        $person_contact->location($location)->save($location);
+        $person_contact->name($name)->save($name);
+        $person_contact->email($email)->save($email);
 
         foreach ($phones as $phone) {
-            $entity_contact->phonenumber($phone)->save($phone);
+            $person_contact->phonenumber($phone)->save($phone);
         }
 
-        $entity_contact->website($website);
-        $entity_contact->save();
+        $person_contact->save();
 
-        return $entity_contact;
+        return $person_contact;
+    }
+
+
+    public static function processWebsite($url=null) {
+
+
+        $validate_website = Validation::isUrlValid($url);
+
+        if(!$validate_website) {
+            $url = null;
+
+        }
+        $website = new \App\Website();
+        $website->setWebsite($url);
+        $website->save();
+
+        return $website;
+
     }
 
     /**
@@ -377,72 +387,56 @@ public class Process {
     }
 
 
+    /**
+     * @param \App\PersonContact $entity_contact
+     * @return \App\User
+     */
+    public static function processUser(\App\PersonContact $person_contact, \App\DynamicEnumValue $dynamic_enum_value)
+    {
+
+        $user = new \App\User();
+        $user->save();
+        $user->contact($person_contact)->save($person_contact);
+        $user->email_address = $person_contact->email->address;
+
+        $user->references($dynamic_enum_value);
+
+        $user->setPassword('ids_14701');
+        $user->save();
+
+        return $user;
+
+
+    }
+
 
     /**
-     *
-     * Process User
-     *
-     * Create a User class object given a row of Entity data and Entity
-     *
-     * @param $c
-     * @param \App\Entity $entity
-     * @return \App\User|bool
+     * @param $value
+     * @param $type
+     * @param $dynamic_enum
+     * @return DynamicEnumValue
+     * @throws \Exception
+     * @internal param DynamicEnumValue $dynamic_enum_value
      */
-    public static function processUser($c, $entity)
-    {
-        $ns_user = self::getUser($c[8]);
+    public static function processDev($value, $type, $dynamic_enum) {
 
-        if($ns_user !== false) {
-            $user = \App\User::getUserByEmail($ns_user[1]);
+        $isvalidtype = \App\Enums\EnumDataSourceType::getKeyByValue($type);
 
-            if (is_object($user)) {
+        if($isvalidtype !== false){
+            $dev = new DynamicEnumValue();
 
-                if ($entity === null) {
+            $dev->value_type = \App\Enums\EnumDataSourceType::getKeyByValue($type);
 
-                } else {
+            $dev->value = $value;
 
-                    $user->accounts($entity)->save($entity);
-                    $user->save();
+            $dev->definition($dynamic_enum)->save($dynamic_enum);
 
-                    return $user;
-                }
-            } else {
-
-                $email = self::processUserEmail($ns_user);
-
-                if ($email->address === "") {
-                    $email->address = null;
-                    return false;
-                }
-
-                $name = self::processUserName($ns_user);
-
-                $location = self::processUserLocation();
-
-                $phone = self::processUserPhone($c);
-
-                $contact = self::processUserContact($c, $location, $name, $email, $phone);
-
-                $user = new \App\User();
-
-                $user->save();
-
-                $user->contact($contact)->save($contact);
-
-                $user->email_address = $email->address;
-
-                $user->getEmailUsername();
-                $user->setPassword('ids_14701');
-
-                $user->accounts($entity)->save($entity);
-
-                $user->save();
-
-                return $user;
-            }
+            $dev->save();
+        } else {
+            throw new \Exception('The type must be valid value in EnumDataSourceType. The type that you are attempting to create with is ' . $type, 500);
         }
 
-        return false;
+        return $dev;
 
     }
 
@@ -486,5 +480,13 @@ public class Process {
 
         return false;
     }
-}
 
+    public static function processCoordinate($lat=null, $lng=null) {
+        $coors = new \App\Coordinate();
+        $coors->lat = $lat;
+        $coors->lng = $lng;
+        $coors->save();
+        return $coors;
+
+    }
+}

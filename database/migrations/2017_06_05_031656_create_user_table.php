@@ -20,8 +20,7 @@ class CreateUserTable extends Migration
             $table->uuid('id');
             $table->primary('id');
             $table->string('class_code');
-            $table->string('username')->nullable();
-            $table->string('email_address')->nullable();
+            $table->string('email_address')->unique();
             $table->uuid('contact_id')->nullable();
             $table->char('password_hash', 64)->nullable();
             $table->string('remember_token', 100)->nullable();
