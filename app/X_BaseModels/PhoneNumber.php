@@ -13,7 +13,7 @@ class PhoneNumber extends Model
      * @var array
      */
     protected $fillable = [
-        'number'
+        'number', 'type'
     ];
 
     protected $guarded = [
@@ -33,11 +33,12 @@ class PhoneNumber extends Model
      * Email constructor.
      * @param array $attributes
      */
-    public function __construct($phonenumber = null,$attributes = array())  {
+    public function __construct($phonenumber = null, $type=null, $attributes = array())  {
         parent::__construct($attributes);
         // Your construct code.
 
         if (!empty($phonenumber)) {
+            $this->phone_type = $type;
 
             if ($phonenumber !== null || empty($phonenumber)) {
 

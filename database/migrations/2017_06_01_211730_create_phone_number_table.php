@@ -21,11 +21,14 @@ class CreatePhoneNumberTable extends Migration
             $table->uuid('id');
             $table->primary('id');
             $table->string('class_code');
+            $table->string('phone_type')->nullable();
+            $table->string('country_code')->nullable();
+
             $table->string('rawnumber')->nullable();
             $table->string('formnumber')->nullable();
-            $table->string('area_code')->nullable();
-            $table->string('exchange')->nullable();
-            $table->string('number')->nullable();
+            $table->integer('area_code')->nullable();
+            $table->integer('exchange')->nullable();
+            $table->integer('number')->nullable();
             $table->boolean('active')->nullable();
             $table->timestamps();
         });

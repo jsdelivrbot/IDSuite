@@ -34,6 +34,8 @@ use PhpParser\Node\Expr\AssignOp\Mod;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 use Symfony\Component\HttpKernel\DataCollector\DumpDataCollector;
+use App\Http\Controllers\Controllers;
+use App\Http\Controllers\Netsuite;
 
 
 class TestController extends Controller
@@ -42,29 +44,9 @@ class TestController extends Controller
 
     public function test_netsuite() {
 
-        $service = new NetsuiteController();
+      //  NetsuiteDatabase::AddUpdateAllCustomers();
 
-
-       //$result = $service->getCustomerSalesTeam(7239);
-        //   $result = $service->searchCustomer("arizona");
-
-/*
-        $all_customers = $service->getAllCustomers();
-        $search_id = $all_customers->searchId;
-
-        var_dump($all_customers);
-
-
-        $saved_search_result = $service->getPage($search_id, 2000);
-*/
-
-
-
-
-        $result = $service->savedSearch(1197);
-
-        dd($result);
-
+        $service = Netsuite\NetsuiteDatabase::AddUpdateAllEmployees();
 
 
 
