@@ -5,7 +5,7 @@
     <section class="row mb-lg-2 mt-lg-4">
 
         <div class="col-lg-2">
-            <h6 class="ml-lg-3 subtle-text" style="color: #434857">DEVICE RECORDS</h6>
+            <h6 class="ml-lg-3 subtle-text" style="color: #c8cad5">DEVICE RECORDS</h6>
             <h3 class="ml-lg-3 raleway" style="color: white;">Transactions</h3>
         </div>
 

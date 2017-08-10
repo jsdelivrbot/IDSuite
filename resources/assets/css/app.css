@@ -57,12 +57,9 @@
     font-weight: 100 !important;
 }
 
-
-
-
-
-
-
+::-webkit-scrollbar {
+    display: none;
+}
 
 
 .btn-outline-purple {
@@ -294,7 +291,7 @@
     border-color: #d59043 !important;
 }
 
-.btn-nav-orange:focus, .btn-nav-orange-teal.focus {
+.btn-nav-orange:focus, .btn-nav-orange.focus {
     -webkit-box-shadow: 0 0 0 2px rgba(92, 184, 92, 0.5);
     box-shadow: 0 0 0 2px rgba(92, 184, 92, 0.5);
 }

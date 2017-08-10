@@ -18,6 +18,7 @@ class EnumOriginType extends Enum
         0   =>  'unknown',
         1   =>  'e-mail',
         2   =>  'phone',
-        3   =>  'internal request'
+        3   =>  'internal request',
+        4   =>  'web'
     ];
 }
