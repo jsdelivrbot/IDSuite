@@ -108,7 +108,7 @@
         @if (!auth::guest() && $viewname !== 'App Selection')
             <div class="row">
 
-                <div class="col-sm-3 col-md-2 col-lg-2 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important;padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
+                <div class="col-sm-3 col-md-2 col-lg-2 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important; padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
 
                     <nav>
                     <ul class="nav nav-pills flex-column">
@@ -133,7 +133,7 @@
                     </ul>
                 </nav>
 
-                    <div style="color:red; position: absolute;bottom: 50px;left:20px;width: 100%;padding-right: 30px;">
+                    <div style="color:red; position: absolute;bottom: 10px;left:20px;width: 100%;padding-right: 30px;">
                         <embed id="white-logo" type="image/svg+xml" src="{{ asset('img/logo_white.svg') }}" style="width: 100%" />
                     </div>
                 </div>

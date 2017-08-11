@@ -7,15 +7,14 @@ use Illuminate\Database\Seeder;
  *
  * Initialize the database with information and settings to make the application functional
  */
-class EnviromentSeeder extends Seeder
+class EnvironmentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
 
         // create default dynamic enum datasource type
         $dynamic_enum = new \App\DynamicEnum();
@@ -27,6 +26,6 @@ class EnviromentSeeder extends Seeder
         // more initializations to follow
 
 
-        echo ("** EnviromentSeeder done **\r\n");
+        echo ("** EnvironmentSeeder done **\r\n");
     }
 }
