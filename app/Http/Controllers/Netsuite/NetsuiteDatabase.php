@@ -18,11 +18,43 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
     /* grab all customers from netsuite and add or update current customer in database */
     public static function AddUpdateAllCustomers() {
 
+        // grab db customers (entities)
+
+
+        /*
+         * todo: create entity_user table connection to connect multiple of entities to multiple user(s)
+         *
+         * */
+
+        $query = "SELECT * FROM entity WHERE entity.active =1";
+
+
+        dd("all local customers fetched");
+
         $service = new NetsuiteController();
+        $result = $service->getAllCustomers(100);
+        $total_pages = $result->totalPages;
+        $all_records = $result->recordList->record;
+        $search_id =    $result->searchId;
 
-        $result = $service->getAllCustomers();
+        // if we have more than one page
+        for($page_counter = 0; $page_counter < $total_pages; $page_counter++) {
+            $next_page_to_fetch = $page_counter+2;
+            $search_result = $service->getPage($search_id, $next_page_to_fetch);
+            $all_records = array_merge($all_records, $search_result->recordList->record);
 
-        dd($result);
+
+
+         //   dd($all_records);
+        }
+
+
+        // now we have all customer records, lets start processing them
+
+
+
+
+
 
     }
 

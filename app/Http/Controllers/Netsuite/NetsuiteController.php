@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Netsuite;
 
 use Illuminate\Http\Request;
+use NetSuite\Classes\SearchStringFieldOperator;
 use NetSuite\NetSuiteService;
 use Illuminate\Support\Facades\App;
 /*
@@ -244,10 +245,28 @@ class NetsuiteController extends \App\Http\Controllers\Controller
 
         $this->service->setSearchPreferences(false, $page_size);
 
-        $CustomerSearch = new \NetSuite\Classes\CustomerSearch();
+        // Instantiate a search object for customers.
+        $CustomerSearch =  new \NetSuite\Classes\CustomerSearch();
+        $CustomerSearchBasic =  new \NetSuite\Classes\CustomerSearchBasic ();
 
-        $customer_search_basic = new \NetSuite\Classes\CustomerSearchBasic();
-        $CustomerSearch->basic = $customer_search_basic;
+        $filter_customer_statuses = array(15, 13); // Closed Won and Renewal
+
+
+        $SearchMultiSelectField = new \NetSuite\Classes\SearchMultiSelectField();
+        $SearchMultiSelectField->operator = 'anyOf';
+
+        $RecordRefList =  array();
+        foreach ($filter_customer_statuses as $filter_customer_status) {
+            $RecordRef = new \NetSuite\Classes\RecordRef();
+            $RecordRef->internalId = $filter_customer_status;
+            $RecordRefList[] = $RecordRef;
+        }
+
+
+        $SearchMultiSelectField->searchValue = $RecordRefList;
+        $CustomerSearchBasic->entityStatus = $SearchMultiSelectField;
+
+        $CustomerSearch->basic =$CustomerSearchBasic;
 
 
         $request = new \NetSuite\Classes\SearchRequest();

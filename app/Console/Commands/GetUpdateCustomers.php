@@ -2,7 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Http\Controllers\NetsuiteController;
+use App\Http\Controllers\Controllers;
+use App\Http\Controllers\Netsuite;
 use Illuminate\Console\Command;
 use DB;
 class GetUpdateCustomers extends Command
@@ -40,13 +41,7 @@ class GetUpdateCustomers extends Command
     {
 
 
-
-    $service = new NetsuiteController();
-
-    $service->getAllCustomers();
-
-
-     //   DB::table('users')->delete(4);
+        $service =Netsuite\NetsuiteDatabase::AddUpdateAllCustomers();
 
 
 

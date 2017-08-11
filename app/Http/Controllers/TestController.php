@@ -46,7 +46,7 @@ class TestController extends Controller
 
       //  NetsuiteDatabase::AddUpdateAllCustomers();
 
-        $service = Netsuite\NetsuiteDatabase::AddUpdateAllEmployees();
+        $service = Netsuite\NetsuiteDatabase::AddUpdateAllCustomers();
 
 
 

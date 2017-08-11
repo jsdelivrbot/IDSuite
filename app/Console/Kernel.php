@@ -27,9 +27,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        // force to run everytime
+        $schedule->command('GetUpdateCustomers:getcustomers');
+
+
+
         // netsuite fetches
         $schedule->command('GetUpdateEmployees:getemployees') ->dailyAt("3:00");
-        $schedule->command('GetUpdateCustomers:getcustomers') ->hourly();
+        $schedule->command('GetUpdateCustomers:getcustomers') ->dailyAt("2:00");
         $schedule->command('GetUpdateSalesRep:getsalesrep') ->everyThirtyMinutes();
 
     }
