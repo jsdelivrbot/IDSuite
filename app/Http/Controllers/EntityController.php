@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\EndpointModel;
 use App\Entity;
+use App\Ticket;
 use App\User;
 use App\EntityContact;
 use App\EntityName;
@@ -162,9 +163,14 @@ class EntityController extends Controller
             $notes_array[] = $note;
         }
 
+
+        $page_ticket = new Ticket;
+
+        $page_tickets = $page_ticket->where('entity_id','=',$entity->id)->paginate(15);
+
         session(['randomnumber' => rand(1,5)]);
 
-        return view('account', ['name' => $name->name, 'tickets' => $entity->tickets->sortByDesc('incident_date'), 'id' => $id, 'viewname' => 'account', 'sites' => $sites_array, 'persons' => $persons_array, 'notes' => $notes_array , 'number' => session('randomnumber')]);
+        return view('account', ['name' => $name->name, 'page_tickets' => $page_tickets, 'id' => $id, 'viewname' => 'account', 'sites' => $sites_array, 'persons' => $persons_array, 'notes' => $notes_array , 'number' => session('randomnumber')])->render();
     }
 
 

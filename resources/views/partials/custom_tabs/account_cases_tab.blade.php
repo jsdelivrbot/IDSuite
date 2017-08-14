@@ -1,5 +1,5 @@
 <div class="tab-pane card-block active-outline-card-block-color-{{$tab_count}}" id="card-block-tab-{{$tab_count}}" role="tabpanel">
-        @if(count($tickets) === 0)
+        @if(count($page_tickets) === 0)
 
                 <h4 class="card-title text-white">Cases</h4>
 
@@ -9,18 +9,16 @@
 
 
 
-                <h4 class="card-title color-{{$tab_count}}">Cases<span class="float-right">Qty: {{count($tickets)}}</span></h4>
+                <h4 class="card-title color-{{$tab_count}}">Cases<span class="float-right">Qty: {{$page_tickets->total()}}</span></h4>
 
 
 
                 <div class="card-deck">
 
-                        @foreach($tickets as $ticket)
+                        @foreach($page_tickets as $ticket)
 
                                 @php
-                                        $number = $ticket->status_type;
-
-
+                                    $number = $ticket->status_type;
                                 @endphp
 
 
@@ -231,6 +229,13 @@
 
                         @endforeach
 
+
                 </div>
+
+        <div class="row">
+            <div class="mx-auto">
+                {{$page_tickets->links('partials.pagination.default')}}
+            </div>
+        </div>
         @endif
 </div>

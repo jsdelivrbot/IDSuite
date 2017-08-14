@@ -38,11 +38,11 @@
             @php
                 $tab_count++;
             @endphp
-            @include('partials.custom_tabs.account_transactions_tab')
+            @include('partials.custom_tabs.account_cases_tab')
             @php
                 $tab_count++;
             @endphp
-            @include('partials.custom_tabs.account_cases_tab')
+            @include('partials.custom_tabs.account_transactions_tab')
             @php
                 $tab_count++;
             @endphp
