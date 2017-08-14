@@ -125,7 +125,7 @@
                             <a class="nav-link btn-outline-yellow" style="color: white !important;" href="#">Reports</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn-outline-blue" style="color: white !important; white-space: nowrap;" href="/tickets">Support-Data</a>
+                            <a class="nav-link btn-outline-blue" style="color: white !important; white-space: nowrap;" href="/tickets">Cases</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn-outline-orange" style="color: white !important; white-space: nowrap;" href="/webrtc">Chat</a>
