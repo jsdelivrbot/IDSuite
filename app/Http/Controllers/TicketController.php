@@ -10,6 +10,7 @@ use App\Enums\EnumTicketType;
 use App\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class TicketController extends Controller
 {
@@ -20,15 +21,14 @@ class TicketController extends Controller
      */
     public function index()
     {
-//        $tickets = DB::table('ticket')->orderBy('ticket_type')->get();
+        $page_ticket = new Ticket;
 
-        $tickets = Ticket::where('status_type','<', 6)
-            ->orderBy('status_type')
-            ->get();
+        $page_tickets = $page_ticket->where('status_type','<', 6)
+            ->orderBy('status_type')->paginate(50);
 
         $tickets_array = array();
 
-        foreach ($tickets as $t){
+        foreach ($page_tickets as $t){
 
             $ticket = new \stdClass();
 
@@ -44,13 +44,9 @@ class TicketController extends Controller
             $ticket->type = EnumTicketType::getValueByKey($t->ticket_type);
             $ticket->priority = EnumPriorityType::getValueByKey($t->priority_type);
             $ticket->status = EnumTicketStatusType::getValueByKey($t->status_type);
-
-
-
             $ticket->subject = $t->subject;
             $ticket->status_type = $t->status_type;
-            $ticket->reference_id = $t->reference_id;
-
+            $ticket->reference_id = $t->references()['netsuite'];
             $ticket->duration = $t->duration();
 
 
@@ -58,7 +54,50 @@ class TicketController extends Controller
 
         }
 
-        return view('tickets', ['tickets' => $tickets_array, 'viewname' => 'Cases']);
+
+        return view('tickets', ['tickets' => $tickets_array, 'page_tickets' => $page_tickets, 'viewname' => 'Cases']);
+    }
+
+
+    public function filter(){
+
+        $filter = Input::get('filter');
+
+        $page_ticket = new Ticket;
+
+        $page_tickets = $page_ticket->paginate(15);
+
+        $tickets_array = array();
+
+        foreach ($page_tickets as $t){
+
+            $ticket = new \stdClass();
+
+            $ticket->id = $t->id;
+
+            if($t->entity === null){
+                $ticket->entity_name = "Unassigned";
+            } else {
+                $ticket->entity_name = $t->entity->contact->name->name;
+            }
+
+            $ticket->origin = EnumOriginType::getValueByKey($t->origin_type);
+            $ticket->type = EnumTicketType::getValueByKey($t->ticket_type);
+            $ticket->priority = EnumPriorityType::getValueByKey($t->priority_type);
+            $ticket->status = EnumTicketStatusType::getValueByKey($t->status_type);
+            $ticket->subject = $t->subject;
+            $ticket->status_type = $t->status_type;
+            $ticket->reference_id = $t->references()['netsuite'];
+            $ticket->duration = $t->duration();
+
+
+            $tickets_array[] = $ticket;
+
+        }
+
+
+        return view('tickets', ['tickets' => $tickets_array, 'viewname' => 'Cases', 'page_tickets' => $page_tickets])->render();
+
     }
 
     /**

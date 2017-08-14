@@ -137,6 +137,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/tickets/{id}', 'TicketController@show');
 
+    Route::get('/filter/tickets/', 'TicketController@filter');
 
 
     Route::get('/webrtc', 'WebRtcController@index');
