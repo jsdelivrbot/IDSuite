@@ -9,7 +9,7 @@
 namespace App\Enums;
 
 
-class EnumModelType extends Enum
+class EnumPhoneNumberType extends Enum
 {
 
     public static $class_code = 'PHN';

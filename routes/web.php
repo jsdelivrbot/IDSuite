@@ -100,6 +100,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/genderEnum', 'EnumController@gender');
 
+    Route::get('/phoneTypeEnum', 'EnumController@phoneType');
+
 
     // Note Routes //
 

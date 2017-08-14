@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Enums\EnumClassCode;
-use App\Enums\EnumGender;
+use App\Enums\EnumGenderType;
 use App\Enums\EnumModelType;
-use App\Enums\EnumStatus;
-use App\Enums\EnumTitle;
+use App\Enums\EnumPhoneNumberType;
+use App\Enums\EnumStatusType;
+use App\Enums\EnumTitleType;
 use Faker\Generator;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class EnumController extends Controller
      *  returns gender enum
      */
     public function gender(){
-        $genders = EnumGender::getValues();
+        $genders = EnumGenderType::getValues();
 
         return response()->json([
             'data' => $genders
@@ -51,7 +52,7 @@ class EnumController extends Controller
      *  returns status enum
      */
     public function status(){
-        $status = EnumStatus::getKeys();
+        $status = EnumStatusType::getKeys();
 
         return response()->json([
             'data' => $status
@@ -62,11 +63,22 @@ class EnumController extends Controller
      *  returns title enum
      */
     public function title(){
-        $titles = EnumTitle::getValues();
+        $titles = EnumTitleType::getValues();
 
         return response()->json([
             'data' => $titles
         ]);
     }
+
+
+    public function phoneType(){
+        $phonetypes = EnumPhoneNumberType::getValues();
+
+        return response()->json([
+            'data' => $phonetypes
+        ]);
+    }
+
+
 
 }
