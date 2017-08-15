@@ -182,7 +182,10 @@
 }
 
 
-
+.card-purple{
+    background-color: #9F86FF !important;
+    color: white !important;
+}
 
 
 
@@ -309,7 +312,10 @@
 }
 
 
-
+.card-orange{
+    background-color: #d59043 !important;
+    color: white !important;
+}
 
 
 
@@ -430,7 +436,10 @@
     transition: all 0.5s ease;
 }
 
-
+.card-pink{
+    background-color: #E64759 !important;
+    color: white !important;
+}
 
 
 
@@ -562,6 +571,10 @@
     border-color: #E4D836;
 }
 
+.card-yellow{
+    background-color: #E4D836 !important;
+    color: white !important;
+}
 
 
 
@@ -673,6 +686,10 @@
     border-color: #1ca8dd;
 }
 
+.card-blue{
+    background-color: #1ca8dd !important;
+    color: white !important;
+}
 
 
 
@@ -799,6 +816,10 @@
     border-color: #1BC98E;
 }
 
+.card-teal{
+    background-color: #1BC98E !important;
+    color: white !important;
+}
 
 
 

@@ -37,12 +37,74 @@
         </div>
 
     </section>
+
     <div class="col-lg-6 offset-3">
         <hr style="border-top: 2px solid rgba(255, 255, 255, 0.2) !important;">
-
-        {{--<div id="container"></div>--}}
-
     </div>
+
+    <section class="mb-lg-2 mt-lg-4">
+        <div class="card-deck">
+            <div class="card card-purple">
+                <div class="card-block">
+                    <div class="text-center">
+                        <h4 class="card-title"># Closed</h4>
+                        <h1 class="card-title">{{$number_closed}}</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-orange">
+                <div class="card-block">
+                    <div class="text-center">
+                        <h4 class="card-title"># In Progress</h4>
+                        <h1 class="card-title">{{$number_in_progress}}</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-pink">
+                <div class="card-block">
+                    <div class="text-center">
+                        <h4 class="card-title"># less than 60D</h4>
+                        <h1 class="card-title">{{$number_less_60}}</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-blue">
+                <div class="card-block">
+                    <div class="text-center">
+                        <h4 class="card-title"># Re-opened</h4>
+                        <h1 class="card-title">{{$number_reopened}}</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-yellow">
+                <div class="card-block">
+                    <div class="text-center">
+                        <h4 class="card-title"># Pending</h4>
+                        <h1 class="card-title">{{$number_pending}}</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-teal">
+                <div class="card-block">
+                    <div class="text-center">
+                        <h4 class="card-title"># closed first call</h4>
+                        <h1 class="card-title">{{$number_closed_call}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="col-lg-6 offset-3">
+        <hr style="border-top: 2px solid rgba(255, 255, 255, 0.2) !important;">
+    </div>
+
     <section id="cards">
 
             @foreach($tickets as $ticket)
