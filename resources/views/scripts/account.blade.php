@@ -11,6 +11,9 @@
 <script src="{{asset('assets/amcharts/plugins/dataloader/dataloader.js')}}"></script>
 <script src="{{asset('assets/amcharts/themes/dark.js')}}"></script>
 <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script src="{{asset('assets/js/jquery.validate.js')}}"></script>
+<script src="{{asset('assets/js/additional-methods.js')}}"></script>
+
 
 @stack('custom_tabs')
 @stack('account_scripts')
@@ -19,3 +22,4 @@
 @stack('account_deviceupstatus_chart')
 @stack('account_deviceupstatuspercent_chart')
 @stack('account_ping_line_chart')
+@stack('account_contacts')

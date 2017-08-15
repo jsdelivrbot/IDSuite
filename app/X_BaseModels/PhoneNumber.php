@@ -33,7 +33,7 @@ class PhoneNumber extends Model
      * Email constructor.
      * @param array $attributes
      */
-    public function __construct($phonenumber = null, $type=null, $attributes = array())  {
+    public function __construct($phonenumber = null, $type = null, $attributes = array())  {
         parent::__construct($attributes);
         // Your construct code.
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\EndpointModel;
 use App\Entity;
+use App\Enums\EnumPhoneNumberType;
 use App\Ticket;
 use App\User;
 use App\EntityContact;
@@ -134,9 +135,13 @@ class EntityController extends Controller
 
                 $person = new \stdClass();
 
-                $person->fullname = $p->personname->first_name . ' ' . $p->personname->last_name;
+                $person->fullname = $p->name->first_name . ' ' . $p->name->last_name;
 
-                $person->number = $p->phonenumber->number;
+                $person->number = $p->phonenumber->rawnumber;
+
+                $person->phonetype = EnumPhoneNumberType::getValueByKey($p->phonenumber->phone_type);
+
+                $person->email = $p->email->address;
 
                 $person->address = $p->location->address;
 

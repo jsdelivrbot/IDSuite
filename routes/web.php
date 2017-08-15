@@ -112,6 +112,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/proxy/{id}', 'ProxyController@show');
 
 
+    // PersonContact routes //
+
+    Route::post('/personcontacts', 'PersonContactController@create');
+
+
     // Random Number Route //
 
     Route::get('/getRandomNumber', 'RandomNumberController@getRandomNumber');
