@@ -16,6 +16,7 @@ package-lock.json
 ip2location.csv
 public/assets/css/*
 public/assets/js/*
+public/*
 *.csv
 *.lock
 public/assets/amcharts/amcharts.js
@@ -353,3 +354,6 @@ public/assets/lang/so.js
 public/assets/lang/th.js
 public/assets/lang/tr.js
 public/assets/lang/zh.js
+public/assets/amcharts/
+public/assets/lang/
+resources/views/vendor/
