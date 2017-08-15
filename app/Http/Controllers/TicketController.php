@@ -28,6 +28,14 @@ class TicketController extends Controller
 
         $tickets_array = array();
 
+        $number_closed = 0;
+        $number_in_progress = 0;
+        $number_less_60 = 0;
+        $number_reopened = 0;
+        $number_pending = 0;
+        $number_closed_call = 0;
+
+
         foreach ($page_tickets as $t){
 
             $ticket = new \stdClass();
@@ -47,15 +55,40 @@ class TicketController extends Controller
             $ticket->subject = $t->subject;
             $ticket->status_type = $t->status_type;
             $ticket->reference_id = $t->references()['netsuite'];
+
+
             $ticket->duration = $t->duration();
 
+            if($t->status_type === 6){
+                $number_closed++;
+            }
+
+            if($t->status_type === 3){
+                $number_pending++;
+            }
+
+            if($t->status_type === 2){
+                $number_reopened++;
+            }
+
+            if($t->status_type === 1){
+                $number_in_progress++;
+            }
+
+            if($t->status_type === 8){
+                $number_closed_call++;
+            }
+
+            if($ticket->duration < 5184000){
+                $number_less_60++;
+            }
 
             $tickets_array[] = $ticket;
 
         }
 
 
-        return view('tickets', ['tickets' => $tickets_array, 'page_tickets' => $page_tickets, 'viewname' => 'Cases']);
+        return view('tickets', ['tickets' => $tickets_array, 'page_tickets' => $page_tickets, 'viewname' => 'Cases', 'number_closed' => $number_closed, 'number_in_progress' => $number_in_progress, 'number_less_60' => $number_less_60, 'number_reopened' => $number_reopened, 'number_pending' => $number_pending, 'number_closed_call' => $number_closed_call]);
     }
 
 
@@ -69,6 +102,14 @@ class TicketController extends Controller
 
         $tickets_array = array();
 
+        $number_closed = 0;
+        $number_in_progress = 0;
+        $number_less_60 = 0;
+        $number_reopened = 0;
+        $number_pending = 0;
+        $number_closed_call = 0;
+
+
         foreach ($page_tickets as $t){
 
             $ticket = new \stdClass();
@@ -91,12 +132,36 @@ class TicketController extends Controller
             $ticket->duration = $t->duration();
 
 
+            if($t->status_type === 6){
+                $number_closed++;
+            }
+
+            if($t->status_type === 3){
+                $number_pending++;
+            }
+
+            if($t->status_type === 2){
+                $number_reopened++;
+            }
+
+            if($t->status_type === 1){
+                $number_in_progress++;
+            }
+
+            if($t->status_type === 8){
+                $number_closed_call++;
+            }
+
+            if($ticket->duration < 5184000){
+                $number_less_60++;
+            }
+
             $tickets_array[] = $ticket;
 
         }
 
 
-        return view('tickets', ['tickets' => $tickets_array, 'viewname' => 'Cases', 'page_tickets' => $page_tickets])->render();
+        return view('tickets', ['tickets' => $tickets_array, 'viewname' => 'Cases', 'page_tickets' => $page_tickets, 'number_closed' => $number_closed, 'number_in_progress' => $number_in_progress, 'number_less_60' => $number_less_60, 'number_reopened' => $number_reopened, 'number_pending' => $number_pending, 'number_closed_call' => $number_closed_call])->render();
 
     }
 
