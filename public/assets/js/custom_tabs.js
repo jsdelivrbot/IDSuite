@@ -60,20 +60,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 17:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(18);
-
-
-/***/ }),
-
-/***/ 18:
+/***/ 10:
 /***/ (function(module, exports) {
 
 /**
@@ -236,19 +228,19 @@ $("#notes").click(function () {
     bar_two.set(0);
     // bar_two.to({color: '#1BC98E'});
 
-    bar_one.animate(1.0, { to: { color: '#1BC98E' } }); // Number from 0.0 to 1.0
-    bar_two.animate(-1.0, { to: { color: '#1BC98E' } }); // Number from 0.0 to 1.0
+    bar_one.animate(1.0, { to: { color: '#E4D836' } }); // Number from 0.0 to 1.0
+    bar_two.animate(-1.0, { to: { color: '#E4D836' } }); // Number from 0.0 to 1.0
 });
 
 var bar_one = new ProgressBar.Line(container_one, {
     strokeWidth: 1,
     easing: 'easeInOut',
     duration: 1400,
-    color: '#E4D836',
+    color: '#fff',
     trailColor: 'transparent',
     trailWidth: 1,
     svgStyle: { width: '100%', height: '100%' },
-    from: { color: '#E4D836' },
+    from: { color: '#fff' },
     to: { color: '#E64759' },
     step: function step(state, bar) {
         bar.path.setAttribute('stroke', state.color);
@@ -259,11 +251,11 @@ var bar_two = new ProgressBar.Line(container_two, {
     strokeWidth: 1,
     easing: 'easeInOut',
     duration: 1400,
-    color: '#E4D836',
+    color: '#fff',
     trailColor: 'transparent',
     trailWidth: 1,
     svgStyle: { width: '100%', height: '100%' },
-    from: { color: '#E4D836' },
+    from: { color: '#fff' },
     to: { color: '#E64759' },
     step: function step(state, bar) {
         bar.path.setAttribute('stroke', state.color);
@@ -272,6 +264,14 @@ var bar_two = new ProgressBar.Line(container_two, {
 
 bar_one.animate(1.0); // Number from 0.0 to 1.0
 bar_two.animate(-1.0); // Number from 0.0 to 1.0
+
+/***/ }),
+
+/***/ 9:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(10);
+
 
 /***/ })
 
