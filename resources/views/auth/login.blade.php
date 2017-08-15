@@ -47,7 +47,7 @@
 
                             <div class="form-group">
 
-                                <button type="submit" class="btn" style="background-color: #5cb85c">
+                                <button type="submit" class="btn btn-nav-teal" >
                                     Login
                                 </button>
 
