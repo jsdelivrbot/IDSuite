@@ -130,6 +130,8 @@ class EntityController extends Controller
 
         $persons_array = array();
 
+        $count = 0;
+
         if(count($entity->persons) > 0) {
             foreach ($entity->persons as $p) {
 
@@ -149,8 +151,26 @@ class EntityController extends Controller
                 $person->state = $p->location->state;
                 $person->zip = $p->location->zipcode;
 
+                // TODO update badges when we start pulling in real data. //
+
+                if($count === 0) {
+
+                    $person->badges = array(
+                        'IDSuite',
+                        'Manual'
+                    );
+
+                } else {
+                    $person->badges = array(
+                        'NetSuite',
+                        'Trust',
+                        'IDSuite'
+                    );
+                }
                 $persons_array[] = $person;
 
+
+                $count++;
             }
         }
 
@@ -174,6 +194,7 @@ class EntityController extends Controller
         $page_tickets = $page_ticket->where('entity_id','=',$entity->id)->paginate(15);
 
         session(['randomnumber' => rand(1,5)]);
+
 
         return view('account', ['name' => $name->name, 'page_tickets' => $page_tickets, 'id' => $id, 'viewname' => 'account', 'sites' => $sites_array, 'persons' => $persons_array, 'notes' => $notes_array , 'number' => session('randomnumber')])->render();
     }

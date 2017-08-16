@@ -94,7 +94,6 @@
         </div>
 
         <div class="col-lg-12 mt-5 mb-4" style="padding: 0;">
-            {{--<hr class="mt-5" style="border-color: rgba(255, 255, 255, 0.2);">--}}
             <div class="row no-gutters">
                 <div class="col-lg-6">
                     <div id="container_two"></div>
@@ -408,12 +407,6 @@
 
     });
 
-    let charts = [];
-
-    let url = "/img/ids_logo.png";
-
-    let logo;
-
     function getDataUri(url, callback) {
         let image = new Image();
 
@@ -430,16 +423,10 @@
         image.src = url;
     }
 
-    let header_img;
-
-    let layout_1;
-
-    getDataUri(url, function(dataurl){
-
-        header_img = dataurl;
+    function generateLayout(header, footer, topbar, bottombar, charts, chartobject, callback){
 
 
-         layout_1 = {
+        let layout = {
             pageMargins: [ 40, 100, 40, 40 ],
 
             /*
@@ -447,9 +434,9 @@
              */
             header: function( currentPage, totalPage ) {
                 return {
-                    image: "logo",
-                    fit: [ 900, 70 ],
-                    margin: 20
+                    image: "header",
+                    fit: [600, 70],
+                    margin: 30
                 }
             },
 
@@ -459,11 +446,18 @@
                  ** PAGE 1
                  */
                 {
-                    text: "Fawzi is awesome",
-                    style: ["header","safetyDistance"]
+                    image: "topbar",
+                    fit: [900, 70],
+                    margin: [-40, 20, 20, 20]
+                },
+                {
+                    text: "Monthly Report",
+                    style: ["header","safetyDistance"],
+                    alignment: "center"
                 }, {
-                    text: "This is just a paragraph to see if your actually reading it.",
-                    style: "safetyDistance"
+                    text: "Generation Detail: by IDSolutions",
+                    style: "safetyDistance",
+                    alignment: "center"
                 }, {
                     columnGap: 40,
                     columns: [ {
@@ -474,7 +468,7 @@
                             text: "This is the graph from the top of the account pag",
                             style: "description"
                         }, {
-                            image: "image_1",
+                            image: "chart1",
                             fit: [ ( 595.28 / 2 ) - 60, ( 595.28 / 2 ) - 60 ] // 1 column width incl. margins
                         } ]
                     }, {
@@ -485,41 +479,18 @@
                             text: "This is the same darn thing",
                             style: "description"
                         }, {
-                            image: "image_1",
+                            image: "chart1",
                             fit: [ ( 595.28 / 2 ) - 60, ( 595.28 / 2 ) - 60 ] // 1 column width incl. margins
                         } ]
                     } ],
                     style: "safetyDistance"
-                }, {
-                    text: "Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....Amac Owns....",
-                    pageBreak: "after"
                 },
-
-
-                /*
-                 ** Page 2; Forced through "pageBreak"
-                 */
                 {
-                    text: "This is a header, using header style",
-                    style: ["header","safetyDistance"]
-                }, {
-                    columnGap: 40,
-                    columns: [ {
-                        stack: [ {
-                            text: "Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....Amac Owns Even More....",
-                            style: "safetyDistance"
-                        }, {
-                            image: "image_1",
-                            fit: [ ( 595.28 / 2 ) - 60, ( 595.28 / 2 ) - 60 ] // 1 column width incl. margins
-                        } ]
-                    }, {
-                        stack: [ {
-                            image: "image_1",
-                            fit: [ ( 595.28 / 2 ) - 60, ( 595.28 / 2 ) - 60 ], // 1 column width incl. margins
-                            style: "safetyDistance"
-                        }]
-                    } ]
+                    image: "bottombar",
+                    fit: [900, 70],
+                    margin: [-40, 375, 20, 20]
                 }
+
             ],
 
             /*
@@ -527,7 +498,8 @@
              */
             footer: function( currentPage, totalPage ) {
                 return {
-                    text: [ currentPage, "/", totalPage ].join( "" ),
+                    image: "footer",
+                    fit: [150, 350],
                     alignment: "center"
                 }
             },
@@ -557,40 +529,113 @@
              ** Predefined images
              */
             images: {
-                logo: header_img
+                header: header,
+                topbar: topbar,
+                bottombar: bottombar,
+                footer: footer,
+                chart1: charts[0]
             }
         };
 
+        callback(chartobject, layout);
+    }
+
+    let charts = [];
+
+    let header = "/img/global_presence_heading.png";
+    let topbar = "/img/global_presence_top_bar.png";
+    let bottombar = "/img/global_presence_bottom_bar.png";
+    let footer = "/img/customer_care_heading.png";
+
+    let layout_1;
+
+    getDataUri(header, function(dataurl) {
+        header = dataurl;
+        getDataUri(topbar, function(dataurl){
+            topbar = dataurl;
+            getDataUri(bottombar, function(dataurl){
+                bottombar = dataurl;
+                getDataUri(footer, function(dataurl){
+                    footer = dataurl;
+
+                })
+            })
+        })
     });
+
     
     function createReport() {
+
+
         let pdf_images = 0;
         let pdf_layout = layout_1; // loaded from another JS file
-        for ( index in charts ) {
-            let chartobject = charts[index];
-            // Capture current state of the chart
-            chartobject.AmExport.capture( {}, function() {
-                // Export to PNG
-                this.toPNG( {
-                    multiplier: 2 // pretend to be lossless
 
-                    // Add image to the layout reference
-                }, function( data ) {
-                    pdf_images++;
-                    pdf_layout.images[ "image_" + pdf_images ] = data;
 
-                    // Once all has been processed create the PDF
-                    if ( pdf_images === AmCharts.charts.length ) {
+//        let chartids = ['devicebytype', 'chart1'];
 
-                        // Save as single PDF and offer as download
-                        this.toPDF( pdf_layout, function( data ) {
-                            this.download( data, this.defaults.formats.PDF.mimeType, "amcharts.pdf" );
-                        } );
-                    }
-                } );
-            } );
+        let chartids = ['chart1'];
+
+        let charts = {};
+
+        let charts_remaining = chartids.length;
+
+        for (let i = 0; i < chartids.length; i++){
+
+            for (let x = 0; x < AmCharts.charts.length; x++){
+
+                if (AmCharts.charts[x].div.id === chartids[i]){
+
+                    charts[chartids[i]] = AmCharts.charts[x];
+
+                }
+
+            }
+
         }
+
+
+        for (let x in charts){
+            if(charts.hasOwnProperty(x)){
+
+                let chart = charts[x];
+
+                chart["export"].capture({}, function(){
+                    this.toPNG({}, function(data){
+
+                        this.setup.chart.exportedImage = data;
+
+                        charts_remaining--;
+
+                        if(charts_remaining === 0){
+
+                            let chartes = [data];
+
+                            generateLayout(header, footer, topbar, bottombar, chartes, this, generatePdf);
+
+                        }
+
+                    })
+
+                })
+
+            }
+
+        }
+
     }
+
+
+    function generatePdf(chartobject, layout){
+
+        console.log(layout);
+
+        chartobject.toPDF( layout, function( data ) {
+            chartobject.download( data, this.defaults.formats.PDF.mimeType, "amcharts.pdf" );
+        } );
+
+    }
+
+
 
 </script>
 
