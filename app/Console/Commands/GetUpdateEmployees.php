@@ -3,6 +3,9 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Http\Controllers\Netsuite;
+
+
 use DB;
 class GetUpdateEmployees extends Command
 {
@@ -37,6 +40,7 @@ class GetUpdateEmployees extends Command
      */
     public function handle()
     {
-        //
+        $service = Netsuite\NetsuiteDatabase::AddUpdateAllEmployees();
+
     }
 }

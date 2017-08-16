@@ -45,9 +45,14 @@ class TestController extends Controller
     public function test_netsuite() {
 
       //  NetsuiteDatabase::AddUpdateAllCustomers();
+        $output =   Netsuite\NetsuiteDatabase::AddUpdateAllEmployees();
 
-        $service = Netsuite\NetsuiteDatabase::AddUpdateAllCustomers();
+        //$output =   Netsuite\NetsuiteDatabase::AddUpdateAllCustomers();
 
+      //  $service = new Netsuite\NetsuiteController();
+       // $output = $service->getCustomer(27033);
+
+        dd($output);
 
 
 

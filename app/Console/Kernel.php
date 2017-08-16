@@ -15,7 +15,6 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         '\App\Console\Commands\GetUpdateCustomers',
         '\App\Console\Commands\GetUpdateEmployees',
-        '\App\Console\Commands\GetUpdateSalesRep',
 
     ];
 
@@ -35,7 +34,6 @@ class Kernel extends ConsoleKernel
         // netsuite fetches
         $schedule->command('GetUpdateEmployees:getemployees') ->dailyAt("3:00");
         $schedule->command('GetUpdateCustomers:getcustomers') ->dailyAt("2:00");
-        $schedule->command('GetUpdateSalesRep:getsalesrep') ->everyThirtyMinutes();
 
     }
 

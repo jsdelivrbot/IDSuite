@@ -49,8 +49,17 @@ class DynamicEnumValue extends Model
     }
 
 
-    public static function getByValue($ref_id){
-        $result = DynamicEnumValue::where('value', '=', $ref_id)->first();
+    public static function getByValue($ref_id, $type = null) {
+        $dev = new DynamicEnumValue;
+
+        if($type == null){
+            $result = $dev->where('value', '=', $ref_id)->first();
+        }
+        else {
+            $result = $dev->where('value', '=', $ref_id)->where('value_type', '=', $type)->first();
+
+        }
+
         return $result;
     }
 

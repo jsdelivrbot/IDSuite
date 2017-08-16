@@ -41,7 +41,7 @@ class GetUpdateCustomers extends Command
     {
 
 
-        $service =Netsuite\NetsuiteDatabase::AddUpdateAllCustomers();
+        $output = Netsuite\NetsuiteDatabase::AddUpdateAllCustomers();
 
 
 

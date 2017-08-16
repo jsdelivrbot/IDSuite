@@ -35,8 +35,9 @@ class NetsuiteController extends \App\Http\Controllers\Controller
         //optional -------------------------------------
         "logging"  => true,
         "log_path" => $log_path
-    );
+         );
 
+         $soap_config =  [   "exceptions" => true];
 
          if(self::AUTH_TYPE == 'user') {
              //user based authentication
@@ -55,8 +56,10 @@ class NetsuiteController extends \App\Http\Controllers\Controller
          }
 
 
-        $this->service = new NetSuiteService($config);
+
+        $this->service = new NetSuiteService($config, $soap_config);
         $this->service->logRequests(true);
+
 
     }
 
