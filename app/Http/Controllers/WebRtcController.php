@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Aloha\Twilio\Support\Laravel\Facade as Phone;
+use Illuminate\Support\Facades\Input;
+use Mockery\Exception;
 
 class WebRtcController extends Controller
 {
@@ -14,6 +17,33 @@ class WebRtcController extends Controller
     public function index()
     {
         return view('webrtc', ['viewname' => 'webrtc']);
+    }
+
+    public function sendMessage(){
+
+        try {
+            $number = Input::get('number');
+            $text = Input::get('text');
+
+            Phone::message($number, $text);
+
+            $response = "Sent!";
+
+            $status = "success";
+
+        } catch(\Services_Twilio_RestException $e){
+
+            $status = "error";
+
+            $response = $e->getMessage();
+
+        }
+
+        return response()->json([
+            'status' => $status,
+            'data'   => $response
+        ]);
+
     }
 
     /**

@@ -147,10 +147,20 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/filter/tickets/', 'TicketController@filter');
 
 
+    // Trust Routes //
+
+    Route::get('trust', function(){
+        return view('trust.trustdata', ['viewname' => 'Trust']);
+    });
+
+
 
     // WebRTC Routes //
 
     Route::get('/webrtc', 'WebRtcController@index');
+
+
+    Route::post('/twilio', 'WebRtcController@sendMessage');
 
 
 });

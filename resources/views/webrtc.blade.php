@@ -3,59 +3,168 @@
 
 @section('content')
 
-
-    <div class="text-white">
-
-
-        <div id="messenger-wrapper" class="mt-3">
-            <div class="container">
-                <h1>Peer Messenger</h1>
-
-                <div id="connect">
-                    <h4>ID: <span id="id"></span></h4>
-                    <input type="text" name="name" id="name" placeholder="Name">
-                    <input type="text" name="peer_id" id="peer_id" placeholder="Peer ID">
-                    <div id="connected_peer_container" class="hidden">
-                        Connected Peer:
-                        <span id="connected_peer"></span>
-                    </div>
-                    <button id="login">Login</button>
-                </div>
-
-                <div id="chat" class="hidden">
-                    <div id="messages-container">
-                        <ul id="messages"></ul>
-                    </div>
-                    <div id="message-container">
-                        <input type="text" name="message" id="message" placeholder="Type message..">
-                        <button id="send-message">Send Message</button>
-                        <button id="call">Call</button>
-                    </div>
-                </div>
-
-
-                <div id="peer-camera" class="camera">
-                    <video width="300" height="300" autoplay></video>
-                </div>
-
+    <div class="text-white mt-4">
+        <div class="row">
+            <div class="col-4 offset-1">
+                <h2>SMS Message</h2>
             </div>
-
-
         </div>
 
-        <script id="messages-template" type="text/x-handlebars-template">
-            @{{#each messages}}
-            <li>
-                <span class="from">@{{from}}:</span> @{{text}}
-            </li>
-            @{{/each}}
-        </script>
+        <div class="col-lg-10 offset-1">
+            <hr style="border-top: 2px solid rgba(255, 255, 255, 1) !important;">
+        </div>
+
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="ml-lg-5 col-4">
+                <div class="ml-4 form-group row">
+                    <label for="text-number" class="col-2 col-form-label">Telephone</label>
+                    <div class="col-4">
+                        <input class="form-control" type="tel" placeholder="3175551234" id="text-number">
+                    </div>
+                </div>
+                <div class="ml-4 form-group row">
+                    <label for="text-message" class="col-2 col-form-label">Message</label>
+                    <div class="col-10">
+                        <textarea class="form-control" type="text" placeholder="Type your message..." id="text-message"></textarea>
+                    </div>
+                </div>
+                <button id='text-button' type="button" class="btn btn-primary float-right">Send</button>
+            </div>
+            <div id="message-status" class="col-6">
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4 offset-1">
+                <h2>Peer Video and Messaging</h2>
+            </div>
+        </div>
+
+        <div class="col-lg-10 offset-1">
+            <hr style="border-top: 2px solid rgba(255, 255, 255, 1) !important;">
+        </div>
+
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-5" id="connect">
+                <div class="ml-lg-5 form-group row">
+                    <label for="name" class="col-1 col-form-label">ID</label>
+                    <div class="col-5">
+                        <input class="form-control" type="text" name="name" id="name" placeholder="Name">
+                    </div>
+                    <div class="col-5">
+                        <input class="form-control" type="text" name="peer_id" id="peer_id" placeholder="Peer ID">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div id="connected_peer_container" class="hidden">
+                    Connected Peer:
+                    <span id="connected_peer"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-1"></div>
+            <div id="chat" class="hidden col-5">
+                <div class="ml-lg-5 form-group row">
+                    <label for="message" class="col-1 col-form-label">Text</label>
+                    <div class="col-10">
+                        <textarea class="form-control" type="text" placeholder="Type your message..." id="message"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2 ml-lg-5">
+            <div class="col-1"></div>
+            <div class="col-5">
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-2">
+                        <button id="login" type="button" class="btn btn-primary">Login</button>
+                    </div>
+                    <div class="col-8">
+                        <button id="send-message" type="button" class="btn btn-primary float-right mr-4">Send Message</button>
+                        <button id="call" type="button" class="btn btn-primary float-right mr-3">Call</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div id="peer-camera" class="camera">
+                <video width="300" height="300" autoplay></video>
+            </div>
+        </div>
+
     </div>
 
 @endsection
 
 
 @push('webrtc')
+
+<script id="messages-template" type="text/x-handlebars-template">
+    @{{#each messages}}
+    <li>
+        <span class="from">@{{from}}:</span> @{{text}}
+    </li>
+    @{{/each}}
+</script>
+
+<script>
+
+    $('#text-button').click(function(){
+
+
+
+        $.ajax({
+            url: "/twilio",
+            method: "POST",
+            data: {
+                number: $('#text-number').val(),
+                text: $('#text-message').val()
+            },
+            success: function(data){
+
+                console.log(data)
+
+                if(data.status === "success"){
+
+                    $('#message-status')
+                        .empty()
+                        .append('<span style="color: green">Message successfully sent.</span>');
+
+                }
+                else{
+
+                    $('#message-status')
+                        .empty()
+                        .append('<span style="color: red">'+data.data+'</span>');
+
+                }
+
+
+            },
+            error: function(data){
+
+                alert('There was an error. this is the message: ' + data);
+
+            }
+        })
+
+    });
+
+
+</script>
+
+
 
 <script>
 
