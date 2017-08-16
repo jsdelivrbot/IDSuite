@@ -105,7 +105,7 @@
 
     <div class="container-fluid">
 
-        @if (!auth::guest() && $viewname !== 'App Selection')
+        @if (!auth::guest() && $viewname !== 'App Selection' && $viewname !== 'Trust')
             <div class="row">
 
                 <div class="col-sm-3 col-md-2 col-lg-2 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important; padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">

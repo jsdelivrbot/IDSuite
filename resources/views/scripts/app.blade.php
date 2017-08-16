@@ -14,6 +14,8 @@
     @include('scripts.devices')
 @elseif($viewname === 'Transactions' || $viewname === 'DataTables')
     @include('scripts.transaction')
+@elseif($viewname === 'Trust')
+    @include('scripts.trust')
 @elseif($viewname === 'webrtc')
     @include('scripts.webrtc')
 @endif
