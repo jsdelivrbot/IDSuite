@@ -1,14 +1,25 @@
     <section class="offset-lg-1 col-lg-10">
-        <table class="table table-bordered hide" id="records-table">
+        <table class="table table-bordered hide" id="records-table" style="border-radius: 15px">
             <thead>
             <tr>
-                <th>Local Name</th>
-                <th>Remote Name</th>
-                <th>Start Time</th>
-                <th>Duration</th>
-                <th>Details</th>
+                <th style="border: none">Local Name</th>
+                <th style="border: none">Remote Name</th>
+                <th style="border: none">Start Time</th>
+                <th style="border: none">Duration</th>
+                <th style="border: none">Direction</th>
+                <th style="border: none">Details</th>
             </tr>
             </thead>
+            <tfoot>
+                <tr class="text-white">
+                    <th style="border: none"></th>
+                    <th style="border: none"></th>
+                    <th style="border: none"></th>
+                    <th style="border: none"></th>
+                    <th style="border: none"></th>
+                    <th style="border: none"></th>
+                </tr>
+            </tfoot>
         </table>
     </section>
 
@@ -156,13 +167,35 @@
                 },
                 {
                     targets: 4,
+                    data: 'direction',
+                    name: 'direction',
+                    defaultContent: "<i>Not Available<i>",
+                    render: function (data) {
+
+
+
+                        if(data === "in"){
+
+                            return '<i class="fa fa-phone"></i> <i class="fa fa-arrow-left"></i>';
+
+                        } else if(data === "out") {
+
+                            return '<i class="fa fa-phone"></i> <i class="fa fa-arrow-right"></i>';
+
+                        } else {
+
+                            return '<span>Unknown</span>';
+
+                        }
+
+                    }
+                },
+                {
+                    targets: 5,
                     data: 'record_id',
                     name: 'id',
                     className: "text-center",
                     render: function (data, type, full, meta) {
-
-                        console.log('data : ' + data);
-
                         return '<button class="btn btn-nav-teal" data-toggle="modal" data-target="#detailModal" onclick="getRecordDetails(\'' + data + '\')">Details</button>';
                     }
                 },

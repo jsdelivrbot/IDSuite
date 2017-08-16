@@ -35,12 +35,12 @@ class DatatablesController extends Controller
         if($id === null) {
             $records = DB::table('record')
                 ->leftjoin('timeperiod', 'record.timeperiod_id', '=', 'timeperiod.id')
-                ->select('record.id as record_id', 'local_name', 'remote_name', 'start', 'duration');
+                ->select('record.id as record_id', 'local_name', 'remote_name', 'start', 'direction', 'duration');
         } else {
             $records = DB::table('record')
                 ->leftjoin('timeperiod', 'record.timeperiod_id', '=', 'timeperiod.id')
                 ->leftjoin('endpoint', 'record.endpoint_id', '=', 'endpoint.id')
-                ->select('record.id as record_id', 'local_name', 'remote_name', 'start', 'duration')
+                ->select('record.id as record_id', 'local_name', 'remote_name', 'start', 'direction', 'duration')
                 ->where('endpoint.entity_id', '=', $id);
         }
 
