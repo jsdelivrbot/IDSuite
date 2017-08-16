@@ -1,5 +1,10 @@
 <div class="card card-square mb-lg-5" style="background-color: transparent; border: none;">
-    <ul id="account-card-header" class="nav nav-tabs active-outline-card-header-color-1" role="tablist">
+
+    @if(strpos(request()->getQueryString(), 'page' ) !== false)
+        <ul id="account-card-header" class="nav nav-tabs active-outline-card-header-color-4" role="tablist">
+    @else
+        <ul id="account-card-header" class="nav nav-tabs active-outline-card-header-color-1" role="tablist">
+    @endif
 
         @if($viewname === 'account')
 
@@ -165,41 +170,80 @@ $(function() {
                 bar_two.animate(-1.0, {to: {color: color}});  // Number from 0.0 to 1.0
             });
         }
-    };
+    }
 });
 
-let bar_one = new ProgressBar.Line(container_one, {
-strokeWidth: 1,
-easing: 'easeInOut',
-duration: 1400,
-color: '#fff',
-trailColor: 'transparent',
-trailWidth: 1,
-svgStyle: { width: '100%', height: '100%' },
-from: { color: '#fff' },
-to: { color: '#E64759' },
-step: function step(state, bar) {
-bar.path.setAttribute('stroke', state.color);
-}
-});
+@if(strpos(request()->getQueryString(), 'page' ) !== false)
 
-let bar_two = new ProgressBar.Line(container_two, {
-strokeWidth: 1,
-easing: 'easeInOut',
-duration: 1400,
-color: '#fff',
-trailColor: 'transparent',
-trailWidth: 1,
-svgStyle: { width: '100%', height: '100%' },
-from: { color: '#fff' },
-to: { color: '#E64759' },
-step: function step(state, bar) {
-bar.path.setAttribute('stroke', state.color);
-}
-});
+    let bar_one = new ProgressBar.Line(container_one, {
+        strokeWidth: 1,
+        easing: 'easeInOut',
+        duration: 1400,
+        color: '#fff',
+        trailColor: 'transparent',
+        trailWidth: 1,
+        svgStyle: { width: '100%', height: '100%' },
+        from: { color: '#fff' },
+        to: { color: '#E4D836' },
+        step: function step(state, bar) {
+            bar.path.setAttribute('stroke', state.color);
+        }
+    });
 
-bar_one.animate(1.0); // Number from 0.0 to 1.0
-bar_two.animate(-1.0); // Number from 0.0 to 1.0
+    let bar_two = new ProgressBar.Line(container_two, {
+        strokeWidth: 1,
+        easing: 'easeInOut',
+        duration: 1400,
+        color: '#fff',
+        trailColor: 'transparent',
+        trailWidth: 1,
+        svgStyle: { width: '100%', height: '100%' },
+        from: { color: '#fff' },
+        to: { color: '#E4D836' },
+        step: function step(state, bar) {
+            bar.path.setAttribute('stroke', state.color);
+        }
+    });
+
+    bar_one.animate(1.0); // Number from 0.0 to 1.0
+    bar_two.animate(-1.0); // Number from 0.0 to 1.0
+
+@else
+
+    let bar_one = new ProgressBar.Line(container_one, {
+        strokeWidth: 1,
+        easing: 'easeInOut',
+        duration: 1400,
+        color: '#fff',
+        trailColor: 'transparent',
+        trailWidth: 1,
+        svgStyle: { width: '100%', height: '100%' },
+        from: { color: '#fff' },
+        to: { color: '#E64759' },
+        step: function step(state, bar) {
+            bar.path.setAttribute('stroke', state.color);
+        }
+    });
+
+    let bar_two = new ProgressBar.Line(container_two, {
+        strokeWidth: 1,
+        easing: 'easeInOut',
+        duration: 1400,
+        color: '#fff',
+        trailColor: 'transparent',
+        trailWidth: 1,
+        svgStyle: { width: '100%', height: '100%' },
+        from: { color: '#fff' },
+        to: { color: '#E64759' },
+        step: function step(state, bar) {
+            bar.path.setAttribute('stroke', state.color);
+        }
+    });
+
+    bar_one.animate(1.0); // Number from 0.0 to 1.0
+    bar_two.animate(-1.0); // Number from 0.0 to 1.0
+
+@endif
 
 </script>
 

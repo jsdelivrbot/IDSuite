@@ -147,6 +147,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/filter/tickets/', 'TicketController@filter');
 
 
+
+    // WebRTC Routes //
+
     Route::get('/webrtc', 'WebRtcController@index');
 
 

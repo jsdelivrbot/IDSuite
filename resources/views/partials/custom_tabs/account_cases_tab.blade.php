@@ -1,4 +1,9 @@
-<div class="tab-pane card-block active-outline-card-block-color-{{$tab_count}}" id="card-block-tab-{{$tab_count}}" role="tabpanel">
+@if(strpos(request()->getQueryString(), 'page' ) !== false)
+    <div class="tab-pane card-block active active-outline-card-block-color-{{$tab_count}}" id="card-block-tab-{{$tab_count}}" role="tabpanel">
+@else
+    <div class="tab-pane card-block active-outline-card-block-color-{{$tab_count}}" id="card-block-tab-{{$tab_count}}" role="tabpanel">
+@endif
+
         @if(count($page_tickets) === 0)
 
                 <h4 class="card-title text-white">Cases</h4>
@@ -234,7 +239,7 @@
 
         <div class="row">
             <div class="mx-auto">
-                {{$page_tickets->links('partials.pagination.default')}}
+                {{$page_tickets->links('partials.pagination.case')}}
             </div>
         </div>
         @endif
