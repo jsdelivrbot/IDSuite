@@ -44,6 +44,10 @@ class TestController extends Controller
 
     public function test_netsuite() {
 
+<<<<<<< Updated upstream
+=======
+      //  NetsuiteDatabase::AddUpdateAllCustomers();
+>>>>>>> Stashed changes
         $output =   Netsuite\NetsuiteDatabase::AddUpdateSMSites();
 
 

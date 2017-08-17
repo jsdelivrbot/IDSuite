@@ -211,9 +211,6 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
 
 
         // now we have all customer records, lets start processing them
-
-        $insert_counter = 0;
-
         foreach ($all_records as $record) {
             echo $insert_counter."/".count($all_records)."...";
             $insert_counter ++;

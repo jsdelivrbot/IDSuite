@@ -17,7 +17,6 @@ class Process {
      * @param $c
      * @return \App\Email
      */
-
     public static function processEmail($email_r=null, $return_false = false)
     {
         $isvalidemail = Validation::isEmailValid($email_r);
