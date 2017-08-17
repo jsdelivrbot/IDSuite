@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Helper;
 
 
 use App\DynamicEnumValue;
+use App\PhoneNumber;
 use Illuminate\Support\Facades\App;
 
 class Process {
@@ -19,14 +20,21 @@ class Process {
      */
     public static function processEmail($email_r=null, $return_false = false)
     {
+
         $isvalidemail = Validation::isEmailValid($email_r);
 
         if ($isvalidemail) {
             $email = new \App\Email();
             $email->setEmail($email_r);
         } else {
-            return $return_false;
-          //  throw new \Exception('invalid email inside processEmail '.$email_r, 500);
+
+            if(!$return_false) {
+                $email = new \App\Email();
+            }else {
+                return false;
+            }
+
+            //  throw new \Exception('invalid email inside processEmail '.$email_r, 500);
 
         }
 
@@ -82,6 +90,19 @@ class Process {
         return $name;
 
     }
+
+    public static function processEntityName($company_name)
+    {
+
+        $name = new \App\EntityName();
+        $name->name = $company_name;
+        $name->save();
+
+        return $name;
+
+
+    }
+
 
     /**
      *
@@ -203,33 +224,33 @@ class Process {
     {
         $saved_phone_nums = [];
         $phone = null; // initialize
-            if(is_array($phone_number)) {
+        if(is_array($phone_number)) {
 
-                foreach ($phone_number as $type=>$phone_num) {
-                    if($phone_num){
+            foreach ($phone_number as $type=>$phone_num) {
+                if($phone_num){
 
-                        $phone = new \App\PhoneNumber($phone_num, $type);
-                        $phone->save();
-                        $saved_phone_nums[]=$phone;
-                    }
-                }
-                if(empty($saved_phone_nums)){
-                    $phone = new \App\PhoneNumber();
+                    $phone = new \App\PhoneNumber($phone_num, $type);
                     $phone->save();
-
+                    $saved_phone_nums[]=$phone;
                 }
-            }else{
-                // looks like its just a number
-
-                if($phone_number) {
-                    $phone = new \App\PhoneNumber($phone_number, $default_type);
-                    $phone->save();
-                } else {
-                    $phone = new \App\PhoneNumber();
-                    $phone->save();
-                }
-                $saved_phone_nums[] = $phone;
             }
+            if(empty($saved_phone_nums)){
+                $phone = new \App\PhoneNumber();
+                $phone->save();
+
+            }
+        }else{
+            // looks like its just a number
+
+            if($phone_number) {
+                $phone = new \App\PhoneNumber($phone_number, $default_type);
+                $phone->save();
+            } else {
+                $phone = new \App\PhoneNumber();
+                $phone->save();
+            }
+            $saved_phone_nums[] = $phone;
+        }
 
         return $saved_phone_nums;
 
@@ -253,14 +274,15 @@ class Process {
 
 
     /**
+     * @param \App\Entity $entity
      * @param \App\Location $location
      * @param \App\PersonName $name
      * @param \App\Email $email
      * @param $phones array
-     * @param \App\Website $website
      * @return \App\PersonContact
+     * @internal param \App\Website $website
      */
-    public static function processContact(\App\Location $location, \App\PersonName $name, \App\Email $email, array $phones)
+    public static function processContact( \App\Location $location, \App\PersonName $name, \App\Email $email, array $phones, $entity = null)
     {
         $person_contact = new \App\PersonContact();
 
@@ -268,15 +290,55 @@ class Process {
         $person_contact->name($name)->save($name);
         $person_contact->email($email)->save($email);
 
-        foreach ($phones as $phone) {
-            $person_contact->phonenumber($phone)->save($phone);
+        if($phones && !empty($phones)) {
+            foreach ($phones as $phone) {
+                $person_contact->phonenumber($phone)->save($phone);
+            }
         }
 
         $person_contact->save();
 
+        if($entity !==null)
+            $entity->persons()->save($person_contact);
+
+
         return $person_contact;
     }
 
+
+    /**
+     * @param \App\Location $location
+     * @param \App\EntityName $name
+     * @param \App\Email $email
+     * @param \App\PhoneNumber $phone
+     * @return \App\EntityContact
+     */
+    public static function processEntityContact(\App\Location $location, \App\EntityName $name, \App\Email $email, array $phone)
+    {
+
+
+
+
+        $entity_contact = new \App\EntityContact();
+
+        $entity_contact->location($location)->save($location);
+        $entity_contact->name($name)->save($name);
+        $entity_contact->email($email)->save($email);
+        if(empty($phone) || !$phone) {
+            $phone = new PhoneNumber();
+            $phone->save();
+            $entity_contact->phonenumber($phone)->save($phone);
+
+        }else{
+
+            $phone = $phone[0];
+            $entity_contact->phonenumber($phone)->save($phone);
+        }
+
+        $entity_contact->save();
+
+        return $entity_contact;
+    }
 
     public static function processWebsite($url=null) {
 
@@ -299,14 +361,13 @@ class Process {
      *
      * process user contact
      *
-     * @param $c
      * @param \App\Location $location
      * @param \App\PersonName $name
      * @param \App\Email $email
      * @param \App\PhoneNumber $phone
      * @return \App\PersonContact
      */
-    public static function processUserContact($c, \App\Location $location, \App\PersonName $name, \App\Email $email, \App\PhoneNumber $phone)
+    public static function processUserContact(\App\Location $location, \App\PersonName $name, \App\Email $email, \App\PhoneNumber $phone)
     {
         $user_contact = new \App\PersonContact();
 
@@ -332,9 +393,7 @@ class Process {
 
         if(!empty($raw_note)){
             $note = new \App\Note();
-
             $note->text = $raw_note;
-
             $note->save();
         } else {
             $note = null;
@@ -344,15 +403,14 @@ class Process {
 
     }
 
+
     /**
-     *
-     * process entity
-     *
      * @param $c
      * @param \App\EntityContact $entity_contact
+     * @param \App\Note $note
      * @return \App\Entity
      */
-    public static function processEntity($c, \App\EntityContact $entity_contact, $note)
+    public static function processEntity(\App\EntityContact $entity_contact, \App\DynamicEnumValue $dynamic_enum_value, $note=null)
     {
         $entity = new \App\Entity();
 
@@ -365,20 +423,6 @@ class Process {
         if($note !== null){
             $entity->notes()->save($note);
         }
-
-        $dynamic_enum_value = new \App\DynamicEnumValue();
-
-        $dynamic_enum_value->save();
-
-        $dynamic_enum = \App\DynamicEnum::getByName('reference_key');
-
-        $dynamic_enum_value->definition($dynamic_enum)->save($dynamic_enum);
-
-        $dynamic_enum_value->value = $c[10];
-
-        $dynamic_enum_value->value_type = \App\Enums\EnumDataSourceType::getKeyByValue('netsuite');
-
-        $dynamic_enum_value->save();
 
         $entity->references($dynamic_enum_value);
 

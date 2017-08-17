@@ -183,11 +183,6 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
         // grab db customers (entities)
 
 
-        /*
-         * todo: create entity_user table connection to connect multiple of entities to multiple user(s)
-         *
-         * */
-
         // grab all customers that have a netsuite id
 
         // grab local employee list
@@ -207,7 +202,7 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
 
 
         // if we have more than one page
-      //  goto skip_pages;
+       // goto skip_pages;
         for($page_counter = 0; $page_counter < $total_pages; $page_counter++) {
 
             $next_page_to_fetch = $page_counter+2;
@@ -236,7 +231,7 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
             //
          //   dd($all_records);
         }
-     //   skip_pages:
+      //  skip_pages:
 
 
         $insert_counter = 1;
@@ -303,32 +298,51 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
 
                 // attach employee to customer
 
-                if($record->salesRep != null) {
-                    $sales_rep_netsuite_id = $record->salesRep->internalId;
-                    if($sales_rep_netsuite_id) {
+                if(count($record->salesTeamList->salesTeam) > 0) {
 
-                        // look for netsuite id in database
-                        $dev = DynamicEnumValue::getByValue($sales_rep_netsuite_id, EnumDataSourceType::getKeyByValue("netsuite"));
-                        if($dev) {
-                            $user = $dev->referable(\App\User::class);
+                    foreach ($record->salesTeamList->salesTeam as $sales_rep) {
+                        $sales_rep_netsuite_id = $sales_rep->employee->internalId;
+                        $sales_rep_netsuite_name = $sales_rep->employee->name;
+
+                        if($sales_rep_netsuite_id != null) {
+
+                            // look for netsuite id in database
+                            $dev = DynamicEnumValue::getByValue($sales_rep_netsuite_id, EnumDataSourceType::getKeyByValue("netsuite"));
+                            if($dev) {
+                                $user = $dev->referable(\App\User::class);
+                                $found = false;
+
+                                foreach ( $entity->users as $u) {
+                                    if($u->id == $user->id) {
+                                        $found = true;
+                                        break;
+                                    }
+                                }
 
 
-                            $entity->user($user);
-                            $entity->save();
+                                if(!$found){
+                                    $entity->users()->save($user);
+                                    $entity->save();
+                                }else{
+                                    // user already attached
+                                    echo "?";
+                                }
+                            }
+
+                        }else {
+                            // no employee found for $sales_rep_netsuite_id
+                            echo "!";
                         }
 
-                    }else {
-
-                        echo ("no emp found for ".$sales_rep_netsuite_id);
-                        //no employee found to attach this customer to
                     }
+
                 }
 
 
             }else {
                 // ns record found in database.
                 //todo: update user in database
-                echo 'ns record '.($record->internalId).'found in database';
+                echo "-";
             }
         }
 
@@ -337,18 +351,17 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
     /* grab all employees from netsuite and add or update current employee list in database in one go */
     public static function AddUpdateAllEmployees() {
 
+        // get local employees
+        $local_netsuite_employee = Database::getAllEmployees();
+        $internal_ids = array_column($local_netsuite_employee, 'value');
 
 
 
         // get netsuite employee list
         $service = new NetsuiteController();
         $netsuite_employee_list = $service->getEmployeeList();
-
         $records = $netsuite_employee_list->recordList->record;
 
-        $local_netsuite_employee = Database::getAllEmployees();
-
-        $internal_ids = array_column($local_netsuite_employee, 'value');
 
 
         $users_created = array();
@@ -394,6 +407,8 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
 
 
                         $users_created[] = $user;
+
+                        echo "+";
                     }else{
                         // invalid email! what netsuite. seriously?
                         Log::error("Invalid email", array("record" =>$record));
@@ -406,22 +421,21 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
 
 
                 }else{
-                    // ns record exist and email also exist.. update proccess
-
-                    echo 'ns record exist and email also exist.. update proccess';
+                    // ns record does not exist and email exist.. update proccess
+                    echo "?";
                 }
 
 
             }else {
                 // ns record found in database
-                echo 'ns record found in database';
+                echo '-';
             }
 
 
 
         }
-        echo "users created";
-        dd($users_created);
+        echo "** done **";
+       // dd($users_created);
 
     }
 

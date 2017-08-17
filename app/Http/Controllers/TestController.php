@@ -48,7 +48,7 @@ class TestController extends Controller
         $output =   Netsuite\NetsuiteDatabase::AddUpdateSMSites();
 
 
-        $service = Netsuite\NetsuiteDatabase::AddUpdateAllCustomers();
+   //     $service = Netsuite\NetsuiteDatabase::AddUpdateAllCustomers();
 
 
 

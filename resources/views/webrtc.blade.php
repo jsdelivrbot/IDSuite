@@ -185,7 +185,10 @@
         let messages = [];
         let peer_id, name, conn;
         let messages_template = Handlebars.compile($('#messages-template').html());
+        let peer = new Peer('someuserid', {host: 'localhost', port: 9000, path: '/'});
 
+
+        /*
         let peer = new Peer({
             key: 'hwesip1r0iicnmi',
             debug: 3,
@@ -195,6 +198,8 @@
                     credential: 'muazkh', username: 'webrtc@live.com' }
             ]}
         });
+
+        */
 
         peer.on('open', function(){
             $('#id').text(peer.id);
