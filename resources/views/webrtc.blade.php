@@ -185,22 +185,17 @@
         let messages = [];
         let peer_id, name, conn;
         let messages_template = Handlebars.compile($('#messages-template').html());
-        let peer = new Peer({
-            key: 'peerjs',
-            host: 'idsuite.xyz',
-            port: 9000,
-            path: '/'
-        });
+        let peer = new Peer(
+            '{{$user_id}}',
+            {
+                key: 'peerjs',
+                host: 'idsuite.xyz',
+                port: 9000,
+                path: '/'
+            });
 
 
-        /*
-        let peer = new Peer({key: 'hwesip1r0iicnmi',debug: 3,  config: {'iceServers': [{ url: 'stun:stun1.l.google.com:19302' },
-                { url: 'turn:numb.viagenie.ca',
-                    credential: 'muazkh', username: 'webrtc@live.com' }
-            ]}
-        });
 
-        */
 
         peer.on('open', function(){
             $('#id').text(peer.id);
