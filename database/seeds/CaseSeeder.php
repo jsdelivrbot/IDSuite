@@ -362,7 +362,7 @@ class CaseSeeder extends Seeder
      * returns a Entity.
      *
      * @param $t
-     * @return bool
+     * @return bool|\Illuminate\Database\Eloquent\Model|null|static
      */
     public static function processEntity($t){
 

@@ -520,7 +520,7 @@ class NsSeeder extends Seeder
 
                 } else {
 
-                    $user->accounts($entity)->save($entity);
+                    $user->accounts()->save($entity);
                     $user->save();
 
                     return $user;
@@ -553,7 +553,7 @@ class NsSeeder extends Seeder
                 $user->getEmailUsername();
                 $user->setPassword('ids_14701');
 
-                $user->accounts($entity)->save($entity);
+                $user->accounts()->save($entity);
 
                 $user->save();
 

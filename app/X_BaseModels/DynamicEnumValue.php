@@ -34,7 +34,7 @@ class DynamicEnumValue extends Model
 
     public function referable($type)
     {
-        return $this->morphedByMany($type, 'object', 'x_object_dev', 'dynamic_enum_value_id', 'object_id')->first();
+        return $this->morphedByMany($type, 'object', 'object_dev', 'dynamic_enum_value_id', 'object_id')->first();
     }
 
     /**

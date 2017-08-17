@@ -108,7 +108,6 @@
                             </div>
                         </div>
 
-
                     @elseif($number === 5)
 
                         <div class="col-lg-4">

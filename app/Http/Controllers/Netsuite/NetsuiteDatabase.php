@@ -64,8 +64,8 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
         // grab local employee list
         $query = "select user.id as user_id ,  dynamic_enum_value.id as dynamic_enum_value_id, dynamic_enum_value.value, dynamic_enum_value.value_type
         from user
-        LEFT  JOIN x_object_dev ON user.id = x_object_dev.object_id
-        LEFT  JOIN dynamic_enum_value ON x_object_dev.dynamic_enum_value_id = dynamic_enum_value.id
+        LEFT  JOIN object_dev ON user.id = object_dev.object_id
+        LEFT  JOIN dynamic_enum_value ON object_dev.dynamic_enum_value_id = dynamic_enum_value.id
         WHERE dynamic_enum_value.value_type = 0 AND dynamic_enum_value.value IS NOT NULL";
 
         $local_netsuite_employee = DB::select($query);

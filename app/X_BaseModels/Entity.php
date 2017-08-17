@@ -16,7 +16,7 @@ class Entity extends Model
         'contact_id', 'parent_id'
     ];
     protected $relationships = [
-        'contact', 'parent', 'user', 'persons', 'sites'
+        'contact', 'parent', 'users', 'persons', 'sites'
     ];
     protected $guarded = [
         'created_at', 'updated_at'
@@ -73,18 +73,14 @@ class Entity extends Model
     }
 
     // many to one
-    public function user(User $u = null){
-
-        if($u !== null) {
-            $this->user_id = $u->id;
-        }
-
-        return $this->belongsTo(User::class);
+    public function endpoints(){
+        return $this->hasMany(Endpoint::class, 'entity_id', 'id');
     }
 
 
-    public function endpoints(){
-        return $this->hasMany(Endpoint::class, 'entity_id', 'id');
+    // many to many //
+    public function users(){
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 
     /**
@@ -97,7 +93,7 @@ class Entity extends Model
 
     public function references(DynamicEnumValue $dynamic_enum_value = null){
 
-        $references = $this->morphToMany(DynamicEnumValue::class, 'object','x_object_dev');
+        $references = $this->morphToMany(DynamicEnumValue::class, 'object','object_dev')->withTimestamps();
 
         if($dynamic_enum_value !== null) {
             $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id]);

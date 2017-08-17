@@ -15,10 +15,8 @@ class CreateWebsiteTable extends Migration
     {
         Schema::enableForeignKeyConstraints();
 
-
-
         Schema::create('website', function (Blueprint $table) {
-
+            $table->engine = 'InnoDB';
             $table->uuid('id');
             $table->primary('id');
             $table->string('class_code');

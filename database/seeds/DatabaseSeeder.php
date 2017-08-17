@@ -23,10 +23,10 @@ class DatabaseSeeder extends Seeder
         $dynamic_enum->values = json_encode($reference_keys);
 
         $dynamic_enum->save();
-        dd("done");
+
         self::$dynamic_enum = $dynamic_enum;
 
-       // $this->call('ip2LocationSeeder');
+//        $this->call('ip2LocationSeeder');
 
         $this->call('NsSeeder');
         $this->call('CaseSeeder');

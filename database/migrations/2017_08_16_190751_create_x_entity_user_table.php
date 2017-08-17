@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateXObjectDevTable extends Migration
+class CreateXEntityUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,14 @@ class CreateXObjectDevTable extends Migration
      */
     public function up()
     {
-
         Schema::enableForeignKeyConstraints();
 
-        Schema::create('object_dev', function (Blueprint $table) {
+        Schema::create('entity_user', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->uuid('object_id')->nullable();
-            $table->uuid('dynamic_enum_value_id')->nullable();
-            $table->uuid('dynamic_enum_id')->nullable();
-            $table->string('object_type')->nullable();
+            $table->uuid('entity_id')->nullable();
+            $table->uuid('user_id')->nullable();
             $table->timestamps();
-
-            $table->index('object_id');
-            $table->index('object_type');
-
         });
-
-
     }
 
     /**
@@ -39,6 +30,6 @@ class CreateXObjectDevTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('object_dev');
+        Schema::dropIfExists('entity_user');
     }
 }

@@ -43,8 +43,6 @@ class CreateFkeys extends Migration
         Schema::table('entity', function(Blueprint $table){
             $table->foreign('contact_id')->references('id')->on('entitycontact')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('parent_id')->references('id')->on('entity')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
-
         });
 
         Schema::table('entitycontact', function (Blueprint $table){
@@ -92,9 +90,14 @@ class CreateFkeys extends Migration
             $table->foreign('contact_id')->references('id')->on('personcontact')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
         });
 
-        Schema::table('x_object_dev', function(Blueprint $table){
+        Schema::table('object_dev', function(Blueprint $table){
             $table->foreign('dynamic_enum_value_id')->references('id')->on('dynamic_enum_value')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('dynamic_enum_id')->references('id')->on('dynamic_enum')->onDelete('cascade')->onUpdate('cascade');
+        });
+
+        Schema::table('entity_user', function(Blueprint $table){
+            $table->foreign('entity_id')->references('id')->on('entity')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

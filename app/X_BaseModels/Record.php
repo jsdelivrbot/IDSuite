@@ -54,7 +54,7 @@ class Record extends Model
     }
 
     public function references(){
-        $references = $this->morphToMany(DynamicEnumValue::class, 'object','x_object_dev')->withTimestamps();
+        $references = $this->morphToMany(DynamicEnumValue::class, 'object','object_dev')->withTimestamps();
 
         $ref_array = array();
 

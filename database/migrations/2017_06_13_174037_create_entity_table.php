@@ -23,7 +23,6 @@ class CreateEntityTable extends Migration
             $table->string('class_code');
             $table->uuid('contact_id')->nullable();
             $table->uuid('parent_id')->nullable();
-            $table->uuid('user_id')->nullable();
             $table->boolean('active')->nullable();
             $table->timestamps();
         });
