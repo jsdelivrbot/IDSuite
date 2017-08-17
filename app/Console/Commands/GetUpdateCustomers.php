@@ -13,7 +13,7 @@ class GetUpdateCustomers extends Command
      *
      * @var string
      */
-    protected $signature = 'GetUpdateCustomers:getcustomers';
+    protected $signature = 'Netsuite:updatecustomers';
 
     /**
      * The console command description.

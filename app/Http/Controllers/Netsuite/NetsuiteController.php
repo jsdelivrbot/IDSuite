@@ -101,8 +101,9 @@ class NetsuiteController extends \App\Http\Controllers\Controller
 
 
     // grab saved search or list
-    public function savedSearch($savedSearchId) {
+    public function savedSearch($savedSearchId, $page_size=100) {
 
+        $this->service->setSearchPreferences(false, $page_size);
 
         $search = new \NetSuite\Classes\CustomRecordSearchAdvanced();
         $search->savedSearchId = $savedSearchId;

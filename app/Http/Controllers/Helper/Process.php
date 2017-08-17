@@ -17,7 +17,8 @@ class Process {
      * @param $c
      * @return \App\Email
      */
-    public static function processEmail($email_r)
+
+    public static function processEmail($email_r=null, $return_false = false)
     {
         $isvalidemail = Validation::isEmailValid($email_r);
 
@@ -25,7 +26,7 @@ class Process {
             $email = new \App\Email();
             $email->setEmail($email_r);
         } else {
-            return false;
+            return $return_false;
           //  throw new \Exception('invalid email inside processEmail '.$email_r, 500);
 
         }
@@ -147,7 +148,7 @@ class Process {
      * @return \App\Location
      * @internal param $c
      */
-    public static function processLocation($address=null, $city=null, $state=null, $zipcode=null, \App\Coordinate $coors=null)
+    public static function processLocation($address=null, $city=null, $state=null, $zipcode=null, $country = null, \App\Coordinate $coors=null)
     {
         $location = new \App\Location();
 
@@ -155,6 +156,7 @@ class Process {
         $location->city = $city;
         $location->state = $state;
         $location->zipcode = $zipcode;
+        $location->country_code = $country;
         $location->save();
 
         if($coors == null) {

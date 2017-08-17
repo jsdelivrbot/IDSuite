@@ -3,15 +3,18 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Http\Controllers\Netsuite;
+
+
 use DB;
-class GetUpdateEmployees extends Command
+class GetUpdateSMSites extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'Netsuite:updateemployees';
+    protected $signature = 'Netsuite:updatesmsites';
 
     /**
      * The console command description.
@@ -37,6 +40,7 @@ class GetUpdateEmployees extends Command
      */
     public function handle()
     {
-        //
+        $service = Netsuite\NetsuiteDatabase::AddUpdateSMSites();
+
     }
 }
