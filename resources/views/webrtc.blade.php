@@ -185,7 +185,7 @@
         let messages = [];
         let peer_id, name, conn;
         let messages_template = Handlebars.compile($('#messages-template').html());
-        let peer = new Peer('someuserid', {host: 'localhost', port: 9000, path: '/'});
+        let peer = new Peer('someuserid', {host: 'idsuite.xyz', port: 9000, path: '/'});
 
 
         /*

@@ -24,6 +24,7 @@ class CreatePhoneNumberTable extends Migration
             $table->integer('phone_type')->nullable();
             $table->string('country_code')->nullable();
             $table->string('rawnumber')->nullable();
+            $table->integer('digits')->nullable();
             $table->string('formnumber')->nullable();
             $table->integer('area_code')->nullable();
             $table->integer('exchange')->nullable();

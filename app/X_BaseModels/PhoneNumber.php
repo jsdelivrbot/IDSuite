@@ -39,11 +39,13 @@ class PhoneNumber extends Model
 
         if (!empty($phonenumber)) {
             $this->phone_type = $type;
+            $this->rawnumber = $phonenumber;
+
 
             if ($phonenumber !== null || empty($phonenumber)) {
+                $this->digits = preg_replace("/[^0-9]/","", $phonenumber);
 
                 if (strlen($phonenumber) === 10) {
-                    $this->rawnumber = $phonenumber;
 
                     $area_code = substr($phonenumber, 0, 3);
                     $exchange = substr($phonenumber, 3, 3);
@@ -57,7 +59,6 @@ class PhoneNumber extends Model
 
                 } elseif (strlen($phonenumber) === 8) {
 
-                    $this->rawnumber = $phonenumber;
                     $this->area_code = null;
                     $this->exchange = substr($phonenumber, 0, 3);
                     $this->number = substr($phonenumber, 3, 4);
@@ -65,7 +66,6 @@ class PhoneNumber extends Model
 
                 } else {
 
-                    $this->rawnumber = $phonenumber;
                     $this->area_code = null;
                     $this->exchange = null;
                     $this->number = null;
@@ -75,7 +75,6 @@ class PhoneNumber extends Model
                 }
             } else {
 
-                $this->rawnumber = $phonenumber;
                 $this->area_code = $phonenumber;
                 $this->exchange = $phonenumber;
                 $this->number = $phonenumber;

@@ -202,7 +202,7 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
 
 
         // if we have more than one page
-       // goto skip_pages;
+        goto skip_pages;
         for($page_counter = 0; $page_counter < $total_pages; $page_counter++) {
 
             $next_page_to_fetch = $page_counter+2;
@@ -231,7 +231,7 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
             //
          //   dd($all_records);
         }
-      //  skip_pages:
+        skip_pages:
 
 
         $insert_counter = 1;
@@ -298,7 +298,7 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
 
                 // attach employee to customer
 
-                if(count($record->salesTeamList->salesTeam) > 0) {
+                if($record->salesTeamList != null) {
 
                     foreach ($record->salesTeamList->salesTeam as $sales_rep) {
                         $sales_rep_netsuite_id = $sales_rep->employee->internalId;
