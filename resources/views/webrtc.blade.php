@@ -112,9 +112,17 @@
             </div>
         </div>
 
-        <div class="col-3">
-            <div id="peer-camera" class="camera">
-                <video width="300" height="300" autoplay></video>
+        <div class="row">
+            <div class="col-3">
+                <div id="peer-camera" class="camera">
+                    <video width="300" height="300" autoplay></video>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div id="my-camera" class="camera">
+                    <video width="300" height="300" autoplay></video>
+                </div>
             </div>
         </div>
 
