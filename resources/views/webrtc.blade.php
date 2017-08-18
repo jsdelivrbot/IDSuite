@@ -38,7 +38,7 @@
 
         <div class="row">
             <div class="col-4 offset-1">
-                <h2>Peer Video and Messaging</h2>
+                <h2>Peer Video</h2>
             </div>
         </div>
 
@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <ul id="messages-container">
+            {{--<ul id="messages-container">--}}
                 {{--<div class="row">--}}
                     {{--<div id="connected_peer_container" class="hidden">--}}
                         {{--Connected Peer:--}}
@@ -75,20 +75,20 @@
                     {{--</div>--}}
 
                 {{--</div>--}}
-            </ul>
+            {{--</ul>--}}
         </div>
 
-        <div class="row">
-            <div class="col-1"></div>
-            <div id="chat" class="hidden col-5">
-                <div class="ml-lg-5 form-group row">
-                    <label for="message" class="col-1 col-form-label">Text</label>
-                    <div class="col-10">
-                        <textarea class="form-control" type="text" placeholder="Type your message..." id="message"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{--<div class="row">--}}
+            {{--<div class="col-1"></div>--}}
+            {{--<div id="chat" class="hidden col-5">--}}
+                {{--<div class="ml-lg-5 form-group row">--}}
+                    {{--<label for="message" class="col-1 col-form-label">Text</label>--}}
+                    {{--<div class="col-10">--}}
+                        {{--<textarea class="form-control" type="text" placeholder="Type your message..." id="message"></textarea>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
 
         <div class="row mt-2 ml-lg-5">
             <div class="col-1"></div>
@@ -96,10 +96,10 @@
                 <div class="row">
                     <div class="col-1"></div>
                     <div class="col-2">
-                        <button id="login" type="button" class="btn btn-primary">Login</button>
+                        {{--<button id="login" type="button" class="btn btn-primary">Login</button>--}}
                     </div>
                     <div class="col-8">
-                        <button id="send-message" type="button" class="btn btn-primary float-right mr-4">Send Message</button>
+                        {{--<button id="send-message" type="button" class="btn btn-primary float-right mr-4">Send Message</button>--}}
                         <button id="call" type="button" class="btn btn-primary float-right mr-3">Call</button>
                     </div>
                 </div>
@@ -291,9 +291,9 @@
         });
 
         function handleMessage(data){
-//            let header_plus_footer_height = 285;
-//            let base_height = $(document).height() - header_plus_footer_height;
-//            let messages_container_height = $('#messages-container').height();
+            let header_plus_footer_height = 285;
+            let base_height = $(document).height() - header_plus_footer_height;
+            let messages_container_height = $('#messages-container').height();
             messages.push(data);
 
             let html = messages_template({'messages' : messages});
@@ -328,6 +328,18 @@
         $('#send-message').click(sendMessage);
 
         $('#call').click(function(){
+
+            peer_id = $('#peer_id').val();
+            if(peer_id){
+                conn = peer.connect(peer_id, {metadata: {
+                    'username': name
+                }});
+                conn.on('data', handleMessage);
+            }
+
+            $('#chat').removeClass('hidden');
+            $('#connect').addClass('hidden');
+
             console.log('now calling: ' + peer_id);
             console.log(peer);
             let call = peer.call(peer_id, window.localStream);
