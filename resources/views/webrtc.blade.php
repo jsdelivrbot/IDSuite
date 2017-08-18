@@ -301,7 +301,7 @@
             console.log(messages);
             console.log(html);
 
-            $('#messages').html(html);
+            $('#messages').append(html);
 
             if(messages_container_height >= base_height){
                 $('html, body').animate({ scrollTop: $(document).height() }, 500);
