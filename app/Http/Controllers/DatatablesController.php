@@ -22,6 +22,17 @@ class DatatablesController extends Controller
         return view('datatables.index', ['viewname' => 'DataTables']);
     }
 
+    private static function http_post($payload){
+
+        $client = new \GuzzleHttp\Client(['verify' => false]);
+
+        $request = new \GuzzleHttp\Psr7\Request('POST', self::url(), self::headers(), $payload);
+
+        $result = json_decode($client->send($request)->getBody()->getContents());
+
+        return $result;
+    }
+
     /**
      * Process datatables ajax request.
      *
@@ -55,4 +66,5 @@ class DatatablesController extends Controller
 
         return Datatables::of($records)->make(true);
     }
+
 }

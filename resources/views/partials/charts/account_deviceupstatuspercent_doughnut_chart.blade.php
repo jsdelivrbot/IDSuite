@@ -1,65 +1,72 @@
-<canvas id="deviceupstatuspercentall"></canvas>
+<div class="row m-1">
+    <div class="col-lg-12 mt-2 text-white">
+        <h5>Device Status Percentage</h5>
+    </div>
+    {{--<div class="col-lg-2">--}}
+        {{--<button id="deviceupstatuspercentallbtn" onclick="buildChart()" class="btn btn-outline-pink m-1 float-right">--}}
+            {{--<i id="deviceupstatuspercentallicon" class="fa fa-plus"></i>--}}
+        {{--</button>--}}
+    {{--</div>--}}
+</div>
+<div class="row">
+    <div class="col-lg-8">
+        <div  id="deviceupstatuspercentall"></div>
+    </div>
+</div>
 
 @push('account_deviceupstatuspercent_chart')
+<script src="https://www.amcharts.com/lib/3/pie.js"></script>
 
 <script>
 
+
     $( document ).ready(function() {
-        $.ajax({
-            type: "GET",
-            url: '/api/deviceUpStatusPercentAll',
-            success: function (data) {
 
-                if(data !== false) {
+        shrinkChart3();
 
-                    let status = data.status;
-
-                    let deviceupstatuspercentall = document.getElementById("deviceupstatuspercentall").getContext('2d');
-
-                    let myChart = new Chart(deviceupstatuspercentall, {
-                        type: 'doughnut',
-                        data: {
-                            datasets: [{
-                                data: status,
-                                backgroundColor: [
-                                    'rgba(27, 201, 142, .2)',
-                                    'rgba(230, 71, 89, .2)'
-                                ],
-                                borderColor: [
-                                    'rgba(27, 201, 142, 1)',
-                                    'rgba(230, 71, 89, 1)'
-                                ],
-                            }],
-                            labels: [
-                                "Devices Up",
-                                "Devices Down"
-                            ]
-                        },
-                        options: {
-                            responsive: true,
-                            title: {
-                                display: true,
-                                text: 'Current Device Statuses',
-                                fontColor: 'rgba(255,255,255,1)',
-                                fontSize: 24
-                            },
-                            tooltips: {
-                                callbacks: {
-                                    label: function (tooltipItem, data) {
-                                        let dataset = data.datasets[tooltipItem.datasetIndex];
-
-                                        let dataitem = dataset.data[tooltipItem.index];
-
-                                        return dataitem + "%";
-                                    }
-                                }
-                            }
-                        }
-                    });
-                }
-            }
-        });
     });
+
+    function shrinkChart3(){
+
+        $('#deviceupstatuspercentall').animate({
+            width: '300px',
+            height: '200px'
+        }, 500);
+
+        let chart = AmCharts.makeChart( "deviceupstatuspercentall", {
+            "type": "pie",
+            "theme": "dark",
+            labelsEnabled: false,
+            legend:{
+                position: "right",
+                marginRight: 10,
+                autoMargins: false
+            },
+            "dataProvider": [ {
+                "state": "Online",
+                "count": 441
+            }, {
+                "state": "Offline",
+                "count": 395
+            } ],
+            "valueField": "count",
+            "titleField": "state",
+            "startEffect": "elastic",
+            "startDuration": 2,
+            "labelRadius": 15,
+            "innerRadius": "50%",
+            "depth3D": 10,
+            "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+            "angle": 15,
+            export: {
+                enabled: true,
+                menu: []
+            }
+        } );
+
+        charts.push(chart);
+
+    }
 
 </script>
 

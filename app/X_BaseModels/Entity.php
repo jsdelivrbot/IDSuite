@@ -136,4 +136,18 @@ class Entity extends Model
 
     }
 
+    public function getAllRecords(){
+
+        $records_array = array();
+
+        foreach($this->endpoints as $endpoint){
+            foreach ($endpoint->records as $record){
+                $records_array[] = $record;
+            }
+        }
+
+        return $records_array;
+
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Aloha\Twilio\TwilioInterface;
 use App\Analytic;
 use App\DynamicEnum;
 use App\DynamicEnumValue;
@@ -376,6 +377,16 @@ class TestController extends Controller
      */
     public function test()
     {
+
+
+        TwilioInterface::messageWithMedia();
+
+        dd(ChartController::callVolumeOverTime());
+
+        $entity = Entity::getObjectById('ENT59959adcd226c');
+
+        dd($entity->getAllRecords());
+
         dd(ChartController::deviceByType());
 
             $this->mapZabbixEndpointsToEndpoints();

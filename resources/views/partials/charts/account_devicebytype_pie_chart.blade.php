@@ -3,9 +3,9 @@
         <h5>Count of Devices By Type</h5>
     </div>
     <div class="col-lg-2">
-        <button id="devicebytypebtn" onclick="buildChart()" class="btn btn-outline-pink m-1 float-right">
-            <i id="devicebytypeicon" class="fa fa-plus"></i>
-        </button>
+        {{--<button id="devicebytypebtn" onclick="buildChart()" class="btn btn-outline-pink m-1 float-right">--}}
+            {{--<i id="devicebytypeicon" class="fa fa-plus"></i>--}}
+        {{--</button>--}}
     </div>
 </div>
 <div class="row">
@@ -26,15 +26,17 @@
 
     function shrinkChart(){
 
-        $('#devicebytype').width('350px')
-            .height('200px');
+        $('#devicebytype').animate({
+            width: '350px',
+            height: '200px'
+        }, 500);
 
-        $('#devicebytypebtn').attr("onclick", "buildChart()");
+//        $('#devicebytypebtn').attr("onclick", "buildChart()");
+//
+//        $('#devicebytypeicon').removeClass()
+//            .addClass('fa fa-plus');
 
-        $('#devicebytypeicon').removeClass()
-            .addClass('fa fa-plus');
-
-        let shrinkchart = AmCharts.makeChart( "devicebytype", {
+        globalchart = AmCharts.makeChart( "devicebytype", {
             type: "pie",
             theme: "dark",
             labelsEnabled: false,
@@ -66,11 +68,7 @@
                 menu: []
             }
         });
-
-        globalchart = shrinkchart;
     }
-
-    let first = true;
 
     function buildChart() {
         $.ajax({
@@ -81,8 +79,10 @@
 
                 globalchart.clear();
 
-                $('#devicebytype').width('1000px')
-                    .height('800px');
+                $('#devicebytype').animate({
+                    width: '1000px',
+                    height: '800px'
+                }, 500);
 
                 $('#devicebytypebtn').attr("onclick", "shrinkChart()");
 
@@ -115,16 +115,14 @@
                         }
                     });
 
-                    chart.addListener("rendered", zoomChart);
-                    if (chart.zoomChart) {
-                        chart.zoomChart();
-                    }
-
-                    function zoomChart() {
-                        chart.zoomToIndexes(Math.round(chart.dataProvider.length * 0.4), Math.round(chart.dataProvider.length * 0.55));
-                    }
-
-                    globalchart = chart;
+//                    chart.addListener("rendered", zoomChart);
+//                    if (chart.zoomChart) {
+//                        chart.zoomChart();
+//                    }
+//
+//                    function zoomChart() {
+//                        chart.zoomToIndexes(Math.round(chart.dataProvider.length * 0.4), Math.round(chart.dataProvider.length * 0.55));
+//                    }
 
                     charts.push(chart);
                 }

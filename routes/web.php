@@ -51,6 +51,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     // chart routes //
 
+    Route::get('/api/callVolumeOverTime', 'ChartController@callVolumeOverTime');
+
     Route::get('/api/deviceByType', 'ChartController@deviceByType');
 
     Route::get('/api/deviceUpStatusAll', 'ChartController@deviceUpStatusAll');

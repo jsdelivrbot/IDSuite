@@ -1,11 +1,11 @@
 <div class="row m-1">
     <div class="col-lg-10 mt-2 text-white">
-        <h5>Count of Devices By Type</h5>
+        <h5>Device Status</h5>
     </div>
     <div class="col-lg-2">
-        <button id="deviceupstatusbtn" onclick="buildChart2()" class="btn btn-outline-pink m-1 float-right">
-            <i id="deviceupstatusicon" class="fa fa-plus"></i>
-        </button>
+        {{--<button id="deviceupstatusbtn" onclick="buildChart2()" class="btn btn-outline-pink m-1 float-right">--}}
+            {{--<i id="deviceupstatusicon" class="fa fa-plus"></i>--}}
+        {{--</button>--}}
     </div>
 </div>
 <div class="row">
@@ -31,12 +31,12 @@
         $('#deviceupstatus').width('350px')
             .height('200px');
 
-        $('#deviceupstatusbtn').attr("onclick", "buildChart2()");
+//        $('#deviceupstatusbtn').attr("onclick", "buildChart2()");
+//
+//        $('#deviceupstatusicon').removeClass()
+//            .addClass('fa fa-plus');
 
-        $('#deviceupstatusicon').removeClass()
-            .addClass('fa fa-plus');
-
-        let shrinkchart = AmCharts.makeChart( "deviceupstatus", {
+        let chart = AmCharts.makeChart( "deviceupstatus", {
             type: "serial",
             startDuration: 2,
             theme: "dark",
@@ -47,25 +47,17 @@
                 autoMargins: false
             },
             dataProvider: [ {
-                "country": "Canada",
-                "visits": 441,
-                "color": "#CD0D74"
+                "state": "Up",
+                "count": 441,
+                "color": "#008000"
             }, {
-                "country": "Brazil",
-                "visits": 395,
-                "color": "#754DEB"
-            }, {
-                "country": "Italy",
-                "visits": 386,
-                "color": "#DDDDDD"
-            }, {
-                "country": "Australia",
-                "visits": 384,
-                "color": "#999999"
+                "state": "Down",
+                "count": 395,
+                "color": "#FF0000"
             }],
             valueAxes: [{
                 position: "left",
-                title: "Visitors"
+                title: "Count"
             }],
             graphs: [{
                 balloonText: "[[category]]: <b>[[value]]</b>",
@@ -73,7 +65,7 @@
                 fillAlphas: 1,
                 lineAlpha: 0.1,
                 type: "column",
-                valueField: "visits"
+                valueField: "count"
             }],
             depth3D: 20,
             angle: 30,
@@ -82,7 +74,7 @@
                 cursorAlpha: 0,
                 zoomable: false
             },
-            categoryField: "country",
+            categoryField: "state",
             categoryAxis: {
                 gridPosition: "start",
                 labelRotation: 90
@@ -93,7 +85,9 @@
             }
         });
 
-        globalchart2 = shrinkchart;
+        charts.push(chart);
+
+//        globalchart2 = shrinkchart;
     }
 
     let first2 = true;

@@ -33,6 +33,81 @@ class ChartController
     }
 
 
+    public static function callVolumeOverTime(){
+
+
+        if(session('callvolumedata') === null) {
+
+            $entity = Entity::getObjectById(session('currentaccount'));
+
+            $records_array = array();
+
+            $endpoints_array = array();
+
+            $label_array = array();
+
+            $data_array = array();
+
+            $cost = 0;
+
+
+            foreach ($entity->endpoints as $endpoint) {
+                foreach ($endpoint->records as $record) {
+                    $records_array[] = $record;
+                }
+            }
+
+            $year1 = new \stdClass();
+            $year1->year = "2014";
+            $year1->value = 0;
+
+            $year2 = new \stdClass();
+            $year2->year = "2015";
+            $year2->value = 0;
+
+            $year3 = new \stdClass();
+            $year3->year = "2016";
+            $year3->value = 0;
+
+            $year4 = new \stdClass();
+            $year4->year = "2017";
+            $year4->value = 0;
+
+            $years = ['2014' => 0, '2015' => 0, '2016' => 0, '2017' => 0];
+
+            foreach ($records_array as $record) {
+                switch (substr($record->timeperiod->start, 0, 4)) {
+                    case '2014':
+                        $year1->value = $year1->value + 1;
+                        break;
+                    case '2015':
+                        $year2->value = $year2->value + 1;
+                        break;
+                    case '2016':
+                        $year3->value = $year3->value + 1;
+                        break;
+                    case '2017':
+                        $year4->value = $year4->value + 1;
+                        break;
+                }
+
+            }
+
+
+            $data = array($year1, $year2, $year3, $year4);
+
+            session(["callvolumedata" => $data]);
+
+        } else {
+            $data = session('callvolumedata');
+        }
+
+
+
+        return response()->json($data);
+    }
+
+
     /**
      *
      * Returns for an account the devices it has.
@@ -99,35 +174,29 @@ class ChartController
     public function deviceUpStatusAll(){
         $entity = Entity::getObjectById(session('currentaccount'));
 
-        $endpoints = $entity->endpoints;
+        $up_value = new \stdClass();
+        $up_value->count = 0;
+        $up_value->state = "Up";
+        $up_value->color = "#008000";
 
-        $up_value = 0;
 
-        $down_value = 0;
+        $down_value = new \stdClass();
+        $down_value->count = 0;
+        $down_value->state = "Down";
+        $down_value->color = "#FF0000";
 
-        $status = array();
 
-        foreach ($endpoints as $endpoint){
+        foreach ($entity->endpoints as $endpoint){
             if($endpoint->status === 'u'){
-                $up_value++;
+                $up_value->count = $up_value->count + 1;
             } else {
-                $down_value++;
+                $down_value->count = $down_value->count + 1;
             }
         }
 
-        $status[] = $up_value;
-        $status[] = $down_value;
+        $data = array($up_value, $down_value);
 
-        if($down_value !== 0) {
-            $value = $up_value / $down_value;
-        } else {
-            return response()->json(['status' => false]);
-        }
-
-        return response()->json([
-            'status'    => $status,
-            'value'     => $value
-        ]);
+        return response()->json($data);
 
     }
 

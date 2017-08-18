@@ -39,10 +39,12 @@ abstract class Model extends Eloquent
     }
 
 
-
+    /**
+     * @param $id
+     * @return $class::class
+     */
     public static function getObjectById($id)
     {
-
         $class = get_called_class();
         $results = $class::find($id);
         return $results;
