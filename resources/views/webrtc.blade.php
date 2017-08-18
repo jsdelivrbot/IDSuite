@@ -297,6 +297,10 @@
             messages.push(data);
 
             let html = messages_template({'messages' : messages});
+
+            console.log(messages);
+            console.log(html);
+
             $('#messages').html(html);
 
             if(messages_container_height >= base_height){
@@ -307,6 +311,8 @@
         function sendMessage(){
             let text = $('#message').val();
             let data = {'from': name, 'text': text};
+
+            console.log(data);
 
             conn.send(data);
             handleMessage(data);
