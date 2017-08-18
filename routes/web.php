@@ -169,6 +169,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/twilio', 'WebRtcController@sendMessage');
 
+    Route::post('/alltwilio', 'WebRtcController@sendMessageToAll');
+
 
 });
 

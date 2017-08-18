@@ -5,8 +5,9 @@
 
     <div class="text-white mt-4">
         <div class="row">
-            <div class="col-4 offset-1">
+            <div class="col-11 offset-1">
                 <h2>SMS Message</h2>
+                <button id='all-text-button' type="button" class="btn btn-danger float-right" style="margin-right: 150px">Send</button>
             </div>
         </div>
 
@@ -168,6 +169,25 @@
                 }
 
 
+            },
+            error: function(data){
+
+                alert('There was an error. this is the message: ' + data);
+
+            }
+        })
+
+    });
+
+
+
+    $('#all-text-button').click(function(){
+
+        $.ajax({
+            url: "/alltwilio",
+            method: "POST",
+            success: function(data){
+                console.log(data)
             },
             error: function(data){
 
