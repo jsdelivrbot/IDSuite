@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-3">
                 <div class="row">
                     <div id="connected_peer_container" class="hidden">
                         Connected Peer:
@@ -75,6 +75,13 @@
                         <span id="id"></span>
                     </div>
 
+                </div>
+            </div>
+
+
+            <div class="col-3">
+                <div id="peer-camera" class="camera">
+                    <video width="300" height="300" autoplay></video>
                 </div>
             </div>
         </div>
@@ -104,18 +111,6 @@
                         <button id="call" type="button" class="btn btn-primary float-right mr-3">Call</button>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div id="my-camera" class="camera ml-5">
-                <video width="300" height="300" autoplay></video>
-            </div>
-        </div>
-
-        <div class="row">
-            <div id="peer-camera" class="camera">
-                <video width="300" height="300" autoplay></video>
             </div>
         </div>
 
@@ -201,7 +196,7 @@
         let messages = [];
         let peer_id, name, conn;
         let messages_template = Handlebars.compile($('#messages-template').html());
-        let peer = new Peer(
+        let peer = new Peer('{{$user_id}}',
             {
                 key: 'peerjs',
                 host: 'idsuite.xyz',
@@ -215,7 +210,7 @@
         peer.on('open', function(){
 
             console.log(peer.id);
-            
+
             $('#id').text(peer.id);
         });
 
