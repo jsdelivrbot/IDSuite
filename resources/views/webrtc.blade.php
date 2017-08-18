@@ -55,12 +55,17 @@
                         <input class="form-control" type="text" name="name" id="name" placeholder="Name">
                     </div>
                     <div class="col-5">
-                        <input class="form-control" type="text" name="peer_id" id="peer_id" placeholder="Peer ID">
+                        {{--<input class="form-control" type="text" name="peer_id" id="peer_id" placeholder="Peer ID">--}}
+
+                        <select class="form-control" id="peer_id">
+                            <option value="">Select a User...</option>
+                        </select>
+
                     </div>
                 </div>
             </div>
 
-            <div class="col-3">
+            <div class="col-2">
                 <div class="row">
                     <div id="connected_peer_container" class="hidden">
                         Connected Peer:
@@ -75,13 +80,6 @@
                         <span id="id"></span>
                     </div>
 
-                </div>
-            </div>
-
-
-            <div class="col-3">
-                <div id="peer-camera" class="camera">
-                    <video width="300" height="300" autoplay></video>
                 </div>
             </div>
         </div>
@@ -111,6 +109,12 @@
                         <button id="call" type="button" class="btn btn-primary float-right mr-3">Call</button>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div id="peer-camera" class="camera">
+                <video width="300" height="300" autoplay></video>
             </div>
         </div>
 
@@ -181,9 +185,18 @@
 
     $.ajax({
         type: "GET",
-        url: '/getAuthUser',
+        url: '/getUsers',
         success: function(data){
             console.log(data);
+
+            $.each(data, function (key, value) {
+
+//                console.log(key);
+                console.log(value);
+
+                $('#peer_id').append('<option value=' + value.id + '>' + value.fullname + '</option>');
+            });
+
         },
         error: function(message){
 

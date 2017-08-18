@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,6 +37,28 @@ class UserController extends Controller
 	        return response()->json(false);
         }
 
+
+    }
+
+
+
+    public function getUsers(){
+
+        $users = User::all();
+
+        $user_array = array();
+
+        foreach($users as $user){
+            $u = new \stdClass();
+
+            $u->fullname = $user->contact->name->first_name . ' ' . $user->contact->name->last_name;
+            $u->id = $user->id;
+
+            $user_array[] = $u;
+
+        }
+
+        return response()->json($user_array);
 
     }
 

@@ -29,6 +29,8 @@ Route::post('login', 'Auth\LoginController@loginNameOrEmail');
 
 Route::get('/getAuthUser', 'UserController@getCurrentUser');
 
+
+
 // test routes //
 Route::get('/test', 'TestController@test');
 Route::get('/test/ns', 'TestController@test_netsuite');
@@ -37,6 +39,9 @@ Route::get('/test/ns', 'TestController@test_netsuite');
 // auth middleware //
 
 Route::group(['middleware' => ['auth']], function () {
+
+
+    Route::get('/getUsers', 'UserController@getUsers');
 
     // apppicker routes //
 
