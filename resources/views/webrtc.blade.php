@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <div id="messages-container" class="col-2">
+            <ul id="messages-container">
                 {{--<div class="row">--}}
                     {{--<div id="connected_peer_container" class="hidden">--}}
                         {{--Connected Peer:--}}
@@ -75,7 +75,7 @@
                     {{--</div>--}}
 
                 {{--</div>--}}
-            </div>
+            </ul>
         </div>
 
         <div class="row">
@@ -291,9 +291,9 @@
         });
 
         function handleMessage(data){
-            let header_plus_footer_height = 285;
-            let base_height = $(document).height() - header_plus_footer_height;
-            let messages_container_height = $('#messages-container').height();
+//            let header_plus_footer_height = 285;
+//            let base_height = $(document).height() - header_plus_footer_height;
+//            let messages_container_height = $('#messages-container').height();
             messages.push(data);
 
             let html = messages_template({'messages' : messages});
