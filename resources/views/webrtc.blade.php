@@ -96,6 +96,11 @@
             </div>
         </div>
 
+        <div class="row">
+            <div id="my-camera" class="camera">
+                <video width="300" height="300" autoplay></video>
+            </div>
+        </div>
 
         <div class="row">
             <div id="peer-camera" class="camera">
