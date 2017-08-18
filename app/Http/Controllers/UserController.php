@@ -32,6 +32,7 @@ class UserController extends Controller
 	        $user = new \stdClass();
 	        $user->id = $authuser->id;
 	        $user->email = $authuser->email_address;
+	        $user->fullname = $authuser->contact->name->first_name . ' ' . $authuser->contact->name->last_name;
             return response()->json($user);
         } else {
 	        return response()->json(false);

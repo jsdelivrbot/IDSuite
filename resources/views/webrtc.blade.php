@@ -191,6 +191,9 @@
 
 <script>
 
+    let name;
+
+
     $.ajax({
         type: "GET",
         url: '/getUsers',
@@ -198,10 +201,6 @@
             console.log(data);
 
             $.each(data, function (key, value) {
-
-//                console.log(key);
-                console.log(value);
-
                 $('#peer_id').append('<option value=' + value.id + '>' + value.fullname + '</option>');
             });
 
@@ -212,10 +211,28 @@
     });
 
 
+    $.ajax({
+        type: "GET",
+        url: '/getAuthUser',
+        success: function(data){
+            console.log(data);
+
+            name = data.fullname;
+
+            console.log(name);
+
+        },
+        error: function(message){
+
+        }
+    });
+
+
+
     $(function(){
 
         let messages = [];
-        let peer_id, name, conn;
+        let peer_id, conn;
         let messages_template = Handlebars.compile($('#messages-template').html());
         let peer = new Peer('{{$user_id}}',
             {
@@ -257,7 +274,6 @@
         }
 
         $('#login').click(function(){
-            name = $('#name').val();
             peer_id = $('#peer_id').val();
             if(peer_id){
                 conn = peer.connect(peer_id, {metadata: {
