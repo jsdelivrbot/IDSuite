@@ -50,17 +50,11 @@
             <div class="col-1"></div>
             <div class="col-5" id="connect">
                 <div class="ml-lg-5 form-group row">
-                    <label for="name" class="col-1 col-form-label">ID</label>
+                    <label for="peer_id" class="col-1 col-form-label">User</label>
                     <div class="col-5">
-                        <input class="form-control" type="text" name="name" id="name" placeholder="Name">
-                    </div>
-                    <div class="col-5">
-                        {{--<input class="form-control" type="text" name="peer_id" id="peer_id" placeholder="Peer ID">--}}
-
                         <select class="form-control" id="peer_id">
                             <option value="">Select a User...</option>
                         </select>
-
                     </div>
                 </div>
             </div>
