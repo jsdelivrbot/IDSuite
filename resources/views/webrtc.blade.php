@@ -97,7 +97,7 @@
         </div>
 
         <div class="row">
-            <div id="my-camera" class="camera">
+            <div id="my-camera" class="camera ml-5">
                 <video width="300" height="300" autoplay></video>
             </div>
         </div>
@@ -191,7 +191,6 @@
         let peer_id, name, conn;
         let messages_template = Handlebars.compile($('#messages-template').html());
         let peer = new Peer(
-            '{{$user_id}}',
             {
                 key: 'peerjs',
                 host: 'idsuite.xyz',
