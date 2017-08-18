@@ -216,6 +216,7 @@
         });
 
         function onReceiveStream(stream, element_id){
+            console.log('element id : ' + element_id);
             let video = $('#' + element_id + ' video')[0];
             video.src = window.URL.createObjectURL(stream);
             window.peer_stream = stream;
