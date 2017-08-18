@@ -59,22 +59,22 @@
                 </div>
             </div>
 
-            <div class="col-2">
-                <div class="row">
-                    <div id="connected_peer_container" class="hidden">
-                        Connected Peer:
-                        <span id="connected_peer"></span>
-                    </div>
-                </div>
+            <div id="messages-container" class="col-2">
+                {{--<div class="row">--}}
+                    {{--<div id="connected_peer_container" class="hidden">--}}
+                        {{--Connected Peer:--}}
+                        {{--<span id="connected_peer"></span>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
 
-                <div class="row">
+                {{--<div class="row">--}}
 
-                    <div id="connected_peer_container" class="hidden">
-                        My ID:
-                        <span id="id"></span>
-                    </div>
+                    {{--<div id="connected_peer_container" class="hidden">--}}
+                        {{--My ID:--}}
+                        {{--<span id="id"></span>--}}
+                    {{--</div>--}}
 
-                </div>
+                {{--</div>--}}
             </div>
         </div>
 
