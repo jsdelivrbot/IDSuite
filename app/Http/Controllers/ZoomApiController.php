@@ -38,14 +38,10 @@ class ZoomApiController extends Controller
 
         /*Check for any errors*/
         $errorMessage = curl_exec($ch);
-        dump( $errorMessage);
         curl_close($ch);
 
         /*Will print back the response from the call*/
         /*Used for troubleshooting/debugging		*/
-        dump($request_url);
-        dump($data);
-        dump($response);
         if(!$response){
             return false;
         }
@@ -55,23 +51,23 @@ class ZoomApiController extends Controller
 
     function createAUser($user_email, $user_type){
         $createAUserArray = array();
-        $createAUserArray['email'] = $_POST[$user_email];
-        $createAUserArray['type'] = $_POST[$user_type];
+        $createAUserArray['email'] = $user_email;
+        $createAUserArray['type'] = $user_type;
         return $this->sendRequest('user/create', $createAUserArray);
     }
 
     function autoCreateAUser($user_email, $user_type, $user_password){
         $autoCreateAUserArray = array();
-        $autoCreateAUserArray['email'] = $_POST[$user_email];
-        $autoCreateAUserArray['type'] = $_POST[$user_type];
-        $autoCreateAUserArray['password'] = $_POST[$user_password];
+        $autoCreateAUserArray['email'] = $user_email;
+        $autoCreateAUserArray['type'] = $user_type;
+        $autoCreateAUserArray['password'] = $user_password;
         return $this->sendRequest('user/autocreate', $autoCreateAUserArray);
     }
 
     function custCreateAUser($user_email, $user_type){
         $custCreateAUserArray = array();
-        $custCreateAUserArray['email'] = $_POST[$user_email];
-        $custCreateAUserArray['type'] = $_POST[$user_type];
+        $custCreateAUserArray['email'] = $user_email;
+        $custCreateAUserArray['type'] = $user_type;
         return $this->sendRequest('user/custcreate', $custCreateAUserArray);
     }
 
@@ -80,7 +76,7 @@ class ZoomApiController extends Controller
             'page_size'     => $page_size,
             'page_number'   => $page_number
         );
-        $deleteAUserArray['id'] = $_POST[$user_id];
+        $deleteAUserArray['id'] = $user_id;
         return $this->sendRequest('user/delete', $deleteAUserArray);
     }
 
@@ -103,79 +99,79 @@ class ZoomApiController extends Controller
 
     function getUserInfo($user_id){
         $getUserInfoArray = array();
-        $getUserInfoArray['id'] = $_POST[$user_id];
+        $getUserInfoArray['id'] = $user_id;
         return $this->sendRequest('user/get',$getUserInfoArray);
     }
 
 
     function getUserInfoByEmail($user_email, $user_login_type){
         $getUserInfoByEmailArray = array();
-        $getUserInfoByEmailArray['email'] = $_POST[$user_email];
-        $getUserInfoByEmailArray['login_type'] = $_POST[$user_login_type];
+        $getUserInfoByEmailArray['email'] = $user_email;
+        $getUserInfoByEmailArray['login_type'] = $user_login_type;
         return $this->sendRequest('user/getbyemail',$getUserInfoByEmailArray);
     }
 
 
     function updateUserInfo($user_id){
         $updateUserInfoArray = array();
-        $updateUserInfoArray['id'] = $_POST[$user_id];
+        $updateUserInfoArray['id'] = $user_id;
         return $this->sendRequest('user/update',$updateUserInfoArray);
     }
 
 
     function updateUserPassword($user_id, $user_new_password){
         $updateUserPasswordArray = array();
-        $updateUserPasswordArray['id'] = $_POST[$user_id];
-        $updateUserPasswordArray['password'] = $_POST[$user_new_password];
+        $updateUserPasswordArray['id'] = $user_id;
+        $updateUserPasswordArray['password'] = $user_new_password;
         return $this->sendRequest('user/updatepassword', $updateUserPasswordArray);
     }
 
     function setUserAssistant($user_id, $user_email, $assistant_email){
         $setUserAssistantArray = array();
-        $setUserAssistantArray['id'] = $_POST[$user_id];
-        $setUserAssistantArray['host_email'] = $_POST[$user_email];
-        $setUserAssistantArray['assistant_email'] = $_POST[$assistant_email];
+        $setUserAssistantArray['id'] = $user_id;
+        $setUserAssistantArray['host_email'] = $user_email;
+        $setUserAssistantArray['assistant_email'] = $assistant_email;
         return $this->sendRequest('user/assistant/set', $setUserAssistantArray);
     }
 
     function deleteUserAssistant($user_id, $user_email, $assistant_email){
         $deleteUserAssistantArray = array();
-        $deleteUserAssistantArray['id'] = $_POST[$user_id];
-        $deleteUserAssistantArray['host_email'] = $_POST[$user_email];
-        $deleteUserAssistantArray['assistant_email'] = $_POST[$assistant_email];
+        $deleteUserAssistantArray['id'] = $user_id;
+        $deleteUserAssistantArray['host_email'] = $user_email;
+        $deleteUserAssistantArray['assistant_email'] = $assistant_email;
         return $this->sendRequest('user/assistant/delete',$deleteUserAssistantArray);
     }
 
 
     function revokeSSOToken($user_id, $user_email){
         $revokeSSOTokenArray = array();
-        $revokeSSOTokenArray['id'] = $_POST[$user_id];
-        $revokeSSOTokenArray['email'] = $_POST[$user_email];
+        $revokeSSOTokenArray['id'] = $user_id;
+        $revokeSSOTokenArray['email'] = $user_email;
         return $this->sendRequest('user/revoketoken', $revokeSSOTokenArray);
     }
 
 
     function deleteUserPermanently($user_id, $user_email){
         $deleteUserPermanentlyArray = array();
-        $deleteUserPermanentlyArray['id'] = $_POST[$user_id];
-        $deleteUserPermanentlyArray['email'] = $_POST[$user_email];
+        $deleteUserPermanentlyArray['id'] = $user_id;
+        $deleteUserPermanentlyArray['email'] = $user_email;
         return $this->sendRequest('user/permanentdelete', $deleteUserPermanentlyArray);
     }
 
 
     function createAMeeting($user_id, $meeting_topic, $meeting_type){
         $createAMeetingArray = array();
-        $createAMeetingArray['host_id'] = $_POST[$user_id];
-        $createAMeetingArray['topic'] = $_POST[$meeting_topic];
-        $createAMeetingArray['type'] = $_POST[$meeting_type];
+        $createAMeetingArray['host_id'] = $user_id;
+        $createAMeetingArray['topic'] = $meeting_topic;
+        $createAMeetingArray['type'] = $meeting_type;
         return $this->sendRequest('meeting/create', $createAMeetingArray);
     }
 
 
     function deleteAMeeting($meeting_id, $user_id){
         $deleteAMeetingArray = array();
-        $deleteAMeetingArray['id'] = $_POST[$meeting_id];
-        $deleteAMeetingArray['host_id'] = $_POST[$user_id];
+        $deleteAMeetingArray['id'] = $meeting_id;
+        $deleteAMeetingArray['host_id'] = $user_id;
         return $this->sendRequest('meeting/delete', $deleteAMeetingArray);
     }
 
@@ -184,63 +180,63 @@ class ZoomApiController extends Controller
             'page_size'     => $page_size,
             'page_number'   => $page_number
         );
-        $listMeetingsArray['host_id'] = $_POST[$user_id];
+        $listMeetingsArray['host_id'] = $user_id;
         return $this->sendRequest('meeting/list',$listMeetingsArray);
     }
 
 
     function getMeetingInfo($meeting_id, $user_id){
         $getMeetingInfoArray = array();
-        $getMeetingInfoArray['id'] = $_POST[$meeting_id];
-        $getMeetingInfoArray['host_id'] = $_POST[$user_id];
+        $getMeetingInfoArray['id'] = $meeting_id;
+        $getMeetingInfoArray['host_id'] = $user_id;
         return $this->sendRequest('meeting/get', $getMeetingInfoArray);
     }
 
 
     function endAMeeting($meeting_id, $user_id){
         $endAMeetingArray = array();
-        $endAMeetingArray['id'] = $_POST[$meeting_id];
-        $endAMeetingArray['host_id'] = $_POST[$user_id];
+        $endAMeetingArray['id'] = $meeting_id;
+        $endAMeetingArray['host_id'] = $user_id;
         return $this->sendRequest('meeting/end', $endAMeetingArray);
     }
 
 
     function getDailyReport($month, $year){
         $getDailyReportArray = array();
-        $getDailyReportArray['month'] = $_POST[$month];
-        $getDailyReportArray['year'] = $_POST[$year];
+        $getDailyReportArray['month'] = $month;
+        $getDailyReportArray['year'] = $year;
         return $this->sendRequest('report/getdailyreport', $getDailyReportArray);
     }
 
 
     function getAccountReport($from, $to){
         $getAccountReportArray = array();
-        $getAccountReportArray['from'] = $_POST[$from];
-        $getAccountReportArray['to'] = $_POST[$to];
+        $getAccountReportArray['from'] = $from;
+        $getAccountReportArray['to'] = $to;
         return $this->sendRequest('report/getaccountreport', $getAccountReportArray);
     }
 
 
     function getUserReport($user_id, $from, $to){
         $getUserReportArray = array();
-        $getUserReportArray['user_id'] = $_POST[$user_id];
-        $getUserReportArray['from'] = $_POST[$from];
-        $getUserReportArray['to'] = $_POST[$to];
+        $getUserReportArray['user_id'] = $user_id;
+        $getUserReportArray['from'] = $from;
+        $getUserReportArray['to'] = $to;
         return $this->sendRequest('report/getuserreport', $getUserReportArray);
     }
 
 
     function createAWebinar($user_id, $topic){
         $createAWebinarArray = array();
-        $createAWebinarArray['host_id'] = $_POST[$user_id];
-        $createAWebinarArray['topic'] = $_POST[$topic];
+        $createAWebinarArray['host_id'] = $user_id;
+        $createAWebinarArray['topic'] = $topic;
         return $this->sendRequest('webinar/create',$createAWebinarArray);
     }
 
     function deleteAWebinar($webinar_id, $user_id){
         $deleteAWebinarArray = array();
-        $deleteAWebinarArray['id'] = $_POST[$webinar_id];
-        $deleteAWebinarArray['host_id'] = $_POST[$user_id];
+        $deleteAWebinarArray['id'] = $webinar_id;
+        $deleteAWebinarArray['host_id'] = $user_id;
         return $this->sendRequest('webinar/delete',$deleteAWebinarArray);
     }
 
@@ -249,30 +245,30 @@ class ZoomApiController extends Controller
             'page_size'     => $page_size,
             'page_number'   => $page_number
         );
-        $listWebinarsArray['host_id'] = $_POST[$user_id];
+        $listWebinarsArray['host_id'] = $user_id;
         return $this->sendRequest('webinar/list',$listWebinarsArray);
     }
 
     function getWebinarInfo($webinar_id, $user_id){
         $getWebinarInfoArray = array();
-        $getWebinarInfoArray['id'] = $_POST[$webinar_id];
-        $getWebinarInfoArray['host_id'] = $_POST[$user_id];
+        $getWebinarInfoArray['id'] = $webinar_id;
+        $getWebinarInfoArray['host_id'] = $user_id;
         return $this->sendRequest('webinar/get',$getWebinarInfoArray);
     }
 
 
     function updateWebinarInfo($webinar_id, $user_id){
         $updateWebinarInfoArray = array();
-        $updateWebinarInfoArray['id'] = $_POST[$webinar_id];
-        $updateWebinarInfoArray['host_id'] = $_POST[$user_id];
+        $updateWebinarInfoArray['id'] = $webinar_id;
+        $updateWebinarInfoArray['host_id'] = $user_id;
         return $this->sendRequest('webinar/update',$updateWebinarInfoArray);
     }
 
 
     function endAWebinar($webinar_id, $user_id){
         $endAWebinarArray = array();
-        $endAWebinarArray['id'] = $_POST[$webinar_id];
-        $endAWebinarArray['host_id'] = $_POST[$user_id];
+        $endAWebinarArray['id'] = $webinar_id;
+        $endAWebinarArray['host_id'] = $user_id;
         return $this->sendRequest('webinar/end',$endAWebinarArray);
     }
 
