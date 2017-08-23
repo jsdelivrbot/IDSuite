@@ -379,6 +379,16 @@ class TestController extends Controller
     {
 
 
+        $zoom = new ZoomApiController();
+
+        dd($zoom->listWebinars());
+
+
+        $e = Entity::getObjectById('ENT59959adcd226c');
+
+        dd($e->references());
+
+
         TwilioInterface::messageWithMedia();
 
         dd(ChartController::callVolumeOverTime());
