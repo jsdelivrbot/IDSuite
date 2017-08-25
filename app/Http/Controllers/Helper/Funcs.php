@@ -17,4 +17,13 @@ class Funcs
         $first_name = trim( preg_replace('#'.$last_name.'#', '', $name ) );
         return array($first_name, $last_name);
     }
+
+
+//Remove all special characters from a string [duplicate]
+public static function clean($string) {
+    $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+
+    return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+}
+
 }

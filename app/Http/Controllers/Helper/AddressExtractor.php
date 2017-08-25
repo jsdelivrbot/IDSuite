@@ -8,6 +8,8 @@
 
 namespace App\Http\Controllers\Helper;
 
+use Mockery\Exception;
+
 class AddressExtractor  {
 
     private $_string;
@@ -179,7 +181,12 @@ class AddressExtractor  {
     /* remove from string in order to make it easier to find missing this */
     protected function remove($string, $case_sensitive = false) {
         $s = ($case_sensitive==false ? "i" : "");
-        $this->_string = preg_replace("/".$string."/$s", "", $this->_string);
+        try{
+            $this->_string = preg_replace("/".$string."/$s", "", $this->_string);
+
+        }catch (\Exception $exception){
+            $this->_string = "";
+        }
     }
 
     public function getNotFound() {
