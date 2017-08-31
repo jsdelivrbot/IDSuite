@@ -31,6 +31,9 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
         $service = new NetsuiteController();
         $result = $service->savedSearch(1422, 100);
 
+       // $record = $result->searchRowList->searchRow[99];
+       // dd($record);
+
 
         echo ".";
         $total_pages = $result->totalPages;
@@ -38,7 +41,7 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
         $search_id =    $result->searchId;
 
         // if we have more than one page
-          goto skip_pages;
+    //      goto skip_pages;
         for($page_counter = 0; $page_counter < $total_pages; $page_counter++) {
 
             $next_page_to_fetch = $page_counter+2;
@@ -66,7 +69,7 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
             //
             //   dd($all_records);
         }
-           skip_pages:
+       //    skip_pages:
 
         $insert_counter = 0;
 
@@ -79,9 +82,6 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
 
      //   dump("db_customers_internal_ids", $db_customers_internal_ids);
       //  dump("db_sm_internal_ids", $db_sm_internal_ids);
-
-
-
 
 
         foreach ($all_records as $record) {
@@ -97,79 +97,86 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
             $name = $record->basic->name[0]->searchValue;
 
                 $city = null; $address = null;$zip_code= null;  $full_address = null;$customer_internal_id = null;
-                foreach ($record->basic->customFieldList->customField as $address_fields) {
+                if(isset($record->basic->customFieldList->customField)){
 
-                    if($address_fields->scriptId == 'custrecord_esm_site_city')
-                        $city = $address_fields->searchValue;
-                    elseif($address_fields->scriptId == 'custrecord_esm_site_addr1')
-                        $address = $address_fields->searchValue;
-                    elseif($address_fields->scriptId == 'custrecord_esm_site_zip')
-                        $zip_code = $address_fields->searchValue;
-                    elseif($address_fields->scriptId == 'custrecord_esm_site_address_text')
-                        $full_address = $address_fields->searchValue;
-                    elseif($address_fields->scriptId == 'custrecord_esm_site_parent')
-                        $customer_internal_id = $address_fields->searchValue->internalId;
-                }
+                    foreach ($record->basic->customFieldList->customField as $address_fields) {
 
-            if($customer_internal_id == null){
-                echo '!';
-                continue; // something messed up, skip this record
+                        if($address_fields->scriptId == 'custrecord_esm_site_city')
+                            $city = $address_fields->searchValue;
+                        elseif($address_fields->scriptId == 'custrecord_esm_site_addr1')
+                            $address = $address_fields->searchValue;
+                        elseif($address_fields->scriptId == 'custrecord_esm_site_zip')
+                            $zip_code = $address_fields->searchValue;
+                        elseif($address_fields->scriptId == 'custrecord_esm_site_address_text')
+                            $full_address = $address_fields->searchValue;
+                        elseif($address_fields->scriptId == 'custrecord_esm_site_parent')
+                            $customer_internal_id = $address_fields->searchValue->internalId;
 
-            }
+                        //custrecord_esm_site_country
+                        //custrecord_esm_site_state
+                    }
 
+                    if($customer_internal_id == null){
+                        echo '!';
+                        continue; // something messed up, skip this record
 
-                // $full_address = trim(preg_replace('/\s\s+/', ', ', $full_address));
-            $full_address = str_replace(["(",")","[","]",":",";","{","}"], " ", $full_address);
-
-            $full_address_extracted = new AddressExtractor($full_address);
-                $full_address_extracted_output = $full_address_extracted->getOutput();
-                $country = \Jasny\ISO\Countries::getCode($full_address_extracted_output['country']);
-                if(!$country) $country = null;
-                $state = $full_address_extracted_output['state'];
-                if(!$state) $state = null;
-
-                /*now that out of the way lets start the process */
-
-                // make sure that customer exist and sm site record does not
-
-                if(array_search($customer_internal_id, $db_customers_internal_ids) !== false
-                    && array_search($sm_internal_id, $db_sm_internal_ids) === false) {
-
-                    //add to db
-
-                    $dev = DynamicEnumValue::getByValue($customer_internal_id, EnumDataSourceType::getKeyByValue("netsuite"));
-                    //dd($dev);
-                    //dd("customer_internal_id ",$customer_internal_id,' ', "sm_internal_id ", $sm_internal_id);
-
-
-                    if($dev) {
-
-                        $location = Process::processLocation($address, $city, $state, $zip_code, $country); // will create coordiante object as well
-                        $name = Process::processEntityName($name);
-                        $phones = Process::processPhone();
-                        $email = Process::processEmail();
-                        $entity_contact = Process::processEntityContact($location, $name, $email, $phones);
-
-                        $entity = $dev->referable(\App\Entity::class);
-                        $entity->sites()->save($entity_contact);
-                        $entity->save();
-                        echo "+";
-                    }else {
-                        echo "?";
-
-                        // couldn't find entity for customer id
                     }
 
 
+                    // $full_address = trim(preg_replace('/\s\s+/', ', ', $full_address));
+                    $full_address = Funcs::clean(str_replace(["(",")","[","]",":",";","{","}"], " ", $full_address));
 
-                }else {
-                    // todo: update record
-                    echo "-";
+                    $full_address_extracted = new AddressExtractor($full_address);
+                    $full_address_extracted_output = $full_address_extracted->getOutput();
+                    $country = \Jasny\ISO\Countries::getCode($full_address_extracted_output['country']);
+                    if(!$country) $country = null;
+                    $state = $full_address_extracted_output['state'];
+                    if(!$state) $state = null;
 
+                    /*now that out of the way lets start the process */
+
+                    // make sure that customer exist and sm site record does not
+
+                    if(array_search($customer_internal_id, $db_customers_internal_ids) !== false
+                        && array_search($sm_internal_id, $db_sm_internal_ids) === false) {
+
+                        //add to db
+
+                        $dev = DynamicEnumValue::getByValue($customer_internal_id, EnumDataSourceType::getKeyByValue("netsuite"));
+                        //dd($dev);
+                        //dd("customer_internal_id ",$customer_internal_id,' ', "sm_internal_id ", $sm_internal_id);
+
+
+                        if($dev) {
+
+                            $location = Process::processLocation($address, $city, $state, $zip_code, $country); // will create coordiante object as well
+                            $name = Process::processEntityName($name);
+                            $phones = Process::processPhone();
+                            $email = Process::processEmail();
+                            $entity_contact = Process::processEntityContact($location, $name, $email, $phones);
+
+                            $entity = $dev->referable(\App\Entity::class);
+                            $entity->sites()->save($entity_contact);
+                            $entity->save();
+                            echo "+";
+                        }else {
+                            echo "?";
+
+                            // couldn't find entity for customer id
+                        }
+
+                    }else {
+                        // sm site already exist in database
+                        // todo: update record
+                        echo "-";
+
+
+                    }
+
+                }else{
+                    // ignore sm site
 
                 }
-
-                $insert_counter++;
 
 
 
@@ -194,7 +201,7 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
      //   dd("all local customers fetched");
 
         $service = new NetsuiteController();
-        $result = $service->getAllCustomers(50);
+        $result = $service->getAllCustomers(30);
         echo ".";
         $total_pages = $result->totalPages;
         $all_records = $result->recordList->record;
@@ -202,7 +209,7 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
 
 
         // if we have more than one page
-        goto skip_pages;
+      //  goto skip_pages;
         for($page_counter = 0; $page_counter < $total_pages; $page_counter++) {
 
             $next_page_to_fetch = $page_counter+2;
@@ -231,7 +238,7 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
             //
          //   dd($all_records);
         }
-        skip_pages:
+    //    skip_pages:
 
 
         $insert_counter = 1;
@@ -266,8 +273,17 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
                     $parent_netsuite_id = $record->parent->internalId;
                     $dev = DynamicEnumValue::getByValue($parent_netsuite_id, EnumDataSourceType::getKeyByValue("netsuite"));
 
-                    if(!$dev) {
+                    if(!$dev && $dev !=null) {
+                        try{
+
+
                         $parent_entity = $dev->referable(\App\Entity::class);
+                        }catch (\Exception $e) {
+                            dump("parent id: ".$parent_netsuite_id );
+                            dump($record);
+
+                            dd("error");
+                        }
                         $parent_entity->children($entity)->save($entity);
                         $parent_entity->save();
                     }
@@ -362,8 +378,6 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
         $netsuite_employee_list = $service->getEmployeeList();
         $records = $netsuite_employee_list->recordList->record;
 
-
-
         $users_created = array();
         foreach ($records as $record) {
 
@@ -391,23 +405,12 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
                         );
 
                         $location = Process::processLocation(); // will create coordiante object as well
-
-
-
                         $phones = Process::processPhone($phone_numbers); // returns an array of PhoneNumber class
-
-
                         $dynamic_enum = \App\DynamicEnum::getByName('reference_key'); // grabbing the dynamic enum object that has name reference_key
-
                         $dynamic_enum_value = Process::processDev($record->internalId, 'netsuite', $dynamic_enum);
-
                         $person_contact = Process::processContact( $location, $name, $email, $phones);
-
                         $user = Process::processUser($person_contact, $dynamic_enum_value);
-
-
                         $users_created[] = $user;
-
                         echo "+";
                     }else{
                         // invalid email! what netsuite. seriously?

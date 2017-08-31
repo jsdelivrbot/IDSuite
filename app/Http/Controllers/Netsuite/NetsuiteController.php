@@ -49,8 +49,8 @@ class NetsuiteController extends \App\Http\Controllers\Controller
              */
              $config['consumerKey'] = env('NETSUITE_CONSUMERKEY');
              $config['consumerSecret'] = env('NETSUITE_CONSUMERSECRET');
-             $config['token'] =" env('NETSUITE_TOKENS');";
-             $config['tokenSecret'] = " env('NETSUITE_TOKENSECRET');";
+             $config['token'] = env('NETSUITE_TOKENS');
+             $config['tokenSecret'] = env('NETSUITE_TOKENSECRET');
 
          }
 
@@ -266,13 +266,9 @@ class NetsuiteController extends \App\Http\Controllers\Controller
 
         $SearchMultiSelectField->searchValue = $RecordRefList;
         $CustomerSearchBasic->entityStatus = $SearchMultiSelectField;
-
         $CustomerSearch->basic =$CustomerSearchBasic;
-
-
         $request = new \NetSuite\Classes\SearchRequest();
         $request->searchRecord = $CustomerSearch;
-
         $searchResponse = $this->service->search($request);
 
 

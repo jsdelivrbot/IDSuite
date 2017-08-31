@@ -33,7 +33,6 @@ class Kernel extends ConsoleKernel
 
 
         // netsuite fetches
-
         $schedule->command('Netsuite:updateemployees') ->dailyAt("1:00");
         $schedule->command('Netsuite:updatecustomers') ->dailyAt("1:30");
         $schedule->command('Netsuite:updatesmsites') ->dailyAt("3:00");
