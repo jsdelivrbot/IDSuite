@@ -172,6 +172,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/alltwilio', 'WebRtcController@sendMessageToAll');
 
 
+
+    // stats routes //
+
+    Route::get('/stats', 'ProductStatController@index');
+
+
 });
 
 
