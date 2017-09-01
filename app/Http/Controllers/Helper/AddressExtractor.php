@@ -174,8 +174,7 @@ class AddressExtractor  {
             $this->remove($this->_output["street"]);
         }
 
-
-        //echo $this->_string;
+        return $this->_string;
     }
 
     /* remove from string in order to make it easier to find missing this */
