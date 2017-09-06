@@ -59,13 +59,23 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/api/deviceUpStatusPercentAll', 'ChartController@deviceUpStatusPercentAll');
 
+    Route::get('/api/protocolbreakout', 'ChartController@protocolBreakout');
+
     Route::get('/api/deviceCostPerCallAvg', 'ChartController@deviceCostPerCallAvg');
 
     Route::get('/api/devicePingData', 'ChartController@devicePingData');
 
+    Route::get('/api/avergaecallduration', 'ChartController@averageCallDuration');
+
+    Route::get('/api/accountcases', 'ChartController@accountCases');
+
+    Route::get('/api/casesopened', 'ChartController@casesOpened');
+
     Route::get('api/chart/', 'ChartController@index');
 
     Route::get('api/chart/getCustomers', 'ChartController@getCustomers');
+
+    Route::get('api/totalcallduration', 'ChartController@totalCallDuration');
 
     Route::post('api/chart/vot', 'ChartController@vot');
 

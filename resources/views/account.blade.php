@@ -209,22 +209,17 @@
                         "selectedGraphLineAlpha": 1
 
                     },
+                     "chartScrollbarSettings":{
+                        fontSize: 2
+                     },
                     "chartCursor": {
-                        "categoryBalloonDateFormat": "YYYY",
                         "cursorAlpha": 0,
                         "valueLineEnabled": true,
                         "valueLineBalloonEnabled": true,
                         "valueLineAlpha": 0.5,
                         "fullWidth": true
                     },
-                    "dataDateFormat": "YYYY",
-                    "categoryField": "year",
-                    "categoryAxis": {
-                        "minPeriod": "YYYY",
-                        "parseDates": true,
-                        "minorGridAlpha": 0.1,
-                        "minorGridEnabled": true
-                    },
+                    "categoryField": "date_string",
                     "export": {
                         "enabled": true,
                         "menu": []

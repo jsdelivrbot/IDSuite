@@ -1,46 +1,47 @@
 <div class="row m-1">
     <div class="col-lg-12 mt-2 text-white">
-        <h5>Device Status</h5>
+        <h5>Total Call Duration</h5>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <div id="deviceupstatus"></div>
+        <div id="totalcallduration"></div>
     </div>
 </div>
 
-@push('account_deviceupstatus_chart')
+@push('account_totalcallminutes_chart')
 
 <script>
 
     $( document ).ready(function() {
 
-        $('#deviceupstatus').width('500px')
+        $('#totalcallduration').width('500px')
             .height('200px');
 
         $.ajax({
             type: "GET",
-            url: '/api/deviceUpStatusAll',
+            url: '/api/totalcallduration',
             success: function (data) {
-
-                console.log(data)
-
 
                 if (data !== false) {
 
-                    AmCharts.makeChart("deviceupstatus", {
-                        theme: "light",
+                    AmCharts.makeChart("totalcallduration", {
                         type: "serial",
                         startDuration: 2,
-                        dataProvider: data,
+                        theme: "dark",
                         labelsEnabled: false,
+                        dataProvider: data,
+                        valueAxes: [{
+                            position: "left",
+                            title: "Minutes"
+                        }],
                         graphs: [{
                             balloonText: "[[category]]: <b>[[value]]</b>",
                             fillColorsField: "color",
                             fillAlphas: 1,
                             lineAlpha: 0.1,
                             type: "column",
-                            valueField: "count"
+                            valueField: "value"
                         }],
                         depth3D: 20,
                         angle: 30,
@@ -49,7 +50,7 @@
                             cursorAlpha: 0,
                             zoomable: false
                         },
-                        categoryField: "state",
+                        categoryField: "date_string",
                         categoryAxis: {
                             gridPosition: "start",
                             labelRotation: 90
@@ -57,7 +58,6 @@
                         export: {
                             enabled: true
                         }
-
                     });
 
 
@@ -65,6 +65,7 @@
             }
         });
     });
+
 
 </script>
 

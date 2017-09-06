@@ -25,8 +25,39 @@
 
 
         <div class="card" style="box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.6), 0 2px 10px 0 rgba(0, 0, 0, 0.12); border-color: rgba(255, 255, 255, 0.2);background-color: transparent !important; border-width: 3px">
+            <div class="card-img-top">
+                @include('partials.charts.account_totalminutes_bar')
+            </div>
+        </div>
+    </div>
+
+    <div class="card-deck mt-4">
+        <div class="card" style="box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.6), 0 2px 10px 0 rgba(0, 0, 0, 0.12); border-color: rgba(255, 255, 255, 0.2);background-color: transparent !important; border-width: 3px">
+            <div class="card-img-top">
+                @include('partials.charts.account_averagecallduration_bar')
+            </div>
+        </div>
 
 
+        <div class="card" style="box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.6), 0 2px 10px 0 rgba(0, 0, 0, 0.12); border-color: rgba(255, 255, 255, 0.2);background-color: transparent !important; border-width: 3px">
+            <div class="card-img-top">
+                @include('partials.charts.account_casestatusnotclosed_bar')
+            </div>
+        </div>
+    </div>
+
+    <div class="card-deck mt-4">
+        <div class="card" style="box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.6), 0 2px 10px 0 rgba(0, 0, 0, 0.12); border-color: rgba(255, 255, 255, 0.2);background-color: transparent !important; border-width: 3px">
+            <div class="card-img-top">
+                @include('partials.charts.account_casesopened')
+            </div>
+        </div>
+
+
+        <div class="card" style="box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.6), 0 2px 10px 0 rgba(0, 0, 0, 0.12); border-color: rgba(255, 255, 255, 0.2);background-color: transparent !important; border-width: 3px">
+            <div class="card-img-top">
+                @include('partials.charts.account_protocolbreakout_piebreakout')
+            </div>
         </div>
     </div>
 

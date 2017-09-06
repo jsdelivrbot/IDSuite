@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Aloha\Twilio\TwilioInterface;
 use App\Analytic;
+use App\AnalyticTotalCallRecords;
 use App\DynamicEnum;
 use App\DynamicEnumValue;
 use App\Entity;
@@ -11,6 +12,7 @@ use App\EntityContact;
 use App\EntityName;
 use App\Enums\EnumDataSourceType;
 use App\Enums\EnumDeviceType;
+use App\Enums\EnumMonths;
 use App\Ip2Location;
 use App\PersonContact;
 use App\Record;
@@ -377,6 +379,26 @@ class TestController extends Controller
      */
     public function test()
     {
+
+        ZabbixController::mapEndpoints();
+
+        dd('done');
+
+
+        $analytic = new AnalyticTotalCallRecords();
+
+        dd($analytic);
+
+
+        ChartController::protocolBreakout();
+
+
+
+        ChartController::callVolumeOverTime();
+
+
+
+        dd(EnumMonths::getKeyByValue(date("F")));
 
 
         TwilioInterface::messageWithMedia();

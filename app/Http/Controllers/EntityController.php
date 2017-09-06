@@ -36,13 +36,16 @@ class EntityController extends Controller
 
                 foreach ($a->children as $child) {
 
-                    if ($user->id !== $child->user->id){
+                    if($child->user !== null) {
 
-                        $account = new \stdClass();
-                        $account->name = $child->contact->name->name;
-                        $account->id = $child->id;
+                        if ($user->id !== $child->user->id) {
 
-                        $accounts_array[] = $account;
+                            $account = new \stdClass();
+                            $account->name = $child->contact->name->name;
+                            $account->id = $child->id;
+
+                            $accounts_array[] = $account;
+                        }
                     }
                 }
             }

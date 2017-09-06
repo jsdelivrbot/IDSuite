@@ -12,6 +12,13 @@ namespace App\Http\Controllers;
 use App\Endpoint;
 use App\EndpointModel;
 use App\Entity;
+use App\Enums\EnumFullMonths;
+use App\Enums\EnumMonths;
+use App\Enums\EnumShortMonths;
+use App\Enums\EnumStatusType;
+use App\Enums\EnumTicketStatusType;
+use App\Enums\EnumTicketType;
+use function GuzzleHttp\Psr7\try_fopen;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
@@ -25,31 +32,223 @@ class ChartController
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function index()
-    {
+    public static function casesOpened(){
 
-        $output = "Main API page";
-        return $output;
+        if(session('casesopened') === null) {
+
+            $year_start = 2016;
+            $cur_year = intval(date("Y"));
+            $cur_month = EnumFullMonths::getKeyByValue(date("F"));
+
+            $entity = Entity::getObjectById(session('currentaccount'));
+
+            $data_array = array();
+
+
+            for($y = $year_start; $y <= $cur_year ; $y++){
+
+                if($y !== $cur_year) {
+                    for ($m = 0; $m <= 11; $m++) {
+
+                        $obj = new \stdClass();
+                        $obj->date_string = EnumShortMonths::getValueByKey($m) . " " . $y;
+                        $obj->year_string = strval($y);
+                        $obj->month_string = EnumShortMonths::getValueByKey($m);
+                        $obj->month_val = $m;
+                        $obj->month_real = $m + 1;
+                        $obj->value = 0;
+
+                        if($m >= 9) {
+                            $obj->month_string = strval($m + 1);
+                        } else {
+                            $obj->month_string = "0" . strval($m + 1);
+                        }
+                        $data_array[] = $obj;
+                    }
+                } else {
+                    for ($m = 0; $m <= $cur_month; $m++) {
+
+                        $obj = new \stdClass();
+                        $obj->date_string = EnumShortMonths::getValueByKey($m) . " " . $y;
+                        $obj->year_string = strval($y);
+                        $obj->month_string = EnumShortMonths::getValueByKey($m);
+                        $obj->month_val = $m;
+                        $obj->month_real = $m + 1;
+                        $obj->value = 0;
+
+                        if($m >= 9) {
+                            $obj->month_string = strval($m + 1);
+                        } else {
+                            $obj->month_string = "0" . strval($m + 1);
+                        }
+
+                        $data_array[] = $obj;
+                    }
+                }
+            }
+
+
+
+
+            foreach ($entity->tickets as $ticket) {
+                foreach ($data_array as $timeframe){
+                    if(substr($ticket->incident_date, 0, 4) === $timeframe->year_string && substr($ticket->incident_date, 5, 2) === $timeframe->month_string) {
+
+                        $timeframe->value = $timeframe->value + 1;
+
+                    }
+                }
+            }
+            session(["casesopened" => $data_array]);
+
+        } else {
+            $data_array = session('casesopened');
+        }
+
+        return response()->json($data_array);
+
+    }
+
+
+    public static function accountCases(){
+
+        $entity = Entity::getObjectById(session('currentaccount'));
+
+
+        $data_set = array();
+
+        $data_all = new \stdClass();
+        $data_all->type = "All Cases";
+        $data_all->less = false;
+        $data_set[] = $data_all;
+
+        $data_few = new \stdClass();
+        $data_few->type = "Not Closed Cases";
+        $data_few->less = 6;
+        $data_set[] = $data_few;
+
+
+
+        foreach ($data_set as $data) {
+
+            $count = 0;
+
+            foreach (EnumTicketStatusType::getValues() as $value) {
+
+                if($data->less === false) {
+                    $data->$value = 0;
+                } else {
+                    if($count < $data_few->less){
+                        $data->$value = 0;
+                    } else {
+                        continue;
+                    }
+                }
+                $count++;
+            }
+        }
+
+
+        foreach ($data_set as $data) {
+
+            foreach ($entity->tickets as $ticket){
+
+                if($data->less === false) {
+
+
+                    switch ($ticket->status_type) {
+                        case 0:
+                            $data->unknown = $data->unknown + $data->unknown;
+                            break;
+                        case 1:
+                            $p = "in progress";
+                            $data->$p = $data->$p + 1;
+                            break;
+                        case 2:
+                            $p = "re-opened";
+                            $data->$p = $data->$p + 1;
+                            break;
+                        case 3:
+                            $p = "pending on-site";
+                            $data->$p = $data->$p + 1;
+                            break;
+                        case 4:
+                            $p = "Hold - Awaiting Customer Response";
+                            $data->$p = $data->$p + 1;
+                            break;
+                        case 5:
+                            $p = "rma - requires netsuite entry update";
+                            $data->$p = $data->$p + 1;
+                            break;
+                        case 6:
+                            $p = "closed";
+                            $data->$p = $data->$p + 1;
+                            break;
+                        case 7:
+                            $p = "non support email";
+                            $data->$p = $data->$p + 1;
+                            break;
+                        case 8:
+                            $p = "closed on first call";
+                            $data->$p = $data->$p + 1;
+                            break;
+                        case 9:
+                            $p = "closed - sent back to sales rep";
+                            $data->$p = $data->$p + 1;
+                            break;
+                        case 10:
+                            $p = "closed due to non response";
+                            $data->$p = $data->$p + 1;
+                            break;
+                    }
+                } else {
+
+                    switch ($ticket->status_type) {
+                        case 0:
+                            $data->unknown = $data->unknown + $data->unknown;
+                            break;
+                        case 1:
+                            $p = "in progress";
+                            $data->$p = $data->$p + 1;
+                            break;
+                        case 2:
+                            $p = "re-opened";
+                            $data->$p = $data->$p + 1;
+                            break;
+                        case 3:
+                            $p = "pending on-site";
+                            $data->$p = $data->$p + 1;
+                            break;
+                        case 4:
+                            $p = "Hold- Awaiting Customer Response";
+                            $data->$p = $data->$p + 1;
+                            break;
+                        case 5:
+                            $p = "rma - requires netsuite entry update";
+                            $data->$p = $data->$p + 1;
+                            break;
+                    }
+                }
+            }
+        }
+
+        return response()->json($data_set);
+
+
     }
 
 
     public static function callVolumeOverTime(){
 
-
         if(session('callvolumedata') === null) {
+
+            $year_start = 2016;
+            $cur_year = intval(date("Y"));
+            $cur_month = EnumFullMonths::getKeyByValue(date("F"));
 
             $entity = Entity::getObjectById(session('currentaccount'));
 
             $records_array = array();
-
-            $endpoints_array = array();
-
-            $label_array = array();
-
-            $data_array = array();
-
-            $cost = 0;
-
 
             foreach ($entity->endpoints as $endpoint) {
                 foreach ($endpoint->records as $record) {
@@ -57,54 +256,70 @@ class ChartController
                 }
             }
 
-            $year1 = new \stdClass();
-            $year1->year = "2014";
-            $year1->value = 0;
+            $data_array = array();
 
-            $year2 = new \stdClass();
-            $year2->year = "2015";
-            $year2->value = 0;
 
-            $year3 = new \stdClass();
-            $year3->year = "2016";
-            $year3->value = 0;
+            for($y = $year_start; $y <= $cur_year ; $y++){
 
-            $year4 = new \stdClass();
-            $year4->year = "2017";
-            $year4->value = 0;
 
-            $years = ['2014' => 0, '2015' => 0, '2016' => 0, '2017' => 0];
+                if($y !== $cur_year) {
+                    for ($m = 0; $m <= 11; $m++) {
 
-            foreach ($records_array as $record) {
-                switch (substr($record->timeperiod->start, 0, 4)) {
-                    case '2014':
-                        $year1->value = $year1->value + 1;
-                        break;
-                    case '2015':
-                        $year2->value = $year2->value + 1;
-                        break;
-                    case '2016':
-                        $year3->value = $year3->value + 1;
-                        break;
-                    case '2017':
-                        $year4->value = $year4->value + 1;
-                        break;
+                        $obj = new \stdClass();
+                        $obj->date_string = EnumShortMonths::getValueByKey($m) . " " . $y;
+                        $obj->year_string = strval($y);
+                        $obj->month_string = EnumShortMonths::getValueByKey($m);
+                        $obj->month_val = $m;
+                        $obj->month_real = $m + 1;
+                        $obj->value = 0;
+
+                        if($m >= 9) {
+                            $obj->month_string = strval($m + 1);
+                        } else {
+                            $obj->month_string = "0" . strval($m + 1);
+                        }
+                        $data_array[] = $obj;
+                    }
+                } else {
+                    for ($m = 0; $m <= $cur_month; $m++) {
+
+                        $obj = new \stdClass();
+                        $obj->date_string = EnumShortMonths::getValueByKey($m) . " " . $y;
+                        $obj->year_string = strval($y);
+                        $obj->month_string = EnumShortMonths::getValueByKey($m);
+                        $obj->month_val = $m;
+                        $obj->month_real = $m + 1;
+                        $obj->value = 0;
+
+                        if($m >= 9) {
+                            $obj->month_string = strval($m + 1);
+                        } else {
+                            $obj->month_string = "0" . strval($m + 1);
+                        }
+
+                        $data_array[] = $obj;
+                    }
                 }
-
             }
 
 
-            $data = array($year1, $year2, $year3, $year4);
+            foreach ($records_array as $record) {
+                foreach ($data_array as $timeframe){
+                    if(substr($record->timeperiod->start, 0, 4) === $timeframe->year_string && substr($record->timeperiod->start, 5, 2) === $timeframe->month_string) {
+                        $timeframe->value = $timeframe->value + 1;
+                    }
+                }
+            }
 
-            session(["callvolumedata" => $data]);
+            session(["callvolumedata" => $data_array]);
 
         } else {
-            $data = session('callvolumedata');
+            $data_array = session('callvolumedata');
         }
 
 
 
-        return response()->json($data);
+        return response()->json($data_array);
     }
 
 
@@ -126,15 +341,11 @@ class ChartController
 
         $model_names_value_array = array();
 
-        $names = array();
-
-        $values = array();
-
         foreach ($models as $model) {
 
             $m = new \stdClass();
 
-            $m->name = $model->manufacturer . " " . $model->name . " " . $model->edition;
+            $m->name = $model->manufacturer . " " . $model->name . " " . $model->edition . "( " . $model->description . " )";
             $m->value = 0;
 
             $model_names_value_array[] = $m;
@@ -143,7 +354,7 @@ class ChartController
         foreach ($endpoints as $endpoint){
             foreach ($model_names_value_array as $name) {
                 if($endpoint->endpointmodel !== null) {
-                    if ($endpoint->endpointmodel->manufacturer . " " . $endpoint->endpointmodel->name . " " . $endpoint->endpointmodel->edition === $name->name) {
+                    if ($endpoint->endpointmodel->manufacturer . " " . $endpoint->endpointmodel->name . " " . $endpoint->endpointmodel->edition . "( " . $endpoint->endpointmodel->description . " )" === $name->name) {
                         $name->value = $name->value + 1;
                     }
                 }
@@ -163,6 +374,190 @@ class ChartController
 
     }
 
+
+    public function totalCallDuration(){
+
+        if(session('totalcallduration') === null) {
+
+        $year_start = 2016;
+        $cur_year = intval(date("Y"));
+        $cur_month = EnumFullMonths::getKeyByValue(date("F"));
+
+        $entity = Entity::getObjectById(session('currentaccount'));
+
+        $records_array = array();
+
+
+        foreach ($entity->endpoints as $endpoint) {
+            foreach ($endpoint->records as $record) {
+                $records_array[] = $record;
+            }
+        }
+
+        $data_array = array();
+
+
+        for($y = $year_start; $y <= $cur_year ; $y++){
+
+
+            if($y !== $cur_year) {
+                for ($m = 0; $m <= 11; $m++) {
+
+                    $obj = new \stdClass();
+                    $obj->date_string = EnumShortMonths::getValueByKey($m) . " " . $y;
+                    $obj->year_string = strval($y);
+                    $obj->month_string = EnumShortMonths::getValueByKey($m);
+                    $obj->month_val = $m;
+                    $obj->month_real = $m + 1;
+                    $obj->value = 0;
+
+                    if($m >= 9) {
+                        $obj->month_string = strval($m + 1);
+                    } else {
+                        $obj->month_string = "0" . strval($m + 1);
+                    }
+                    $data_array[] = $obj;
+                }
+            } else {
+                for ($m = 0; $m <= $cur_month; $m++) {
+
+                    $obj = new \stdClass();
+                    $obj->date_string = EnumShortMonths::getValueByKey($m) . " " . $y;
+                    $obj->year_string = strval($y);
+                    $obj->month_string = EnumShortMonths::getValueByKey($m);
+                    $obj->month_val = $m;
+                    $obj->month_real = $m + 1;
+                    $obj->value = 0;
+
+                    if($m >= 9) {
+                        $obj->month_string = strval($m + 1);
+                    } else {
+                        $obj->month_string = "0" . strval($m + 1);
+                    }
+
+                    $data_array[] = $obj;
+                }
+            }
+        }
+
+
+        foreach ($records_array as $record) {
+            foreach ($data_array as $timeframe){
+                if(substr($record->timeperiod->start, 0, 4) === $timeframe->year_string && substr($record->timeperiod->start, 5, 2) === $timeframe->month_string) {
+
+
+
+                    $timeframe->value = $timeframe->value + round($record->timeperiod->duration/60);
+
+
+                }
+            }
+        }
+            session(["totalcallduration" => $data_array]);
+
+        } else {
+            $data_array = session('totalcallduration');
+        }
+
+
+        return response()->json($data_array);
+
+    }
+
+
+    public function averageCallDuration(){
+
+        if(session('averagecallduration') === null) {
+
+            $year_start = 2016;
+            $cur_year = intval(date("Y"));
+            $cur_month = EnumFullMonths::getKeyByValue(date("F"));
+
+            $entity = Entity::getObjectById(session('currentaccount'));
+
+            $records_array = array();
+
+            foreach ($entity->endpoints as $endpoint) {
+                foreach ($endpoint->records as $record) {
+                    $records_array[] = $record;
+                }
+            }
+
+            $data_array = array();
+
+
+            for($y = $year_start; $y <= $cur_year ; $y++){
+
+
+                if($y !== $cur_year) {
+                    for ($m = 0; $m <= 11; $m++) {
+
+                        $obj = new \stdClass();
+                        $obj->date_string = EnumShortMonths::getValueByKey($m) . " " . $y;
+                        $obj->year_string = strval($y);
+                        $obj->month_string = EnumShortMonths::getValueByKey($m);
+                        $obj->month_val = $m;
+                        $obj->month_real = $m + 1;
+                        $obj->count = 0;
+                        $obj->total = 0;
+                        $obj->value = 0;
+
+                        if($m >= 9) {
+                            $obj->month_string = strval($m + 1);
+                        } else {
+                            $obj->month_string = "0" . strval($m + 1);
+                        }
+                        $data_array[] = $obj;
+                    }
+                } else {
+                    for ($m = 0; $m <= $cur_month; $m++) {
+
+                        $obj = new \stdClass();
+                        $obj->date_string = EnumShortMonths::getValueByKey($m) . " " . $y;
+                        $obj->year_string = strval($y);
+                        $obj->month_string = EnumShortMonths::getValueByKey($m);
+                        $obj->month_val = $m;
+                        $obj->month_real = $m + 1;
+                        $obj->count = 0;
+                        $obj->total = 0;
+                        $obj->value = 0;
+
+                        if($m >= 9) {
+                            $obj->month_string = strval($m + 1);
+                        } else {
+                            $obj->month_string = "0" . strval($m + 1);
+                        }
+
+                        $data_array[] = $obj;
+                    }
+                }
+            }
+
+
+            foreach ($records_array as $record) {
+                foreach ($data_array as $timeframe){
+                    if(substr($record->timeperiod->start, 0, 4) === $timeframe->year_string && substr($record->timeperiod->start, 5, 2) === $timeframe->month_string) {
+
+                        $timeframe->count = $timeframe->count + 1;
+
+                        $timeframe->total = $timeframe->total + $record->timeperiod->duration;
+
+                        $timeframe->value = round(($timeframe->total/$timeframe->count)/60);
+
+
+                    }
+                }
+            }
+            session(["averagecallduration" => $data_array]);
+
+        } else {
+            $data_array = session('averagecallduration');
+        }
+
+
+        return response()->json($data_array);
+
+    }
 
 
     /**
@@ -208,42 +603,192 @@ class ChartController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function deviceUpStatusPercentAll(){
+    public static function deviceUpStatusPercentAll(){
         $entity = Entity::getObjectById(session('currentaccount'));
 
-        $endpoints = $entity->endpoints;
+        $up_value = new \stdClass();
+        $up_value->count = 0;
+        $up_value->state = "Up";
+        $up_value->color = "#008000";
 
-        $up_value = 0;
 
-        $down_value = 0;
+        $down_value = new \stdClass();
+        $down_value->count = 0;
+        $down_value->state = "Down";
+        $down_value->color = "#FF0000";
 
-        $status = array();
+        $rebooting_value = new \stdClass();
+        $rebooting_value->count = 0;
+        $rebooting_value->state = "Rebooting";
+        $rebooting_value->color = "#FF0000";
 
-        foreach ($endpoints as $endpoint){
-            if($endpoint->status === 'u'){
-                $up_value++;
+        $indeterminate_value = new \stdClass();
+        $indeterminate_value->count = 0;
+        $indeterminate_value->state = "Indeterminate";
+        $indeterminate_value->color = "#FF0000";
+
+
+
+        foreach ($entity->endpoints as $endpoint){
+            if($endpoint->status === EnumStatusType::getKeyByValue("up")){
+                $up_value->count = $up_value->count + 1;
+            } elseif($endpoint->status === EnumStatusType::getKeyByValue("down")) {
+                $down_value->count = $down_value->count + 1;
+            } elseif ($endpoint->status === EnumStatusType::getKeyByValue("Rebooting")){
+                $rebooting_value->count = $rebooting_value->count + 1;
             } else {
-                $down_value++;
+                $indeterminate_value->count = $indeterminate_value->count + 1;
             }
         }
 
-        $total = $up_value + $down_value;
 
-        if($total !== 0) {
-            $up_value = round(($up_value / $total) * 100);
-            $down_value = round(($down_value / $total) * 100);
-            $status[] = $up_value;
-            $status[] = $down_value;
+        $data = array($up_value, $down_value, $rebooting_value, $indeterminate_value);
 
-            return response()->json([
-                'status'    => $status
-            ]);
+        return response()->json($data);
 
-        } else {
-            return response()->json([
-                'status' => false
-            ]);
+    }
+
+
+    public static function protocolBreakout(){
+
+        $entity = Entity::getObjectById(session('currentaccount'));
+
+        $records_array = array();
+
+        foreach ($entity->endpoints as $endpoint) {
+            foreach ($endpoint->records as $record) {
+                $records_array[] = $record;
+            }
         }
+
+
+
+
+        // Types //
+
+        //auto//
+        $auto_obj = new \stdClass();
+        $auto_obj->type = "Auto";
+        $auto_obj->count = 0;
+        $auto_obj->percent = 0;
+        $auto_obj->subtypes = array();
+
+        //sip//
+        $sip_obj = new \stdClass();
+        $sip_obj->type = "Sip";
+        $sip_obj->count = 0;
+        $sip_obj->percent = 0;
+
+        // sip subtype //
+        // sip video //
+        $sip_video = new \stdClass();
+        $sip_video->type = "Sip Video";
+        $sip_video->count = 0;
+        $sip_video->percent = 0;
+        // sip audio //
+        $sip_audio = new \stdClass();
+        $sip_audio->type = "Sip Audio";
+        $sip_audio->count = 0;
+        $sip_audio->percent = 0;
+
+        $sip_subtype_array = array(
+            $sip_audio,
+            $sip_video
+        );
+
+        $sip_obj->subtypes = $sip_subtype_array;
+
+        //h323//
+        $h323_obj = new \stdClass();
+        $h323_obj->type = "H.323";
+        $h323_obj->count = 0;
+        $h323_obj->percent = 0;
+
+        //h323 subtype //
+        //h323 video //
+        $h323_video = new \stdClass();
+        $h323_video->type = "H.323 Video";
+        $h323_video->count = 0;
+        $h323_video->percent = 0;
+
+        //h323 audio //
+        $h323_audio = new \stdClass();
+        $h323_audio->type = "H.323 Audio";
+        $h323_audio->count = 0;
+        $h323_audio->percent = 0;
+
+        $h323_subtype_array = array(
+            $h323_audio,
+            $h323_video
+        );
+
+        $h323_obj->subtypes = $h323_subtype_array;
+
+        $types_array = array(
+            $auto_obj,
+            $sip_obj,
+            $h323_obj
+        );
+
+        $total = 0;
+
+        foreach($records_array as $record){
+            switch ($record->protocol){
+                case "AUTO":
+                    $auto_obj->count = $auto_obj->count + 1;
+                    $total = $total + 1;
+                    break;
+                case "H.323":
+                    $h323_obj->count = $h323_obj->count + 1;
+                    $h323_video->count = $h323_video->count + 1;
+                    $total = $total + 1;
+                    break;
+                case "h323":
+                    $h323_obj->count = $h323_obj->count + 1;
+                    $h323_video->count = $h323_video->count + 1;
+                    $total = $total + 1;
+                    break;
+                case "voice_h323":
+                    $h323_obj->count = $h323_obj->count + 1;
+                    $h323_audio->count = $h323_audio->count + 1;
+                    $total = $total + 1;
+                    break;
+                case "SIP":
+                    $sip_obj->count = $sip_obj->count + 1;
+                    $sip_video->count = $sip_video->count + 1;
+                    $total = $total + 1;
+                    break;
+                case "sip":
+                    $sip_obj->count = $sip_obj->count + 1;
+                    $sip_video->count = $sip_video->count + 1;
+                    $total = $total + 1;
+                    break;
+                case "voice_sip":
+                    $sip_obj->count = $sip_obj->count + 1;
+                    $sip_audio->count = $sip_audio->count + 1;
+                    $total = $total + 1;
+                    break;
+                default:
+                    continue;
+                    break;
+
+            }
+        }
+
+        # chart_analytic = $entity->analytic('averagecallduration')->value;
+
+        foreach($types_array as $type){
+
+            $type->percent = round(100 * $type->count/$total);
+
+            foreach ($type->subtypes as $subtype){
+                $subtype->percent = round(100 * $subtype->count/$type->count);
+            }
+
+        }
+
+        return response()->json($types_array);
+
     }
 
 
