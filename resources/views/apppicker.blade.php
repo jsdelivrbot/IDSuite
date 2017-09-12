@@ -45,7 +45,7 @@
                     <div class="card-block text-right">
                         <h4 class="card-title">MedSitter</h4>
                         <p class="card-text">Remote patient monitoring application.</p>
-                        <a href="accounts" class="btn btn-outline-blue float-right disabled" style="color: white !important; border-color: white !important;"><i class="fa fa-lock" aria-hidden="true" style="color: white !important;"></i>&nbsp Launch</a>
+                        <a href="/medsitter" class="btn btn-outline-blue float-right" style="color: white !important; border-color: white !important;">Launch</a>
                     </div>
                 </div>
 

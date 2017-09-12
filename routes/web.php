@@ -172,14 +172,17 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
-    // WebRTC Routes //
+    // Medsitter Routes WebRTC Routes //
 
-    Route::get('/webrtc', 'WebRtcController@index');
+    Route::get('/medsitter', 'MedsitterController@index');
 
 
-    Route::post('/twilio', 'WebRtcController@sendMessage');
-
-    Route::post('/alltwilio', 'WebRtcController@sendMessageToAll');
+//    Route::get('/webrtc', 'WebRtcController@index');
+//
+//
+//    Route::post('/twilio', 'WebRtcController@sendMessage');
+//
+//    Route::post('/alltwilio', 'WebRtcController@sendMessageToAll');
 
 
 
