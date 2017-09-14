@@ -166,7 +166,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Aloha\Twilio\Support\Laravel\ServiceProvider::class,
-
+        'Chumper\Zipper\ZipperServiceProvider',
 
         /*
          * Package Service Providers...
@@ -232,6 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
         'Twilio' => Aloha\Twilio\Support\Laravel\Facade::class,
+        'Zipper' => 'Chumper\Zipper\Zipper',
 
     ],
 

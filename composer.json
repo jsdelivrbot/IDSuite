@@ -14,7 +14,8 @@
         "laravel/tinker": "~1.0",
         "ryanwinchester/netsuite-php": "2016.2.*",
         "twbs/bootstrap": "4.0.0-alpha.6",
-        "yajra/laravel-datatables-oracle": "^7.9"
+        "yajra/laravel-datatables-oracle": "^7.9",
+        "chumper/zipper": "1.0.x"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

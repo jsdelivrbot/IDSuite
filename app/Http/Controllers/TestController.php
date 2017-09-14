@@ -39,10 +39,19 @@ use GuzzleHttp\Client;
 use Symfony\Component\HttpKernel\DataCollector\DumpDataCollector;
 use App\Http\Controllers\Controllers;
 use App\Http\Controllers\Netsuite;
+use App\Http\Controllers\Polycom;
 
 
 class TestController extends Controller
 {
+
+
+
+    public  function test_polycom () {
+
+
+        Polycom\PolycomController::grabCDR();
+    }
 
 
     public function test_netsuite() {
