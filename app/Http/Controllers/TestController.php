@@ -380,6 +380,10 @@ class TestController extends Controller
     public function test()
     {
 
+        $vidyostream = new VidyoController();
+
+        dd($vidyostream->generateToken());
+
 
 //        $user = User::getObjectById('USR59959be43fb65');
 //

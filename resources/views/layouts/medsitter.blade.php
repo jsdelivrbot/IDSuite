@@ -110,19 +110,31 @@
     @if (!auth::guest() && $viewname !== 'App Selection' && $viewname !== 'Trust')
         <div class="row">
 
-            <div class="col-sm-3 col-md-2 col-lg-2 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important; padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
+            <div class="col-sm-3 col-md-2 col-lg-1 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important; padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
 
                 <nav>
                     <ul class="nav nav-pills flex-column">
-
                         <li class="nav-item ">
-                            <a class="nav-link btn-outline-teal" style="color: white !important;" href="/medsitter/home">Home</a>
+                            <a class="nav-link btn-outline-teal" style="color: white !important;" href="/medsitter/home">Room Library</a>
                         </li>
-
                         <li class="nav-item ">
-                            <a class="nav-link btn-outline-teal" style="color: white !important;" href="/medsitter/">Zoom</a>
+                            <a class="nav-link btn-outline-blue" style="color: white !important;" href="#">Snaps</a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link btn-outline-pink" style="color: white !important;white-space: nowrap;" href="#">Snippets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn-outline-purple" style="color: white !important;" href="#">Sessions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn-outline-yellow" style="color: white !important;" href="#">Settings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn-outline-orange" style="color: white !important;" href="#">Recordings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn-outline-blue" style="color: white !important;" href="#">Dashboard</a>
+                        </li>
                     </ul>
                 </nav>
 
@@ -132,7 +144,7 @@
             </div>
 
 
-            <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 col-lg-10 offset-lg-2 pt-3">
+            <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 col-lg-11 offset-lg-1 pt-3">
                 @yield('content')
             </main>
 
