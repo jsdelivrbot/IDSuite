@@ -380,6 +380,18 @@ class TestController extends Controller
     public function test()
     {
 
+
+//        $user = User::getObjectById('USR59959be43fb65');
+//
+//        dd($user->references());
+
+        $zstream = new ZoomApiController();
+
+
+
+        dd($zstream->mapUsers());
+
+
         ZabbixController::mapEndpoints();
 
         dd('done');

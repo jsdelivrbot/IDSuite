@@ -174,6 +174,47 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 
+    public function hasReference($reference_key){
+        $result = array_key_exists($reference_key, $this->references());
+        return $result;
+    }
+
+
+    public function updateDev($key, $value, $de){
+
+        if($this->hasReference($key)){
+
+            foreach($this->devs as $dev){
+
+                if ($dev->dynamicenum_id === $de->id){
+
+                    if($de->values[$dev->value_type] === $key){
+
+                        if($dev->value === $value){
+
+                            return $dev;
+
+                        } else {
+
+                            $dev->value = $value;
+                            $dev->save();
+                            return $dev;
+
+                        }
+
+                    } else {
+
+                        continue;
+
+                    }
+                }
+            }
+        }
+
+        return false;
+
+    }
+
     /**
      * @return string
      *
@@ -267,6 +308,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function validateAddress(){
 
     }
+
+
 
 
 }

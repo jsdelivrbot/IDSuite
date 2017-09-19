@@ -237,7 +237,7 @@ class ZabbixController extends Controller
 
     public static function getRefDe(){
         return DynamicEnum::getByName(ZabbixController::$de);
-}
+    }
 
 
     public static function mapEndpoints(){
