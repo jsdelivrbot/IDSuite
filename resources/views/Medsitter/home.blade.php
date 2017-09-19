@@ -37,6 +37,7 @@
             <input type="text" id="token" placeholder="" value="{{$vidyo->getToken()}}" style="margin-left: -27px">
             <input id="resourceId" type="text" value="IDSRoom" style="margin-left: -27px">
             <input id="displayName" type="text" value="Amac" style="margin-left: -27px">
+            <div id="error"></div>
         </div>
 
         <div class="col-lg-5">
