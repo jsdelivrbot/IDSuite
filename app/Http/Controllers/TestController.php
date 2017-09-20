@@ -380,6 +380,9 @@ class TestController extends Controller
     public function test()
     {
 
+
+        dd($this->buildDevTicketRelationship());
+
         $vidyostream = new VidyoController();
 
         dd($vidyostream->generateToken());
