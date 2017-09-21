@@ -298,7 +298,24 @@ class ZoomApiController extends Controller
         return $this->sendRequest('webinar/end',$endAWebinarArray);
     }
 
+    public function listZoomRoom($page_size = 50, $page_number = 1){
+        $listZoomRoomArray = array(
+            'page_size'         => $page_size,
+            'page_number'       => $page_number
+        );
+        return $this->sendRequest('metrics/zoomrooms',$listZoomRoomArray);
+    }
 
+    public function getZoomRoomDetail($id, $from, $to, $page_size = 50, $page_number = 1){
+        $getZoomRoomDetailArray = array(
+            'id'                => $id,
+            'from'              => $from,
+            'to'                => $to,
+            'page_size'         => $page_size,
+            'page_number'       => $page_number
+        );
+        return $this->sendRequest('metrics/zoomroomdetail',$getZoomRoomDetailArray);
+    }
 
     public function mapUsers(){
 
@@ -384,5 +401,18 @@ class ZoomApiController extends Controller
 
     }
 
+
+    public function getAllZoomRoomDetails(){
+
+        $rooms = $this->listZoomRoom()->zoom_rooms;
+
+        $room_detail_array = array();
+
+        foreach ($rooms as $room) {
+            $room_detail_array[] = $this->getZoomRoomDetail($room->id, '2017-9-1', '2017-9-21');
+        }
+
+        return $room_detail_array;
+    }
 
 }

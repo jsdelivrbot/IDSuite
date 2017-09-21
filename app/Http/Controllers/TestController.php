@@ -380,6 +380,17 @@ class TestController extends Controller
     public function test()
     {
 
+        dd(ZabbixController::mapEndpoints());
+
+        $zstream = new ZoomApiController();
+
+        dd($zstream->getAllZoomRoomDetails());
+
+
+
+        $zstream->listZoomRoom();
+
+        $zstream->getZoomRoomDetail('N9zNcPmSTgel-VDLp8HmlA', '2017-9-1', '2017-9-21');
 
         dd($this->buildDevTicketRelationship());
 
