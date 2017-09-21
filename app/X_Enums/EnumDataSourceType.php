@@ -17,7 +17,9 @@ class EnumDataSourceType extends Enum
         0   =>  'netsuite',
         1   =>  'zabbix',
         2   =>  'mrge',
-        3   =>  'polycom'
+        3   =>  'polycom',
+        4   =>  'zoom',
+        5   =>  'vidyo',
     ];
 
 }

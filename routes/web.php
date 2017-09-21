@@ -32,6 +32,8 @@ Route::get('/getAuthUser', 'UserController@getCurrentUser');
 
 
 // test routes //
+Route::get('/test/vidyo', 'TestController@test_vidyo');
+
 Route::get('/test', 'TestController@test');
 Route::get('/test/ns', 'TestController@test_netsuite');
 Route::get('/test/polycom', 'TestController@test_polycom');

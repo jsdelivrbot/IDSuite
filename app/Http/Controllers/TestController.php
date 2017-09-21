@@ -13,6 +13,7 @@ use App\EntityName;
 use App\Enums\EnumDataSourceType;
 use App\Enums\EnumDeviceType;
 use App\Enums\EnumMonths;
+use App\Http\Controllers\Vidyo\VidyoController;
 use App\Ip2Location;
 use App\PersonContact;
 use App\Record;
@@ -46,11 +47,50 @@ class TestController extends Controller
 {
 
 
+    public  function test_vidyo () {
+
+
+        $polycom = new Vidyo\VidyoController('portal.idsflame.com', 'cdraccess','ids_14701', 'portal2');
+
+        $cdr_rows = $polycom->grabCDR();
+
+        dd($cdr_rows);
+
+        VidyoController::grabCDR();
+
+    }
+
 
     public  function test_polycom () {
 
+        /*
+        RPRM – 10.0.14.87 (innobidsrprm1.e-idsolutions.local) port 8443
+                      User: IDS\your domain username (IDS\fbreidi)
+                      Pass: your domain password
 
-        Polycom\PolycomController::grabCDR();
+        RPDMA – 10.0.14.85 (innobidsrpdma1.e-idsolutions.local) port 8443
+                      User: fbreidi
+                      Pass: ids_14701
+
+        conferences:
+        meeting in a room. can include 1 or more devices
+
+        calls:
+        direct user to user
+
+
+            unzip
+        CONFLIST_DETAIL_ALL_CSV-14.csv
+        ENDPOINT_CDR_DETAIL_ALL_CSV-13.csv
+         * */
+
+
+        $polycom = new Polycom\PolycomController('https://10.0.14.87:8443/api/rest/billing', 'IDS\fbreidi', 'openinternet');
+
+        $cdr_rows = $polycom->grabCDR();
+
+        dd($cdr_rows);
+
     }
 
 

@@ -26,7 +26,7 @@ class CreateEndpointTable extends Migration
             $table->uuid('proxy_id')->nullable();
             $table->uuid('location_id')->nullable();
 
-            $table->char('password_hash', 64)->nullable();
+            $table->char('password', 64)->nullable();
 
             $table->string('class_code');
             $table->string('username')->nullable();

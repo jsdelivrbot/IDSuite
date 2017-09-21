@@ -12,4 +12,5 @@ namespace App\Http\Controllers\LifeSize;
 class LifeSizeDatabase
 {
 
+
 }
