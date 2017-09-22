@@ -176,6 +176,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/medsitter', 'MedsitterController@index');
 
+    Route::get('/medsitter/patient', 'MedsitterController@patientview');
+
 
 //    Route::get('/webrtc', 'WebRtcController@index');
 //

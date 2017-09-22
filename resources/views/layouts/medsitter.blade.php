@@ -135,6 +135,9 @@
                         <li class="nav-item">
                             <a class="nav-link btn-outline-blue" style="color: white !important;" href="#">Dashboard</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn-outline-pink" style="color: white !important;" href="/medsitter/patient">Patient</a>
+                        </li>
                     </ul>
                 </nav>
 

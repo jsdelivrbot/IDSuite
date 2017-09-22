@@ -27,12 +27,60 @@ html, body {
 	/*position: absolute;*/
 	z-index: 100;
 }
-#renderer {
+#renderer0 {
 	/*position:     absolute;*/
 	/*top:          0px;*/
 	/*right:        0px;*/
 	/*bottom:       60px;*/
-	z-index: 99;
+	/*z-index: 99;*/
+	height:		670px;
+	/*width: 		1500px;*/
+	width:		100%;
+}
+#renderer1 {
+	/*position:     absolute;*/
+	/*top:          0px;*/
+	/*right:        0px;*/
+	/*bottom:       60px;*/
+	/*z-index: 99;*/
+	height:		300px;
+	width: 		100%;
+}
+#renderer2 {
+	/*position:     absolute;*/
+	/*top:          0px;*/
+	/*right:        0px;*/
+	/*bottom:       60px;*/
+	/*z-index: 99;*/
+	height:		300px;
+	width: 		100%;
+}
+#renderer3 {
+	/*position:     absolute;*/
+	/*top:          0px;*/
+	/*right:        0px;*/
+	/*bottom:       60px;*/
+	/*z-index: 99;*/
+	height:		300px;
+	width: 		100%;
+}
+#renderer4 {
+	/*position:     absolute;*/
+	/*top:          0px;*/
+	/*right:        0px;*/
+	/*bottom:       60px;*/
+	/*z-index: 99;*/
+	height:		300px;
+	width: 		100%;
+}
+#renderer5 {
+	/*position:     absolute;*/
+	/*top:          0px;*/
+	/*right:        0px;*/
+	/*bottom:       60px;*/
+	/*z-index: 99;*/
+	height:		300px;
+	width: 		100%;
 }
 #helper {
 	/*position:     absolute;*/

@@ -10,7 +10,7 @@
                 <span id="clientVersion"></span>
                 {{--<div id="renderer" class="card-img-top rendererWithOptions pluginOverlay mt-2" style="height: 275px;"></div>--}}
 
-                <div id="renderer0" class="card-img-top rendererWithOptions pluginOverlay mt-2"> </div>
+                <div id="renderer2" class="card-img-top mt-2"> </div>
 
                 <div class="card-block">
 
@@ -47,7 +47,7 @@
             <div class="card" style="background-color: #434857 !important">
                 <span id="connectionStatus">Initializing</span>
                 <span id="clientVersion"></span>
-                <div id="renderer1" class="card-img-top rendererWithOptions pluginOverlay mt-2"> </div>
+                <div id="renderer3" class="card-img-top mt-2"> </div>
                 <div class="card-block">
 
                     {{--<span id="participantStatus"></span>--}}
@@ -73,7 +73,7 @@
             <div class="card" style="background-color: #434857 !important">
                 <span id="connectionStatus">Initializing</span>
                 <span id="clientVersion"></span>
-                <div id="renderer2" class="card-img-top rendererWithOptions pluginOverlay mt-2"> </div>
+                <div id="renderer4" class="card-img-top mt-2"> </div>
                 <div class="card-block">
 
                     {{--<span id="participantStatus"></span>--}}
@@ -99,7 +99,7 @@
             <div class="card" style="background-color: #434857 !important">
                 <span id="connectionStatus">Initializing</span>
                 <span id="clientVersion"></span>
-                <div id="renderer3" class="card-img-top rendererWithOptions pluginOverlay mt-2"> </div>
+                <div id="renderer5" class="card-img-top mt-2"> </div>
                 <div class="card-block">
 
                     {{--<span id="participantStatus"></span>--}}

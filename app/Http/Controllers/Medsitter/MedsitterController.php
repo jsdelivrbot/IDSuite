@@ -16,4 +16,10 @@ class MedsitterController extends Controller
         return view('Medsitter.home', ['viewname' => 'Medsitter / Home']);
 
     }
+
+
+    public function patientview(){
+        return view('Medsitter.patientview', ['viewname' => 'Medsitter / Patient']);
+    }
+
 }
