@@ -13,7 +13,7 @@
                             <p class="card-text text-white">This is customer {{$name}}</p>
 
                             <div class="col-md-10 offset-1">
-                                <input type="button" value="Export charts to PDF" onclick="createReport();" />
+                                <button type="button" class="btn btn-outline-info mb-3" onclick="createReport();" >Generate PDF Report</button>
                                 <div id="chart1" style="width: 100%; height: 400px;"></div>
                             </div>
 
@@ -28,7 +28,7 @@
                             <p class="card-text text-white">This is customer {{$name}}</p>
 
                             <div class="col-md-10 offset-1">
-                                <input type="button" value="Export charts to PDF" onclick="createReport();" />
+                                <button type="button" class="btn btn-outline-info mb-3" onclick="createReport();" >Generate PDF Report</button>
                                 <div class="chart-container">
                                     <div id="chart1" style="width: 100%; height: 400px;"></div>
                                 </div>
@@ -45,7 +45,7 @@
                             <p class="card-text text-white">This is customer {{$name}}</p>
 
                             <div class="col-md-10 offset-1">
-                                <input type="button" value="Export charts to PDF" onclick="createReport();" />
+                                <button type="button" class="btn btn-outline-info mb-3" onclick="createReport();" >Generate PDF Report</button>
                                 <div class="chart-container">
                                     <div id="chart1" style="width: 100%; height: 400px;"></div>
                                 </div>
@@ -62,7 +62,7 @@
                             <p class="card-text text-white">This is customer {{$name}}</p>
 
                             <div class="col-md-10 offset-1">
-                                <input type="button" value="Export charts to PDF" onclick="createReport();" />
+                                <button type="button" class="btn btn-outline-info mb-3" onclick="createReport();" >Generate PDF Report</button>
                                 <div class="chart-container">
                                     <div id="chart1" style="width: 100%; height: 400px;"></div>
                                 </div>
@@ -79,7 +79,7 @@
                             <p class="card-text text-white">This is customer {{$name}}</p>
 
                             <div class="col-md-10 offset-1">
-                                <input type="button" value="Export charts to PDF" onclick="createReport();" />
+                                <button type="button" class="btn btn-outline-info mb-3" onclick="createReport();" >Generate PDF Report</button>
                                 <div class="chart-container">
                                     <div id="chart1" style="width: 100%; height: 400px;"></div>
                                 </div>
