@@ -18,8 +18,8 @@
 
                     <div class="form-group">
                         <div class="input-group justify-content-center">
-                            <button id="microphoneButton" title="Microphone Privacy" class="toolbarButton microphoneOn"></button>
-                            <button id="cameraButton" title="Camera Privacy" class="toolbarButton cameraOn"></button>
+                            {{--<button id="microphoneButton" title="Microphone Privacy" class="toolbarButton microphoneOn"></button>--}}
+                            {{--<button id="cameraButton" title="Camera Privacy" class="toolbarButton cameraOn"></button>--}}
                             <button id="joinLeaveButton" title="Join Conference" class="toolbarButton callStart"></button>
                             <button class="btn btn-nav-blue my-2 my-sm-0" type="button">Details</button>
                         </div>
@@ -45,13 +45,30 @@
             <div id="error"></div>
         </div>
 
+    <div class="row">
+        <div class="mt-4 col-lg-6 text-white">
+
+            <span>Name: </span><span id="participant-name"></span>
+            <span>Type: </span><span id="participant-type"></span>
+            <span>Muted: </span><span id="participant-muted"></span>
+
+        </div>
+    </div>
+
+
+
 
 @endsection
 
 
-@push('medsitter_vidyo_connector')
+@push('medsitter_patient')
+
+
+
 
     <script type="text/javascript">
+
+
         function onVidyoClientLoaded(status) {
             console.log("Status: " + status.state + "Description: " + status.description);
 
@@ -112,7 +129,7 @@
             var webrtcLogLevel = "";
             if (webrtc) {
                 // Set the WebRTC log level to either: 'info' (default), 'error', or 'none'
-                webrtcLogLevel = '&webrtcLogLevel=info';
+                webrtcLogLevel = '&webrtcLogLevel=none';
             }
 
             //We need to ensure we're loading the VidyoClient library and listening for the callback.
@@ -186,6 +203,47 @@
         // Runs when the page loads
         $(function() {
             joinViaBrowser();
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        console.log('pusher');
+
+        let participant;
+
+        Echo.private('medsitter-call-status')
+            .listen('EventCallStatus', event => {
+
+                participant = event.participant;
+
+                console.log('event fired');
+
+
+            });
+
+
+    </script>
+
+
+
+    <script type="text/javascript">
+
+        let only_once = true;
+
+        $(window).on("beforeunload", function() {
+
+            if(only_once) {
+                only_once = false;
+                $.ajax({
+                    url: "/medsitter/participant/leave",
+                    type: "POST",
+                    data: {
+                        "participant_id": "{{$participant->id}}",
+                        "pod_id": "{{$pod->id}}"
+                    }
+                });
+            }
         });
     </script>
 

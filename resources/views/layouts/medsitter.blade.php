@@ -115,7 +115,10 @@
                 <nav>
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item ">
-                            <a class="nav-link btn-outline-teal" style="color: white !important;" href="/medsitter/home">Room Library</a>
+                            <a class="nav-link btn-outline-teal" style="color: white !important;" href="/medsitter/library">Pod Library</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link btn-outline-yellow" style="color: white !important;" href="/medsitter/pods">Pod</a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link btn-outline-blue" style="color: white !important;" href="#">Snaps</a>

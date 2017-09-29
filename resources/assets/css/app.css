@@ -196,13 +196,13 @@
     color: #d59043;
     background-image: none;
     background-color: transparent;
-    border-color: #d59043;
+    border-color: #d59043 !important;
 }
 
 .btn-outline-orange:hover {
     color: #fff;
     background-color: #d59043;
-    border-color: #d59043;
+    border-color: #d59043 !important;
 }
 
 .btn-outline-orange:focus, .btn-outline-orange.focus {
@@ -790,13 +790,13 @@
     color: #1BC98E;
     background-image: none;
     background-color: transparent;
-    border-color: #1BC98E;
+    border-color: #1BC98E !important;
 }
 
 .btn-outline-teal:hover {
     color: #fff;
     background-color: #1BC98E;
-    border-color: #1BC98E;
+    border-color: #1BC98E !important;
 }
 
 .btn-outline-teal:focus, .btn-outline-teal.focus {

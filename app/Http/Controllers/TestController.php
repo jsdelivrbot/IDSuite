@@ -14,7 +14,9 @@ use App\Enums\EnumDataSourceType;
 use App\Enums\EnumDeviceType;
 use App\Enums\EnumMonths;
 use App\Ip2Location;
+use App\Participant;
 use App\PersonContact;
+use App\Pod;
 use App\Record;
 use App\Ticket;
 use App\User;
@@ -379,6 +381,61 @@ class TestController extends Controller
      */
     public function test()
     {
+
+
+        $pods = Pod::all();
+
+        foreach ($pods as $pod){
+            $pod->active_count = count($pod->getActiveParticipants());
+            $pod->total_count = count($pod->getActiveParticipants());
+
+            $pod->save();
+        }
+
+       dd('done');
+
+//        $pod = Pod::getObjectById('POD59ce690d7802d');
+
+//        dd($pod->getActiveParticipants());
+
+//        $pod->participants()->updateExistingPivot('PAR59ce66aec360e', ['active' => true]);
+
+//        dd('finito');
+
+        $pod = new Pod();
+
+        $pod->setName('testas2');
+
+        $participant = new Participant();
+
+        $participant->setName('Aasdfasdf12lex123');
+        $participant->setType('sittasdf12er123');
+
+        $pod->participants()->attach($participant->id, ['active_status' => true]);
+
+        $pod->participants()->updateExistingPivot($participant->id, ['active_status' => false]);
+
+        $participant = new Participant();
+
+        $participant->setName('Aasdfasdf12lex123');
+        $participant->setType('sittasdf12er123');
+
+        $pod->participants()->attach($participant->id, ['active_status' => true]);
+
+//        $pod->participants()->updateExistingPivot($participant->id, ['active_status' => false]);
+
+        $participant = new Participant();
+
+        $participant->setName('Aasdfasdf12lex123');
+        $participant->setType('sittasdf12er123');
+
+        $pod->participants()->attach($participant->id, ['active_status' => true]);
+
+//        $pod->participants()->updateExistingPivot($participant->id, ['active_status' => false]);
+
+        dd('done');
+
+
 
         dd(ZabbixController::mapEndpoints());
 

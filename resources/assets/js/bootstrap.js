@@ -16,6 +16,18 @@ if (typeof jQuery === 'undefined') {
 }(jQuery);
 
 
+import Echo from "laravel-echo"
+
+window.Pusher = require('pusher-js');
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: 'd572e35009e3465ac331',
+    cluster: 'us2',
+    encrypted: true
+});
+
+
 +function () {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
