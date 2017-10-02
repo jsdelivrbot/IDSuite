@@ -83,7 +83,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <a id="patient-cancel" class="btn btn-nav-pink" data-dismiss="modal" style="cursor: pointer !important;">Close</a>
-                                        <a id="patient-submit" class="btn btn-nav-orange" style="cursor: pointer !important;"><i class="fa fa-plus"></i>Submit</a>
+                                        <a id="patient-submit" class="btn btn-nav-orange" style="cursor: pointer !important;"></i>Submit</a>
                                     </div>
                                 </div>
                             </div>
