@@ -46,6 +46,49 @@
                             <div class="col-lg-1 align-self-center ml-3">
                                 <a id="pod-link-{{$pod->id}}" class="btn btn-outline-orange" href="/medsitter/sitter/{{$pod->id}}" role="button">Sitter</a>
                             </div>
+                            <!-- Start Form-->
+                            <div class="modal" id="patientModal" tabindex="-1" role="dialog" aria-labelledby="patientModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Add Contact</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" style="color: white;">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="contact-form">
+                                            <div class="form-group">
+                                                <label for="patient-first-name-first-name">First Name</label>
+                                                <input class="form-control" id="patient-first-name" placeholder="Jane" minlength="2" type="text" required/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="patient-middle-name-middle-name">Middle Name</label>
+                                                <input class="form-control" id="patient-middle-name" placeholder="Dorthy"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="patient-last-name-last-name">Last Name</label>
+                                                <input class="form-control" id="patient-last-name" placeholder="Doe" minlength="2" type="text" required/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="patient-contact-number">Contact Phone Number</label>
+                                                <input class="form-control" id="patient-contact" placeholder="" required/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contact-preferred-name">Microphone Privacy</label>
+                                                <input type="radio" class="form-control" name="patient-microphone-status" value="muted"> Muted<br>
+                                                <input type="radio" class="form-control" name="patient-microphone-status" value="active"> Active<br>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a id="patient-cancel" class="btn btn-nav-pink" data-dismiss="modal" style="cursor: pointer !important;">Close</a>
+                                        <a id="patient-submit" class="btn btn-nav-orange" style="cursor: pointer !important;"><i class="fa fa-plus"></i>Submit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Form-->
                             <div class="col-lg-3 align-self-center">
                                 <div class="ml-5 ">
                                     <span id="pod-name-{{$pod->id}}">{{$pod->name}}</span>
@@ -70,7 +113,6 @@
                 </div>
             </div>
         </div>
-
     @endforeach
 
 
@@ -266,6 +308,58 @@
                 "color": "#67b7dc",
                 "align": "right"
             }]
+        });
+    </script>
+    <script>
+        $('#patient-form').validate({
+            rules: {
+                "contact-phone-number": {
+                    required: true,
+                    phoneUS: true
+                }
+            }
+        });
+
+        $('#patient-submit').click(function(){
+
+            if($('#patient-form').valid()) {
+
+                let firstname = $('#patient-first-name').val();
+                let middlename = $('#patient-middle-name').val();
+                let lastname = $('#patient-last-name').val();
+                let phonenumber = $('#patient-contact').val();
+                let microphonestatus = $('#patient-microphone-status').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: '/personcontacts',
+                    data: {
+                        firstname: firstname,
+                        middlename: middlename,
+                        lastname: lastname,
+                        phonenumber: phonenumber,
+                        microphonestatus: microphonestatus
+                    },
+                    success: function (data) {
+                        // add note dynamically to note list //
+
+                        $('#patientModal').modal('hide');
+
+                        console.log($('#patient-default').length);
+
+                        if ($('#note-default').length === 1) {
+                            $('#note-default').hide();
+                            $('#note-last-hr').hide();
+                            $('#notes-title').after('<div class="card-text text-white"><div>' + data.text + '</div><small>created - ' + data.created_at + '</small></div><hr class="mb-4" style="border-color: #9F86FF">')
+                        } else {
+                            $('#notes-title').after('<div class="card-text text-white"><div>' + data.text + '</div><small>created - ' + data.created_at + '</small></div><hr class="mb-4" style="border-color: #9F86FF">')
+                        }
+                    }
+                });
+            } else {
+
+            }
+
         });
     </script>
 
