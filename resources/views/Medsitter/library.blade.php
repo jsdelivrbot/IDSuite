@@ -57,7 +57,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form id="contact-form">
+                                        <form id="patient-form">
                                             <div class="form-group">
                                                 <label for="patient-first-name-first-name">First Name</label>
                                                 <input class="form-control" id="patient-first-name" placeholder="Jane" minlength="2" type="text" required/>
