@@ -13,6 +13,7 @@ use App\EntityName;
 use App\Enums\EnumDataSourceType;
 use App\Enums\EnumDeviceType;
 use App\Enums\EnumMonths;
+use App\helper\TokenGenerator;
 use App\Ip2Location;
 use App\Participant;
 use App\PersonContact;
@@ -382,6 +383,7 @@ class TestController extends Controller
     public function test()
     {
 
+        dd();
 
         $pods = Pod::all();
 

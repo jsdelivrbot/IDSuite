@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="col-lg-1 align-self-center">
 
-                                @if(count($pod->getActiveParticipants()) < 4)
+                                @if(count($pod->patient_count) < 4)
                                     <a id="pod-link-{{$pod->id}}" data-toggle="modal" data-target="#patientModal" class="btn btn-outline-teal"  role="button">Patient</a>
                                 @else
                                     <a id="pod-link-{{$pod->id}}" data-toggle="modal" data-target="#patientModal" class="btn btn-outline-teal disabled" role="button">Patient</a>
@@ -85,12 +85,8 @@
                     <div class="modal-body">
                         <form id="patient-form">
                             <div class="form-group">
-                                <label for="patient-first-name-first-name">First Name</label>
+                                <label for="patient-first-name">First Name</label>
                                 <input class="form-control" id="patient-first-name" placeholder="Jane" minlength="2" type="text" required/>
-                            </div>
-                            <div class="form-group">
-                                <label for="patient-middle-name-middle-name">Middle Name</label>
-                                <input class="form-control" id="patient-middle-name" placeholder="Dorthy"/>
                             </div>
                             <div class="form-group">
                                 <label for="patient-last-name-last-name">Last Name</label>
@@ -109,7 +105,7 @@
                     </div>
                     <div class="modal-footer">
                         <a id="patient-cancel" class="btn btn-nav-pink" data-dismiss="modal" style="cursor: pointer !important;">Close</a>
-                        <a id="patient-submit" class="btn btn-nav-orange" style="cursor: pointer !important;" href="/medsitter/patient/{{$pod->id}}-{{count($pod->getActiveParticipants())+1}}"><i class="fa fa-plus"></i>Submit</a>
+                        <a id="patient-submit" value="{{$pod->id}}" class="btn btn-nav-orange" style="cursor: pointer !important;"><i class="fa fa-plus"></i>Submit</a>
                     </div>
                 </div>
             </div>
@@ -313,47 +309,33 @@
         });
     </script>
     <script>
-        $('#patient-form').validate({
-            rules: {
-                "contact-phone-number": {
-                    required: true,
-                    phoneUS: true
-                }
-            }
-        });
 
         $('#patient-submit').click(function(){
 
             let firstname = $('#patient-first-name').val();
-            let middlename = $('#patient-middle-name').val();
             let lastname = $('#patient-last-name').val();
             let phonenumber = $('#patient-contact').val();
             let microphonestatus = $('#patient-microphone-status').val();
 
+
+            let podid = $(this).attr('value');
+
+            console.log(podid);
+
+
             $.ajax({
                 type: "POST",
-                url: '/#',
+                url: "/medsitter/participant",
                 data: {
                     firstname: firstname,
-                    middlename: middlename,
                     lastname: lastname,
                     phonenumber: phonenumber,
-                    microphonestatus: microphonestatus
+                    microphonestatus: microphonestatus,
+                    type: "patient"
                 },
                 success: function (data) {
                     // add note dynamically to note list //
-
-                    $('#patientModal').modal('hide');
-
-                    console.log($('#patient-default').length);
-
-                    if ($('#note-default').length === 1) {
-                        $('#note-default').hide();
-                        $('#note-last-hr').hide();
-                        $('#notes-title').after('<div class="card-text text-white"><div>' + data.text + '</div><small>created - ' + data.created_at + '</small></div><hr class="mb-4" style="border-color: #9F86FF">')
-                    } else {
-                        $('#notes-title').after('<div class="card-text text-white"><div>' + data.text + '</div><small>created - ' + data.created_at + '</small></div><hr class="mb-4" style="border-color: #9F86FF">')
-                    }
+                    window.location.href = '/medsitter/patient/'+podid+'-'+data.participant_id;
                 }
             });
         });

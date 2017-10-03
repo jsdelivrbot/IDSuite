@@ -22,9 +22,10 @@ class CreateParticipantTable extends Migration
             $table->primary('id');
             $table->string('class_code');
 
-            $table->string('name');
-            $table->integer('type');
-            $table->boolean('muted');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->integer('type')->nullable();
+            $table->boolean('muted')->nullable();
 
 
             $table->boolean('active')->nullable();

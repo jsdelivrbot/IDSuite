@@ -6,11 +6,11 @@
 
         <div class="col-lg-11" style="margin-left: 3.75%;">
             <div class="card" style="background-color: #434857 !important">
-                <span id="connectionStatus">Initializing</span>
-                <span id="clientVersion"></span>
+                <span id="connectionStatus-0">Initializing</span>
+                <span id="clientVersion-0"></span>
                 {{--<div id="renderer" class="card-img-top rendererWithOptions pluginOverlay mt-2" style="height: 275px;"></div>--}}
 
-                <div id="renderer2" class="card-img-top mt-2"> </div>
+                <div id="renderer2-0" class="card-img-top mt-2"> </div>
 
                 <div class="card-block">
 
@@ -20,7 +20,7 @@
                         <div class="input-group justify-content-center">
                             {{--<button id="microphoneButton" title="Microphone Privacy" class="toolbarButton microphoneOn"></button>--}}
                             {{--<button id="cameraButton" title="Camera Privacy" class="toolbarButton cameraOn"></button>--}}
-                            <button id="joinLeaveButton" title="Join Conference" class="toolbarButton callStart"></button>
+                            <button id="joinLeaveButton-0" title="Join Conference" class="toolbarButton callStart"></button>
                             <button class="btn btn-nav-blue my-2 my-sm-0" type="button">Details</button>
                         </div>
                     </div>
@@ -38,10 +38,10 @@
         @endphp
 
         <div class="col-lg-6 offset-4">
-            <input type="text" id="host" value="{{$vidyo->getHostId()}}" style="margin-left: -27px">
-            <input type="text" id="token" placeholder="" value="{{$vidyo->getToken()}}" style="margin-left: -27px">
-            <input id="resourceId" type="text" value="IDSRoom" style="margin-left: -27px">
-            <input id="displayName" type="text" value="Amac" style="margin-left: -27px">
+            <input type="text" id="host" value="{{$vidyo->getHostId()}}">
+            <input type="text" id="token" placeholder="" value="{{$vidyotoken}}">
+            <input id="resourceId" type="text" value="{{$room}}">
+            <input id="displayName" type="text" value="{{$participant->first_name . ' ' . $participant->last_name}}">
             <div id="error"></div>
         </div>
 
@@ -80,7 +80,7 @@
                     $("#helper").addClass("hidden");
                     // After the VidyoClient is successfully initialized a global VC object will become available
                     // All of the VidyoConnector gui and logic is implemented in VidyoConnector.js
-                    StartVidyoConnector(VC, VCUtils.params.webrtc);
+                    StartVidyoConnector(VC, 0);
                     break;
                 case "RETRYING": // The library operating is temporarily paused
                     connectionstatus.html("Temporarily unavailable retrying in " + status.nextTimeout/1000 + " seconds");

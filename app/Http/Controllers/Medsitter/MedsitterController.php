@@ -9,13 +9,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\EnumParticipantType;
 use App\Events\EventCallStatus;
 use App\Events\LivePods;
 use App\Events\PodCount;
+use App\Events\PodKey;
+use App\VidyoTokenGenerator;
 use App\Participant;
 use App\Pod;
 use function GuzzleHttp\Psr7\parse_request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Validation\Rules\In;
 
 class MedsitterController extends Controller
 {
@@ -33,7 +37,8 @@ class MedsitterController extends Controller
         $sitter = new Participant();
 
         $sitter->setType('sitter');
-        $sitter->setName('testsitter');
+        $sitter->setFirstName('test');
+        $sitter->setLastName('sitter');
         $sitter->setMuted(false);
 
         $sitter->save();
@@ -59,22 +64,47 @@ class MedsitterController extends Controller
         event(new PodCount($pod));
     }
 
-    public function patient($id, $count){
+    public function patient($pod_id, $participant_id){
 
-        $pod = Pod::getObjectById($id);
+        $participant = Participant::getObjectById($participant_id);
 
-        $participant = new Participant();
-
-        $participant->setType('patient');
-        $participant->setName('testpatient');
-        $participant->setMuted(false);
+        $pod = Pod::getObjectById($pod_id);
 
         $pod->joinParticipant($participant);
 
+        $tokenObj = new VidyoTokenGenerator($pod_id . '-' . $participant_id);
+
+        $token = $tokenObj->getToken();
+
         event(new EventCallStatus($participant));
         event(new PodCount($pod));
+        event(new PodKey($token, $tokenObj->getRoom(), $pod_id));
 
-        return view('Medsitter.patient', ['viewname' => 'Medsitter / Patient', 'participant' => $participant, 'pod' => $pod]);
+        return view('Medsitter.patient', ['viewname' => 'Medsitter / Patient', 'participant' => $participant, 'pod' => $pod, 'vidyotoken' => $token, 'room' => $tokenObj->getRoom()]);
+    }
+
+    public function participant(){
+
+        $first_name = Input::get('firstname');
+        $last_name = Input::get('lastname');
+        $phone_number = Input::get('phonenumber');
+        $mute_status = Input::get('microphonestatus');
+        $type = Input::get('type');
+
+
+        $participant = new Participant();
+
+        $participant->setFirstName($first_name);
+        $participant->setLastName($last_name);
+        $participant->setType($type);
+        $participant->setMuted($mute_status);
+
+        $participant->save();
+
+        return response()->json([
+            'participant_id' => $participant->id
+        ]);
+
     }
 
     public function dropParticipant(){

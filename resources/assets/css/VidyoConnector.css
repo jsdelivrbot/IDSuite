@@ -46,7 +46,34 @@ html, body {
 	height:		300px;
 	width: 		100%;
 }
-#renderer2 {
+#renderer2-0 {
+	/*position:     absolute;*/
+	/*top:          0px;*/
+	/*right:        0px;*/
+	/*bottom:       60px;*/
+	/*z-index: 99;*/
+	height:		300px;
+	width: 		100%;
+}
+#renderer2-1 {
+	/*position:     absolute;*/
+	/*top:          0px;*/
+	/*right:        0px;*/
+	/*bottom:       60px;*/
+	/*z-index: 99;*/
+	height:		300px;
+	width: 		100%;
+}
+#renderer2-2 {
+	/*position:     absolute;*/
+	/*top:          0px;*/
+	/*right:        0px;*/
+	/*bottom:       60px;*/
+	/*z-index: 99;*/
+	height:		300px;
+	width: 		100%;
+}
+#renderer2-3 {
 	/*position:     absolute;*/
 	/*top:          0px;*/
 	/*right:        0px;*/
