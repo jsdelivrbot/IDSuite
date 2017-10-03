@@ -46,7 +46,6 @@
                             <div class="col-lg-1 align-self-center ml-3">
                                 <a id="pod-link-{{$pod->id}}" class="btn btn-outline-orange" href="/medsitter/sitter/{{$pod->id}}" role="button">Sitter</a>
                             </div>
-
                             <div class="col-lg-3 align-self-center">
                                 <div class="ml-5 ">
                                     <span id="pod-name-{{$pod->id}}">{{$pod->name}}</span>
