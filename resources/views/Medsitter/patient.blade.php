@@ -226,8 +226,15 @@
 
                 let roomkey = event.room_key;
 
-                if(roomkey === "{{$pod->id . '-' . $participant->id}}"){
+                console.log(roomkey);
 
+
+                if(roomkey === "{{$pod->id . '-' . $participant->id}}"){
+                    muteSpeakers(0);
+
+                    console.log('speakers mute toggled');
+                } else{
+                    console.log('speakers mute toggled FAILED: Room keys are not equal.');
                 }
 
             });
