@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 use App\Enums\EnumParticipantType;
 use App\Events\EventCallStatus;
 use App\Events\LivePods;
+use App\Events\MutePatient;
 use App\Events\PodCount;
 use App\Events\PodKey;
 use App\VidyoTokenGenerator;
@@ -152,6 +153,18 @@ class MedsitterController extends Controller
 
     }
 
+
+    public function muteToggle(){
+
+        $pod = Input::get("pod_id");
+
+        $participant = Input::get("participant_id");
+
+        event(new MutePatient(Pod::getObjectById($pod), Participant::getObjectById($participant)));
+
+        return response()->json("Mute event has been created");
+
+    }
 
     public function muteAll(){
 

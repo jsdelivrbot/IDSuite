@@ -28,3 +28,7 @@ Broadcast::channel('medsitter-pod-count', function () {
 Broadcast::channel('medsitter-pod-key', function () {
     return true;
 });
+
+Broadcast::channel('medsitter-mute-toggle', function () {
+    return true;
+});

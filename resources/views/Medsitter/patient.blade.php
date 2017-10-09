@@ -18,7 +18,7 @@
 
                     <div class="form-group">
                         <div class="input-group justify-content-center">
-                            {{--<button id="microphoneButton" title="Microphone Privacy" class="toolbarButton microphoneOn"></button>--}}
+                            <button id="microphoneButton-0" title="Microphone Privacy" class="toolbarButton microphoneOn"></button>
                             {{--<button id="cameraButton" title="Camera Privacy" class="toolbarButton cameraOn"></button>--}}
                             <button id="joinLeaveButton-0" title="Join Conference" class="toolbarButton callStart"></button>
                             <button class="btn btn-nav-blue my-2 my-sm-0" type="button">Details</button>
@@ -69,6 +69,7 @@
     <script type="text/javascript">
 
 
+
         function onVidyoClientLoaded(status) {
             console.log("Status: " + status.state + "Description: " + status.description);
 
@@ -99,6 +100,8 @@
                     connectionstatus.html(status.description);
                     break;
             }
+
+
             return true; // Return true to reload the plugins if not available
         }
         function UpdateHelperPaths(status) {
@@ -214,13 +217,22 @@
 
         Echo.private('medsitter-call-status')
             .listen('EventCallStatus', event => {
-
                 participant = event.participant;
+            });
 
-                console.log('event fired');
 
+        Echo.private('medsitter-mute-toggle')
+            .listen('MutePatient', event => {
+
+                let roomkey = event.room_key;
+
+                if(roomkey === "{{$pod->id . '-' . $participant->id}}"){
+
+                }
 
             });
+
+
 
 
     </script>

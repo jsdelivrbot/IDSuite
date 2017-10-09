@@ -25,12 +25,10 @@
                             <button class="btn btn-nav-blue my-2 my-sm-0" type="button">Details</button>
                         </div>
                         <div id="patient-0">
-
                         </div>
 
                         <div id="error-0"></div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -47,7 +45,6 @@
             <input id="resourceId" type="text" value="IDSRoom" style="margin-left: -27px">
             <input id="displayName" type="text" value="{{$sitter->first_name . ' ' . $sitter->last_name}}" style="margin-left: -27px">
             <div id="error"></div>
-
 
             <div id="participants" class="mt-4 col-lg-6 text-white">
 
@@ -156,13 +153,8 @@
 
     <script type="text/javascript">
 
-
-        function onVidyoClientLoaded(status, patientnumber = 0) {
-
-
-//        function startVidyo(status, patientnumber){
-
-            console.log("Status: " + status.state + "Description: " + status.description);
+        function onVidyoClientLoaded(status, count) {
+            console.log("Status: " + status.state + " Description: " + status.description);
 
             let connectionstatus = $("#connectionStatus");
 
@@ -172,8 +164,13 @@
                     $("#helper").addClass("hidden");
                     // After the VidyoClient is successfully initialized a global VC object will become available
                     // All of the VidyoConnector gui and logic is implemented in VidyoConnector.js
-//                    StartVidyoConnector(VC, patientnumber);
-                    StartVidyoConnector(VC, patientnumber);
+                    StartVidyoConnector(VC, count);
+
+//                    var devices = navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+//                        .then(function(stream) {
+//                            console.log(stream);
+//                        });
+
                     break;
                 case "RETRYING": // The library operating is temporarily paused
                     connectionstatus.html("Temporarily unavailable retrying in " + status.nextTimeout/1000 + " seconds");
@@ -238,61 +235,6 @@
             loadVidyoClientLibrary(true, false);
         }
 
-
-        function loadHelperOptions() {
-            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            // Opera 8.0+
-            var isOpera = (userAgent.indexOf("Opera") || userAgent.indexOf('OPR')) != -1 ;
-            // Firefox
-            var isFirefox = userAgent.indexOf("Firefox") != -1;
-            // Chrome 1+
-            var isChrome = userAgent.indexOf("Chrome") != -1;
-            // Safari
-            var isSafari = !isChrome && userAgent.indexOf("Safari") != -1;
-            // AppleWebKit
-            var isAppleWebKit = !isSafari && !isChrome && userAgent.indexOf("AppleWebKit") != -1;
-            // Internet Explorer 6-11
-            var isIE = (userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true );
-            // Edge 20+
-            var isEdge = !isIE && !!window.StyleMedia;
-            // Check if Mac
-            var isMac = navigator.platform.indexOf('Mac') > -1;
-            // Check if Windows
-            var isWin = navigator.platform.indexOf('Win') > -1;
-            // Check if Linux
-            var isLinux = navigator.platform.indexOf('Linux') > -1;
-            // Check if Android
-            var isAndroid = userAgent.indexOf("android") > -1;
-            // Check if WebRTC is available
-            var isWebRTCAvailable = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || (navigator.mediaDevices ? navigator.mediaDevices.getUserMedia : undefined);
-
-
-            if (!isMac && !isWin && !isLinux) {
-                /* Mobile App*/
-                if (isAndroid) {
-                    $("#joinViaApp").removeClass("hidden");
-                } else {
-                    $("#joinViaOtherApp").removeClass("hidden");
-                }
-                if (isWebRTCAvailable) {
-                    /* Supports WebRTC */
-                    $("#joinViaBrowser").removeClass("hidden");
-                }
-            } else {
-                /* Desktop App */
-                $("#joinViaApp").removeClass("hidden");
-
-                if (isWebRTCAvailable) {
-                    /* Supports WebRTC */
-                    $("#joinViaBrowser").removeClass("hidden");
-                }
-                if (isSafari || isFirefox || (isAppleWebKit && isMac) || (isIE && !isEdge)) {
-                    /* Supports Plugins */
-                    $("#joinViaPlugIn").removeClass("hidden");
-                }
-            }
-        }
-
         // Runs when the page loads
         $(function() {
             joinViaBrowser();
@@ -344,6 +286,8 @@
 
                 $('#patient-' + key).append('<div><span>Id: '+p.id+'</span></div><div><span>Name: '+p.first_name +' '+ p.last_name +'</span></div><div><span>Type: '+type+'</span></div><div><span>Muted: '+muted+'</span></div>');
 
+                $('#microphoneButton-' + key).attr('onclick', "muteToggle('"+p.id+"')");
+
             });
 
 
@@ -379,35 +323,61 @@
 
         let patient_count = 0;
 
+        let patient_array = [];
+
         Echo.private('medsitter-pod-key')
             .listen('PodKey', event => {
 
-                let token = event.token;
+                let patient_obj = {
+                    "token" : event.token,
+                    "roomkey" : event.room_key,
+                    "podid" : event.pod_id
+                };
 
-                let roomkey = event.room_key;
-
-                let podid = event.pod_id;
-
-                if (podid === "{{$pod->id}}"){
-                    $('#token').val(token);
-                    $('#resourceId').val(roomkey);
+                if (patient_obj.podid === "{{$pod->id}}"){
+                    $('#token').val(patient_obj.token);
+                    $('#resourceId').val(patient_obj.roomkey);
 
                     let status = {
                         state: "READY",
                         description: "WebRTC successfully loaded"
                     };
 
-                    onVidyoClientLoaded(status, patient_count);
+                    patient_obj.patient_number = patient_count;
+
+                    StartVidyoConnector(VC, patient_count);
+
+                    patient_array.push(patient_obj);
 
                     patient_count++;
+
+
+
                 }
-
-                console.log(token);
-                console.log(roomkey);
-                console.log(podid);
-
+                console.log(patient_obj);
             });
 
+
+
+        function muteToggle(participant_id) {
+
+            console.log('mic muted toggle');
+
+            $.ajax({
+                url: "/medsitter/participant/mutetoggle",
+                type: "GET",
+                data: {
+                    "participant_id": participant_id,
+                    "pod_id": "{{$pod->id}}"
+                },
+                success: function (response) {
+                    console.log("mic toggle response: " + response);
+                }
+            });
+        }
+
     </script>
+
+
 
 @endpush

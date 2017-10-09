@@ -192,6 +192,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/medsitter/participant', 'MedsitterController@participant');
 
+    Route::get('/medsitter/participant/mutetoggle', 'MedsitterController@muteToggle');
+
 
 
 //    Route::get('/webrtc', 'WebRtcController@index');
