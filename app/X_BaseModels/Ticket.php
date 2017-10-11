@@ -4,6 +4,8 @@ namespace App;
 
 use App\Enums\EnumDataSourceType;
 use App\Model as Model;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class Ticket extends Model
 {
@@ -50,7 +52,7 @@ class Ticket extends Model
         $references = $this->morphToMany(DynamicEnumValue::class, 'object','object_dev')->withTimestamps();
 
         if($dynamic_enum_value !== null) {
-            $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id]);
+            $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id, 'value_type' => $dynamic_enum_value->value_type]);
         }
 
         $ref_array = array();
@@ -101,4 +103,22 @@ class Ticket extends Model
 
         return $duration;
     }
+
+
+    /**
+     * @param $type
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function searchTicketsByDevType($value){
+
+        $type = EnumDataSourceType::getKeyByValue($value);
+
+        $result = Ticket::join('object_dev', 'ticket.id', '=', 'object_dev.object_id')
+                        ->where('value_type', '=', $type)
+                        ->get();
+
+        return $result;
+    }
+
+
 }

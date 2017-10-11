@@ -22,6 +22,7 @@ class CreateXObjectDevTable extends Migration
             $table->uuid('dynamic_enum_value_id')->nullable();
             $table->uuid('dynamic_enum_id')->nullable();
             $table->string('object_type')->nullable();
+            $table->integer('value_type')->nullable();
             $table->timestamps();
 
             $table->index('object_id');
