@@ -26,50 +26,48 @@
 
     </section>
 
+    <div id="pods">
 
     @foreach($pods as $pod)
 
-        <div class="row mt-2">
-            <div class="col-lg-11" style="margin-left: 3.75%;">
-                <div class="card" style="background-color: #434857 !important">
-                    <div class="card-block text-white" style="padding: 8px;">
-                        <div class="row">
-                            <div class="col-lg-1 align-self-center">
+            <div class="row mt-2">
+                <div class="col-lg-11" style="margin-left: 3.75%;">
+                    <div class="card" style="background-color: #434857 !important">
+                        <div class="card-block text-white" style="padding: 8px;">
+                            <div class="row">
+                                <div class="col-lg-1 align-self-center">
 
-                                @if(count($pod->patient_count) < 4)
-                                    <a id="pod-link-{{$pod->id}}" data-toggle="modal" data-target="#patientModal" class="btn btn-outline-teal"  role="button">Patient</a>
-                                @else
-                                    <a id="pod-link-{{$pod->id}}" data-toggle="modal" data-target="#patientModal" class="btn btn-outline-teal disabled" role="button">Patient</a>
-                                @endif
+                                    @if($pod->patient_count < 4 && $pod->sitter_count > 0)
+                                        <a id="pod-patient-link-{{$pod->id}}" data-toggle="modal" data-target="#patientModal" class="btn btn-outline-teal"  role="button" onclick="changeSubmit('{{$pod->id}}')">Patient</a>
+                                    @else
+                                        <a id="pod-patient-link-{{$pod->id}}" data-toggle="modal" data-target="#patientModal" class="btn btn-outline-teal disabled" role="button" onclick="changeSubmit('{{$pod->id}}')">Patient</a>
+                                    @endif
 
-                            </div>
-                            <div class="col-lg-1 align-self-center ml-3">
-                                <a id="pod-link-{{$pod->id}}" class="btn btn-outline-orange" href="/medsitter/sitter/{{$pod->id}}" role="button">Sitter</a>
-                            </div>
-                            <div class="col-lg-3 align-self-center">
-                                <div class="ml-5 ">
-                                    <span id="pod-name-{{$pod->id}}">{{$pod->name}}</span>
                                 </div>
-                            </div>
-
-                            <div class="col-lg-3 align-self-center">
-                                <div class="progress">
-                                    <div id="pod-participant-count-{{$pod->id}}" class="progress-bar" role="progressbar" style="width: {{100*($pod->patient_count/4)}}%" aria-valuenow="{{100*($pod->patient_count/4)}}%" aria-valuemin="0" aria-valuemax="100">{{$pod->patient_count}}/4</div>
+                                <div class="col-lg-1 align-self-center ml-3">
+                                    <a id="pod-sitter-link-{{$pod->id}}" class="btn btn-outline-orange" href="/medsitter/sitter/{{$pod->id}}" role="button">Sitter</a>
+                                </div>
+                                <div class="col-lg-3 align-self-center">
+                                    <div class="ml-5 ">
+                                        <span id="pod-name-{{$pod->id}}">{{$pod->name}}</span>
+                                    </div>
                                 </div>
 
-                            </div>
+                                <div class="col-lg-3 align-self-center">
+                                    <div class="progress">
+                                        <div id="pod-participant-count-{{$pod->id}}" class="progress-bar" role="progressbar" style="width: {{100*($pod->patient_count/4)}}%" aria-valuenow="{{100*($pod->patient_count/4)}}%" aria-valuemin="0" aria-valuemax="100">{{$pod->patient_count}}/4</div>
+                                    </div>
+                                </div>
 
-                            <div class="col-lg-3 align-self-center">
-
-                                <span id="pod-sitter-count-{{$pod->id}}">{{$pod->sitter_count}} Sitter(s)</span>
-                                <span id="pod-patient-count-{{$pod->id}}">{{$pod->patient_count}} Patient(s)</span>
-
+                                <div class="col-lg-3 align-self-center">
+                                    <span id="pod-sitter-count-{{$pod->id}}">{{$pod->sitter_count}} Sitter(s)</span>
+                                    <span id="pod-patient-count-{{$pod->id}}">{{$pod->patient_count}} Patient(s)</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 
         <!-- Start Form-->
@@ -105,13 +103,14 @@
                     </div>
                     <div class="modal-footer">
                         <a id="patient-cancel" class="btn btn-nav-pink" data-dismiss="modal" style="cursor: pointer !important;">Close</a>
-                        <a id="patient-submit" value="{{$pod->id}}" class="btn btn-nav-orange" style="cursor: pointer !important;"><i class="fa fa-plus"></i>Submit</a>
+                        <a id="patient-submit" value="" class="btn btn-nav-orange" style="cursor: pointer !important;"><i class="fa fa-plus"></i>Submit</a>
                     </div>
                 </div>
             </div>
         </div>
         <!--End Form-->
     @endforeach
+    </div>
 
 
 @endsection
@@ -128,16 +127,9 @@
 
         console.log('pusher');
 
-        let pods = [];
-
         Echo.private('medsitter-pods')
             .listen('LivePods', event => {
-
-                pods.push(event.pod);
-
-                console.log(pods);
-
-                updateValues();
+                updateValues(event.pod);
 
             });
 
@@ -149,27 +141,21 @@
 
                 let pod = event.pod;
 
-                let podcount = event.pod.patient_count;
-
                 console.log(event.pod);
 
-                updateCount(pod, podcount);
+                updateCount(pod);
 
             });
 
 
-        function updateCount(pod, count) {
+        function updateCount(pod) {
 
-            let value = 100*(count / 4);
-
-            console.log("value : " + value);
-            console.log("count : " + count);
-            console.log("pod_id : " + pod.id);
+            let value = 100*(pod.patient_count / 4);
 
             $('#pod-participant-count-' + pod.id)
                 .css("width", value + "%")
                 .attr("aria-valuenow", value + "%")
-                .text(count +  " / 4");
+                .text(pod.patient_count +  " / 4");
 
             $('#pod-sitter-count-' + pod.id)
                 .text(pod.sitter_count + " Sitter(s)");
@@ -177,31 +163,92 @@
             $('#pod-patient-count-' + pod.id)
                 .text(pod.patient_count + " Patient(s)");
 
+
+            if(pod.patient_count < 4 && pod.sitter_count > 0){
+
+                console.log("enabled");
+
+                $("#pod-patient-link-" + pod.id).removeClass("disabled");
+
+            } else {
+
+                console.log("disabled");
+
+                $("#pod-patient-link-" + pod.id).addClass("disabled");
+
+            }
+
+            if(pod.sitter_count === 0){
+
+                console.log("disable sitter button");
+
+                $("#pod-sitter-link-" + pod.id).removeClass("disabled");
+            } else {
+
+                console.log("disable sitter button");
+
+                $("#pod-sitter-link-" + pod.id).addClass("disabled");
+            }
+
             console.log("updated count");
 
         }
 
-        function updateValues (){
+        function updateValues (pod){
 
-            let type, muted;
+            if(pod.completed === 0){
+                pod.completed = 'false';
+            } else {
+                pod.completed = 'true';
+            }
 
-            console.log('test');
+            let styleWidth = 100 * (pod.patient_count / 4);
+            let ariaValueNow = 100 * (pod.patient_count / 4);
 
-            $('#pods').empty();
 
-            $.each(pods, function(key){
+            $('#pods').prepend('<div class="row mt-2">' +
+                '                   <div class="col-lg-11" style="margin-left: 3.75%;">' +
+                '                       <div class="card" style="background-color: #434857 !important">' +
+                '                           <div class="card-block text-white" style="padding: 8px;">' +
+                '                               <div class="row">' +
+                '                                   <div id="patient-links-'+pod.id+'" class="col-lg-1 align-self-center">' +
+                '                                   </div>' +
+                '                                   <div class="col-lg-1 align-self-center ml-3">' +
+                '                                       <a id="pod-sitter-link-'+pod.id+'" class="btn btn-outline-orange" href="/medsitter/sitter/'+pod.id+'" role="button">Sitter</a>' +
+                '                                   </div>' +
+                '                                   <div class="col-lg-3 align-self-center">' +
+                '                                       <div class="ml-5 ">' +
+                '                                           <span id="pod-name-'+pod.id+'">'+pod.name+'</span>' +
+                '                                       </div>' +
+                '                                   </div>' +
+                '                                   <div class="col-lg-3 align-self-center">' +
+                '                                       <div class="progress">' +
+                '                                           <div id="pod-participant-count-'+pod.id+'" class="progress-bar" role="progressbar" style="width: '+styleWidth+'%" aria-valuenow="'+ariaValueNow+'%" aria-valuemin="0" aria-valuemax="100">'+pod.patient_count+'/4</div>' +
+                '                                       </div>' +
+                '                                   </div>' +
+                '                                   <div class="col-lg-3 align-self-center">' +
+                '                                       <span id="pod-sitter-count-'+pod.id+'">'+pod.sitter_count+' Sitter(s)</span>' +
+                '                                       <span id="pod-patient-count-'+pod.id+'">'+pod.patient_count+' Patient(s)</span>' +
+                '                                   </div>' +
+                '                               </div>' +
+                '                           </div>' +
+                '                       </div>' +
+                '                   </div>' +
+                '               </div>' +
+                '');
 
-                let p = pods[key];
+            if(pod.patient_count < 4 && pod.sitter_count > 0){
+                $('#patient-links-'+pod.id).append('<a id="pod-patient-link-'+pod.id+'" data-toggle="modal" data-target="#patientModal" class="btn btn-outline-teal"  role="button" onclick="changeSubmit(\''+pod.id+'\')">Patient</a>');
+            } else {
+                $('#patient-links-'+pod.id).append('<a id="pod-patient-link-'+pod.id+'" data-toggle="modal" data-target="#patientModal" class="btn btn-outline-teal disabled" role="button" onclick="changeSubmit(\''+pod.id+'\')">Patient</a>')
+            }
 
-                if(p.completed === 0){
-                    p.completed = 'false';
-                } else {
-                    p.completed = 'true';
-                }
+        }
 
-                $('#pods').append('<div class="row mt-3"><div class="col-lg-6"><div><span>Id: '+p.id+'</span></div><div><span>Name: '+p.name+'</span></div><div><span>Completed: '+p.completed+'</span></div></div><div class="col-lg-6"><a class="btn btn-outline-teal color-2 float-right" href="/medsitter/sitter/'+p.id+'" role="button">Join</a></div></div>');
+        function changeSubmit(podId) {
+            $('#patient-submit').attr('value', podId);
 
-            });
+            console.log("changed paitent-submit");
 
         }
 
