@@ -150,4 +150,20 @@ class Entity extends Model
 
     }
 
+
+    /**
+     * @param $value
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function searchByDevType($value){
+
+        $type = EnumDataSourceType::getKeyByValue($value);
+
+        $result = Entity->join('object_dev', 'entity.id', '=', 'object_dev.object_id')
+            ->where('value_type', '=', $type)
+            ->get();
+
+        return $result;
+    }
+
 }

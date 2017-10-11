@@ -106,14 +106,14 @@ class Ticket extends Model
 
 
     /**
-     * @param $type
+     * @param $value
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public static function searchTicketsByDevType($value){
+    public static function searchByDevType($value){
 
         $type = EnumDataSourceType::getKeyByValue($value);
 
-        $result = Ticket::join('object_dev', 'ticket.id', '=', 'object_dev.object_id')
+        $result = Ticket->join('object_dev', 'ticket.id', '=', 'object_dev.object_id')
                         ->where('value_type', '=', $type)
                         ->get();
 
