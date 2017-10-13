@@ -178,9 +178,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/medsitter/patient/{pod_id}-{participant_id}', 'MedsitterController@patient');
 
+    Route::get('/medsitter/patient/join', 'MedsitterController@patientJoin');
+
     Route::get('/medsitter/sitter/{id}', 'MedsitterController@sitter');
 
-    Route::get('/medsitter/library', 'MedsitterController@library');
+    Route::get('/medsitter/lobby', 'MedsitterController@library');
 
     Route::get('/medsitter/pods', 'MedsitterController@pod');
 
@@ -193,6 +195,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/medsitter/participant', 'MedsitterController@participant');
 
     Route::get('/medsitter/participant/mutetoggle', 'MedsitterController@muteToggle');
+
+    Route::get('/medsitter/patient/ready', 'MedsitterController@patientReady');
+
+    Route::post('/medsitter/pod/delete', 'MedsitterController@podDelete');
 
 
 

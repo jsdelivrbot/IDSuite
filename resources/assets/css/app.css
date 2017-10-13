@@ -193,7 +193,7 @@
 
 
 .btn-outline-orange {
-    color: #d59043;
+    color: #FFFFFF !important;
     background-image: none;
     background-color: transparent;
     border-color: #d59043 !important;
@@ -340,12 +340,12 @@
     color: #E64759;
     background-image: none;
     background-color: transparent;
-    border-color: #E64759;
+    border-color: #E64759 !important;
 }
 .btn-outline-pink:hover {
     color: #fff;
     background-color: #E64759;
-    border-color: #E64759;
+    border-color: #E64759 !important;
 }
 
 .btn-outline-pink:focus, .btn-outline-pink.focus {
@@ -362,7 +362,7 @@
 .show > .btn-outline-pink.dropdown-toggle {
     color: #fff;
     background-color: #E64759;
-    border-color: #E64759;
+    border-color: #E64759 !important;
 }
 
 .btn-nav-pink {
@@ -545,13 +545,13 @@
     color: #E4D836;
     background-image: none;
     background-color: transparent;
-    border-color: #E4D836;
+    border-color: #E4D836 !important;
 }
 
 .btn-outline-yellow:hover {
     color: #fff;
     background-color: #E4D836;
-    border-color: #E4D836;
+    border-color: #E4D836 !important;
 }
 
 .btn-outline-yellow:focus, .btn-outline-yellow.focus {
@@ -662,7 +662,7 @@
     color: #1ca8dd;
     background-image: none;
     background-color: transparent;
-    border-color: #1ca8dd;
+    border-color: #1ca8dd !important;
 }
 .btn-outline-blue:hover {
     color: #fff;

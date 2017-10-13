@@ -43,8 +43,11 @@ html, body {
 	/*right:        0px;*/
 	/*bottom:       60px;*/
 	/*z-index: 99;*/
-	height:		300px;
+	height:		375px;
 	width: 		100%;
+}
+.renderer-patient{
+	height: 740px !important;
 }
 #renderer2-0 {
 	/*position:     absolute;*/
@@ -52,7 +55,7 @@ html, body {
 	/*right:        0px;*/
 	/*bottom:       60px;*/
 	/*z-index: 99;*/
-	height:		300px;
+	height:		375px;
 	width: 		100%;
 }
 #renderer2-1 {
@@ -61,7 +64,7 @@ html, body {
 	/*right:        0px;*/
 	/*bottom:       60px;*/
 	/*z-index: 99;*/
-	height:		300px;
+	height:		375px;
 	width: 		100%;
 }
 #renderer2-2 {
@@ -70,7 +73,7 @@ html, body {
 	/*right:        0px;*/
 	/*bottom:       60px;*/
 	/*z-index: 99;*/
-	height:		300px;
+	height:		375px;
 	width: 		100%;
 }
 #renderer2-3 {
@@ -79,7 +82,7 @@ html, body {
 	/*right:        0px;*/
 	/*bottom:       60px;*/
 	/*z-index: 99;*/
-	height:		300px;
+	height:		375px;
 	width: 		100%;
 }
 #renderer3 {
@@ -267,6 +270,11 @@ html, body {
 .microphoneOff { background-image: url(/img/microphoneOff.png); }
 .callStart     { background-image: url(/img/callStart.png); }
 .callEnd       { background-image: url(/img/callEnd.png); }
+
+.joinsms{
+	background-image: url(/img/sms.png);
+}
+
 .showOptions   {
 	background-image: url(/img/showOptions.png);
 	background-size:  30px auto;

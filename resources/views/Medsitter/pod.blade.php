@@ -15,11 +15,11 @@
 
                     <form id="pod-form mt-5">
                         <div class="form-group">
-                            <label for="pod-name">Room Name</label>
+                            <label for="pod-name">Pod Name</label>
                             <input class="form-control" id="pod-name" placeholder="Pod Name..." minlength="2" type="text" required/>
                         </div>
 
-                        <a id="pod-submit" class="btn btn-nav-orange" style="cursor: pointer !important;"><i class="fa fa-plus"></i> &nbsp; Create Room</a>
+                        <a id="pod-submit" class="btn btn-nav-orange" style="cursor: pointer !important;"><i class="fa fa-plus"></i> &nbsp; Create Pod</a>
 
                     </form>
 

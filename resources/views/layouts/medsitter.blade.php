@@ -115,10 +115,7 @@
                 <nav>
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item ">
-                            <a class="nav-link btn-outline-teal" style="color: white !important;" href="/medsitter/library">Pod Library</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link btn-outline-yellow" style="color: white !important;" href="/medsitter/pods">Pod</a>
+                            <a class="nav-link btn-outline-teal" style="color: white !important;" href="/medsitter/lobby">Lobby</a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link btn-outline-blue" style="color: white !important;" href="#">Snaps</a>
@@ -134,12 +131,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn-outline-orange" style="color: white !important;" href="#">Recordings</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-blue" style="color: white !important;" href="#">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-pink" style="color: white !important;" href="/medsitter/patient">Patient</a>
                         </li>
                     </ul>
                 </nav>

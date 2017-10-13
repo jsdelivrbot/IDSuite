@@ -11,6 +11,9 @@ namespace App\Http\Controllers;
 
 use App\Enums\EnumParticipantType;
 use App\Events\EventCallStatus;
+use App\Events\EventJoinPatient;
+use App\Events\EventParticipantJoin;
+use App\Events\EventPatientReady;
 use App\Events\LivePods;
 use App\Events\MutePatient;
 use App\Events\PodCount;
@@ -84,26 +87,68 @@ class MedsitterController extends Controller
         return view('Medsitter.patient', ['viewname' => 'Medsitter / Patient', 'participant' => $participant, 'pod' => $pod, 'vidyotoken' => $token, 'room' => $tokenObj->getRoom()]);
     }
 
+
+    public function patientJoin(){
+
+        $pod = Input::get('pod_id');
+        $patient = Input::get('patient_id');
+
+        $key = "$pod-$patient";
+
+        $url_string = "/medsitter/patient/$pod-$patient";
+
+        event(new EventJoinPatient($url_string, $key));
+
+    }
+
+
+    public function podDelete(){
+
+        $pod = Pod::getObjectById(Input::get('id'));
+
+        $pod->active = 0;
+
+        $pod->save();
+
+        return response()->json("true");
+
+    }
+
+    public function patientReady(){
+
+        $room_key = Input::get('roomkey');
+
+
+        event(new EventPatientReady($room_key));
+
+    }
+
+
     public function participant(){
 
         $first_name = Input::get('firstname');
         $last_name = Input::get('lastname');
         $phone_number = Input::get('phonenumber');
-        $mute_status = Input::get('microphonestatus');
-        $type = Input::get('type');
+//        $mute_status = Input::get('microphonestatus');
+//        $type = Input::get('type');
+        $pod = Input::get('podid');
 
 
         $participant = new Participant();
 
         $participant->setFirstName($first_name);
         $participant->setLastName($last_name);
-        $participant->setType($type);
-        $participant->setMuted($mute_status);
+        $participant->setType('patient');
+        $participant->setMuted(false);
 
         $participant->save();
 
+        event(new EventParticipantJoin($participant));
+
+        $key = "$pod-$participant->id";
+
         return response()->json([
-            'participant_id' => $participant->id
+            'key' => $key
         ]);
 
     }
@@ -124,7 +169,22 @@ class MedsitterController extends Controller
 
         $pods = Pod::where('completed','=',0)->get()->sortByDesc('updated_at');
 
-        return view('Medsitter.library', ['viewname' => 'Medsitter / Room Library', 'pods' => $pods]);
+        $active_patient_count = 0;
+        $active_sitter_count = 0;
+
+        foreach ($pods as $pod){
+
+            $active_patient_count = $active_patient_count + $pod->patient_count;
+
+            $active_sitter_count = $active_sitter_count + $pod->sitter_count;
+
+        }
+
+
+        $sitter_to_patient_ratio = round($active_patient_count / $active_sitter_count, 2);
+
+
+        return view('Medsitter.library', ['viewname' => 'Medsitter / Lobby', 'pods' => $pods, 'active_paitient_count' => $active_patient_count, 'active_sitter_count' => $active_sitter_count, 'sitter_to_patient_ratio' => $sitter_to_patient_ratio]);
 
     }
 
@@ -158,11 +218,15 @@ class MedsitterController extends Controller
 
         $pod = Input::get("pod_id");
 
-        $participant = Input::get("participant_id");
+        $participant_id = Input::get("participant_id");
 
-        event(new MutePatient(Pod::getObjectById($pod), Participant::getObjectById($participant)));
+        $participant = Participant::getObjectById($participant_id);
 
-        return response()->json("Mute event has been created");
+        $participant->setMuted(!$participant->getMuted());
+
+        event(new MutePatient(Pod::getObjectById($pod), $participant));
+
+        return response()->json($participant);
 
     }
 
