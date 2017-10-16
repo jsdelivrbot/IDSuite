@@ -4,22 +4,18 @@ namespace App;
 
 
 use App\Enums\EnumDataSourceType;
-use Mockery\Exception;
 use Illuminate\Support\Facades\Hash;
-
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Auth\Passwords\CanResetPassword;
 
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 use App\Model as Model;
-use Symfony\Component\HttpKernel\Tests\Controller\ContainerControllerResolverTest;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
 
-    use Authenticatable;
+//    use Authenticatable;
     /**
      * The attributes that are mass assignable.
      *

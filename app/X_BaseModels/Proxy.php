@@ -85,4 +85,19 @@ class Proxy extends Model
         $proxy = Proxy::where('name', $name)->first();
         return $proxy;
     }
+
+    /**
+     * @param $value
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function searchByDevType($value){
+
+        $type = EnumDataSourceType::getKeyByValue($value);
+
+        $result = Proxy::join('object_dev', 'proxy.id', '=', 'object_dev.object_id')
+            ->where('value_type', '=', $type)
+            ->get();
+
+        return $result;
+    }
 }
