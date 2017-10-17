@@ -125,7 +125,7 @@
             processing: true,
             serverSide: true,
             iDisplayLength: 10,
-            ajax: '/getRecordsDataTables',
+            ajax: '/api/getRecordsDataTables',
             columnDefs: [
                 {
                     targets: 0,
@@ -221,7 +221,7 @@
 
         $.ajax({
             type: "GET",
-            url: '/getRecordDetails',
+            url: '/api/getRecordDetails',
             data: {
                 id: id
             },

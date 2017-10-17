@@ -104,7 +104,7 @@
 
         <div class="row mt-4">
             <div class="col-12">
-                @include('partials.custom_tabs.custom_tabs')
+                @include('measure.partials.custom_tabs.custom_tabs')
             </div>
         </div>
     </div>

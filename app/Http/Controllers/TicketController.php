@@ -88,7 +88,7 @@ class TicketController extends Controller
         }
 
 
-        return view('tickets', ['tickets' => $tickets_array, 'page_tickets' => $page_tickets, 'viewname' => 'Cases', 'number_closed' => $number_closed, 'number_in_progress' => $number_in_progress, 'number_less_60' => $number_less_60, 'number_reopened' => $number_reopened, 'number_pending' => $number_pending, 'number_closed_call' => $number_closed_call]);
+        return view('measure.tickets', ['tickets' => $tickets_array, 'page_tickets' => $page_tickets, 'viewname' => 'Cases', 'number_closed' => $number_closed, 'number_in_progress' => $number_in_progress, 'number_less_60' => $number_less_60, 'number_reopened' => $number_reopened, 'number_pending' => $number_pending, 'number_closed_call' => $number_closed_call]);
     }
 
 
@@ -224,7 +224,7 @@ class TicketController extends Controller
 
         session(['randomnumber' => rand(1,5)]);
 
-        return view('ticket', ['viewname' => 'case','name' => $ticket->reference_id, 'ticket' => $ticket, 'number' => session('randomnumber')]);
+        return view('measure.ticket', ['viewname' => 'case','name' => $ticket->reference_id, 'ticket' => $ticket, 'number' => session('randomnumber')]);
     }
 
     /**

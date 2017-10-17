@@ -10,7 +10,7 @@
                         <div class="card-block">
 
                             <h4 class="card-title pink">{{$name}}
-                                @include('partials.device_status.device_status')
+                                @include('measure.partials.device_status.device_status')
                             </h4>
                             <p class="card-text text-white">This is endpoint {{$name}}</p>
 
@@ -27,7 +27,7 @@
                                 <ul class="list-group row" style="background-color: transparent;">
                                     <li class="col-lg-10 list-group-item" style="background-color: transparent; border: none;">
                                         <div class="col-lg-5">Account Name</div>
-                                        <div class="col-lg-7"><a href="/accounts/{{$endpoint->account->id}}">{{$endpoint->account->name}}</a></div>
+                                        <div class="col-lg-7"><a href="/measure/accounts/{{$endpoint->account->id}}">{{$endpoint->account->name}}</a></div>
                                         <div class="col-lg-5">Name</div>
                                         <div class="col-lg-7">{{$endpoint->name}}</div>
                                         <div class="col-lg-5">IP Address</div>
@@ -54,7 +54,7 @@
                         <div class="card-block">
 
                             <h4 class="card-title teal">{{$name}}
-                                @include('partials.device_status.device_status')
+                                @include('measure.partials.device_status.device_status')
                             </h4>
                             <p class="card-text text-white">This is endpoint {{$name}}</p>
 
@@ -71,7 +71,7 @@
                                 <ul class="list-group row" style="background-color: transparent;">
                                     <li class="col-lg-10 list-group-item" style="background-color: transparent; border: none;">
                                         <div class="col-lg-5">Account Name</div>
-                                        <div class="col-lg-7"><a href="/accounts/{{$endpoint->account->id}}">{{$endpoint->account->name}}</a></div>
+                                        <div class="col-lg-7"><a href="/measure/accounts/{{$endpoint->account->id}}">{{$endpoint->account->name}}</a></div>
                                         <div class="col-lg-5">Name</div>
                                         <div class="col-lg-7">{{$endpoint->name}}</div>
                                         <div class="col-lg-5">IP Address</div>
@@ -98,7 +98,7 @@
                         <div class="card-block">
 
                             <h4 class="card-title purple">{{$name}}
-                                @include('partials.device_status.device_status')
+                                @include('measure.partials.device_status.device_status')
                             </h4>
                             <p class="card-text text-white">This is endpoint {{$name}}</p>
 
@@ -114,7 +114,7 @@
                                 <ul class="list-group row" style="background-color: transparent;">
                                     <li class="col-lg-10 list-group-item" style="background-color: transparent; border: none;">
                                         <div class="col-lg-5">Account Name</div>
-                                        <div class="col-lg-7"><a href="/accounts/{{$endpoint->account->id}}">{{$endpoint->account->name}}</a></div>
+                                        <div class="col-lg-7"><a href="/measure/accounts/{{$endpoint->account->id}}">{{$endpoint->account->name}}</a></div>
                                         <div class="col-lg-5">Name</div>
                                         <div class="col-lg-7">{{$endpoint->name}}</div>
                                         <div class="col-lg-5">IP Address</div>
@@ -141,7 +141,7 @@
                         <div class="card-block">
 
                             <h4 class="card-title yellow">{{$name}}
-                                @include('partials.device_status.device_status')
+                                @include('measure.partials.device_status.device_status')
                             </h4>
                             <p class="card-text text-white">This is endpoint {{$name}}</p>
 
@@ -157,7 +157,7 @@
                                 <ul class="list-group row" style="background-color: transparent;">
                                     <li class="col-lg-10 list-group-item" style="background-color: transparent; border: none;">
                                         <div class="col-lg-5">Account Name</div>
-                                        <div class="col-lg-7"><a href="/accounts/{{$endpoint->account->id}}">{{$endpoint->account->name}}</a></div>
+                                        <div class="col-lg-7"><a href="/measure/accounts/{{$endpoint->account->id}}">{{$endpoint->account->name}}</a></div>
                                         <div class="col-lg-5">Name</div>
                                         <div class="col-lg-7">{{$endpoint->name}}</div>
                                         <div class="col-lg-5">IP Address</div>
@@ -184,7 +184,7 @@
                         <div class="card-block">
 
                             <h4 class="card-title blue">{{$name}}
-                                @include('partials.device_status.device_status')
+                                @include('measure.partials.device_status.device_status')
                             </h4>
                             <p class="card-text text-white">This is endpoint {{$name}}</p>
 
@@ -200,7 +200,7 @@
                                 <ul class="list-group row" style="background-color: transparent;">
                                     <li class="col-lg-10 list-group-item" style="background-color: transparent; border: none;">
                                         <div class="col-lg-5">Account Name</div>
-                                        <div class="col-lg-7"><a href="/accounts/{{$endpoint->account->id}}">{{$endpoint->account->name}}</a></div>
+                                        <div class="col-lg-7"><a href="/measure/accounts/{{$endpoint->account->id}}">{{$endpoint->account->name}}</a></div>
                                         <div class="col-lg-5">Name</div>
                                         <div class="col-lg-7">{{$endpoint->name}}</div>
                                         <div class="col-lg-5">IP Address</div>
@@ -238,7 +238,7 @@
             </div>
         </div>
 
-        @include('partials.custom_tabs.custom_tabs')
+        @include('measure.partials.custom_tabs.custom_tabs')
 
     </div>
 

@@ -143,7 +143,7 @@
 
 
         $.ajax({
-            url: "/twilio",
+            url: "/api/twilio",
             method: "POST",
             data: {
                 number: $('#text-number').val(),
@@ -184,7 +184,7 @@
     $('#all-text-button').click(function(){
 
         $.ajax({
-            url: "/alltwilio",
+            url: "/api/alltwilio",
             method: "POST",
             success: function(data){
                 console.log(data)

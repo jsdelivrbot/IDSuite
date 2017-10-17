@@ -8,15 +8,15 @@
 
         @if($viewname === 'account')
 
-            @include('partials.custom_tabs.account_tab_headers')
+            @include('measure.partials.custom_tabs.account_tab_headers')
 
         @elseif($viewname === 'device')
 
-            @include('partials.custom_tabs.device_tab_headers')
+            @include('measure.partials.custom_tabs.device_tab_headers')
 
         @elseif($viewname === 'case')
 
-            @include('partials.custom_tabs.device_tab_headers')
+            @include('measure.partials.custom_tabs.device_tab_headers')
 
         @endif
 
@@ -31,56 +31,56 @@
 
         @if($viewname === 'account')
 
-            @include('partials.custom_tabs.account_insights_tab')
+            @include('measure.partials.custom_tabs.account_insights_tab')
             @php
                 $tab_count++;
             @endphp
-            @include('partials.custom_tabs.account_locations_tab')
+            @include('measure.partials.custom_tabs.account_locations_tab')
             @php
                 $tab_count++;
             @endphp
-            @include('partials.custom_tabs.account_contacts_tab')
+            @include('measure.partials.custom_tabs.account_contacts_tab')
             @php
                 $tab_count++;
             @endphp
-            @include('partials.custom_tabs.account_cases_tab')
+            @include('measure.partials.custom_tabs.account_cases_tab')
             @php
                 $tab_count++;
             @endphp
-            @include('partials.custom_tabs.account_transactions_tab')
+            @include('measure.partials.custom_tabs.account_transactions_tab')
             @php
                 $tab_count++;
             @endphp
-            @include('partials.custom_tabs.account_notes_tab')
+            @include('measure.partials.custom_tabs.account_notes_tab')
 
 
         @elseif($viewname === 'device')
 
-            @include('partials.custom_tabs.device_insights_tab')
+            @include('measure.partials.custom_tabs.device_insights_tab')
             @php
                 $tab_count++;
             @endphp
-            @include('partials.custom_tabs.device_locations_tab')
+            @include('measure.partials.custom_tabs.device_locations_tab')
             @php
                 $tab_count++;
             @endphp
-            @include('partials.custom_tabs.device_contacts_tab')
+            @include('measure.partials.custom_tabs.device_contacts_tab')
             @php
                 $tab_count++;
             @endphp
-            @include('partials.custom_tabs.device_notes_tab')
+            @include('measure.partials.custom_tabs.device_notes_tab')
 
         @elseif($viewname === 'case')
 
-            @include('partials.custom_tabs.device_insights_tab')
+            @include('measure.partials.custom_tabs.device_insights_tab')
             @php
                 $tab_count++;
             @endphp
-            @include('partials.custom_tabs.device_contacts_tab')
+            @include('measure.partials.custom_tabs.device_contacts_tab')
             @php
                 $tab_count++;
             @endphp
-            @include('partials.custom_tabs.device_notes_tab')
+            @include('measure.partials.custom_tabs.device_notes_tab')
 
         @endif
 

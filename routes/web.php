@@ -41,12 +41,12 @@ Route::get('/test/ns', 'TestController@test_netsuite');
 Route::group(['middleware' => ['auth']], function () {
 
 
-    Route::get('/getUsers', 'UserController@getUsers');
+    Route::get('/api/getUsers', 'UserController@getUsers');
 
     // apppicker routes //
 
     Route::get('/apps', function(){
-        return view('apppicker', ['viewname' => 'App Selection']);
+        return view('/idsuite/apppicker', ['viewname' => 'App Selection']);
     });
 
     // chart routes //
@@ -71,62 +71,62 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/api/casesopened', 'ChartController@casesOpened');
 
-    Route::get('api/chart/', 'ChartController@index');
+    Route::get('/api/chart/', 'ChartController@index');
 
-    Route::get('api/chart/getCustomers', 'ChartController@getCustomers');
+    Route::get('/api/chart/getCustomers', 'ChartController@getCustomers');
 
-    Route::get('api/totalcallduration', 'ChartController@totalCallDuration');
+    Route::get('/api/totalcallduration', 'ChartController@totalCallDuration');
 
-    Route::post('api/chart/vot', 'ChartController@vot');
+    Route::post('/api/chart/vot', 'ChartController@vot');
 
-    Route::post('api/chart/locp', 'ChartController@locp');
+    Route::post('/api/chart/locp', 'ChartController@locp');
 
 
     // Endpoint routes //
 
-    Route::get('/devices/{id}', 'EndpointController@show');
+    Route::get('/measure/devices/{id}', 'EndpointController@show');
 
-    Route::get('/devices' , 'EndpointController@index');
+    Route::get('/measure/devices' , 'EndpointController@index');
 
-    Route::get('/getDeviceStatus', 'EndpointController@getDeviceStatus');
+    Route::get('/api/getDeviceStatus', 'EndpointController@getDeviceStatus');
 
 
     // EndpointModel routes //
 
-    Route::get('/model/{id}', 'EndpointModelController@show');
+    Route::get('/measure/model/{id}', 'EndpointModelController@show');
 
 
     // Entity routes //
 
-    Route::get('/accounts', 'EntityController@index');
+    Route::get('/measure/accounts', 'EntityController@index');
 
-    Route::get('/accounts/all', 'EntityController@all');
+    Route::get('/measure/accounts/all', 'EntityController@all');
 
-    Route::get('/accounts/{id}', 'EntityController@show');
+    Route::get('/measure/accounts/{id}', 'EntityController@show');
 
 
     // Enums Route //
 
-    Route::get('/modelTypeEnum', 'EnumController@modelType');
+    Route::get('/api/modelTypeEnum', 'EnumController@modelType');
 
-    Route::get('/classCodeEnum', 'EnumController@classCode');
+    Route::get('/api/classCodeEnum', 'EnumController@classCode');
 
-    Route::get('/statusEnum', 'EnumController@status');
+    Route::get('/api/statusEnum', 'EnumController@status');
 
-    Route::get('/titleEnum', 'EnumController@title');
+    Route::get('/api/titleEnum', 'EnumController@title');
 
-    Route::get('/genderEnum', 'EnumController@gender');
+    Route::get('/api/genderEnum', 'EnumController@gender');
 
-    Route::get('/phoneTypeEnum', 'EnumController@phoneType');
+    Route::get('/api/phoneTypeEnum', 'EnumController@phoneType');
 
 
     // Note Routes //
 
-    Route::post('/notes', 'NoteController@create');
+    Route::post('/api/notes', 'NoteController@create');
 
     // proxy routes //
 
-    Route::get('/proxy/{id}', 'ProxyController@show');
+    Route::get('/measure/proxy/{id}', 'ProxyController@show');
 
 
     // PersonContact routes //
@@ -136,37 +136,37 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Random Number Route //
 
-    Route::get('/getRandomNumber', 'RandomNumberController@getRandomNumber');
+    Route::get('/api/getRandomNumber', 'RandomNumberController@getRandomNumber');
 
 
     // record routes //
 
-    Route::get('/transactions', 'RecordController@index');
+    Route::get('/measure/transactions', 'RecordController@index');
 
-    Route::get('/getRecordDetails', 'RecordController@getRecordDetails');
+    Route::get('/api/getRecordDetails', 'RecordController@getRecordDetails');
 
-    Route::get('/getTransactions', 'RecordController@getTransactions');
+    Route::get('/api/getTransactions', 'RecordController@getTransactions');
 
 
     Route::resource('datatables', 'DatatablesController', [
         'getIndex' => 'datatables'
     ]);
 
-    Route::get('/getRecordsDataTables', 'DataTablesController@getRecordsDataTables');
+    Route::get('/api/getRecordsDataTables', 'DataTablesController@getRecordsDataTables');
 
 
     // Tickets routes //
 
-    Route::get('/tickets', 'TicketController@index');
+    Route::get('/measure/tickets', 'TicketController@index');
 
-    Route::get('/tickets/{id}', 'TicketController@show');
+    Route::get('/measure/ticket/{id}', 'TicketController@show');
 
-    Route::get('/filter/tickets/', 'TicketController@filter');
+    Route::get('/measure/filter/tickets/', 'TicketController@filter');
 
 
     // Trust Routes //
 
-    Route::get('trust', function(){
+    Route::get('/trust', function(){
         return view('trust.trustdata', ['viewname' => 'Trust']);
     });
 
@@ -177,18 +177,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/medsitter', 'MedsitterController@index');
 
 
-//    Route::get('/webrtc', 'WebRtcController@index');
+//    Route::get('/measure/webrtc', 'WebRtcController@index');
 //
 //
-//    Route::post('/twilio', 'WebRtcController@sendMessage');
+//    Route::post('/api/twilio', 'WebRtcController@sendMessage');
 //
-//    Route::post('/alltwilio', 'WebRtcController@sendMessageToAll');
+//    Route::post('/api/alltwilio', 'WebRtcController@sendMessageToAll');
 
 
 
     // stats routes //
 
-    Route::get('/stats', 'ProductStatController@index');
+    Route::get('/measure/stats', 'ProductStatController@index');
 
 
 });

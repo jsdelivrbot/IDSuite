@@ -42,15 +42,6 @@
 
                 @php
                     $number = rand(1,5);
-                    /*
-                    if(strlen($endpoint->name) > 23 ){
-                        $trunc_name = substr($endpoint->name, 0, 20);
-
-                        $trunc_name = $trunc_name . '...';
-
-                    } else {
-                        $trunc_name = $endpoint->name;
-                    }*/
 
                 @endphp
 
@@ -62,7 +53,7 @@
                                 <h4 class="card-title text-truncate">{{$endpoint->name}}</h4>
                                 <div class="searchfilterterm" style="display: none;">{{strtolower($endpoint->name)}}</div>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="devices/{{$endpoint->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                <a href="/measure/devices/{{$endpoint->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>
                         </div>
                     </div>
@@ -74,7 +65,7 @@
                                 <h4 class="card-title text-truncate">{{$endpoint->name}}</h4>
                                 <div class="searchfilterterm" style="display: none;">{{strtolower($endpoint->name)}}</div>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="devices/{{$endpoint->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                <a href="/measure/devices/{{$endpoint->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>
                         </div>
                     </div>
@@ -86,7 +77,7 @@
                                 <h4 class="card-title text-truncate">{{$endpoint->name}}</h4>
                                 <div class="searchfilterterm" style="display: none;">{{strtolower($endpoint->name)}}</div>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="devices/{{$endpoint->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                <a href="/measure/devices/{{$endpoint->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>
                         </div>
                     </div>
@@ -98,7 +89,7 @@
                                 <h4 class="card-title text-truncate">{{$endpoint->name}}</h4>
                                 <div class="searchfilterterm" style="display: none;">{{strtolower($endpoint->name)}}</div>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="devices/{{$endpoint->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                <a href="/measure/devices/{{$endpoint->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>
                         </div>
                     </div>
@@ -110,7 +101,7 @@
                                 <h4 class="card-title text-truncate">{{$endpoint->name}}</h4>
                                 <div class="searchfilterterm" style="display: none;">{{strtolower($endpoint->name)}}</div>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="devices/{{$endpoint->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                <a href="/measure/devices/{{$endpoint->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>
                         </div>
                     </div>

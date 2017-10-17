@@ -24,7 +24,7 @@ class RecordController
      */
     public function index()
     {
-        return view('transactions', ['viewname' => 'Transactions']);
+        return view('measure.transactions', ['viewname' => 'Transactions']);
     }
 
     public function getTransactions(){
@@ -44,7 +44,7 @@ class RecordController
                 }
             }
         }
-        return view('transactions', ['viewname' => 'Transactions']);
+        return view('measure.transactions', ['viewname' => 'Transactions']);
     }
 
     public function getRecordDetails(){

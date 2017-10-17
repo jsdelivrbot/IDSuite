@@ -20,7 +20,7 @@
         <hr style="border-top: 2px solid rgba(255, 255, 255, 0.2) !important;">
     </div>
 
-    @include('partials.datatables.recordtable')
+    @include('measure.partials.datatables.recordtable')
 
 @endsection
 

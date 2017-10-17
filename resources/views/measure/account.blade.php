@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('views.layouts.app')
 
 @section('content')
 
@@ -105,7 +105,7 @@
             </div>
         </div>
 
-        @include('partials.custom_tabs.custom_tabs');
+        @include('measure.partials.custom_tabs.custom_tabs');
 
     </div>
 
@@ -125,7 +125,7 @@
 
         $.ajax({
             type: "GET",
-            url: '/getRandomNumber',
+            url: '/api/getRandomNumber',
             success: function (number) {
 
                 let bgcolor;
