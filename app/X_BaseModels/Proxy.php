@@ -82,7 +82,7 @@ class Proxy extends Model
     }
 
     public static function getByName($name){
-        $proxy = Proxy->where('name', $name)->first();
+        $proxy = Proxy::where('name', $name)->first();
         return $proxy;
     }
 
@@ -95,7 +95,7 @@ class Proxy extends Model
 
         $type = EnumDataSourceType::getKeyByValue($value);
 
-        $result = Proxy->join('object_dev', 'proxy.id', '=', 'object_dev.object_id')
+        $result = Proxy::join('object_dev', 'proxy.id', '=', 'object_dev.object_id')
             ->where('value_type', '=', $type)
             ->get();
 

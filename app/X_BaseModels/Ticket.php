@@ -113,7 +113,7 @@ class Ticket extends Model
 
         $type = EnumDataSourceType::getKeyByValue($value);
 
-        $result = Ticket->join('object_dev', 'ticket.id', '=', 'object_dev.object_id')
+        $result = Ticket::join('object_dev', 'ticket.id', '=', 'object_dev.object_id')
                         ->where('value_type', '=', $type)
                         ->get();
 

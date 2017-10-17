@@ -159,7 +159,7 @@ class Endpoint extends Model
 
 
     public static function getByName($name){
-        return Endpoint->where('name', $name)->first();
+        return Endpoint::where('name', $name)->first();
     }
 
     public function hasReference($reference_key){

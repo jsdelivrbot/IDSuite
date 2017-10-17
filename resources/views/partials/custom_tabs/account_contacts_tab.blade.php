@@ -184,7 +184,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: '/personcontacts',
+                    url: '/api/personcontacts',
                     data: {
                         firstname: firstname,
                         middlename: middlename,

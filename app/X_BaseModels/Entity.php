@@ -159,7 +159,7 @@ class Entity extends Model
 
         $type = EnumDataSourceType::getKeyByValue($value);
 
-        $result = Entity->join('object_dev', 'entity.id', '=', 'object_dev.object_id')
+        $result = Entity::join('object_dev', 'entity.id', '=', 'object_dev.object_id')
             ->where('value_type', '=', $type)
             ->get();
 

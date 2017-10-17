@@ -131,7 +131,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     // PersonContact routes //
 
-    Route::post('/personcontacts', 'PersonContactController@create');
+    Route::post('/api/personcontacts', 'PersonContactController@create');
 
 
     // Random Number Route //
@@ -172,7 +172,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
-    // Medsitter Routes WebRTC Routes //
+    // medsitter Routes WebRTC Routes //
 
     Route::get('/medsitter', 'MedsitterController@index');
 

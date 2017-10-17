@@ -74,7 +74,7 @@ class PersonContact extends Model
     }
 
     public static function getContactByEmail($email     ){
-        return PersonContact->where('email_id', $email->id)->first();
+        return PersonContact::where('email_id', $email->id)->first();
     }
 
 }
