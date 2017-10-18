@@ -161,7 +161,7 @@ class TicketController extends Controller
         }
 
 
-        return view('tickets', ['tickets' => $tickets_array, 'viewname' => 'Cases', 'page_tickets' => $page_tickets, 'number_closed' => $number_closed, 'number_in_progress' => $number_in_progress, 'number_less_60' => $number_less_60, 'number_reopened' => $number_reopened, 'number_pending' => $number_pending, 'number_closed_call' => $number_closed_call])->render();
+        return view('measure.tickets', ['tickets' => $tickets_array, 'viewname' => 'Cases', 'page_tickets' => $page_tickets, 'number_closed' => $number_closed, 'number_in_progress' => $number_in_progress, 'number_less_60' => $number_less_60, 'number_reopened' => $number_reopened, 'number_pending' => $number_pending, 'number_closed_call' => $number_closed_call])->render();
 
     }
 
