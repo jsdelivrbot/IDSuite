@@ -27,7 +27,7 @@ class RecordController
         return view('measure.transactions', ['viewname' => 'Transactions']);
     }
 
-    public function getTransactions(){
+    public function getTransactions() {
         $user = Auth::user();
 
         $records = array();

@@ -29,7 +29,7 @@ class CreateProxyTable extends Migration
             $table->string('port')->nullable();
             $table->string('target')->nullable();
             $table->string('token')->nullable();
-            $table->string('key')->nullable();
+            $table->string('pkey')->nullable();
 
             $table->boolean('active')->nullable();
 

@@ -7,6 +7,8 @@
     "require": {
         "php": ">=5.6.4",
         "aloha/twilio": "^3.0",
+        "chumper/zipper": "1.0.x",
+        "clue/socks-react": "0.8.6",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
         "guzzlehttp/guzzle": "~6.0",
         "jasny/iso": "^0.2.0",
@@ -14,8 +16,7 @@
         "laravel/tinker": "~1.0",
         "ryanwinchester/netsuite-php": "2016.2.*",
         "twbs/bootstrap": "4.0.0-alpha.6",
-        "yajra/laravel-datatables-oracle": "^7.9",
-        "chumper/zipper": "1.0.x"
+        "yajra/laravel-datatables-oracle": "^7.9"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -27,6 +27,10 @@ Auth::routes();
 
 Route::post('login', 'Auth\LoginController@loginNameOrEmail');
 
+// api
+Route::get('api/records/getRecords', 'API\APIController@getRecords');
+Route::get('api/records/insertRecords', 'API\APIController@insertRecords'); // must be post
+
 Route::get('/getAuthUser', 'UserController@getCurrentUser');
 
 
@@ -44,7 +48,7 @@ Route::get('/test/polycom', 'TestController@test_polycom');
 Route::group(['middleware' => ['auth']], function () {
 
 
-    Route::get('/api/getUsers', 'UserController@getUsers');
+    Route::get('/getUsers', 'UserController@getUsers');
 
     // apppicker routes //
 

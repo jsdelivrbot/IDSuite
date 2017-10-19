@@ -26,4 +26,10 @@ public static function clean($string) {
     return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
 }
 
+
+        public static function is_multi_array( $arr ) {
+        rsort( $arr );
+        return isset( $arr[0] ) && is_array( $arr[0] );
+    }
+
 }

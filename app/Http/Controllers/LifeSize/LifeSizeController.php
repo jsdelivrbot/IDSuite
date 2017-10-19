@@ -29,7 +29,7 @@ class LifeSizeController
     {
 
         // construct query
-        $from=null, $to=null;
+        $from=null; $to=null;
         if($from !== null)
             $data[]=array('to-date' => $to);
         $data = array('from-date' => $from);
@@ -43,7 +43,7 @@ class LifeSizeController
 
 
 
-        return $results;
+        return $response;
 
     }
 

@@ -13,13 +13,27 @@ class EnumDataSourceType extends Enum
 
     public static $class_code = 'EDS';
 
+
+
     public static $enum = [
         0   =>  'netsuite',
         1   =>  'zabbix',
         2   =>  'mrge',
         3   =>  'polycom',
         4   =>  'zoom',
-        5   =>  'vidyo'
+        5   =>  'vidyo',
+        6   => 'lifesize'
     ];
+
+
+
+    const netsuite = 0;
+    const zabbix = 1;
+    const mrge = 2;
+    const polycom = 3;
+    const zoom = 4;
+    const vidyo = 5;
+    const lifesize = 6;
+
 
 }

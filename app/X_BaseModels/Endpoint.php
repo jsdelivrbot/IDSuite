@@ -143,6 +143,17 @@ class Endpoint extends Model
         }
         return $this;
     }
+    public function getPassword($encrypted_password){
+        // TODO Password Validation
+        try{
+            $this->isActive();
+            $this->password = decrypt($encrypted_password);
+
+        } catch(\Exception $e) {
+            dump($e->getMessage());
+        }
+        return $this->password;
+    }
 
     /**
      * @return bool
@@ -161,6 +172,10 @@ class Endpoint extends Model
 
     public static function getByName($name){
         return Endpoint::where('name', $name)->first();
+    }
+
+    public static function getByCol($col, $value){
+        return self::where($col, $value)->first();
     }
 
     public function hasReference($reference_key){

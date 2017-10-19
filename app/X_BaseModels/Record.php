@@ -13,7 +13,7 @@ class Record extends Model
      * @var array
      */
     protected $fillable = [
-        'endpoint', 'timeperiod', 'local_id', 'conf_id','location_id', 'local_name', 'local_number', 'remote_name', 'remote_number', 'dialed_digits', 'direction', 'protocol', 'id'
+        'endpoint', 'timeperiod', 'local_id','type', 'conference_id','location_id', 'local_name', 'local_number', 'remote_name', 'remote_number', 'dialed_digits', 'direction', 'protocol', 'id'
     ];
 
     protected $guarded = [

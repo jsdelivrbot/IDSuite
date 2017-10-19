@@ -247,7 +247,7 @@ class EndpointSeeder extends Seeder{
             $proxy->port    = $p[4];
             $proxy->target  = null;
             $proxy->token   = $p[6];
-            $proxy->key     = $p[7];
+            $proxy->pkey    = $p[7];
 
             $proxy->save();
 
@@ -257,6 +257,8 @@ class EndpointSeeder extends Seeder{
                 $proxy->entity($entity)->save($entity);
                 $proxy->save();
             } else {
+                dump($p[1]);
+                dump($entity);
                 dd('$entity not an object');
             }
 
@@ -590,6 +592,7 @@ class EndpointSeeder extends Seeder{
 
             $model->price = floatval(preg_replace('/,/', '', $m[3]));
 
+
             $model->save();
 
             $dynamic_enum_value = new \App\DynamicEnumValue();
@@ -716,7 +719,7 @@ class EndpointSeeder extends Seeder{
 
             $ip2location = \App\Ip2Location::getByIp($e[8]);
 
-            if($ip2location->latitude !== 0.0 && $ip2location->longitude !== 0.0){
+            if($ip2location->latitude !== 0.0 && $ip2location->longitude !== 0.0) {
                 $coordinate = new \App\Coordinate();
                 $coordinate->lng = $ip2location->longitude;
                 $coordinate->lat = $ip2location->latitude;
@@ -741,7 +744,7 @@ class EndpointSeeder extends Seeder{
 
             } else {
 
-                $endpoint->location($proxy->location)->save($proxy->location);
+            //    $endpoint->location($proxy->location)->save($proxy->location);
 
             }
 

@@ -13,7 +13,7 @@ class Proxy extends Model
      * @var array
      */
     protected $fillable = [
-        'address', 'name', 'port', 'target', 'token', 'key'
+        'address', 'name', 'port', 'target', 'token', 'pkey'
     ];
 
     protected $guarded = [

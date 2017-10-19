@@ -23,11 +23,12 @@ class CreateRecordTable extends Migration
             $table->string('class_code');
 
             $table->uuid('endpoint_id')->nullable();
+            $table->uuid('type')->nullable();
             $table->uuid('timeperiod_id')->nullable();
             $table->uuid('remote_location_id')->nullable();
 
             $table->string('local_id')->nullable();
-            $table->string('conference_id')->nullable();
+            $table->string('conf_id')->nullable();
             $table->string('local_name')->nullable();
             $table->string('local_number')->nullable();
             $table->string('remote_name')->nullable();
