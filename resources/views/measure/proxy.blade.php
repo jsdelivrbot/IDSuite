@@ -24,7 +24,7 @@
                     @if(isset($proxy))
                         @foreach($proxy as $p)
 
-                            <tr><td><a href="/proxy/{{$p->id}}">{{$p->id}}</a></td><td>{{$p->name}}</td><td>{{$p->ip}}</td><td>{{$p->port}}</td><td>{{$p->target}}</td><td>{{$p->key}}</td><td>{{$p->token}}</td></tr>
+                            <tr><td><a href="/measure/proxy/{{$p->id}}">{{$p->id}}</a></td><td>{{$p->name}}</td><td>{{$p->ip}}</td><td>{{$p->port}}</td><td>{{$p->target}}</td><td>{{$p->key}}</td><td>{{$p->token}}</td></tr>
 
                         @endforeach
                     @endif

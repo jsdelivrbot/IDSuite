@@ -58,7 +58,7 @@ class Proxy extends Model
         $references = $this->morphToMany(DynamicEnumValue::class, 'object','object_dev')->withTimestamps();
 
         if($dynamic_enum_value !== null) {
-            $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id]);
+            $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id, 'value_type' => $dynamic_enum_value->value_type]);
         }
 
         $ref_array = array();
@@ -84,5 +84,21 @@ class Proxy extends Model
     public static function getByName($name){
         $proxy = Proxy::where('name', $name)->first();
         return $proxy;
+    }
+
+
+    /**
+     * @param $value
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function searchByDevType($value){
+
+        $type = EnumDataSourceType::getKeyByValue($value);
+
+        $result = Proxy::join('object_dev', 'proxy.id', '=', 'object_dev.object_id')
+            ->where('value_type', '=', $type)
+            ->get();
+
+        return $result;
     }
 }

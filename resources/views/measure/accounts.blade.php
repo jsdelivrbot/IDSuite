@@ -61,7 +61,7 @@
                                     <h4 class="card-title text-truncate">{{$account->name}}</h4>
                                     <div class="searchfilterterm" style="display: none;">{{strtolower($account->name)}}</div>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>
+                                    <a href="/measure/accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>
                                 </div>
                             </div>
                                 </div>
@@ -75,7 +75,7 @@
                                     <h4 class="card-title text-truncate">{{$account->name}}</h4>
                                     <div class="searchfilterterm" style="display: none;">{{strtolower($account->name)}}</div>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>
+                                    <a href="/measure/accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                                     <h4 class="card-title text-truncate">{{$account->name}}</h4>
                                     <div class="searchfilterterm" style="display: none;">{{strtolower($account->name)}}</div>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>
+                                    <a href="/measure/accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                                     <h4 class="card-title text-truncate">{{$account->name}}</h4>
                                     <div class="searchfilterterm" style="display: none;">{{strtolower($account->name)}}</div>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>
+                                    <a href="/measure/accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>
                                 </div>
                             </div>
                         </div>
@@ -116,7 +116,7 @@
                                     <h4 class="card-title text-truncate">{{$account->name}}</h4>
                                     <div class="searchfilterterm" style="display: none;">{{strtolower($account->name)}}</div>
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>
+                                    <a href="/measure/accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>
                                 </div>
                             </div>
                         </div>

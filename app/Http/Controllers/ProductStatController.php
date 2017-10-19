@@ -31,7 +31,7 @@ class ProductStatController extends Controller
 
         $viewname = 'Product Statistics';
 
-        return view('stats', compact('customer_count', 'zabbix_count', 'netsuite_count', 'mrge_count', 'polycom_count', 'viewname'));
+        return view('measure.stats', compact('customer_count', 'zabbix_count', 'netsuite_count', 'mrge_count', 'polycom_count', 'viewname'));
     }
 
     /**

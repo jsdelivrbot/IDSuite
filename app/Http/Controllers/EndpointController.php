@@ -33,7 +33,7 @@ class EndpointController extends Controller
 
         }
 
-        return view('endpoints', ['endpoints' => $endpoint_array, 'viewname' => 'Devices']);
+        return view('measure.endpoints', ['endpoints' => $endpoint_array, 'viewname' => 'Devices']);
     }
 
 
@@ -95,7 +95,7 @@ class EndpointController extends Controller
 
         $duration_average = round($endpoint->analytics[2]->value, 2);
 
-        return view('endpoint', ['endpoint' => $e,'name' => $e->name, 'viewname' => 'device', 'number' => session('randomnumber'), 'recordcount' => $recordcount, 'durationaverage' => $duration_average]);
+        return view('measure.endpoint', ['endpoint' => $e,'name' => $e->name, 'viewname' => 'device', 'number' => session('randomnumber'), 'recordcount' => $recordcount, 'durationaverage' => $duration_average]);
     }
 
     /**

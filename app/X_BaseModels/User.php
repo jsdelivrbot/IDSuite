@@ -93,7 +93,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $references = $this->morphToMany(DynamicEnumValue::class, 'object','object_dev')->withTimestamps();
 
         if($dynamic_enum_value !== null) {
-            $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id]);
+            $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id, 'value_type' => $dynamic_enum_value->value_type]);
         }
 
         $ref_array = array();
@@ -309,6 +309,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
+
+    /**
+     * @param $value
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function searchByDevType($value){
+
+        $type = EnumDataSourceType::getKeyByValue($value);
+
+        $result = User::join('object_dev', 'user.id', '=', 'object_dev.object_id')
+            ->where('value_type', '=', $type)
+            ->get();
+
+        return $result;
+    }
 
 
 

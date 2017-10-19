@@ -9,7 +9,7 @@
                 <div class="card-block text-right">
                     <h4 class="card-title">MEASURE</h4>
                     <p class="card-text">Customer account performance analysis and insights.</p>
-                    <a href="accounts" class="btn btn-outline-pink float-right" style="color: white !important; border-color: white !important;">Launch</a>
+                    <a href="/measure/accounts" class="btn btn-outline-pink float-right" style="color: white !important; border-color: white !important;">Launch</a>
                 </div>
             </div>
 
@@ -17,7 +17,7 @@
                 <div class="card-block text-right">
                     <h4 class="card-title">LENS</h4>
                     <p class="card-text">Customer sentiment and perspective monitoring.</p>
-                    <a href="accounts" class="btn btn-outline-blue float-right disabled" style="color: white !important; border-color: white !important;"><i class="fa fa-lock" aria-hidden="true" style="color: white !important;"></i>&nbsp Launch</a>
+                    <a href="/lens/..." class="btn btn-outline-blue float-right disabled" style="color: white !important; border-color: white !important;"><i class="fa fa-lock" aria-hidden="true" style="color: white !important;"></i>&nbsp Launch</a>
                 </div>
             </div>
 
@@ -25,7 +25,7 @@
                 <div class="card-block text-right">
                     <h4 class="card-title">CASE</h4>
                     <p class="card-text">Details, insights, and analysis of customer support tickets.</p>
-                    <a href="accounts" class="btn btn-outline-blue float-right disabled" style="color: white !important; border-color: white !important;"><i class="fa fa-lock" aria-hidden="true" style="color: white !important;"></i>&nbsp Launch</a>
+                    <a href="/case/..." class="btn btn-outline-blue float-right disabled" style="color: white !important; border-color: white !important;"><i class="fa fa-lock" aria-hidden="true" style="color: white !important;"></i>&nbsp Launch</a>
                 </div>
             </div>
 
@@ -54,7 +54,7 @@
                     <div class="card-block text-right">
                         <h4 class="card-title">WebStore</h4>
                         <p class="card-text">Webstore - IDS eCommerce front-end.</p>
-                        <a href="accounts" class="btn btn-outline-blue float-right disabled" style="color: white !important; border-color: white !important;"><i class="fa fa-lock" aria-hidden="true" style="color: white !important;"></i>&nbsp Launch</a>
+                        <a href="/webstore/..." class="btn btn-outline-blue float-right disabled" style="color: white !important; border-color: white !important;"><i class="fa fa-lock" aria-hidden="true" style="color: white !important;"></i>&nbsp Launch</a>
                     </div>
                 </div>
 

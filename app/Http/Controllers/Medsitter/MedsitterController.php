@@ -13,7 +13,7 @@ class MedsitterController extends Controller
 {
     public function index(){
 
-        return view('Medsitter.home', ['viewname' => 'Medsitter / Home']);
+        return view('medsitter.home', ['viewname' => 'medsitter / Home']);
 
     }
 }

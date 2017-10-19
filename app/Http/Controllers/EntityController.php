@@ -58,7 +58,7 @@ class EntityController extends Controller
             $accounts_array[] = $account;
         }
 
-        return view('accounts', ['accounts' => $accounts_array, 'viewname' => 'Accounts']);
+        return view('measure.accounts', ['accounts' => $accounts_array, 'viewname' => 'Accounts']);
 
     }
 
@@ -199,7 +199,7 @@ class EntityController extends Controller
         session(['randomnumber' => rand(1,5)]);
 
 
-        return view('account', ['name' => $name->name, 'page_tickets' => $page_tickets, 'id' => $id, 'viewname' => 'account', 'sites' => $sites_array, 'persons' => $persons_array, 'notes' => $notes_array , 'number' => session('randomnumber')])->render();
+        return view('measure.account', ['name' => $name->name, 'page_tickets' => $page_tickets, 'id' => $id, 'viewname' => 'account', 'sites' => $sites_array, 'persons' => $persons_array, 'notes' => $notes_array , 'number' => session('randomnumber')])->render();
     }
 
 

@@ -7,7 +7,7 @@
     $( document ).ready(function() {
         $.ajax({
             type: "GET",
-            url: '/getDeviceStatus',
+            url: '/api/getDeviceStatus',
             success: function (data) {
 
                 if (data === true) {

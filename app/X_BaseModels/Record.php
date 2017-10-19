@@ -53,12 +53,18 @@ class Record extends Model
         return $this->hasOne(Location::class, 'id','remote_location_id');
     }
 
-    public function references(){
+    public function references(DynamicEnumValue $dynamic_enum_value = null){
+
         $references = $this->morphToMany(DynamicEnumValue::class, 'object','object_dev')->withTimestamps();
+
+        if($dynamic_enum_value !== null) {
+            $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id, 'value_type' => $dynamic_enum_value->value_type]);
+        }
 
         $ref_array = array();
 
         foreach($references->get() as $reference){
+
             $ref_array[EnumDataSourceType::getValueByKey($reference->value_type)] = $reference->value;
         }
 
@@ -180,5 +186,21 @@ class Record extends Model
             unset($record);
 
         }
+    }
+
+
+    /**
+     * @param $value
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function searchByDevType($value){
+
+        $type = EnumDataSourceType::getKeyByValue($value);
+
+        $result = Record::join('object_dev', 'record.id', '=', 'object_dev.object_id')
+            ->where('value_type', '=', $type)
+            ->get();
+
+        return $result;
     }
 }

@@ -90,10 +90,10 @@ class Endpoint extends Model
 
     public function references(DynamicEnumValue $dynamic_enum_value = null){
 
-        $references = $this->morphToMany(DynamicEnumValue::class, 'object','object_dev');
+        $references = $this->morphToMany(DynamicEnumValue::class, 'object','object_dev')->withTimestamps();
 
         if($dynamic_enum_value !== null) {
-            $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id]);
+            $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id, 'value_type' => $dynamic_enum_value->value_type]);
         }
 
         $ref_array = array();
@@ -160,7 +160,7 @@ class Endpoint extends Model
 
 
     public static function getByName($name){
-        return self::where('name', $name)->first();
+        return Endpoint::where('name', $name)->first();
     }
 
     public function hasReference($reference_key){

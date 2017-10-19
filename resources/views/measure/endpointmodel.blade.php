@@ -22,7 +22,7 @@
                     @if(isset($model))
                         @foreach($model as $m)
 
-                            <tr><td><a href="/model/{{$m->id}}">{{$m->id}}</a></td><td>{{$m->name}}</td><td>{{$m->manufacturer}}</td><td>{{$m->architecture}}</td><td>{{$m->key}}</td></tr>
+                            <tr><td><a href="/measure/model/{{$m->id}}">{{$m->id}}</a></td><td>{{$m->name}}</td><td>{{$m->manufacturer}}</td><td>{{$m->architecture}}</td><td>{{$m->key}}</td></tr>
 
                         @endforeach
                     @endif

@@ -28,7 +28,7 @@
             <button class="navbar-toggler navbar-toggler-right" style="border-color: #5cb85c" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand ml-2 mr-lg-5" href="/accounts" style="color: #5cb85c;padding-bottom: 0 !important; font-size: 0;">
+            <a class="navbar-brand ml-2 mr-lg-5" href="/measure/accounts" style="color: #5cb85c;padding-bottom: 0 !important; font-size: 0;">
                 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="-5 0 120 95" height="45">
                     <defs>
                         <style>
@@ -115,19 +115,19 @@
                     <nav>
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item ">
-                            <a class="nav-link btn-outline-teal" style="color: white !important;" href="/accounts">Accounts</a>
+                            <a class="nav-link btn-outline-teal" style="color: white !important;" href="/measure/accounts">Accounts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn-outline-pink" style="color: white !important;white-space: nowrap;" href="/transactions">Transactions</a>
+                            <a class="nav-link btn-outline-pink" style="color: white !important;white-space: nowrap;" href="/measure/transactions">Transactions</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn-outline-purple" style="color: white !important;" href="/devices">Devices</a>
+                            <a class="nav-link btn-outline-purple" style="color: white !important;" href="/measure/devices">Devices</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn-outline-yellow" style="color: white !important;" href="#">Reports</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn-outline-blue" style="color: white !important; white-space: nowrap;" href="/tickets">Cases</a>
+                            <a class="nav-link btn-outline-blue" style="color: white !important; white-space: nowrap;" href="/measure/tickets">Cases</a>
                         </li>
                     </ul>
                 </nav>

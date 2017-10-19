@@ -17,7 +17,7 @@
                         <input type="search" placeholder="Search Filter..." name="search" class="form-control searchbox-input" required="">
 
                         <div class="form-check mt-2 mb-0">
-                            <form action="/filter/tickets">
+                            <form action="/measure/filter/tickets">
                                 <label class="form-check-label mr-1">
                                     <input id="filter-all" name="filter" class="form-check-input" type="checkbox">
                                     All Cases
@@ -146,7 +146,7 @@
                                 <p class="card-text">{{intval(floor($ticket->duration/60/60/24))}} Day(s)</p>
                                 <p class="card-text">{{$ticket->entity_name}}</p>
                                 <p class="card-text">{{$ticket->subject}}</p>
-                                <a href="tickets/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                <a href="/measure/ticket/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                                 <p class="card-text">{{intval(floor($ticket->duration/60/60/24))}} Day(s)</p>
                                 <p class="card-text">{{$ticket->entity_name}}</p>
                                 <p class="card-text">{{$ticket->subject}}</p>
-                                <a href="tickets/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                <a href="/measure/ticket/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>
                         </div>
                     </div>
@@ -182,7 +182,7 @@
                                 <p class="card-text">{{intval(floor($ticket->duration/60/60/24))}} Day(s)</p>
                                 <p class="card-text">{{$ticket->entity_name}}</p>
                                 <p class="card-text">{{$ticket->subject}}</p>
-                                <a href="tickets/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                <a href="/measure/ticket/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>
                         </div>
                     </div>
@@ -200,7 +200,7 @@
                                 <p class="card-text">{{intval(floor($ticket->duration/60/60/24))}} Day(s)</p>
                                 <p class="card-text">{{$ticket->entity_name}}</p>
                                 <p class="card-text">{{$ticket->subject}}</p>
-                                <a href="tickets/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                <a href="/measure/ticket/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>
                         </div>
                     </div>
@@ -218,7 +218,7 @@
                                 <p class="card-text">{{intval(floor($ticket->duration/60/60/24))}} Day(s)</p>
                                 <p class="card-text">{{$ticket->entity_name}}</p>
                                 <p class="card-text">{{$ticket->subject}}</p>
-                                <a href="tickets/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                <a href="/measure/ticket/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>
                         </div>
                     </div>
@@ -236,7 +236,7 @@
                                 <p class="card-text">{{intval(floor($ticket->duration/60/60/24))}} Day(s)</p>
                                 <p class="card-text">{{$ticket->entity_name}}</p>
                                 <p class="card-text">{{$ticket->subject}}</p>
-                                <a href="tickets/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                <a href="/measure/ticket/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>
                         </div>
                     </div>
@@ -254,7 +254,7 @@
                                 <p class="card-text">{{intval(floor($ticket->duration/60/60/24))}} Day(s)</p>
                                 <p class="card-text">{{$ticket->entity_name}}</p>
                                 <p class="card-text">{{$ticket->subject}}</p>
-                                <a href="tickets/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                <a href="/measure/ticket/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                             </div>
                         </div>
                     </div>
@@ -272,7 +272,7 @@
                                     <p class="card-text">{{intval(floor($ticket->duration/60/60/24))}} Day(s)</p>
                                     <p class="card-text">{{$ticket->entity_name}}</p>
                                     <p class="card-text">{{$ticket->subject}}</p>
-                                    <a href="tickets/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                    <a href="/measure/ticket/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                                 </div>
                             </div>
                         </div>
@@ -290,7 +290,7 @@
                                     <p class="card-text">{{intval(floor($ticket->duration/60/60/24))}} Day(s)</p>
                                     <p class="card-text">{{$ticket->entity_name}}</p>
                                     <p class="card-text">{{$ticket->subject}}</p>
-                                    <a href="tickets/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
+                                    <a href="/measure/ticket/{{$ticket->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">Go somewhere</a>
                                 </div>
                             </div>
                         </div>
@@ -308,7 +308,7 @@
 
         <div class="row">
             <div class="mx-auto">
-                {{$page_tickets->links('partials.pagination.default')}}
+                {{$page_tickets->links('measure.partials.pagination.default')}}
             </div>
         </div>
     </section>
