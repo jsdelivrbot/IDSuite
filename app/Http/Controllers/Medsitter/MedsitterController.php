@@ -38,22 +38,27 @@ class MedsitterController extends Controller
 
         $pod = Pod::getObjectById($id);
 
-        $sitter = new Participant();
 
-        $sitter->setType('sitter');
-        $sitter->setFirstName('test');
-        $sitter->setLastName('sitter');
-        $sitter->setMuted(false);
+        if($pod->sitter_count === 0) {
 
-        $sitter->save();
+            $sitter = new Participant();
 
-        $pod->joinSitter($sitter);
+            $sitter->setType('sitter');
+            $sitter->setFirstName('test');
+            $sitter->setLastName('sitter');
+            $sitter->setMuted(false);
 
-        event(new EventCallStatus($sitter));
-        event(new PodCount($pod));
+            $sitter->save();
 
-        return view('Medsitter.sitter', ['viewname' => 'Medsitter / Sitter', 'sitter' => $sitter, 'pod' => $pod]);
+            $pod->joinSitter($sitter);
 
+            event(new EventCallStatus($sitter));
+            event(new PodCount($pod));
+
+            return view('medsitter.sitter', ['viewname' => 'Medsitter / Sitter', 'sitter' => $sitter, 'pod' => $pod]);
+        } else {
+            return redirect('/medsitter/lobby');
+        }
 
     }
 
@@ -123,6 +128,22 @@ class MedsitterController extends Controller
 
     }
 
+    public function getPod(){
+
+        $pod = Pod::getObjectById(Input::get('pod_id'));
+
+        return response()->json($pod);
+    }
+
+    public function generateCode(){
+
+        $pod = Pod::getObjectById(Input::get("pod_id"));
+
+        $pod->generateCode();
+
+        return response()->json($pod->code);
+
+    }
 
     public function participant(){
 
@@ -132,7 +153,6 @@ class MedsitterController extends Controller
 //        $mute_status = Input::get('microphonestatus');
 //        $type = Input::get('type');
         $pod = Input::get('podid');
-
 
         $participant = new Participant();
 
@@ -151,6 +171,60 @@ class MedsitterController extends Controller
             'key' => $key
         ]);
 
+    }
+
+    public function externalparticipant(){
+
+        $first_name = Input::get('firstname');
+        $last_name = Input::get('lastname');
+        $phone_number = Input::get('phonenumber');
+//        $mute_status = Input::get('microphonestatus');
+//        $type = Input::get('type');
+        $pod = Input::get('podid');
+
+        $code = Input::get('code');
+
+        $participant = new Participant();
+
+        $participant->setFirstName($first_name);
+        $participant->setLastName($last_name);
+        $participant->setType('patient');
+        $participant->setMuted(false);
+
+        $participant->save();
+
+        event(new EventParticipantJoin($participant, $code));
+
+        $key = "$pod-$participant->id";
+
+        return response()->json([
+            'key' => $key
+        ]);
+
+    }
+
+
+    public function getPods(){
+
+        $pods = Pod::getPods();
+
+        return response()->json($pods);
+
+    }
+
+    public function externalJoinView(){
+
+        $pods = Pod::getActivelyLooking();
+
+        return view('medsitter.external_join', ['viewname' => 'Patient Join', 'pods' => $pods]);
+
+    }
+
+    public function externalJoin(){
+
+        $code = Input::get('code');
+
+        return response()->json($code);
     }
 
     public function dropParticipant(){
@@ -180,9 +254,11 @@ class MedsitterController extends Controller
 
         }
 
-
-        $sitter_to_patient_ratio = round($active_patient_count / $active_sitter_count, 2);
-
+        if($active_sitter_count != 0) {
+            $sitter_to_patient_ratio = round($active_patient_count / $active_sitter_count, 2);
+        } else {
+            $sitter_to_patient_ratio = 0;
+        }
 
         return view('Medsitter.library', ['viewname' => 'Medsitter / Lobby', 'pods' => $pods, 'active_paitient_count' => $active_patient_count, 'active_sitter_count' => $active_sitter_count, 'sitter_to_patient_ratio' => $sitter_to_patient_ratio]);
 

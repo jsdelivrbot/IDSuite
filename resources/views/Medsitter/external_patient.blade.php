@@ -1,101 +1,28 @@
-@extends('layouts.medsitter')
+@extends('layouts.medsitter.external')
 
 @section('content')
 
     <div class="row mt-2">
 
-        <div class="col-lg-6">
+        <div class="col-lg-11" style="margin-left: 3.75%;">
             <div class="card" style="background-color: #434857 !important">
                 <span id="connectionStatus-0">Initializing</span>
                 <span id="clientVersion-0"></span>
+                {{--<div id="renderer" class="card-img-top rendererWithOptions pluginOverlay mt-2" style="height: 275px;"></div>--}}
 
-                <div id="renderer2-0" class="card-img-top mt-2"> </div>
+                <div id="renderer2-0" class="card-img-top mt-2 renderer-patient"> </div>
 
                 <div class="card-block">
 
-                    <div id="patient-connect-buttons-0" class="form-group">
+                    {{--<span id="participantStatus"></span>--}}
+
+                    <div class="form-group">
                         <div class="input-group justify-content-center">
-                            <button id="join-sms-0" title="Join by SMS" class="toolbarButton joinsms" onclick="showSmsInput(0)"></button>
-                            <button class="toolbarButton" onclick="showCode(0)"><i class="fa fa-code fa-3x" aria-hidden="true" style="color: white;"></i></button>
-                        </div>
-                    </div>
-
-                    <div id="patient-sms-connect-form-0" class="form-group d-none">
-                        <div class="input-group justify-content-center">
-                                <input type="tel" class="form-control" id="sms-join-number-0" aria-describedby="Phone Number" placeholder="Enter 10 digit number...">
-                            <button id="join-sms-0" title="Join by SMS" class="toolbarButton joinsms"></button>
-                            <button id="cancel-sms-0" title="Join by SMS" class="toolbarButton" onclick="hideSmsInpute(0)"><i class="fa fa-times fa-3x" style="color: red;"></i></button>
-                        </div>
-                    </div>
-
-
-                    <div id="patient-code-connect-form-0" class="form-group d-none">
-                        <div class="input-group justify-content-center">
-                            <input class="form-control" id="code-number-0" disabled>
-                            <button id="join-code-0" title="Join by Code" class="toolbarButton" onclick="generateCode(0)"><i class="fa fa-code fa-3x" aria-hidden="true" style="color: white;"></i></button>
-                            <button id="cancel-code-0" title="Join by Code" class="toolbarButton" onclick="hideCode(0)"><i class="fa fa-times fa-3x" style="color: red;"></i></button>
-                        </div>
-                    </div>
-
-
-                    <div id="patient-video-buttons-0" class="form-group d-none">
-                        <div class="input-group justify-content-center">
-                            <button id="microphoneButton-0" title="Microphone Privacy" class="toolbarButton microphoneOff"></button>
+                            <button id="microphoneButton-0" title="Microphone Privacy" class="toolbarButton microphoneOn"></button>
+                            {{--<button id="cameraButton" title="Camera Privacy" class="toolbarButton cameraOn"></button>--}}
                             <button id="joinLeaveButton-0" title="Join Conference" class="toolbarButton callStart"></button>
                             <button class="btn btn-nav-blue my-2 my-sm-0" type="button">Details</button>
                         </div>
-                        <div id="patient-0">
-                        </div>
-
-                        <div id="error-0"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-lg-6">
-            <div class="card" style="background-color: #434857 !important">
-                <span id="connectionStatus-1">Initializing</span>
-                <span id="clientVersion-1"></span>
-
-                <div id="renderer2-1" class="card-img-top mt-2"> </div>
-
-                <div class="card-block">
-
-                    <div id="patient-connect-buttons-1" class="form-group">
-                        <div class="input-group justify-content-center">
-                            <button id="join-sms-1" title="Join by SMS" class="toolbarButton joinsms" onclick="showSmsInput(1)"></button>
-                            <button class="toolbarButton" onclick="showCode(1)"><i class="fa fa-code fa-3x" aria-hidden="true" style="color: white;"></i></button>
-                        </div>
-                    </div>
-
-                    <div id="patient-sms-connect-form-1" class="form-group d-none">
-                        <div class="input-group justify-content-center">
-                            <input type="tel" class="form-control" id="sms-join-number-1" aria-describedby="Phone Number" placeholder="Enter 10 digit number...">
-                            <button id="join-sms-1" title="Join by SMS" class="toolbarButton joinsms"></button>
-                            <button id="cancel-sms-1" title="Join by SMS" class="toolbarButton" onclick="hideSmsInpute(1)"><i class="fa fa-times fa-3x" style="color: red;"></i></button>
-                        </div>
-                    </div>
-
-                    <div id="patient-code-connect-form-1" class="form-group d-none">
-                        <div class="input-group justify-content-center">
-                            <input class="form-control" id="code-number-1" disabled>
-                            <button id="join-code-1" title="Join by Code" class="toolbarButton" onclick="generateCode(1)"><i class="fa fa-code fa-3x" aria-hidden="true" style="color: white;"></i></button>
-                            <button id="cancel-code-1" title="Join by Code" class="toolbarButton" onclick="hideCode(1)"><i class="fa fa-times fa-3x" style="color: red;"></i></button>
-                        </div>
-                    </div>
-
-                    <div id="patient-video-buttons-1" class="form-group d-none">
-                        <div class="input-group justify-content-center">
-                            <button id="microphoneButton-1" title="Microphone Privacy" class="toolbarButton microphoneOff"></button>
-                            <button id="joinLeaveButton-1" title="Join Conference" class="toolbarButton callStart"></button>
-                            <button class="btn btn-nav-blue my-2 my-sm-1" type="button">Details</button>
-                        </div>
-                        <div id="patient-1">
-
-                        </div>
-                        <div id="error-1"></div>
                     </div>
 
                 </div>
@@ -103,202 +30,6 @@
         </div>
 
     </div>
-
-    <div class="row mt-3">
-
-        <div class="col-lg-6">
-            <div class="card" style="background-color: #434857 !important">
-                <span id="connectionStatus-2">Initializing</span>
-
-                <span id="clientVersion-2"></span>
-
-                <div id="renderer2-2" class="card-img-top mt-2"> </div>
-
-                <div class="card-block">
-
-                    <div id="patient-connect-buttons-2" class="form-group">
-                        <div class="input-group justify-content-center">
-                            <button id="join-sms-2" title="Join by SMS" class="toolbarButton joinsms" onclick="showSmsInput(2)"></button>
-                            <button class="toolbarButton" onclick="showCode(2)"><i class="fa fa-code fa-3x" aria-hidden="true" style="color: white;"></i></button>
-                        </div>
-                    </div>
-
-                    <div id="patient-sms-connect-form-2" class="form-group d-none">
-                        <div class="input-group justify-content-center">
-                            <input type="tel" class="form-control" id="sms-join-number-2" aria-describedby="Phone Number" placeholder="Enter 10 digit number...">
-                            <button id="join-sms-2" title="Join by SMS" class="toolbarButton joinsms"></button>
-                            <button id="cancel-sms-2" title="Join by SMS" class="toolbarButton" onclick="hideSmsInpute(2)"><i class="fa fa-times fa-3x" style="color: red;"></i></button>
-                        </div>
-                    </div>
-
-                    <div id="patient-code-connect-form-2" class="form-group d-none">
-                        <div class="input-group justify-content-center">
-                            <input class="form-control" id="code-number-2" disabled>
-                            <button id="join-code-2" title="Join by Code" class="toolbarButton" onclick="generateCode(2)"><i class="fa fa-code fa-3x" aria-hidden="true" style="color: white;"></i></button>
-                            <button id="cancel-code-2" title="Join by Code" class="toolbarButton" onclick="hideCode(2)"><i class="fa fa-times fa-3x" style="color: red;"></i></button>
-                        </div>
-                    </div>
-
-                    <div id="patient-video-buttons-2" class="form-group d-none">
-                        <div class="input-group justify-content-center">
-                            <button id="microphoneButton-2" title="Microphone Privacy" class="toolbarButton microphoneOff"></button>
-                            <button id="joinLeaveButton-2" title="Join Conference" class="toolbarButton callStart"></button>
-                            <button class="btn btn-nav-blue my-2 my-sm-2" type="button">Details</button>
-                        </div>
-                        <div id="patient-2">
-
-                        </div>
-                        <div id="error-2"></div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-6">
-            <div class="card" style="background-color: #434857 !important">
-
-                <span id="connectionStatus-3">Initializing</span>
-
-                <span id="clientVersion-3"></span>
-
-                <div id="renderer2-3" class="card-img-top mt-2"> </div>
-
-                <div class="card-block">
-
-                    <div id="patient-connect-buttons-3" class="form-group">
-                        <div class="input-group justify-content-center">
-                            <button id="join-sms-3" title="Join by SMS" class="toolbarButton joinsms" onclick="showSmsInput(3)"></button>
-                            <button class="toolbarButton" onclick="showCode(3)"><i class="fa fa-code fa-3x" aria-hidden="true" style="color: white;"></i></button>
-                        </div>
-                    </div>
-
-                    <div id="patient-sms-connect-form-3" class="form-group d-none">
-                        <div class="input-group justify-content-center">
-                            <input type="tel" class="form-control" id="sms-join-number-3" aria-describedby="Phone Number" placeholder="Enter 10 digit number...">
-                            <button id="join-sms-3" title="Join by SMS" class="toolbarButton joinsms"></button>
-                            <button id="cancel-sms-3" title="Join by SMS" class="toolbarButton" onclick="hideSmsInpute(3)"><i class="fa fa-times fa-3x" style="color: red;"></i></button>
-                        </div>
-                    </div>
-
-                    <div id="patient-code-connect-form-3" class="form-group d-none">
-                        <div class="input-group justify-content-center">
-                            <input class="form-control" id="code-number-3" disabled>
-                            <button id="join-code-3" title="Join by Code" class="toolbarButton" onclick="generateCode(3)"><i class="fa fa-code fa-3x" aria-hidden="true" style="color: white;"></i></button>
-                            <button id="cancel-code-3" title="Join by Code" class="toolbarButton" onclick="hideCode(3)"><i class="fa fa-times fa-3x" style="color: red;"></i></button>
-                        </div>
-                    </div>
-
-                    <div id="patient-video-buttons-3" class="form-group d-none">
-                        <div class="input-group justify-content-center">
-                            <button id="microphoneButton-3" title="Microphone Privacy" class="toolbarButton microphoneOff"></button>
-                            <button id="joinLeaveButton-3" title="Join Conference" class="toolbarButton callStart"></button>
-                            <button class="btn btn-nav-blue my-2 my-sm-3" type="button">Details</button>
-                        </div>
-                        <div id="patient-3">
-
-                        </div>
-                        <div id="error-3"></div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="row mt-4">
-        <div class="col-lg-5">
-
-        </div>
-        <div class="col-lg-2 text-center">
-            <small class="text-white">MedSitter © Copyright 2017</small>
-
-            <div>
-                <button class="btn btn-nav-blue btn-sm my-2 my-sm-0" onclick="$('#medsitter-copyright-modal').modal('toggle')">Details</button>
-            </div>
-
-        </div>
-        <div class="col-lg-5">
-
-        </div>
-    </div>
-
-
-    <!-- Start Form-->
-    <div class="modal" id="medsitter-copyright-modal" tabindex="-1" role="dialog" aria-labelledby="medsitter-copyright-modal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Copyright -- Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" style="color: white;">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h4>MedSitter</h4>
-                    <span>
-                        © Copyright 2017 -Interactive Digital Solutions, Inc; All Rights Reserved The MedSitter brand is trademarked by Interactive Digital Solutions. All other products or brand names are trademarks of their respective holders.
-                    </span>
-                </div>
-                <div class="modal-footer">
-                    <a class="btn btn-nav-pink" data-dismiss="modal" style="cursor: pointer !important;">Close</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--End Form-->
-
-    <!-- Start Form-->
-    <div class="modal" id="patient-joining-modal" tabindex="-1" role="dialog" aria-labelledby="patient-joining-modal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Patient Joining</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" style="color: white;">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div>
-                        <span>First Name: </span><span id="join-first-name"></span>
-                    </div>
-                    <div>
-                        <span>Last Name: </span><span id="join-last-name"></span>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a id="patient-join-cancel" class="btn btn-nav-pink" data-dismiss="modal" style="cursor: pointer !important;">Cancel</a>
-                    <a id="patient-join-submit" class="btn btn-nav-orange" style="cursor: pointer !important;">Admit Patient</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--End Form-->
-
-
-    <div class="modal" id="invalid-code-modal" tabindex="-1" role="dialog" aria-labelledby="invalid-code-modal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Invalid Code Used</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" style="color: white;">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <span>
-                        The patient was unable to join due to using an invalid code upon connection. The code used was <span id="invalid-code"></span>
-                    </span>
-                </div>
-                <div class="modal-footer">
-                    <a id="invalid-code-close" class="btn btn-nav-pink" data-dismiss="modal" style="cursor: pointer !important;">Close</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     @php
 
@@ -306,28 +37,38 @@
 
     @endphp
 
-    <div class="invisible">
-        <input type="text" id="host" value="{{$vidyo->getHostId()}}" style="margin-left: -27px">
-        <input type="text" id="token" placeholder="" value="{{$vidyo->getToken()}}" style="margin-left: -27px">
-        <input id="resourceId" type="text" value="IDSRoom" style="margin-left: -27px">
-        <input id="displayName" type="text" value="{{$sitter->first_name . ' ' . $sitter->last_name}}" style="margin-left: -27px">
+    <div class="col-lg-6 offset-4">
+        <input type="text" id="host" value="{{$vidyo->getHostId()}}">
+        <input type="text" id="token" placeholder="" value="{{$vidyotoken}}">
+        <input id="resourceId" type="text" value="{{$room}}">
+        <input id="displayName" type="text" value="{{$participant->first_name . ' ' . $participant->last_name}}">
         <div id="error"></div>
+    </div>
 
-        <div id="participants" class="mt-4 col-lg-6 text-white">
+    <div class="row">
+        <div class="mt-4 col-lg-6 text-white">
+
+            <span>Name: </span><span id="participant-name"></span>
+            <span>Type: </span><span id="participant-type"></span>
+            <span>Muted: </span><span id="participant-muted"></span>
 
         </div>
-
     </div>
+
+
+
 
 @endsection
 
 
-@push('medsitter_sitter')
+@push('medsitter_patient')
 
 
     <script type="text/javascript">
 
-        function onVidyoClientLoaded(status, count) {
+
+
+        function onVidyoClientLoaded(status) {
             console.log("Status: " + status.state + " Description: " + status.description);
 
             let connectionstatus = $("#connectionStatus");
@@ -338,7 +79,12 @@
                     $("#helper").addClass("hidden");
                     // After the VidyoClient is successfully initialized a global VC object will become available
                     // All of the VidyoConnector gui and logic is implemented in VidyoConnector.js
-                    StartVidyoConnector(VC, count);
+
+                    console.log(VCUtils.params.webrtc);
+
+                    StartVidyoConnector(VC, 0, VCUtils.params.webrtc);
+
+
 
 
                     break;
@@ -359,6 +105,8 @@
                     connectionstatus.html(status.description);
                     break;
             }
+
+
             return true; // Return true to reload the plugins if not available
         }
         function UpdateHelperPaths(status) {
@@ -405,307 +153,129 @@
             loadVidyoClientLibrary(true, false);
         }
 
+
+        function loadHelperOptions() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            // Opera 8.0+
+            var isOpera = (userAgent.indexOf("Opera") || userAgent.indexOf('OPR')) != -1 ;
+            // Firefox
+            var isFirefox = userAgent.indexOf("Firefox") != -1;
+            // Chrome 1+
+            var isChrome = userAgent.indexOf("Chrome") != -1;
+            // Safari
+            var isSafari = !isChrome && userAgent.indexOf("Safari") != -1;
+            // AppleWebKit
+            var isAppleWebKit = !isSafari && !isChrome && userAgent.indexOf("AppleWebKit") != -1;
+            // Internet Explorer 6-11
+            var isIE = (userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true );
+            // Edge 20+
+            var isEdge = !isIE && !!window.StyleMedia;
+            // Check if Mac
+            var isMac = navigator.platform.indexOf('Mac') > -1;
+            // Check if Windows
+            var isWin = navigator.platform.indexOf('Win') > -1;
+            // Check if Linux
+            var isLinux = navigator.platform.indexOf('Linux') > -1;
+            // Check if Android
+            var isAndroid = userAgent.indexOf("android") > -1;
+            // Check if WebRTC is available
+            var isWebRTCAvailable = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || (navigator.mediaDevices ? navigator.mediaDevices.getUserMedia : undefined);
+
+
+            if (!isMac && !isWin && !isLinux) {
+                /* Mobile App*/
+                if (isAndroid) {
+                    $("#joinViaApp").removeClass("hidden");
+                } else {
+                    $("#joinViaOtherApp").removeClass("hidden");
+                }
+                if (isWebRTCAvailable) {
+                    /* Supports WebRTC */
+                    $("#joinViaBrowser").removeClass("hidden");
+                }
+            } else {
+                /* Desktop App */
+                $("#joinViaApp").removeClass("hidden");
+
+                if (isWebRTCAvailable) {
+                    /* Supports WebRTC */
+                    $("#joinViaBrowser").removeClass("hidden");
+                }
+                if (isSafari || isFirefox || (isAppleWebKit && isMac) || (isIE && !isEdge)) {
+                    /* Supports Plugins */
+                    $("#joinViaPlugIn").removeClass("hidden");
+                }
+            }
+        }
+
         // Runs when the page loads
         $(function() {
             joinViaBrowser();
         });
     </script>
 
-
     <script type="text/javascript">
 
         console.log('pusher');
 
-        let joining_patient;
-
-        Echo.private('medsitter-participant-join')
-            .listen('EventParticipantJoin', event => {
-                joining_patient = event.participant;
-
-                if(event.code !== null){
-
-                    console.log('event.code not null');
-
-
-
-                    $.ajax({
-                        url: "/api/getPod",
-                        type: "GET",
-                        data: {
-                            "pod_id": "{{$pod->id}}"
-                        },
-                        success: function(pod){
-
-                            if(pod.code === event.code){
-
-                                console.log('pod.code and event.code ===');
-
-                                $('#join-first-name').text(joining_patient.first_name);
-                                $('#join-last-name').text(joining_patient.last_name);
-
-                                $('#patient-joining-modal').modal('toggle');
-
-                            } else {
-
-
-                                // TODO this needs to be removed //
-
-                                console.log('joininvalid');
-
-                                $('#invalid-code').text(event.code);
-
-                                $('#invalid-code-modal').modal("toggle");
-
-                                $.ajax({
-                                    url: "/medsitter/sitter/joininvalid",
-                                    type: "GET",
-                                    data: {
-                                        "pod_id": "{{$pod->id}}",
-                                        "participant_id": event.participant.id,
-                                        "code": event.code
-                                    },
-                                    success: function(code){
-
-
-                                        console.log('joininvalid');
-
-                                        $('#invalid-code').text(code);
-
-                                        $('#invalid-code-modal').modal("toggle");
-
-                                    }
-                                });
-
-                            }
-                        }
-                    });
-                }
-            });
-
-        Echo.private('medsitter-patient-ready')
-            .listen('EventPatientReady', event => {
-
-                let roomkey = event.roomkey;
-
-                let count = patient_count - 1;
-
-                console.log('trigger join: ' + count);
-
-                $('#patient-connect-buttons-' + count).addClass("d-none");
-
-                $('#patient-sms-connect-form-' + count).addClass("d-none");
-
-                $('#patient-code-connect-form-' + count).addClass("d-none");
-
-                $('#joinLeaveButton-' + count).trigger('click');
-
-            });
-
-
-
-        $('#patient-join-submit').click(function(){
-
-            $.ajax({
-                url: "/medsitter/patient/join",
-                type: "GET",
-                data: {
-                    "pod_id": "{{$pod->id}}",
-                    "patient_id": joining_patient.id
-                }
-            });
-
-            $('#patient-joining-modal').modal('toggle');
-
-        });
-
-        let participants = [];
+        let participant;
 
         Echo.private('medsitter-call-status')
             .listen('EventCallStatus', event => {
-                participants.push(event.participant);
-                updateValues();
+                participant = event.participant;
             });
 
 
-        function updateValues (){
+        Echo.private('medsitter-mute-toggle')
+            .listen('MutePatient', event => {
 
-            let type, muted;
+                let remoteroomkey = event.room_key;
 
-            console.log('test');
+                let localroomkey = "{{$pod->id . '-' . $participant->id}}";
 
-            $.each(participants, function(key){
+                console.log('remoteroomkey: ' + remoteroomkey);
 
-                let p = participants[key];
+                console.log('localroomkey: ' + localroomkey);
 
-                if(p.type === 0){
-                    type = 'sitter';
-                } else if (p.type === 1){
-                    type = 'patient';
-                } else {
-                    type = 'unkown';
+                if(remoteroomkey === localroomkey){
+                    muteSpeakers(0);
+
+                    console.log('speakers mute toggled');
+                } else{
+                    console.log('speakers mute toggled FAILED: Room keys are not equal.');
                 }
-
-                if(p.muted === 0){
-                    muted = 'false';
-                } else {
-                    muted = 'true';
-                }
-//
-//                $('#patient-' + key).empty();
-//
-//                $('#patient-' + key).append('<div><span>Id: '+p.id+'</span></div><div><span>Name: '+p.first_name +' '+ p.last_name +'</span></div><div><span>Type: '+type+'</span></div><div><span>Muted: '+muted+'</span></div>');
-
-                $('#patient-video-buttons-' + key).removeClass("d-none");
-
-                $('#patient-connect-buttons-' + key).addClass("d-none");
-
-                $('#patient-sms-connect-form-' + key).addClass("d-none");
-
-                $('#microphoneButton-' + key).attr('onclick', "muteToggle("+JSON.stringify(p)+", '"+key+"')");
 
             });
 
 
 
-        }
 
     </script>
+
 
 
     <script type="text/javascript">
 
         let only_once = true;
 
-
         $(window).on("beforeunload", function() {
+
             if(only_once) {
                 only_once = false;
                 $.ajax({
-                    url: "/medsitter/sitter/leave",
+                    url: "/medsitter/participant/leave",
                     type: "POST",
                     data: {
-                        "sitter_id": "{{$sitter->id}}",
+                        "participant_id": "{{$participant->id}}",
                         "pod_id": "{{$pod->id}}"
                     }
                 });
             }
-
-            return "Are you sure you want to leave? The session will die!";
         });
     </script>
 
 
     <script type="text/javascript">
-
-        let patient_count = 0;
-
-        let patient_array = [];
-
-        Echo.private('medsitter-pod-key')
-            .listen('PodKey', event => {
-
-                let patient_obj = {
-                    "token" : event.token,
-                    "roomkey" : event.room_key,
-                    "podid" : event.pod_id
-                };
-
-                console.log(event.room_key);
-
-                if (patient_obj.podid === "{{$pod->id}}"){
-                    $('#token').val(patient_obj.token);
-                    $('#resourceId').val(patient_obj.roomkey);
-
-                    let status = {
-                        state: "READY",
-                        description: "WebRTC successfully loaded"
-                    };
-
-                    patient_obj.patient_number = patient_count;
-
-                    StartVidyoConnector(VC, patient_count);
-
-                    patient_array.push(patient_obj);
-
-                    patient_count++;
-
-                }
-                console.log(patient_obj);
-            });
-
-
-        function generateCode(id){
-
-            $.ajax({
-                url: "/medsitter/sitter/generateCode",
-                type: "POST",
-                data: {
-                    "pod_id": "{{$pod->id}}"
-                },
-                success: function (code) {
-
-                    console.log(code);
-
-                    $('#code-number-' + id).val(code);
-
-                }
-            });
-
-        }
-
-
-        function showSmsInput(id){
-            $('#patient-connect-buttons-' + id).addClass('d-none');
-            $('#patient-sms-connect-form-' + id).removeClass('d-none');
-        }
-
-        function hideSmsInpute(id){
-            $('#patient-sms-connect-form-' + id).addClass('d-none');
-            $('#patient-connect-buttons-' + id).removeClass('d-none');
-        }
-
-        function showCode(id){
-            $('#patient-connect-buttons-' + id).addClass('d-none');
-            $('#patient-code-connect-form-' + id).removeClass('d-none');
-        }
-
-        function hideCode(id){
-            $('#patient-code-connect-form-' + id).addClass('d-none');
-            $('#patient-connect-buttons-' + id).removeClass('d-none');
-        }
-
-
-        function muteToggle(participant, key) {
-
-            console.log(participant);
-
-            $.ajax({
-                url: "/medsitter/participant/mutetoggle",
-                type: "GET",
-                data: {
-                    "participant_id": participant.id,
-                    "pod_id": "{{$pod->id}}"
-                },
-                success: function (participant) {
-
-                    console.log('participant muted: ' + participant.muted);
-
-                    if(participant.muted === true){
-                        $('#microphoneButton-' + key).addClass("microphoneOn").removeClass("microphoneOff");
-                    } else {
-                        $('#microphoneButton-' + key).addClass("microphoneOff").removeClass("microphoneOn");
-                    }
-
-                }
-            });
-        }
-
-    </script>
-
-
-
-    <script type="text/javascript">
-
 
         const OPEN_REMOTE_SLOT = "-1";
 
@@ -717,7 +287,7 @@
         let vidyoConnector;
         let speakerPrivacy = false;
         // Run StartVidyoConnector when the VidyoClient is successfully loaded
-        function StartVidyoConnector(VC, patientnumber = -1) {
+        function StartVidyoConnector(VC, patientnumber = -1, config) {
 
             console.log('start vidyo connector');
 
@@ -749,7 +319,7 @@
                 userData: 0
             }).then(function(vc) {
                 vidyoConnector = vc;
-                parseUrlParameters(configParams, patientnumber);
+                parseUrlParameters(configParams);
                 registerDeviceListeners(vidyoConnector, cameras, microphones, speakers, rendererSlots, selectedLocalCamera, remoteCameras, patientnumber);
                 handleDeviceChange(vidyoConnector, cameras, microphones, speakers);
                 handleParticipantChange(vidyoConnector, rendererSlots, remoteCameras, patientnumber);
@@ -770,8 +340,14 @@
                     });
                 }
 
+                console.log(configParams);
+
                 // Join the conference if the autoJoin URL parameter was enabled
-                if (configParams.autoJoin === "1") {
+//                if (configParams.autoJoin === "1") {
+
+                if (true) {
+                    console.log('autoJoin Started');
+
                     joinLeave();
                 } else {
                     // Handle the join in the toolbar button being clicked by the end user.
@@ -822,61 +398,34 @@
 
 
 
-//            function muteSpeakers(){
-//
-//                console.log('muteSpeakers');
-//
-//                speakerPrivacy = !speakerPrivacy;
-//
-//                vidyoConnector.SetSpeakerPrivacy({
-//                    privacy: speakerPrivacy
-//                }).then(function(result) {
-//
-//                    console.log('result: ' + result);
-//
-//                    if (speakerPrivacy) {
-//                        $("#microphoneButton-"+patientnumber).addClass("microphoneOff").removeClass("microphoneOn");
-//                    } else {
-//                        $("#microphoneButton-"+patientnumber).addClass("microphoneOn").removeClass("microphoneOff");
-//                    }
-//                    console.log("SetSpeakerPrivacy Success");
-//                }).catch(function(result) {
-//
-//                    console.log('result: ' + result);
-//
-//                    console.error("SetSpeakerPrivacy Failed");
-//                });
-//
-//            }
-
             // Handle the microphone mute button, toggle between mute and unmute audio.
-//            $("#microphoneButton-" + patientnumber).click(function() {
-//
-//                console.log('MicbuttonTriggered');
-//
-//                speakerPrivacy = !speakerPrivacy;
-//
-//                vidyoConnector.SetSpeakerPrivacy({
-//                    privacy: speakerPrivacy
-//                }).then(function(result) {
-//
-//                    console.log('result: ' + result);
-//
-//                    if (speakerPrivacy) {
-//                        $("#microphoneButton-"+patientnumber).addClass("microphoneOff").removeClass("microphoneOn");
-//                    } else {
-//                        $("#microphoneButton-"+patientnumber).addClass("microphoneOn").removeClass("microphoneOff");
-//                    }
-//                    console.log("SetSpeakerPrivacy Success");
-//                }).catch(function(result) {
-//
-//                    console.log('result: ' + result);
-//
-//                    console.error("SetSpeakerPrivacy Failed");
-//                });
-//            });
+            $("#microphoneButton-" + patientnumber).click(function() {
 
-            function joinLeave(patient) {
+                console.log('patient mic triggered');
+
+                speakerPrivacy = !speakerPrivacy;
+
+                vidyoConnector.SetSpeakerPrivacy({
+                    privacy: speakerPrivacy
+                }).then(function(result) {
+
+                    console.log('result: ' + result);
+
+                    if (speakerPrivacy) {
+                        $("#microphoneButton-"+patientnumber).addClass("microphoneOff").removeClass("microphoneOn");
+                    } else {
+                        $("#microphoneButton-"+patientnumber).addClass("microphoneOn").removeClass("microphoneOff");
+                    }
+                    console.log("SetSpeakerPrivacy Success");
+                }).catch(function(result) {
+
+                    console.log('result: ' + result);
+
+                    console.error("SetSpeakerPrivacy Failed");
+                });
+            });
+
+            function joinLeave() {
                 // join or leave dependent on the joinLeaveButton, whether it
                 // contains the class callStart or callEnd.
                 if ($("#joinLeaveButton-"+patientnumber).hasClass("callStart")) {
@@ -902,7 +451,9 @@
             $("#options-"+patientnumber).removeClass("optionsHide");
         }
 
-        function muteSpeakers(){
+        function muteSpeakers(id){
+
+            console.log('Mute Speakers triggered');
 
             speakerPrivacy = !speakerPrivacy;
 
@@ -913,9 +464,9 @@
                 console.log('result: ' + result);
 
                 if (speakerPrivacy) {
-                    $("#microphoneButton-"+patientnumber).addClass("microphoneOff").removeClass("microphoneOn");
+                    $("#microphoneButton-" + id).addClass("microphoneOff").removeClass("microphoneOn");
                 } else {
-                    $("#microphoneButton-"+patientnumber).addClass("microphoneOn").removeClass("microphoneOff");
+                    $("#microphoneButton-" + id).addClass("microphoneOn").removeClass("microphoneOff");
                 }
                 console.log("SetSpeakerPrivacy Success");
             }).catch(function(result) {
@@ -1265,16 +816,16 @@
             // Fill in the form parameters from the URI
             var host = getUrlParameterByName("host");
             if (host)
-//                $("#host").val(host);
+                $("#host").val(host);
             var token = getUrlParameterByName("token");
             if (token)
-//                $("#token").val(token);
+                $("#token").val(token);
             var displayName = getUrlParameterByName("displayName");
             if (displayName)
-//                $("#displayName").val(displayName);
+                $("#displayName").val(displayName);
             var resourceId = getUrlParameterByName("resourceId");
             if (resourceId)
-//                $("#resourceId").val(resourceId);
+                $("#resourceId").val(resourceId);
             configParams.autoJoin    = getUrlParameterByName("autoJoin");
             configParams.enableDebug = getUrlParameterByName("enableDebug");
             configParams.hideConfig  = getUrlParameterByName("hideConfig");
@@ -1342,8 +893,6 @@
             $("#error-" + patientnumber).html("");
             $("#message-" + patientnumber).html("<h3 class='blink'>CONNECTING...</h3>");
 
-            console.log('********************VidyoConnecting********************');
-
             vidyoConnector.Connect({
                 // Take input from options form
                 host: $("#host").val(),
@@ -1380,6 +929,15 @@
             }).then(function(status) {
                 if (status) {
                     console.log("Connect Success");
+
+                    $.ajax({
+                        url: "/medsitter/patient/ready",
+                        type: "GET",
+                        data: {
+                            "roomkey": '{{$participant->first_name . ' ' . $participant->last_name}}'
+                        }
+                    });
+
                 } else {
                     console.error("Connect Failed");
                     connectorDisconnected(rendererSlots, remoteCameras, "Failed", "", patientnumber);
@@ -1428,8 +986,6 @@
 
 
 
-
     </script>
-
 
 @endpush

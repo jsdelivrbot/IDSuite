@@ -36,6 +36,13 @@ Route::get('/test', 'TestController@test');
 Route::get('/test/ns', 'TestController@test_netsuite');
 
 
+Route::get('/medsitter/join', 'MedsitterController@externalJoinView');
+
+Route::post('/medsitter/external/join', 'MedsitterController@externalparticipant');
+
+
+
+
 // auth middleware //
 
 Route::group(['middleware' => ['auth']], function () {
@@ -199,6 +206,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/medsitter/patient/ready', 'MedsitterController@patientReady');
 
     Route::post('/medsitter/pod/delete', 'MedsitterController@podDelete');
+
+    Route::get('/medsitter/getPods', 'MedsitterController@getPods');
+
+    Route::get('/api/getPod', 'MedsitterController@getPod');
+
+    Route::post('/medsitter/sitter/generateCode', 'MedsitterController@generateCode');
+
+
 
 
 

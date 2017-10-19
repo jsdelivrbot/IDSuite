@@ -5,6 +5,7 @@
 {{--<script src="{{asset('assets/js/VidyoConnector.js')}}"></script>--}}
 {{--<script src="{{asset('assets/js/echo.ts')}}"></script>--}}
 
+@stack('medsitter_external_join')
 @stack('medsitter_patient')
 @stack('medsitter_sitter')
 @stack('medsitter_home')

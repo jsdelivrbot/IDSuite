@@ -6,18 +6,11 @@
     <section class="row mt-3">
 
         <div class="col-lg-8" style="margin-left: 2.5%;">
-
             <div class="card text-white" style="background-color: transparent;border: none">
                 <div class="card-block">
                     <h1 class="card-title" style="border: none;">Pod Dashboard</h1>
-
-                    {{--<div class="card-text ml-5">--}}
-                        {{--Account is enabled up-to 4 patients--}}
-                    {{--</div>--}}
-
                 </div>
             </div>
-
         </div>
 
     </section>
@@ -110,7 +103,7 @@
                 <div class="col-lg-11" style="margin-left: 3.75%;">
                     <div class="card" style="background-color: #434857 !important">
                         <div class="card-block text-white" style="padding: 8px;">
-                            <div class="row">
+                            <div class="row" id="pod-inner-row-{{$pod->id}}">
                                 <div class="col-lg-1 align-self-center">
 
                                     @if($pod->patient_count < 4 && $pod->sitter_count > 0)
@@ -122,9 +115,9 @@
                                 </div>
                                 <div class="col-lg-1 align-self-center ml-3 text-white">
                                     @if($pod->sitter_count === 0)
-                                        <a id="pod-sitter-link-{{$pod->id}}" class="btn btn-outline-orange" href="/medsitter/sitter/{{$pod->id}}" role="button">Sitter</a>
+                                        <a id="pod-sitter-link-{{$pod->id}}" class="btn btn-outline-orange sitter-button" href="/medsitter/sitter/{{$pod->id}}" role="button">Sitter</a>
                                     @else
-                                        <a id="pod-sitter-link-{{$pod->id}}" class="btn btn-outline-orange disabled" href="/medsitter/sitter/{{$pod->id}}" role="button">Sitter</a>
+                                        <a id="pod-sitter-link-{{$pod->id}}" class="btn btn-outline-orange sitter-button disabled" href="/medsitter/sitter/{{$pod->id}}" role="button">Sitter</a>
                                     @endif
                                 </div>
                                 <div class="col-lg-3 align-self-center">
@@ -135,16 +128,16 @@
 
                                 <div class="col-lg-3 align-self-center">
                                     <div class="progress">
-                                        <div id="pod-participant-count-{{$pod->id}}" class="progress-bar" role="progressbar" style="width: {{100*($pod->patient_count/4)}}%" aria-valuenow="{{100*($pod->patient_count/4)}}%" aria-valuemin="0" aria-valuemax="100">{{$pod->patient_count}}/4</div>
+                                        <div id="pod-participant-count-{{$pod->id}}" class="progress-bar" role="progressbar" style="width: {{100*($pod->patient_count/4)}}%" aria-valuenow="{{100*($pod->patient_count/4)}}%" aria-valuemin="0" aria-valuemax="100">{{$pod->patient_count}} / 4</div>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-2 align-self-center">
-                                    <span id="pod-sitter-count-{{$pod->id}}">{{$pod->sitter_count}} Sitter(s)</span>
-                                    <span id="pod-patient-count-{{$pod->id}}">{{$pod->patient_count}} Patient(s)</span>
+                                    <span id="pod-sitter-count-{{$pod->id}}">{{$pod->sitter_count}}</span><span> Sitter(s)</span>
+                                    <span id="pod-patient-count-{{$pod->id}}">{{$pod->patient_count}}</span><span> Patient(s)</span>
                                 </div>
                                 @if($pod->active_count === 0)
-                                    <div class="col-lg-1 align-self-center">
+                                    <div class="col-lg-1 align-self-center" id="pod-delete-col-{{$pod->id}}">
                                         <a id="pod-delete-link-{{$pod->id}}" data-toggle="modal" data-target="#podDeleteModal" class="btn btn-outline-pink"  role="button" onclick="updateDeletePodModal('{{$pod->name}}', '{{$pod->id}}');" ><i class="fa fa-minus"></i> Delete</a>
                                     </div>
                                 @endif
@@ -158,7 +151,7 @@
     </div>
 
 
-    <!-- Start Form-->
+    <!-- Paitent Modal Form-->
     <div class="modal" id="patientModal" tabindex="-1" role="dialog" aria-labelledby="patientModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -196,9 +189,9 @@
             </div>
         </div>
     </div>
-    <!--End Form-->
+    <!--End Paitent Form-->
 
-    <!-- Start Form-->
+    <!-- Patient Waiting Modal-->
     <div class="modal" id="waitingModal" tabindex="-1" role="dialog" aria-labelledby="waitingModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -214,9 +207,9 @@
             </div>
         </div>
     </div>
-    <!--End Form-->
+    <!--End Patient Waiting Form-->
 
-    <!-- Start Form-->
+    <!-- Create Pod Modal Form-->
     <div class="modal" id="podModal" tabindex="-1" role="dialog" aria-labelledby="podModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -241,10 +234,10 @@
             </div>
         </div>
     </div>
-    <!--End Form-->
+    <!--End Create Pod Form-->
 
 
-    <!-- Start Form-->
+    <!-- Delete Pod Modal Form-->
     <div class="modal" id="podDeleteModal" tabindex="-1" role="dialog" aria-labelledby="podDeleteModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -266,7 +259,7 @@
             </div>
         </div>
     </div>
-    <!--End Form-->
+    <!--End Delete Pod Form-->
 
 
 @endsection
@@ -281,6 +274,14 @@
 
 
     <script type="text/javascript">
+
+
+        $('.sitter-button').on('click', function(){
+
+            $(this).addClass('disabled');
+
+        });
+
 
         $('#pod-submit').click(function(){
 
@@ -335,6 +336,8 @@
         }
 
 
+
+
     </script>
 
 
@@ -351,7 +354,6 @@
                 }
 
                 let count = parseInt($('#active-patient-count').text()) + 1;
-
 
 
                 $('#active-patient-count').text(count);
@@ -390,10 +392,10 @@
                 .text(pod.patient_count +  " / 4");
 
             $('#pod-sitter-count-' + pod.id)
-                .text(pod.sitter_count + " Sitter(s)");
+                .text(pod.sitter_count);
 
             $('#pod-patient-count-' + pod.id)
-                .text(pod.patient_count + " Patient(s)");
+                .text(pod.patient_count);
 
 
             if(pod.patient_count < 4 && pod.sitter_count > 0){
@@ -422,6 +424,15 @@
                 $("#pod-sitter-link-" + pod.id).addClass("disabled");
             }
 
+            if(pod.active_count === 0){
+                $('#pod-inner-row-' + pod.id)
+                    .append('<div class="col-lg-1 align-self-center" id="pod-delete-col-'+pod.id+'">' +
+                        '   <a id="pod-delete-link-'+pod.id+'" data-toggle="modal" data-target="#podDeleteModal" class="btn btn-outline-pink"  role="button" onclick="updateDeletePodModal(\''+pod.name+'\', \''+pod.id+'\');" ><i class="fa fa-minus"></i> Delete</a>' +
+                        '</div>');
+            } else {
+                $('#pod-delete-col-' + pod.id).remove();
+            }
+
             console.log("updated count");
 
         }
@@ -442,7 +453,7 @@
                 '                   <div class="col-lg-11" style="margin-left: 3.75%;">' +
                 '                       <div class="card" style="background-color: #434857 !important">' +
                 '                           <div class="card-block text-white" style="padding: 8px;">' +
-                '                               <div class="row">' +
+                '                               <div class="row" id="pod-inner-row'+pod.id+'">' +
                 '                                   <div id="patient-links-'+pod.id+'" class="col-lg-1 align-self-center">' +
                 '                                   </div>' +
                 '                                   <div class="col-lg-1 align-self-center ml-3">' +
@@ -459,10 +470,10 @@
                 '                                       </div>' +
                 '                                   </div>' +
                 '                                   <div class="col-lg-2 align-self-center">' +
-                '                                       <span id="pod-sitter-count-'+pod.id+'">'+pod.sitter_count+' Sitter(s)</span>' +
-                '                                       <span id="pod-patient-count-'+pod.id+'">'+pod.patient_count+' Patient(s)</span>' +
+                '                                       <span id="pod-sitter-count-'+pod.id+'">'+pod.sitter_count+'</span><span> Sitter(s)</span>' +
+                '                                       <span id="pod-patient-count-'+pod.id+'">'+pod.patient_count+'</span><span> Patient(s)</span>' +
                 '                                   </div>' +
-                '                                   <div class="col-lg-1 align-self-center">' +
+                '                                   <div class="col-lg-1 align-self-center" id="pod-delete-col-'+pod.id+'">' +
                 '                                       <a id="pod-delete-link-'+pod.id+'" data-toggle="modal" data-target="#podDeleteModal" class="btn btn-outline-pink"  role="button" onclick="updateDeletePodModal(\''+pod.name+'\', \''+pod.id+'\');" ><i class="fa fa-minus"></i> Delete</a>' +
                 '                               </div>' +
                 '                           </div>' +
@@ -625,6 +636,92 @@
                 }
             });
         });
+
+
+        $(function(){
+
+            $.ajax({
+                type: "GET",
+                url: "/medsitter/getPods",
+                success: function(pods){
+
+                    $.each(pods, function(key, value){
+
+                        let pod = pods[key];
+
+                        let elSit = $('#pod-sitter-count-' + pod.id);
+
+                        let elPat = $('#pod-patient-count-' + pod.id);
+
+                        let sitter_val = parseInt(elSit.text());
+                        let patient_val = parseInt(elPat.text());
+
+                        console.log(sitter_val);
+                        console.log(patient_val);
+
+                        if(pod.sitter_count !== sitter_val) {
+                            elSit.text(pod.sitter_count);
+
+                            if(pod.sitter_count === 0){
+                                $('#pod-sitter-link-' + pod.id).removeClass("disabled");
+
+                                if(pod.active_count === 0){
+
+                                    $('#pod-patient-link-' + pod.id).addClass("disabled");
+
+                                    $('#pod-inner-row-' + pod.id)
+                                        .append('<div class="col-lg-1 align-self-center" id="pod-delete-col-'+pod.id+'">' +
+                                            '   <a id="pod-delete-link-'+pod.id+'" data-toggle="modal" data-target="#podDeleteModal" class="btn btn-outline-pink"  role="button" onclick="updateDeletePodModal(\''+pod.name+'\', \''+pod.id+'\');" ><i class="fa fa-minus"></i> Delete</a>' +
+                                            '</div>');
+                                }
+
+                            }
+
+                        }
+
+                        if(pod.patient_count !== patient_val){
+                            elPat.text(pod.patient_count);
+
+                            let styleWidth = 100 * (pod.patient_count / 4);
+                            let ariaValueNow = 100 * (pod.patient_count / 4);
+
+
+                            console.log('styleWidth : ' + styleWidth);
+                            console.log('ariaValueNow : ' + ariaValueNow);
+                            console.log('pod.patient_count : ' + pod.patient_count);
+
+
+                            $('#pod-participant-count-' + pod.id)
+                                .css("width", styleWidth)
+                                .attr("aria-valuenow", ariaValueNow + "%")
+                                .text(pod.patient_cound + " / 4");
+
+
+                            console.log("change")
+
+                            if(pod.active_count === 0) {
+                                $('#pod-patient-link-' + pod.id).addClass("disabled");
+
+                                $('#pod-inner-row-' + pod.id)
+                                    .append('<div class="col-lg-1 align-self-center" id="pod-delete-col-'+pod.id+'">' +
+                                        '   <a id="pod-delete-link-'+pod.id+'" data-toggle="modal" data-target="#podDeleteModal" class="btn btn-outline-pink"  role="button" onclick="updateDeletePodModal(\''+pod.name+'\', \''+pod.id+'\');" ><i class="fa fa-minus"></i> Delete</a>' +
+                                        '</div>');
+                            }
+
+                        }
+
+
+
+
+
+                    });
+
+
+                }
+            });
+
+        });
+
     </script>
 
 

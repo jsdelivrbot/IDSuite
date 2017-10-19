@@ -88,10 +88,10 @@ class Pod extends Model
     public function dropSitter($sitter){
         $this->participants()->updateExistingPivot($sitter->id, ['active_status' => false]);
 
-
         if($this->active_count > 0) {
             $this->active_count = $this->active_count - 1;
         }
+
         if($this->sitter_count > 0) {
             $this->sitter_count = $this->sitter_count - 1;
         }
@@ -134,5 +134,52 @@ class Pod extends Model
         $this->save();
 
         return $this->getActiveParticipants();
+    }
+
+
+    public static function getPods($active = true){
+        if(!$active) {
+            return Pod::all();
+        } else{
+            return Pod::where("active", "=", 1)->get();
+        }
+    }
+
+    public function generateCode(){
+
+        $this->code = self::generateXDigitPin(4);
+
+        $this->save();
+
+        return $this;
+    }
+
+    public function destroyCode(){
+
+        $this->code = null;
+
+        $this->save();
+
+        return $this;
+
+    }
+
+    private static function generateXDigitPin($numOfDigits){
+
+        $pin = array();
+
+        for($count = 0; $count < $numOfDigits; $count++){
+            $number = rand(0,9);
+            $pin[] = $number;
+        }
+
+        return implode("",$pin);
+
+    }
+
+    public static function getActivelyLooking(){
+
+        return Pod::where("code", "!=", null)->where("active", "=", 1)->get();
+
     }
 }

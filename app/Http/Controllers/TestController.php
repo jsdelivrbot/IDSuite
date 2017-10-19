@@ -383,7 +383,17 @@ class TestController extends Controller
     public function test()
     {
 
-        dd();
+
+
+        $pod = Pod::getObjectById('POD59dfc8a2193c5');
+
+        dd($pod->generateCode());
+
+        $MC = new MedsitterController();
+
+        $MC->getPods();
+
+        dd('done');
 
         $pods = Pod::all();
 

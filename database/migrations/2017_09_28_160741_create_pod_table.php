@@ -34,6 +34,8 @@ class CreatePodTable extends Migration
 
             $table->integer('patient_count');
 
+            $table->string('code');
+
             $table->boolean('active')->nullable();
 
             $table->timestamps();

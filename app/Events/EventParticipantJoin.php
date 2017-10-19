@@ -15,16 +15,18 @@ class EventParticipantJoin implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $participant;
+    public $participant, $code;
 
     /**
      * Create a new event instance.
      *
      * @param Participant $participant
      */
-    public function __construct(Participant $participant)
+    public function __construct(Participant $participant, $code = null)
     {
+
         $this->participant = $participant;
+        $this->code = $code;
 
         return $this;
     }
