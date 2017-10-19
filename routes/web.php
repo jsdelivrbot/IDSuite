@@ -170,7 +170,8 @@ Route::group(['middleware' => ['auth']], function () {
         return view('trust.trustdata', ['viewname' => 'Trust']);
     });
 
-
+    // Organize Routes //
+    Route::get('/organize', "OrganizeController@index");
 
     // medsitter Routes WebRTC Routes //
 

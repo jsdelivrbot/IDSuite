@@ -20,6 +20,7 @@ mix.js('resources/assets/js/device_status.js', 'public/assets/js');
 mix.js('resources/assets/js/account_note.js', 'public/assets/js');
 mix.js('resources/assets/js/records.js', 'public/assets/js');
 mix.js('resources/assets/js/device_charts.js', 'public/assets/js');
+mix.js('resources/assets/js/getorgchart.js', 'public/assets/js');
 
 mix.copy('node_modules/amcharts3/amcharts', 'public/assets/amcharts');
 mix.copy('node_modules/jquery-validation/dist/jquery.validate.js', 'public/assets/js');
@@ -51,6 +52,8 @@ mix.styles([
 mix.styles([
     'resources/assets/css/custom_tabs.css'
 ], 'public/assets/css/custom_tabs.css');
+
+mix.styles('resources/assets/css/getorgchart.css', 'public/assets/css');
 
 
 

@@ -59,6 +59,20 @@
                 </div>
 
         </div>
+        <div class="row mt-4">
+            <div class="col-lg-4">
+                <div class="card" style="background-color: #f1cbff;color: #252830 !important;">
+                    <div class="card-block text-right">
+                        <h4 class="card-title">ORGANIZE</h4>
+                        <p class="card-text">Some text goes here. Adding some more text so this is the same size as everything else.</p>
+                        <a href="/organize" class="btn btn-outline-purple float-right" style="color: white !important; border-color: white !important;">Launch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+
+    </div>
     </div>
 @endsection

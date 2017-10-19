@@ -113,24 +113,24 @@
                 <div class="col-sm-3 col-md-2 col-lg-2 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important; padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
 
                     <nav>
-                    <ul class="nav nav-pills flex-column">
-                        <li class="nav-item ">
-                            <a class="nav-link btn-outline-teal" style="color: white !important;" href="/measure/accounts">Accounts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-pink" style="color: white !important;white-space: nowrap;" href="/measure/transactions">Transactions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-purple" style="color: white !important;" href="/measure/devices">Devices</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-yellow" style="color: white !important;" href="#">Reports</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-blue" style="color: white !important; white-space: nowrap;" href="/measure/tickets">Cases</a>
-                        </li>
-                    </ul>
-                </nav>
+                        <ul class="nav nav-pills flex-column">
+                            <li class="nav-item ">
+                                <a class="nav-link btn-outline-teal" style="color: white !important;" href="/measure/accounts">Accounts</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn-outline-pink" style="color: white !important;white-space: nowrap;" href="/measure/transactions">Transactions</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn-outline-purple" style="color: white !important;" href="/measure/devices">Devices</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn-outline-yellow" style="color: white !important;" href="#">Reports</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn-outline-blue" style="color: white !important; white-space: nowrap;" href="/measure/tickets">Cases</a>
+                            </li>
+                        </ul>
+                    </nav>
 
                     <div style="color:red; position: absolute;bottom: 10px;left:20px;width: 100%;padding-right: 30px;">
                         <embed id="white-logo" type="image/svg+xml" src="{{ asset('img/logo_white.svg') }}" style="width: 100%" />
