@@ -14,7 +14,7 @@ class CreateCommandTable extends Migration
     public function up()
     {
         Schema::enableForeignKeyConstraints();
-        Schema::create('endpoint', function (Blueprint $table) {
+        Schema::create('commands', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->uuid('id');
