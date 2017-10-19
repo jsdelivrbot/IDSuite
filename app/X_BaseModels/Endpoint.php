@@ -20,7 +20,7 @@ class Endpoint extends Model
 
 
     protected $guarded = [
-        'password_hash', 'updated_at', 'created_at'
+        'password', 'updated_at', 'created_at'
     ];
 
     /**
@@ -135,7 +135,8 @@ class Endpoint extends Model
         // TODO Password Validation
         try{
             $this->isActive();
-            $this->password_hash = Hash::make($password);
+            $this->password = encrypt($password);
+
             $this->save();
         } catch(\Exception $e) {
             dump($e->getMessage());
