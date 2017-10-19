@@ -80,9 +80,10 @@ use Illuminate\Support\Facades\Log;
 
                     $h_record = new \App\Http\Controllers\Helper\Prepare\Record();
                     $h_record->setEndpointId($endpoint_proxy_details->endpoint_id);
+                    $h_record->setType(EnumDataSourceType::vidyo);
+
                     $h_record->setTimeStart($record->JoinTime);
                     $h_record->setTimeEnd($record->LeaveTime);
-                    $h_record->setType(EnumDataSourceType::vidyo);
                     $h_record->setDirection($record->Direction);
                     $h_record->setLocalId($record->CallID);
                     $h_record->setLocalName($record->CallerName);
@@ -106,13 +107,20 @@ use Illuminate\Support\Facades\Log;
 
                     $h_record = new \App\Http\Controllers\Helper\Prepare\Record();
                     $h_record->setEndpointId($endpoint_proxy_details->endpoint_id);
-                    // records from polycom
-                    $h_record->setTimeEnd($record->null);
-                    $h_record->setTimeEnd($record->null);
-
-
-
                     $h_record->setType(EnumDataSourceType::polycom);
+
+                    $h_record->setTimeStart( date_create_from_format('m-d-Y g:i A', $record->start_date." ".$record->start_time)->format('Y-m-d H:i:s'));
+                    $h_record->setTimeEnd(date_create_from_format('m-d-Y g:i A', $record->end_date." ".$record->end_time)->format('Y-m-d H:i:s'));
+                    $h_record->setLocalId($record->serial_number);
+                    $h_record->setConferenceId($record->serial_number);
+                    $h_record->setLocalName($record->name);
+                    $h_record->setLocalNumber($record->call_id);
+                    $h_record->setRemoteName($record->remote_system_name);
+                    $h_record->setRemoteNumber($record->call_number_1);
+                    $h_record->setDialedDigits($record->call_number_1);
+                    $h_record->setDirection($record->call_direction);
+                    $h_record->setProtocol($record->transport_type);
+
                     $h_record->computeAll();
 
                 }
@@ -127,6 +135,7 @@ use Illuminate\Support\Facades\Log;
                     $h_record = new \App\Http\Controllers\Helper\Prepare\Record();
                     $h_record->setEndpointId($endpoint_proxy_details->endpoint_id);
                     $h_record->setType(EnumDataSourceType::lifesize);
+
                     $h_record->setTimeStart($record->start_time);
                    // $h_record->setTimeEnd(date("Y-m-d H:i:s",(strtotime($record->start_time) + strtotime($record->duration)) ));
                     $h_record->setTimeEnd($record->end_time);

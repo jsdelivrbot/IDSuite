@@ -9,7 +9,7 @@
 namespace App\Http\Controllers\Helper\Prepare;
 
 use Illuminate\Support\Facades\Log;
-
+use App\Http\Controllers\Helper\Funcs;
 class Record
 {
 
@@ -226,7 +226,7 @@ class Record
      */
     public function setDirection($direction)
     {
-        $this->direction = $direction;
+        $this->direction = (Funcs::in_arrayi ($direction, array("incoming", "in", "I")) ? "in" : "out");
     }
 
     /**
