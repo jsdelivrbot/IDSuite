@@ -28,7 +28,7 @@
     <button class="navbar-toggler navbar-toggler-right" style="border-color: #5cb85c" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand ml-2 mr-lg-5" href="/medsitter" style="color: #5cb85c;padding-bottom: 0 !important; font-size: 0;">
+    <a class="navbar-brand ml-2 mr-lg-5" href="/accounts" style="color: #5cb85c;padding-bottom: 0 !important; font-size: 0;">
         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="-5 0 120 95" height="45">
             <defs>
                 <style>
@@ -72,87 +72,14 @@
                     <span class="sr-only">(current)</span></a>
             </li>
         </ul>
-
-        <ul class="nav navbar-nav" >
-            <!-- Authentication Links -->
-            @if (!Auth::guest())
-
-                <li class="mr-5 dropdown">
-                    <button class="dropdown-toggle btn btn-outline-pink" style="border-color: #E64759; color: white;" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ Auth::user()->getEmailUsername()}}
-                    </button>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-
-                        <a class="dropdown-item" href="/apps">App Select</a>
-
-                        <a class="dropdown-item" href="/stats">Product Stats</a>
-                    </div>
-                </li>
-
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                    <button class="btn btn-nav-blue my-2 my-sm-0" type="submit">Search</button>
-                </form>
-
-            @endif
-        </ul>
     </div>
 </nav>
 
 <div class="container-fluid">
 
-    @if (!auth::guest() && $viewname !== 'App Selection' && $viewname !== 'Trust')
-        <div class="row">
-
-            <div class="col-sm-3 col-md-2 col-lg-1 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important; padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
-
-                <nav>
-                    <ul class="nav nav-pills flex-column">
-                        <li class="nav-item ">
-                            <a class="nav-link btn-outline-teal" style="color: white !important;" href="/medsitter/lobby">Lobby</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link btn-outline-blue" style="color: white !important;" href="#">Snaps</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-pink" style="color: white !important;white-space: nowrap;" href="#">Snippets</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-purple" style="color: white !important;" href="#">Sessions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-yellow" style="color: white !important;" href="#">Settings</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-orange" style="color: white !important;" href="#">Recordings</a>
-                        </li>
-                    </ul>
-                </nav>
-
-                <div style="color:red; position: absolute;bottom: 10px;left:20px;width: 100%;padding-right: 30px;">
-                    <embed id="white-logo" type="image/svg+xml" src="{{ asset('img/logo_white.svg') }}" style="width: 100%" />
-                </div>
-            </div>
-
-
-            <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 col-lg-11 offset-lg-1 pt-3">
-                @yield('content')
-            </main>
-
-
-            @else
-                <main class="col-sm-1 col-md-12  col-lg-12  pt-3">
-                    @yield('content')
-                </main>
-            @endif
-
-        </div>
+    <main class="col-sm-1 col-md-12  col-lg-12  pt-3">
+        @yield('content')
+    </main>
 
 
 </div>

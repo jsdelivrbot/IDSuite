@@ -51,6 +51,12 @@ class DynamicEnumValue extends Model
 
     public static function getByValue($ref_id){
         $result = DynamicEnumValue::where('value', '=', $ref_id)->first();
+
+        return $result;
+    }
+
+    public static function getByValueType($type){
+        $result = DynamicEnumValue::where('value_type', '=', $type)->get();
         return $result;
     }
 

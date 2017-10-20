@@ -150,7 +150,6 @@ class Entity extends Model
 
     }
 
-
     /**
      * @param $value
      * @return \Illuminate\Database\Eloquent\Collection

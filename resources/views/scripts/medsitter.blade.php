@@ -1,5 +1,12 @@
 @include('scripts.static_scripts')
 
-@if($viewname === 'home')
+<link href="{{asset('assets/css/VidyoConnector.css')}}">
 
-@endif
+{{--<script src="{{asset('assets/js/VidyoConnector.js')}}"></script>--}}
+{{--<script src="{{asset('assets/js/echo.ts')}}"></script>--}}
+
+@stack('medsitter_external_join')
+@stack('medsitter_patient')
+@stack('medsitter_sitter')
+@stack('medsitter_home')
+@stack('medsitter_library')

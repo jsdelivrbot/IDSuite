@@ -11,6 +11,34 @@
 |
 */
 
-Broadcast::channel('App.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+Broadcast::channel('medsitter-call-status', function () {
+    return true;
+});
+
+Broadcast::channel('medsitter-pods', function () {
+    return true;
+});
+
+Broadcast::channel('medsitter-pod-count', function () {
+    return true;
+});
+
+Broadcast::channel('medsitter-pod-key', function () {
+    return true;
+});
+
+Broadcast::channel('medsitter-mute-toggle', function () {
+    return true;
+});
+
+Broadcast::channel('medsitter-participant-join', function () {
+    return true;
+});
+
+Broadcast::channel('medsitter-join-url', function () {
+    return true;
+});
+
+Broadcast::channel('medsitter-patient-ready', function () {
+    return true;
 });

@@ -43,6 +43,13 @@ Route::get('/test/ns', 'TestController@test_netsuite');
 Route::get('/test/polycom', 'TestController@test_polycom');
 
 
+Route::get('/medsitter/join', 'MedsitterController@externalJoinView');
+
+Route::post('/medsitter/external/join', 'MedsitterController@externalparticipant');
+
+
+
+
 // auth middleware //
 
 Route::group(['middleware' => ['auth']], function () {
@@ -182,6 +189,39 @@ Route::group(['middleware' => ['auth']], function () {
     // medsitter Routes WebRTC Routes //
 
     Route::get('/medsitter', 'MedsitterController@index');
+
+    Route::get('/medsitter/patient/{pod_id}-{participant_id}', 'MedsitterController@patient');
+
+    Route::get('/medsitter/patient/join', 'MedsitterController@patientJoin');
+
+    Route::get('/medsitter/sitter/{id}', 'MedsitterController@sitter');
+
+    Route::get('/medsitter/lobby', 'MedsitterController@library');
+
+    Route::get('/medsitter/pods', 'MedsitterController@pod');
+
+    Route::post('/medsitter/pod', 'MedsitterController@createPod');
+
+    Route::post('/medsitter/participant/leave', 'MedsitterController@dropParticipant');
+
+    Route::post('/medsitter/sitter/leave', 'MedsitterController@dropSitter');
+
+    Route::post('/medsitter/participant', 'MedsitterController@participant');
+
+    Route::get('/medsitter/participant/mutetoggle', 'MedsitterController@muteToggle');
+
+    Route::get('/medsitter/patient/ready', 'MedsitterController@patientReady');
+
+    Route::post('/medsitter/pod/delete', 'MedsitterController@podDelete');
+
+    Route::get('/medsitter/getPods', 'MedsitterController@getPods');
+
+    Route::get('/api/getPod', 'MedsitterController@getPod');
+
+    Route::post('/medsitter/sitter/generateCode', 'MedsitterController@generateCode');
+
+
+
 
 
 //    Route::get('/measure/webrtc', 'WebRtcController@index');

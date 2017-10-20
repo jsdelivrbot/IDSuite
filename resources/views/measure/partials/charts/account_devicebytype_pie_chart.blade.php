@@ -12,6 +12,8 @@
 
 @push('account_devicebytype_chart')
 
+
+
 <script>
 
     $( document ).ready(function() {
@@ -27,6 +29,10 @@
 
                 if (data !== false) {
 
+                    AmCharts.exportCFG.menu[0].menu.push({
+                        "label": "SMS/MMS",
+                    });
+
                     AmCharts.makeChart("devicebytype", {
                         type: "pie",
                         theme: "dark",
@@ -39,10 +45,11 @@
                         balloon: {
                             fixedPosition: true
                         },
-                        export: {
-                            enabled: true
-                        }
+                        export: AmCharts.exportCFG
                     });
+
+
+
 
                 }
             }

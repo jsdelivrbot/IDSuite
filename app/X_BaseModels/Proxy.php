@@ -86,7 +86,6 @@ class Proxy extends Model
         return $proxy;
     }
 
-
     /**
      * @param $value
      * @return \Illuminate\Database\Eloquent\Collection

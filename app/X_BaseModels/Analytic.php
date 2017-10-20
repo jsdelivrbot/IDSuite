@@ -112,26 +112,6 @@ class Analytic extends Model
     }
 
 
-    public function total(){
-
-        $objects = $this->analytic_object_type::where('endpoint_id', $this->endpoint->id)->get();
-
-        $total = count($objects);
-
-        $avc = new AnalyticValueCache();
-
-        $avc->value = $total;
-
-        $avc->save();
-
-        $avc->analytic($this)->save($this);
-
-        $avc->save();
-
-        return $total;
-    }
-
-
     public static function resetAnalytics(){
         $analytics = Analytic::all();
 
