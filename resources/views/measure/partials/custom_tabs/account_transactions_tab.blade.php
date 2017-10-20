@@ -11,7 +11,7 @@
         <h4 class="card-title color-{{$tab_count}}">Transactions</h4>
 
         <div class="mt-4">
-            @include('partials.datatables.recordtable')
+            @include('measure.partials.datatables.recordtable')
         </div>
     @endif
 

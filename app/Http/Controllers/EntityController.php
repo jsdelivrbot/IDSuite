@@ -142,9 +142,14 @@ class EntityController extends Controller
 
                 $person->fullname = $p->name->first_name . ' ' . $p->name->last_name;
 
-                $person->number = $p->phonenumber->rawnumber;
+                if($p->phonenumber !== null) {
+                    $person->number = $p->phonenumber->rawnumber;
+                    $person->phonetype = EnumPhoneNumberType::getValueByKey($p->phonenumber->phone_type);
+                } else {
+                    $person->number = "N/A";
+                    $person->phonetype = "N/A";
+                }
 
-                $person->phonetype = EnumPhoneNumberType::getValueByKey($p->phonenumber->phone_type);
 
                 $person->email = $p->email->address;
 

@@ -239,7 +239,7 @@
 
         <div class="row">
             <div class="mx-auto">
-                {{$page_tickets->links('partials.pagination.case')}}
+                {{$page_tickets->links('measure.partials.pagination.case')}}
             </div>
         </div>
         @endif
