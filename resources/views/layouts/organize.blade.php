@@ -28,7 +28,7 @@
     <button class="navbar-toggler navbar-toggler-right" style="border-color: #5cb85c" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand ml-2 mr-lg-5" href="/measure/accounts" style="color: #5cb85c;padding-bottom: 0 !important; font-size: 0;">
+    <a class="navbar-brand ml-2 mr-lg-5" href="/organize" style="color: #5cb85c;padding-bottom: 0 !important; font-size: 0;">
         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="-5 0 120 95" height="45">
             <defs>
                 <style>
@@ -118,33 +118,33 @@
                             <a class="nav-link btn-outline-teal" style="color: white !important;" href="/organize">Entire Comapany</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn-outline-pink" style="color: white !important;white-space: nowrap;" href="#">Some Test</a>
+                            <a class="nav-link btn-outline-pink" style="color: white !important;white-space: nowrap;" href="cvav">Clear Vision AV</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn-outline-purple" style="color: white !important;" href="#">Some Text</a>
+                            <a class="nav-link btn-outline-purple" style="color: white !important;" href="randd">R&D</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn-outline-yellow" style="color: white !important;" href="#">Some Text</a>
+                            <a class="nav-link btn-outline-yellow" style="color: white !important;" href="sales">Sales</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn-outline-blue" style="color: white !important; white-space: nowrap;" href="#">Some Text</a>
+                            <a class="nav-link btn-outline-blue" style="color: white !important; white-space: nowrap;" href="#">CCC</a>
                         </li>
                     </ul>
                 </nav>
 
-                <div style="color:red; position: absolute;bottom: 10px;left:20px;width: 100%;padding-right: 30px;">
+                <div style="color:red; position: absolute;bottom: 10px;left:30px;width: 100%;padding-right: 30px;">
                     <embed id="white-logo" type="image/svg+xml" src="{{ asset('img/logo_white.svg') }}" style="width: 100%" />
                 </div>
             </div>
 
 
-            <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 col-lg-10 offset-lg-2 pt-3">
+            <main class=" col-sm-9 col-md-10 offset-md-2 col-lg-10 offset-lg-2 pt-3">
                 @yield('content')
             </main>
 
 
             @else
-                <main class="col-sm-1 col-md-12  col-lg-12  pt-3">
+                <main class="col-sm-1 offset-sm-3 col-md-12  col-lg-12  pt-3">
                     @yield('content')
                 </main>
             @endif

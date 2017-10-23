@@ -51,9 +51,9 @@
         var orgChart = new getOrgChart(peopleElement, {
             theme: "vivian",
             color: "darkred",
-            enableGridView: true,
-            secondParentIdField: "secondParentId",
-            enableEdit: false,
+            enableGridView: false, //Enables spreed sheet type viewing of the chart
+            secondParentIdField: "secondParentId", //Adds ability to have two parents, connects to second parent with dashed line
+            enableEdit: false, //Allows users to add/delete people
             primaryFields: ["Name", "Title", "Phone", "Mail"],
             photoFields: ["image"],
 
@@ -65,7 +65,7 @@
                 { id: 4, parentId: 1, Name: "Brad Ballentine", Title: "VP Cust Svc Prod Dev/Mgmt", Phone: "330-263-6439", Mail: "shetler@rhyta.com", image: "/img/images/f-5.jpg" },
                 { id: 5, parentId: 1, Name: "Chris Apple", Title: "Director, Engineering", Phone: "408-460-0589", image: "/img/images/f-4.jpg" },
                 { id: 6, parentId: 1, Name: "Zac Cook", Title: "VP Enterprise Sales ", Phone: "801-920-9842", Mail: "JasonWGoodman@armyspy.com", image: "/img/images/f-8.jpg" },
-                { id: 7, parentId: 1, Name: "Rick Dawson", Title: "VP Healthcare Sales", Phone: "Conservation scientist", Mail: "hodges@teleworm.us", image: "/img/images/f-7.jpg" },
+                { id: 7, parentId: 1, Name: "Rick Dawson", Title: "VP Healthcare Sales", Phone: "801-920-9842", Mail: "hodges@teleworm.us", image: "/img/images/f-7.jpg" },
                 { id: 8, parentId: 4, Name: "Nicholas Luthy", Title: "Dir, Product Mangement", Phone: "989-474-8325", Mail: "hunter@teleworm.us", image: "/img/images/f-6.jpg" },
                 { id: 9, parentId: 8, Name: "Alex MacDonald-Smith", Title: "Software Engineer", Phone: "479-359-2159", image: "/img/images/f-3.jpg" },
                 { id: 10, parentId: 8, secondParentId: 4, Name: "Alex Lindsay", Title: "Software Engineer Intern", Phone: "847-474-8775", image: "/img/images/f-2.jpg" },

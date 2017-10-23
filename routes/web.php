@@ -173,6 +173,12 @@ Route::group(['middleware' => ['auth']], function () {
     // Organize Routes //
     Route::get('/organize', "OrganizeController@index");
 
+    Route::get('/cvav', "OrganizeController@cvav");
+
+    Route::get('/randd', "OrganizeController@randd");
+
+    Route::get('/sales', "OrganizeController@sales");
+
     // medsitter Routes WebRTC Routes //
 
     Route::get('/medsitter', 'MedsitterController@index');

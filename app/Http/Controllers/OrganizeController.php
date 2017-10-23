@@ -82,4 +82,19 @@ class OrganizeController extends Controller
     {
         //
     }
+
+    public function cvav()
+    {
+        return view('organize.cvav', ['viewname' => 'Organize']);
+
+    }
+    public function randd()
+    {
+        return view('organize.randd', ['viewname' => 'Organize']);
+
+    }
+    public function sales()
+    {
+        return view('organize.sales', ['viewname' => 'Organize']);
+    }
 }
