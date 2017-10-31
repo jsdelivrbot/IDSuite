@@ -129,9 +129,6 @@
                         <li class="nav-item">
                             <a class="nav-link btn-outline-yellow" style="color: white !important;" href="#">Settings</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-orange" style="color: white !important;" href="#">Recordings</a>
-                        </li>
                     </ul>
                 </nav>
 
