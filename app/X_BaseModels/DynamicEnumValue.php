@@ -60,11 +60,6 @@ class DynamicEnumValue extends Model
         return $result;
     }
 
-    public static function getByValueType($type){
-        $result = DynamicEnumValue::where('value_type', '=', $type)->get();
-        return $result;
-    }
-
 
     public static function getByDynamicEnum($name, $key = null){
         $de_id = DynamicEnum::getByName($name);

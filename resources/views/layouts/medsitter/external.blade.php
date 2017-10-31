@@ -28,7 +28,7 @@
     <button class="navbar-toggler navbar-toggler-right" style="border-color: #5cb85c" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand ml-2 mr-lg-5" href="/accounts" style="color: #5cb85c;padding-bottom: 0 !important; font-size: 0;">
+    <a class="navbar-brand ml-2 mr-lg-5" href="/apps" style="color: #5cb85c;padding-bottom: 0 !important; font-size: 0;">
         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="-5 0 120 95" height="45">
             <defs>
                 <style>
