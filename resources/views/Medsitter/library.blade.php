@@ -78,8 +78,8 @@
             <div class="card card-teal" style="margin-right: 3.75%;">
                 <div class="card-block">
                     <div class="text-center">
-                        <h4 class="card-title"># closed first call</h4>
-                        <h1 class="card-title">72</h1>
+                        <h4 class="card-title">Alerts</h4>
+                        <h1 class="card-title">2</h1>
                     </div>
                 </div>
             </div>
