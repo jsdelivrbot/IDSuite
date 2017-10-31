@@ -29,7 +29,7 @@ class MedsitterController extends Controller
 {
     public function index(){
 
-        return view('medsitter.home', ['viewname' => 'medsitter / Home']);
+        return view('Medistter.home', ['viewname' => 'medsitter / Home']);
 
     }
 
@@ -55,7 +55,7 @@ class MedsitterController extends Controller
             event(new EventCallStatus($sitter));
             event(new PodCount($pod));
 
-            return view('medsitter.sitter', ['viewname' => 'Medsitter / Sitter', 'sitter' => $sitter, 'pod' => $pod]);
+            return view('Medistter.sitter', ['viewname' => 'Medsitter / Sitter', 'sitter' => $sitter, 'pod' => $pod]);
         } else {
             return redirect('/medsitter/lobby');
         }
@@ -89,7 +89,7 @@ class MedsitterController extends Controller
         event(new PodCount($pod));
         event(new PodKey($token, $tokenObj->getRoom(), $pod_id));
 
-        return view('Medsitter.patient', ['viewname' => 'Medsitter / Patient', 'participant' => $participant, 'pod' => $pod, 'vidyotoken' => $token, 'room' => $tokenObj->getRoom()]);
+        return view('Medistter.patient', ['viewname' => 'Medsitter / Patient', 'participant' => $participant, 'pod' => $pod, 'vidyotoken' => $token, 'room' => $tokenObj->getRoom()]);
     }
 
 
@@ -216,7 +216,7 @@ class MedsitterController extends Controller
 
         $pods = Pod::getActivelyLooking();
 
-        return view('medsitter.external_join', ['viewname' => 'Patient Join', 'pods' => $pods]);
+        return view('Medistter.external_join', ['viewname' => 'Patient Join', 'pods' => $pods]);
 
     }
 
@@ -260,14 +260,14 @@ class MedsitterController extends Controller
             $sitter_to_patient_ratio = 0;
         }
 
-        return view('Medsitter.library', ['viewname' => 'Medsitter / Lobby', 'pods' => $pods, 'active_paitient_count' => $active_patient_count, 'active_sitter_count' => $active_sitter_count, 'sitter_to_patient_ratio' => $sitter_to_patient_ratio]);
+        return view('Medistter.library', ['viewname' => 'Medsitter / Lobby', 'pods' => $pods, 'active_paitient_count' => $active_patient_count, 'active_sitter_count' => $active_sitter_count, 'sitter_to_patient_ratio' => $sitter_to_patient_ratio]);
 
     }
 
 
     public function pod(){
 
-        return view('Medsitter.pod', ['viewname' => 'Medsitter / Room']);
+        return view('Medistter.pod', ['viewname' => 'Medsitter / Room']);
 
     }
 
