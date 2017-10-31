@@ -48,12 +48,14 @@
 $.ajax({
     type: "GET",
     url: '/api/getUserHierarchy',
-    success: function (data) {
+    success: function(data) {
 
         //            { id: 1, parentId: null, Name: "Tracy Mills", Title: "President", Phone: "678-772-470", Mail: "tmills@e-idsolutions.com", Address: "Atlanta, GA 30303", image: "/img/images/f-11.jpg" }
 
-        console.log(data);
-
+        $.each(data, function(key, value){
+            data[key].id parseInt(data[key].id);
+            data[key].parent_id = parseInt(data[key].parent_id);
+        })
         if (data !== false) {
             var peopleElement = document.getElementById("people");
             var orgChart = new getOrgChart(peopleElement, {
