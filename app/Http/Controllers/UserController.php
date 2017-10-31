@@ -62,5 +62,25 @@ class UserController extends Controller
         return response()->json($user_array);
 
     }
+    public static function getUserHierarchy(){
 
+        $users = User::all();
+
+        $user_array = array();
+
+        foreach($users as $user){
+            $u = new \stdClass();
+
+            $u->parentId = $user->parent_id;
+            $u->id = $user->id;
+            $u->Name = $user->contact->name->first_name . ' ' . $user->contact->name->last_name;
+            $u->Mail = $user->email_address;
+            $user_array[] = $u;
+
+
+        }
+
+        return response()->json($user_array);
+
+    }
 }

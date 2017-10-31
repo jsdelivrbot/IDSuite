@@ -381,6 +381,10 @@ class TestController extends Controller
     {
 
 
+        UserController::getUserHierarchy();
+
+
+
 //        $user = User::getObjectById('USR59959be43fb65');
 //
 //        dd($user->references());

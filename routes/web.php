@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::get('/api/getUsers', 'UserController@getUsers');
-
+    Route::get('/api/getUserHierarchy', 'UserController@getUserHierarchy');
     // apppicker routes //
 
     Route::get('/apps', function(){
