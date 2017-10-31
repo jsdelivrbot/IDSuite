@@ -27,6 +27,8 @@ mix.copy('node_modules/jquery-validation/dist/jquery.validate.js', 'public/asset
 mix.copy('node_modules/jquery-validation/dist/additional-methods.js', 'public/assets/js');
 mix.copy('node_modules/laravel-echo/src/echo.ts', 'public/assets/js');
 
+mix.copyDirectory('resources/assets/img', 'public/img');
+
 mix.scripts([
     'resources/assets/js/enum_gender_select.js',
     'resources/assets/js/enum_title_select.js'
