@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 use Yajra\Datatables\Datatables;
 
-class DatatablesController extends Controller
+class DataTablesController extends Controller
 {
     /**
      * Displays datatables front end view
@@ -40,6 +40,7 @@ class DatatablesController extends Controller
      */
     public function getRecordsDataTables()
     {
+
 
         $id = session('data_table_id');
 
