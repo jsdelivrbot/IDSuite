@@ -222,7 +222,7 @@
     <script>
         $.ajax({
             type: "GET",
-            url: '/phoneTypeEnum',
+            url: '/api/phoneTypeEnum',
             success: function (data) {
                 $.each(data.data, function(index, value){
 
