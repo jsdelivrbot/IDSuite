@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
 
 //        $this->call('EnvironmentSeeder');
 //        $this->call('CaseSeeder');
-//        $this->call('EndpointSeeder');
+        $this->call('EndpointSeeder');
 //        $this->call('RecordSeeder');
     }
 }

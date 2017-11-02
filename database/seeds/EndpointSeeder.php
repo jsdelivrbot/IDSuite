@@ -257,7 +257,8 @@ class EndpointSeeder extends Seeder{
                 $proxy->entity($entity)->save($entity);
                 $proxy->save();
             } else {
-                dump($p[1]);
+
+                dump( $p);
                 dump($entity);
                 dd('$entity not an object');
             }
@@ -755,10 +756,11 @@ class EndpointSeeder extends Seeder{
            // $endpoint->setPassword($e[6]);
 
             $endpoint->name = $e[7];
+            $endpoint->type = \App\Enums\EnumDataSourceType::getKeyByValue($e[2]);
 
             $endpoint->ipaddress = $e[8];
 
-            $endpoint->macaddress = $e[9];
+        //    $endpoint->macaddress = $e[9];
 
             $endpoint->sync_time = $e[11];
 

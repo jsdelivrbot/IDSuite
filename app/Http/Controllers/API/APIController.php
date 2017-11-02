@@ -29,7 +29,7 @@ class APIController
                  LEFT JOIN endpoint ON endpoint.proxy_id = proxy.id
                  WHERE proxy.id='" . $proxy_id . "' AND proxy.pkey='" . $key . "' AND endpoint.ipaddress='" . $endpoint_address . "' LIMIT 0,1";
         $result = DB::select($query);
-        // Log::info($result);
+        Log::info($query);
 
         if ($result == false) {
             Log::info("couldn't validate request");
@@ -144,7 +144,7 @@ class APIController
             // grab first part
             $tenant_name_details = strstr($conference_name, '@', true);
 
-            if (!isset($customer_nsid[$tenant_name_details])) {
+            if (isset($customer_nsid[$tenant_name_details])) {
                 return $customer_nsid[$tenant_name_details]; // looks like we found it in our table
 
             } else {

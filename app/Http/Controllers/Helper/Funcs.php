@@ -46,7 +46,7 @@ public static function clean($string) {
         return $string;
     }
 
-    function in_arrayi($needle, $haystack) {
+public static function in_arrayi($needle, $haystack) {
         return in_array(strtolower($needle), array_map('strtolower', $haystack));
     }
 

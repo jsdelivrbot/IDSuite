@@ -61,7 +61,34 @@ class TestController extends Controller
 
     }
 
+    public function add_proxy_endpoint()
+    {
 
+        // ids proxy: PRX59fb7e4b7912a
+        //ids entity:  ENT59fb752109f59
+
+
+        /*
+        $proxy = new Proxy();
+        $proxy->name = "idsolution";
+        $proxy->address = "localhost";
+        $proxy->port = "80";
+        $proxy->token = "token";
+        $entity = Entity::getByName("IDSolutions");
+        $proxy->entity($entity);
+        $res = $proxy->save();
+
+        dd($proxy);
+*/
+        $endpoint = new Endpoint();
+        $endpoint->entity();
+        $endpoint->proxy(Proxy::getObjectById("PRX59fb7e4b7912a"));
+        $endpoint->name = "portal.idsflame.com";
+        $endpoint->ipaddress = "portal.idsflame.com";
+        $res = $endpoint->save();
+
+        dd($endpoint);
+    }
 
     public function test_api() {
 

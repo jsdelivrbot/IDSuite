@@ -27,7 +27,7 @@ class CreateEndpointTable extends Migration
             $table->uuid('proxy_id')->nullable();
             $table->uuid('location_id')->nullable();
             $table->integer('type')->nullable();
-            $table->integer('e_many')->default(0); // many entities?
+            $table->integer('e_many')->default(0)->nullable(); // many entities?
 
            // $table->char('password', 160)->nullable();
             $table->char('links', 160)->nullable();
@@ -35,7 +35,7 @@ class CreateEndpointTable extends Migration
             //$table->string('username')->nullable();
             $table->string('name')->nullable();
             $table->string('ipaddress')->nullable();
-            $table->string('macaddress')->nullable();
+          //  $table->string('macaddress')->nullable();
 
             $table->time('sync_time')->nullable();
             $table->time('reboot_time')->nullable();;
