@@ -32,8 +32,22 @@ public static function clean($string) {
         return isset( $arr[0] ) && is_array( $arr[0] );
     }
 
-}
 
-function in_arrayi($needle, $haystack) {
-    return in_array(strtolower($needle), array_map('strtolower', $haystack));
+    public static function  find_between($string, $start, $end, $trim = true, $greedy = false) {
+        $pattern = '/' . preg_quote($start) . '(.*';
+        if (!$greedy) $pattern .= '?';
+        $pattern .= ')' . preg_quote($end) . '/';
+        preg_match($pattern, $string, $matches);
+        $string = $matches[0];
+        if ($trim) {
+            $string = substr($string, strlen($start));
+            $string = substr($string, 0, -strlen($start) + 1);
+        }
+        return $string;
+    }
+
+    function in_arrayi($needle, $haystack) {
+        return in_array(strtolower($needle), array_map('strtolower', $haystack));
+    }
+
 }

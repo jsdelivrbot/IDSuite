@@ -186,7 +186,7 @@ class UserSeeder extends Seeder
             $endpoint->model_id     = $model->id;
             $endpoint->proxy_id     = $proxy->id;
 
-            $endpoint->setPassword('testing');
+           // $endpoint->setPassword('testing');
 
             $endpoint->save();
 

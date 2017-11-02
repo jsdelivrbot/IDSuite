@@ -20,17 +20,19 @@ class CreateEndpointTable extends Migration
 
             $table->uuid('id');
             $table->primary('id');
+            $table->string('class_code');
 
             $table->uuid('entity_id')->nullable();
             $table->uuid('model_id')->nullable();
             $table->uuid('proxy_id')->nullable();
             $table->uuid('location_id')->nullable();
             $table->integer('type')->nullable();
+            $table->integer('e_many')->default(0); // many entities?
 
-            $table->char('password', 160)->nullable();
+           // $table->char('password', 160)->nullable();
+            $table->char('links', 160)->nullable();
 
-            $table->string('class_code');
-            $table->string('username')->nullable();
+            //$table->string('username')->nullable();
             $table->string('name')->nullable();
             $table->string('ipaddress')->nullable();
             $table->string('macaddress')->nullable();

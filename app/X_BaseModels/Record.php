@@ -13,7 +13,7 @@ class Record extends Model
      * @var array
      */
     protected $fillable = [
-        'endpoint', 'timeperiod', 'local_id','type', 'conference_id','location_id', 'local_name', 'local_number', 'remote_name', 'remote_number', 'dialed_digits', 'direction', 'protocol', 'id'
+        'endpoint_id', 'entity_id', 'timeperiod_id', 'local_id','type', 'conference_id','remote_location_id', 'local_name', 'local_number', 'remote_name', 'remote_number', 'dialed_digits', 'direction', 'protocol', 'id'
     ];
 
     protected $guarded = [
@@ -38,6 +38,14 @@ class Record extends Model
             $this->endpoint_id = $e->id;
         }
         return $this->hasOne(Endpoint::class, 'id', 'endpoint_id');
+    }
+
+
+    public function entity(Entity $e = null){
+        if($e !== null){
+            $this->entity_id = $e->id;
+        }
+        return $this->hasOne(Endpoint::class, 'id', 'entity_id');
     }
 
     public function timeperiod(TimePeriod $t = null){

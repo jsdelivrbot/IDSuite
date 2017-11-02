@@ -750,9 +750,9 @@ class EndpointSeeder extends Seeder{
 
             $endpoint->save();
 
-            $endpoint->username = $e[5];
+        //    $endpoint->username = $e[5];
 
-            $endpoint->setPassword($e[6]);
+           // $endpoint->setPassword($e[6]);
 
             $endpoint->name = $e[7];
 

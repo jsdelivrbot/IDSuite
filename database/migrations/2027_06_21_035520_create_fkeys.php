@@ -38,6 +38,8 @@ class CreateFkeys extends Migration
             $table->foreign('model_id')->references('id')->on('endpointmodel')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('proxy_id')->references('id')->on('proxy')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('location_id')->references('id')->on('location')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('links')->references('id')->on('endpointlinks')->onDelete('cascade')->onUpdate('cascade');
+
         });
 
         Schema::table('entity', function(Blueprint $table){
@@ -75,6 +77,7 @@ class CreateFkeys extends Migration
 
         Schema::table('record', function(Blueprint $table) {
             $table->foreign('endpoint_id')->references('id')->on('endpoint')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('entity_id')->references('id')->on('entity')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('timeperiod_id')->references('id')->on('timeperiod')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('remote_location_id')->references('id')->on('location')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
 

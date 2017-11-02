@@ -23,6 +23,8 @@ class CreateRecordTable extends Migration
             $table->string('class_code');
 
             $table->uuid('endpoint_id')->nullable();
+            $table->uuid('entity_id')->nullable();
+
             $table->uuid('type')->nullable();
             $table->uuid('timeperiod_id')->nullable();
             $table->uuid('remote_location_id')->nullable();

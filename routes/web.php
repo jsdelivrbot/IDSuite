@@ -41,6 +41,7 @@ Route::get('/test/vidyo', 'TestController@test_vidyo');
 Route::get('/test', 'TestController@test');
 Route::get('/test/ns', 'TestController@test_netsuite');
 Route::get('/test/polycom', 'TestController@test_polycom');
+Route::get('/test/api', 'TestController@test_api');
 
 
 // auth middleware //

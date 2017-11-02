@@ -15,12 +15,12 @@ class Endpoint extends Model
      * @var array
      */
     protected $fillable = [
-
+        'entity_id', 'proxy_id', 'location_id', 'type','e_many', 'ipaddress'
     ];
 
 
     protected $guarded = [
-        'password', 'updated_at', 'created_at'
+        'updated_at', 'created_at'
     ];
 
     /**
@@ -131,6 +131,8 @@ class Endpoint extends Model
      * set user password_hash
      * @return $this
      */
+
+    /*
     public function setPassword($password){
         // TODO Password Validation
         try{
@@ -154,6 +156,8 @@ class Endpoint extends Model
         }
         return $this->password;
     }
+
+    */
 
     /**
      * @return bool

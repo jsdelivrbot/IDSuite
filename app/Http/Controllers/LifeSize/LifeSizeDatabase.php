@@ -139,11 +139,8 @@ class LifeSizeDatabase
                             '". db_escape($f['protocol'], $dbh) ."'
                         );
                     ";
-
                     $cdr_res = db_query($cdr_query, $dbh);
-
                 }
-
             }
         }
 

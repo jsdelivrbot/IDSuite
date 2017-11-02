@@ -13,6 +13,7 @@ use App\EntityName;
 use App\Enums\EnumDataSourceType;
 use App\Enums\EnumDeviceType;
 use App\Enums\EnumMonths;
+use App\Http\Controllers\API\APIController;
 use App\Http\Controllers\Vidyo\VidyoController;
 use App\Ip2Location;
 use App\PersonContact;
@@ -60,6 +61,44 @@ class TestController extends Controller
 
     }
 
+
+
+    public function test_api() {
+
+        $cdr_record = json_decode("{
+			\"CallID\": 645957,
+			\"UniqueCallID\": \"2108459514204460\",
+			\"ConferenceName\": \"Racine1@hhcppo.idvideophone.com\",
+			\"TenantName\": \"ids\",
+			\"ConferenceType\": \"C\",
+			\"EndpointType\": \"D\",
+			\"CallerID\": \"pmoser\",
+			\"CallerName\": \"Patrick Moser\",
+			\"JoinTime\": \"2017-11-01 11:23:17\",
+			\"LeaveTime\": \"2017-11-01 11:25:17\",
+			\"CallState\": \"COMPLETED\",
+			\"Direction\": \"O\",
+			\"RouterID\": \"EMQS678A3WWUDRYPBGD3U6V3RB6158EE9E1NAKZY2CW9600VR0001\",
+			\"GWID\": null,
+			\"GWPrefix\": null,
+			\"ReferenceNumber\": \"\",
+			\"ApplicationName\": \"VidyoDesktop\",
+			\"ApplicationVersion\": \"TAG_VD_3_6_9_014\",
+			\"ApplicationOs\": \"Mac OS\",
+			\"DeviceModel\": \"iMac17,1\",
+			\"EndpointPublicIPAddress\": \"184.55.135.86\",
+			\"CallCompletionCode\": \"1\",
+			\"Extension\": \"1962819\",
+			\"EndpointGUID\": \"A86-2F4E5B3A0D6C056D-E3D4C74CAA52D2AD\",
+			\"AccessType\": \"U\",
+			\"RoomType\": \"M\",
+			\"RoomOwner\": \"Racine1\"
+		}");
+
+
+        $result = APIController::searchidsflame($cdr_record);
+        dd($result);
+    }
 
     public  function test_polycom () {
 
@@ -1241,7 +1280,7 @@ class TestController extends Controller
         $endpoint->model_id     = $model->id;
         $endpoint->proxy_id     = $proxy->id;
 
-        $endpoint->setPassword('testing');
+        //$endpoint->setPassword('testing');
 
         $endpoint->save();
 

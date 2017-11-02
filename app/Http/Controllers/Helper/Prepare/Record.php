@@ -8,6 +8,8 @@
 
 namespace App\Http\Controllers\Helper\Prepare;
 
+use App\Enums\EnumDataSourceType;
+use App\Http\Controllers\API\APIController;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Helper\Funcs;
 class Record
@@ -15,14 +17,18 @@ class Record
 
     private $record; // \App\Record
     private $endpoint; // \App\Endpoint
+    private $entity; // \App\Entity
 
     private $endpoint_id;
+    private $entity_id;
 
     private $time_start;
     private $time_end;
 
     private $local_id;
     private $conference_id;
+
+    private $tenant_name;
 
 
 
@@ -35,6 +41,21 @@ class Record
     private $direction;
     private $protocol;
 
+    /**
+     * @return mixed
+     */
+    public function getTenantName()
+    {
+        return $this->tenant_name;
+    }
+
+    /**
+     * @param mixed $tenant_name
+     */
+    public function setTenantName($tenant_name)
+    {
+        $this->tenant_name = $tenant_name;
+    }
     /**
      * @return mixed
      */
@@ -282,20 +303,45 @@ class Record
 
         $this->record->type           = $this->type;
         $this->record->local_id       = $this->local_id;
-        $this->record->conference_id        = $this->conference_id;
+        $this->record->conference_id  = $this->conference_id;
         $this->record->local_name     = $this->local_name;
         $this->record->local_number   = $this->local_number;
         $this->record->remote_name    = $this->remote_name;
         $this->record->remote_number  = $this->remote_number;
         $this->record->dialed_digits  = $this->dialed_digits;
         $this->record->direction      = $this->direction;
-        $this->record->protocol       =  $this->protocol;
+        $this->record->protocol       = $this->protocol;
 
     }
 
     public function computeEndpoint() {
         $this->endpoint = \App\Endpoint::getObjectById($this->endpoint_id);
         $this->record->endpoint($this->endpoint);
+    }
+
+    public function computeEntity() {
+        // oh boy
+        if($this->endpoint->e_many ==1 && $this->record->type == EnumDataSourceType::vidyo) {
+
+            if($this->endpoint->name == 'portal.idvideophone.com' || $this->endpoint->ipaddress == 'portal.idvideophone.com' || $this->endpoint->ipaddress == '172.28.10.12')
+                $customer_nsid = APIController::searchIdvideophone($this);
+            else
+                $customer_nsid = APIController::searchidsflame($this);
+
+            if($customer_nsid) {
+
+                $dev = \App\DynamicEnumValue::getByValue($customer_nsid);
+                $entity= $dev->referable(\App\Entity::class);
+                $this->record->entity($entity);
+
+            }
+
+        }else{
+
+            $this->entity = \App\Entity::getObjectById($this->endpoint->entity_id);
+            $this->record->entity($this->entity);
+        }
+
     }
 
     public function computeTimePeriod() {
@@ -354,6 +400,7 @@ class Record
     public function computeAll() {
         $this->computeRecord();
         $this->computeEndpoint();
+        $this->computeEntity();
         $this->computeTimePeriod();
         $this->computeLocation();
         $this->saveRecord();
