@@ -15,17 +15,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-/*
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-*/
 
-// api routes
 
-// public API //
-Route::group(['middleware' => ['auth']], function () {
-
-});
-
-//following Which require authentication

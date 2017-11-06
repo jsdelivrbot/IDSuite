@@ -49,6 +49,7 @@ Route::get('/test/api', 'TestController@test_api');
 
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('/passport', 'PassportController@index');
 
     Route::get('/getUsers', 'UserController@getUsers');
 
@@ -204,3 +205,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

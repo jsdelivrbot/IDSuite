@@ -8,30 +8,36 @@
 require('./bootstrap');
 
 
-window.amcharts = require('amcharts3');
+window.Vue = require('vue');
+require('vue-resource');
+
+window.axios = require('axios');
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-// window.Vue = require('vue');
-//
-// require('vue-resource');
 
-// Vue.component('example', require('./components/Example.vue'));
-//
-// Vue.component('appheader', require('./components/appheader.vue'));
-//
-// const app = new Vue({
-//     el: '#root'
-// });
-//
-// Vue.http.interceptors.push((request, next) =>{
-//     request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
-//
-//     next();
-// });
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue')
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue')
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue')
+);
+
+const app = new Vue({
+    el: '#app'
+});
 
 /**
  *
@@ -44,3 +50,14 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
+
+Vue.http.interceptors.push((request, next) =>{
+    request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+
+    next();
+});
+
+window.axios.defaults.headers.common = {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+    'X-Requested-With': 'XMLHttpRequest'
+};

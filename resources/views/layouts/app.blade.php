@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="{{asset('assets/css/font-awesome.css')}}">
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
 
+    @if($viewname === 'OAuth')
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    @endif
+
     @if($viewname === 'account' || $viewname === 'device' || $viewname === 'case')
         <link rel="stylesheet" href="{{asset('assets/css/custom_tabs.css')}}">
     @endif
@@ -23,6 +27,8 @@
 
 </head>
 <body class="raleway" style="background-color: #293a46;">
+
+    @if($viewname !== 'OAuth')
 
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top" style="background-color: #434857 !important; border-bottom: 2px solid rgba(255, 255, 255, 0.2);">
             <button class="navbar-toggler navbar-toggler-right" style="border-color: #5cb85c" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,9 +111,11 @@
             </div>
         </nav>
 
+    @endif
+
     <div class="container-fluid">
 
-        @if (!auth::guest() && $viewname !== 'App Selection' && $viewname !== 'Trust')
+        @if (!auth::guest() && $viewname !== 'App Selection' && $viewname !== 'Trust' && $viewname !== 'OAuth')
             <div class="row">
 
                 <div class="col-sm-3 col-md-2 col-lg-2 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important; padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">

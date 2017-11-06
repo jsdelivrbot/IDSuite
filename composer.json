@@ -13,6 +13,7 @@
         "guzzlehttp/guzzle": "~6.0",
         "jasny/iso": "^0.2.0",
         "laravel/framework": "5.4.*",
+        "laravel/passport": "^4.0",
         "laravel/tinker": "~1.0",
         "ryanwinchester/netsuite-php": "2016.2.*",
         "twbs/bootstrap": "4.0.0-alpha.6",
