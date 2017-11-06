@@ -44,7 +44,7 @@ Route::get('/test/ns', 'TestController@test_netsuite');
 Route::get('/test/polycom', 'TestController@test_polycom');
 Route::get('/test/api', 'TestController@test_api');
 
-
+Route::get('/authenticate', 'LoginController@authenicate');
 // auth middleware //
 
 Route::group(['middleware' => ['auth']], function () {
