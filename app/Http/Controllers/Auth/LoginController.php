@@ -69,4 +69,23 @@ class LoginController extends Controller
         return view('auth.login', ['viewname' => 'Login']);
     }
 
+
+    public function authenticate(){
+
+        $email = Input::get('email');
+
+        $password = Input::get('password');
+
+
+        $attempt = Auth::attempt(['email' => $email, 'password' => $password, 'active' => 1],true);
+
+        dd($attempt);
+
+        return response()->json([
+            'user'
+        ]);
+
+    }
+
+
 }
