@@ -216,7 +216,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public static function getUserByContact($contact)
     {
-        return User::where('contact_id', $contact->id)->first();
+        return (new User)->where('contact_id', $contact->id)->first();
     }
 
     public static function getUserByEmail($email)
@@ -440,7 +440,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         $type = EnumDataSourceType::getKeyByValue($value);
 
-        $result = User::join('object_dev', 'user.id', '=', 'object_dev.object_id')
+        $result = (new User)->join('object_dev', 'user.id', '=', 'object_dev.object_id')
             ->where('value_type', '=', $type)
             ->get();
 

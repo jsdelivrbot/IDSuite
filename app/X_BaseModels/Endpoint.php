@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Enums\EnumDataSourceType;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 
 use App\Model as Model;
@@ -170,10 +171,11 @@ class Endpoint extends Model
 
 
     /**
-     * @return bool
      *
      * is Active
      * returns whether or not the user is active.
+     * @throws Exception
+     *  @return bool is Active
      */
     public function isActive()
     {
@@ -194,7 +196,7 @@ class Endpoint extends Model
      */
     public static function getByName($name)
     {
-        return Endpoint::where('name', $name)->first();
+        return (new Endpoint)->where('name', $name)->first();
     }
 
     /**
@@ -207,7 +209,7 @@ class Endpoint extends Model
      */
     public static function getByCol($col, $value)
     {
-        return self::where($col, $value)->first();
+        return (new Endpoint)->where($col, $value)->first();
     }
 
     /**

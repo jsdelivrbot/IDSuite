@@ -164,7 +164,7 @@ class Analytic extends Model
 
     public function total(){
 
-        $objects = $this->analytic_object_type::where('endpoint_id', $this->endpoint->id)->get();
+        $objects = $this->analytic_object_type->where('endpoint_id', $this->endpoint->id)->get();
 
         $total = count($objects);
 

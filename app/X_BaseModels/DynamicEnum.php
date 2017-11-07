@@ -85,7 +85,7 @@ class DynamicEnum extends Model
     public static function getByName($name)
     {
 
-        return DynamicEnum::where('name', '=', $name)->first();
+        return (new DynamicEnum)->where('name', '=', $name)->first();
 
     }
 

@@ -496,6 +496,8 @@ class TestController extends Controller
     public function test()
     {
 
+        dd(Entity::searchByDevType('netsuite'));
+
         dd('test');
 
         $this->createEndpointsFromZabbix($entity, $endpoint);

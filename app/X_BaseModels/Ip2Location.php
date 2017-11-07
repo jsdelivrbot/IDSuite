@@ -78,7 +78,7 @@ class Ip2Location extends Model
         $ip_long = ip2long($ip);
 
         if ($ip_long) {
-            $location_details = Ip2Location::where('ip_to', '>=', $ip_long)->limit(1)->first();
+            $location_details = (new Ip2Location)->where('ip_to', '>=', $ip_long)->limit(1)->first();
         } else {
             // TODO throw exceptions
 //            throw new Exception('Ip must be numeric');

@@ -170,7 +170,7 @@ class Entity extends Model
      */
     public static function getByName($name)
     {
-        $name = EntityName::where('name', $name)->first();
+        $name = (new EntityName)->where('name', $name)->first();
 
         if ($name === null) {
             return $name;
@@ -215,7 +215,7 @@ class Entity extends Model
 
         $type = EnumDataSourceType::getKeyByValue($value);
 
-        $result = Entity::join('object_dev', 'entity.id', '=', 'object_dev.object_id')
+        $result = (new Entity)->join('object_dev', 'entity.id', '=', 'object_dev.object_id')
             ->where('value_type', '=', $type)
             ->get();
 

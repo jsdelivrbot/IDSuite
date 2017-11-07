@@ -118,7 +118,7 @@ class EndpointModel extends Model
      */
     public static function getByMpn($mpn)
     {
-        return EndpointModel::where('manpnumber', $mpn)->first();
+        return ( new EndpointModel)->where('manpnumber', $mpn)->first();
     }
 
     /**
@@ -130,7 +130,7 @@ class EndpointModel extends Model
      */
     public static function getByName($name)
     {
-        return EndpointModel::where('name', $name)->first();
+        return ( new EndpointModel)->where('name', $name)->first();
     }
 
     /**

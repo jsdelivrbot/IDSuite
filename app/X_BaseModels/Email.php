@@ -113,6 +113,6 @@ class Email extends Model
      */
     public static function getEmailByAddress($address)
     {
-        return Email::where('address', $address)->first();
+        return (new Email)->where('address', $address)->first();
     }
 }
