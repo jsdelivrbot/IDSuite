@@ -7,9 +7,11 @@
     "require": {
         "php": ">=5.6.4",
         "aloha/twilio": "^3.0",
+        "barryvdh/laravel-ide-helper": "^2.4",
         "chumper/zipper": "1.0.x",
         "clue/socks-react": "0.8.6",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
+        "doctrine/dbal": "^2.6",
         "guzzlehttp/guzzle": "~6.0",
         "jasny/iso": "^0.2.0",
         "laravel/framework": "5.4.*",
@@ -50,6 +52,8 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta",
             "php artisan optimize"
         ]
     },

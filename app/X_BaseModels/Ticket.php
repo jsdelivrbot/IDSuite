@@ -7,6 +7,45 @@ use App\Model as Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * App\Ticket
+ *
+ * @property string $id
+ * @property string|null $entity_id
+ * @property string|null $user_id
+ * @property string|null $personcontact_id
+ * @property int|null $origin_type
+ * @property int|null $ticket_type
+ * @property int|null $priority_type
+ * @property int|null $status_type
+ * @property string $class_code
+ * @property string|null $subject
+ * @property string|null $incident_date
+ * @property string|null $last_message_date
+ * @property int|null $known
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\User $assigned_user
+ * @property-read \App\Entity $entity
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereEntityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereIncidentDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereKnown($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereLastMessageDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereOriginType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket wherePersoncontactId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket wherePriorityType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereStatusType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereSubject($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereTicketType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ticket whereUserId($value)
+ * @mixin \Eloquent
+ */
 class Ticket extends Model
 {
     /**
@@ -66,7 +105,9 @@ class Ticket extends Model
     }
 
     /**
-     * User constructor.
+     *
+     * constructor
+     *
      * @param array $attributes
      */
     public function __construct($attributes = array())  {
@@ -106,6 +147,9 @@ class Ticket extends Model
 
 
     /**
+     *
+     * searchByDevType
+     *
      * @param $value
      * @return \Illuminate\Database\Eloquent\Collection
      */

@@ -16,11 +16,36 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 
-
-
 use App\Model as Model;
 use Symfony\Component\HttpKernel\Tests\Controller\ContainerControllerResolverTest;
 
+/**
+ * App\User
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property string $email
+ * @property string|null $contact_id
+ * @property string|null $password_hash
+ * @property string|null $remember_token
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Entity[] $accounts
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[] $clients
+ * @property-read \App\PersonContact $contact
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereContactId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePasswordHash($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
 
@@ -84,28 +109,31 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * relationships
      */
-    public function contact(PersonContact $p = null){
-        if($p !== null){
+    public function contact(PersonContact $p = null)
+    {
+        if ($p !== null) {
             $this->contact_id = $p->id;
         }
         return $this->hasOne(PersonContact::class);
     }
 
-    public function accounts(){
+    public function accounts()
+    {
         return $this->belongsToMany(Entity::class)->withTimestamps();
     }
 
-    public function references(DynamicEnumValue $dynamic_enum_value = null){
+    public function references(DynamicEnumValue $dynamic_enum_value = null)
+    {
 
-        $references = $this->morphToMany(DynamicEnumValue::class, 'object','object_dev')->withTimestamps();
+        $references = $this->morphToMany(DynamicEnumValue::class, 'object', 'object_dev')->withTimestamps();
 
-        if($dynamic_enum_value !== null) {
+        if ($dynamic_enum_value !== null) {
             $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id, 'value_type' => $dynamic_enum_value->value_type]);
         }
 
         $ref_array = array();
 
-        foreach($references->get() as $reference){
+        foreach ($references->get() as $reference) {
 
             $ref_array[EnumDataSourceType::getValueByKey($reference->value_type)] = $reference->value;
         }
@@ -114,10 +142,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * User constructor.
+     *
+     * constructor
+     *
      * @param array $attributes
      */
-    public function __construct($attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 
@@ -128,30 +159,47 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     /**
+     *
+     * setPassword
+     *
      * @param $password string
-     * set user password_hash
      * @return $this
      */
-    public function setPassword($password){
+    public function setPassword($password)
+    {
         // TODO Password Validation
-        try{
+        try {
             $this->isActive();
             $this->password_hash = Hash::make($password);
             $this->save();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             dump($e->getMessage());
         }
         return $this;
     }
 
 
-    public function orderAccountsByName(){
+    /**
+     *
+     * orderAccountsByName
+     *
+     * @return mixed
+     */
+    public function orderAccountsByName()
+    {
         $sorted = $this->accounts->sortBy('name');
 
         return $sorted;
     }
 
-    public function getEmailUsername(){
+    /**
+     *
+     * getEmailUsername
+     *
+     * @return mixed
+     */
+    public function getEmailUsername()
+    {
         $contact = PersonContact::getObjectById($this->contact_id);
 
         $email = Email::getObjectById($contact->email_id);
@@ -159,19 +207,28 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $email->username_prefix;
     }
 
-    public static function getUserByContact($contact){
-        return User::where('contact_id', $contact->id)->first();
+    /**
+     *
+     * getUserByContact
+     *
+     * @param $contact
+     * @return \Illuminate\Database\Eloquent\Model|null|static
+     */
+    public static function getUserByContact($contact)
+    {
+        return (new User)->where('contact_id', $contact->id)->first();
     }
 
-    public static function getUserByEmail($email){
+    public static function getUserByEmail($email)
+    {
 
         $email = Email::getEmailByAddress($email);
 
-        if(is_object($email)){
+        if (is_object($email)) {
             $contact = PersonContact::getContactByEmail($email);
-            if(is_object($contact)){
+            if (is_object($contact)) {
                 $user = User::getUserByContact($contact);
-                if(is_object($user)){
+                if (is_object($user)) {
                     return $user;
                 }
             }
@@ -181,23 +238,41 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 
-    public function hasReference($reference_key){
+    /**
+     *
+     * hasReference
+     *
+     * @param $reference_key
+     * @return bool
+     */
+    public function hasReference($reference_key)
+    {
         $result = array_key_exists($reference_key, $this->references());
         return $result;
     }
 
 
-    public function updateDev($key, $value, $de){
+    /**
+     *
+     * updateDev
+     *
+     * @param $key
+     * @param $value
+     * @param $de
+     * @return bool
+     */
+    public function updateDev($key, $value, $de)
+    {
 
-        if($this->hasReference($key)){
+        if ($this->hasReference($key)) {
 
-            foreach($this->devs as $dev){
+            foreach ($this->devs as $dev) {
 
-                if ($dev->dynamicenum_id === $de->id){
+                if ($dev->dynamicenum_id === $de->id) {
 
-                    if($de->values[$dev->value_type] === $key){
+                    if ($de->values[$dev->value_type] === $key) {
 
-                        if($dev->value === $value){
+                        if ($dev->value === $value) {
 
                             return $dev;
 
@@ -223,115 +298,154 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * @return string
      *
      * getFullName
-     * returns concatenated first and last name of user.
+     *
+     * @return string
      */
-    public function getFullName(){
+    public function getFullName()
+    {
         return $this->first_name . ' ' . $this->last_name;
     }
 
 
     /**
+     *
+     * getAuthIdentifierName
+     *
      * Get the name of the unique identifier for the user.
      *
      * @return string
      */
-    public function getAuthIdentifierName(){
+    public function getAuthIdentifierName()
+    {
         return $this->getKeyName();
 
     }
 
     /**
+     *
+     * getAuthIdentifier
+     *
      * Get the unique identifier for the user.
      *
      * @return mixed
      */
-    public function getAuthIdentifier(){
+    public function getAuthIdentifier()
+    {
         return $this->{$this->getAuthIdentifierName()};
     }
 
     /**
+     *
+     * getAuthPassword
+     *
      * Get the password for the user.
      *
      * @return string
      */
-    public function getAuthPassword(){
+    public function getAuthPassword()
+    {
         return $this->password_hash;
     }
 
     /**
+     *
+     * getRememberToken
+     *
      * Get the token value for the "remember me" session.
      *
      * @return string
      */
-    public function getRememberToken(){
-        if (! empty($this->getRememberTokenName())) {
+    public function getRememberToken()
+    {
+        if (!empty($this->getRememberTokenName())) {
             return $this->{$this->getRememberTokenName()};
         }
     }
 
     /**
+     *
+     * setRememberToken
+     *
      * Set the token value for the "remember me" session.
      *
-     * @param  string  $value
+     * @param  string $value
      * @return void
      */
-    public function setRememberToken($value){
-        if (! empty($this->getRememberTokenName())) {
+    public function setRememberToken($value)
+    {
+        if (!empty($this->getRememberTokenName())) {
             $this->{$this->getRememberTokenName()} = $value;
         }
     }
 
     /**
+     *
+     * getRememberTokenName
+     *
      * Get the column name for the "remember me" token.
      *
      * @return string
      */
-    public function getRememberTokenName(){
+    public function getRememberTokenName()
+    {
         return $this->rememberTokenName;
     }
 
     /**
+     *
+     * getEmailForPasswordReset
+     *
      * Get the e-mail address where password reset links are sent.
      *
      * @return string
      */
-    public function getEmailForPasswordReset(){
+    public function getEmailForPasswordReset()
+    {
 
     }
 
     /**
+     *
+     * sendPasswordResetNotification
+     *
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param  string $token
      * @return void
      */
-    public function sendPasswordResetNotification($token){
+    public function sendPasswordResetNotification($token)
+    {
 
     }
 
-    public function validateAddress(){
-
+    /**
+     *  validateAddress
+     */
+    public function validateAddress()
+    {
     }
 
 
     /**
+     *
+     * searchByDevType
+     *
      * @param $value
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public static function searchByDevType($value){
+    public static function searchByDevType($value)
+    {
 
         $type = EnumDataSourceType::getKeyByValue($value);
 
-        $result = User::join('object_dev', 'user.id', '=', 'object_dev.object_id')
+        $result = (new User)->join('object_dev', 'user.id', '=', 'object_dev.object_id')
             ->where('value_type', '=', $type)
             ->get();
 
         return $result;
     }
-
 
 
 }

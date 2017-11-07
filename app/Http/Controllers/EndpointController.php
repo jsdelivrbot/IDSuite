@@ -17,6 +17,7 @@ class EndpointController extends Controller
 
         $endpoints = Endpoint::all();
 
+
         $endpoint_array = array();
 
         foreach($endpoints as $endpoint) {
@@ -77,7 +78,7 @@ class EndpointController extends Controller
         $e->id = $endpoint->id;
         $e->name = $endpoint->name;
         $e->ip = $endpoint->ipaddress;
-        $e->mac = $endpoint->macaddress;
+
         $e->model = $endpoint->model_id;
         $e->proxy = $endpoint->proxy_id;
 
@@ -90,6 +91,12 @@ class EndpointController extends Controller
 
 
         session(['randomnumber' => rand(1,5)]);
+
+        if($endpoint->type === 7){
+
+            return view('measure.endpoint', ['endpoint' => $e,'name' => $e->name, 'viewname' => 'device', 'number' => session('randomnumber'), 'recordcount' => 0, 'durationaverage' => 0]);
+
+        }
 
         $recordcount = count($endpoint->records);
 
@@ -163,24 +170,55 @@ class EndpointController extends Controller
 
         $endpoint = session('currentendpointobject');
 
+        $zabbix = new ZabbixController();
 
         if(array_key_exists( 'zabbix' ,$endpoint->references())){
-            $response = ZabbixController::getItemsByHost($endpoint->references()['zabbix']);
 
-            if($response[6]->lastvalue === "1"){
-                $result = true;
-            } else {
-                $result = false;
+            $ref_id = $endpoint->references()['zabbix'];
+
+            $response = $zabbix->getItemsByHost($ref_id);
+
+            foreach ($response as $item){
+
+                if($item->name === "Agent ping"){
+
+                    if($item->lastvalue === "1"){
+
+                        $result = true;
+
+                    } else {
+
+                        $result = false;
+
+                    }
+
+                    $history = $zabbix->getHistory($item->itemid, $item->value_type);
+//                    $history = $zabbix->getHistory('66279');
+
+                    dd($history);
+
+                    break;
+
+                } else {
+                    continue;
+                }
             }
-
         } else {
             $result = false;
-
         }
 
         return response()->json($result);
 
     }
+
+
+    public function createView(){
+
+        return view('measure.endpoint_create', ['viewname' => 'Create Endpoint']);
+
+    }
+
+
 
 
 }

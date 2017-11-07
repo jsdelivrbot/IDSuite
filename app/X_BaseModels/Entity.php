@@ -5,6 +5,34 @@ namespace App;
 use App\Model as Model;
 use App\Enums\EnumDataSourceType;
 
+/**
+ * App\Entity
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property string|null $contact_id
+ * @property string|null $parent_id
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Entity[] $children
+ * @property-read \App\EntityContact $contact
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Endpoint[] $endpoints
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Note[] $notes
+ * @property-read \App\Entity $parent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\PersonContact[] $persons
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\EntityContact[] $sites
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Ticket[] $tickets
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity whereContactId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Entity extends Model
 {
     /**
@@ -33,22 +61,26 @@ class Entity extends Model
     protected $keyType = 'uuid';
 
     /**
+     *
      * relationships
+     *
      */
 
     // one to one //
-    public function contact(EntityContact $c = null){
+    public function contact(EntityContact $c = null)
+    {
 
-        if($c !== null) {
+        if ($c !== null) {
             $this->contact_id = $c->id;
         }
 
         return $this->hasOne(EntityContact::class);
     }
 
-    public function parent(Entity $e = null){
+    public function parent(Entity $e = null)
+    {
 
-        if($e !== null) {
+        if ($e !== null) {
             $this->parent_id = $e->id;
         }
 
@@ -56,52 +88,56 @@ class Entity extends Model
     }
 
     // one to many
-    public function persons(){
+    public function persons()
+    {
         return $this->hasMany(PersonContact::class);
     }
 
-    public function sites(){
+    public function sites()
+    {
         return $this->hasMany(EntityContact::class);
     }
 
-    public function tickets(){
+    public function tickets()
+    {
         return $this->hasMany(Ticket::class);
     }
 
-    public function children(){
+    public function children()
+    {
         return $this->hasMany(Entity::class, 'parent_id', 'id');
     }
 
     // many to one
-    public function endpoints(){
+    public function endpoints()
+    {
         return $this->hasMany(Endpoint::class, 'entity_id', 'id');
     }
 
 
     // many to many //
-    public function users(){
+    public function users()
+    {
         return $this->belongsToMany(User::class)->withTimestamps();
     }
 
-    /**
-     * Get all of the entity's notes.
-     */
     public function notes()
     {
         return $this->morphMany(Note::class, 'noteable');
     }
 
-    public function references(DynamicEnumValue $dynamic_enum_value = null){
+    public function references(DynamicEnumValue $dynamic_enum_value = null)
+    {
 
-        $references = $this->morphToMany(DynamicEnumValue::class, 'object','object_dev')->withTimestamps();
+        $references = $this->morphToMany(DynamicEnumValue::class, 'object', 'object_dev')->withTimestamps();
 
-        if($dynamic_enum_value !== null) {
+        if ($dynamic_enum_value !== null) {
             $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id, 'value_type' => $dynamic_enum_value->value_type]);
         }
 
         $ref_array = array();
 
-        foreach($references->get() as $reference){
+        foreach ($references->get() as $reference) {
 
             $ref_array[EnumDataSourceType::getValueByKey($reference->value_type)] = $reference->value;
         }
@@ -111,23 +147,32 @@ class Entity extends Model
 
 
     /**
-     * personname constructor.
+     *
+     * constructor
+     *
      * @param array $attributes
      */
-    public function __construct($attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
-
-        $this->active = 1;
 
         return $this;
 
     }
 
-    public static function getByName($name) {
-        $name = EntityName::where('name', $name)->first();
+    /**
+     *
+     * getByName
+     *
+     * @param $name
+     * @return \Illuminate\Database\Eloquent\Model|null|static
+     */
+    public static function getByName($name)
+    {
+        $name = (new EntityName)->where('name', $name)->first();
 
-        if($name === null){
+        if ($name === null) {
             return $name;
         } else {
             $entity = $name->entitycontact->entity;
@@ -136,12 +181,19 @@ class Entity extends Model
 
     }
 
-    public function getAllRecords(){
+    /**
+     *
+     * getAllRecords
+     *
+     * @return array
+     */
+    public function getAllRecords()
+    {
 
         $records_array = array();
 
-        foreach($this->endpoints as $endpoint){
-            foreach ($endpoint->records as $record){
+        foreach ($this->endpoints as $endpoint) {
+            foreach ($endpoint->records as $record) {
                 $records_array[] = $record;
             }
         }
@@ -152,14 +204,18 @@ class Entity extends Model
 
 
     /**
+     *
+     * searchByDevType
+     *
      * @param $value
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public static function searchByDevType($value){
+    public static function searchByDevType($value)
+    {
 
         $type = EnumDataSourceType::getKeyByValue($value);
 
-        $result = Entity::join('object_dev', 'entity.id', '=', 'object_dev.object_id')
+        $result = (new Entity)->join('object_dev', 'entity.id', '=', 'object_dev.object_id')
             ->where('value_type', '=', $type)
             ->get();
 

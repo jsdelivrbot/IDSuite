@@ -5,6 +5,37 @@ namespace App;
 use App\Model as Model;
 use Mockery\Exception;
 
+/**
+ * App\PhoneNumber
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property int|null $phone_type
+ * @property string|null $country_code
+ * @property string|null $rawnumber
+ * @property int|null $digits
+ * @property string|null $formnumber
+ * @property int|null $area_code
+ * @property int|null $exchange
+ * @property int|null $number
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PhoneNumber whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PhoneNumber whereAreaCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PhoneNumber whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PhoneNumber whereCountryCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PhoneNumber whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PhoneNumber whereDigits($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PhoneNumber whereExchange($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PhoneNumber whereFormnumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PhoneNumber whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PhoneNumber whereNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PhoneNumber wherePhoneType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PhoneNumber whereRawnumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PhoneNumber whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class PhoneNumber extends Model
 {
     /**
@@ -29,11 +60,16 @@ class PhoneNumber extends Model
     public $incrementing = false;
 
     protected $keyType = 'uuid';
+
+
     /**
-     * Email constructor.
+     * constructor.
+     * @param null $phonenumber
+     * @param null $type
      * @param array $attributes
      */
-    public function __construct($phonenumber = null, $type = null, $attributes = array())  {
+    public function __construct($phonenumber = null, $type = null, $attributes = array())
+    {
         parent::__construct($attributes);
         // Your construct code.
 
@@ -43,7 +79,7 @@ class PhoneNumber extends Model
 
 
             if ($phonenumber !== null || empty($phonenumber)) {
-                $this->digits = preg_replace("/[^0-9]/","", $phonenumber);
+                $this->digits = preg_replace("/[^0-9]/", "", $phonenumber);
 
                 if (strlen($phonenumber) === 10) {
 
@@ -83,9 +119,9 @@ class PhoneNumber extends Model
                 return $this;
 
             }
-        } else {
-            return $this;
         }
+
+        return $this;
 
     }
 

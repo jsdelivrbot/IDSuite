@@ -22,10 +22,9 @@ class EnumDataSourceType extends Enum
         3   =>  'polycom',
         4   =>  'zoom',
         5   =>  'vidyo',
-        6   => 'lifesize'
+        6   =>  'lifesize',
+        7   =>  'hms'
     ];
-
-
 
     const netsuite = 0;
     const zabbix = 1;
@@ -34,6 +33,6 @@ class EnumDataSourceType extends Enum
     const zoom = 4;
     const vidyo = 5;
     const lifesize = 6;
-
+    const hms = 7;
 
 }

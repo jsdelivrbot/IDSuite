@@ -6,6 +6,36 @@ use App\Model as Model;
 use App\Enums\EnumDataSourceType;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * App\EndpointModel
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property string|null $manufacturer
+ * @property string|null $manpnumber
+ * @property string|null $name
+ * @property string|null $description
+ * @property float|null $price
+ * @property string|null $edition
+ * @property int|null $type
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Endpoint[] $endpoints
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereEdition($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereManpnumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereManufacturer($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class EndpointModel extends Model
 {
     /**
@@ -31,21 +61,29 @@ class EndpointModel extends Model
 
     protected $keyType = 'uuid';
 
-    public function endpoints(){
+
+    /*
+     *
+     * Relationships
+     *
+     */
+    public function endpoints()
+    {
         return $this->hasMany(Endpoint::class, 'model_id', 'id');
     }
 
-    public function references(DynamicEnumValue $dynamic_enum_value = null){
+    public function references(DynamicEnumValue $dynamic_enum_value = null)
+    {
 
-        $references = $this->morphToMany(DynamicEnumValue::class, 'object','object_dev')->withTimestamps();
+        $references = $this->morphToMany(DynamicEnumValue::class, 'object', 'object_dev')->withTimestamps();
 
-        if($dynamic_enum_value !== null) {
+        if ($dynamic_enum_value !== null) {
             $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id, 'value_type' => $dynamic_enum_value->value_type]);
         }
 
         $ref_array = array();
 
-        foreach($references->get() as $reference){
+        foreach ($references->get() as $reference) {
 
             $ref_array[EnumDataSourceType::getValueByKey($reference->value_type)] = $reference->value;
         }
@@ -53,34 +91,57 @@ class EndpointModel extends Model
         return $ref_array;
     }
 
+
     /**
+     *
+     * constructor
+     *
      * EndpointModel constructor.
      * @param array $attributes
      */
-    public function __construct($attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
-
 
         return $this;
 
     }
 
-    public static function getByMpn($mpn){
-        $model = EndpointModel::where('manpnumber', $mpn)->first();
 
-        return $model;
+    /**
+     *
+     * getByMpn
+     *
+     * @param $mpn
+     * @return \Illuminate\Database\Eloquent\Model|null|static
+     */
+    public static function getByMpn($mpn)
+    {
+        return ( new EndpointModel)->where('manpnumber', $mpn)->first();
     }
 
-    public static function getByName($name){
-
-        $model = EndpointModel::where('name', $name)->first();
-
-        return $model;
+    /**
+     *
+     * getByName
+     *
+     * @param $name
+     * @return \Illuminate\Database\Eloquent\Model|null|static
+     */
+    public static function getByName($name)
+    {
+        return ( new EndpointModel)->where('name', $name)->first();
     }
 
-    public static function getAllModels(){
-        return $models = EndpointModel::all();
+    /**
+     *
+     * getAllModels
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getAllModels()
+    {
+        return EndpointModel::all();
     }
 
 

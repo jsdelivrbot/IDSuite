@@ -7,6 +7,9 @@
         <div class="col-lg-2">
             <h6 class="ml-lg-3 subtle-text" style="color: #c8cad5">Endpoints</h6>
             <h3 class="ml-lg-3 raleway" style="color: white;">Devices</h3>
+
+            <a id="contact-submit" class="btn btn-nav-orange" style="cursor: pointer !important;" href="/measure/device/create"><i class="fa fa-plus"></i> Add Endpoint</a>
+
         </div>
 
         <div class="col-lg-10" style="color: white;">

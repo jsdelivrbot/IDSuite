@@ -282,14 +282,14 @@
 
 
 .btn-nav-orange {
-    color: #d59043;
+    color: #d59043 !important;
     background-image: none;
     background-color: transparent;
     border-color: #d59043 !important;
 }
 
 .btn-nav-orange:hover {
-    color: #fff;
+    color: #fff !important;
     background-color: #d59043;
     border-color: #d59043 !important;
 }
@@ -306,7 +306,7 @@
 
 .btn-nav-orange:active, .btn-nav-orange.active,
 .show > .btn-nav-orange.dropdown-toggle {
-    color: #fff;
+    color: #fff !important;
     background-color: #d59043;
     border-color: #d59043 !important;
 }
