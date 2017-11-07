@@ -96,6 +96,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/measure/devices/{id}', 'EndpointController@show');
 
+    Route::get('/measure/device/create', 'EndpointController@createView');
+
     Route::get('/measure/devices' , 'EndpointController@index');
 
     Route::get('/api/getDeviceStatus', 'EndpointController@getDeviceStatus');

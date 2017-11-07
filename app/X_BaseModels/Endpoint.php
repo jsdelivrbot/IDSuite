@@ -99,7 +99,6 @@ class Endpoint extends Model
         $ref_array = array();
 
         foreach($references->get() as $reference){
-
             $ref_array[EnumDataSourceType::getValueByKey($reference->value_type)] = $reference->value;
         }
 
@@ -125,39 +124,6 @@ class Endpoint extends Model
 
     }
 
-
-    /**
-     * @param $password string
-     * set user password_hash
-     * @return $this
-     */
-
-    /*
-    public function setPassword($password){
-        // TODO Password Validation
-        try{
-            $this->isActive();
-            $this->password = encrypt($password);
-
-            $this->save();
-        } catch(\Exception $e) {
-            dump($e->getMessage());
-        }
-        return $this;
-    }
-    public function getPassword($encrypted_password){
-        // TODO Password Validation
-        try{
-            $this->isActive();
-            $this->password = decrypt($encrypted_password);
-
-        } catch(\Exception $e) {
-            dump($e->getMessage());
-        }
-        return $this->password;
-    }
-
-    */
 
     /**
      * @return bool

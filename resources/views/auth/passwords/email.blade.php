@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-                <div class="panel-body">
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-8">
+            <div class="card card-inverse" style="background-color: #434857; border-color: rgba(255, 255, 255, 0.2); ">
+                <h3 class="card-header" style="background-color: #434857;">Reset Password</h3>
+                <div class="card-block">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}

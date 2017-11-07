@@ -118,7 +118,7 @@
         @if (!auth::guest() && $viewname !== 'App Selection' && $viewname !== 'Trust' && $viewname !== 'OAuth')
             <div class="row">
 
-                <div class="col-sm-3 col-md-2 col-lg-2 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important; padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
+                <div class="col-sm-3 col-md-1 col-lg-1 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important; padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
 
                     <nav>
                     <ul class="nav nav-pills flex-column">
@@ -146,13 +146,13 @@
                 </div>
 
 
-                <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 col-lg-10 offset-lg-2 pt-3">
+                <main class="col-sm-10 offset-sm-2 col-md-11 offset-md-1 col-lg-11 offset-lg-1 pt-3" id="app">
                     @yield('content')
                 </main>
 
 
         @else
-                    <main class="col-sm-1 col-md-12  col-lg-12  pt-3">
+                    <main class="col-sm-1 col-md-12  col-lg-12  pt-3" id="app">
                         @yield('content')
                     </main>
         @endif

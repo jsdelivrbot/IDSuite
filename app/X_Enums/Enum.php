@@ -52,6 +52,7 @@ abstract class Enum
     }
 
     static function getValueByKey($key){
+
         $class = get_called_class();
 
 

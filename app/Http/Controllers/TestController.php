@@ -35,6 +35,7 @@ use GuzzleHttp\Psr7\Request;
 use function GuzzleHttp\Psr7\str;
 use Illuminate\Support\Facades\Auth;
 use Mockery\Exception;
+use NetSuite\Classes\EntityType;
 use PhpParser\Node\Expr\AssignOp\Mod;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
@@ -495,10 +496,9 @@ class TestController extends Controller
     public function test()
     {
 
+        dd('test');
 
-//        $user = User::getObjectById('USR59959be43fb65');
-//
-//        dd($user->references());
+        $this->createEndpointsFromZabbix($entity, $endpoint);
 
         $zstream = new ZoomApiController();
 
@@ -1322,5 +1322,51 @@ class TestController extends Controller
 
     public function addCustomersToUser(){
 
+    }
+
+    /**
+     * @param $entity
+     * @param $endpoint
+     */
+    public function createEndpointsFromZabbix(&$entity, &$endpoint)
+    {
+        $zabbix = new ZabbixController();
+
+        $hosts = $zabbix->getHosts();
+
+        $count = 0;
+
+        foreach ($hosts as $host) {
+
+            $count++;
+
+            echo $count . PHP_EOL;
+
+            if (substr($host->host, 0, 3) === 'UOI') {
+                $entity = Entity::getByName('University of Iowa Medical Center');
+                $endpoint = new Endpoint();
+                $endpoint->name = $host->host;
+                $endpoint->type = EnumDataSourceType::getKeyByValue('hms');
+
+                $de = DynamicEnum::getByName('reference_key');
+
+                $dev = new DynamicEnumValue();
+                $dev->definition($de)->save($de);
+                $dev->value = $host->hostid;
+                $dev->value_type = EnumDataSourceType::getKeyByValue('zabbix');
+
+                $dev->save();
+
+                $endpoint->references($dev);
+
+
+                $endpoint->entity($entity)->save($entity);
+                $endpoint->save();
+
+            }
+            continue;
+        }
+
+        dd('jobs done');
     }
 }

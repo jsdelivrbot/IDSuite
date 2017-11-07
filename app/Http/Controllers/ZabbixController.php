@@ -17,43 +17,119 @@ use Illuminate\Support\Facades\Input;
 
 class ZabbixController extends Controller
 {
-    private static $user, $password, $jsonrpc, $url;
+    private $user, $password, $jsonrpc, $url, $group_id;
 
-    private static $headers = array(
+
+    /**
+     * ZabbixController constructor.
+     */
+    public function __construct()
+    {
+
+        $this->user = env('ZABBIX_USER');
+        $this->password = env('ZABBIX_PASS');
+        $this->jsonrpc = env('ZABBIX_JSONRPC');
+        $this->url = env('ZABBIX_URL');
+        $this->group_id = env('ZABBIX_GROUP_ID');
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getJsonrpc()
+    {
+        return $this->jsonrpc;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGroupId()
+    {
+        return $this->group_id;
+    }
+
+
+    /**
+     * @param mixed $group_id
+     */
+    public function setGroupId($group_id)
+    {
+        $this->group_id = $group_id;
+    }
+
+    private $headers = array(
         'content-type' => 'application/json'
     );
 
-    private static function user(){
-        return self::$user = env('ZABBIX_USER');
+    /**
+     * @return string
+     */
+    public function getKey()
+    {
+        return $this->key;
     }
 
-    private static function password(){
-        return self::$password = env('ZABBIX_PASS');
+    /**
+     * @return string
+     */
+    public function getDe()
+    {
+        return $this->de;
     }
 
-    private static function jsonrpc(){
-        return self::$jsonrpc = env('ZABBIX_JSONRPC');
-    }
-    private static function url(){
-        return self::$url = env('ZABBIX_URL');
-    }
+    private $version = '3.2';
 
-    private static function headers(){
-        return self::$headers;
-    }
+    public $key = 'zabbix';
 
-    private static $version = '3.2';
-
-    public static $key = 'zabbix';
-
-    public static $de = 'reference_key';
+    public $de = 'reference_key';
 
 
-    private static function http_post($payload){
-
+    private function http_post($payload){
         $client = new \GuzzleHttp\Client(['verify' => false]);
 
-        $request = new \GuzzleHttp\Psr7\Request('POST', self::url(), self::headers(), $payload);
+        $request = new \GuzzleHttp\Psr7\Request('POST', $this->getUrl(), $this->getHeaders(), $payload);
 
         $result = json_decode($client->send($request)->getBody()->getContents());
 
@@ -63,26 +139,26 @@ class ZabbixController extends Controller
     /**
      *
      */
-    private static function loginUser(){
+    private function loginUser(){
 
         $params = array(
-            "user"      => self::user(),
-            "password"  => self::password()
+            "user"      => $this->getUser(),
+            "password"  => $this->getPassword()
         );
 
         $payload = json_encode([
-            "jsonrpc" => self::jsonrpc(),
+            "jsonrpc" => $this->getJsonrpc(),
             "method"=> "user.login",
             "params"=> $params,
             "id"=> 1,
             "auth"=> null
         ]);
 
-        return self::http_post($payload)->result;
+        return $this->http_post($payload)->result;
     }
 
 
-    public static function getHistory($id, $sortfield = null, $limit = 10, $history = 0, $sortorder = "DESC", $output = "extend"){
+    public function getHistory($id, $history = 0, $sortfield = "clock", $limit = 10, $sortorder = "DESC", $output = "extend"){
 
         $params = array(
             "output"    => $output,
@@ -94,79 +170,48 @@ class ZabbixController extends Controller
         );
 
         $payload = json_encode([
-            "jsonrpc" => self::jsonrpc(),
+            "jsonrpc" => $this->getJsonrpc(),
             "method"=> "history.get",
             "params"=> $params,
             "id"=> 1,
-            "auth"=> self::loginUser()
+            "auth"=> $this->loginUser()
         ]);
 
-        return self::http_post($payload)->result;
+        return $this->http_post($payload)->result;
     }
 
 
-    public static function getHosts(array $host_id_array = null, $sortfield = null, $limit = 10, $sortorder = "DESC", $output = "extend"){
-
-
-//        $t=   {
-//            "jsonrpc": "2.0",
-//            "method": "host.get",
-//            "params": {
-//                "output": "extend",
-//                "filter": {
-//                    "host": [
-//                        "Zabbix server",
-//                        "Linux server"
-//                    ]
-//                }
-//            },
-//            "auth": "038e1d7b1735c6a5436ee9eae095879e",
-//            "id": 1
-//        };
-
-
+    public function getHosts($group_id = null, array $host_id_array = null, $sortfield = null, $limit = 10, $sortorder = "DESC", $output = "extend"){
 
         $output = array("hostid","host","group");
 
+        if($group_id === null){
+            $params = array(
+                "groupids"  =>  $this->getGroupId(),
+                "output"    =>  $output,
+            );
+        } else {
+            $params = array(
+                "groupids"  =>  $group_id,
+                "output"    =>  $output,
+            );
+        }
 
-        $params = array(
-            "groupids"  =>  "49",
-            "output"    =>  $output,
-        );
 
         $payload = json_encode([
-            "jsonrpc" => self::jsonrpc(),
+            "jsonrpc" => $this->getJsonrpc(),
             "method"=> "host.get",
             "params"=> $params,
             "id"=> 1,
-            "auth"=> self::loginUser()
+            "auth"=> $this->loginUser()
         ]);
 
-        return self::http_post($payload)->result;
+        return $this->http_post($payload)->result;
     }
 
 
 
-    public static function getHost($host_id , $sortfield = null, $limit = 10, $sortorder = "DESC", $output = "extend"){
-
-
-//        $t=   {
-//            "jsonrpc": "2.0",
-//            "method": "host.get",
-//            "params": {
-//                "output": "extend",
-//                "filter": {
-//                    "host": [
-//                        "Zabbix server",
-//                        "Linux server"
-//                    ]
-//                }
-//            },
-//            "auth": "038e1d7b1735c6a5436ee9eae095879e",
-//            "id": 1
-//        };
-
-
+    public function getHost($host_id, $sortfield = null, $limit = 10, $sortorder = "DESC", $output = "extend"){
 
         $params = array(
             "output"    =>  "extend",
@@ -174,36 +219,18 @@ class ZabbixController extends Controller
         );
 
         $payload = json_encode([
-            "jsonrpc" => self::jsonrpc(),
+            "jsonrpc" => $this->getJsonrpc(),
             "method"=> "host.get",
             "params"=> $params,
             "id"=> 1,
-            "auth"=> self::loginUser()
+            "auth"=> $this->loginUser()
         ]);
 
-        return self::http_post($payload)->result;
+        return $this->http_post($payload)->result;
     }
 
 
-    public static function getItemsByHost($hostid){
-
-//          {
-//              "jsonrpc": "2.0",
-//              "method": "item.get",
-//              "params": {
-//                  "output": [
-//                      "itemid",
-//                      "name"
-//                  ],
-//                  "hostids": "10507",
-//                  "search": {
-//                      "key_": "icmp"
-//                  },
-//                  "sortfield": "name"
-//              },
-//              "auth": "65512ffb085044105e2f1a07851c37ba",
-//              "id": 1
-//}
+    public function getItemsByHost($hostid){
 
         $search = new \stdClass();
 
@@ -212,7 +239,9 @@ class ZabbixController extends Controller
         $output = array(
             "itemid",
             "name",
-            "lastvalue"
+            "key_",
+            "lastvalue",
+            "value_type"
         );
 
         $params = array(
@@ -223,26 +252,25 @@ class ZabbixController extends Controller
         );
 
         $payload = json_encode([
-            "jsonrpc" => self::jsonrpc(),
+            "jsonrpc" => $this->getJsonrpc(),
             "method"=> "item.get",
             "params"=> $params,
             "id"=> 1,
-            "auth"=> self::loginUser()
+            "auth"=> $this->loginUser()
         ]);
 
-
-        return self::http_post($payload)->result;
+        return $this->http_post($payload)->result;
     }
 
 
-    public static function getRefDe(){
+    public function getRefDe(){
         return DynamicEnum::getByName(ZabbixController::$de);
     }
 
 
-    public static function mapEndpoints(){
+    public function mapEndpoints(){
 
-        $zendpoints = self::getHosts();
+        $zendpoints = $this->getHosts();
         $count = 0;
         $foundcount = 0;
         $missedcount = 0;
@@ -253,14 +281,14 @@ class ZabbixController extends Controller
 
             if($e !== null){
 
-                if($e->hasReference(self::$key)) {
+                if($e->hasReference($this->key)) {
 
-                    $currentvalue = $e->references()[self::$key];
+                    $currentvalue = $e->references()[$this->key];
 
                     if($currentvalue === $z->hostid){
                         continue;
                     } else {
-                        $e->updateDev(self::$key, $z->hostid, self::getRefDe());
+                        $e->updateDev($this->key, $z->hostid, $this->getRefDe());
                     }
                 } else {
                     $dev = new DynamicEnumValue();
@@ -268,7 +296,7 @@ class ZabbixController extends Controller
                     $dev->value = $z->hostid;
                     $de = DynamicEnum::getByName('reference_key');
 
-                    $dev->value_type = EnumDataSourceType::getKeyByValue(self::$key);
+                    $dev->value_type = EnumDataSourceType::getKeyByValue($this->key);
                     $dev->definition($de)->save($de);
 
                     $dev->save();
@@ -278,17 +306,32 @@ class ZabbixController extends Controller
                     $e->save();
 
                     $foundcount++;
+
+                    echo "found count = $foundcount" . PHP_EOL;
+
                 }
 
             } else {
 
+
+                $endpoint = new Endpoint();
+
+
                 $missedcount++;
+
+                echo "missed count = $missedcount" . PHP_EOL;
 
             }
             $count++;
         }
 
     }
+
+
+
+
+
+
 
 
 }

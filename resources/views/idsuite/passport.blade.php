@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container p-lg-1" id="app">
+    <div class="container p-lg-1">
 
         <passport-clients></passport-clients>
 

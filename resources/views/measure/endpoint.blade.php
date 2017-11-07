@@ -32,8 +32,6 @@
                                         <div class="col-lg-7">{{$endpoint->name}}</div>
                                         <div class="col-lg-5">IP Address</div>
                                         <div class="col-lg-7">{{$endpoint->ip}}</div>
-                                        <div class="col-lg-5">Mac Address</div>
-                                        <div class="col-lg-7">{{$endpoint->mac}}</div>
                                         <div class="col-lg-5">Model</div>
                                         <div class="col-lg-7">{{$endpoint->model}}</div>
                                         <div class="col-lg-5">Proxy</div>
@@ -76,8 +74,6 @@
                                         <div class="col-lg-7">{{$endpoint->name}}</div>
                                         <div class="col-lg-5">IP Address</div>
                                         <div class="col-lg-7">{{$endpoint->ip}}</div>
-                                        <div class="col-lg-5">Mac Address</div>
-                                        <div class="col-lg-7">{{$endpoint->mac}}</div>
                                         <div class="col-lg-5">Model</div>
                                         <div class="col-lg-7">{{$endpoint->model}}</div>
                                         <div class="col-lg-5">Proxy</div>
@@ -119,8 +115,6 @@
                                         <div class="col-lg-7">{{$endpoint->name}}</div>
                                         <div class="col-lg-5">IP Address</div>
                                         <div class="col-lg-7">{{$endpoint->ip}}</div>
-                                        <div class="col-lg-5">Mac Address</div>
-                                        <div class="col-lg-7">{{$endpoint->mac}}</div>
                                         <div class="col-lg-5">Model</div>
                                         <div class="col-lg-7">{{$endpoint->model}}</div>
                                         <div class="col-lg-5">Proxy</div>
@@ -162,8 +156,6 @@
                                         <div class="col-lg-7">{{$endpoint->name}}</div>
                                         <div class="col-lg-5">IP Address</div>
                                         <div class="col-lg-7">{{$endpoint->ip}}</div>
-                                        <div class="col-lg-5">Mac Address</div>
-                                        <div class="col-lg-7">{{$endpoint->mac}}</div>
                                         <div class="col-lg-5">Model</div>
                                         <div class="col-lg-7">{{$endpoint->model}}</div>
                                         <div class="col-lg-5">Proxy</div>
@@ -205,8 +197,6 @@
                                         <div class="col-lg-7">{{$endpoint->name}}</div>
                                         <div class="col-lg-5">IP Address</div>
                                         <div class="col-lg-7">{{$endpoint->ip}}</div>
-                                        <div class="col-lg-5">Mac Address</div>
-                                        <div class="col-lg-7">{{$endpoint->mac}}</div>
                                         <div class="col-lg-5">Model</div>
                                         <div class="col-lg-7">{{$endpoint->model}}</div>
                                         <div class="col-lg-5">Proxy</div>
