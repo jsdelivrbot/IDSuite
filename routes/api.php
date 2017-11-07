@@ -16,8 +16,17 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
+//Route::middleware('auth:api')->post('/records/getRecords', function(){
+//    return 'hello world';
+//});
+
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+Route::group(['middleware' => ['api']], function () {
+    Route::get('/records/getRecords', 'API\APIController@getRecords');
+    Route::post('/records/insertRecords', 'API\APIController@insertRecords');
+});

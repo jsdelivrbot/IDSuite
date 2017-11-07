@@ -18,5 +18,4 @@ public/assets/js/*
 public/assets/*
 public/*
 *.csv
-*.lock
 resources/views/vendor/

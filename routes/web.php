@@ -27,10 +27,6 @@ Auth::routes();
 
 Route::post('login', 'Auth\LoginController@loginNameOrEmail');
 
-// api
-Route::get('api/records/getRecords', 'API\APIController@getRecords');
-Route::get('api/records/insertRecords', 'API\APIController@insertRecords'); // must be post
-
 Route::get('/getAuthUser', 'UserController@getCurrentUser');
 
 

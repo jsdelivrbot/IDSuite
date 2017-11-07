@@ -29,7 +29,7 @@ class APIController
                  LEFT JOIN endpoint ON endpoint.proxy_id = proxy.id
                  WHERE proxy.id='" . $proxy_id . "' AND proxy.pkey='" . $key . "' AND endpoint.ipaddress='" . $endpoint_address . "' LIMIT 0,1";
         $result = DB::select($query);
-        Log::info($query);
+      //  Log::info($query);
 
         if ($result == false) {
             Log::info("couldn't validate request");
@@ -70,10 +70,10 @@ class APIController
     {
 
         // connect to db do a search and grab netsuite id
-        $dbconn = pg_connect("host=10.0.14.33 port=5432 dbname=ids_webstore user=postgres password=postgres");
+        $dbconn = pg_connect("host=".env('IDVIDEOPHONE_HOST')." port=".env('IDVIDEOPHONE_PORT')." dbname=".env('IDVIDEOPHONE_DB')." user=".env('IDVIDEOPHONE_USER')." password=".env('IDVIDEOPHONE_PASSWORD')."");
         $query = "SELECT customerplan.tenantname, customerplan.tenanturl, customerplan.extensionprefix, customerplan.packagetype, customerplan.plantype, netsuiteinfo.netsuiteid, netsuiteinfo.customerid, netsuiteinfo.subscriptionid
                 FROM customerplan LEFT JOIN netsuiteinfo ON netsuiteinfo.customerid= customerplan.customerid WHERE customerplan.isactiveplan=1 AND customerplan.activestatus=1 AND
-                    $type iLIKE '" . $search . "'
+                    $type iLIKE '" . $search . "'HOST
                     ORDER BY customerplan.dateadded LIMIT 1 ";
 
         $result = pg_query($dbconn, $query);
@@ -91,7 +91,7 @@ class APIController
     }
 
     /* returns customer netsuite id*/
-    public static function searchidsflame(\App\Http\Controllers\Helper\Prepare\Record $cdr_log)
+    public static function searchidsflame(\App\Http\Controllers\Helper\Prepare\Record $cdr_log, $netsuite_call = false, $idvideophone_call = false)
     {
 
         $customer_nsid = array(
@@ -161,30 +161,32 @@ class APIController
             }
         }
 
+        // match part of conference name with customer list
+        $needle_pos = Funcs::strpos_arr($conference_name, $customer_nsid);
+        if ($needle_pos !== false) {
+            return $customer_nsid[$needle_pos];
 
-// still here?
-        $idvideophone_fetch = self::searchIdvideophone($tenant_name);
-
-        if ($idvideophone_fetch) {
-            return $idvideophone_fetch;
         }
 
-// still here? ok, let's try a netsuite search.
-        $ns = new NetsuiteController();
-        $ns_result = $ns->searchCustomer($tenant_name, "startsWith");
-        $ns_result = $ns_result->recordList->record;
-        $customer_details = $ns_result[0];
 
-        if ($customer_details) {
-            return $customer_details->internalId;
+
+            // let's try idvidephone
+
+        if($idvideophone_call == true) {
+
+            $idvideophone_fetch = self::searchIdvideophone($tenant_name);
+
+            if ($idvideophone_fetch) {
+                return $idvideophone_fetch;
+            }
         }
+
 
 // how about a netsuite internal search?
 
         $query = "SELECT entity.id FROM entity
         LEFT JOIN entitycontact ON entitycontact.id = entity.contact_id
         LEFT JOIN email ON email.id = entitycontact.email_id
-        
         WHERE email.host='" . $tenant_name . "'
         LIMIT 0,1
         ";
@@ -192,7 +194,7 @@ class APIController
         $result = DB::select($query);
         if ($result) {
             $entity_id = $result[0]->id;
-            $entity = Entity::getObjectById($entity_id);
+            $entity = \App\Entity::getObjectById($entity_id);
 
             $netsuite_id = $entity->references()['netsuite'];
 
@@ -200,26 +202,43 @@ class APIController
         }
 
 
-        // at this point we are desperate
-        if(isset($sub_domain)){
+        if($netsuite_call == true) {
 
-            $ns = new NetsuiteController();
-            $ns_result = $ns->searchCustomer($sub_domain, "contains");
-            $ns_result = $ns_result->recordList->record;
-            $customer_details = $ns_result[0];
 
-            if ($customer_details) {
-                return $customer_details->internalId;
-            }
-        }
+        // still here? ok, let's try a netsuite search.
+                $ns = new NetsuiteController();
+                $ns_result = $ns->searchCustomer($tenant_name, "startsWith");
+                $ns_result = $ns_result->recordList->record;
+                $customer_details = $ns_result[0];
 
-        $ns = new NetsuiteController();
-        $ns_result = $ns->searchCustomer($tenant_name, "contains");
-        $ns_result = $ns_result->recordList->record;
-        $customer_details = $ns_result[0];
+                if ($customer_details) {
+                    return $customer_details->internalId;
+                }
 
-        if ($customer_details) {
-            return $customer_details->internalId;
+
+
+                // at this point we are desperate
+                if(isset($sub_domain)){
+
+                    $ns = new NetsuiteController();
+                    $ns_result = $ns->searchCustomer($sub_domain, "contains");
+                    $ns_result = $ns_result->recordList->record;
+                    $customer_details = $ns_result[0];
+
+                    if ($customer_details) {
+                        return $customer_details->internalId;
+                    }
+                }
+
+                $ns = new NetsuiteController();
+                $ns_result = $ns->searchCustomer($tenant_name, "contains");
+                $ns_result = $ns_result->recordList->record;
+                $customer_details = $ns_result[0];
+
+                if ($customer_details) {
+                    return $customer_details->internalId;
+                }
+
         }
 
         // we tried our best
@@ -228,10 +247,13 @@ class APIController
 
     }
 
-    public
-    function insertRecords(Request $request)
+    public  function insertRecords(Request $request)
     {
-        Log::info("insertRecords");
+
+        ini_set('max_execution_time', 3600);
+        ini_set('memory_limit', "3072M");
+        ini_set('upload_max_filesize', "3072M");
+        ini_set('post_max_size', "3072M");        Log::info("insertRecords");
 
         $proxy_id = $request->input('proxy_id');
         $endpoint_address = $request->input('endpoint');
