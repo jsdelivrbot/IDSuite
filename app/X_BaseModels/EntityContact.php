@@ -22,11 +22,10 @@ class EntityContact extends Model
         'updated_at', 'created_at'
     ];
 
-
     protected $relationships = [
-        'phonenumber', 'email', 'location','website'
+        'phonenumber', 'email', 'location', 'website'
     ];
-    public $incrementing = false;
+
 
     /**
      * Define table to be used with this model. It defaults and assumes table names will have an s added to the end.
@@ -36,52 +35,60 @@ class EntityContact extends Model
 
     protected $keyType = 'uuid';
 
+    public $incrementing = false;
+
     /**
      * relationships
      */
-    public function name(EntityName $e = null){
-        if($e !== null){
+    public function name(EntityName $e = null)
+    {
+        if ($e !== null) {
             $this->entityname_id = $e->id;
         }
 
         return $this->hasOne(EntityName::class, 'id', 'entityname_id');
     }
 
-    public function email(Email $e = null){
-        if($e !== null){
+    public function email(Email $e = null)
+    {
+        if ($e !== null) {
             $this->email_id = $e->id;
         }
 
         return $this->hasOne(Email::class, 'id', 'email_id');
     }
 
-    public function website(Website $w = null){
-        if($w !== null){
+    public function website(Website $w = null)
+    {
+        if ($w !== null) {
             $this->website_id = $w->id;
         }
 
         return $this->hasOne(Website::class, 'id', 'website_id');
     }
 
-    public function location(Location $l = null){
+    public function location(Location $l = null)
+    {
 
-        if($l !== null){
+        if ($l !== null) {
             $this->location_id = $l->id;
         }
 
         return $this->hasOne(Location::class, 'id', 'location_id');
     }
 
-    public function phonenumber(PhoneNumber $p = null){
-        if($p !== null){
+    public function phonenumber(PhoneNumber $p = null)
+    {
+        if ($p !== null) {
             $this->phonenumber_id = $p->id;
         }
 
         return $this->hasOne(PhoneNumber::class, 'id', 'phonenumber_id');
     }
 
-    public function entity(Entity $e = null){
-        if($e !== null){
+    public function entity(Entity $e = null)
+    {
+        if ($e !== null) {
             $this->entity_id = $e->id;
         }
         return $this->belongsTo(Entity::class, 'id', 'contact_id');
@@ -92,7 +99,8 @@ class EntityContact extends Model
      * Contact constructor.
      * @param array $attributes
      */
-    public function __construct($attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 

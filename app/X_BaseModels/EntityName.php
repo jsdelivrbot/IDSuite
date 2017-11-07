@@ -29,8 +29,9 @@ class EntityName extends Model
 
     protected $keyType = 'uuid';
 
-    public function entitycontact(EntityContact $ec = null){
-        if($ec !== null) {
+    public function entitycontact(EntityContact $ec = null)
+    {
+        if ($ec !== null) {
             $this->entitycontact_id = $ec->id;
         }
         return $this->belongsTo(EntityContact::class, 'id', 'entityname_id');
@@ -41,7 +42,8 @@ class EntityName extends Model
      * personname constructor.
      * @param array $attributes
      */
-    public function __construct($attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 

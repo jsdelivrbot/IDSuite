@@ -29,18 +29,27 @@ class PersonName extends Model
 
     protected $keyType = 'uuid';
 
-    public function personcontact(PersonContact $p = null){
-        if($p !== null) {
+    /**
+     *
+     * Relationships
+     *
+     */
+    public function personcontact(PersonContact $p = null)
+    {
+        if ($p !== null) {
             $this->personcontact_id = $p->id;
         }
         return $this->hasOne(PersonContact::class, 'id', 'personcontact_id');
     }
 
     /**
-     * personname constructor.
+     *
+     * constructor
+     *
      * @param array $attributes
      */
-    public function __construct($attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 

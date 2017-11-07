@@ -33,7 +33,8 @@ class EndpointLog extends Model
      * EndpointLog constructor.
      * @param array $attributes
      */
-    public function __construct($attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 

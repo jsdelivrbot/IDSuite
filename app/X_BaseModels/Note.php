@@ -38,10 +38,11 @@ class Note extends Model
     protected $keyType = 'uuid';
 
     /**
-     * personname constructor.
+     * constructor.
      * @param array $attributes
      */
-    public function __construct($attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 

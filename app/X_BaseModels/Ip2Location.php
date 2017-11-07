@@ -10,7 +10,7 @@ class Ip2Location extends Model
 {
 
     protected $fillable = [
-        'ip_from', 'ip_to', 'country_code', 'country_name', 'region_name', 'city_name', 'latitude', 'longitude', 'zip_code','time_zone'
+        'ip_from', 'ip_to', 'country_code', 'country_name', 'region_name', 'city_name', 'latitude', 'longitude', 'zip_code', 'time_zone'
     ];
 
 
@@ -25,22 +25,30 @@ class Ip2Location extends Model
     protected $keyType = 'integer';
 
 
-
     /**
-     * User constructor.
+     * constructor.
      * @param array $attributes
      */
-    public function __construct($attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
         return $this;
     }
 
-    public static function getByIp($ip){
+    /**
+     *
+     * getByIp
+     *
+     * @param $ip
+     * @return bool|Model|null|static
+     */
+    public static function getByIp($ip)
+    {
 
         $ip_long = ip2long($ip);
 
-        if($ip_long) {
+        if ($ip_long) {
             $location_details = Ip2Location::where('ip_to', '>=', $ip_long)->limit(1)->first();
         } else {
             // TODO throw exceptions

@@ -13,7 +13,7 @@ class Record extends Model
      * @var array
      */
     protected $fillable = [
-        'endpoint_id', 'entity_id', 'timeperiod_id', 'local_id','type', 'conference_id','remote_location_id', 'local_name', 'local_number', 'remote_name', 'remote_number', 'dialed_digits', 'direction', 'protocol'
+        'endpoint_id', 'entity_id', 'timeperiod_id', 'local_id', 'type', 'conference_id', 'remote_location_id', 'local_name', 'local_number', 'remote_name', 'remote_number', 'dialed_digits', 'direction', 'protocol'
     ];
 
     protected $guarded = [
@@ -33,45 +33,51 @@ class Record extends Model
     /**
      * relationships
      */
-    public function endpoint(Endpoint $e = null){
-        if($e !== null){
+    public function endpoint(Endpoint $e = null)
+    {
+        if ($e !== null) {
             $this->endpoint_id = $e->id;
         }
         return $this->hasOne(Endpoint::class, 'id', 'endpoint_id');
     }
 
 
-    public function entity(Entity $e = null){
-        if($e !== null){
+    public function entity(Entity $e = null)
+    {
+        if ($e !== null) {
             $this->entity_id = $e->id;
         }
         return $this->hasOne(Endpoint::class, 'id', 'entity_id');
     }
 
-    public function timeperiod(TimePeriod $t = null){
-        if($t !== null){
+    public function timeperiod(TimePeriod $t = null)
+    {
+        if ($t !== null) {
             $this->timeperiod_id = $t->id;
         }
-        return $this->hasOne(TimePeriod::class, 'id','timeperiod_id');
+        return $this->hasOne(TimePeriod::class, 'id', 'timeperiod_id');
     }
-    public function remote_location(Location $l = null){
-        if($l !== null){
+
+    public function remote_location(Location $l = null)
+    {
+        if ($l !== null) {
             $this->remote_location_id = $l->id;
         }
-        return $this->hasOne(Location::class, 'id','remote_location_id');
+        return $this->hasOne(Location::class, 'id', 'remote_location_id');
     }
 
-    public function references(DynamicEnumValue $dynamic_enum_value = null){
+    public function references(DynamicEnumValue $dynamic_enum_value = null)
+    {
 
-        $references = $this->morphToMany(DynamicEnumValue::class, 'object','object_dev')->withTimestamps();
+        $references = $this->morphToMany(DynamicEnumValue::class, 'object', 'object_dev')->withTimestamps();
 
-        if($dynamic_enum_value !== null) {
+        if ($dynamic_enum_value !== null) {
             $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id, 'value_type' => $dynamic_enum_value->value_type]);
         }
 
         $ref_array = array();
 
-        foreach($references->get() as $reference){
+        foreach ($references->get() as $reference) {
 
             $ref_array[EnumDataSourceType::getValueByKey($reference->value_type)] = $reference->value;
         }
@@ -81,10 +87,13 @@ class Record extends Model
 
 
     /**
-     * User constructor.
+     *
+     * constructor
+     *
      * @param array $attributes
      */
-    public function __construct($attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 
@@ -93,36 +102,40 @@ class Record extends Model
     }
 
 
-    public function process(){
+    /**
+     *  process
+     */
+    public function process()
+    {
         $analytics = $this->endpoint->analytics;
 
-        foreach ($analytics as $analytic){
+        foreach ($analytics as $analytic) {
 
             $property_relationship = $analytic->analytic_object_relationship;
             $property_name = $analytic->analytic_object_property;
 
-            switch ($analytic->analytic_type){
+            switch ($analytic->analytic_type) {
                 case 0:
-                    if(is_null($property_relationship)) {
-                        if(!is_null($property_name)) {
+                    if (is_null($property_relationship)) {
+                        if (!is_null($property_name)) {
                             $analytic->value++;
                             $analytic->save();
                         }
                     } else {
-                        if(!is_null($this->$property_relationship->$property_name)){
+                        if (!is_null($this->$property_relationship->$property_name)) {
                             $analytic->value++;
                             $analytic->save();
                         }
                     }
                     break;
                 case 1:
-                    if(is_null($property_relationship)) {
-                        if(!is_null($property_name)) {
+                    if (is_null($property_relationship)) {
+                        if (!is_null($property_name)) {
                             $analytic->value = $analytic->value + $this->$property_name;
                             $analytic->save();
                         }
                     } else {
-                        if(!is_null($this->$property_relationship->$property_name)){
+                        if (!is_null($this->$property_relationship->$property_name)) {
                             $analytic->value = $analytic->value + $this->$property_relationship->$property_name;
                             $analytic->save();
                         }
@@ -138,16 +151,16 @@ class Record extends Model
 
                     break;
                 case 5:
-                    if(!is_null($analytic->numerator) && !is_null($analytic->denominator)){
+                    if (!is_null($analytic->numerator) && !is_null($analytic->denominator)) {
                         $analytic->value = round($analytic->numerator->value / $analytic->denominator->value, 8);
                         $analytic->save();
                     }
                     break;
                 case 6:
-                    if(!is_null($property_name)){
+                    if (!is_null($property_name)) {
                         $stringvalsarray = array();
 
-                        foreach ($this->endpoint->records as $record){
+                        foreach ($this->endpoint->records as $record) {
                             $stringvalsarray[] = $record->$property_name;
                         }
 
@@ -160,13 +173,14 @@ class Record extends Model
                         $analytic->stringvalue = $keys[0];
                         $analytic->value = $count[$keys[0]];
                         $analytic->save();
-                   }
+                    }
             }
         }
     }
 
 
-    public static function recomputeAnalytics(){
+    public static function recomputeAnalytics()
+    {
 
         ini_set('memory_limit', '-1');
 
@@ -178,13 +192,12 @@ class Record extends Model
 
         unset($records);
 
-        for ($count = 0; $count < $records_length; $count++)
-        {
+        for ($count = 0; $count < $records_length; $count++) {
             $records = Record::all();
 
             $record = $records[0];
 
-            if($record->timeperiod->duration < 0){
+            if ($record->timeperiod->duration < 0) {
                 continue;
             }
 
@@ -198,10 +211,14 @@ class Record extends Model
 
 
     /**
+     *
+     * searchByDevType
+     *
      * @param $value
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public static function searchByDevType($value){
+    public static function searchByDevType($value)
+    {
 
         $type = EnumDataSourceType::getKeyByValue($value);
 

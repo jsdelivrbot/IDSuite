@@ -29,11 +29,16 @@ class PhoneNumber extends Model
     public $incrementing = false;
 
     protected $keyType = 'uuid';
+
+
     /**
-     * Email constructor.
+     * constructor.
+     * @param null $phonenumber
+     * @param null $type
      * @param array $attributes
      */
-    public function __construct($phonenumber = null, $type = null, $attributes = array())  {
+    public function __construct($phonenumber = null, $type = null, $attributes = array())
+    {
         parent::__construct($attributes);
         // Your construct code.
 
@@ -43,7 +48,7 @@ class PhoneNumber extends Model
 
 
             if ($phonenumber !== null || empty($phonenumber)) {
-                $this->digits = preg_replace("/[^0-9]/","", $phonenumber);
+                $this->digits = preg_replace("/[^0-9]/", "", $phonenumber);
 
                 if (strlen($phonenumber) === 10) {
 
@@ -83,9 +88,9 @@ class PhoneNumber extends Model
                 return $this;
 
             }
-        } else {
-            return $this;
         }
+
+        return $this;
 
     }
 

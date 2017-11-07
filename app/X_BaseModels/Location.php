@@ -37,9 +37,10 @@ class Location extends Model
     /**
      * relationships
      */
-    public function coordinate(Coordinate $c = null){
+    public function coordinate(Coordinate $c = null)
+    {
 
-        if($c !== null) {
+        if ($c !== null) {
             $this->coordinate_id = $c->id;
         }
 
@@ -49,12 +50,13 @@ class Location extends Model
     // we may want to have a proxies relationship //
 
 
-
     /**
      * Location constructor.
+     *
      * @param array $attributes
      */
-    public function __construct($attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 
@@ -67,9 +69,11 @@ class Location extends Model
     /**
      *
      * Create Coordinates from a Instance Method.
+     *
      * @return $this|bool $mixed
      */
-    public function createCoordinatesGoogle(){
+    public function createCoordinatesGoogle()
+    {
         try {
             $coordinates = Coordinate::createCoordinatesFromLocation($this);
             if ($coordinates !== false) {
@@ -78,7 +82,7 @@ class Location extends Model
 //            $this->coordinate = $coordinates;
             $this->coordinate_id = $coordinates->id;
             $this->save();
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             \Log::warning("Class: Location \n Method: createCoordinates \n Location: " . $this->mrge_id . " failed to create coordinates. \n Error Message: " . $e->getMessage());
         }
 

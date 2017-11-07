@@ -25,8 +25,29 @@ class DynamicEnumValue extends Model
     protected $keyType = 'uuid';
 
 
-    public function definition(DynamicEnum $d = null){
-        if($d !== null) {
+    /**
+     *
+     * constructor
+     *
+     * @param array $attributes
+     */
+    public function __construct($attributes = array())
+    {
+        parent::__construct($attributes); // Eloquent
+        // Your construct code.
+
+        return $this;
+    }
+
+
+    /**
+     *
+     *  Relationships
+     *
+     */
+    public function definition(DynamicEnum $d = null)
+    {
+        if ($d !== null) {
             $this->dynamicenum_id = $d->id;
         }
         return $this->hasOne(DynamicEnum::class, 'id', 'dynamicenum_id');
@@ -37,33 +58,47 @@ class DynamicEnumValue extends Model
         return $this->morphedByMany($type, 'object', 'object_dev', 'dynamic_enum_value_id', 'object_id')->first();
     }
 
+
     /**
      *
-     * @param array $attributes
+     * getByValue
+     *
+     * @param $ref_id
+     * @return \Illuminate\Database\Eloquent\Model|null|static
      */
-    public function __construct($attributes = array())  {
-        parent::__construct($attributes); // Eloquent
-        // Your construct code.
-
-        return $this;
-    }
-
-
-    public static function getByValue($ref_id){
+    public static function getByValue($ref_id)
+    {
         $result = DynamicEnumValue::where('value', '=', $ref_id)->first();
         return $result;
     }
 
-    public static function getByValueType($type){
+    /**
+     *
+     * getByValueType
+     *
+     * @param $type
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getByValueType($type)
+    {
         $result = DynamicEnumValue::where('value_type', '=', $type)->get();
         return $result;
     }
 
 
-    public static function getByDynamicEnum($name, $key = null){
+    /**
+     *
+     * getByDynamicEnum
+     *
+     * @param $name
+     * @param null $key
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getByDynamicEnum($name, $key = null)
+    {
         $de_id = DynamicEnum::getByName($name);
 
-        if($key !== null){
+        if ($key !== null) {
             return DynamicEnumValue::where('dynamicenum_id', '=', $de_id->id)->where('value_type', '=', $key)->get();
         } else {
             return DynamicEnumValue::where('dynamicenum_id', '=', $de_id->id)->get();

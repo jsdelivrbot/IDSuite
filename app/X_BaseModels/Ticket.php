@@ -66,7 +66,9 @@ class Ticket extends Model
     }
 
     /**
-     * User constructor.
+     *
+     * constructor
+     *
      * @param array $attributes
      */
     public function __construct($attributes = array())  {
@@ -106,6 +108,9 @@ class Ticket extends Model
 
 
     /**
+     *
+     * searchByDevType
+     *
      * @param $value
      * @return \Illuminate\Database\Eloquent\Collection
      */

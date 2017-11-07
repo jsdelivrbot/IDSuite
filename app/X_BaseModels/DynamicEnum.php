@@ -31,23 +31,42 @@ class DynamicEnum extends Model
 
     /**
      *
+     * constructor
+     *
      * @param array $attributes
      */
-    public function __construct($attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
         return $this;
     }
 
 
-    public function setValues($values){
+    /**
+     *
+     * setValues()
+     *
+     * @param $values
+     * @return $this
+     */
+    public function setValues($values)
+    {
         $this->values = json_encode($values);
         return $this;
     }
 
-    public static function getByName($name){
+    /**
+     *
+     * getByName
+     *
+     * @param $name
+     * @return \Illuminate\Database\Eloquent\Model|null|static
+     */
+    public static function getByName($name)
+    {
 
-        return DynamicEnum::where('name','=', $name)->first();
+        return DynamicEnum::where('name', '=', $name)->first();
 
     }
 

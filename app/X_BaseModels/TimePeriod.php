@@ -30,10 +30,13 @@ class TimePeriod extends Model
     protected $keyType = 'uuid';
 
     /**
-     * timeperiod constructor.
+     *
+     * constructor
+     *
      * @param array $attributes
      */
-    public function __construct($attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 
@@ -42,8 +45,15 @@ class TimePeriod extends Model
     }
 
 
-    public function setDuration(){
-        $start  = strtotime($this->start);
+    /**
+     *
+     * setDuration
+     *
+     * @return $this
+     */
+    public function setDuration()
+    {
+        $start = strtotime($this->start);
         $end = strtotime($this->end);
 
         $this->duration = $end - $start;

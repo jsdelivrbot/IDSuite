@@ -15,21 +15,12 @@ class Endpoint extends Model
      * @var array
      */
     protected $fillable = [
-        'entity_id', 'proxy_id', 'location_id', 'type','e_many', 'ipaddress'
+        'entity_id', 'proxy_id', 'location_id', 'type', 'e_many', 'ipaddress'
     ];
 
 
     protected $guarded = [
         'updated_at', 'created_at'
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'active'
     ];
 
     /**
@@ -41,87 +32,94 @@ class Endpoint extends Model
     public $incrementing = false;
 
     protected $keyType = 'uuid';
+
     /**
+     *
      * relationships
+     *
      */
+    public function endpointmodel(EndpointModel $e = null)
+    {
 
-    public function endpointmodel(EndpointModel $e = null){
-
-        if($e !== null) {
+        if ($e !== null) {
             $this->model_id = $e->id;
         }
 
         return $this->hasOne(EndpointModel::class, 'id', 'model_id');
     }
 
-    public function proxy(Proxy $p = null){
+    public function proxy(Proxy $p = null)
+    {
 
-        if($p !== null) {
+        if ($p !== null) {
             $this->proxy_id = $p->id;
         }
 
         return $this->hasOne(Proxy::class, 'id', 'proxy_id');
     }
 
-    public function location(Location $l = null){
-        if($l !== null){
+    public function location(Location $l = null)
+    {
+        if ($l !== null) {
             $this->location_id = $l->id;
         }
 
         return $this->hasOne(Location::class, 'id', 'location_id');
     }
 
-    public function entity(Entity $e = null){
+    public function entity(Entity $e = null)
+    {
 
-        if($e !== null) {
+        if ($e !== null) {
             $this->entity_id = $e->id;
         }
 
         return $this->hasOne(Entity::class, 'id', 'entity_id');
     }
 
-    public function records(){
+    public function records()
+    {
         return $this->hasMany(Record::class, 'endpoint_id', 'id');
     }
 
-    public function analytics(){
+    public function analytics()
+    {
         return $this->hasMany(Analytic::class, 'endpoint_id', 'id');
     }
 
-    public function references(DynamicEnumValue $dynamic_enum_value = null){
+    public function references(DynamicEnumValue $dynamic_enum_value = null)
+    {
 
-        $references = $this->morphToMany(DynamicEnumValue::class, 'object','object_dev')->withTimestamps();
+        $references = $this->morphToMany(DynamicEnumValue::class, 'object', 'object_dev')->withTimestamps();
 
-        if($dynamic_enum_value !== null) {
+        if ($dynamic_enum_value !== null) {
             $references->attach($dynamic_enum_value, ['dynamic_enum_id' => $dynamic_enum_value->definition->id, 'value_type' => $dynamic_enum_value->value_type]);
         }
 
         $ref_array = array();
 
-        foreach($references->get() as $reference){
+        foreach ($references->get() as $reference) {
             $ref_array[EnumDataSourceType::getValueByKey($reference->value_type)] = $reference->value;
         }
 
         return $ref_array;
     }
 
-
-    public function devs(DynamicEnumValue $dynamic_enum_value = null, $getAllDev = false){
-        return $this->morphToMany(DynamicEnumValue::class, 'object','object_dev')->withTimestamps();
+    public function devs(DynamicEnumValue $dynamic_enum_value = null, $getAllDev = false)
+    {
+        return $this->morphToMany(DynamicEnumValue::class, 'object', 'object_dev')->withTimestamps();
     }
 
     /**
      * Endpoint constructor.
      * @param array $attributes
      */
-    public function __construct($attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 
-        $this->active = 1;
-
         return $this;
-
     }
 
 
@@ -131,8 +129,9 @@ class Endpoint extends Model
      * is Active
      * returns whether or not the user is active.
      */
-    public function isActive(){
-        if($this->active) {
+    public function isActive()
+    {
+        if ($this->active) {
             return true;
         } else {
             Throw new Exception('This user is not active. Therefore you cannot change the password', 409);
@@ -140,26 +139,61 @@ class Endpoint extends Model
     }
 
 
-    public static function getByName($name){
+    /**
+     *
+     * getByName
+     *
+     * @param $name
+     * @return \Illuminate\Database\Eloquent\Model|null|static
+     */
+    public static function getByName($name)
+    {
         return Endpoint::where('name', $name)->first();
     }
 
-    public static function getByCol($col, $value){
+    /**
+     *
+     * getByCol
+     *
+     * @param $col
+     * @param $value
+     * @return \Illuminate\Database\Eloquent\Model|null|static
+     */
+    public static function getByCol($col, $value)
+    {
         return self::where($col, $value)->first();
     }
 
-    public function hasReference($reference_key){
+    /**
+     *
+     * hasReference
+     *
+     * @param $reference_key
+     * @return bool
+     */
+    public function hasReference($reference_key)
+    {
         $result = array_key_exists($reference_key, $this->references());
         return $result;
     }
 
-    public function updateDev($key, $value, $de){
+    /**
+     *
+     * updateDev
+     *
+     * @param $key
+     * @param $value
+     * @param $de
+     * @return bool
+     */
+    public function updateDev($key, $value, $de)
+    {
 
-        if($this->hasReference($key)){
-            foreach($this->devs as $dev){
-                if ($dev->dynamicenum_id === $de->id){
-                    if($de->values[$dev->value_type] === $key){
-                        if($dev->value === $value){
+        if ($this->hasReference($key)) {
+            foreach ($this->devs as $dev) {
+                if ($dev->dynamicenum_id === $de->id) {
+                    if ($de->values[$dev->value_type] === $key) {
+                        if ($dev->value === $value) {
                             return $dev;
                         } else {
                             $dev->value = $value;
@@ -172,11 +206,8 @@ class Endpoint extends Model
                 }
             }
         }
-
         return false;
-
     }
-
 
 
 }

@@ -16,7 +16,7 @@ class Website extends Model
     ];
 
     protected $guarded = [
-         'created_at', 'updated_at'
+        'created_at', 'updated_at'
     ];
 
     /**
@@ -28,38 +28,42 @@ class Website extends Model
     public $incrementing = false;
 
     protected $keyType = 'uuid';
+
     /**
-     * Website constructor.
+     *
+     * constructor
+     *
      * @param array $attributes
      */
-    public function __construct($attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 
         // TODO split string stuff to get the rest of the attributes.
 
         return $this;
-
     }
 
 
     /**
      *
+     * setWebsite
+     *
      *  setWebsite on Website class object. it will also fill out the rest of the properties.
      *
-     * @param string $address
+     * @param null $url
      * @return $this
+     * @internal param string $address
      */
-    public function setWebsite($url = null){
-
-
-
+    public function setWebsite($url = null)
+    {
         if (\App\Http\Controllers\Helper\Validation::isUrlValid($url) == false) {
             $this->url = null;
             $this->save();
             return $this;
 
-       }else {
+        } else {
             $url = trim($url);
 
             $parsed_url = parse_url($url);
@@ -80,7 +84,6 @@ class Website extends Model
 
             $this->save();
             return $this;
-
         }
     }
 

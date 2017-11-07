@@ -31,19 +31,6 @@ class Coordinate extends Model
     protected $keyType = 'uuid';
 
     /**
-     * relationships
-     */
-    public function location(Location $l = null){
-
-        if($l !== null) {
-            $this->location_id = $l->id;
-        }
-
-        return $this->belongsTo(Location::class,'id','coordinate_id');
-    }
-
-
-    /**
      * Coordinate constructor.
      * @param array $attributes
      * @internal param Float $lat
@@ -51,11 +38,26 @@ class Coordinate extends Model
      * @internal param $contact /App/Contact
      * @internal param string $password
      */
-    public function __construct( $attributes = array())  {
+    public function __construct($attributes = array())
+    {
         parent::__construct($attributes); // Eloquent
         // Your construct code.
 
         return $this;
+    }
+
+
+    /**
+     * relationships
+     */
+    public function location(Location $l = null)
+    {
+
+        if ($l !== null) {
+            $this->location_id = $l->id;
+        }
+
+        return $this->belongsTo(Location::class, 'id', 'coordinate_id');
     }
 
     /**
@@ -68,20 +70,21 @@ class Coordinate extends Model
      * @return mixed
      * @throws \Exception
      */
-    public static function getCoordinatesFromLocation($location, $isLocationObject){
+    public static function getCoordinatesFromLocation($location, $isLocationObject)
+    {
 
         $googleUrl = env("GOOGLE_URL");
         $googleApiKey = env("GOOGLE_API_KEY");
 
-        if($isLocationObject) {
+        if ($isLocationObject) {
             $full_address = $location->address . $location->city . $location->state . $location->zip;
         } else {
             $full_address = $location;
         }
 
         $post_parameters = array(
-            'address'   => $full_address,
-            'key'       => $googleApiKey
+            'address' => $full_address,
+            'key' => $googleApiKey
         );
 
         $post_parameters = http_build_query($post_parameters, '', '&');
@@ -98,10 +101,10 @@ class Coordinate extends Model
         $response = json_decode($response);
         $status = $response->status;
 
-        if(property_exists($response, 'error_message')){
+        if (property_exists($response, 'error_message')) {
             throw new \Exception("Class: Coordinates \n Method: getCoordinatesFromLocation \n Message: There was an error with the Google Maps API request Message : " . $response->error_message . "\n The request URL : " . $request_url, 500);
         } else {
-            switch ($status){
+            switch ($status) {
                 case 'OK':
                     $coordinates = $response->results[0]->geometry->location;
                     return $coordinates;
@@ -123,14 +126,15 @@ class Coordinate extends Model
      * @param Location $location
      * @return Coordinate|bool
      */
-    public static function createCoordinatesFromLocation (Location $location){
+    public static function createCoordinatesFromLocation(Location $location)
+    {
         try {
             $coordinates = self::getCoordinatesFromLocation($location, true);
             $coordinates = new Coordinate([
                 'lat' => $coordinates->lat,
                 'lng' => $coordinates->lng
             ]);
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             Log::warning("Class: Coordinates \n Method: createCoordinatesFromLocation \n Location: " . $location->mrge_id . " failed to create coordinates. \n Error Message: " . $e->getMessage());
             return false;
         }
@@ -146,14 +150,15 @@ class Coordinate extends Model
      * @param string $address
      * @return Coordinate|bool
      */
-    public static function createCoordinatesFromAddress ($address){
+    public static function createCoordinatesFromAddress($address)
+    {
         try {
             $coordinates = self::getCoordinatesFromLocation($address, false);
             $coordinates = new Coordinate([
                 'lat' => $coordinates->lat,
                 'lng' => $coordinates->lng
             ]);
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             Log::warning("Class: Coordinates \n Method: createCoordinatesFromAddress \n Address: " . $address . " failed to create coordinates. \n Error Message: " . $e->getMessage());
             return false;
         }
