@@ -4,6 +4,27 @@ namespace App;
 
 use App\Model as Model;
 
+/**
+ * App\TimePeriod
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property string|null $start
+ * @property string|null $end
+ * @property int|null $duration
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TimePeriod whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TimePeriod whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TimePeriod whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TimePeriod whereDuration($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TimePeriod whereEnd($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TimePeriod whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TimePeriod whereStart($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TimePeriod whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class TimePeriod extends Model
 {
     /**

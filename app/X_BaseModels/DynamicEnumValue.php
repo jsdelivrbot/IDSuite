@@ -4,6 +4,28 @@ namespace App;
 
 use App\Model as Model;
 
+/**
+ * App\DynamicEnumValue
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property int|null $active
+ * @property string|null $value
+ * @property int|null $value_type
+ * @property string|null $dynamicenum_id
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\DynamicEnum $definition
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DynamicEnumValue whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DynamicEnumValue whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DynamicEnumValue whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DynamicEnumValue whereDynamicenumId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DynamicEnumValue whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DynamicEnumValue whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DynamicEnumValue whereValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\DynamicEnumValue whereValueType($value)
+ * @mixin \Eloquent
+ */
 class DynamicEnumValue extends Model
 {
     /**

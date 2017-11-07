@@ -4,6 +4,11 @@ namespace App;
 
 use App\Model as Model;
 
+/**
+ * App\EndpointLog
+ *
+ * @mixin \Eloquent
+ */
 class EndpointLog extends Model
 {
     /**

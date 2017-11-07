@@ -6,6 +6,35 @@ use Illuminate\Database\Eloquent\Model;
 use Mockery\Exception;
 
 
+/**
+ * App\Ip2Location
+ *
+ * @property int|null $ip_from
+ * @property int|null $ip_to
+ * @property string|null $country_code
+ * @property string|null $country_name
+ * @property string|null $region_name
+ * @property string|null $city_name
+ * @property string|null $zip_code
+ * @property string|null $time_zone
+ * @property float|null $latitude
+ * @property float|null $longitude
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ip2Location whereCityName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ip2Location whereCountryCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ip2Location whereCountryName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ip2Location whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ip2Location whereIpFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ip2Location whereIpTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ip2Location whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ip2Location whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ip2Location whereRegionName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ip2Location whereTimeZone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ip2Location whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Ip2Location whereZipCode($value)
+ * @mixin \Eloquent
+ */
 class Ip2Location extends Model
 {
 

@@ -4,6 +4,29 @@ namespace App;
 
 use App\Model as Model;
 
+/**
+ * App\Email
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property string|null $address
+ * @property string|null $username_prefix
+ * @property string|null $host
+ * @property string|null $top_level_domain
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Email whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Email whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Email whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Email whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Email whereHost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Email whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Email whereTopLevelDomain($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Email whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Email whereUsernamePrefix($value)
+ * @mixin \Eloquent
+ */
 class Email extends Model
 {
     /**

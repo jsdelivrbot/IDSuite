@@ -4,6 +4,11 @@ namespace App;
 
 use App\Model as Model;
 
+/**
+ * App\Website
+ *
+ * @mixin \Eloquent
+ */
 class Website extends Model
 {
     /**

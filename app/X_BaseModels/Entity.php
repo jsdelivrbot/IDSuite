@@ -5,6 +5,34 @@ namespace App;
 use App\Model as Model;
 use App\Enums\EnumDataSourceType;
 
+/**
+ * App\Entity
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property string|null $contact_id
+ * @property string|null $parent_id
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Entity[] $children
+ * @property-read \App\EntityContact $contact
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Endpoint[] $endpoints
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Note[] $notes
+ * @property-read \App\Entity $parent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\PersonContact[] $persons
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\EntityContact[] $sites
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Ticket[] $tickets
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity whereContactId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Entity extends Model
 {
     /**

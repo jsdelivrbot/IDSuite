@@ -4,6 +4,56 @@ namespace App;
 
 use App\Model as Model;
 
+/**
+ * App\Analytic
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property string|null $endpoint_id
+ * @property int $analytic_type
+ * @property string $name
+ * @property string|null $analytic_object_class
+ * @property string|null $analytic_object_relationship
+ * @property string|null $analytic_object_property
+ * @property string|null $numerator_id
+ * @property string|null $denominator_id
+ * @property string|null $addend_one_id
+ * @property string|null $addend_two_id
+ * @property string|null $minuend_id
+ * @property string|null $subtrahend_id
+ * @property float|null $value
+ * @property string|null $stringvalue
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Analytic $addend_one
+ * @property-read \App\Analytic $addend_two
+ * @property-read \App\Analytic $denominator
+ * @property-read \App\Endpoint $endpoint
+ * @property-read \App\Analytic $minuend
+ * @property-read \App\Analytic $numerator
+ * @property-read \App\Analytic $subtrahend
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereAddendOneId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereAddendTwoId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereAnalyticObjectClass($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereAnalyticObjectProperty($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereAnalyticObjectRelationship($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereAnalyticType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereDenominatorId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereEndpointId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereMinuendId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereNumeratorId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereStringvalue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereSubtrahendId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Analytic whereValue($value)
+ * @mixin \Eloquent
+ */
 class Analytic extends Model
 {
     /**

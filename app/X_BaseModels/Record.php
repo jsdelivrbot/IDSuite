@@ -5,6 +5,51 @@ namespace App;
 use App\Model as Model;
 use App\Enums\EnumDataSourceType;
 
+/**
+ * App\Record
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property string|null $endpoint_id
+ * @property string|null $type
+ * @property string|null $timeperiod_id
+ * @property string|null $remote_location_id
+ * @property string|null $local_id
+ * @property string|null $conf_id
+ * @property string|null $local_name
+ * @property string|null $local_number
+ * @property string|null $remote_name
+ * @property string|null $remote_number
+ * @property string|null $dialed_digits
+ * @property string|null $direction
+ * @property string|null $protocol
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Endpoint $endpoint
+ * @property-read \App\Endpoint $entity
+ * @property-read \App\Location $remote_location
+ * @property-read \App\TimePeriod $timeperiod
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereConfId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereDialedDigits($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereDirection($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereEndpointId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereLocalId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereLocalName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereLocalNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereProtocol($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereRemoteLocationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereRemoteName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereRemoteNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereTimeperiodId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Record extends Model
 {
     /**

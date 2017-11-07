@@ -7,6 +7,52 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Model as Model;
 
+/**
+ * App\Endpoint
+ *
+ * @property string $id
+ * @property string|null $entity_id
+ * @property string|null $model_id
+ * @property string|null $proxy_id
+ * @property string|null $location_id
+ * @property int|null $type
+ * @property string $class_code
+ * @property string|null $name
+ * @property string|null $ipaddress
+ * @property string|null $sync_time
+ * @property string|null $reboot_time
+ * @property string|null $last_reboot
+ * @property string|null $status_at
+ * @property int|null $status
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Analytic[] $analytics
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\DynamicEnumValue[] $devs
+ * @property-read \App\EndpointModel $endpointmodel
+ * @property-read \App\Entity $entity
+ * @property-read \App\Location $location
+ * @property-read \App\Proxy $proxy
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereEntityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereIpaddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereLastReboot($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereLocationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereModelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereProxyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereRebootTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereStatusAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereSyncTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Endpoint extends Model
 {
     /**

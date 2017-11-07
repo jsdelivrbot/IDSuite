@@ -6,6 +6,38 @@ namespace App;
 use App\Model as Model;
 
 
+/**
+ * App\PersonContact
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property string|null $personname_id
+ * @property string|null $email_id
+ * @property string|null $location_id
+ * @property string|null $phonenumber_id
+ * @property string|null $user_id
+ * @property string|null $entity_id
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Email $email
+ * @property-read \App\Entity $entity
+ * @property-read \App\Location $location
+ * @property-read \App\PersonName $name
+ * @property-read \App\PhoneNumber $phonenumber
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PersonContact whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PersonContact whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PersonContact whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PersonContact whereEmailId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PersonContact whereEntityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PersonContact whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PersonContact whereLocationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PersonContact wherePersonnameId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PersonContact wherePhonenumberId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PersonContact whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PersonContact whereUserId($value)
+ * @mixin \Eloquent
+ */
 class PersonContact extends Model
 {
 

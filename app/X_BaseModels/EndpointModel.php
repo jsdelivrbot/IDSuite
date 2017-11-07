@@ -6,6 +6,36 @@ use App\Model as Model;
 use App\Enums\EnumDataSourceType;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * App\EndpointModel
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property string|null $manufacturer
+ * @property string|null $manpnumber
+ * @property string|null $name
+ * @property string|null $description
+ * @property float|null $price
+ * @property string|null $edition
+ * @property int|null $type
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Endpoint[] $endpoints
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereEdition($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereManpnumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereManufacturer($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EndpointModel whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class EndpointModel extends Model
 {
     /**

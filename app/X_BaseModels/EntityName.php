@@ -4,6 +4,24 @@ namespace App;
 
 use App\Model as Model;
 
+/**
+ * App\EntityName
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property string|null $name
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\EntityContact $entitycontact
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityName whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityName whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityName whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityName whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityName whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityName whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class EntityName extends Model
 {
     /**

@@ -4,6 +4,26 @@ namespace App;
 
 use App\Model as Model;
 
+/**
+ * App\AnalyticValueCache
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property int|null $value
+ * @property int|null $active
+ * @property string|null $analytic_id
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Analytic $analytic
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\AnalyticValueCache whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\AnalyticValueCache whereAnalyticId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\AnalyticValueCache whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\AnalyticValueCache whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\AnalyticValueCache whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\AnalyticValueCache whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\AnalyticValueCache whereValue($value)
+ * @mixin \Eloquent
+ */
 class AnalyticValueCache extends Model
 {
     /**

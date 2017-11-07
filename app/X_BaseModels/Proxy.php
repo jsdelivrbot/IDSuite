@@ -5,6 +5,40 @@ namespace App;
 use App\Model as Model;
 use App\Enums\EnumDataSourceType;
 
+/**
+ * App\Proxy
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property string|null $entity_id
+ * @property string|null $location_id
+ * @property string|null $name
+ * @property string|null $address
+ * @property string|null $port
+ * @property string|null $target
+ * @property string|null $token
+ * @property string|null $pkey
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Endpoint[] $endpoints
+ * @property-read \App\Entity $entity
+ * @property-read \App\Location $location
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Proxy whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Proxy whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Proxy whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Proxy whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Proxy whereEntityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Proxy whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Proxy whereLocationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Proxy whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Proxy wherePkey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Proxy wherePort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Proxy whereTarget($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Proxy whereToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Proxy whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Proxy extends Model
 {
     /**

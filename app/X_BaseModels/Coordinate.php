@@ -5,6 +5,28 @@ namespace App;
 use App\Model as Model;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * App\Coordinate
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property float|null $lat
+ * @property float|null $lng
+ * @property string|null $location_id
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Location $location
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Coordinate whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Coordinate whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Coordinate whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Coordinate whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Coordinate whereLat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Coordinate whereLng($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Coordinate whereLocationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Coordinate whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Coordinate extends Model
 {
     /**

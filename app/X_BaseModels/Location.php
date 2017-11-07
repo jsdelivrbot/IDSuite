@@ -5,6 +5,36 @@ namespace App;
 use App\Model as Model;
 use Mockery\Exception;
 
+/**
+ * App\Location
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property string|null $coordinate_id
+ * @property string|null $address
+ * @property string|null $city
+ * @property string|null $state
+ * @property string|null $zipcode
+ * @property string|null $country_code
+ * @property string|null $time_zone
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Coordinate $coordinate
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Location whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Location whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Location whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Location whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Location whereCoordinateId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Location whereCountryCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Location whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Location whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Location whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Location whereTimeZone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Location whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Location whereZipcode($value)
+ * @mixin \Eloquent
+ */
 class Location extends Model
 {
     /**

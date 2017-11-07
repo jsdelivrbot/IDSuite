@@ -6,6 +6,39 @@ namespace App;
 use App\Model as Model;
 
 
+/**
+ * App\EntityContact
+ *
+ * @property string $id
+ * @property string $class_code
+ * @property string|null $entityname_id
+ * @property string|null $email_id
+ * @property string|null $location_id
+ * @property string|null $phonenumber_id
+ * @property string|null $website_id
+ * @property string|null $entity_id
+ * @property int|null $active
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\Email $email
+ * @property-read \App\Entity $entity
+ * @property-read \App\Location $location
+ * @property-read \App\EntityName $name
+ * @property-read \App\PhoneNumber $phonenumber
+ * @property-read \App\Website $website
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityContact whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityContact whereClassCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityContact whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityContact whereEmailId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityContact whereEntityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityContact whereEntitynameId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityContact whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityContact whereLocationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityContact wherePhonenumberId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityContact whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\EntityContact whereWebsiteId($value)
+ * @mixin \Eloquent
+ */
 class EntityContact extends Model
 {
 
