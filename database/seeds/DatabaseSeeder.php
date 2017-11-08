@@ -13,23 +13,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
-        $dynamic_enum = new \App\DynamicEnum();
-
-        $dynamic_enum->name = 'reference_key';
-
-        $reference_keys = \App\Enums\EnumDataSourceType::getValues();
-
-        $dynamic_enum->values = json_encode($reference_keys);
-
-        $dynamic_enum->save();
-
-        self::$dynamic_enum = $dynamic_enum;
+        self::$dynamic_enum = \App\DynamicEnum::getByName('reference_key');
 
 //        $this->call('ip2LocationSeeder');
 
 //        $this->call('EnvironmentSeeder');
-//        $this->call('CaseSeeder');
+        $this->call('CaseSeeder');
         $this->call('EndpointSeeder');
 //        $this->call('RecordSeeder');
     }

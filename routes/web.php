@@ -110,11 +110,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Entity routes //
 
-    Route::get('/measure/accounts', 'EntityController@index');
+    Route::get('/measure/accounts', 'EntityController@getEntitiesView');
 
     Route::get('/measure/accounts/all', 'EntityController@all');
 
-    Route::get('/measure/accounts/{id}', 'EntityController@show');
+    Route::get('/measure/accounts/{id}', 'EntityController@getEntityView');
 
 
     // Enums Route //

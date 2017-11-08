@@ -71,7 +71,7 @@
                     <li class="nav-item active">
                         <a class="nav-link">
                             @if($viewname === 'account' || $viewname === 'device' || $viewname === 'case')
-                                {{$name}}
+                                {{--{{$entity->contact->name}}--}}
                             @else
                                 {{$viewname}}
                             @endif

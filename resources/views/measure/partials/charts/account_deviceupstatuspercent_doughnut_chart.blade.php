@@ -5,58 +5,47 @@
 </div>
 <div class="row">
     <div class="col-lg-8">
-        <div  id="deviceupstatuspercentall"></div>
+        <div id="deviceupstatuspercentall"></div>
     </div>
 </div>
 
 @push('account_deviceupstatuspercent_chart')
 
-<script src="https://www.amcharts.com/lib/3/pie.js"></script>
+    <script src="https://www.amcharts.com/lib/3/pie.js"></script>
 
-<script>
+    <script>
 
-    $( document ).ready(function() {
+        function chartDeviceUpStatusPercentAll(data) {
+            AmCharts.makeChart("deviceupstatuspercentall", {
+                type: "pie",
+                theme: "dark",
+                dataProvider: data,
+                titleField: "state",
+                valueField: "count",
+                export: {
+                    enabled: true
+                }
+            });
+        }
 
-        $('#deviceupstatuspercentall').width('500px')
-            .height('200px');
+        function deviceUpStatusPercentAll(el) {
 
-        $.ajax({
-            type: "GET",
-            url: '/api/deviceUpStatusPercentAll',
-            success: function(data){
+            setChartHW(el);
+            axios({
+                type: 'get',
+                url: '/api/deviceUpStatusPercentAll'
+            }).then(function (data) {
+                console.log(data.data);
 
-                console.log(data);
+                chartDeviceUpStatusPercentAll(data.data);
 
-                AmCharts.makeChart( "deviceupstatuspercentall", {
-                    type: "pie",
-                    theme: "dark",
-                    dataProvider: data,
-                    titleField: "state",
-                    valueField: "count",
-                    export: {
-                        enabled: true
-                    }
-                });
+            });
+        }
 
-//
-//                AmCharts.makeChart("devicebytype", {
-//                    type: "pie",
-//                    theme: "dark",
-//                    dataProvider: data,
-//                    valueField: "value",
-//                    titleField: "name",
-//                    balloon: {
-//                        fixedPosition: true
-//                    },
-//                    export: {
-//                        enabled: true
-//                    }
-//                });
-            }
+        $(document).ready(function () {
+            deviceUpStatusPercentAll($('#deviceupstatuspercentall'));
         });
 
-    });
-
-</script>
+    </script>
 
 @endpush

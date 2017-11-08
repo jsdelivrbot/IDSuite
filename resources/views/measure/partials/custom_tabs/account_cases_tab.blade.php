@@ -4,7 +4,7 @@
     <div class="tab-pane card-block active-outline-card-block-color-{{$tab_count}}" id="card-block-tab-{{$tab_count}}" role="tabpanel">
 @endif
 
-        @if(count($page_tickets) === 0)
+        @if(count($entity->tickets) === 0)
 
                 <h4 class="card-title text-white">Cases</h4>
 
@@ -14,13 +14,13 @@
 
 
 
-                <h4 class="card-title color-{{$tab_count}}">Cases<span class="float-right">Qty: {{$page_tickets->total()}}</span></h4>
+                <h4 class="card-title color-{{$tab_count}}">Cases<span class="float-right">Qty: {{$entity->tickets->total()}}</span></h4>
 
 
 
                 <div class="card-deck">
 
-                        @foreach($page_tickets as $ticket)
+                        @foreach($entity->tickets as $ticket)
 
                                 @php
                                     $number = $ticket->status_type;

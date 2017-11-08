@@ -13,57 +13,62 @@
 
 <script>
 
-    $( document ).ready(function() {
+    function chartTotalCallDuration(data) {
+        if (data !== false) {
 
-        $('#totalcallduration').width('500px')
-            .height('200px');
-
-        $.ajax({
-            type: "GET",
-            url: '/api/totalcallduration',
-            success: function (data) {
-
-                if (data !== false) {
-
-                    AmCharts.makeChart("totalcallduration", {
-                        type: "serial",
-                        startDuration: 2,
-                        theme: "dark",
-                        labelsEnabled: false,
-                        dataProvider: data,
-                        valueAxes: [{
-                            position: "left",
-                            title: "Minutes"
-                        }],
-                        graphs: [{
-                            balloonText: "[[category]]: <b>[[value]]</b>",
-                            fillColorsField: "color",
-                            fillAlphas: 1,
-                            lineAlpha: 0.1,
-                            type: "column",
-                            valueField: "value"
-                        }],
-                        depth3D: 20,
-                        angle: 30,
-                        chartCursor: {
-                            categoryBalloonEnabled: false,
-                            cursorAlpha: 0,
-                            zoomable: false
-                        },
-                        categoryField: "date_string",
-                        categoryAxis: {
-                            gridPosition: "start",
-                            labelRotation: 90
-                        },
-                        export: {
-                            enabled: true
-                        }
-                    });
-
-
+            AmCharts.makeChart("totalcallduration", {
+                type: "serial",
+                startDuration: 2,
+                theme: "dark",
+                labelsEnabled: false,
+                dataProvider: data,
+                valueAxes: [{
+                    position: "left",
+                    title: "Minutes"
+                }],
+                graphs: [{
+                    balloonText: "[[category]]: <b>[[value]]</b>",
+                    fillColorsField: "color",
+                    fillAlphas: 1,
+                    lineAlpha: 0.1,
+                    type: "column",
+                    valueField: "value"
+                }],
+                depth3D: 20,
+                angle: 30,
+                chartCursor: {
+                    categoryBalloonEnabled: false,
+                    cursorAlpha: 0,
+                    zoomable: false
+                },
+                categoryField: "date_string",
+                categoryAxis: {
+                    gridPosition: "start",
+                    labelRotation: 90
+                },
+                export: {
+                    enabled: true
                 }
-            }
+            });
+        }
+    }
+
+    function totalCallDuration(el) {
+        setChartHW(el);
+
+        axios({
+            type: 'get',
+            url: '/api/totalcallduration'
+        }).then(function (data) {
+            console.log(data.data);
+
+            chartTotalCallDuration(data.data);
+
         });
+    }
+
+    $( document ).ready(function() {
+        totalCallDuration($('#totalcallduration'));
     });
 
 

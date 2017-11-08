@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="float-right raleway">
-                        Qty: {{count($accounts)}}
+                        {{--Qty: {{count($accounts)}}--}}
                     </div>
                 </div>
             </div>
@@ -31,106 +31,106 @@
     </div>
     <section id="cards">
 
-        @foreach($accounts as $account)
+        {{--@foreach($accounts as $account)--}}
 
-            @if($loop->index % 3 === 0 && !$loop->last)
-                <div class="row">
-            @elseif($loop->last)
-                <div class="row">
-            @endif
+            {{--@if($loop->index % 3 === 0 && !$loop->last)--}}
+                {{--<div class="row">--}}
+            {{--@elseif($loop->last)--}}
+                {{--<div class="row">--}}
+            {{--@endif--}}
 
-                @php
-                    $number = rand(1,5);
+                {{--@php--}}
+                    {{--$number = rand(1,5);--}}
 
-                    if(strlen($account->name) > 23 ){
-                        $trunc_name = substr($account->name, 0, 20);
+                    {{--if(strlen($account->name) > 23 ){--}}
+                        {{--$trunc_name = substr($account->name, 0, 20);--}}
 
-                        $trunc_name = $trunc_name . '...';
+                        {{--$trunc_name = $trunc_name . '...';--}}
 
-                    } else {
-                        $trunc_name = $account->name;
-                    }
+                    {{--} else {--}}
+                        {{--$trunc_name = $account->name;--}}
+                    {{--}--}}
 
-                @endphp
+                {{--@endphp--}}
 
-                    @if($number === 1)
+                    {{--@if($number === 1)--}}
 
-                            <div class="col-lg-4">
-                            <div class="card mb-3 text-center" style="background-color: #1BC98E;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">
-                                <div class="card-block">
-                                    <h4 class="card-title text-truncate">{{$account->name}}</h4>
-                                    <div class="searchfilterterm" style="display: none;">{{strtolower($account->name)}}</div>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="/measure/accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>
-                                </div>
-                            </div>
-                                </div>
-
-
-                    @elseif($number === 2)
-
-                        <div class="col-lg-4">
-                            <div class="card mb-3 text-center" style="background-color: #E64759;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">
-                                <div class="card-block">
-                                    <h4 class="card-title text-truncate">{{$account->name}}</h4>
-                                    <div class="searchfilterterm" style="display: none;">{{strtolower($account->name)}}</div>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="/measure/accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>
-                                </div>
-                            </div>
-                        </div>
+                            {{--<div class="col-lg-4">--}}
+                            {{--<div class="card mb-3 text-center" style="background-color: #1BC98E;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">--}}
+                                {{--<div class="card-block">--}}
+                                    {{--<h4 class="card-title text-truncate">{{$account->name}}</h4>--}}
+                                    {{--<div class="searchfilterterm" style="display: none;">{{strtolower($account->name)}}</div>--}}
+                                    {{--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>--}}
+                                    {{--<a href="/measure/accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                                {{--</div>--}}
 
 
-                    @elseif($number === 3)
+                    {{--@elseif($number === 2)--}}
 
-                        <div class="col-lg-4">
-                            <div class="card mb-3 text-center" style="background-color: #9F86FF;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">
-                                <div class="card-block">
-                                    <h4 class="card-title text-truncate">{{$account->name}}</h4>
-                                    <div class="searchfilterterm" style="display: none;">{{strtolower($account->name)}}</div>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="/measure/accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    @elseif($number === 4)
-
-                        <div class="col-lg-4">
-                            <div class="card mb-3 text-center" style="background-color: #E4D836;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">
-                                <div class="card-block">
-                                    <h4 class="card-title text-truncate">{{$account->name}}</h4>
-                                    <div class="searchfilterterm" style="display: none;">{{strtolower($account->name)}}</div>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="/measure/accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    @elseif($number === 5)
-
-                        <div class="col-lg-4">
-                            <div class="card mb-3 text-center" style="background-color: #1ca8dd;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">
-                                <div class="card-block">
-                                    <h4 class="card-title text-truncate">{{$account->name}}</h4>
-                                    <div class="searchfilterterm" style="display: none;">{{strtolower($account->name)}}</div>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="/measure/accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>
-                                </div>
-                            </div>
-                        </div>
+                        {{--<div class="col-lg-4">--}}
+                            {{--<div class="card mb-3 text-center" style="background-color: #E64759;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">--}}
+                                {{--<div class="card-block">--}}
+                                    {{--<h4 class="card-title text-truncate">{{$account->name}}</h4>--}}
+                                    {{--<div class="searchfilterterm" style="display: none;">{{strtolower($account->name)}}</div>--}}
+                                    {{--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>--}}
+                                    {{--<a href="/measure/accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
 
-                    @endif
+                    {{--@elseif($number === 3)--}}
 
-                @if($loop->iteration % 3 === 0)
-                </div>
-                @elseif($loop->last)
-                </div>
-                @endif
+                        {{--<div class="col-lg-4">--}}
+                            {{--<div class="card mb-3 text-center" style="background-color: #9F86FF;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">--}}
+                                {{--<div class="card-block">--}}
+                                    {{--<h4 class="card-title text-truncate">{{$account->name}}</h4>--}}
+                                    {{--<div class="searchfilterterm" style="display: none;">{{strtolower($account->name)}}</div>--}}
+                                    {{--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>--}}
+                                    {{--<a href="/measure/accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
-            @endforeach
+
+                    {{--@elseif($number === 4)--}}
+
+                        {{--<div class="col-lg-4">--}}
+                            {{--<div class="card mb-3 text-center" style="background-color: #E4D836;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">--}}
+                                {{--<div class="card-block">--}}
+                                    {{--<h4 class="card-title text-truncate">{{$account->name}}</h4>--}}
+                                    {{--<div class="searchfilterterm" style="display: none;">{{strtolower($account->name)}}</div>--}}
+                                    {{--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>--}}
+                                    {{--<a href="/measure/accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+
+                    {{--@elseif($number === 5)--}}
+
+                        {{--<div class="col-lg-4">--}}
+                            {{--<div class="card mb-3 text-center" style="background-color: #1ca8dd;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">--}}
+                                {{--<div class="card-block">--}}
+                                    {{--<h4 class="card-title text-truncate">{{$account->name}}</h4>--}}
+                                    {{--<div class="searchfilterterm" style="display: none;">{{strtolower($account->name)}}</div>--}}
+                                    {{--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>--}}
+                                    {{--<a href="/measure/accounts/{{$account->id}}" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+
+
+                    {{--@endif--}}
+
+                {{--@if($loop->iteration % 3 === 0)--}}
+                {{--</div>--}}
+                {{--@elseif($loop->last)--}}
+                {{--</div>--}}
+                {{--@endif--}}
+
+            {{--@endforeach--}}
     </section>
 
 @endsection
@@ -150,6 +150,59 @@
     });
 
 
+    axios({
+        method:'get',
+        url:'/api/entities/{{Auth::user()->id}}',
+    }).then(function(response) {
+        let entities = response.data;
+        if(entities.length > 0){
+            let rowkey;
+            $.each(entities, function(key, value){
+                console.log(value);
+
+                if(key % 3 === 0 || key === entities.length) {
+
+                    rowkey = key;
+
+                    $('#cards').append('<div class="row" id="row-'+key+'">');
+
+                    $('#row-' + key ).prepend(
+                        '<div class="col-lg-4"> ' +
+                            '<div class="card mb-3 text-center" style="background-color: #1BC98E;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">' +
+                                '<div class="card-block"> ' +
+                                    '<h4 class="card-title text-truncate">' + value.name + '</h4> ' +
+                                    '<div class="searchfilterterm" style="display: none;">' + value.name.toLowerCase() + '</div> ' +
+                                    '<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p> ' +
+                                    '<a href="/measure/accounts/' + value.id + '" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a> ' +
+                                '</div> ' +
+                            '</div> ' +
+                        '</div>'
+                    )
+
+                } else {
+
+                    $('#row-' + rowkey).prepend('' +
+                        '<div class="col-lg-4"> ' +
+                            '<div class="card mb-3 text-center" style="background-color: #1BC98E;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);"> ' +
+                                '<div class="card-block"> ' +
+                                    '<h4 class="card-title text-truncate">' + value.name + '</h4> ' +
+                                    '<div class="searchfilterterm" style="display: none;">' + value.name.toLowerCase() + '</div> ' +
+                                    '<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p> ' +
+                                    '<a href="/measure/accounts/' + value.id + '" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a> ' +
+                                '</div> ' +
+                            '</div> ' +
+                        '</div>'
+                    )
+                }
+
+            });
+
+        } else {
+            console.log('false');
+        }
+
+
+    });
 
 </script>
 

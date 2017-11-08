@@ -60,12 +60,20 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 58);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 10:
+/***/ 58:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(59);
+
+
+/***/ }),
+
+/***/ 59:
 /***/ (function(module, exports) {
 
 /**
@@ -264,14 +272,6 @@ var bar_two = new ProgressBar.Line(container_two, {
 
 bar_one.animate(1.0); // Number from 0.0 to 1.0
 bar_two.animate(-1.0); // Number from 0.0 to 1.0
-
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(10);
-
 
 /***/ })
 

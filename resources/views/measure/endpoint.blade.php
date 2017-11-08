@@ -4,7 +4,7 @@
     <div class="container p-lg-1">
         <div class="row">
             <div class="col-lg-12 col-md-12 offset-md-2 offset-lg-0">
-                @if($number === 1)
+{{--                @if($number === 1)--}}
 
                     <div class="card card-inverse card-square border-bottom-pink border-right-pink" style="border-top: none; border-left: none; background-color: transparent;">
                         <div class="card-block">
@@ -46,7 +46,7 @@
                         </div>
                     </div>
 
-                @elseif($number === 2)
+{{--                @elseif($number === 2)--}}
 
                     <div class="card card-inverse card-square border-bottom-teal border-right-teal" style="border-top: none; border-left: none; background-color: transparent; ">
                         <div class="card-block">
@@ -88,7 +88,7 @@
                         </div>
                     </div>
 
-                @elseif($number === 3)
+{{--                @elseif($number === 3)--}}
 
                     <div class="card card-inverse card-square border-bottom-purple border-right-purple" style="border-top: none; border-left: none; background-color: transparent;">
                         <div class="card-block">
@@ -129,7 +129,7 @@
                         </div>
                     </div>
 
-                @elseif($number === 4)
+{{--                @elseif($number === 4)--}}
 
                     <div class="card card-inverse card-square border-bottom-yellow border-right-yellow" style="border-top: none; border-left: none; background-color: transparent;">
                         <div class="card-block">
@@ -170,7 +170,7 @@
                         </div>
                     </div>
 
-                @else
+                {{--@else--}}
 
                     <div class="card card-inverse card-square border-bottom-blue border-right-blue" style="border-top: none; border-left: none; background-color: transparent;">
                         <div class="card-block">
@@ -211,7 +211,7 @@
                         </div>
                     </div>
 
-                @endif
+                {{--@endif--}}
 
             </div>
         </div>
@@ -228,7 +228,7 @@
             </div>
         </div>
 
-        @include('measure.partials.custom_tabs.custom_tabs')
+        {{--@include('measure.partials.custom_tabs.custom_tabs')--}}
 
     </div>
 

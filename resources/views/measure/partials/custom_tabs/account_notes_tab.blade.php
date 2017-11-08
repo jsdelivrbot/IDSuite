@@ -7,9 +7,9 @@
             <a id="note-modal-btn" href="#" class="btn btn-nav-color-{{$tab_count}} float-right" data-toggle="modal" data-target="#noteModal"><i class="fa fa-plus"></i> Add Note</a>
         </div>
     </div>
-    @if(count($notes) > 0)
+    @if(count($entity->notes) > 0)
 
-        @foreach($notes as $n)
+        @foreach($entity->notes as $n)
 
 
             <div class="card-text text-white">
