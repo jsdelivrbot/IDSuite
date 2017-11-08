@@ -71,8 +71,9 @@ class UserController extends Controller
         foreach($users as $user){
             $u = new \stdClass();
 
-            $u->id = $user->organize_id;
-            $u->parentId = $user->parent_id;
+//            $u->id = $user->organize_id;
+            $u->id = $user->id;
+            $u->parentId = $user->manager_id;
             $u->name = $user->contact->name->first_name . ' ' . $user->contact->name->last_name;
             $u->mail = $user->email_address;
             $user_array[] = $u;
