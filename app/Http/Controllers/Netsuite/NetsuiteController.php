@@ -29,8 +29,8 @@ class NetsuiteController extends \App\Http\Controllers\Controller
         "endpoint" => env('NETSUITE_ENDPOINT', "2016_2"),
         "host"     => env('NETSUITE_HOST', "https://webservices.sandbox.netsuite.com"),
         "role"     => env('NETSUITE_ROLE','3'),
-        "account"  => env('NETSUITE_ACCOUNT', '3592634'),
-        "app_id"   =>  env('NETSUITE_APPID','7A54F120-BA76-48B2-8C0E-27A9025E7969'),
+        "account"  => env('NETSUITE_ACCOUNT'),
+        "app_id"   =>  env('NETSUITE_APPID'),
 
         //optional -------------------------------------
         "logging"  => true,
@@ -40,8 +40,8 @@ class NetsuiteController extends \App\Http\Controllers\Controller
 
          if(self::AUTH_TYPE == 'user') {
              //user based authentication
-             $config['email'] = env('NETSUITE_USERNAME','support@e-idsolutions.com');
-             $config['password'] = env('NETSUITE_PASSWORD','Webstore14701');
+             $config['email'] = env('NETSUITE_USERNAME');
+             $config['password'] = env('NETSUITE_PASSWORD');
 
          }else{
             /* token based authentication (need to be enabled)

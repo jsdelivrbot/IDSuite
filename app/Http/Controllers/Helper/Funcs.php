@@ -50,4 +50,16 @@ public static function in_arrayi($needle, $haystack) {
         return in_array(strtolower($needle), array_map('strtolower', $haystack));
     }
 
+    /* strpos that takes an array of values to match against a string
+    returns array index of needles
+     */
+
+    public static function strpos_arr($haystack, $needles) {
+        if(!is_array($needles)) $needles = array($needles);
+        foreach($needles as $needle => $val) {
+
+            if(($pos = strpos($haystack, $needle))!==false) return $needle;
+        }
+        return false;
+    }
 }

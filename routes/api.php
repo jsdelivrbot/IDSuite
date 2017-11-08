@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 
 /*
@@ -15,18 +14,14 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::group(['middleware' => ['auth:api']], function () {
-
-
     Route::get('/entities/{user_id}', 'EntityController@getEntities');
     Route::get('/entity/{entity_id}', 'EntityController@getEntity');
 
-
+    Route::get('/records/getRecords', 'API\APIController@getRecords');
+    Route::post('/records/insertRecords', 'API\APIController@insertRecords');
 });
-
-
