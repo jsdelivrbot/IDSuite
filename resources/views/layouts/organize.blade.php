@@ -117,18 +117,18 @@
                         <li class="nav-item ">
                             <a class="nav-link btn-outline-teal" style="color: white !important;" href="/organize">Entire Comapany</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-pink" style="color: white !important;white-space: nowrap;" href="cvav">Clear Vision AV</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-purple" style="color: white !important;" href="randd">R&D</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-yellow" style="color: white !important;" href="sales">Sales</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-blue" style="color: white !important; white-space: nowrap;" href="#">CCC</a>
-                        </li>
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link btn-outline-pink" style="color: white !important;white-space: nowrap;" href="cvav">Clear Vision AV</a>--}}
+                        {{--</li>--}}
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link btn-outline-purple" style="color: white !important;" href="randd">R&D</a>--}}
+                        {{--</li>--}}
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link btn-outline-yellow" style="color: white !important;" href="sales">Sales</a>--}}
+                        {{--</li>--}}
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link btn-outline-blue" style="color: white !important; white-space: nowrap;" href="#">CCC</a>--}}
+                        {{--</li>--}}
                     </ul>
                 </nav>
 

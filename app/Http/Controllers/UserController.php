@@ -71,13 +71,17 @@ class UserController extends Controller
         foreach($users as $user){
             $u = new \stdClass();
 
+            $u->id = $user->organize_id;
             $u->parentId = $user->parent_id;
-            $u->id = $user->id;
-            $u->Name = $user->contact->name->first_name . ' ' . $user->contact->name->last_name;
-            $u->Mail = $user->email_address;
+            $u->name = $user->contact->name->first_name . ' ' . $user->contact->name->last_name;
+            $u->mail = $user->email_address;
             $user_array[] = $u;
 
-
+//            $user_array = array();
+//            foreach($users as $user){
+//                dump($user);  // this will display the user object
+//                }
+//                 dd($user_array); // this will stop program execution and display the user array.
         }
 
         return response()->json($user_array);
