@@ -496,6 +496,14 @@ class TestController extends Controller
     public function test()
     {
 
+        $dev = \App\DynamicEnumValue::getByValue("29168");
+
+        if($dev === null)
+            echo "is null";
+
+
+                $entity= $dev->referable(\App\Entity::class);
+                $this->record->entity($entity);
     }
 
 

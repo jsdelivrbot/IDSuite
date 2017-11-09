@@ -56,7 +56,7 @@ class APIController
         LEFT JOIN endpoint ON record.endpoint_id = endpoint.id
         LEFT JOIN proxy ON endpoint.proxy_id = proxy.id
         LEFT JOIN timeperiod ON timeperiod.id = record.timeperiod_id
-        WHERE proxy.id='$proxy_id' AND proxy.pkey='$key'
+        WHERE proxy.id='$proxy_id' AND proxy.pkey='$key' AND endpoint.ipaddress = '$endpoint_address'
         ORDER BY record.created_at DESC LIMIT $limit";
 
         $result = DB::select($query);
@@ -66,27 +66,44 @@ class APIController
     }
 
     /* returns customer netsuite id*/
-    public static function searchIdvideophone($search, $type = "tenantname")
+    public static function searchIdvideophone(\App\Http\Controllers\Helper\Prepare\Record $record, $type = "tenantname")
     {
 
         // connect to db do a search and grab netsuite id
         $dbconn = pg_connect("host=".env('IDVIDEOPHONE_HOST')." port=".env('IDVIDEOPHONE_PORT')." dbname=".env('IDVIDEOPHONE_DB')." user=".env('IDVIDEOPHONE_USER')." password=".env('IDVIDEOPHONE_PASSWORD')."");
         $query = "SELECT customerplan.tenantname, customerplan.tenanturl, customerplan.extensionprefix, customerplan.packagetype, customerplan.plantype, netsuiteinfo.netsuiteid, netsuiteinfo.customerid, netsuiteinfo.subscriptionid
                 FROM customerplan LEFT JOIN netsuiteinfo ON netsuiteinfo.customerid= customerplan.customerid WHERE customerplan.isactiveplan=1 AND customerplan.activestatus=1 AND
-                    $type iLIKE '" . $search . "'HOST
+                    $type iLIKE '" . $record->getTenantName() . "'
                     ORDER BY customerplan.dateadded LIMIT 1 ";
+
 
         $result = pg_query($dbconn, $query);
 
         if ($result && pg_num_rows($result) > 0) {
-//netsuiteid
-//
             $row = pg_fetch_assoc($result);
-
-
             return $row['netsuiteid'];
 
-        } else return false;
+        }
+
+
+        $query = "SELECT entity.id FROM entity
+        LEFT JOIN entitycontact ON entitycontact.id = entity.contact_id
+        LEFT JOIN email ON email.id = entitycontact.email_id
+        WHERE email.address='" . $record->getRemoteName() . "'
+        LIMIT 0,1
+        ";
+
+        $result = DB::select($query);
+        if ($result) {
+            $entity_id = $result[0]->id;
+            $entity = \App\Entity::getObjectById($entity_id);
+
+            $netsuite_id = $entity->references()['netsuite'];
+
+            if($netsuite_id) return $netsuite_id;
+        }
+
+        return false;
 
     }
 
