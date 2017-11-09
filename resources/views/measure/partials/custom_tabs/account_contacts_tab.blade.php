@@ -9,9 +9,9 @@
         </div>
     </div>
 
-    @if(count($persons) > 0)
+    @if(count($entity->personel) > 0)
 
-        @foreach($persons as $p)
+        @foreach($entity->personel as $p)
 
 
             <h5 class="card-title mt-2 text-white">{{$p->fullname}}</h5>
@@ -222,7 +222,7 @@
     <script>
         $.ajax({
             type: "GET",
-            url: '/phoneTypeEnum',
+            url: '/api/phoneTypeEnum',
             success: function (data) {
                 $.each(data.data, function(index, value){
 

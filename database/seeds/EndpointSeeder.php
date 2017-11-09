@@ -793,111 +793,111 @@ class EndpointSeeder extends Seeder{
 
 
 
-            $count_records_analytic = new \App\Analytic();
-
-            $count_records_analytic->save();
-
-            $count_records_analytic->analytic_type = \App\Enums\EnumAnalyticType::getKeyByValue('Count');
-
-            $count_records_analytic->analytic_object_class = \App\Record::class;
-
-            $count_records_analytic->analytic_object_relationship = null;
-
-            $count_records_analytic->analytic_object_property = "id";
-
-            $count_records_analytic->name = 'Total Call Data Records';
-
-            $count_records_analytic->value = 0;
-
-            $count_records_analytic->stringvalue = null;
-
-            $count_records_analytic->save();
-
-            $count_records_analytic->endpoint($endpoint)->save($endpoint);
-
-            $count_records_analytic->save();
-
-
-
-            $total_call_time_analytic = new \App\Analytic();
-
-            $total_call_time_analytic->save();
-
-            $total_call_time_analytic->analytic_type = \App\Enums\EnumAnalyticType::getKeyByValue('Total');
-
-            $total_call_time_analytic->analytic_object_class = \App\Record::class;
-
-            $total_call_time_analytic->analytic_object_relationship = "timeperiod";
-
-            $total_call_time_analytic->analytic_object_property = "duration";
-
-            $total_call_time_analytic->name = 'Total Call Duration';
-
-            $total_call_time_analytic->value = 0;
-
-            $total_call_time_analytic->stringvalue = null;
-
-            $total_call_time_analytic->save();
-
-            $total_call_time_analytic->endpoint($endpoint)->save($endpoint);
-
-            $total_call_time_analytic->save();
-
-
-
-            $average_call_time_analytic = new \App\Analytic();
-
-            $average_call_time_analytic->save();
-
-            $average_call_time_analytic->analytic_type = \App\Enums\EnumAnalyticType::getKeyByValue('division');
-
-            $average_call_time_analytic->analytic_object_class = \App\Record::class;
-
-            $average_call_time_analytic->analytic_object_relationship = null;
-
-            $average_call_time_analytic->analytic_object_property = null;
-
-            $average_call_time_analytic->name = 'Average Call Duration';
-
-            $average_call_time_analytic->denominator($count_records_analytic)->save($count_records_analytic);
-
-            $average_call_time_analytic->numerator($total_call_time_analytic)->save($total_call_time_analytic);
-
-            $average_call_time_analytic->value = 0;
-
-            $average_call_time_analytic->stringvalue = null;
-
-            $average_call_time_analytic->save();
-
-            $average_call_time_analytic->endpoint($endpoint)->save($endpoint);
-
-            $average_call_time_analytic->save();
-
-
-
-            $most_common_local_name_analytic = new \App\Analytic();
-
-            $most_common_local_name_analytic->save();
-
-            $most_common_local_name_analytic->analytic_type = \App\Enums\EnumAnalyticType::getKeyByValue('frequent');
-
-            $most_common_local_name_analytic->analytic_object_class = \App\Record::class;
-
-            $most_common_local_name_analytic->analytic_object_relationship = null;
-
-            $most_common_local_name_analytic->analytic_object_property = "local_name";
-
-            $most_common_local_name_analytic->name = "Most Frequent Local Name";
-
-            $most_common_local_name_analytic->value = null;
-
-            $most_common_local_name_analytic->stringvalue = null;
-
-            $most_common_local_name_analytic->save();
-
-            $most_common_local_name_analytic->endpoint($endpoint)->save($endpoint);
-
-            $most_common_local_name_analytic->save();
+//            $count_records_analytic = new \App\Analytic();
+//
+//            $count_records_analytic->save();
+//
+//            $count_records_analytic->analytic_type = \App\Enums\EnumAnalyticType::getKeyByValue('Count');
+//
+//            $count_records_analytic->analytic_object_class = \App\Record::class;
+//
+//            $count_records_analytic->analytic_object_relationship = null;
+//
+//            $count_records_analytic->analytic_object_property = "id";
+//
+//            $count_records_analytic->name = 'Total Call Data Records';
+//
+//            $count_records_analytic->value = 0;
+//
+//            $count_records_analytic->stringvalue = null;
+//
+//            $count_records_analytic->save();
+//
+//            $count_records_analytic->endpoint($endpoint)->save($endpoint);
+//
+//            $count_records_analytic->save();
+//
+//
+//
+//            $total_call_time_analytic = new \App\Analytic();
+//
+//            $total_call_time_analytic->save();
+//
+//            $total_call_time_analytic->analytic_type = \App\Enums\EnumAnalyticType::getKeyByValue('Total');
+//
+//            $total_call_time_analytic->analytic_object_class = \App\Record::class;
+//
+//            $total_call_time_analytic->analytic_object_relationship = "timeperiod";
+//
+//            $total_call_time_analytic->analytic_object_property = "duration";
+//
+//            $total_call_time_analytic->name = 'Total Call Duration';
+//
+//            $total_call_time_analytic->value = 0;
+//
+//            $total_call_time_analytic->stringvalue = null;
+//
+//            $total_call_time_analytic->save();
+//
+//            $total_call_time_analytic->endpoint($endpoint)->save($endpoint);
+//
+//            $total_call_time_analytic->save();
+//
+//
+//
+//            $average_call_time_analytic = new \App\Analytic();
+//
+//            $average_call_time_analytic->save();
+//
+//            $average_call_time_analytic->analytic_type = \App\Enums\EnumAnalyticType::getKeyByValue('division');
+//
+//            $average_call_time_analytic->analytic_object_class = \App\Record::class;
+//
+//            $average_call_time_analytic->analytic_object_relationship = null;
+//
+//            $average_call_time_analytic->analytic_object_property = null;
+//
+//            $average_call_time_analytic->name = 'Average Call Duration';
+//
+//            $average_call_time_analytic->denominator($count_records_analytic)->save($count_records_analytic);
+//
+//            $average_call_time_analytic->numerator($total_call_time_analytic)->save($total_call_time_analytic);
+//
+//            $average_call_time_analytic->value = 0;
+//
+//            $average_call_time_analytic->stringvalue = null;
+//
+//            $average_call_time_analytic->save();
+//
+//            $average_call_time_analytic->endpoint($endpoint)->save($endpoint);
+//
+//            $average_call_time_analytic->save();
+//
+//
+//
+//            $most_common_local_name_analytic = new \App\Analytic();
+//
+//            $most_common_local_name_analytic->save();
+//
+//            $most_common_local_name_analytic->analytic_type = \App\Enums\EnumAnalyticType::getKeyByValue('frequent');
+//
+//            $most_common_local_name_analytic->analytic_object_class = \App\Record::class;
+//
+//            $most_common_local_name_analytic->analytic_object_relationship = null;
+//
+//            $most_common_local_name_analytic->analytic_object_property = "local_name";
+//
+//            $most_common_local_name_analytic->name = "Most Frequent Local Name";
+//
+//            $most_common_local_name_analytic->value = null;
+//
+//            $most_common_local_name_analytic->stringvalue = null;
+//
+//            $most_common_local_name_analytic->save();
+//
+//            $most_common_local_name_analytic->endpoint($endpoint)->save($endpoint);
+//
+//            $most_common_local_name_analytic->save();
 
 
             $count++;

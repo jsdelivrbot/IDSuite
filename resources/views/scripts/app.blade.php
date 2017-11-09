@@ -1,5 +1,7 @@
 @include('scripts.static_scripts')
 
+
+
 @if($viewname === 'account')
     @include('scripts.account')
 @elseif($viewname === 'Accounts')
@@ -20,3 +22,11 @@
     @include('scripts.webrtc')
 @endif
 
+
+<script>
+
+
+    axiosAll(axiosrequests);
+
+
+</script>

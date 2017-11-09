@@ -1,7 +1,7 @@
 <div class="tab-pane card-block active-outline-card-block-color-{{$tab_count}}" id="card-block-tab-{{$tab_count}}" role="tabpanel">
     <h3 class="card-title color-{{$tab_count}} mb-3">Sites</h3>
 
-    @foreach($sites as $s)
+    @foreach($entity->sites as $s)
 
         <h5 class="card-title mt-2 text-white">{{$s->name}}</h5>
         <div class="card-text text-white">

@@ -5,51 +5,63 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <div  id="devicebytype"></div>
+        <div id="devicebytype"></div>
     </div>
 </div>
 
 
 @push('account_devicebytype_chart')
 
-<script>
+    <script>
 
-    $( document ).ready(function() {
 
-        $('#devicebytype').width('500px')
-            .height('200px');
+        function chartDeviceByType(data) {
+            if (data !== false) {
+                AmCharts.makeChart("devicebytype", {
+                    type: "pie",
+                    theme: "dark",
+                    fontSize: 18,
+                    color: '#000',
+                    dataProvider: data,
+                    labelsEnabled: false,
+                    valueField: "value",
+                    titleField: "name",
+                    balloon: {
+                        fixedPosition: true
+                    },
+                    export: {
+                        enabled: true
+                    }
+                });
 
-        $.ajax({
-            type: "GET",
-            url: '/api/deviceByType',
-            dataType: 'json',
-            success: function (data) {
-
-                if (data !== false) {
-
-                    AmCharts.makeChart("devicebytype", {
-                        type: "pie",
-                        theme: "dark",
-                        fontSize: 18,
-                        color: '#000',
-                        dataProvider: data,
-                        labelsEnabled: false,
-                        valueField: "value",
-                        titleField: "name",
-                        balloon: {
-                            fixedPosition: true
-                        },
-                        export: {
-                            enabled: true
-                        }
-                    });
-
-                }
             }
+        }
+
+        function deviceByType(entity_id, el) {
+
+            setChartHW(el, '500px', '200px');
+
+            let options = JSON.stringify({
+                id: entity_id
+            });
+
+            return axios.get('/api/chart/deviceByType/' + options)
+                .then(function (data) {
+
+                    if(!validate(data.data)){
+                        return false;
+                    }
+
+                    chartDeviceByType(data.data);
+
+                });
+        }
+
+        $(document).ready(function () {
+            axiosrequests.push = deviceByType('{{$entity->id}}', $('#devicebytype'));
         });
-    });
 
 
-</script>
+    </script>
 
 @endpush

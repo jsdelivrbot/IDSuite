@@ -42,6 +42,32 @@
     border-radius: 0 !important;
 }
 
+.text-subtle{
+    color: #c8cad5 !important;
+}
+
+.custom-hr{
+    border-top: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.custom-nav{
+    background-color: #434857 !important;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.custom-border-color-green{
+    border-color: #5cb85c;
+}
+
+.custom-navbar-brand{
+    color: #5cb85c;padding-bottom: 0 !important;
+    font-size: 0;
+}
+
+.custom-border-color-pink{
+    border-color: #E64759 !important;
+}
+
 .subtle-text{
     margin-top: 0;
     margin-bottom: 5px;

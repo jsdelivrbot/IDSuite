@@ -23,9 +23,11 @@ Route::get('login', function(){
     return view('auth.login', ['viewname' => 'Login']);
 });
 
-Auth::routes();
+//Auth::routes();
 
 Route::post('login', 'Auth\LoginController@loginNameOrEmail');
+
+Route::get('logout', 'Auth\LoginController@logout');
 
 Route::get('/getAuthUser', 'UserController@getCurrentUser');
 
@@ -57,25 +59,25 @@ Route::group(['middleware' => ['auth']], function () {
 
     // chart routes //
 
-    Route::get('/api/callVolumeOverTime', 'ChartController@callVolumeOverTime');
+//    Route::get('/api/callVolumeOverTime', 'ChartController@callVolumeOverTime');
 
-    Route::get('/api/deviceByType', 'ChartController@deviceByType');
+//    Route::get('/api/deviceByType', 'ChartController@deviceByType');
 
-    Route::get('/api/deviceUpStatusAll', 'ChartController@deviceUpStatusAll');
+//    Route::get('/api/deviceUpStatusAll', 'ChartController@deviceUpStatusAll');
 
-    Route::get('/api/deviceUpStatusPercentAll', 'ChartController@deviceUpStatusPercentAll');
-
-    Route::get('/api/protocolbreakout', 'ChartController@protocolBreakout');
-
-    Route::get('/api/deviceCostPerCallAvg', 'ChartController@deviceCostPerCallAvg');
-
-    Route::get('/api/devicePingData', 'ChartController@devicePingData');
-
-    Route::get('/api/avergaecallduration', 'ChartController@averageCallDuration');
-
-    Route::get('/api/accountcases', 'ChartController@accountCases');
-
-    Route::get('/api/casesopened', 'ChartController@casesOpened');
+//    Route::get('/api/deviceUpStatusPercentAll', 'ChartController@deviceUpStatusPercentAll');
+//
+//    Route::get('/api/protocolbreakout', 'ChartController@protocolBreakout');
+//
+//    Route::get('/api/deviceCostPerCallAvg', 'ChartController@deviceCostPerCallAvg');
+//
+//    Route::get('/api/devicePingData', 'ChartController@devicePingData');
+//
+//    Route::get('/api/avergaecallduration', 'ChartController@averageCallDuration');
+//
+//    Route::get('/api/accountcases', 'ChartController@accountCases');
+//
+//    Route::get('/api/casesopened', 'ChartController@casesOpened');
 
     Route::get('/api/chart/', 'ChartController@index');
 
@@ -106,11 +108,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Entity routes //
 
-    Route::get('/measure/accounts', 'EntityController@index');
+    Route::get('/measure/accounts', 'EntityController@getEntitiesView');
 
     Route::get('/measure/accounts/all', 'EntityController@all');
 
-    Route::get('/measure/accounts/{id}', 'EntityController@show');
+    Route::get('/measure/accounts/{id}', 'EntityController@getEntityView');
 
 
     // Enums Route //

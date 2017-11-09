@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\EndpointModel;
 use App\Entity;
+use App\Enums\EnumClassCode;
 use App\Enums\EnumPhoneNumberType;
 use App\Ticket;
 use App\User;
@@ -11,97 +12,109 @@ use App\EntityContact;
 use App\EntityName;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mockery\Exception;
 
 class EntityController extends Controller
 {
 
-    public $randomnumber;
+    /**
+     *
+     * getEntitiesView
+     *
+     * Returns Entities view
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getEntitiesView()
+    {
+        return view('measure.accounts', ['viewname' => 'Accounts']);
+    }
 
     /**
-     * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * getEntities
+     *
+     * returns entity objects
+     *
+     * @param $options
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function getEntities($options)
     {
-        $user = Auth::user();
+
+        $options = json_decode($options);
+
+        $user = $this->validateObject($options);
 
         $accounts = $user->accounts;
-
         $accounts_array = array();
-
         foreach ($accounts as $a) {
-
             if (count($a->children) > 0) {
-
                 foreach ($a->children as $child) {
-
-                    if($child->user !== null) {
-
+                    if ($child->user !== null) {
                         if ($user->id !== $child->user->id) {
-
                             $account = new \stdClass();
                             $account->name = $child->contact->name->name;
                             $account->id = $child->id;
-
                             $accounts_array[] = $account;
                         }
                     }
                 }
             }
 
-            $account  = new \stdClass();
-
-            $account->name  = $a->contact->name->name;
-            $account->id    = $a->id;
-
+            $account = new \stdClass();
+            $account->name = $a->contact->name->name;
+            $account->id = $a->id;
             $accounts_array[] = $account;
         }
-
-        return view('measure.accounts', ['accounts' => $accounts_array, 'viewname' => 'Accounts']);
-
+        return response()->json($accounts_array);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
-     * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
+     * getEntityView
      *
-     * @param String $id
-     * @return \Illuminate\Http\Response
+     * returns entity view
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function getEntityView($id)
     {
-        session(['currentaccount' => $id]);
-
         $entity = Entity::getObjectById($id);
+        return view('measure.account', ['viewname' => 'account', 'entity' => $entity]);
+    }
 
-        $name = $entity->contact->name;
+    /**
+     *
+     * getEntity
+     *
+     * returns Entity Data
+     * @var Entity $entity
+     * @param $options
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getEntity($options)
+    {
+        $options = json_decode($options);
+
+        /**
+         * @var Entity $entity
+         */
+        $entity = $this->validateObject($options);
+
+        $entity_obj = new \stdClass();
+
+        $entity_obj->name = $entity->contact->name->name;
+
+        $entity_obj->contact = $entity->contact;
 
         $sites = $entity->sites;
 
-        $sites_array = array();
+        $entity_obj->sites = array();
 
-        foreach ($sites as $s){
+        foreach ($sites as $s) {
 
             $site = new \stdClass();
 
@@ -114,35 +127,34 @@ class EntityController extends Controller
             $site->name = $s->name->name;
 
 
-
-            if($s->email->address !== "") {
+            if ($s->email->address !== "") {
                 $site->email = $s->email->address;
             } else {
                 $site->email = "Email is not listed.";
             }
 
 
-            if($s->phonenumber->number !== null) {
+            if ($s->phonenumber->number !== null) {
                 $site->number = $s->phonenumber->number;
-            } else{
+            } else {
                 $site->number = "Number is not listed.";
             }
 
-            $sites_array[] = $site;
+            $entity_obj->sites[] = $site;
         }
 
-        $persons_array = array();
+        $entity_obj->personnel = array();
 
         $count = 0;
 
-        if(count($entity->persons) > 0) {
+        if (count($entity->persons) > 0) {
             foreach ($entity->persons as $p) {
 
                 $person = new \stdClass();
 
                 $person->fullname = $p->name->first_name . ' ' . $p->name->last_name;
 
-                if($p->phonenumber !== null) {
+                if ($p->phonenumber !== null) {
                     $person->number = $p->phonenumber->rawnumber;
                     $person->phonetype = EnumPhoneNumberType::getValueByKey($p->phonenumber->phone_type);
                 } else {
@@ -161,7 +173,7 @@ class EntityController extends Controller
 
                 // TODO update badges when we start pulling in real data. //
 
-                if($count === 0) {
+                if ($count === 0) {
 
                     $person->badges = array(
                         'IDSuite',
@@ -175,70 +187,27 @@ class EntityController extends Controller
                         'IDSuite'
                     );
                 }
-                $persons_array[] = $person;
+                $entity_obj->personnel[] = $person;
 
 
                 $count++;
             }
         }
 
-        $notes_array = array();
+        $entity_obj->notes = array();
 
-
-
-        foreach ($entity->notes->sortByDesc('created_at') as $n){
+        foreach ($entity->notes->sortByDesc('created_at') as $n) {
 
             $note = new \stdClass();
 
             $note->text = $n->text;
             $note->created = $n->created_at;
 
-            $notes_array[] = $note;
+            $entity_obj->notes[] = $note;
         }
 
+        $entity_obj->tickets = (new Ticket)->where('entity_id', '=', $entity->id)->paginate(15);
 
-        $page_ticket = new Ticket;
-
-        $page_tickets = $page_ticket->where('entity_id','=',$entity->id)->paginate(15);
-
-        session(['randomnumber' => rand(1,5)]);
-
-
-        return view('measure.account', ['name' => $name->name, 'page_tickets' => $page_tickets, 'id' => $id, 'viewname' => 'account', 'sites' => $sites_array, 'persons' => $persons_array, 'notes' => $notes_array , 'number' => session('randomnumber')])->render();
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Entity  $entity
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Entity $entity)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Entity  $entity
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Entity $entity)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Entity  $entity
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Entity $entity)
-    {
-        //
+        return response()->json(['entity' => $entity_obj]);
     }
 }
