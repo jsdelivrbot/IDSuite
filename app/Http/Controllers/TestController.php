@@ -506,24 +506,10 @@ class TestController extends Controller
     public function test()
     {
 
-<<<<<<< HEAD
-        $dev = \App\DynamicEnumValue::getByValue("29168");
-
-        if($dev === null)
-            echo "is null";
-
-
-                $entity= $dev->referable(\App\Entity::class);
-                $this->record->entity($entity);
-=======
-        $zabbix = new ZabbixController();
-
-        dd($zabbix->getHosts());
-
-        $this->createEndpointsFromZabbix();
-
->>>>>>> 6e59c6032c1e0b714b3986b4ea5bae52ef7cbd2c
     }
+
+
+
 
 
     public function addCustomersToUser()
