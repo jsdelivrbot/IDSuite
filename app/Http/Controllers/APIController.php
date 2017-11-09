@@ -8,9 +8,10 @@
  * Time: 10:50 AM
  */
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Enums\EnumDataSourceType;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\Netsuite\NetsuiteController;
 use App\Record;
 use Illuminate\Support\Facades\Crypt;
@@ -19,7 +20,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Helper\Funcs;
 use Illuminate\Support\Facades\Log;
 
-class APIController
+class APIController extends Controller
 {
 
     public static function validateRequest($proxy_id, $endpoint_address, $key)
@@ -44,6 +45,9 @@ class APIController
     public function getRecords(Request $request)
     {
 
+        dd("inside getrecords");
+
+        Log::info("getrecords");
         // $key = Crypt::decrypt($key);
 
         $proxy_id = $request->input('proxy_id');
@@ -267,6 +271,8 @@ class APIController
     public  function insertRecords(Request $request)
     {
 
+        dd("inside insertrecords");
+
         ini_set('max_execution_time', 3600);
         ini_set('memory_limit', "3072M");
         ini_set('upload_max_filesize', "3072M");
@@ -368,10 +374,11 @@ class APIController
         }
 
 
+        return "inserting records done";
+
     }
 
-    public
-    static function grabRecordsFrom($endpoint_id, $from, $to, $key)
+    public    static function grabRecordsFrom($endpoint_id, $from, $to, $key)
     {
 
 

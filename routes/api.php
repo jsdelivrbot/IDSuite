@@ -14,11 +14,16 @@ use Illuminate\Http\Request;
 |
 */
 
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+
 Route::group(['middleware' => ['auth:api']], function () {
+
+
 
     //Entity Routes//
     Route::get('/entities/{options}', 'EntityController@getEntities');
@@ -37,8 +42,8 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/chart/casesopened/{options}', 'ChartController@casesOpened');
 
     //Records Routes//
-    Route::get('/records/getRecords', 'API\APIController@getRecords');
-    Route::post('/records/insertRecords', 'API\APIController@insertRecords');
+    Route::get('/records/getRecords', 'APIController@getRecords');
+    Route::post('/records/insertRecords', 'APIController@insertRecords');
 
     //Enum Routes//
     Route::get('/enum/measure/links/{options}', 'EnumController@measureLinks');
