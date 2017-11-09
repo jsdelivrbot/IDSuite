@@ -30,11 +30,11 @@
 
     @if($viewname !== 'OAuth')
 
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top" style="background-color: #434857 !important; border-bottom: 2px solid rgba(255, 255, 255, 0.2);">
-            <button class="navbar-toggler navbar-toggler-right" style="border-color: #5cb85c" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top custom-nav">
+            <button class="navbar-toggler navbar-toggler-right custom-border-color-green" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand ml-2 mr-lg-5" href="/measure/accounts" style="color: #5cb85c;padding-bottom: 0 !important; font-size: 0;">
+            <a class="navbar-brand ml-2 mr-lg-5 custom-navbar-brand" href="/measure/accounts">
                 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="-5 0 120 95" height="45">
                     <defs>
                         <style>
@@ -70,11 +70,13 @@
                 <ul class="navbar-nav ml-lg-3 mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link">
+
                             @if($viewname === 'account' || $viewname === 'device' || $viewname === 'case')
                                 {{--{{$entity->contact->name}}--}}
                             @else
                                 {{$viewname}}
                             @endif
+
                             <span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
@@ -84,16 +86,17 @@
                     @if (!Auth::guest())
 
                         <li class="mr-5 dropdown">
-                            <button class="dropdown-toggle btn btn-outline-pink" style="border-color: #E64759; color: white;" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="dropdown-toggle btn btn-outline-pink text-white custom-border-color-pink" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ Auth::user()->getEmailUsername()}}
                             </button>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                                {{--<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>--}}
+                                <a class="dropdown-item" href="{{ route('logout') }}" >Logout</a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
+                                {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+                                    {{--{{ csrf_field() }}--}}
+                                {{--</form>--}}
 
                                 <a class="dropdown-item" href="/apps">App Select</a>
 
@@ -121,27 +124,13 @@
                 <div class="col-sm-3 col-md-1 col-lg-1 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important; padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
 
                     <nav>
-                    <ul class="nav nav-pills flex-column">
-                        <li class="nav-item ">
-                            <a class="nav-link btn-outline-teal" style="color: white !important;" href="/measure/accounts">Accounts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-pink" style="color: white !important;white-space: nowrap;" href="/measure/transactions">Transactions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-purple" style="color: white !important;" href="/measure/devices">Devices</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-yellow" style="color: white !important;" href="#">Reports</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-outline-blue" style="color: white !important; white-space: nowrap;" href="/measure/tickets">Cases</a>
-                        </li>
+                    <ul class="nav nav-pills flex-column" id="measure-links">
+
                     </ul>
                 </nav>
 
                     <div style="color:red; position: absolute;bottom: 10px;left:20px;width: 100%;padding-right: 30px;">
-                        <embed id="white-logo" type="image/svg+xml" src="{{ asset('img/logo_white.svg') }}" style="width: 100%" />
+                        <embed id="white-logo" class="w-100" type="image/svg+xml" src="{{ asset('img/logo_white.svg') }}"/>
                     </div>
                 </div>
 
@@ -167,3 +156,4 @@
 
 </body>
 </html>
+

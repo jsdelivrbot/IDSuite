@@ -54,12 +54,15 @@
     }
 
     function casesOpened(el) {
-        setChartHW(el);
+        setChartHW(el, '500px', '200px');
         axios({
             type: 'get',
             url: '/api/casesopened'
         }).then(function (data) {
-            console.log(data.data);
+
+            if(!validate(data.data)){
+                return false;
+            }
 
             chartCasesOpened(data.data);
         });

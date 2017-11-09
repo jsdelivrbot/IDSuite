@@ -56,13 +56,16 @@
     }
 
     function averageCallDuration(el) {
-        setChartHW(el);
+        setChartHW(el, '500px', '200px');
 
         axios({
             type: 'get',
             url: '/api/avergaecallduration'
         }).then(function (data) {
-            console.log(data.data);
+
+            if(!validate(data.data)){
+                return false;
+            }
 
             chartAverageCallDuration(data.data);
 

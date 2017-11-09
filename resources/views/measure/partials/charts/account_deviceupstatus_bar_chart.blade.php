@@ -52,23 +52,29 @@
         }
     }
 
-    function deviceUpStatusAll(el) {
+    function deviceUpStatusAll(entity_id, el) {
 
-        setChartHW(el);
+        setChartHW(el, '500px', '200px');
 
-        axios({
-            type: "get",
-            url: '/api/deviceUpStatusAll'
-        }).then(function (data) {
-
-            chartDeviceUpStatus(data.data);
-
+        let options = JSON.stringify({
+            id: entity_id
         });
+
+        return axios.get('/api/chart/deviceUpStatusAll/' + options)
+            .then(function (data) {
+
+                if(!validate(data.data)){
+                    return false;
+                }
+
+                chartDeviceUpStatus(data.data);
+
+            });
     }
 
     $( document ).ready(function() {
 
-        deviceUpStatusAll($('#deviceupstatus'));
+        axiosrequests.push = deviceUpStatusAll('{{$entity->id}}',$('#deviceupstatus'));
 
     });
 

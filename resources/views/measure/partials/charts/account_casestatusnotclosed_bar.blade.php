@@ -134,13 +134,18 @@
     }
 
     function accountCases(el) {
-        setChartHW(el);
+        setChartHW(el, '500px', '200px');
 
         $.ajax({
             type: "GET",
             url: '/api/accountcases',
             success: function (data) {
-                chartAccountCases(data);
+
+                if(!validate(data.data)){
+                    return false;
+                }
+
+                chartAccountCases(data.data);
             }
         });
     }

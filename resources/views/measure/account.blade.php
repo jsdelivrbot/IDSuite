@@ -127,6 +127,8 @@
 
     <script>
 
+        let charts = [];
+        let layout_1;
 
         /**
          *
@@ -209,12 +211,16 @@
             charts.push(chart);
         }
 
-        function setChartHW(el) {
-            el.width('500px')
-                .height('200px');
-        }
 
-
+        /**
+         *
+         * getDataUri
+         *
+         * converts image source uri to raw image data.
+         *
+         * @param url
+         * @param callback
+         */
         function getDataUri(url, callback) {
             let image = new Image();
 
@@ -231,6 +237,20 @@
             image.src = url;
         }
 
+        /**
+         *
+         * generateLayout
+         *
+         * generates a layout for a report based on parameters.
+         *
+         * @param header
+         * @param footer
+         * @param topbar
+         * @param bottombar
+         * @param charts
+         * @param chartobject
+         * @param callback
+         */
         function generateLayout(header, footer, topbar, bottombar, charts, chartobject, callback) {
 
 
@@ -365,38 +385,18 @@
             callback(chartobject, layout);
         }
 
-        let charts = [];
 
-        let header = "/img/global_presence_heading.png";
-        let topbar = "/img/global_presence_top_bar.png";
-        let bottombar = "/img/global_presence_bottom_bar.png";
-        let footer = "/img/customer_care_heading.png";
-
-        let layout_1;
-
-        getDataUri(header, function (dataurl) {
-            header = dataurl;
-            getDataUri(topbar, function (dataurl) {
-                topbar = dataurl;
-                getDataUri(bottombar, function (dataurl) {
-                    bottombar = dataurl;
-                    getDataUri(footer, function (dataurl) {
-                        footer = dataurl;
-
-                    })
-                })
-            })
-        });
-
-
+        /**
+         *
+         * createReport
+         *
+         * creates a report that can be used to save to a format.
+         *
+         */
         function createReport() {
-
 
             let pdf_images = 0;
             let pdf_layout = layout_1; // loaded from another JS file
-
-
-            //        let chartids = ['devicebytype', 'chart1'];
 
             let chartids = ['chart1', 'devicebytype', 'deviceupstatus', 'deviceupstatuspercentall'];
 
@@ -456,6 +456,15 @@
         }
 
 
+        /**
+         *
+         * generatePdf
+         *
+         * takes a layout and report to generate a savable pdf
+         *
+         * @param chartobject
+         * @param layout
+         */
         function generatePdf(chartobject, layout) {
 
             console.log(layout);
@@ -467,41 +476,93 @@
         }
 
 
-        function callVolumeOverTime() {
-            axios({
-                type: "get",
-                url: '/api/callVolumeOverTime'
-            }).then(function (data) {
+        /**
+         *
+         * callVolumeOverTime
+         *
+         * get amchart data and validates the data to create object to show call volume over time.
+         *
+         * @param entity_id
+         * @param start_time
+         */
+        function callVolumeOverTime(entity_id, start_time = null) {
 
-                setHeaderChart(data.data);
-
+            let options = JSON.stringify({
+                id: entity_id,
+                start_time: start_time
             });
+
+            return axios.get('/api/chart/callVolumeOverTime/' + options)
+                .then(function (data) {
+                    let chartData = data.data;
+
+                    if(!validate(chartData)){
+                        return false;
+                    }
+
+                    setHeaderChart(chartData);
+                });
         }
 
-        function getEntity() {
-            axios({
-                method: 'get',
-                url: '/api/entity/{{$entity->id}}',
-            }).then(function (data) {
+        /**
+         *
+         * getEntity
+         *
+         * gets entity object and validates it
+         *
+         * @param entity_id
+         */
+        function getEntity(entity_id) {
 
-                console.log(data.data);
-
-                let entity = data.data.entity;
-                let name = entity.contact.name.name;
-
-                setHeaderCard(name);
+            let options = JSON.stringify({
+                id: entity_id
             });
+
+            return axios.get('/api/entity/' + options)
+                .then(function (data) {
+                    let response = data.data;
+
+                    if(!validate(response)){
+                        return false;
+                    }
+
+                    let entity = data.data.entity;
+                    let name = entity.name;
+
+                    setHeaderCard(name);
+                });
         }
 
-        function axiosAll() {
-            axios.all([callVolumeOverTime(), getEntity()])
-                .then(axios.spread(function (acct, perms) {
-                    console.log("axios_all complete");
-                }));
-        }
 
         $(document).ready(function () {
-            axiosAll();
+
+
+            console.log(axiosrequests);
+
+            axiosrequests.push = getEntity('{{$entity->id}}');
+            axiosrequests.push = callVolumeOverTime('{{$entity->id}}');
+
+
+            let header = "/img/global_presence_heading.png";
+            let topbar = "/img/global_presence_top_bar.png";
+            let bottombar = "/img/global_presence_bottom_bar.png";
+            let footer = "/img/customer_care_heading.png";
+
+
+            getDataUri(header, function (dataurl) {
+                header = dataurl;
+                getDataUri(topbar, function (dataurl) {
+                    topbar = dataurl;
+                    getDataUri(bottombar, function (dataurl) {
+                        bottombar = dataurl;
+                        getDataUri(footer, function (dataurl) {
+                            footer = dataurl;
+
+                        })
+                    })
+                })
+            });
+
         });
 
     </script>

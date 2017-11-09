@@ -29,6 +29,7 @@ class EnumClassCode extends Enum
         'EnumTicketStatusType'  =>  'ETS',
         'EnumTicketType'        =>  'ETT',
         'EnumTitleType'         =>  'ETI',
+        'EnumMeasureLinks'      =>  'EMSL',
         'Email'                 =>  'EML',
         'Endpoint'              =>  'END',
         'EndpointLog'           =>  'ENL',

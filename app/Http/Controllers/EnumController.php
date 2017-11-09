@@ -8,11 +8,24 @@ use App\Enums\EnumModelType;
 use App\Enums\EnumPhoneNumberType;
 use App\Enums\EnumStatusType;
 use App\Enums\EnumTitleType;
+use App\X_Enums\EnumMeasureSidebarLinks;
 use Faker\Generator;
 use Illuminate\Http\Request;
 
 class EnumController extends Controller
 {
+
+    public function measureLinks($options){
+
+        $options = json_decode($options);
+
+        $this->validateObject($options);
+
+        $links = EnumMeasureSidebarLinks::$enum;
+
+        return response()->json($links);
+
+    }
 
     /**
      *  returns gender enum

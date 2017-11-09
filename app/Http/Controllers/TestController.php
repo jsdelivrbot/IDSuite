@@ -49,10 +49,11 @@ class TestController extends Controller
 {
 
 
-    public  function test_vidyo () {
+    public function test_vidyo()
+    {
 
 
-        $polycom = new Vidyo\VidyoController('portal.idsflame.com', 'cdraccess','ids_14701', 'portal2');
+        $polycom = new Vidyo\VidyoController('portal.idsflame.com', 'cdraccess', 'ids_14701', 'portal2');
 
         $cdr_rows = $polycom->grabCDR();
 
@@ -91,7 +92,8 @@ class TestController extends Controller
         dd($endpoint);
     }
 
-    public function test_api() {
+    public function test_api()
+    {
 
         $cdr_record = json_decode("{
 			\"CallID\": 645957,
@@ -128,7 +130,8 @@ class TestController extends Controller
         dd($result);
     }
 
-    public  function test_polycom () {
+    public function test_polycom()
+    {
 
         /*
         RPRM – 10.0.14.87 (innobidsrprm1.e-idsolutions.local) port 8443
@@ -161,15 +164,14 @@ class TestController extends Controller
     }
 
 
-    public function test_netsuite() {
+    public function test_netsuite()
+    {
 
 
-        $output =   Netsuite\NetsuiteDatabase::AddUpdateAllCustomers(6895);
+        $output = Netsuite\NetsuiteDatabase::AddUpdateAllCustomers(6895);
 
 
-   //     $service = Netsuite\NetsuiteDatabase::AddUpdateAllCustomers();
-
-
+        //     $service = Netsuite\NetsuiteDatabase::AddUpdateAllCustomers();
 
 
     }
@@ -180,7 +182,8 @@ class TestController extends Controller
         return ((float)$usec + (float)$sec);
     }
 
-    public function getDevParentByDevName(){
+    public function getDevParentByDevName()
+    {
         $dev = DynamicEnumValue::getByValue('12');
 
         dd($dev->referable(Entity::class));
@@ -188,7 +191,8 @@ class TestController extends Controller
     }
 
 
-    public function buildDevTicketRelationship(){
+    public function buildDevTicketRelationship()
+    {
         $ticket = new Ticket();
 
         $ticket->save();
@@ -213,7 +217,8 @@ class TestController extends Controller
 
     }
 
-    public function getEndpointByMpn(){
+    public function getEndpointByMpn()
+    {
         $results = EndpointModel::getByMpn('7200-65250-001');
 
         dd($results);
@@ -221,7 +226,8 @@ class TestController extends Controller
     }
 
 
-    public function getZabbixHostData(){
+    public function getZabbixHostData()
+    {
         $data = ZabbixController::getHosts();
 
         dd($data);
@@ -229,7 +235,8 @@ class TestController extends Controller
     }
 
 
-    public function modelParsingTest(){
+    public function modelParsingTest()
+    {
         $item_descriptions[] = "HDX Media Center 6000 Series w/ 1 display";
 
         $type_of_devices = ['cam', 'camera', 'phone', 'module', 'codec', 'softphone', 'software'];
@@ -270,7 +277,7 @@ class TestController extends Controller
                     dump($name);
 
 
-                    if (count($model_explode) > 2){
+                    if (count($model_explode) > 2) {
                         $edition = $model_explode[2];
                     } else {
                         $edition = null;
@@ -282,7 +289,7 @@ class TestController extends Controller
 
                     $model_explode = explode(' ', trim($man_modelname));
 
-                    if(array_search(strtolower($model_explode[0]), $type_of_devices)){
+                    if (array_search(strtolower($model_explode[0]), $type_of_devices)) {
 
                         $man_modelname = trim(substr($item_description, $pos, strlen($item_description)), ' - ');
 
@@ -340,7 +347,7 @@ class TestController extends Controller
 
                     dump($name);
 
-                    if (count($model_explode) > 2){
+                    if (count($model_explode) > 2) {
                         $edition = $model_explode[2];
                     } else {
                         $edition = null;
@@ -352,7 +359,7 @@ class TestController extends Controller
 
                     $model_explode = explode(' ', trim($man_modelname));
 
-                    if(array_search(strtolower($model_explode[0]), $type_of_devices)){
+                    if (array_search(strtolower($model_explode[0]), $type_of_devices)) {
 
                         $man_modelname = trim(substr($item_description, $pos, strlen($item_description)), ' - ');
 
@@ -400,7 +407,7 @@ class TestController extends Controller
 
                     $description = trim(substr($item_description, strlen($model_explode[0]) + 1 + strlen($name), strlen($item_description)));
 
-                    $desc_explode = explode(' ',preg_replace('/\s\s/', ' ', trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $description))));
+                    $desc_explode = explode(' ', preg_replace('/\s\s/', ' ', trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $description))));
 
 
                 } else {
@@ -413,7 +420,7 @@ class TestController extends Controller
 
                     $description = trim(substr($item_description, strlen($name) + 1 + strlen($edition), strlen($item_description)));
 
-                    $desc_explode = explode(' ',preg_replace('/\s\s/', ' ', trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $description))));
+                    $desc_explode = explode(' ', preg_replace('/\s\s/', ' ', trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', $description))));
                 }
 
 
@@ -454,7 +461,7 @@ class TestController extends Controller
             $model->description = ucfirst(strtolower($description));
 
 
-            if($edition !== null) {
+            if ($edition !== null) {
                 $model->edition = ucfirst(strtolower($edition));
             } else {
                 $model->edition = $edition;
@@ -473,17 +480,20 @@ class TestController extends Controller
         dd($model_array);
     }
 
-    public function mapZabbixEndpointsToEndpoints(){
+    public function mapZabbixEndpointsToEndpoints()
+    {
         ZabbixController::mapEndpoints();
     }
 
-    public function endpointHasReference(Endpoint $endpoint, $key){
+    public function endpointHasReference(Endpoint $endpoint, $key)
+    {
 
         return $endpoint->hasReference($key);
 
     }
 
-    public function getDynaimcEnumsArray($de){
+    public function getDynaimcEnumsArray($de)
+    {
         return $de->values;
     }
 
@@ -496,10 +506,17 @@ class TestController extends Controller
     public function test()
     {
 
+        $zabbix = new ZabbixController();
+
+        dd($zabbix->getHosts());
+
+        $this->createEndpointsFromZabbix();
+
     }
 
 
-    public function addCustomersToUser(){
+    public function addCustomersToUser()
+    {
 
     }
 
@@ -507,11 +524,13 @@ class TestController extends Controller
      * @param $entity
      * @param $endpoint
      */
-    public function createEndpointsFromZabbix(&$entity, &$endpoint)
+    public function createEndpointsFromZabbix($entity, $endpoint)
     {
         $zabbix = new ZabbixController();
 
         $hosts = $zabbix->getHosts();
+
+        dd($hosts);
 
         $count = 0;
 

@@ -81,13 +81,13 @@
         }
 
         function protocolBreakout(el) {
-            setChartHW(el);
-            axios({
-                type: 'get',
-                url: '/api/protocolbreakout'
-            }).then(function (data) {
-                console.log(data.data);
-                chartProtocolBreakout(data.data)
+            setChartHW(el, '500px', '200px');
+            axios.get('/api/protocolbreakout')
+                .then(function (data) {
+                    if(!validate(data.data)){
+                        return false;
+                    }
+                    chartProtocolBreakout(data.data)
             });
         }
 

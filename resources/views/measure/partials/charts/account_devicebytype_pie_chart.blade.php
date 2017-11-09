@@ -37,22 +37,28 @@
             }
         }
 
-        function deviceByType(el) {
+        function deviceByType(entity_id, el) {
 
-            setChartHW(el);
+            setChartHW(el, '500px', '200px');
 
-            axios({
-                type: "get",
-                url: '/api/deviceByType'
-            }).then(function (data) {
-
-                chartDeviceByType(data.data);
-
+            let options = JSON.stringify({
+                id: entity_id
             });
+
+            return axios.get('/api/chart/deviceByType/' + options)
+                .then(function (data) {
+
+                    if(!validate(data.data)){
+                        return false;
+                    }
+
+                    chartDeviceByType(data.data);
+
+                });
         }
 
         $(document).ready(function () {
-            deviceByType($('#devicebytype'));
+            axiosrequests.push = deviceByType('{{$entity->id}}', $('#devicebytype'));
         });
 
 

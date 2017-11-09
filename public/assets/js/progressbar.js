@@ -60,35 +60,20 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-<<<<<<< HEAD
 /******/ 	return __webpack_require__(__webpack_require__.s = 54);
-=======
-/******/ 	return __webpack_require__(__webpack_require__.s = 55);
->>>>>>> 0d40a1a3efa6d3d1613afd31eea1427a879df325
 /******/ })
 /************************************************************************/
 /******/ ({
 
-<<<<<<< HEAD
 /***/ 54:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(55);
-=======
-/***/ 55:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(56);
->>>>>>> 0d40a1a3efa6d3d1613afd31eea1427a879df325
 
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ 55:
-=======
-/***/ 56:
->>>>>>> 0d40a1a3efa6d3d1613afd31eea1427a879df325
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var require;var require;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };

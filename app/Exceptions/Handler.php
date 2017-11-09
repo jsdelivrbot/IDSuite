@@ -49,6 +49,14 @@ class Handler extends ExceptionHandler
             return redirect('/');
         }
 
+        if($exception instanceof  \Symfony\Component\HttpKernel\Exception\HttpException){
+            return response()->json([
+                'request'   => $request->path(),
+                'status'    => $exception->getStatusCode(),
+                'error'     => $exception->getMessage()
+            ], $exception->getStatusCode());
+        }
+
         return parent::render($request, $exception);
     }
 

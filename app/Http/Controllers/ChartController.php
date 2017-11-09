@@ -22,17 +22,19 @@ use function GuzzleHttp\Psr7\try_fopen;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
-class ChartController
+class ChartController extends Controller
 {
 
     /**
+     *
+     * casesOpened
      *
      * Returns data needed to build device by type chart
      *
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public static function casesOpened()
+    public function casesOpened()
     {
 
         if (session('casesopened') === null) {
@@ -109,7 +111,13 @@ class ChartController
     }
 
 
-    public static function accountCases()
+    /**
+     *
+     * accountCases
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function accountCases()
     {
 
         $entity = Entity::getObjectById(session('currentaccount'));
@@ -237,107 +245,109 @@ class ChartController
     }
 
 
-    public static function callVolumeOverTime()
+    /**
+     *
+     * callVolumeOverTime
+     *
+     * @param $options
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function callVolumeOverTime($options)
     {
+        $options = json_decode($options);
 
-        if (session('callvolumedata') === null) {
+        $entity = $this->validateObject($options);
 
+        if (!isset($options->year_start)) {
             $year_start = 2016;
-            $cur_year = intval(date("Y"));
-            $cur_month = EnumFullMonths::getKeyByValue(date("F"));
-
-            $entity = Entity::getObjectById(session('currentaccount'));
-
-            $records_array = array();
-
-            foreach ($entity->endpoints as $endpoint) {
-                foreach ($endpoint->records as $record) {
-                    $records_array[] = $record;
-                }
-            }
-
-            $data_array = array();
-
-
-            for ($y = $year_start; $y <= $cur_year; $y++) {
-
-
-                if ($y !== $cur_year) {
-                    for ($m = 0; $m <= 11; $m++) {
-
-                        $obj = new \stdClass();
-                        $obj->date_string = EnumShortMonths::getValueByKey($m) . " " . $y;
-                        $obj->year_string = strval($y);
-                        $obj->month_string = EnumShortMonths::getValueByKey($m);
-                        $obj->month_val = $m;
-                        $obj->month_real = $m + 1;
-                        $obj->value = 0;
-
-                        if ($m >= 9) {
-                            $obj->month_string = strval($m + 1);
-                        } else {
-                            $obj->month_string = "0" . strval($m + 1);
-                        }
-                        $data_array[] = $obj;
-                    }
-                } else {
-                    for ($m = 0; $m <= $cur_month; $m++) {
-
-                        $obj = new \stdClass();
-                        $obj->date_string = EnumShortMonths::getValueByKey($m) . " " . $y;
-                        $obj->year_string = strval($y);
-                        $obj->month_string = EnumShortMonths::getValueByKey($m);
-                        $obj->month_val = $m;
-                        $obj->month_real = $m + 1;
-                        $obj->value = 0;
-
-                        if ($m >= 9) {
-                            $obj->month_string = strval($m + 1);
-                        } else {
-                            $obj->month_string = "0" . strval($m + 1);
-                        }
-
-                        $data_array[] = $obj;
-                    }
-                }
-            }
-
-
-            foreach ($records_array as $record) {
-                foreach ($data_array as $timeframe) {
-                    if (substr($record->timeperiod->start, 0, 4) === $timeframe->year_string && substr($record->timeperiod->start, 5, 2) === $timeframe->month_string) {
-                        $timeframe->value = $timeframe->value + 1;
-                    }
-                }
-            }
-
-            session(["callvolumedata" => $data_array]);
-
         } else {
-            $data_array = session('callvolumedata');
+            $year_start = $options->year_start;
         }
 
+        $cur_year = intval(date("Y"));
+        $cur_month = EnumFullMonths::getKeyByValue(date("F"));
 
+        $records_array = array();
+
+        foreach ($entity->endpoints as $endpoint) {
+            foreach ($endpoint->records as $record) {
+                $records_array[] = $record;
+            }
+        }
+
+        $data_array = array();
+
+        for ($y = $year_start; $y <= $cur_year; $y++) {
+            if ($y !== $cur_year) {
+                for ($m = 0; $m <= 11; $m++) {
+
+                    $obj = new \stdClass();
+                    $obj->date_string = EnumShortMonths::getValueByKey($m) . " " . $y;
+                    $obj->year_string = strval($y);
+                    $obj->month_string = EnumShortMonths::getValueByKey($m);
+                    $obj->month_val = $m;
+                    $obj->month_real = $m + 1;
+                    $obj->value = 0;
+
+                    if ($m >= 9) {
+                        $obj->month_string = strval($m + 1);
+                    } else {
+                        $obj->month_string = "0" . strval($m + 1);
+                    }
+                    $data_array[] = $obj;
+                }
+            } else {
+                for ($m = 0; $m <= $cur_month; $m++) {
+
+                    $obj = new \stdClass();
+                    $obj->date_string = EnumShortMonths::getValueByKey($m) . " " . $y;
+                    $obj->year_string = strval($y);
+                    $obj->month_string = EnumShortMonths::getValueByKey($m);
+                    $obj->month_val = $m;
+                    $obj->month_real = $m + 1;
+                    $obj->value = 0;
+
+                    if ($m >= 9) {
+                        $obj->month_string = strval($m + 1);
+                    } else {
+                        $obj->month_string = "0" . strval($m + 1);
+                    }
+
+                    $data_array[] = $obj;
+                }
+            }
+        }
+
+        foreach ($records_array as $record) {
+            foreach ($data_array as $timeframe) {
+                if (substr($record->timeperiod->start, 0, 4) === $timeframe->year_string && substr($record->timeperiod->start, 5, 2) === $timeframe->month_string) {
+                    $timeframe->value = $timeframe->value + 1;
+                }
+            }
+        }
         return response()->json($data_array);
     }
 
 
     /**
      *
-     * Returns for an account the devices it has.
+     * deviceByType
      *
+     * @param $options
      * @return \Illuminate\Http\JsonResponse
      */
-    public static function deviceByType()
+    public function deviceByType($options)
     {
+        $options = json_decode($options);
 
-        $user = Auth::user();
-
-        $entity = Entity::getObjectById(session('currentaccount'));
+        /**
+         * @var Entity $entity
+         */
+        $entity = $this->validateObject($options);
 
         $endpoints = $entity->endpoints;
 
-        $models = EndpointModel::getAllModels();
+        $models = EndpointModel::all();
 
         $model_names_value_array = array();
 
@@ -367,7 +377,6 @@ class ChartController
             if ($name->value > 0) {
                 $cleaned_values[] = $name;
             }
-
         }
 
         return response()->json($cleaned_values);
@@ -567,9 +576,11 @@ class ChartController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function deviceUpStatusAll()
+    public function deviceUpStatusAll($options)
     {
-        $entity = Entity::getObjectById(session('currentaccount'));
+        $options = json_decode($options);
+
+        $entity = $this->validateObject($options);
 
         $up_value = new \stdClass();
         $up_value->count = 0;
@@ -600,57 +611,28 @@ class ChartController
 
     /**
      *
+     * deviceUpStatusPercentageAll
+     *
      * returns data needed to build device up status for all devices chart
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public static function deviceUpStatusPercentAll()
+    public function deviceUpStatusPercentAll($options)
     {
-        $entity = Entity::getObjectById(session('currentaccount'));
+        $options = json_decode($options);
 
-        $up_value = new \stdClass();
-        $up_value->count = 0;
-        $up_value->state = "Up";
-        $up_value->color = "#008000";
+        /**
+         * @var Entity $entity
+         */
+        $entity = $this->validateObject($options);
 
-
-        $down_value = new \stdClass();
-        $down_value->count = 0;
-        $down_value->state = "Down";
-        $down_value->color = "#FF0000";
-
-        $rebooting_value = new \stdClass();
-        $rebooting_value->count = 0;
-        $rebooting_value->state = "Rebooting";
-        $rebooting_value->color = "#FF0000";
-
-        $indeterminate_value = new \stdClass();
-        $indeterminate_value->count = 0;
-        $indeterminate_value->state = "Indeterminate";
-        $indeterminate_value->color = "#FF0000";
-
-
-        foreach ($entity->endpoints as $endpoint) {
-            if ($endpoint->status === EnumStatusType::getKeyByValue("up")) {
-                $up_value->count = $up_value->count + 1;
-            } elseif ($endpoint->status === EnumStatusType::getKeyByValue("down")) {
-                $down_value->count = $down_value->count + 1;
-            } elseif ($endpoint->status === EnumStatusType::getKeyByValue("Rebooting")) {
-                $rebooting_value->count = $rebooting_value->count + 1;
-            } else {
-                $indeterminate_value->count = $indeterminate_value->count + 1;
-            }
-        }
-
-
-        $data = array($up_value, $down_value, $rebooting_value, $indeterminate_value);
+        $data = $this->devicesStatusCompute($entity);
 
         return response()->json($data);
-
     }
 
 
-    public static function protocolBreakout()
+    public function protocolBreakout()
     {
 
         $entity = Entity::getObjectById(session('currentaccount'));
@@ -778,6 +760,7 @@ class ChartController
         # chart_analytic = $entity->analytic('averagecallduration')->value;
 
         foreach ($types_array as $type) {
+
 
             if ($total !== 0) {
                 $type->percent = round(100 * $type->count / $total);
@@ -966,5 +949,50 @@ endpoint.customer as customer_id, customer.cust_name as customer_name
         echo json_encode($query_result, JSON_PRETTY_PRINT);
 
 
+    }
+
+    /**
+     *
+     * devicesStatusCompute
+     *
+     * computes neccessary value for deviceUpStatusPercentAll
+     *
+     * @param $entity
+     */
+    public function devicesStatusCompute($entity)
+    {
+        $up_value = new \stdClass();
+        $up_value->count = 0;
+        $up_value->state = "Up";
+        $up_value->color = "#008000";
+
+        $down_value = new \stdClass();
+        $down_value->count = 0;
+        $down_value->state = "Down";
+        $down_value->color = "#FF0000";
+
+        $rebooting_value = new \stdClass();
+        $rebooting_value->count = 0;
+        $rebooting_value->state = "Rebooting";
+        $rebooting_value->color = "#FF0000";
+
+        $indeterminate_value = new \stdClass();
+        $indeterminate_value->count = 0;
+        $indeterminate_value->state = "Indeterminate";
+        $indeterminate_value->color = "#FF0000";
+
+        foreach ($entity->endpoints as $endpoint) {
+            if ($endpoint->status === EnumStatusType::getKeyByValue("up")) {
+                $up_value->count = $up_value->count + 1;
+            } elseif ($endpoint->status === EnumStatusType::getKeyByValue("down")) {
+                $down_value->count = $down_value->count + 1;
+            } elseif ($endpoint->status === EnumStatusType::getKeyByValue("Rebooting")) {
+                $rebooting_value->count = $rebooting_value->count + 1;
+            } else {
+                $indeterminate_value->count = $indeterminate_value->count + 1;
+            }
+        }
+
+        return array($up_value, $down_value, $rebooting_value, $indeterminate_value);
     }
 }

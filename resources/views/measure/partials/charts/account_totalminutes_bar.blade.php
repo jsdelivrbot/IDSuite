@@ -54,7 +54,7 @@
     }
 
     function totalCallDuration(el) {
-        setChartHW(el);
+        setChartHW(el, '500px', '200px');
 
         axios({
             type: 'get',
