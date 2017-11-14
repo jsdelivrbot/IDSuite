@@ -41,7 +41,7 @@ class Controller extends BaseController
     {
 
         if (!isset($options->id)) {
-            abort(500, 'The options object requires at least an id key and a valid value for that key.');
+            abort(200, 'The options object requires at least an id key and a valid value for that key.');
         }
 
         $class_path = $this->getClassPathFromId($options);
@@ -50,9 +50,9 @@ class Controller extends BaseController
 
         if($object === null){
             if($class_path === '\App\User'){
-                abort(500, 'The id ' . $options->id . ' is not associated with a valid user.');
+                abort(200, 'The id ' . $options->id . ' is not associated with a valid user.');
             } else {
-                abort(500, 'The '. $class_path .' object with an id of ' . $options->id . ' was not found.');
+                abort(200, 'The '. $class_path .' object with an id of ' . $options->id . ' was not found.');
             }
         }
 

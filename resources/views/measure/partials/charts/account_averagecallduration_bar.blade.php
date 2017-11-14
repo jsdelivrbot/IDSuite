@@ -55,25 +55,36 @@
         }
     }
 
-    function averageCallDuration(el) {
+    /**
+     *
+     * averageCallDuration
+     *
+     * gets data for average call duration chart
+     *
+     * @param entity_id
+     * @param el
+     */
+    function averageCallDuration(entity_id, el) {
         setChartHW(el, '500px', '200px');
 
-        axios({
-            type: 'get',
-            url: '/api/avergaecallduration'
-        }).then(function (data) {
-
-            if(!validate(data.data)){
-                return false;
-            }
-
-            chartAverageCallDuration(data.data);
-
+        let options = JSON.stringify({
+            id: entity_id,
+            start_time: 2017
         });
+
+        return axios.get('/api/chart/averagecallduration/' + options)
+            .then(function (data) {
+
+                if(!validate(data.data)){
+                    return false;
+                }
+
+                chartAverageCallDuration(data.data);
+            });
     }
 
     $( document ).ready(function() {
-        averageCallDuration($('#avergaecallduration'));
+        axiosrequests.push = averageCallDuration('{{$entity->id}}', $('#avergaecallduration'));
     });
 
 

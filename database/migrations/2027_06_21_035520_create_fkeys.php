@@ -103,6 +103,11 @@ class CreateFkeys extends Migration
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
         });
 
+        Schema::table('endpoint_entity', function(Blueprint $table){
+            $table->foreign('entity_id')->references('id')->on('entity')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('endpoint_id')->references('id')->on('endpoint')->onDelete('cascade')->onUpdate('cascade');
+        });
+
        // Schema::table('command', function(Blueprint $table){
       //      $table->foreign('endpoint_id')->references('id')->on('endpoint')->onDelete('cascade')->onUpdate('cascade');
       //  });

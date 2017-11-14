@@ -68,6 +68,10 @@
     border-color: #E64759 !important;
 }
 
+.custom-top-link{
+    margin-top: 5px !important;
+}
+
 .subtle-text{
     margin-top: 0;
     margin-bottom: 5px;

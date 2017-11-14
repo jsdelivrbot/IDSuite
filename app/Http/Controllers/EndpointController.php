@@ -7,6 +7,105 @@ use Illuminate\Http\Request;
 
 class EndpointController extends Controller
 {
+
+    /**
+     *
+     * getEndpointsView
+     *
+     * Returns Endpoints view
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getEndpointsView()
+    {
+        return view('measure.endpoints', ['viewname' => 'Devices']);
+    }
+
+    /**
+     *
+     * getEndpoints
+     *
+     * returns entity objects
+     *
+     * @param $options
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getEndpoints($options)
+    {
+        $options = json_decode($options);
+
+        $this->validateObject($options);
+
+        $endpoints = (new Endpoint)->all();
+        $endpoints_array = array();
+        foreach ($endpoints as $e) {
+            $endpoint = new \stdClass();
+            $endpoint->name = $e->name;
+            $endpoint->id = $e->id;
+            $endpoints_array[] = $endpoint;
+        }
+        return response()->json($endpoints_array);
+    }
+
+
+    /**
+     *
+     * getEndpointView
+     *
+     * returns endpoint view
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getEndpointView($id)
+    {
+        $endpoint = Endpoint::getObjectById($id);
+        return view('measure.endpoint', ['viewname' => 'device', 'endpoint' => $endpoint]);
+    }
+
+
+    /**
+     *
+     * getEndpoint
+     *
+     * returns Endpoint data
+     *
+     * @param $options
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getEndpoint($options)
+    {
+
+        $options = json_decode($options);
+
+        /**
+         * @var Endpoint $endpoint
+         */
+        $endpoint = $this->validateObject($options);
+
+
+        $e = new \stdClass();
+
+        $e->entity_name = $endpoint->getEntityName();
+
+        $e->name = $endpoint->name;
+
+        $e->entity = $endpoint->entity;
+
+        $e->ip = $endpoint->ipaddress;
+
+        $e->model = $endpoint->getType();
+
+        $e->proxy = $endpoint->getProxyName();
+
+        $e->call_count = $endpoint->getCallCount();
+
+        $e->average_call_duration = $endpoint->getAverageCallDuration();
+
+        return response()->json($e);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +119,7 @@ class EndpointController extends Controller
 
         $endpoint_array = array();
 
-        foreach($endpoints as $endpoint) {
+        foreach ($endpoints as $endpoint) {
             $e = new \stdClass();
 
             $e->id = $endpoint->id;
@@ -51,7 +150,7 @@ class EndpointController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -62,7 +161,7 @@ class EndpointController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -90,11 +189,11 @@ class EndpointController extends Controller
         $e->account = $account;
 
 
-        session(['randomnumber' => rand(1,5)]);
+        session(['randomnumber' => rand(1, 5)]);
 
-        if($endpoint->type === 7){
+        if ($endpoint->type === 7) {
 
-            return view('measure.endpoint', ['endpoint' => $e,'name' => $e->name, 'viewname' => 'device', 'number' => session('randomnumber'), 'recordcount' => 0, 'durationaverage' => 0]);
+            return view('measure.endpoint', ['endpoint' => $e, 'name' => $e->name, 'viewname' => 'device', 'number' => session('randomnumber'), 'recordcount' => 0, 'durationaverage' => 0]);
 
         }
 
@@ -102,13 +201,13 @@ class EndpointController extends Controller
 
         $duration_average = round($endpoint->analytics[2]->value, 2);
 
-        return view('measure.endpoint', ['endpoint' => $e,'name' => $e->name, 'viewname' => 'device', 'number' => session('randomnumber'), 'recordcount' => $recordcount, 'durationaverage' => $duration_average]);
+        return view('measure.endpoint', ['endpoint' => $e, 'name' => $e->name, 'viewname' => 'device', 'number' => session('randomnumber'), 'recordcount' => $recordcount, 'durationaverage' => $duration_average]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -119,8 +218,8 @@ class EndpointController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -131,7 +230,7 @@ class EndpointController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -139,12 +238,13 @@ class EndpointController extends Controller
         //
     }
 
-    public function byCustomer($id){
+    public function byCustomer($id)
+    {
         $customer = \App\Customer::getObjectById($id);
 
         $endpoints = array();
 
-        foreach ($customer->endpoints as $endpoint){
+        foreach ($customer->endpoints as $endpoint) {
             $e = new \stdClass();
 
             $e->id = $endpoint->id;
@@ -163,26 +263,35 @@ class EndpointController extends Controller
 
     /**
      *
+     * getDeviceStatus
+     *
      * get an endpoints status
      *
+     * @param $options
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function getDeviceStatus(){
+    public function getDeviceStatus($options){
 
-        $endpoint = session('currentendpointobject');
+        $options = json_decode($options);
 
-        $zabbix = new ZabbixController();
+        /**
+         * @var Endpoint $endpoint
+         */
+        $endpoint = $this->validateObject($options);
 
-        if(array_key_exists( 'zabbix' ,$endpoint->references())){
+        if (array_key_exists('zabbix', $endpoint->references())) {
+
+            $zabbix = new ZabbixController();
 
             $ref_id = $endpoint->references()['zabbix'];
 
             $response = $zabbix->getItemsByHost($ref_id);
 
-            foreach ($response as $item){
+            foreach ($response as $item) {
 
-                if($item->name === "Agent ping"){
+                if ($item->name === "Agent ping") {
 
-                    if($item->lastvalue === "1"){
+                    if ($item->lastvalue === "1") {
 
                         $result = true;
 
@@ -193,9 +302,6 @@ class EndpointController extends Controller
                     }
 
                     $history = $zabbix->getHistory($item->itemid, $item->value_type);
-//                    $history = $zabbix->getHistory('66279');
-
-                    dd($history);
 
                     break;
 
@@ -212,13 +318,12 @@ class EndpointController extends Controller
     }
 
 
-    public function createView(){
+    public function createView()
+    {
 
         return view('measure.endpoint_create', ['viewname' => 'Create Endpoint']);
 
     }
-
-
 
 
 }

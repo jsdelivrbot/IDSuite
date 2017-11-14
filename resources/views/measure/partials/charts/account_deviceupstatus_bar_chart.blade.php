@@ -52,6 +52,15 @@
         }
     }
 
+    /**
+     *
+     * deviceUpStatusAll
+     *
+     * gets data to build device up status all chart
+     *
+     * @param entity_id
+     * @param el
+     */
     function deviceUpStatusAll(entity_id, el) {
 
         setChartHW(el, '500px', '200px');

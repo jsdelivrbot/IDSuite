@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Enums\EnumDataSourceType;
+use App\Enums\EnumStatusType;
+use Carbon\Carbon;
 use Exception;
 
 use App\Model as Model;
@@ -256,5 +258,112 @@ class Endpoint extends Model
         return false;
     }
 
+
+    /**
+     *
+     * getType
+     *
+     * return the value type of endpoint->type
+     *
+     * @return mixed
+     */
+    public function getType()
+    {
+
+        return EnumDataSourceType::getValueByKey($this->type);
+
+    }
+
+
+    /**
+     *
+     * getCallCount
+     *
+     * return the count of call records associated to this endpoint
+     *
+     * @return int
+     */
+    public function getCallCount()
+    {
+        $count = 'count(*)';
+        return \DB::select("select count(*) from record where record.endpoint_id = '$this->id'")[0]->$count;
+    }
+
+
+    /**
+     *
+     * getAverageCallDuration
+     *
+     * return the count of call records associated to this endpoint
+     *
+     * @return array
+     */
+    public function getAverageCallDuration()
+    {
+        return \DB::select("select AVG(timeperiod.duration) as timeperiod_duration from record LEFT join timeperiod on record.timeperiod_id=timeperiod.id where record.endpoint_id = '$this->id'")[0]->timeperiod_duration;
+    }
+
+
+    /**
+     *
+     * getEntityName
+     *
+     * return Endpoint Entity's name
+     *
+     * @return null|string
+     */
+    public function getEntityName()
+    {
+
+        return $this->entity->contact->name->name;
+
+    }
+
+
+    /**
+     *
+     * getProxyName
+     *
+     * return Endpoint Entity's name
+     *
+     * @return null|string
+     */
+    public function getProxyName()
+    {
+
+        return $this->proxy->name;
+
+    }
+
+    /**
+     *
+     * getStatus
+     *
+     * get the status value from key
+     *
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return EnumStatusType::getValueByKey($this->status);
+    }
+
+
+    /**
+     * @param Carbon $start_date
+     * @return mixed
+     */
+    public function getRecordsByDate(Carbon $start_date){
+
+        $start_date = $start_date->toDateString();
+
+        /**
+         * @var Carbon $start_date
+         */
+        $records = \DB::select("select record.*, timeperiod.start as timeperiod_start, timeperiod.duration as timeperiod_duration from record LEFT join timeperiod on record.timeperiod_id=timeperiod.id where timeperiod.start > '$start_date' AND record.endpoint_id = '$this->id'");
+
+        return $records;
+
+    }
 
 }

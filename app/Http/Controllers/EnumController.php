@@ -30,66 +30,90 @@ class EnumController extends Controller
     /**
      *  returns gender enum
      */
-    public function gender(){
-        $genders = EnumGenderType::getValues();
+    public function gender($options){
 
-        return response()->json([
-            'data' => $genders
-        ]);
+        $options = json_decode($options);
+
+        $this->validateObject($options);
+
+        $genders = EnumGenderType::$enum;
+
+
+        return response()->json($genders);
 
     }
 
     /**
      *  returns modelType enum
      */
-    public function modelType(){
-        $modelTypes = EnumModelType::getKeys();
+    public function modelType($options){
 
-        return response()->json([
-            'data' => $modelTypes
-        ]);
+        $options = json_decode($options);
+
+        $this->validateObject($options);
+
+        $modelTypes = EnumModelType::$enum;
+
+
+        return response()->json($modelTypes);
     }
 
     /**
      *  returns classCode enum
      */
-    public function classCode(){
-        $classCodes = EnumClassCode::getKeys();
+    public function classCode($options){
 
-        return response()->json([
-            'data' => $classCodes
-        ]);
+        $options = json_decode($options);
+
+        $this->validateObject($options);
+
+        $classCodes = EnumClassCode::$enum;
+
+
+        return response()->json($classCodes);
     }
 
     /**
      *  returns status enum
      */
-    public function status(){
-        $status = EnumStatusType::getKeys();
+    public function status($options){
 
-        return response()->json([
-            'data' => $status
-        ]);
+        $options = json_decode($options);
+
+        $this->validateObject($options);
+
+        $status = EnumStatusType::$enum;
+
+
+        return response()->json($status);
     }
 
     /**
      *  returns title enum
      */
-    public function title(){
-        $titles = EnumTitleType::getValues();
+    public function title($options){
 
-        return response()->json([
-            'data' => $titles
-        ]);
+        $options = json_decode($options);
+
+        $this->validateObject($options);
+
+        $titles = EnumTitleType::$enum;
+
+
+        return response()->json($titles);
     }
 
 
-    public function phoneType(){
-        $phonetypes = EnumPhoneNumberType::getValues();
+    public function phoneType($options){
 
-        return response()->json([
-            'data' => $phonetypes
-        ]);
+        $options = json_decode($options);
+
+        $this->validateObject($options);
+
+        $phonetypes = EnumPhoneNumberType::$enum;
+
+
+        return response()->json($phonetypes);
     }
 
 

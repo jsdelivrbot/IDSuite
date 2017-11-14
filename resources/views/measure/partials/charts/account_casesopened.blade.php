@@ -53,23 +53,35 @@
         }
     }
 
-    function casesOpened(el) {
+    /**
+     *
+     * casesOpened
+     *
+     * get case data for opened cases chart
+     *
+     * @param entity_id
+     * @param el
+     */
+    function casesOpened(entity_id, el) {
         setChartHW(el, '500px', '200px');
-        axios({
-            type: 'get',
-            url: '/api/casesopened'
-        }).then(function (data) {
 
-            if(!validate(data.data)){
-                return false;
-            }
-
-            chartCasesOpened(data.data);
+        let options = JSON.stringify({
+            id: entity_id,
+            start_time: 2017
         });
+
+        return axios.get('/api/chart/casesopened/' + options)
+            .then(function (data) {
+                if(!validate(data.data)){
+                    return false;
+                }
+
+                chartCasesOpened(data.data);
+            });
     }
 
     $( document ).ready(function() {
-        casesOpened($('#casesopened'));
+        axiosrequests.push = casesOpened('{{$entity->id}}',$('#casesopened'));
     });
 
 </script>

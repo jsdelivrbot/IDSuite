@@ -1,4 +1,4 @@
-    <section class="offset-lg-1 col-lg-10">
+    <section class="col-lg-10">
         <table class="table table-bordered hide" id="records-table" style="border-radius: 15px">
             <thead>
             <tr>
@@ -121,11 +121,23 @@
     <script>
     $( document ).ready(function() {
 
+        @if(isset($entity->id))
+            let id = '{{$entity->id}}';
+        @elseif(isset($endpoint->id))
+            let id = '{{$endpoint->id}}';
+        @else
+            let id = '{{Auth::user()->id}}';
+        @endif
+
+        let options = JSON.stringify({
+            id: id
+        });
+
         $('#records-table').DataTable({
             processing: true,
             serverSide: true,
             iDisplayLength: 10,
-            ajax: '/api/getRecordsDataTables',
+            ajax: '/records/getRecordsTable/' + options,
             columnDefs: [
                 {
                     targets: 0,
@@ -219,13 +231,14 @@
         $('#direction').text("");
         $('#protocol').text("");
 
-        $.ajax({
-            type: "GET",
-            url: '/api/getRecordDetails',
-            data: {
-                id: id
-            },
-            success: function (data) {
+        let options = JSON.stringify({
+            id: id
+        });
+
+        axios.get('/api/records/getRecordDetails/' + options)
+            .then(function(data){
+
+                data = data.data;
 
                 $('#record-id').text(data.id);
                 $('#endpoint-id').html('<a href="/devices/'+data.endpoint_id+'">'+data.endpoint_id+'</a>');
@@ -333,10 +346,7 @@
                         });
                     }
                 }
-            },
-        });
-
-
+            });
     }
 </script>
 

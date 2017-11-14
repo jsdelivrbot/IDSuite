@@ -15,7 +15,7 @@ class EnumMeasureSidebarLinks extends Enum
     public static $class_code = 'EMSL';
 
     public static $enum = [
-        'Accounts'      => ["url" => "/measure/accounts",       "class" => "btn-outline-teal"],
+        'Accounts'      => ["url" => "/measure/accounts",       "class" => "btn-outline-teal custom-top-link"],
         'Transactions'  => ["url" => "/measure/transactions",   "class" => "btn-outline-pink"],
         'Devices'       => ["url" => "/measure/devices",        "class" => "btn-outline-purple"],
         'Reports'       => ["url" => "/measure/reports",        "class" => "btn-outline-yellow"],

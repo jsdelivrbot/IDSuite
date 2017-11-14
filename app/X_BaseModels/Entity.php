@@ -4,6 +4,7 @@ namespace App;
 
 use App\Model as Model;
 use App\Enums\EnumDataSourceType;
+use Carbon\Carbon;
 
 /**
  * App\Entity
@@ -108,14 +109,13 @@ class Entity extends Model
         return $this->hasMany(Entity::class, 'parent_id', 'id');
     }
 
-    // many to one
-    public function endpoints()
-    {
-        return $this->hasMany(Endpoint::class, 'entity_id', 'id');
-    }
-
 
     // many to many //
+    public function endpoints()
+    {
+        return $this->belongsToMany(Endpoint::class)->withTimestamps();
+    }
+
     public function users()
     {
         return $this->belongsToMany(User::class)->withTimestamps();
@@ -143,6 +143,10 @@ class Entity extends Model
         }
 
         return $ref_array;
+    }
+
+    public function records(){
+        return $this->hasMany(Record::class, 'entity_id', 'id');
     }
 
 
@@ -220,6 +224,24 @@ class Entity extends Model
             ->get();
 
         return $result;
+    }
+
+
+    /**
+     * @param Carbon $start_date
+     * @return mixed
+     */
+    public function getRecordsByDate(Carbon $start_date = null){
+
+        if($start_date === null){
+            return \DB::select("select record.*, timeperiod.start as timeperiod_start, timeperiod.duration as timeperiod_duration from record LEFT join timeperiod on record.timeperiod_id=timeperiod.id where record.entity_id = '$this->id'");
+        } else {
+            $start_date = $start_date->toDateString();
+            return \DB::select("select record.*, timeperiod.start as timeperiod_start, timeperiod.duration as timeperiod_duration from record LEFT join timeperiod on record.timeperiod_id=timeperiod.id where timeperiod.start > '$start_date' AND record.entity_id = '$this->id'");
+        }
+
+
+
     }
 
 }

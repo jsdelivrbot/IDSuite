@@ -1,16 +1,11 @@
 <?php
 
 
-/**
- * Created by PhpStorm.
- * User: fbreidi
- * Date: 9/26/2017
- * Time: 10:50 AM
- */
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Enums\EnumDataSourceType;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\Netsuite\NetsuiteController;
 use App\Record;
 use Illuminate\Support\Facades\Crypt;
@@ -19,7 +14,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Helper\Funcs;
 use Illuminate\Support\Facades\Log;
 
-class APIController
+class APIController extends Controller
 {
 
     public static function validateRequest($proxy_id, $endpoint_address, $key)
@@ -45,6 +40,7 @@ class APIController
     {
 
         // $key = Crypt::decrypt($key);
+        dd('in get records');
 
         $proxy_id = $request->input('proxy_id');
         $endpoint_address = $request->input('endpoint');

@@ -30,6 +30,7 @@ use App\Location;
 use App\Model;
 use App\PersonName;
 use App\Proxy;
+use Carbon\Carbon;
 use Faker\Provider\DateTime;
 use GuzzleHttp\Psr7\Request;
 use function GuzzleHttp\Psr7\str;
@@ -505,6 +506,30 @@ class TestController extends Controller
      */
     public function test()
     {
+
+        /**
+         * @var Entity $entity
+         */
+        $entity = Entity::getObjectById('ENT59fb750428fa8');
+        $endpoint = Endpoint::getByName('portal.idsflame.com');
+
+        $entity->endpoints($endpoint)->save($endpoint);
+
+        $entity->save();
+
+        dd($entity->endpoints);
+
+        dd($endpoint);
+
+
+        /**
+         * @var Carbon $start_date
+         */
+        $start_date = Carbon::parse('first day of January 2017');
+
+        dd($entity->getRecordsByDate($start_date));
+
+
 
         $zabbix = new ZabbixController();
 

@@ -10,8 +10,66 @@
                     $number = rand(1,5);
                 @endphp
 
+                <style>
+                    .demo {
+                        position: relative;
+                        margin: 120px auto;
+                        width: 150px;
+                    }
+
+                    .loader {
+                        position: absolute;
+                        opacity: .7;
+                    }
+
+                    .loader circle {
+                        animation: draw 4s infinite ease-in-out;
+                        transform-origin: center;
+                        transform: rotate(-90deg);
+                    }
+
+                    .loader-2 circle,
+                    .loader-6 circle {
+                        animation-delay: 1s;
+                    }
+
+                    .loader-7 circle {
+                        animation-delay: 2s;
+                    }
+
+                    .loader-4 circle,
+                    .loader-8 circle {
+                        animation-delay: 3s;
+                    }
+
+                    .loader-3 {
+                        left: -150px;
+                        transform: rotateY(180deg);
+                    }
+
+                    .loader-6,
+                    .loader-7,
+                    .loader-8 {
+                        left: -150px;
+                        transform: rotateX(180deg) rotateY(180deg);
+                    }
+
+                    .loader-5 circle {
+                        opacity: .2;
+                    }
+
+                    @keyframes draw {
+                        50% {
+                            stroke-dashoffset: 0;
+                            transform: scale(.5);
+                        }
+                    }
+
+                </style>
 
                 @if($number === 1)
+
+
 
                     <div class="card card-inverse card-square border-bottom-pink border-right-pink"
                          style="border-top: none; border-left: none; background-color: transparent;">
@@ -21,7 +79,41 @@
 
                             <div class="col-md-10 offset-1">
                                 <input type="button" value="Export charts to PDF" onclick="createReport();"/>
-                                <div id="chart1" style="width: 100%; height: 400px;"></div>
+                                <div  class="chart-container">
+                                    <div id="chart1" style="width: 100%; height: 400px;"></div>
+                                </div>
+
+
+                                {{--<div class="demo">--}}
+                                    {{--<svg class="loader">--}}
+                                        {{--<filter id="blur">--}}
+                                            {{--<fegaussianblur in="SourceGraphic" stddeviation="2"></fegaussianblur>--}}
+                                        {{--</filter>--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#F4F519" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-2">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#DE2FFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-3">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#FF5932" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-4">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#E97E42" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-5">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="white" stroke-width="6" stroke-linecap="round" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-6">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#00DCA3" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-7">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="purple" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-8">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#AAEA33" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                {{--</div>--}}
+
                             </div>
 
                         </div>
@@ -40,6 +132,38 @@
                                 <div class="chart-container">
                                     <div id="chart1" style="width: 100%; height: 400px;"></div>
                                 </div>
+
+
+                                {{--<div class="demo">--}}
+                                    {{--<svg class="loader">--}}
+                                        {{--<filter id="blur">--}}
+                                            {{--<fegaussianblur in="SourceGraphic" stddeviation="2"></fegaussianblur>--}}
+                                        {{--</filter>--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#F4F519" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-2">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#DE2FFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-3">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#FF5932" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-4">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#E97E42" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-5">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="white" stroke-width="6" stroke-linecap="round" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-6">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#00DCA3" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-7">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="purple" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-8">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#AAEA33" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                {{--</div>--}}
+
                             </div>
 
                         </div>
@@ -58,6 +182,38 @@
                                 <div class="chart-container">
                                     <div id="chart1" style="width: 100%; height: 400px;"></div>
                                 </div>
+
+
+                                {{--<div class="demo">--}}
+                                    {{--<svg class="loader">--}}
+                                        {{--<filter id="blur">--}}
+                                            {{--<fegaussianblur in="SourceGraphic" stddeviation="2"></fegaussianblur>--}}
+                                        {{--</filter>--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#F4F519" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-2">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#DE2FFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-3">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#FF5932" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-4">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#E97E42" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-5">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="white" stroke-width="6" stroke-linecap="round" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-6">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#00DCA3" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-7">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="purple" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-8">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#AAEA33" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                {{--</div>--}}
+
                             </div>
 
                         </div>
@@ -76,6 +232,38 @@
                                 <div class="chart-container">
                                     <div id="chart1" style="width: 100%; height: 400px;"></div>
                                 </div>
+
+
+                                {{--<div class="demo">--}}
+                                    {{--<svg class="loader">--}}
+                                        {{--<filter id="blur">--}}
+                                            {{--<fegaussianblur in="SourceGraphic" stddeviation="2"></fegaussianblur>--}}
+                                        {{--</filter>--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#F4F519" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-2">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#DE2FFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-3">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#FF5932" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-4">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#E97E42" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-5">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="white" stroke-width="6" stroke-linecap="round" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-6">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#00DCA3" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-7">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="purple" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-8">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#AAEA33" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                {{--</div>--}}
+
                             </div>
 
                         </div>
@@ -94,6 +282,38 @@
                                 <div class="chart-container">
                                     <div id="chart1" style="width: 100%; height: 400px;"></div>
                                 </div>
+
+
+                                {{--<div class="demo">--}}
+                                    {{--<svg class="loader">--}}
+                                        {{--<filter id="blur">--}}
+                                            {{--<fegaussianblur in="SourceGraphic" stddeviation="2"></fegaussianblur>--}}
+                                        {{--</filter>--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#F4F519" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-2">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#DE2FFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-3">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#FF5932" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-4">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#E97E42" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-5">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="white" stroke-width="6" stroke-linecap="round" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-6">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#00DCA3" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-7">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="purple" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                    {{--<svg class="loader loader-8">--}}
+                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#AAEA33" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
+                                    {{--</svg>--}}
+                                {{--</div>--}}
+
                             </div>
 
                         </div>
@@ -485,7 +705,7 @@
          * @param entity_id
          * @param start_time
          */
-        function callVolumeOverTime(entity_id, start_time = null) {
+        function callVolumeOverTime(entity_id, start_time = (new Date()).getFullYear()) {
 
             let options = JSON.stringify({
                 id: entity_id,
@@ -530,6 +750,9 @@
                     let name = entity.name;
 
                     setHeaderCard(name);
+
+                    setLocationTab(entity.sites, $('.location-tab'));
+                    setContactTab(entity.personnel, $('.contacts-tab'));
                 });
         }
 

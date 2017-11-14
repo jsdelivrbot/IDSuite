@@ -133,25 +133,33 @@
         }
     }
 
-    function accountCases(el) {
+    /**
+     *
+     * accountCases
+     *
+     * get case data for account cases chart
+     *
+     * @param entity_id
+     * @param el
+     */
+    function accountCases(entity_id, el) {
         setChartHW(el, '500px', '200px');
 
-        $.ajax({
-            type: "GET",
-            url: '/api/accountcases',
-            success: function (data) {
-
-                if(!validate(data.data)){
-                    return false;
-                }
-
-                chartAccountCases(data.data);
-            }
+        let options = JSON.stringify({
+            id: entity_id
         });
+
+        return axios.get('/api/chart/accountcases/' + options).then(function(data){
+            if(!validate(data.data)){
+                return false;
+            }
+
+            chartAccountCases(data.data);
+        })
     }
 
     $( document ).ready(function() {
-        accountCases($('#accountcases'));
+        axiosrequests.push = accountCases('{{$entity->id}}', $('#accountcases'));
     });
 
 

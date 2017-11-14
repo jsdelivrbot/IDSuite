@@ -22,49 +22,54 @@ class DatatablesController extends Controller
         return view('datatables.index', ['viewname' => 'DataTables']);
     }
 
-    private static function http_post($payload){
-
-        $client = new \GuzzleHttp\Client(['verify' => false]);
-
-        $request = new \GuzzleHttp\Psr7\Request('POST', self::url(), self::headers(), $payload);
-
-        $result = json_decode($client->send($request)->getBody()->getContents());
-
-        return $result;
-    }
-
     /**
      * Process datatables ajax request.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
-    public function getRecordsDataTables()
+    public function getRecordsTable(Request $request, $options)
     {
 
-        $id = session('data_table_id');
+        $options = json_decode($options);
 
-        if($id === null) {
+        $object = $this->validateObject($options);
+
+        if(get_class($object) === "App\Entity") {
             $records = DB::table('record')
                 ->leftjoin('timeperiod', 'record.timeperiod_id', '=', 'timeperiod.id')
-                ->select('record.id as record_id', 'local_name', 'remote_name', 'start', 'direction', 'duration');
-        } else {
+                ->select('record.id as record_id', 'local_name', 'remote_name', 'start', 'direction', 'duration')
+                ->where('record.entity_id', '=', $object->id);
+        } elseif (get_class($object) === "App\Endpoint"){
             $records = DB::table('record')
                 ->leftjoin('timeperiod', 'record.timeperiod_id', '=', 'timeperiod.id')
                 ->leftjoin('endpoint', 'record.endpoint_id', '=', 'endpoint.id')
                 ->select('record.id as record_id', 'local_name', 'remote_name', 'start', 'direction', 'duration')
-                ->where('endpoint.entity_id', '=', $id);
+                ->where('endpoint.entity_id', '=', $object->id);
+        } elseif(get_class($object) === "App\User") {
+            $records = DB::table('record')
+                ->leftjoin('timeperiod', 'record.timeperiod_id', '=', 'timeperiod.id')
+                ->select('record.id as record_id', 'local_name', 'remote_name', 'start', 'direction', 'duration');
+        } else{
+            return response()->json([
+                'request'   => $request->path(),
+                'error'     => 'The id must be valid and of type Entity, User, or Endpoint'
+            ]);
         }
 
-        $rec_count = $records->get()->count();
 
-        session(['trans_count' => $rec_count]);
+        $request = new \Yajra\Datatables\Request($request);
 
-        if( $rec_count === 0){
-            return response()->json(false);
-        };
+        $datatables = new Datatables($request);
 
+        session(['recordTableCount' => $records->get()->count()]);
 
-        return Datatables::of($records)->make(true);
+        return $datatables->of($records)->make(true);
     }
+
+
+    public function getRecordTableCount(){
+
+        return session('recordTableCount');
+
+    }
+
 
 }

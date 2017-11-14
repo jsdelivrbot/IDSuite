@@ -37,6 +37,15 @@
             }
         }
 
+        /**
+         *
+         * deviceByType
+         *
+         * used to get data for device by type chart.
+         *
+         * @param entity_id
+         * @param el
+         */
         function deviceByType(entity_id, el) {
 
             setChartHW(el, '500px', '200px');

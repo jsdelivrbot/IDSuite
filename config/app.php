@@ -168,6 +168,7 @@ return [
         Aloha\Twilio\Support\Laravel\ServiceProvider::class,
         Chumper\Zipper\ZipperServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -234,6 +235,7 @@ return [
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
         'Twilio' => Aloha\Twilio\Support\Laravel\Facade::class,
         'Zipper' => Chumper\Zipper\Zipper::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

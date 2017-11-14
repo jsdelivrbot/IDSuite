@@ -208,6 +208,7 @@ class EntityController extends Controller
 
         $entity_obj->tickets = (new Ticket)->where('entity_id', '=', $entity->id)->paginate(15);
 
+
         return response()->json(['entity' => $entity_obj]);
     }
 }

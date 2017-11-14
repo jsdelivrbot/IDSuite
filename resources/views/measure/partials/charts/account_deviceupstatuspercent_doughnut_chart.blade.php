@@ -28,14 +28,25 @@
             });
         }
 
-        function deviceUpStatusPercentAll(el) {
+        /**
+         *
+         * deviceUpStatusPercentAll
+         *
+         * get data for device up status percent all chart
+         *
+         * @param entity_id
+         * @param el
+         */
+        function deviceUpStatusPercentAll(entity_id, el) {
 
             setChartHW(el, '500px', '200px');
 
-            axios({
-                type: 'get',
-                url: '/api/deviceUpStatusPercentAll'
-            }).then(function (data) {
+            let options = JSON.stringify({
+                id: entity_id
+            });
+
+            return axios.get('/api/chart/deviceUpStatusPercentAll/' + options)
+                .then(function (data) {
 
                 if(!validate(data.data)){
                     return false;
@@ -47,7 +58,7 @@
         }
 
         $(document).ready(function () {
-            deviceUpStatusPercentAll($('#deviceupstatuspercentall'));
+            axiosrequests.push = deviceUpStatusPercentAll('{{$entity->id}}',$('#deviceupstatuspercentall'));
         });
 
     </script>

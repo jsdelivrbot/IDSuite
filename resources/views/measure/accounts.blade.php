@@ -60,65 +60,6 @@
 
         /**
          *
-         * setQuantity
-         *
-         * set the quantity to the entities-count id.
-         *
-         * @param entities
-         */
-        function setQuantity(entities) {
-            $('#entities-count').text('Qty: ' + entities.length);
-        }
-
-        /**
-         *
-         * createEntityCards
-         *
-         * creates the cards that represent customers in the this view at cards id.
-         *
-         * @param entities
-         */
-        function createEntityCards(entities) {
-
-            let rowkey;
-
-            $.each(entities, function (key, value) {
-                if (key % 3 === 0 || key === entities.length) {
-                    rowkey = key;
-                    $('#cards').append('<div class="row" id="row-' + key + '">');
-
-                    $('#row-' + key).prepend(
-                        '<div class="col-lg-4"> ' +
-                        '<div class="card mb-3 text-center" style="background-color: #1BC98E;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">' +
-                        '<div class="card-block"> ' +
-                        '<h4 class="card-title text-truncate">' + value.name + '</h4> ' +
-                        '<div class="searchfilterterm" style="display: none;">' + value.name.toLowerCase() + '</div> ' +
-                        '<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p> ' +
-                        '<a href="/measure/accounts/' + value.id + '" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a> ' +
-                        '</div> ' +
-                        '</div> ' +
-                        '</div>'
-                    )
-
-                } else {
-                    $('#row-' + rowkey).prepend('' +
-                        '<div class="col-lg-4"> ' +
-                        '<div class="card mb-3 text-center" style="background-color: #1BC98E;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);"> ' +
-                        '<div class="card-block"> ' +
-                        '<h4 class="card-title text-truncate">' + value.name + '</h4> ' +
-                        '<div class="searchfilterterm" style="display: none;">' + value.name.toLowerCase() + '</div> ' +
-                        '<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p> ' +
-                        '<a href="/measure/accounts/' + value.id + '" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a> ' +
-                        '</div> ' +
-                        '</div> ' +
-                        '</div>'
-                    )
-                }
-            });
-        }
-
-        /**
-         *
          * getEntities
          *
          * returns all the entities objects to create the cards.
@@ -140,30 +81,14 @@
                     }
 
                     if (entities.length > 0) {
-                        setQuantity(entities);
-                        createEntityCards(entities);
+                        setQuantity(entities, $('#entities-count'));
+                        createCards(entities, '/measure/accounts/');
                     } else {
                         alert('Hello {{Auth::user()->contact->name->first_name}} you don\'t seem to have any accounts to manage.');
                     }
                 });
         }
 
-        /**
-         *
-         * initSearchBox
-         *
-         * given the searchbox element and set containing the elements to search within. On a keypress this function will filter them.
-         *
-         * @param el
-         * @param haystack
-         */
-        function initSearchBox(el, haystack) {
-            el.keypress(function () {
-                $('.card').parent().show();
-                let filter = $(this).val();
-                haystack.find(".searchfilterterm:not(:contains(" + filter.toLowerCase() + "))").parent().parent().parent().css('display', 'none');
-            });
-        }
 
         /**
          *

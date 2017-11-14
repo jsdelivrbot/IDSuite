@@ -47,43 +47,51 @@ Route::get('/authenticate', 'LoginController@authenicate');
 
 Route::group(['middleware' => ['auth']], function () {
 
+
+    /*
+     *
+     * refactored routes
+     *
+     */
+
+    /**
+     * Endpoint Routes
+     */
+    Route::get('/measure/devices' , 'EndpointController@getEndpointsView');
+    Route::get('/measure/devices/{id}', 'EndpointController@getEndpointView');
+
+    /**
+     * entity routes
+     */
+    Route::get('/measure/accounts', 'EntityController@getEntitiesView');
+    Route::get('/measure/accounts/{id}', 'EntityController@getEntityView');
+
+    /*
+     * Utility routes
+     */
     Route::get('/passport', 'PassportController@index');
-
-    Route::get('/getUsers', 'UserController@getUsers');
-
-    // apppicker routes //
-
     Route::get('/apps', function(){
         return view('/idsuite/apppicker', ['viewname' => 'App Selection']);
     });
 
+
+    /**
+     *
+     * unrefactored routes
+     *
+     */
+
+
+    Route::get('/getUsers', 'UserController@getUsers');
+
+
+
     // chart routes //
 
-//    Route::get('/api/callVolumeOverTime', 'ChartController@callVolumeOverTime');
-
-//    Route::get('/api/deviceByType', 'ChartController@deviceByType');
-
-//    Route::get('/api/deviceUpStatusAll', 'ChartController@deviceUpStatusAll');
-
-//    Route::get('/api/deviceUpStatusPercentAll', 'ChartController@deviceUpStatusPercentAll');
-//
-//    Route::get('/api/protocolbreakout', 'ChartController@protocolBreakout');
-//
-//    Route::get('/api/deviceCostPerCallAvg', 'ChartController@deviceCostPerCallAvg');
-//
-//    Route::get('/api/devicePingData', 'ChartController@devicePingData');
-//
-//    Route::get('/api/avergaecallduration', 'ChartController@averageCallDuration');
-//
-//    Route::get('/api/accountcases', 'ChartController@accountCases');
-//
-//    Route::get('/api/casesopened', 'ChartController@casesOpened');
 
     Route::get('/api/chart/', 'ChartController@index');
 
     Route::get('/api/chart/getCustomers', 'ChartController@getCustomers');
-
-    Route::get('/api/totalcallduration', 'ChartController@totalCallDuration');
 
     Route::post('/api/chart/vot', 'ChartController@vot');
 
@@ -92,11 +100,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Endpoint routes //
 
-    Route::get('/measure/devices/{id}', 'EndpointController@show');
+
 
     Route::get('/measure/device/create', 'EndpointController@createView');
 
-    Route::get('/measure/devices' , 'EndpointController@index');
+
 
     Route::get('/api/getDeviceStatus', 'EndpointController@getDeviceStatus');
 
@@ -104,30 +112,6 @@ Route::group(['middleware' => ['auth']], function () {
     // EndpointModel routes //
 
     Route::get('/measure/model/{id}', 'EndpointModelController@show');
-
-
-    // Entity routes //
-
-    Route::get('/measure/accounts', 'EntityController@getEntitiesView');
-
-    Route::get('/measure/accounts/all', 'EntityController@all');
-
-    Route::get('/measure/accounts/{id}', 'EntityController@getEntityView');
-
-
-    // Enums Route //
-
-    Route::get('/api/modelTypeEnum', 'EnumController@modelType');
-
-    Route::get('/api/classCodeEnum', 'EnumController@classCode');
-
-    Route::get('/api/statusEnum', 'EnumController@status');
-
-    Route::get('/api/titleEnum', 'EnumController@title');
-
-    Route::get('/api/genderEnum', 'EnumController@gender');
-
-    Route::get('/api/phoneTypeEnum', 'EnumController@phoneType');
 
 
     // Note Routes //
@@ -153,7 +137,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/measure/transactions', 'RecordController@index');
 
-    Route::get('/api/getRecordDetails', 'RecordController@getRecordDetails');
+//    Route::get('/api/getRecordDetails', 'RecordController@getRecordDetails');
 
     Route::get('/api/getTransactions', 'RecordController@getTransactions');
 
@@ -162,8 +146,8 @@ Route::group(['middleware' => ['auth']], function () {
         'getIndex' => 'datatables'
     ]);
 
-    Route::get('/api/getRecordsDataTables', 'DataTablesController@getRecordsDataTables');
-
+    Route::get('/records/getRecordsTable/{options}', 'DatatablesController@getRecordsTable');
+    Route::get('/records/getRecordsTableCount', 'DatatablesController@getRecordTableCount');
 
     // Tickets routes //
 

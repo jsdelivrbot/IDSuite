@@ -14,9 +14,8 @@
 <script src="{{asset('assets/js/jquery.validate.js')}}"></script>
 <script src="{{asset('assets/js/additional-methods.js')}}"></script>
 
-
-@stack('custom_tabs')
 @stack('account_scripts')
+@stack('custom_tabs')
 @stack('transaction_data_table')
 @stack('account_devicebytype_chart')
 @stack('account_deviceupstatus_chart')

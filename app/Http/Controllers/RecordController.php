@@ -13,9 +13,11 @@ use App\Record;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 
-class RecordController
+class RecordController extends Controller
 {
     public $randomnumber;
+
+
 
     /**
      * Display a listing of the resource.
@@ -47,10 +49,14 @@ class RecordController
         return view('measure.transactions', ['viewname' => 'Transactions']);
     }
 
-    public function getRecordDetails(){
-        $id = Input::get('id');
+    public function getRecordDetails($options){
 
-        $record = Record::getObjectById($id);
+        $options = json_decode($options);
+
+        /**
+         * @var Record $record
+         */
+        $record = $this->validateObject($options);
 
         $timeperiod = new \stdClass();
 
@@ -64,7 +70,7 @@ class RecordController
         $r->id = $record->id;
         $r->timeperiod = $timeperiod;
         $r->local_id = $record->local_id;
-        $r->conference_id = $record->conference_id;
+        $r->conference_id = $record->conf_id;
         $r->local_name = $record->local_name;
         $r->local_number = $record->local_number;
         $r->remote_name = $record->remote_name;
@@ -74,17 +80,19 @@ class RecordController
         $r->protocol = $record->protocol;
 
 
-        if($record->remote_location->coordinate->lat !== $record->endpoint->location->coordinate->lat && $record->remote_location->coordinate->lng !== $record->endpoint->location->coordinate->lng) {
-            $r->remote_lat = $record->remote_location->coordinate->lat;
-            $r->remote_lng = $record->remote_location->coordinate->lng;
-            $r->local_lat = $record->endpoint->location->coordinate->lat;
-            $r->local_lng = $record->endpoint->location->coordinate->lng;
-        } else {
-            $r->remote_lat = $record->remote_location->coordinate->lat + .00002;
-            $r->remote_lng = $record->remote_location->coordinate->lng + .00002;
-            $r->local_lat = $record->endpoint->location->coordinate->lat;
-            $r->local_lng = $record->endpoint->location->coordinate->lng;
-        }
+//        dd(json_encode($record->endpoint));
+//
+//        if($record->remote_location->coordinate->lat !== $record->endpoint->location->coordinate->lat && $record->remote_location->coordinate->lng !== $record->endpoint->location->coordinate->lng) {
+//            $r->remote_lat = $record->remote_location->coordinate->lat;
+//            $r->remote_lng = $record->remote_location->coordinate->lng;
+//            $r->local_lat = $record->endpoint->location->coordinate->lat;
+//            $r->local_lng = $record->endpoint->location->coordinate->lng;
+//        } else {
+//            $r->remote_lat = $record->remote_location->coordinate->lat + .00002;
+//            $r->remote_lng = $record->remote_location->coordinate->lng + .00002;
+//            $r->local_lat = $record->endpoint->location->coordinate->lat;
+//            $r->local_lng = $record->endpoint->location->coordinate->lng;
+//        }
 
         return response()->json($r);
 

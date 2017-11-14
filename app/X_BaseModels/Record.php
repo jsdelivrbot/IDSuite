@@ -89,10 +89,12 @@ class Record extends Model
 
     public function entity(Entity $e = null)
     {
+
         if ($e !== null) {
             $this->entity_id = $e->id;
         }
-        return $this->hasOne(Endpoint::class, 'id', 'entity_id');
+
+        return $this->hasOne(Entity::class, 'id', 'entity_id');
     }
 
     public function timeperiod(TimePeriod $t = null)
@@ -272,5 +274,19 @@ class Record extends Model
             ->get();
 
         return $result;
+    }
+
+
+    /**
+     *
+     * getDuration
+     *
+     * return record duration
+     *
+     * @return int|null
+     */
+    public function getDuration()
+    {
+        return $this->timeperiod->duration;
     }
 }

@@ -1,4 +1,4 @@
-<div class="tab-pane card-block active-outline-card-block-color-{{$tab_count}}" id="card-block-tab-{{$tab_count}}" role="tabpanel">
+<div class="tab-pane card-block active-outline-card-block-color-{{$tab_count}} contacts-tab" id="card-block-tab-{{$tab_count}}" role="tabpanel">
 
     <div id="contacts-title" class="row mt-2 mb-3">
         <div class="col-lg-6">
@@ -9,91 +9,93 @@
         </div>
     </div>
 
-    @if(count($entity->personel) > 0)
+    {{--@if(count($entity->personel) > 0)--}}
 
-        @foreach($entity->personel as $p)
+        {{--@foreach($entity->personel as $p)--}}
 
 
-            <h5 class="card-title mt-2 text-white">{{$p->fullname}}</h5>
-            <div class="card-text text-white">
-                {{--<ul class="list-group row" style="background-color: transparent;">--}}
-                    <div class="row">
-                        <li class="col-lg-6 list-group-item" style="background-color: transparent; border: none;">
+            {{--<h5 class="card-title mt-2 text-white">{{$p->fullname}}</h5>--}}
+            {{--<div class="card-text text-white">--}}
+                    {{--<div class="row">--}}
+                        {{--<li class="col-lg-6 list-group-item" style="background-color: transparent; border: none;">--}}
                         {{--<div class="col-lg-6">--}}
-                            <div class="col-lg-4">Email</div>
-                            <div class="col-lg-8">{{$p->email}}</div>
-                            <div class="col-lg-4">Phone Number</div>
-                            <div class="col-lg-8">{{$p->number}}</div>
-                            <div class="col-lg-4">Phone Type</div>
-                            <div class="col-lg-8">{{$p->phonetype}}</div>
-                            <div class="col-lg-4">Address</div>
-                            <div class="col-lg-8">{{$p->address}}</div>
-                            <div class="col-lg-4">City</div>
-                            <div class="col-lg-8">{{$p->city}}</div>
-                            <div class="col-lg-4">State</div>
-                            <div class="col-lg-8">{{$p->state}}</div>
-                            <div class="col-lg-4">Postal Code</div>
-                            <div class="col-lg-8">{{$p->zip}}</div>
-                        </li>
+                            {{--<div class="col-lg-4">Email</div>--}}
+                            {{--<div class="col-lg-8">{{$p->email}}</div>--}}
+                            {{--<div class="col-lg-4">Phone Number</div>--}}
+                            {{--<div class="col-lg-8">{{$p->number}}</div>--}}
+                            {{--<div class="col-lg-4">Phone Type</div>--}}
+                            {{--<div class="col-lg-8">{{$p->phonetype}}</div>--}}
+                            {{--<div class="col-lg-4">Address</div>--}}
+                            {{--<div class="col-lg-8">{{$p->address}}</div>--}}
+                            {{--<div class="col-lg-4">City</div>--}}
+                            {{--<div class="col-lg-8">{{$p->city}}</div>--}}
+                            {{--<div class="col-lg-4">State</div>--}}
+                            {{--<div class="col-lg-8">{{$p->state}}</div>--}}
+                            {{--<div class="col-lg-4">Postal Code</div>--}}
+                            {{--<div class="col-lg-8">{{$p->zip}}</div>--}}
+                        {{--</li>--}}
+                        {{----}}
+                        {{--<div class="col-lg-6">--}}
+                            {{--@php--}}
+
+                                {{--$count = count($p->badges);--}}
+
+                            {{--@endphp--}}
+
+                            {{--<div class="row mt-lg-5">--}}
+                            {{--@foreach($p->badges as $badge)--}}
+
+                                {{--@if($badge === "IDSuite")--}}
+
+                                    {{--<div class="col-lg-{{12/$count}}">--}}
+                                        {{--<h2><span class="badge badge-pill badge-warning">IDSuite</span></h2>--}}
+                                    {{--</div>--}}
+
+                                {{--@elseif($badge === "NetSuite")--}}
+
+                                    {{--<div class="col-lg-{{12/$count}}">--}}
+                                        {{--<h2><span class="badge badge-pill badge-info">NetSuite</span></h2>--}}
+                                    {{--</div>--}}
+
+                                {{--@elseif($badge === "Manual")--}}
+
+                                    {{--<div class="col-lg-{{12/$count}}">--}}
+                                        {{--<h2><span class="badge badge-pill badge-success">Manual</span></h2>--}}
+                                    {{--</div>--}}
+
+                                {{--@elseif($badge === "Trust")--}}
+
+                                    {{--<div class="col-lg-{{12/$count}}">--}}
+                                        {{--<h2><span class="badge badge-pill badge-danger">Trust</span></h2>--}}
+                                    {{--</div>--}}
+
+                                {{--@endif--}}
+
+
+                            {{--@endforeach--}}
+                            {{--</div>--}}
                         {{--</div>--}}
-                        <div class="col-lg-6">
-                            @php
-
-                                $count = count($p->badges);
-
-                            @endphp
-
-                            <div class="row mt-lg-5">
-                            @foreach($p->badges as $badge)
-
-                                @if($badge === "IDSuite")
-
-                                    <div class="col-lg-{{12/$count}}">
-                                        <h2><span class="badge badge-pill badge-warning">IDSuite</span></h2>
-                                    </div>
-
-                                @elseif($badge === "NetSuite")
-
-                                    <div class="col-lg-{{12/$count}}">
-                                        <h2><span class="badge badge-pill badge-info">NetSuite</span></h2>
-                                    </div>
-
-                                @elseif($badge === "Manual")
-
-                                    <div class="col-lg-{{12/$count}}">
-                                        <h2><span class="badge badge-pill badge-success">Manual</span></h2>
-                                    </div>
-
-                                @elseif($badge === "Trust")
-
-                                    <div class="col-lg-{{12/$count}}">
-                                        <h2><span class="badge badge-pill badge-danger">Trust</span></h2>
-                                    </div>
-
-                                @endif
-
-
-                            @endforeach
-                            </div>
-                        </div>
-                    </div>
+                        {{----}}
+                    {{--</div>--}}
                 {{--</ul>--}}
-            </div>
+            {{--</div>--}}
 
-            @if(!$loop->last)
-                <hr id="contact-last-hr" class="mb-4" style="border-color: #d59043">
-            @endif
+            {{--@if(!$loop->last)--}}
+                {{--<hr id="contact-last-hr" class="mb-4" style="border-color: #d59043">--}}
+            {{--@endif--}}
 
-        @endforeach
+        {{--@endforeach--}}
 
-    @else
+    {{--@else--}}
 
-        <p class="card-text text-white">We currently do not have any contacts associated with this account.</p>
+        {{--<p class="card-text text-white">We currently do not have any contacts associated with this account.</p>--}}
 
-    @endif
+    {{--@endif--}}
 
 
     <!-- Modal -->
+
+
         <div class="modal" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -159,6 +161,7 @@
 @push('account_contacts')
 
     <script>
+
 
         $('#contact-form').validate({
             rules: {

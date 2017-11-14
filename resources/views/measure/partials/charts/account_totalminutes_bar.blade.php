@@ -53,22 +53,37 @@
         }
     }
 
-    function totalCallDuration(el) {
+    /**
+     *
+     * totalCallDuration
+     *
+     * gets data for total call duration chart
+     *
+     * @param entity_id
+     * @param el
+     */
+    function totalCallDuration(entity_id, el) {
+
         setChartHW(el, '500px', '200px');
 
-        axios({
-            type: 'get',
-            url: '/api/totalcallduration'
-        }).then(function (data) {
-            console.log(data.data);
+        let options = JSON.stringify({
+            id: entity_id,
+            start_time: 2017
+        });
 
-            chartTotalCallDuration(data.data);
+        return axios.get('/api/chart/totalcallduration/' + options)
+            .then(function (data) {
 
+                if(!validate(data.data)){
+                    return false;
+                }
+
+                chartTotalCallDuration(data.data);
         });
     }
 
     $( document ).ready(function() {
-        totalCallDuration($('#totalcallduration'));
+        axiosrequests.push = totalCallDuration('{{$entity->id}}',$('#totalcallduration'));
     });
 
 

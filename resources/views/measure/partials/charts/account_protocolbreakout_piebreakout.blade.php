@@ -80,19 +80,36 @@
             return chartData;
         }
 
-        function protocolBreakout(el) {
+        /**
+         *
+         * protocolBreakout
+         *
+         * get data for protocol breakout chart
+         *
+         * @param entity_id
+         * @param el
+         */
+        function protocolBreakout(entity_id, el) {
             setChartHW(el, '500px', '200px');
-            axios.get('/api/protocolbreakout')
+
+            let options = JSON.stringify({
+                id: entity_id
+            });
+
+            return axios.get('/api/chart/protocolbreakout/' + options)
                 .then(function (data) {
+
                     if(!validate(data.data)){
                         return false;
                     }
+
                     chartProtocolBreakout(data.data)
+
             });
         }
 
         $(document).ready(function () {
-            protocolBreakout($('#protocolbreakout'));
+            axiosrequests.push = protocolBreakout('{{$entity->id}}', $('#protocolbreakout'));
         });
 
     </script>

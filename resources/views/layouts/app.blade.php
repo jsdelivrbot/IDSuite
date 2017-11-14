@@ -135,13 +135,13 @@
                 </div>
 
 
-                <main class="col-sm-10 offset-sm-2 col-md-11 offset-md-1 col-lg-11 offset-lg-1 pt-3" id="app">
+                <main class="col-sm-10 offset-sm-2 col-md-11 offset-md-1 col-lg-11 offset-lg-1 pt-3">
                     @yield('content')
                 </main>
 
 
         @else
-                    <main class="col-sm-1 col-md-12  col-lg-12  pt-3" id="app">
+                    <main class="col-sm-1 col-md-12  col-lg-12  pt-3">
                         @yield('content')
                     </main>
         @endif
