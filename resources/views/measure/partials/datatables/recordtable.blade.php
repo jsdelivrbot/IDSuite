@@ -1,4 +1,4 @@
-    <section class="col-lg-10">
+    <section class="col-lg-12">
         <table class="table table-bordered hide" id="records-table" style="border-radius: 15px">
             <thead>
             <tr>
@@ -119,235 +119,247 @@
     @endphp
 
     <script>
-    $( document ).ready(function() {
 
-        @if(isset($entity->id))
-            let id = '{{$entity->id}}';
-        @elseif(isset($endpoint->id))
-            let id = '{{$endpoint->id}}';
-        @else
-            let id = '{{Auth::user()->id}}';
-        @endif
-
-        let options = JSON.stringify({
-            id: id
-        });
-
-        $('#records-table').DataTable({
-            processing: true,
-            serverSide: true,
-            iDisplayLength: 10,
-            ajax: '/records/getRecordsTable/' + options,
-            columnDefs: [
-                {
-                    targets: 0,
-                    data: 'local_name',
-                    name: 'local_name',
-                    defaultContent: "<i>Not Available<i>",
-                    render: function (data) {
-                        if (data === "") {
-                            return '<i>Not Available<i>';
-                        } else {
-                            return data;
-                        }
-                    }
-                },
-                {
-                    targets: 1,
-                    data: 'remote_name',
-                    name: 'remote_name',
-                    defaultContent: "<i>Not Available<i>",
-                    render: function (data) {
-                        if (data === "") {
-                            return '<i>Not Available<i>';
-                        } else {
-                            return data;
-                        }
-                    }
-                },
-                {
-                    targets: 2,
-                    data: 'start',
-                    name: 'timeperiod.start',
-                    defaultContent: "<i>Not Available<i>",
-                },
-                {
-                    targets: 3,
-                    data: 'duration',
-                    name: 'timeperiod.duration',
-                    defaultContent: "<i>Not Available<i>",
-                },
-                {
-                    targets: 4,
-                    data: 'direction',
-                    name: 'direction',
-                    defaultContent: "<i>Not Available<i>",
-                    render: function (data) {
-
-
-
-                        if(data === "in"){
-
-                            return '<i class="fa fa-phone"></i> <i class="fa fa-arrow-left"></i>';
-
-                        } else if(data === "out") {
-
-                            return '<i class="fa fa-phone"></i> <i class="fa fa-arrow-right"></i>';
-
-                        } else {
-
-                            return '<span>Unknown</span>';
-
-                        }
-
-                    }
-                },
-                {
-                    targets: 5,
-                    data: 'record_id',
-                    name: 'id',
-                    className: "text-center",
-                    render: function (data, type, full, meta) {
-                        return '<button class="btn btn-nav-teal" data-toggle="modal" data-target="#detailModal" onclick="getRecordDetails(\'' + data + '\')">Details</button>';
-                    }
-                },
-            ]
-        });
-    });
-
-    function getRecordDetails(id) {
-
-        $('#record-id').text("");
-        $('#start-time').text("");
-        $('#end-time').text("");
-        $('#duration').text("");
-        $('#local-id').text("");
-        $('#conference-id').text("");
-        $('#local-name').text("");
-        $('#local-number').text("");
-        $('#remote-name').text("");
-        $('#remote-number').text("");
-        $('#dialed-digits').text("");
-        $('#direction').text("");
-        $('#protocol').text("");
-
-        let options = JSON.stringify({
-            id: id
-        });
-
-        axios.get('/api/records/getRecordDetails/' + options)
-            .then(function(data){
-
-                data = data.data;
-
-                $('#record-id').text(data.id);
-                $('#endpoint-id').html('<a href="/devices/'+data.endpoint_id+'">'+data.endpoint_id+'</a>');
-                $('#start-time').text(data.timeperiod.start);
-                $('#end-time').text(data.timeperiod.end);
-                $('#duration').text(data.timeperiod.duration + ' seconds');
-                $('#local-id').text(data.local_id);
-                $('#conference-id').text(data.conference_id);
-                $('#local-name').text(data.local_name);
-                $('#local-number').text(data.local_number);
-                $('#remote-name').text(data.remote_name);
-                $('#remote-number').text(data.remote_number);
-                $('#dialed-digits').text(data.dialed_digits);
-                $('#direction').text(data.direction);
-                $('#protocol').text(data.protocol);
-
-
-                let local_location = new google.maps.LatLng(data.local_lat, data.local_lng);
-
-                let remote_location = new google.maps.LatLng(data.remote_lat, data.remote_lng);
-
-                let center = google.maps.geometry.spherical.interpolate(local_location,remote_location, .5);
-
-                let distance = Math.round(0.000621371192 * google.maps.geometry.spherical.computeDistanceBetween(local_location, remote_location));
-
-                let mileage_cost = .535 * distance;
-
-                let map;
-
-//                console.log('local_location : ' + local_location);
-//                console.log('remote_location : ' + remote_location);
-//                console.log(center.lat());
-//
-//                console.log("distance : " + distance);
-//
-//                console.log("mileage costs : $" + mileage_cost);
-
-                let service = new google.maps.DistanceMatrixService();
-
-                service.getDistanceMatrix(
-                    {
-                        origins: [local_location],
-                        destinations: [remote_location],
-                        travelMode: 'DRIVING',
-                        unitSystem: google.maps.UnitSystem.IMPERIAL,
-                        avoidHighways: false,
-                        avoidTolls: true,
-                    }, getDistance);
-
-                function getDistance(response, status) {
-                    if (status == 'OK') {
-                        let origins = response.originAddresses;
-                        let destinations = response.destinationAddresses;
-
-                        for (let i = 0; i < origins.length; i++) {
-                            let results = response.rows[i].elements;
-                            for (let j = 0; j < results.length; j++) {
-                                let element = results[j];
-                                let distance_text = element.distance.text;
-
-                                let distance_val = element.distance.value * 0.000621371192;
-                                let duration = element.duration.text;
-                                let mileage_cost = Math.round(.535 * distance_val);
-                                let from = origins[i];
-                                let to = destinations[j];
-
-                                $('#distance-text').text(distance_text);
-                                $('#mileage').text("$" + mileage_cost + ".00");
-                                $('#drive-duration').text(duration);
-                            }
-                        }
-                    }
-                }
-
-                initMap(local_location, remote_location, center);
-
-                function initMap(local_location, remote_location, center) {
-                    let directionsService = new google.maps.DirectionsService;
-                    let directionsDisplay = new google.maps.DirectionsRenderer;
-
-                    map = new google.maps.Map(document.getElementById('map'), {
-                        center: {lat: center.lat(),lng: center.lng()},
-                        zoom: 8
-                    });
-
-                    directionsDisplay.setMap(map);
-
-                    let bounds = new google.maps.LatLngBounds(local_location, remote_location);
-
-                    map.fitBounds(bounds);
-
-                    calculateAndDisplayRoute(directionsService, directionsDisplay);
-
-                    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-                        directionsService.route({
-                            origin: local_location,
-                            destination: remote_location,
-                            travelMode: 'DRIVING'
-                        }, function(response, status) {
-                            if (status === 'OK') {
-                                directionsDisplay.setDirections(response);
-                            } else {
-                                window.alert('Directions request failed due to ' + status);
-                            }
-                        });
-                    }
-                }
+        /**
+         * createRecordTable
+         *
+         * gets data and creates record table
+         *
+         * @param id
+         * @param el
+         */
+        function createRecordTable(id, el){
+            let options = JSON.stringify({
+                id: id
             });
-    }
+
+            el.DataTable({
+                processing: true,
+                serverSide: true,
+                iDisplayLength: 10,
+                ajax: '/records/getRecordsTable/' + options,
+                columnDefs: [
+                    {
+                        targets: 0,
+                        data: 'local_name',
+                        name: 'local_name',
+                        defaultContent: "<i>Not Available<i>",
+                        render: function (data) {
+                            if (data === "") {
+                                return '<i>Not Available<i>';
+                            } else {
+                                return data;
+                            }
+                        }
+                    },
+                    {
+                        targets: 1,
+                        data: 'remote_name',
+                        name: 'remote_name',
+                        defaultContent: "<i>Not Available<i>",
+                        render: function (data) {
+                            if (data === "") {
+                                return '<i>Not Available<i>';
+                            } else {
+                                return data;
+                            }
+                        }
+                    },
+                    {
+                        targets: 2,
+                        data: 'start',
+                        name: 'timeperiod.start',
+                        defaultContent: "<i>Not Available<i>",
+                    },
+                    {
+                        targets: 3,
+                        data: 'duration',
+                        name: 'timeperiod.duration',
+                        defaultContent: "<i>Not Available<i>",
+                    },
+                    {
+                        targets: 4,
+                        data: 'direction',
+                        name: 'direction',
+                        defaultContent: "<i>Not Available<i>",
+                        render: function (data) {
+                            if(data === "in"){
+                                return '<i class="fa fa-phone"></i> <i class="fa fa-arrow-left"></i>';
+                            } else if(data === "out") {
+                                return '<i class="fa fa-phone"></i> <i class="fa fa-arrow-right"></i>';
+                            } else {
+                                return '<span>Unknown</span>';
+                            }
+                        }
+                    },
+                    {
+                        targets: 5,
+                        data: 'record_id',
+                        name: 'id',
+                        className: "text-center",
+                        render: function (data, type, full, meta) {
+                            return '<button class="btn btn-nav-teal" data-toggle="modal" data-target="#detailModal" onclick="getRecordDetails(\'' + data + '\')">Details</button>';
+                        }
+                    },
+                ]
+            });
+        }
+
+        /**
+         *
+         * getRecordDetails
+         *
+         * gets details for each record in the record table and creates a modal with the information.
+         *
+         * @param id
+         */
+        function getRecordDetails(id) {
+
+            $('#record-id').text("");
+            $('#start-time').text("");
+            $('#end-time').text("");
+            $('#duration').text("");
+            $('#local-id').text("");
+            $('#conference-id').text("");
+            $('#local-name').text("");
+            $('#local-number').text("");
+            $('#remote-name').text("");
+            $('#remote-number').text("");
+            $('#dialed-digits').text("");
+            $('#direction').text("");
+            $('#protocol').text("");
+
+            let options = JSON.stringify({
+                id: id
+            });
+
+            axios.get('/api/records/getRecordDetails/' + options)
+                .then(function (data) {
+
+                    data = data.data;
+
+                    $('#record-id').text(data.id);
+                    $('#endpoint-id').html('<a href="/devices/' + data.endpoint_id + '">' + data.endpoint_id + '</a>');
+                    $('#start-time').text(data.timeperiod.start);
+                    $('#end-time').text(data.timeperiod.end);
+                    $('#duration').text(data.timeperiod.duration + ' seconds');
+                    $('#local-id').text(data.local_id);
+                    $('#conference-id').text(data.conference_id);
+                    $('#local-name').text(data.local_name);
+                    $('#local-number').text(data.local_number);
+                    $('#remote-name').text(data.remote_name);
+                    $('#remote-number').text(data.remote_number);
+                    $('#dialed-digits').text(data.dialed_digits);
+                    $('#direction').text(data.direction);
+                    $('#protocol').text(data.protocol);
+
+                    let local_location = new google.maps.LatLng(data.local_lat, data.local_lng);
+
+                    let remote_location = new google.maps.LatLng(data.remote_lat, data.remote_lng);
+
+                    let center = google.maps.geometry.spherical.interpolate(local_location, remote_location, .5);
+
+                    let distance = Math.round(0.000621371192 * google.maps.geometry.spherical.computeDistanceBetween(local_location, remote_location));
+
+                    let mileage_cost = .535 * distance;
+
+                    let map;
+
+                    //                console.log('local_location : ' + local_location);
+                    //                console.log('remote_location : ' + remote_location);
+                    //                console.log(center.lat());
+                    //
+                    //                console.log("distance : " + distance);
+                    //
+                    //                console.log("mileage costs : $" + mileage_cost);
+
+                    let service = new google.maps.DistanceMatrixService();
+
+                    service.getDistanceMatrix(
+                        {
+                            origins: [local_location],
+                            destinations: [remote_location],
+                            travelMode: 'DRIVING',
+                            unitSystem: google.maps.UnitSystem.IMPERIAL,
+                            avoidHighways: false,
+                            avoidTolls: true,
+                        }, getDistance);
+
+                    function getDistance(response, status) {
+                        if (status == 'OK') {
+                            let origins = response.originAddresses;
+                            let destinations = response.destinationAddresses;
+
+                            for (let i = 0; i < origins.length; i++) {
+                                let results = response.rows[i].elements;
+                                for (let j = 0; j < results.length; j++) {
+                                    let element = results[j];
+                                    let distance_text = element.distance.text;
+
+                                    let distance_val = element.distance.value * 0.000621371192;
+                                    let duration = element.duration.text;
+                                    let mileage_cost = Math.round(.535 * distance_val);
+                                    let from = origins[i];
+                                    let to = destinations[j];
+
+                                    $('#distance-text').text(distance_text);
+                                    $('#mileage').text("$" + mileage_cost + ".00");
+                                    $('#drive-duration').text(duration);
+                                }
+                            }
+                        }
+                    }
+
+                    initMap(local_location, remote_location, center);
+
+                    function initMap(local_location, remote_location, center) {
+                        let directionsService = new google.maps.DirectionsService;
+                        let directionsDisplay = new google.maps.DirectionsRenderer;
+
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            center: {lat: center.lat(), lng: center.lng()},
+                            zoom: 8
+                        });
+
+                        directionsDisplay.setMap(map);
+
+                        let bounds = new google.maps.LatLngBounds(local_location, remote_location);
+
+                        map.fitBounds(bounds);
+
+                        calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+                        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+                            directionsService.route({
+                                origin: local_location,
+                                destination: remote_location,
+                                travelMode: 'DRIVING'
+                            }, function (response, status) {
+                                if (status === 'OK') {
+                                    directionsDisplay.setDirections(response);
+                                } else {
+                                    window.alert('Directions request failed due to ' + status);
+                                }
+                            });
+                        }
+                    }
+                });
+        }
+
+
+        $( document ).ready(function() {
+
+            @if(isset($entity->id))
+                let id = '{{$entity->id}}';
+            @elseif(isset($endpoint->id))
+                let id = '{{$endpoint->id}}';
+            @else
+                let id = '{{Auth::user()->id}}';
+            @endif
+
+            createRecordTable(id, $('#records-table'));
+
+        });
 </script>
 
 <style>

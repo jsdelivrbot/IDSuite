@@ -9,29 +9,50 @@ use Illuminate\Http\Request;
 
 class ProductStatController extends Controller
 {
+
+
     /**
-     * Display a listing of the resource.
      *
+     * getStatsView
+     *
+     * return measure stats view
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getStatsView()
+    {
+        return view('measure.stats', ['viewname' => 'Product Statistics']);
+    }
+
+    /**
+     *
+     * getStats
+     *
+     * returns measure stats data
+     *
+     * @param $options
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getStats($options)
     {
 
-        $customer_count = count(Entity::all());
+        $options = json_decode($options);
 
+        $this->validateObject($options);
 
-        $zabbix_count = count(DynamicEnumValue::getByDynamicEnum('reference_key', EnumDataSourceType::getKeyByValue('zabbix')));
+        $stats = new \stdClass();
 
-        $netsuite_count = count(DynamicEnumValue::getByDynamicEnum('reference_key', EnumDataSourceType::getKeyByValue('netsuite')));
+        $stats->customer_count = count(Entity::all());
 
-        $mrge_count = count(DynamicEnumValue::getByDynamicEnum('reference_key', EnumDataSourceType::getKeyByValue('mrge')));
+        $stats->zabbix_count = count(DynamicEnumValue::getByDynamicEnum('reference_key', EnumDataSourceType::getKeyByValue('zabbix')));
 
-        $polycom_count = count(DynamicEnumValue::getByDynamicEnum('reference_key', EnumDataSourceType::getKeyByValue('polycom')));
+        $stats->netsuite_count = count(DynamicEnumValue::getByDynamicEnum('reference_key', EnumDataSourceType::getKeyByValue('netsuite')));
 
+        $stats->mrge_count = count(DynamicEnumValue::getByDynamicEnum('reference_key', EnumDataSourceType::getKeyByValue('mrge')));
 
-        $viewname = 'Product Statistics';
+        $stats->polycom_count = count(DynamicEnumValue::getByDynamicEnum('reference_key', EnumDataSourceType::getKeyByValue('polycom')));
 
-        return view('measure.stats', compact('customer_count', 'zabbix_count', 'netsuite_count', 'mrge_count', 'polycom_count', 'viewname'));
+        return response()->json($stats);
     }
 
     /**

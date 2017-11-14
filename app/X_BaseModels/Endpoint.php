@@ -54,6 +54,10 @@ use App\Model as Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $e_many
+ * @property string|null $links
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereEMany($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Endpoint whereLinks($value)
  */
 class Endpoint extends Model
 {

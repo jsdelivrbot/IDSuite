@@ -49,6 +49,10 @@ use App\Enums\EnumDataSourceType;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $entity_id
+ * @property string|null $conference_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereConferenceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Record whereEntityId($value)
  */
 class Record extends Model
 {

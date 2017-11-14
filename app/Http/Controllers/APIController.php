@@ -38,12 +38,8 @@ class APIController extends Controller
 
     public function getRecords(Request $request)
     {
-
-        dd("inside getrecords");
-
         Log::info("getrecords");
         // $key = Crypt::decrypt($key);
-        dd('in get records');
 
         $proxy_id = $request->input('proxy_id');
         $endpoint_address = $request->input('endpoint');

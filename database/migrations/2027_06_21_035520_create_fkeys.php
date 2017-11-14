@@ -91,6 +91,7 @@ class CreateFkeys extends Migration
 
         Schema::table('user', function(Blueprint $table) {
             $table->foreign('contact_id')->references('id')->on('personcontact')->onDelete('cascade')->onUpdate('cascade')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('manager_id')->references('id')->on('user');
         });
 
         Schema::table('object_dev', function(Blueprint $table){

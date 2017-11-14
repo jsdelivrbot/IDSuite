@@ -4,6 +4,14 @@
 
 <script>
 
+    /**
+     * setDeviceStatus
+     *
+     * draws the canvas element that shows endpoint status.
+     *
+     * @param response
+     * @param canvas
+     */
     function setDeviceStatus(response, canvas) {
 
         if (response === true) {
@@ -40,6 +48,15 @@
 
     }
 
+    /**
+     *
+     * getDeviceStatus
+     *
+     * gets data to draw device status.
+     *
+     * @param endpoint_id
+     * @param canvas
+     */
     function getDeviceStatus(endpoint_id, canvas) {
 
         let options = JSON.stringify({
@@ -56,10 +73,10 @@
             })
     }
 
+
     $( document ).ready(function() {
 
         let canvas = document.getElementById('device-status-circle');
-
         axiosrequests.push = getDeviceStatus('{{$endpoint->id}}', canvas);
 
     });

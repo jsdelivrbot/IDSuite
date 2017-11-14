@@ -51,15 +51,13 @@
 //        });
     }
 
-    function getDeviceCostPerCallAvg(device_id, el) {
-
-        setChartHW(el, '500px', '200px');
+    function getDeviceCostPerCallAvg(endpoint_id, el) {
 
         let options = JSON.stringify({
-            id: device_id
+            id: endpoint_id
         });
 
-        return axios.get('/api/deviceCostPerCallAvg/' + options)
+        return axios.get('/api/chart/deviceCostPerCallAvg/' + options)
             .then(function (response) {
 
                 let data = response.data;

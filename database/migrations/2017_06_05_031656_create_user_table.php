@@ -25,6 +25,7 @@ class CreateUserTable extends Migration
             $table->char('password_hash', 64)->nullable();
             $table->string('remember_token', 100)->nullable();
             $table->boolean('active')->nullable();
+            $table->uuid('manager_id')->nullable();
             $table->timestamps();
         });
 

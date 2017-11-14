@@ -28,6 +28,16 @@ use Illuminate\Support\Facades\Input;
 class ChartController extends Controller
 {
 
+    private $average_endpoint_cost = 3000;
+
+    /**
+     * @return int
+     */
+    public function getAverageEndpointCost()
+    {
+        return $this->average_endpoint_cost;
+    }
+
     /**
      *
      * casesOpened
@@ -783,15 +793,25 @@ class ChartController extends Controller
 
     /**
      *
+     * deviceCostPerCallAvg
+     *
      * device cost per call average
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function deviceCostPerCallAvg()
+    public function deviceCostPerCallAvg($options)
     {
-        $endpoint = Endpoint::getObjectById(session('currentendpoint'));
+//        $options = json_decode($options);
 
-        $records = $endpoint->records;
+        /**
+         * @var Endpoint $endpoint
+         */
+//        $endpoint = $this->validateObject($options);
+
+        $endpoint = Endpoint::getObjectById($options);
+
+        dd($endpoint->records);
+
 
         $count = 1;
 
@@ -799,7 +819,7 @@ class ChartController extends Controller
         if ($endpoint->endpointmodel !== null) {
             $cost = $endpoint->endpointmodel->price;
         } else {
-            $cost = 3000;
+            $cost = $this->getAverageEndpointCost();
         }
 
         $label_array = array();

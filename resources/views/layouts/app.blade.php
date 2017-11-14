@@ -100,7 +100,7 @@
 
                                 <a class="dropdown-item" href="/apps">App Select</a>
 
-                                <a class="dropdown-item" href="/stats">Product Stats</a>
+                                <a class="dropdown-item" href="/measure/stats">Product Stats</a>
                             </div>
                         </li>
 

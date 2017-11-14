@@ -3,6 +3,7 @@
 <script src="{{ asset('assets/js/app.js') }}"></script>
 
 
+
 <script>
     let axiosrequests = [];
 
@@ -338,3 +339,6 @@
 </script>
 
 
+@if($viewname === 'Product Statistics')
+    @stack('measure.stats')
+@endif

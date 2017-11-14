@@ -22,7 +22,7 @@
                 <div class="card-block">
                     <div class="text-center">
                         <h4 class="card-title">Customer Count</h4>
-                        <h1 class="card-title">{{$customer_count}}</h1>
+                        <h1 class="card-title" id="customer-count"></h1>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="card-block">
                     <div class="text-center">
                         <h4 class="card-title">Zabbix count</h4>
-                        <h1 class="card-title">{{$zabbix_count}}</h1>
+                        <h1 class="card-title" id="zabbix-count"></h1>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                 <div class="card-block">
                     <div class="text-center">
                         <h4 class="card-title">NetSuite Count</h4>
-                        <h1 class="card-title">{{$netsuite_count}}</h1>
+                        <h1 class="card-title" id="netsuite-count"></h1>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                 <div class="card-block">
                     <div class="text-center">
                         <h4 class="card-title">Mrge Count</h4>
-                        <h1 class="card-title">{{$mrge_count}}</h1>
+                        <h1 class="card-title" id="mrge-count"></h1>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                 <div class="card-block">
                     <div class="text-center">
                         <h4 class="card-title">Polycom Count</h4>
-                        <h1 class="card-title">{{$polycom_count}}</h1>
+                        <h1 class="card-title" id="polycom-count"></h1>
                     </div>
                 </div>
             </div>
@@ -69,3 +69,43 @@
 
 
 @endsection
+
+@push('measure.stats')
+
+    <script>
+
+        function getStats(user_id){
+
+            options = JSON.stringify({
+                id: user_id
+            });
+
+            return axios.get('/api/measure/stats/' + options)
+                .then(function(data){
+
+                    if(!validate(data.data)){
+                        return false;
+                    }
+
+                    let stats = data.data;
+
+                    $('#customer-count').text(stats.customer_count);
+                    $('#zabbix-count').text(stats.zabbix_count);
+                    $('#netsuite-count').text(stats.netsuite_count);
+                    $('#mrge-count').text(stats.mrge_count);
+                    $('#polycom-count').text(stats.polycom_count);
+                });
+
+        }
+
+        $(document).ready(function () {
+
+            console.log('in stats functions');
+
+            axiosrequests.push = getStats('{{Auth::user()->id}}');
+
+        });
+
+    </script>
+
+@endpush

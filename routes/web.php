@@ -23,15 +23,13 @@ Route::get('login', function(){
     return view('auth.login', ['viewname' => 'Login']);
 });
 
-//Auth::routes();
-
 Route::post('login', 'Auth\LoginController@loginNameOrEmail');
 
 Route::get('logout', 'Auth\LoginController@logout');
 
 Route::get('/getAuthUser', 'UserController@getCurrentUser');
 
-
+Route::get('/home', 'HomeController@index')->name('home');
 
 // test routes //
 Route::get('/test/vidyo', 'TestController@test_vidyo');
@@ -46,13 +44,6 @@ Route::get('/authenticate', 'LoginController@authenicate');
 // auth middleware //
 
 Route::group(['middleware' => ['auth']], function () {
-
-
-    /*
-     *
-     * refactored routes
-     *
-     */
 
     /**
      * Endpoint Routes
@@ -82,13 +73,11 @@ Route::group(['middleware' => ['auth']], function () {
      */
 
 
-    Route::get('/getUsers', 'UserController@getUsers');
+    //    Route::get('/getUsers', 'UserController@getUsers');
 
 
 
     // chart routes //
-
-
     Route::get('/api/chart/', 'ChartController@index');
 
     Route::get('/api/chart/getCustomers', 'ChartController@getCustomers');
@@ -99,46 +88,21 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     // Endpoint routes //
-
-
-
     Route::get('/measure/device/create', 'EndpointController@createView');
 
-
-
-    Route::get('/api/getDeviceStatus', 'EndpointController@getDeviceStatus');
-
-
     // EndpointModel routes //
-
     Route::get('/measure/model/{id}', 'EndpointModelController@show');
 
-
-    // Note Routes //
-
-    Route::post('/api/notes', 'NoteController@create');
-
     // proxy routes //
-
     Route::get('/measure/proxy/{id}', 'ProxyController@show');
 
 
-    // PersonContact routes //
-
-    Route::post('/api/personcontacts', 'PersonContactController@create');
-
-
     // Random Number Route //
-
     Route::get('/api/getRandomNumber', 'RandomNumberController@getRandomNumber');
 
 
     // record routes //
-
     Route::get('/measure/transactions', 'RecordController@index');
-
-//    Route::get('/api/getRecordDetails', 'RecordController@getRecordDetails');
-
     Route::get('/api/getTransactions', 'RecordController@getTransactions');
 
 
@@ -171,25 +135,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/medsitter', 'MedsitterController@index');
 
 
-//    Route::get('/measure/webrtc', 'WebRtcController@index');
-//
-//
-//    Route::post('/api/twilio', 'WebRtcController@sendMessage');
-//
-//    Route::post('/api/alltwilio', 'WebRtcController@sendMessageToAll');
 
 
 
     // stats routes //
 
-    Route::get('/measure/stats', 'ProductStatController@index');
+    Route::get('/measure/stats', 'ProductStatController@getStatsView');
 
 
 });
 
 
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

@@ -35,6 +35,12 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/endpoint/getDeviceStatus/{options}', 'EndpointController@getDeviceStatus');
 
 
+    //Person Contact Routes//
+    Route::post('/personcontact/{options}', 'PersonContactController@createPersonContact');
+
+    //Note Routes//
+    Route::post('/note/{options}', 'NoteController@createNote');
+    Route::get('/notes/{options}', 'NoteController@getNotes');
 
     //Chart Routes//
     Route::get('/chart/callVolumeOverTime/{options}', 'ChartController@callVolumeOverTime');
@@ -64,5 +70,19 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/enum/titleEnum/{options}', 'EnumController@title');
     Route::get('/enum/genderEnum/{options}', 'EnumController@gender');
     Route::get('/enum/phoneTypeEnum/{options}', 'EnumController@phoneType');
+
+    //Stats Routes//
+    Route::get('/measure/stats/{options}', 'ProductStatController@getStats');
+
+    //unused atm routes//
+
+    Route::get('/measure/webrtc', 'WebRtcController@index');
+
+
+    Route::post('/api/twilio', 'WebRtcController@sendMessage');
+
+    Route::post('/api/alltwilio', 'WebRtcController@sendMessageToAll');
+
+
 
 });

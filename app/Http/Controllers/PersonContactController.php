@@ -27,22 +27,20 @@ class PersonContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createPersonContact($options)
     {
-        $entity_id = session('currentaccount');
+        $options = json_decode($options);
 
-        $entity = Entity::getObjectById($entity_id);
+        $entity = $this->validateObject($options);
 
-        $firstname = Input::get('firstname');
-        $middlename = Input::get('middlename');
-        $lastname = Input::get('lastname');
-        $preferredname = Input::get('preferredname');
-        $title = Input::get('title');
-        $email_address = Input::get('email');
-        $phonenumber = Input::get('phonenumber');
-        $phonetype = Input::get('phonetype');
-
-
+        $firstname = $options->firstname;
+        $middlename = $options->middlename;
+        $lastname = $options->lastname;
+        $preferredname = $options->preferredname;
+        $title = $options->title;
+        $email_address = $options->email;
+        $phonenumber = $options->phonenumber;
+        $phonetype = $options->phonetype;
 
         $personcontact = new PersonContact();
 
@@ -62,8 +60,6 @@ class PersonContactController extends Controller
         $pnumber = new PhoneNumber($phonenumber, $phonetype);
 
         $pnumber->save();
-
-
 
         $personcontact->location($entity->contact->location)->save($entity->contact->location);
         $personcontact->name($personname)->save($personname);

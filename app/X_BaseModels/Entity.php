@@ -33,6 +33,7 @@ use Carbon\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Entity whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Record[] $records
  */
 class Entity extends Model
 {

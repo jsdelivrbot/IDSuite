@@ -507,6 +507,57 @@ class TestController extends Controller
     public function test()
     {
 
+
+        $file_name = base_path('data_imports/organize.csv');
+
+        $csv = file_get_contents($file_name);
+
+//        $manager = array_map("str_getcsv", explode("\n", $csv));
+
+
+        $manager = array_map("str_getcsv", explode("\n", $csv));
+
+        foreach ($manager as $man) {
+
+            $boss = rtrim($man[0], ': ');
+
+            dump('boss : ' . $boss);
+
+            $boss = User::getUserByEmail($boss);
+
+            $subordinates = array_slice($man, 1, sizeof($man));
+
+            foreach ($subordinates as $s){
+
+                dump($s);
+
+                $s = User::getUserByEmail($s);
+
+                if($s !== false){
+                    dump($s);
+                    dump($boss);
+                    $s->manager_id = $boss->id;
+
+                    $s->save();
+                } else {
+                    dump($s);
+                }
+
+
+            }
+        }
+
+
+        dd('jobs done');
+
+
+        $this->createEndpointsFromZabbix();
+
+        $c = new ChartController();
+
+        $c->deviceCostPerCallAvg('END59fb7f0822244');
+
+
         /**
          * @var Entity $entity
          */
@@ -543,16 +594,18 @@ class TestController extends Controller
     }
 
     /**
-     * @param $entity
-     * @param $endpoint
+     *
+     * createEndpointsFromZabbix
+     *
+     *
+     * creates endpoints from zabbix hosts.
+     *
      */
-    public function createEndpointsFromZabbix($entity, $endpoint)
+    public function createEndpointsFromZabbix()
     {
         $zabbix = new ZabbixController();
 
         $hosts = $zabbix->getHosts();
-
-        dd($hosts);
 
         $count = 0;
 
