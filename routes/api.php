@@ -14,11 +14,16 @@ use Illuminate\Http\Request;
 |
 */
 
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
+
 Route::group(['middleware' => ['auth:api']], function () {
+
+
 
     //Entity Routes//
     Route::get('/entities/{options}', 'EntityController@getEntities');
@@ -49,7 +54,6 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/records/getRecordDetails/{options}', 'RecordController@getRecordDetails');
 
     Route::post('/records/insertRecords', 'APIController@insertRecords');
-
 
 
     //Enum Routes//

@@ -513,7 +513,7 @@ class TestController extends Controller
         $entity = Entity::getObjectById('ENT59fb750428fa8');
         $endpoint = Endpoint::getByName('portal.idsflame.com');
 
-        $entity->endpoints($endpoint)->save($endpoint);
+//        $entity->endpoints()->save($endpoint);
 
         $entity->save();
 
@@ -530,14 +530,11 @@ class TestController extends Controller
         dd($entity->getRecordsByDate($start_date));
 
 
-
         $zabbix = new ZabbixController();
 
-        dd($zabbix->getHosts());
-
-        $this->createEndpointsFromZabbix();
-
     }
+
+
 
 
     public function addCustomersToUser()

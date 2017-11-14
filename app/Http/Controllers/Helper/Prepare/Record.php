@@ -330,9 +330,18 @@ class Record
 
             if($customer_nsid) {
 
+                Log::info($customer_nsid);
                 $dev = \App\DynamicEnumValue::getByValue($customer_nsid);
-                $entity= $dev->referable(\App\Entity::class);
-                $this->record->entity($entity);
+
+                if($dev !== null) {
+
+                    $entity= $dev->referable(\App\Entity::class);
+                    $this->record->entity($entity);
+                }else{
+                   // $this->record->entity(null);
+
+                }
+
 
             }
 
