@@ -169,8 +169,13 @@ class TestController extends Controller
     {
 
 
-        $output = Netsuite\NetsuiteDatabase::AddUpdateAllCustomers(6895);
+        $ns_client  = new Netsuite\NetsuiteController();
 
+        $ticket_details = $ns_client->getTicketDetails(2212728);
+
+
+
+        dd($ticket_details);
 
         //     $service = Netsuite\NetsuiteDatabase::AddUpdateAllCustomers();
 
@@ -507,6 +512,10 @@ class TestController extends Controller
     public function test()
     {
 
+
+
+
+        dd("killing you softly.");
         /**
          * @var Entity $entity
          */

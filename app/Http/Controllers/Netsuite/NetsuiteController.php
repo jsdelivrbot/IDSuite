@@ -26,8 +26,8 @@ class NetsuiteController extends \App\Http\Controllers\Controller
         $log_path = storage_path().'/logs/'.self::LOG_FILE;
          $config = array(
         // required -------------------------------------
-        "endpoint" => env('NETSUITE_ENDPOINT', "2016_2"),
-        "host"     => env('NETSUITE_HOST', "https://webservices.sandbox.netsuite.com"),
+        "endpoint" => env('NETSUITE_ENDPOINT'), //, "2016_2"
+        "host"     => env('NETSUITE_HOST'), //, "https://webservices.sandbox.netsuite.com"
         "role"     => env('NETSUITE_ROLE','3'),
         "account"  => env('NETSUITE_ACCOUNT'),
         "app_id"   =>  env('NETSUITE_APPID'),
@@ -57,6 +57,39 @@ class NetsuiteController extends \App\Http\Controllers\Controller
 
         $this->service = new NetSuiteService($config);
         $this->service->logRequests(true);
+
+    }
+
+
+    public function getTicketDetails ($netsuite_internal_id) {
+
+        $request = new \NetSuite\Classes\GetRequest();
+        $request->baseRef = new \NetSuite\Classes\SupportCase();
+        $request->baseRef->internalId = $netsuite_internal_id;
+        $request->baseRef->type = "record";
+
+        $getResponse = $this->service->get($request);
+
+        dd($getResponse);
+        dd($request);
+
+        if (!$getResponse->readResponse->status->isSuccess) {
+            return false;
+        }else{
+            return $getResponse->readResponse->record;
+
+        }
+    }
+
+
+
+
+    public function getTickets($netsuite_internal_id) {
+
+    }
+
+
+    public function getAllTickets($limit = 1000) {
 
     }
 
