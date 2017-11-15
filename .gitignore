@@ -12,8 +12,6 @@ npm-debug.log
 .env
 yarn-error.log
 ip2location.csv
-public/assets/css/*
-public/assets/js/*
 public/assets/*
 *.csv
 resources/views/vendor/
