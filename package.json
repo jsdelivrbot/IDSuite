@@ -30,6 +30,7 @@
   "dependencies": {
     "amcharts3": "github:amcharts/amcharts3",
     "babel": "^6.23.0",
+    "font-awesome": "^4.7.0",
     "jquery-validation": "^1.17.0",
     "peer": "^0.2.8",
     "vue": "^2.1.10",

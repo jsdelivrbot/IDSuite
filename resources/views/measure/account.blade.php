@@ -374,7 +374,7 @@
             let chart = AmCharts.makeChart("chart1", {
                 "type": "serial",
                 "theme": "dark",
-                "pathToImages": "/assets/amcharts/images/",
+                "pathToImages": "/assets/js/amcharts/images/",
                 "marginTop": 0,
                 "color": "#000",
                 "font": 18,

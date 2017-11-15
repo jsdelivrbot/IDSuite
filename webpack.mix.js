@@ -21,10 +21,14 @@ mix.js('resources/assets/js/account_note.js', 'public/assets/js');
 mix.js('resources/assets/js/records.js', 'public/assets/js');
 mix.js('resources/assets/js/device_charts.js', 'public/assets/js');
 
-// mix.copy('node_modules/amcharts3/amcharts', 'public/assets/amcharts');
+mix.copy('resources/assets/js/amcharts', 'public/assets/js/amcharts');
 mix.copy('node_modules/jquery-validation/dist/jquery.validate.js', 'public/assets/js');
 mix.copy('node_modules/jquery-validation/dist/additional-methods.js', 'public/assets/js');
 
+mix.copy('resources/assets/img', 'public/img');
+
+mix.copy('node_modules/font-awesome/css/font-awesome.css', 'public/assets/css/font-awesome.css');
+mix.copy('node_modules/font-awesome/fonts', 'public/assets/fonts');
 mix.scripts([
     'resources/assets/js/enum_gender_select.js',
     'resources/assets/js/enum_title_select.js'
