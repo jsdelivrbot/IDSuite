@@ -156,11 +156,11 @@ class ApiTest extends TestCase
         dump($response->assertStatus(200)->getStatusCode());
 
 
-        dump('/api/chart/devicePingData/' . json_encode($endpoint_options));
-
-        $response = $this->get( '/api/chart/devicePingData/' . json_encode($endpoint_options), $this->headers($user));
-
-        dump($response->assertStatus(200)->getStatusCode());
+//        dump('/api/chart/devicePingData/' . json_encode($endpoint_options));
+//
+//        $response = $this->get( '/api/chart/devicePingData/' . json_encode($endpoint_options), $this->headers($user));
+//
+//        dump($response->assertStatus(200)->getStatusCode());
 
         dump('/api/chart/deviceCostPerCallAvg/' . json_encode($endpoint_options));
 

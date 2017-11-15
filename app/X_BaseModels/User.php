@@ -45,6 +45,8 @@ use Symfony\Component\HttpKernel\Tests\Controller\ContainerControllerResolverTes
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $manager_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereManagerId($value)
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {

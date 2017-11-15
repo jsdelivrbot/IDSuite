@@ -801,16 +801,16 @@ class ChartController extends Controller
      */
     public function deviceCostPerCallAvg($options)
     {
-//        $options = json_decode($options);
+        $options = json_decode($options);
 
         /**
          * @var Endpoint $endpoint
          */
 //        $endpoint = $this->validateObject($options);
 
-        $endpoint = Endpoint::getObjectById($options);
+        $endpoint = $this->validateObject($options);
 
-        dd($endpoint->records);
+        $records = $endpoint->records;
 
 
         $count = 1;

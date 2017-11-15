@@ -57,7 +57,7 @@
             id: endpoint_id
         });
 
-        return axios.get('/api/chart/deviceCostPerCallAvg/' + options)
+        return axios.post('/api/chart/deviceCostPerCallAvg/' + options)
             .then(function (response) {
 
                 let data = response.data;
