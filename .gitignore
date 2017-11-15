@@ -15,7 +15,6 @@ ip2location.csv
 public/assets/css/*
 public/assets/js/*
 public/assets/*
-public/*
 *.csv
 resources/views/vendor/
 .phpstorm.meta.php

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f38bc9e4a067c1e23d6e34b2e4b8e1db",
+    "content-hash": "281faac1ecf011100e5d5330ab026d7b",
     "packages": [
         {
             "name": "aloha/twilio",
@@ -978,20 +978,23 @@
         },
         {
             "name": "erusev/parsedown",
-            "version": "1.6.3",
+            "version": "1.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "728952b90a333b5c6f77f06ea9422b94b585878d"
+                "reference": "fbe3fe878f4fe69048bb8a52783a09802004f548"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/728952b90a333b5c6f77f06ea9422b94b585878d",
-                "reference": "728952b90a333b5c6f77f06ea9422b94b585878d",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/fbe3fe878f4fe69048bb8a52783a09802004f548",
+                "reference": "fbe3fe878f4fe69048bb8a52783a09802004f548",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35"
             },
             "type": "library",
             "autoload": {
@@ -1016,7 +1019,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2017-05-14T14:47:48+00:00"
+            "time": "2017-11-14T20:44:03+00:00"
         },
         {
             "name": "evenement/evenement",
@@ -2919,16 +2922,16 @@
         },
         {
             "name": "ryanwinchester/netsuite-php",
-            "version": "v2016.2.0",
+            "version": "v2017.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ryanwinchester/netsuite-php.git",
-                "reference": "ebbb94e181a28b422713e3bb6fd4d9830a821b50"
+                "reference": "8cd75ea9a54603b4c231a45fc896c2cc97aedd8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ryanwinchester/netsuite-php/zipball/ebbb94e181a28b422713e3bb6fd4d9830a821b50",
-                "reference": "ebbb94e181a28b422713e3bb6fd4d9830a821b50",
+                "url": "https://api.github.com/repos/ryanwinchester/netsuite-php/zipball/8cd75ea9a54603b4c231a45fc896c2cc97aedd8b",
+                "reference": "8cd75ea9a54603b4c231a45fc896c2cc97aedd8b",
                 "shasum": ""
             },
             "require": {
@@ -2966,7 +2969,7 @@
                 "netsuite",
                 "php"
             ],
-            "time": "2017-04-05T17:11:38+00:00"
+            "time": "2017-09-26T18:56:55+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4917,16 +4920,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.24",
+            "version": "5.7.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "f0b07fbcb0c563eae088736dd0c81acba1d31ac3"
+                "reference": "4b1c822a68ae6577df38a59eb49b046712ec0f6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f0b07fbcb0c563eae088736dd0c81acba1d31ac3",
-                "reference": "f0b07fbcb0c563eae088736dd0c81acba1d31ac3",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4b1c822a68ae6577df38a59eb49b046712ec0f6a",
+                "reference": "4b1c822a68ae6577df38a59eb49b046712ec0f6a",
                 "shasum": ""
             },
             "require": {
@@ -4995,7 +4998,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-11-14T07:52:47+00:00"
+            "time": "2017-11-14T14:50:51+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
