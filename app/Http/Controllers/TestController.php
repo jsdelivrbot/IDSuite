@@ -512,12 +512,15 @@ class TestController extends Controller
      */
     public function test()
     {
+
         $starttime = microtime(true);
         /* do stuff here */
 
 
-        $entity = Entity::getObjectByRefId('netsuite', '62296');
+        $entity = Endpoint::getObjectByRefId('netsuite', '62296', 'reference_key');
 
+
+        dd($entity);
 
 
 //

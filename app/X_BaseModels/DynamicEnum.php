@@ -77,6 +77,16 @@ class DynamicEnum extends Model
 
     /**
      *
+     * setValues()
+     * @return array
+     */
+    public function getValues()
+    {
+        return json_decode($this->values);
+    }
+
+    /**
+     *
      * getByName
      *
      * @param $name
@@ -86,6 +96,19 @@ class DynamicEnum extends Model
     {
 
         return (new DynamicEnum)->where('name', '=', $name)->first();
+
+    }
+
+    public function getKeyByValue($value)
+    {
+        $key = array_search($value, $this->getValues());
+
+        if($key === false){
+            throw new \Exception('The value "' . $value . '" is not a value in this Dynamic Enum "' . $this->id . '". The values are ' . print_r($this->getValues(), true) , 500);
+        } else {
+            return $key;
+        }
+
 
     }
 

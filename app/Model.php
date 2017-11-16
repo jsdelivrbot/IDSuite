@@ -49,10 +49,12 @@ abstract class Model extends Eloquent
      *
      * @param $value_type
      * @param $value
+     * @param $dynamic_enum_name
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public static function getObjectByRefId($value_type, $value)
+    public static function getObjectByRefId($value_type, $value, $dynamic_enum_name)
     {
+        $dynamic_enum = DynamicEnum::getByName($dynamic_enum_name);
 
         $class_path = get_called_class();
 
@@ -60,7 +62,7 @@ abstract class Model extends Eloquent
 
         $table_name = $class->table;
 
-        $type = EnumDataSourceType::getKeyByValue($value_type);
+        $type = $dynamic_enum->getKeyByValue($value_type);
 
         $result = $class->select("$table_name.*")->leftjoin('object_dev', "$table_name.id", '=', 'object_dev.object_id')
             ->leftjoin('dynamic_enum_value', 'dynamic_enum_value.id', '=', 'dynamic_enum_value_id')
@@ -70,6 +72,8 @@ abstract class Model extends Eloquent
 
         return $result;
     }
+
+
 
 
     /**

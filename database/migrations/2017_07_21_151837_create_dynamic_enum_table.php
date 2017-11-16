@@ -22,7 +22,7 @@ class CreateDynamicEnumTable extends Migration
             $table->string('class_code');
             $table->boolean('active')->nullable();
             $table->text('values')->nullable();
-            $table->string('name')->nullable();
+            $table->string('name')->unique();
             $table->timestamps();
 
 
