@@ -517,7 +517,7 @@ class TestController extends Controller
         /* do stuff here */
 
 
-        $entity = Endpoint::getObjectByRefId('netsuite', '62296', 'reference_key');
+        $entity = Entity::getObjectByRefId('netsuite', '62296', 'reference_key');
 
 
         dd($entity);

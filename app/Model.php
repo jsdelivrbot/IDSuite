@@ -47,12 +47,12 @@ abstract class Model extends Eloquent
      *
      * getObjectByRefId
      *
+     * @param $dynamic_enum_name
      * @param $value_type
      * @param $value
-     * @param $dynamic_enum_name
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public static function getObjectByRefId($value_type, $value, $dynamic_enum_name)
+    public static function getObjectByRefId($dynamic_enum_name, $value_type, $value)
     {
         $dynamic_enum = DynamicEnum::getByName($dynamic_enum_name);
 
