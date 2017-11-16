@@ -168,8 +168,14 @@ class TestController extends Controller
     public function test_netsuite()
     {
 
+        $ns_client = new Netsuite\NetsuiteController();
 
-        $output = Netsuite\NetsuiteDatabase::AddUpdateAllCustomers(6895);
+
+        $ns_ticket = $ns_client->getTicketDetails(769549);
+
+        dd($output);
+
+
 
 
         //     $service = Netsuite\NetsuiteDatabase::AddUpdateAllCustomers();
@@ -506,8 +512,41 @@ class TestController extends Controller
      */
     public function test()
     {
+        $starttime = microtime(true);
+        /* do stuff here */
 
 
+        /**
+         * @var Entity $entity
+         */
+        $entity = Entity::getObjectById('ENT59fb759373a5b');
+
+        $endtime = microtime(true);
+        $timediff = $endtime - $starttime;
+
+        echo $timediff;
+
+        /**
+         * @var DynamicEnumValue @val
+         */
+        $val = new DynamicEnumValue();
+        $val->value = '10';
+        $val->value_type = 21;
+        $de = DynamicEnum::getByName('reference_key');
+
+        $val->definition($de)->save($de);
+
+        $val->save();
+
+
+        $entity->references($val);
+
+        $entity->save();
+
+        dd($entity->references());
+
+
+        dd($entity->references());
 
 
 
