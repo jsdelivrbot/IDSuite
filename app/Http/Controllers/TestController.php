@@ -516,15 +516,21 @@ class TestController extends Controller
         /* do stuff here */
 
 
-        /**
-         * @var Entity $entity
-         */
-        $entity = Entity::getObjectById('ENT59fb759373a5b');
+        $entity = Entity::getObjectByRefId('netsuite', '62296');
+
+
+
+//
+//        /**
+//         * @var Entity $entity
+//         */
+//        $entity = Entity::getObjectById('ENT59fb759373a5b');
 
         $endtime = microtime(true);
         $timediff = $endtime - $starttime;
 
         echo $timediff;
+        dd($entity);
 
         /**
          * @var DynamicEnumValue @val
@@ -561,11 +567,7 @@ class TestController extends Controller
          */
         $endpoint = Endpoint::getObjectById('END59fb7f0822244');
 
-<<<<<<< HEAD
         dd($entity->references());
-=======
-        dd($endpoint->records);
->>>>>>> 5b69e68d082b1325b3a0c3e0b7ebcf68e147833d
 
 
 

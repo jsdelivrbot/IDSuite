@@ -20,7 +20,6 @@ class CreateTicketTable extends Migration
 
             $table->primary('id');
             $table->uuid('id');
-            $table->integer('netsuite_id')->nullable();
 
             $table->uuid('entity_id')->nullable();
             $table->uuid('user_id')->nullable();
