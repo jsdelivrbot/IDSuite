@@ -74,6 +74,32 @@ abstract class Model extends Eloquent
     }
 
 
+    /**
+     *
+     * searchByDevType
+     *
+     * @param $value_type
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function searchByDevType($dyanmic_enum_name, $value_type)
+    {
+        $dyanmic_enum = DynamicEnum::getByName($dyanmic_enum_name);
+
+        $class_path = get_called_class();
+
+        $class = (new $class_path);
+
+        $table_name = $class->table;
+
+        $type = $dyanmic_enum->getKeyByValue($value_type);
+
+        $result = $class->join('object_dev', "$table_name.id", '=', 'object_dev.object_id')
+            ->where('value_type', '=', $type)
+            ->get();
+
+        return $result;
+    }
+
 
 
     /**

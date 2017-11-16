@@ -517,10 +517,12 @@ class TestController extends Controller
         /* do stuff here */
 
 
-        $entity = Entity::getObjectByRefId('netsuite', '62296', 'reference_key');
+        $endpoints = Endpoint::searchByDevType('reference_key','zabbix');
+        dd($endpoints);
+
+        $entity = Endpoint::getObjectByRefId('reference_key','zabbix', '4');
 
 
-        dd($entity);
 
 
 //

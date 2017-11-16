@@ -450,24 +450,5 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 
-    /**
-     *
-     * searchByDevType
-     *
-     * @param $value
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public static function searchByDevType($value)
-    {
-
-        $type = EnumDataSourceType::getKeyByValue($value);
-
-        $result = (new User)->join('object_dev', 'user.id', '=', 'object_dev.object_id')
-            ->where('value_type', '=', $type)
-            ->get();
-
-        return $result;
-    }
-
 
 }

@@ -261,24 +261,7 @@ class Record extends Model
     }
 
 
-    /**
-     *
-     * searchByDevType
-     *
-     * @param $value
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public static function searchByDevType($value)
-    {
 
-        $type = EnumDataSourceType::getKeyByValue($value);
-
-        $result = Record::join('object_dev', 'record.id', '=', 'object_dev.object_id')
-            ->where('value_type', '=', $type)
-            ->get();
-
-        return $result;
-    }
 
 
     /**
