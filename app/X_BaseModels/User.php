@@ -252,14 +252,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
          * @var User $member
          */
         foreach($this->getTeamMembers() as $member){
-
             foreach($member->accounts as $entity){
                 $entities->push($entity);
             }
-
         }
 
-        return $entities;
+        return $entities->unique('id');
     }
 
     /**

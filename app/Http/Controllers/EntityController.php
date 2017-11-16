@@ -206,4 +206,30 @@ class EntityController extends Controller
 
         return response()->json(['entity' => $entity_obj]);
     }
+
+
+    public function getEntityManagers($options)
+    {
+
+        $options = json_decode($options);
+
+        /**
+         * @var Entity $entity
+         */
+        $entity = $this->validateObject($options);
+
+        $manager_collection = collect();
+
+        foreach ($entity->users as $manager){
+            $man = new \stdClass();
+
+            $man->name = $manager->getFullName();
+            $man->email = $manager->email;
+
+            $manager_collection->push($man);
+        }
+
+        return response()->json($manager_collection);
+
+    }
 }

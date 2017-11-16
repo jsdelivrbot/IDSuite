@@ -507,7 +507,14 @@ class TestController extends Controller
     public function test()
     {
 
-        $user = User::getUserByEmail('zcook@e-idsolutions.com');
+        /**
+         * @var Entity $entity
+         */
+        $entity = User::getObjectByRefId('netsuite', '62296');
+
+        dd($entity);
+
+        $user = User::getUserByEmail('bbriggs@e-idsolutions.com');
 
         dd($user->getTeamMembersEntities());
 

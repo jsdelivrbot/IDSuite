@@ -75,6 +75,7 @@
                          style="border-top: none; border-left: none; background-color: transparent;">
                         <div class="card-block">
                             <h4 id="header-title" class="card-title pink"></h4>
+
                             <p id="header-title-description" class="card-text text-white"></p>
 
                             <div class="col-md-10 offset-1">
@@ -321,6 +322,12 @@
 
                 @endif
 
+            </div>
+        </div>
+
+        <div id="header-managers" class="mt-4 text-white">
+            <div class="mb-2">
+                <h3>Account Managers</h3>
             </div>
         </div>
 
@@ -756,6 +763,47 @@
                 });
         }
 
+        /**
+         *
+         * getEntityManagers
+         *
+         * gets the entity object's managers (users) and validates it
+         *
+         * @param entity_id
+         */
+        function getEntityManagers(entity_id, el) {
+
+            let options = JSON.stringify({
+                id: entity_id
+            });
+
+            return axios.get('/api/entity/managers/' + options)
+                .then(function (data) {
+                    let managers = data.data;
+
+                    if(!validate(managers)){
+                        return false;
+                    }
+
+                    $.each(managers, function(key, value){
+
+                        el.append(
+                            '<div class="row">' +
+                                '<div class="col-lg-3">' +
+                                    '<span>'+value.name+' : </span>' +
+                                '</div>' +
+                                '<div class="col-lg-3">' +
+                                    '<span>'+value.email+'</span>' +
+                                '</div>' +
+                            '</div>'
+                        )
+
+                    });
+
+                    console.log(managers);
+                });
+        }
+
 
         $(document).ready(function () {
 
@@ -764,6 +812,7 @@
 
             axiosrequests.push = getEntity('{{$entity->id}}');
             axiosrequests.push = callVolumeOverTime('{{$entity->id}}');
+            axiosrequests.push = getEntityManagers('{{$entity->id}}', $('#header-managers'));
 
 
             let header = "/img/global_presence_heading.png";

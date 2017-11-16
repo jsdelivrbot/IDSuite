@@ -25,13 +25,18 @@ class helpers
 
 
 //        dump('********Start*********');
-//        dump('User : ' . $user);
+//        dump('User : ' . $user->getFullName());
 
 
         $team_members = $user->where('manager_id', '=', $user->id)->get();
 
-        if($all_team_members === null){
-            $all_team_members = collect();
+        if($all_team_members === null ){
+            if($team_members->isEmpty()){
+                $all_team_members = collect();
+                return $all_team_members->push($user);
+            } else {
+                $all_team_members = collect();
+            }
 //            dump('all_team_members is null so we created a colleciton');
         } else {
 

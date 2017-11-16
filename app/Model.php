@@ -38,6 +38,39 @@ abstract class Model extends Eloquent
 
     }
 
+    public function getClassTable()
+    {
+
+    }
+
+    /**
+     *
+     * getObjectByRefId
+     *
+     * @param $value_type
+     * @param $value
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function getObjectByRefId($value_type, $value)
+    {
+
+        $class_path = get_called_class();
+
+        $class = (new $class_path);
+
+        $table_name = $class->table;
+
+        $type = EnumDataSourceType::getKeyByValue($value_type);
+
+        $result = $class->select("$table_name.*")->leftjoin('object_dev', "$table_name.id", '=', 'object_dev.object_id')
+            ->leftjoin('dynamic_enum_value', 'dynamic_enum_value.id', '=', 'dynamic_enum_value_id')
+            ->where('object_dev.value_type', '=', $type)
+            ->where('dynamic_enum_value.value', '=', $value)
+            ->first();
+
+        return $result;
+    }
+
 
     /**
      * @param $id
