@@ -64,14 +64,14 @@ class NetsuiteController extends \App\Http\Controllers\Controller
     public function getTicketDetails ($netsuite_internal_id) {
 
         $request = new \NetSuite\Classes\GetRequest();
-        $request->baseRef = new \NetSuite\Classes\SupportCase();
+        $request->baseRef = new \NetSuite\Classes\RecordRef();
         $request->baseRef->internalId = $netsuite_internal_id;
-        $request->baseRef->type = "record";
+        $request->baseRef->type = "supportCase";
+
+
 
         $getResponse = $this->service->get($request);
 
-        dd($getResponse);
-        dd($request);
 
         if (!$getResponse->readResponse->status->isSuccess) {
             return false;
@@ -84,7 +84,7 @@ class NetsuiteController extends \App\Http\Controllers\Controller
 
 
 
-    public function getTickets($netsuite_internal_id) {
+    public function getTickets($customer_netsuite_internal_id) {
 
     }
 

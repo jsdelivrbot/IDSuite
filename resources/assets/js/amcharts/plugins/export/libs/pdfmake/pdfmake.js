@@ -3232,7 +3232,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } catch (e) {}
 	  }());
 
-	  /* Node.js helper references. */
+	  /* Node.js helpers references. */
 	  var nodeIsArrayBuffer = nodeUtil && nodeUtil.isArrayBuffer,
 	      nodeIsDate = nodeUtil && nodeUtil.isDate,
 	      nodeIsMap = nodeUtil && nodeUtil.isMap,
@@ -24881,7 +24881,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				}
 			}
 
-			// helper function to set the border for a given cell
+			// helpers function to set the border for a given cell
 			function setBorder(rowIndex, colIndex, borderIndex, borderValue) {
 				var cell = body[rowIndex][colIndex];
 				cell.border = cell.border || {};
@@ -69013,7 +69013,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	  runtime.wrap = wrap;
 
-	  // Try/catch helper to minimize deoptimizations. Returns a completion
+	  // Try/catch helpers to minimize deoptimizations. Returns a completion
 	  // record like context.tryEntries[i].completion. This interface could
 	  // have been (and was previously) designed to take a closure to be
 	  // invoked without arguments, but in all the cases we care about we
@@ -69187,7 +69187,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        ) : callInvokeWithMethodAndArg();
 	    }
 
-	    // Define the unified helper method that is used to implement .next,
+	    // Define the unified helpers method that is used to implement .next,
 	    // .throw, and .return (see defineIteratorMethods).
 	    this._invoke = enqueue;
 	  }
@@ -69374,7 +69374,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  // Define Generator.prototype.{next,throw,return} in terms of the
-	  // unified ._invoke helper method.
+	  // unified ._invoke helpers method.
 	  defineIteratorMethods(Gp);
 
 	  Gp[toStringTagSymbol] = "Generator";

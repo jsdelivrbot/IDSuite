@@ -545,8 +545,27 @@ class TestController extends Controller
 
         dd($entity->references());
 
+        /**
+         * @var Entity $entity
+         */
+        $entity = User::getObjectByRefId('netsuite', '62296');
 
+        dd($entity);
+
+        $user = User::getUserByEmail('bbriggs@e-idsolutions.com');
+
+        dd($user->getTeamMembersEntities());
+
+        /**
+         * @var Endpoint $endpoint
+         */
+        $endpoint = Endpoint::getObjectById('END59fb7f0822244');
+
+<<<<<<< HEAD
         dd($entity->references());
+=======
+        dd($endpoint->records);
+>>>>>>> 5b69e68d082b1325b3a0c3e0b7ebcf68e147833d
 
 
 

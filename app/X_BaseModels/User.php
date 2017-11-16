@@ -239,6 +239,26 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return false;
     }
 
+    public function getTeamMembers()
+    {
+        return helpers::getTeamMembersHelper($this, null, $this);
+    }
+
+    public function getTeamMembersEntities()
+    {
+        $entities = collect();
+
+        /**
+         * @var User $member
+         */
+        foreach($this->getTeamMembers() as $member){
+            foreach($member->accounts as $entity){
+                $entities->push($entity);
+            }
+        }
+
+        return $entities->unique('id');
+    }
 
     /**
      *
@@ -307,7 +327,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function getFullName()
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return $this->contact->name->first_name . ' ' . $this->contact->name->last_name;
     }
 
 

@@ -1944,7 +1944,7 @@ fabric.CommonMethods = {
   }
 
   /**
-   * Helper for creation of "classes".
+   * helper for creation of "classes".
    * @memberOf fabric.util
    * @param {Function} [parent] optional "Class" to inherit from
    * @param {Object} [properties] Properties shared by all instances of this class
@@ -6746,7 +6746,7 @@ fabric.ElementsParser.prototype.checkIfDone = function() {
     },
 
     /**
-     * Helper for setting width/height
+     * helper for setting width/height
      * @private
      * @param {String} prop property (width|height)
      * @param {Number} value value to set property to
@@ -6770,7 +6770,7 @@ fabric.ElementsParser.prototype.checkIfDone = function() {
     },
 
     /**
-     * Helper for setting css width/height
+     * helper for setting css width/height
      * @private
      * @param {String} prop property (width|height)
      * @param {String} value value to set property to
@@ -13977,7 +13977,7 @@ fabric.util.object.extend(fabric.StaticCanvas.prototype, /** @lends fabric.Stati
     },
 
     /**
-     * Helper method to determine how many cross points are between the 4 object edges
+     * helper method to determine how many cross points are between the 4 object edges
      * and the horizontal line determined by a point on canvas
      * @private
      * @param {fabric.Point} point Point to check
@@ -26202,7 +26202,7 @@ fabric.util.object.extend(fabric.IText.prototype, /** @lends fabric.IText.protot
     },
 
     /**
-     * Helper function to measure a string of text, given its lineIndex and charIndex offset
+     * helper function to measure a string of text, given its lineIndex and charIndex offset
      *
      * @param {CanvasRenderingContext2D} ctx
      * @param {String} text
