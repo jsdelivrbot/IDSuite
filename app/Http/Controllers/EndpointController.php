@@ -96,7 +96,13 @@ class EndpointController extends Controller
 
         $e->model = $endpoint->getType();
 
-        $e->proxy = $endpoint->getProxyName();
+
+        if($endpoint->getProxyName()){
+            $e->proxy = $endpoint->getProxyName();
+        } else {
+            $e->proxy = 'N/A';
+        }
+
 
         $e->call_count = $endpoint->getCallCount();
 

@@ -10,7 +10,6 @@ namespace App\Http\Controllers;
 
 
 use App\Endpoint;
-use App\EndpointModel;
 use App\Entity;
 use App\Enums\EnumDataSourceType;
 use App\Enums\EnumFullMonths;
@@ -53,7 +52,7 @@ class ChartController extends Controller
         $options = json_decode($options);
 
         /**
-         * @var Entity $entity
+         * @var \App\Entity $entity
          */
         $entity = $this->validateObject($options);
 
@@ -801,6 +800,8 @@ class ChartController extends Controller
      */
     public function deviceCostPerCallAvg($options)
     {
+        ini_set('memory_limit', '4096M');
+
         $options = json_decode($options);
 
         /**
@@ -809,9 +810,6 @@ class ChartController extends Controller
 //        $endpoint = $this->validateObject($options);
 
         $endpoint = $this->validateObject($options);
-
-        $records = $endpoint->records;
-
 
         $count = 1;
 
@@ -825,7 +823,7 @@ class ChartController extends Controller
         $label_array = array();
         $data_array = array();
 
-        foreach ($records as $record) {
+        foreach ($endpoint->getRawRecords() as $record) {
 
             $label_array[] = $record->timeperiod_start;
 

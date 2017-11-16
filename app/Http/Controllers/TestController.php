@@ -507,7 +507,16 @@ class TestController extends Controller
     public function test()
     {
 
+        $user = User::getUserByEmail('zcook@e-idsolutions.com');
 
+        dd($user->getTeamMembersEntities());
+
+        /**
+         * @var Endpoint $endpoint
+         */
+        $endpoint = Endpoint::getObjectById('END59fb7f0822244');
+
+        dd($endpoint->records);
 
 
 

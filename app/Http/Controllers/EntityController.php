@@ -44,29 +44,24 @@ class EntityController extends Controller
 
         $options = json_decode($options);
 
+        /**
+         * @var User $user
+         */
         $user = $this->validateObject($options);
 
-        $accounts = $user->accounts;
-        $accounts_array = array();
-        foreach ($accounts as $a) {
-            if (count($a->children) > 0) {
-                foreach ($a->children as $child) {
-                    if ($child->user !== null) {
-                        if ($user->id !== $child->user->id) {
-                            $account = new \stdClass();
-                            $account->name = $child->contact->name->name;
-                            $account->id = $child->id;
-                            $accounts_array[] = $account;
-                        }
-                    }
-                }
-            }
+        $accounts = $user->getTeamMembersEntities();
 
+        $accounts_array = array();
+
+        foreach ($accounts as $a) {
             $account = new \stdClass();
             $account->name = $a->contact->name->name;
             $account->id = $a->id;
             $accounts_array[] = $account;
         }
+
+
+
         return response()->json($accounts_array);
     }
 

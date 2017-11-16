@@ -334,8 +334,11 @@ class Endpoint extends Model
      */
     public function getProxyName()
     {
-
-        return $this->proxy->name;
+        if(isset($this->proxy->name)){
+            return $this->proxy->name;
+        } else {
+            return false;
+        }
 
     }
 
@@ -364,9 +367,14 @@ class Endpoint extends Model
         /**
          * @var Carbon $start_date
          */
-        $records = \DB::select("select record.*, timeperiod.start as timeperiod_start, timeperiod.duration as timeperiod_duration from record LEFT join timeperiod on record.timeperiod_id=timeperiod.id where timeperiod.start > '$start_date' AND record.endpoint_id = '$this->id'");
+        return \DB::select("select record.*, timeperiod.start as timeperiod_start, timeperiod.end as timeperiod_end, timeperiod.duration as timeperiod_duration from record LEFT join timeperiod on record.timeperiod_id=timeperiod.id where timeperiod.start > '$start_date' AND record.endpoint_id = '$this->id'");
 
-        return $records;
+    }
+
+
+    public function getRawRecords(){
+
+        return \DB::select("select record.*, timeperiod.start as timeperiod_start, timeperiod.end as timeperiod_end, timeperiod.duration as timeperiod_duration from record LEFT join timeperiod on record.timeperiod_id=timeperiod.id where record.endpoint_id = '$this->id'");
 
     }
 
