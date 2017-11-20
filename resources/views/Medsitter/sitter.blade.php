@@ -43,7 +43,9 @@
                         <div class="input-group justify-content-center">
                             <button id="microphoneButton-0" title="Microphone Privacy" class="toolbarButton microphoneOff"></button>
                             <button id="joinLeaveButton-0" title="Join Conference" class="toolbarButton callStart"></button>
+                            <button class="toolbarButton"><i class="fa fa-camera fa-3x"></i></button>
                             <button class="btn btn-nav-blue my-2 my-sm-0" type="button">Details</button>
+
                         </div>
                         <div id="patient-0">
                         </div>
@@ -92,7 +94,9 @@
                         <div class="input-group justify-content-center">
                             <button id="microphoneButton-1" title="Microphone Privacy" class="toolbarButton microphoneOff"></button>
                             <button id="joinLeaveButton-1" title="Join Conference" class="toolbarButton callStart"></button>
+                            <button class="toolbarButton"><i class="fa fa-camera fa-3x"></i></button>
                             <button class="btn btn-nav-blue my-2 my-sm-1" type="button">Details</button>
+
                         </div>
                         <div id="patient-1">
 
@@ -146,7 +150,9 @@
                         <div class="input-group justify-content-center">
                             <button id="microphoneButton-2" title="Microphone Privacy" class="toolbarButton microphoneOff"></button>
                             <button id="joinLeaveButton-2" title="Join Conference" class="toolbarButton callStart"></button>
+                            <button class="toolbarButton"><i class="fa fa-camera fa-3x"></i></button>
                             <button class="btn btn-nav-blue my-2 my-sm-2" type="button">Details</button>
+
                         </div>
                         <div id="patient-2">
 
@@ -197,7 +203,9 @@
                         <div class="input-group justify-content-center">
                             <button id="microphoneButton-3" title="Microphone Privacy" class="toolbarButton microphoneOff"></button>
                             <button id="joinLeaveButton-3" title="Join Conference" class="toolbarButton callStart"></button>
+                            <button class="toolbarButton"><i class="fa fa-camera fa-3x"></i></button>
                             <button class="btn btn-nav-blue my-2 my-sm-3" type="button">Details</button>
+
                         </div>
                         <div id="patient-3">
 
