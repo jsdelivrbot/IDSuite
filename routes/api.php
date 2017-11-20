@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/entity/{options}', 'EntityController@getEntity');
     Route::get('/entity/managers/{options}', 'EntityController@getEntityManagers');
 
+
     //Endpoint Routes//
     Route::get('/endpoints/{options}', 'EndpointController@getEndpoints');
     Route::get('/endpoint/{options}', 'EndpointController@getEndpoint');

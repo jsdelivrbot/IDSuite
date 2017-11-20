@@ -114,7 +114,7 @@ class Entity extends Model
     // many to many //
     public function endpoints()
     {
-        return $this->belongsToMany(Endpoint::class)->withTimestamps();
+        return $this->hasMany(Endpoint::class, 'entity_id', 'id');
     }
 
     public function users()

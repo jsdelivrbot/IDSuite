@@ -513,6 +513,13 @@ class TestController extends Controller
     public function test()
     {
 
+        /**
+         * @var Entity $entity
+         */
+        $entity = Entity::getObjectById('ENT59fb7569a279a');
+
+        dd($entity->endpoints);
+
         $starttime = microtime(true);
         /* do stuff here */
 
