@@ -6,12 +6,13 @@
 
         <div class="col-lg-6">
             <div class="card" style="background-color: #434857 !important">
-                <span id="connectionStatus-0">Initializing</span>
-                <span id="clientVersion-0"></span>
-
-                <div id="renderer2-0" class="card-img-top mt-2"> </div>
-
                 <div class="card-block">
+                    <span id="connectionStatus-0">Initializing</span>
+                    <span id="clientVersion-0"></span>
+
+                    <div id="renderer2-0" class="card-img-top mt-2"> </div>
+
+
 
                     <div id="patient-connect-buttons-0" class="form-group">
                         <div class="input-group justify-content-center">
@@ -56,12 +57,13 @@
 
         <div class="col-lg-6">
             <div class="card" style="background-color: #434857 !important">
-                <span id="connectionStatus-1">Initializing</span>
-                <span id="clientVersion-1"></span>
-
-                <div id="renderer2-1" class="card-img-top mt-2"> </div>
-
                 <div class="card-block">
+                    <span id="connectionStatus-1">Initializing</span>
+                    <span id="clientVersion-1"></span>
+
+                    <div id="renderer2-1" class="card-img-top mt-2"> </div>
+
+
 
                     <div id="patient-connect-buttons-1" class="form-group">
                         <div class="input-group justify-content-center">
@@ -109,12 +111,13 @@
         <div class="col-lg-6">
             <div class="card" style="background-color: #434857 !important">
                 <span id="connectionStatus-2">Initializing</span>
-
-                <span id="clientVersion-2"></span>
-
-                <div id="renderer2-2" class="card-img-top mt-2"> </div>
-
                 <div class="card-block">
+
+                    <span id="clientVersion-2"></span>
+
+                    <div id="renderer2-2" class="card-img-top mt-2"> </div>
+
+
 
                     <div id="patient-connect-buttons-2" class="form-group">
                         <div class="input-group justify-content-center">
@@ -159,12 +162,13 @@
             <div class="card" style="background-color: #434857 !important">
 
                 <span id="connectionStatus-3">Initializing</span>
-
-                <span id="clientVersion-3"></span>
-
-                <div id="renderer2-3" class="card-img-top mt-2"> </div>
-
                 <div class="card-block">
+
+                    <span id="clientVersion-3"></span>
+
+                    <div id="renderer2-3" class="card-img-top mt-2"> </div>
+
+
 
                     <div id="patient-connect-buttons-3" class="form-group">
                         <div class="input-group justify-content-center">
