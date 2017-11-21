@@ -24,7 +24,6 @@ class APIController extends Controller
                  LEFT JOIN endpoint ON endpoint.proxy_id = proxy.id
                  WHERE proxy.id='" . $proxy_id . "' AND proxy.pkey='" . $key . "' AND endpoint.ipaddress='" . $endpoint_address . "' LIMIT 0,1";
         $result = DB::select($query);
-        Log::info($query);
 
         if ($result == false) {
             Log::info("couldn't validate request");
@@ -38,7 +37,7 @@ class APIController extends Controller
 
     public function getRecords(Request $request)
     {
-        Log::info("getrecords");
+        \Log::info("getrecords");
         // $key = Crypt::decrypt($key);
 
         $proxy_id = $request->input('proxy_id');
@@ -46,8 +45,7 @@ class APIController extends Controller
         $key = $request->input('key');
         $limit = $request->input('limit', 1);
 
-        Log::info(print_r($request->all(), true));
-        
+
         $endpoint_proxy_details = $this->validateRequest($proxy_id, $endpoint_address, $key);
         $query = "SELECT record.*, timeperiod.start as join_time, timeperiod.end as leave_time FROM record
         LEFT JOIN endpoint ON record.endpoint_id = endpoint.id
@@ -264,7 +262,7 @@ class APIController extends Controller
     public  function insertRecords(Request $request)
     {
 
-        dd("inside insertrecords");
+        \Log::info('Inserting records');
 
         ini_set('max_execution_time', 3600);
         ini_set('memory_limit', "3072M");
