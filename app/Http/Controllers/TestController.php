@@ -173,10 +173,21 @@ class TestController extends Controller
 
         $ns_ticket = $ns_client->getTicketDetails(769549);
 
-        dd($output);
+
+
+        dd($ns_ticket);
+
+        $ticket = new \App\Ticket();
 
 
 
+        /*
+         * message
+         *
+         *
+         *
+ */
+            $ticket->save();
 
         //     $service = Netsuite\NetsuiteDatabase::AddUpdateAllCustomers();
 
@@ -517,7 +528,7 @@ class TestController extends Controller
         /* do stuff here */
 
 
-        $entity = Endpoint::getObjectByRefId('netsuite', '62296', 'reference_key');
+        $entity = Endpoint::getObjectByRefId('reference_key', 'netsuite', '62296');
 
 
         dd($entity);
