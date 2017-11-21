@@ -47,6 +47,8 @@ class EndpointSeeder extends Seeder{
 
         $progress_count = 0;
 
+//        dd($proxies);
+
         foreach ($endpoints as $endpoint){
 
             $progress = round(100 * ($count / count($endpoints)));
@@ -96,19 +98,12 @@ class EndpointSeeder extends Seeder{
 
             $proxy_index = $endpoint[10];
 
+            $proxy_row = $proxies[$proxy_index];
 
+            $proxy_name = $proxy_row[2];
 
-            if($proxy_index > 0){
-                $proxy_row = $proxies[$proxy_index];
+            $endpoint[10] = $proxy_name;
 
-                $proxy_name = $proxy_row[2];
-
-                $endpoint[10] = $proxy_name;
-
-
-            } else {
-                $count++;
-            }
 
             $model_index = $endpoint[3];
 
@@ -210,7 +205,17 @@ class EndpointSeeder extends Seeder{
             }
 
 
-            if($count === 0 || $p[0] === null || $p[1] === 'bs') {
+            if($p[1] === 'bs') {
+                $count++;
+                continue;
+            }
+
+            dump($p[1]);
+
+            $proxy = \App\Proxy::getByName($p[1]);
+
+            if($proxy !== null){
+                dump($p[1]);
                 $count++;
                 continue;
             }
@@ -258,8 +263,6 @@ class EndpointSeeder extends Seeder{
                 $proxy->save();
             } else {
 
-                dump( $p);
-                dump($entity);
                 dd('$entity not an object');
             }
 
@@ -486,8 +489,12 @@ class EndpointSeeder extends Seeder{
 
                     $name = $model_explode[0];
 
-                    $edition = $model_explode[1];
 
+                    if(isset($model_explode[1])) {
+                        $edition = $model_explode[1];
+                    } else {
+                        $edition = '';
+                    }
                     $description = trim(substr($item_description, strlen($name) + 1 + strlen($edition), strlen($item_description)));
                 }
 
@@ -533,7 +540,11 @@ class EndpointSeeder extends Seeder{
 
                     $name = $model_explode[0];
 
-                    $edition = $model_explode[1];
+                    if(isset($model_explode[1])) {
+                        $edition = $model_explode[1];
+                    } else {
+                        $edition = '';
+                    }
 
                     $description = trim(substr($item_description, strlen($name) + 1 + strlen($edition), strlen($item_description)));
 
@@ -591,7 +602,7 @@ class EndpointSeeder extends Seeder{
                 $model->type = $type;
             }
 
-            $model->price = floatval(preg_replace('/,/', '', $m[3]));
+            $model->price = floatval(preg_replace('/,/', '', $m[2]));
 
 
             $model->save();
@@ -604,7 +615,7 @@ class EndpointSeeder extends Seeder{
 
             $dynamic_enum_value->definition($dynamic_enum)->save($dynamic_enum);
 
-            $dynamic_enum_value->value = $m[4];
+            $dynamic_enum_value->value = $m[3];
 
             $dynamic_enum_value->value_type = \App\Enums\EnumDataSourceType::getKeyByValue('mrge');
 
@@ -694,12 +705,19 @@ class EndpointSeeder extends Seeder{
             $entity = static::processEntity($e[1]);
 
             if(!$entity){
+
+                dd($entity);
+
                 continue;
             } else {
                 $endpoint->entity($entity)->save($entity);
             }
 
+            dump($e);
+
             $proxy = static::processProxy($e[10]);
+
+            dump($proxy);
 
             $endpoint->proxy($proxy)->save($proxy);
 
@@ -711,12 +729,7 @@ class EndpointSeeder extends Seeder{
                 $endpoint->endpointmodel($model)->save($model);
             }
 
-
-
             $endpoint->save();
-
-
-
 
             $ip2location = \App\Ip2Location::getByIp($e[8]);
 
@@ -918,6 +931,7 @@ class EndpointSeeder extends Seeder{
 
     public static function processProxy($proxy_name){
         $proxy = \App\Proxy::getByName($proxy_name);
+
         if($proxy === null){
             return false;
         } else {

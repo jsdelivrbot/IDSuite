@@ -480,7 +480,6 @@
          */
         function generateLayout(header, footer, topbar, bottombar, charts, chartobject, callback) {
 
-
             let layout = {
                 pageMargins: [40, 100, 40, 40],
 
@@ -625,7 +624,7 @@
             let pdf_images = 0;
             let pdf_layout = layout_1; // loaded from another JS file
 
-            let chartids = ['chart1', 'devicebytype', 'deviceupstatus', 'deviceupstatuspercentall'];
+            let chartids = ['chart1', 'devicebytype', 'avergaecallduration', 'casesopened'];
 
             let charts = {};
 
@@ -663,10 +662,13 @@
 
                             charts_remaining--;
 
+                            console.log(charts_remaining);
+
 
                             if (charts_remaining === 0) {
 
                                 console.log(charters);
+
 
                                 generateLayout(header, footer, topbar, bottombar, charters, this, generatePdf);
 
@@ -697,7 +699,11 @@
             console.log(layout);
 
             chartobject.toPDF(layout, function (data) {
+                console.log('chartObject');
+
                 chartobject.download(data, this.defaults.formats.PDF.mimeType, "amcharts.pdf");
+
+
             });
 
         }
@@ -731,6 +737,25 @@
                 });
         }
 
+        function setHmsCount(entity, el) {
+
+//            setChartHW(el,'500px', '200px');
+
+            let hms_count = 0;
+
+            $.each(entity.endpoints, function(key, value){
+                if(value.type === 7){
+                    hms_count++;
+                }
+            });
+
+
+            el.append(
+                '<span class="h1 yellow" >'+hms_count+'</span>'
+            );
+
+        }
+
         /**
          *
          * getEntity
@@ -757,6 +782,8 @@
                     let name = entity.name;
 
                     setHeaderCard(name);
+
+                    setHmsCount(entity, $('#hms-count-endpoints'));
 
                     setLocationTab(entity.sites, $('.location-tab'));
                     setContactTab(entity.personnel, $('.contacts-tab'));
@@ -804,21 +831,18 @@
                 });
         }
 
+        let header = "/img/global_presence_heading.png";
+        let topbar = "/img/global_presence_top_bar.png";
+        let bottombar = "/img/global_presence_bottom_bar.png";
+        let footer = "/img/customer_care_heading.png";
 
         $(document).ready(function () {
-
 
             console.log(axiosrequests);
 
             axiosrequests.push = getEntity('{{$entity->id}}');
             axiosrequests.push = callVolumeOverTime('{{$entity->id}}');
             axiosrequests.push = getEntityManagers('{{$entity->id}}', $('#header-managers'));
-
-
-            let header = "/img/global_presence_heading.png";
-            let topbar = "/img/global_presence_top_bar.png";
-            let bottombar = "/img/global_presence_bottom_bar.png";
-            let footer = "/img/customer_care_heading.png";
 
 
             getDataUri(header, function (dataurl) {

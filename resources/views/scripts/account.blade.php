@@ -13,6 +13,7 @@
 <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <script src="{{asset('assets/js/jquery.validate.js')}}"></script>
 <script src="{{asset('assets/js/additional-methods.js')}}"></script>
+<script src="https://cdn.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 
 @stack('account_scripts')
 @stack('custom_tabs')

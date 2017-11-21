@@ -21,7 +21,7 @@ mix.js('resources/assets/js/account_note.js', 'public/assets/js');
 mix.js('resources/assets/js/records.js', 'public/assets/js');
 mix.js('resources/assets/js/device_charts.js', 'public/assets/js');
 
-mix.copy('resources/assets/js/amcharts', 'public/assets/js/amcharts');
+// mix.copy('resources/assets/js/amcharts', 'public/assets/js/amcharts');
 mix.copy('node_modules/jquery-validation/dist/jquery.validate.js', 'public/assets/js');
 mix.copy('node_modules/jquery-validation/dist/additional-methods.js', 'public/assets/js');
 
