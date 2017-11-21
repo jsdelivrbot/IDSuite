@@ -267,7 +267,9 @@ class APIController extends Controller
         ini_set('max_execution_time', 3600);
         ini_set('memory_limit', "3072M");
         ini_set('upload_max_filesize', "3072M");
-        ini_set('post_max_size', "3072M");        Log::info("insertRecords");
+        ini_set('post_max_size', "3072M");
+
+        
 
         $proxy_id = $request->input('proxy_id');
         $endpoint_address = $request->input('endpoint');

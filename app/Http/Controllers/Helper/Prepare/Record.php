@@ -9,7 +9,7 @@
 namespace App\Http\Controllers\Helper\Prepare;
 
 use App\Enums\EnumDataSourceType;
-use App\Http\Controllers\API\APIController;
+use App\Http\Controllers\APIController;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Helper\Funcs;
 class Record

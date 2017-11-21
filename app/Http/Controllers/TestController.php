@@ -13,7 +13,7 @@ use App\EntityName;
 use App\Enums\EnumDataSourceType;
 use App\Enums\EnumDeviceType;
 use App\Enums\EnumMonths;
-use App\Http\Controllers\API\APIController;
+use App\Http\Controllers\APIController;
 use App\Http\Controllers\Vidyo\VidyoController;
 use App\Ip2Location;
 use App\PersonContact;
