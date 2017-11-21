@@ -77,7 +77,10 @@ class DynamicEnum extends Model
 
     /**
      *
-     * setValues()
+     * getValues()
+     *
+     * get json encoded values and decode.
+     *
      * @return array
      */
     public function getValues()
@@ -99,6 +102,16 @@ class DynamicEnum extends Model
 
     }
 
+    /**
+     *
+     * getKeyByValue
+     *
+     * returns key give a value.
+     *
+     * @param $value
+     * @return false|int|string
+     * @throws \Exception
+     */
     public function getKeyByValue($value)
     {
         $key = array_search($value, $this->getValues());

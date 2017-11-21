@@ -807,8 +807,6 @@ class ChartController extends Controller
         /**
          * @var Endpoint $endpoint
          */
-//        $endpoint = $this->validateObject($options);
-
         $endpoint = $this->validateObject($options);
 
         $count = 1;
@@ -836,7 +834,6 @@ class ChartController extends Controller
             'labels' => $label_array,
             'data' => $data_array
         ]);
-
     }
 
 

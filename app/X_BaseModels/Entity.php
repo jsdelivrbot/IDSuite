@@ -114,7 +114,7 @@ class Entity extends Model
     // many to many //
     public function endpoints()
     {
-        return $this->belongsToMany(Endpoint::class)->withTimestamps();
+        return $this->hasMany(Endpoint::class, 'entity_id', 'id');
     }
 
     public function users()
@@ -208,24 +208,6 @@ class Entity extends Model
     }
 
 
-    /**
-     *
-     * searchByDevType
-     *
-     * @param $value_type
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public static function searchByDevType($value_type)
-    {
-
-        $type = EnumDataSourceType::getKeyByValue($value_type);
-
-        $result = (new Entity)->join('object_dev', 'entity.id', '=', 'object_dev.object_id')
-            ->where('value_type', '=', $type)
-            ->get();
-
-        return $result;
-    }
 
 
     /**

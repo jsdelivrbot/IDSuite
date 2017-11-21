@@ -203,6 +203,8 @@ class EntityController extends Controller
 
         $entity_obj->tickets = (new Ticket)->where('entity_id', '=', $entity->id)->paginate(15);
 
+        $entity_obj->endpoints = $entity->endpoints;
+
 
         return response()->json(['entity' => $entity_obj]);
     }

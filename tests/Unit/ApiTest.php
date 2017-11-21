@@ -86,6 +86,13 @@ class ApiTest extends TestCase
         dump($response->assertStatus(200)->getStatusCode());
 
 
+
+        dump('/api/entity/managers/' . json_encode($entity_options));
+
+        $response = $this->get( '/api/entity/managers/' . json_encode($entity_options), $this->headers($user));
+
+        dump($response->assertStatus(200)->getStatusCode());
+
         /**
          * CHART ROUTES
          */
@@ -161,12 +168,12 @@ class ApiTest extends TestCase
 //        $response = $this->get( '/api/chart/devicePingData/' . json_encode($endpoint_options), $this->headers($user));
 //
 //        dump($response->assertStatus(200)->getStatusCode());
-
-        dump('/api/chart/deviceCostPerCallAvg/' . json_encode($endpoint_options));
-
-        $response = $this->get( '/api/chart/deviceCostPerCallAvg/' . json_encode($endpoint_options), $this->headers($user));
-
-        dump($response->assertStatus(200)->getStatusCode());
+//
+//        dump('/api/chart/deviceCostPerCallAvg/' . json_encode($endpoint_options));
+//
+//        $response = $this->get( '/api/chart/deviceCostPerCallAvg/' . json_encode($endpoint_options), $this->headers($user));
+//
+//        dump($response->assertStatus(200)->getStatusCode());
 
 
         /**

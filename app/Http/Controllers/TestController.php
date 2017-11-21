@@ -524,14 +524,23 @@ class TestController extends Controller
     public function test()
     {
 
+        /**
+         * @var Entity $entity
+         */
+        $entity = Entity::getObjectById('ENT59fb7569a279a');
+
+        dd($entity->endpoints);
+
         $starttime = microtime(true);
         /* do stuff here */
 
 
-        $entity = Endpoint::getObjectByRefId('reference_key', 'netsuite', '62296');
+        $endpoints = Endpoint::searchByDevType('reference_key','zabbix');
+        dd($endpoints);
+
+        $entity = Entity::getObjectByRefId('reference_key','netsuite', '62296');
 
 
-        dd($entity);
 
 
 //

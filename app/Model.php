@@ -47,12 +47,15 @@ abstract class Model extends Eloquent
      *
      * getObjectByRefId
      *
+     * Return a single object
+     *
+     * @param $dynamic_enum_name
      * @param $value_type
      * @param $value
-     * @param $dynamic_enum_name
      * @return \Illuminate\Database\Eloquent\Collection
+     * @throws \Exception
      */
-    public static function getObjectByRefId($value_type, $value, $dynamic_enum_name)
+    public static function getObjectByRefId($dynamic_enum_name, $value_type, $value)
     {
         $dynamic_enum = DynamicEnum::getByName($dynamic_enum_name);
 
@@ -68,11 +71,43 @@ abstract class Model extends Eloquent
             ->leftjoin('dynamic_enum_value', 'dynamic_enum_value.id', '=', 'dynamic_enum_value_id')
             ->where('object_dev.value_type', '=', $type)
             ->where('dynamic_enum_value.value', '=', $value)
-            ->first();
+            ->get();
+
+        if($result->count() > 1){
+            throw new \Exception("The value parameter has been found in multiple $class_path(s) class objects that's references relationship has duplicated key -> value DynamicEnumValue objects.", "500");
+        } else {
+            return $result;
+        }
+    }
+
+
+    /**
+     *
+     * searchByDevType
+     *
+     * return all of a class type that has a key matching the dynamic enum's values key.
+     *
+     * @param $value_type
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function searchByDevType($dyanmic_enum_name, $value_type)
+    {
+        $dyanmic_enum = DynamicEnum::getByName($dyanmic_enum_name);
+
+        $class_path = get_called_class();
+
+        $class = (new $class_path);
+
+        $table_name = $class->table;
+
+        $type = $dyanmic_enum->getKeyByValue($value_type);
+
+        $result = $class->join('object_dev', "$table_name.id", '=', 'object_dev.object_id')
+            ->where('value_type', '=', $type)
+            ->get();
 
         return $result;
     }
-
 
 
 
