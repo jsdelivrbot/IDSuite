@@ -46,6 +46,8 @@ class APIController extends Controller
         $key = $request->input('key');
         $limit = $request->input('limit', 1);
 
+        Log::info(print_r($request->all(), true));
+        
         $endpoint_proxy_details = $this->validateRequest($proxy_id, $endpoint_address, $key);
         $query = "SELECT record.*, timeperiod.start as join_time, timeperiod.end as leave_time FROM record
         LEFT JOIN endpoint ON record.endpoint_id = endpoint.id
