@@ -65,6 +65,46 @@
 
         </div>
 
+
+        <div class="card-deck mt-3">
+            <div class="card card-teal">
+                <div class="card-block">
+                    <div class="text-center">
+                        <h4 class="card-title">Total CDR data</h4>
+                        <h1 class="card-title" id="cdr-count"></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-yellow">
+                <div class="card-block">
+                    <div class="text-center">
+                        <h4 class="card-title">Customers with CDR data</h4>
+                        <h1 class="card-title" id="cust-with-cdr"></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-pink">
+                <div class="card-block">
+                    <div class="text-center">
+                        <h4 class="card-title">Customer CDR ratio</h4>
+                        <h1 class="card-title" id="cust_cdr_ratio"></h1>
+                    </div>
+                </div>
+            </div>
+
+            {{--<div class="card card-orange">--}}
+                {{--<div class="card-block">--}}
+                    {{--<div class="text-center">--}}
+                        {{--<h4 class="card-title">Customer's monitored ratio</h4>--}}
+                        {{--<h1 class="card-title" id="cust-monitored-ratio"></h1>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
+        </div>
+
     </section>
 
 
@@ -94,6 +134,10 @@
                     $('#netsuite-count').text(stats.netsuite_count);
                     $('#mrge-count').text(stats.mrge_count);
                     $('#polycom-count').text(stats.polycom_count);
+                    $('#cdr-count').text(stats.cdr_count);
+                    $('#cust-with-cdr').text(stats.cust_with_cdr);
+                    $('#cust_cdr_ratio').text(stats.cust_cdr_ratio.toFixed(2) + '%');
+//                    $('#cust-monitored-ratio').text(stats.cust_monitored_ratio.toFixed(2) + '%');
                 });
 
         }
