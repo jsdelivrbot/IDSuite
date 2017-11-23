@@ -37,6 +37,8 @@ class ProductStatController extends Controller
     public function getStats($options)
     {
 
+        ini_set('memory_limit', '4096M');
+
         $options = json_decode($options);
 
         $this->validateObject($options);
