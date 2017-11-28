@@ -188,25 +188,25 @@
             drawImage(videoElement, 0, 0, canvas.width, canvas.height);
 
 
-        dataUrl = canvas.toDataURL();
-
-
-        console.log(dataUrl);
+        data = canvas.toDataURL();
 
         options = JSON.stringify({
-            img: dataUrl
+            img: data
         });
 
         $.ajax({
             url: "/api/image",
             type: "POST",
             data: {
-                image: dataUrl
+                image: data
             },
             dataType: "json",
             success: function(response){
 
-                console.log(response);
+                console.log(response.filename);
+
+                dataUrl = response.filename;
+
 
             }
 
