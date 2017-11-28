@@ -93,5 +93,8 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('/api/alltwilio', 'WebRtcController@sendMessageToAll');
 
 
+    Route::post('/image', 'FileController@storeFile');
+
+
 
 });

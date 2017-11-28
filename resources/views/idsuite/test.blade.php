@@ -3,14 +3,22 @@
 @section('content')
     <div>
         <video id="monitor" autoplay></video>
+
+        <canvas id="snapshot"></canvas>
+
     </div>
     <div>
         <input type="button" value="Start" onclick="start()" id="startBtn">
+        <input type="button" value="SnapShot" onclick="snapShot()" id="snapshot">
+        <input type="button" value="Analyze face" onclick="processImage()">
         <input type="button" value="Print Media Object" onclick="print()" id="printBtn">
         <select id="input-audio"></select>
         <select id="input-video"></select>
         <select id="output-audio"></select>
     </div>
+
+
+
 
 <script>
 
@@ -23,6 +31,8 @@
     let selectors = [inputaudio, inputvideo, outputvideo];
 
     var startBtn = document.getElementById('startBtn');
+
+    let dataUrl;
 
     let videoElement = document.getElementById('monitor');
 
@@ -161,7 +171,6 @@
         var audioSource = inputaudio.value;
         var videoSource = inputvideo.value;
         var constraints = {
-            audio: {deviceId: audioSource ? {exact: audioSource} : undefined},
             video: {deviceId: videoSource ? {exact: videoSource} : undefined}
         };
 
@@ -169,8 +178,101 @@
         then(gotStream).then(gotDevices).catch(handleError);
     }
 
+    function snapShot(){
+
+        canvas = document.getElementById('snapshot');
+
+        canvas.width = videoElement.videoWidth;
+        canvas.height = videoElement.videoHeight;
+        canvas.getContext('2d').
+            drawImage(videoElement, 0, 0, canvas.width, canvas.height);
 
 
+        dataUrl = canvas.toDataURL();
+
+
+        console.log(dataUrl);
+
+        options = JSON.stringify({
+            img: dataUrl
+        });
+
+        $.ajax({
+            url: "/api/image",
+            type: "POST",
+            data: {
+                image: dataUrl
+            },
+            dataType: "json",
+            success: function(response){
+
+                console.log(response);
+
+            }
+
+        })
+
+
+    }
+
+    function processImage() {
+        // **********************************************
+        // *** Update or verify the following values. ***
+        // **********************************************
+
+        // Replace the subscriptionKey string value with your valid subscription key.
+        var subscriptionKey = "c0d9e7f0352b4fd0a2881027c970d583";
+
+        // Replace or verify the region.
+        //
+        // You must use the same region in your REST API call as you used to obtain your subscription keys.
+        // For example, if you obtained your subscription keys from the westus region, replace
+        // "westcentralus" in the URI below with "westus".
+        //
+        // NOTE: Free trial subscription keys are generated in the westcentralus region, so if you are using
+        // a free trial subscription key, you should not need to change this region.
+        var uriBase = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
+
+        // Request parameters.
+        var params = {
+            "returnFaceId": "true",
+            "returnFaceLandmarks": "false",
+            "returnFaceAttributes": "age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise",
+        };
+
+        // Display the image.
+//        var sourceImageUrl = document.getElementById("inputImage").value;
+//        document.querySelector("#sourceImage").src = sourceImageUrl;
+
+        // Perform the REST API call.
+        $.ajax({
+            url: uriBase + "?" + $.param(params),
+
+            // Request headers.
+            beforeSend: function(xhrObj){
+                xhrObj.setRequestHeader("Content-Type","application/json");
+                xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
+            },
+
+            type: "POST",
+
+            // Request body.
+            data: '{"url": ' + '"' + dataUrl + '"}',
+        })
+
+            .done(function(data) {
+                // Show formatted JSON on webpage.
+                $("#responseTextArea").val(JSON.stringify(data, null, 2));
+            })
+
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                // Display error message.
+                var errorString = (errorThrown === "") ? "Error. " : errorThrown + " (" + jqXHR.status + "): ";
+                errorString += (jqXHR.responseText === "") ? "" : (jQuery.parseJSON(jqXHR.responseText).message) ?
+                    jQuery.parseJSON(jqXHR.responseText).message : jQuery.parseJSON(jqXHR.responseText).error.message;
+                alert(errorString);
+            });
+    };
 </script>
 
 @endsection
