@@ -7,6 +7,7 @@
         <canvas id="snapshot"></canvas>
 
     </div>
+    <br>
     <div>
         <input type="button" value="Start" onclick="start()" id="startBtn">
         <input type="button" value="SnapShot" onclick="snapShot()" id="snapshot">
@@ -16,6 +17,15 @@
         <select id="input-video"></select>
         <select id="output-audio"></select>
     </div>
+    <br>
+
+    <div>
+
+        <textarea id="responseTextArea" class="UIInput" style="width:580px; height:400px;"></textarea>
+        
+    </div>
+
+
 
 
 
