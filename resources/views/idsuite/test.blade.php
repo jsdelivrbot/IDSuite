@@ -21,8 +21,8 @@
 
     <div>
 
-        <textarea id="responseTextArea" class="UIInput" style="width:580px; height:400px;"></textarea>
-        
+        <textarea id="responseTextArea" class="UIInput" style="width:580px; height:1000px;"></textarea>
+
     </div>
 
 
