@@ -114,13 +114,13 @@
 
     <script>
 
-        function getStats(user_id){
+        function getCustomerStats(user_id){
 
             options = JSON.stringify({
                 id: user_id
             });
 
-            return axios.get('/api/measure/stats/' + options)
+            return axios.get('/api/measure/stats/customer/' + options)
                 .then(function(data){
 
                     if(!validate(data.data)){
@@ -129,24 +129,171 @@
 
                     let stats = data.data;
 
-                    $('#customer-count').text(stats.customer_count);
-                    $('#zabbix-count').text(stats.zabbix_count);
-                    $('#netsuite-count').text(stats.netsuite_count);
-                    $('#mrge-count').text(stats.mrge_count);
-                    $('#polycom-count').text(stats.polycom_count);
-                    $('#cdr-count').text(stats.cdr_count);
-                    $('#cust-with-cdr').text(stats.cust_with_cdr);
-                    $('#cust_cdr_ratio').text(stats.cust_cdr_ratio.toFixed(2) + '%');
-//                    $('#cust-monitored-ratio').text(stats.cust_monitored_ratio.toFixed(2) + '%');
+                    $('#customer-count').text(stats.stat);
+
                 });
 
         }
 
+        function getZabbixStats(user_id){
+
+            options = JSON.stringify({
+                id: user_id
+            });
+
+            return axios.get('/api/measure/stats/zabbix/' + options)
+                .then(function(data){
+
+                    if(!validate(data.data)){
+                        return false;
+                    }
+
+                    let stats = data.data;
+
+                    $('#zabbix-count').text(stats.stat);
+
+                });
+
+        }
+
+        function getNetSuiteStats(user_id) {
+
+            options = JSON.stringify({
+                id: user_id
+            });
+
+            return axios.get('/api/measure/stats/netsuite/' + options)
+                .then(function(data){
+
+                    if(!validate(data.data)){
+                        return false;
+                    }
+
+                    let stats = data.data;
+
+                    $('#netsuite-count').text(stats.stat);
+
+                });
+
+        }
+
+        function getMrgeStats(user_id){
+
+            options = JSON.stringify({
+                id: user_id
+            });
+
+            return axios.get('/api/measure/stats/mrge/' + options)
+                .then(function(data){
+
+                    if(!validate(data.data)){
+                        return false;
+                    }
+
+                    let stats = data.data;
+
+                    $('#mrge-count').text(stats.stat);
+
+                });
+
+        }
+
+        function getPolycomStats(user_id){
+
+            options = JSON.stringify({
+                id: user_id
+            });
+
+            return axios.get('/api/measure/stats/polycom/' + options)
+                .then(function(data){
+
+                    if(!validate(data.data)){
+                        return false;
+                    }
+
+                    let stats = data.data;
+
+                    $('#polycom-count').text(stats.stat);
+
+                });
+
+        }
+
+        function getCdrStats(user_id){
+
+            options = JSON.stringify({
+                id: user_id
+            });
+
+            return axios.get('/api/measure/stats/cdr/' + options)
+                .then(function(data){
+
+                    if(!validate(data.data)){
+                        return false;
+                    }
+
+                    let stats = data.data;
+
+
+                    $('#cdr-count').text(stats.stat);
+
+                });
+
+        }
+
+        function getCustomerWithCdrStats(user_id){
+
+            options = JSON.stringify({
+                id: user_id
+            });
+
+            return axios.get('/api/measure/stats/customerwithcdr/' + options)
+                .then(function(data){
+
+                    if(!validate(data.data)){
+                        return false;
+                    }
+
+                    let stats = data.data;
+
+                    $('#cust-with-cdr').text(stats.stat);
+
+                });
+
+        }
+
+        function getCustomerCdrRatioStats(user_id){
+
+            options = JSON.stringify({
+                id: user_id
+            });
+
+            return axios.get('/api/measure/stats/customerwithcdrratio/' + options)
+                .then(function(data){
+
+                    if(!validate(data.data)){
+                        return false;
+                    }
+
+                    let stats = data.data;
+
+                    $('#cust_cdr_ratio').text(stats.stat.toFixed(4) + '%');
+                });
+
+        }
+
+
         $(document).ready(function () {
 
-            console.log('in stats functions');
+            axiosrequests.push = getCustomerStats('{{Auth::user()->id}}');
+            axiosrequests.push = getZabbixStats('{{Auth::user()->id}}');
+            axiosrequests.push = getNetSuiteStats('{{Auth::user()->id}}');
+            axiosrequests.push = getMrgeStats('{{Auth::user()->id}}');
+            axiosrequests.push = getPolycomStats('{{Auth::user()->id}}');
+            axiosrequests.push = getCdrStats('{{Auth::user()->id}}');
+            axiosrequests.push = getCustomerWithCdrStats('{{Auth::user()->id}}');
+            axiosrequests.push = getCustomerCdrRatioStats('{{Auth::user()->id}}');
 
-            axiosrequests.push = getStats('{{Auth::user()->id}}');
 
         });
 

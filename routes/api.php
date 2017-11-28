@@ -74,7 +74,14 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/enum/phoneTypeEnum/{options}', 'EnumController@phoneType');
 
     //Stats Routes//
-    Route::get('/measure/stats/{options}', 'ProductStatController@getStats');
+    Route::get('/measure/stats/customer/{options}', 'ProductStatController@getCustomerStats');
+    Route::get('/measure/stats/zabbix/{options}', 'ProductStatController@getZabbixStats');
+    Route::get('/measure/stats/netsuite/{options}', 'ProductStatController@getNetSuiteStats');
+    Route::get('/measure/stats/mrge/{options}', 'ProductStatController@getMrgeStats');
+    Route::get('/measure/stats/polycom/{options}', 'ProductStatController@getPolycomStats');
+    Route::get('/measure/stats/cdr/{options}', 'ProductStatController@getCdrStats');
+    Route::get('/measure/stats/customerwithcdr/{options}', 'ProductStatController@getCustomerWithCdrStats');
+    Route::get('/measure/stats/customerwithcdrratio/{options}', 'ProductStatController@getCustomerCdrRatioStats');
 
     //unused atm routes//
 

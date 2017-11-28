@@ -261,8 +261,33 @@ class Record extends Model
     }
 
 
+    public static function getRecordCount()
+    {
+        $result = \DB::select("select COUNT(*) FROM record");
 
+        $prop = 'COUNT(*)';
 
+        return $result[0]->$prop;
+
+    }
+
+    public static function getEntityCountWithRecords()
+    {
+        $result = \DB::select("SELECT count(*) as count, record.entity_id FROM `record`  GROUP BY record.entity_id");
+
+        $total_count = 0;
+
+        foreach($result as $group){
+            if($group->entity_id !== null){
+                $total_count++;
+            } else {
+                // Log something here //
+            }
+        }
+
+        return $total_count;
+
+    }
 
     /**
      *

@@ -515,6 +515,10 @@ class TestController extends Controller
         return $de->values;
     }
 
+    public function testView(){
+        return view('idsuite.test', ['viewname' => 'Test View']);
+    }
+
     /**
      *
      * User $user
@@ -523,6 +527,10 @@ class TestController extends Controller
      */
     public function test()
     {
+
+        dd(Record::getRecordCount());
+
+
 
         /**
          * @var Entity $entity

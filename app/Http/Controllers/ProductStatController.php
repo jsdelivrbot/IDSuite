@@ -27,14 +27,14 @@ class ProductStatController extends Controller
 
     /**
      *
-     * getStats
+     * getCustomerStats
      *
      * returns measure stats data
      *
      * @param $options
      * @return \Illuminate\Http\Response
      */
-    public function getStats($options)
+    public function getCustomerStats($options)
     {
 
         ini_set('memory_limit', '4096M');
@@ -47,32 +47,186 @@ class ProductStatController extends Controller
 
         $entities = Entity::all();
 
-        $stats->customer_count = count($entities);
+        $stats->stat = count($entities);
 
-        $stats->zabbix_count = count(DynamicEnumValue::getByDynamicEnum('reference_key', EnumDataSourceType::getKeyByValue('zabbix')));
+        return response()->json($stats);
+    }
 
-        $stats->netsuite_count = count(DynamicEnumValue::getByDynamicEnum('reference_key', EnumDataSourceType::getKeyByValue('netsuite')));
+    /**
+     *
+     * getZabbixStats
+     *
+     * returns measure stats data
+     *
+     * @param $options
+     * @return \Illuminate\Http\Response
+     */
+    public function getZabbixStats($options)
+    {
 
-        $stats->mrge_count = count(DynamicEnumValue::getByDynamicEnum('reference_key', EnumDataSourceType::getKeyByValue('mrge')));
+        ini_set('memory_limit', '4096M');
 
-        $stats->polycom_count = count(DynamicEnumValue::getByDynamicEnum('reference_key', EnumDataSourceType::getKeyByValue('polycom')));
+        $options = json_decode($options);
 
-        $stats->cdr_count = count(\App\Record::all());
+        $this->validateObject($options);
 
-        $stats->cust_with_cdr = 0;
+        $stats = new \stdClass();
 
-        foreach($entities as $entity){
-            if(count($entity->records) > 0){
-                $stats->cust_with_cdr++;
-            } else {
-                continue;
-            }
-        }
+        $stats->stat = count(DynamicEnumValue::getByDynamicEnum('reference_key', EnumDataSourceType::getKeyByValue('zabbix')));
 
-        $stats->cust_cdr_ratio = 100 * ($stats->cust_with_cdr / $stats->customer_count);
+        return response()->json($stats);
+    }
 
+    /**
+     *
+     * getNetSuiteStats
+     *
+     * returns measure stats data
+     *
+     * @param $options
+     * @return \Illuminate\Http\Response
+     */
+    public function getNetSuiteStats($options)
+    {
 
+        ini_set('memory_limit', '4096M');
 
+        $options = json_decode($options);
+
+        $this->validateObject($options);
+
+        $stats = new \stdClass();
+
+        $stats->stat = count(DynamicEnumValue::getByDynamicEnum('reference_key', EnumDataSourceType::getKeyByValue('netsuite')));
+
+        return response()->json($stats);
+    }
+
+    /**
+     *
+     * getMrgeStats
+     *
+     * returns measure stats data
+     *
+     * @param $options
+     * @return \Illuminate\Http\Response
+     */
+    public function getMrgeStats($options)
+    {
+
+        ini_set('memory_limit', '4096M');
+
+        $options = json_decode($options);
+
+        $this->validateObject($options);
+
+        $stats = new \stdClass();
+
+        $stats->stat = count(DynamicEnumValue::getByDynamicEnum('reference_key', EnumDataSourceType::getKeyByValue('mrge')));
+
+        return response()->json($stats);
+    }
+
+    /**
+     *
+     * getPolycomStats
+     *
+     * returns measure stats data
+     *
+     * @param $options
+     * @return \Illuminate\Http\Response
+     */
+    public function getPolycomStats($options)
+    {
+
+        ini_set('memory_limit', '4096M');
+
+        $options = json_decode($options);
+
+        $this->validateObject($options);
+
+        $stats = new \stdClass();
+
+        $stats->stat = count(DynamicEnumValue::getByDynamicEnum('reference_key', EnumDataSourceType::getKeyByValue('polycom')));
+
+        return response()->json($stats);
+    }
+
+    /**
+     *
+     * getCdrStats
+     *
+     * returns measure stats data
+     *
+     * @param $options
+     * @return \Illuminate\Http\Response
+     */
+    public function getCdrStats($options)
+    {
+
+        ini_set('memory_limit', '4096M');
+
+        $options = json_decode($options);
+
+        $this->validateObject($options);
+
+        $stats = new \stdClass();
+
+        $stats->stat = \App\Record::getRecordCount();
+
+        return response()->json($stats);
+    }
+
+    /**
+     *
+     * getCustomerWithCdrStats
+     *
+     * returns measure stats data
+     *
+     * @param $options
+     * @return \Illuminate\Http\Response
+     */
+    public function getCustomerWithCdrStats($options)
+    {
+
+        ini_set('memory_limit', '4096M');
+
+        $options = json_decode($options);
+
+        $this->validateObject($options);
+
+        $stats = new \stdClass();
+
+        $stats->stat = \App\Record::getEntityCountWithRecords();
+
+        return response()->json($stats);
+    }
+
+    /**
+     *
+     * getCustomerCdrRatioStats
+     *
+     * returns measure stats data
+     *
+     * @param $options
+     * @return \Illuminate\Http\Response
+     */
+    public function getCustomerCdrRatioStats($options)
+    {
+
+        ini_set('memory_limit', '4096M');
+
+        $options = json_decode($options);
+
+        $this->validateObject($options);
+
+        $stats = new \stdClass();
+
+        $cust_with_cdr = \App\Record::getEntityCountWithRecords();
+
+        $records_count = \App\Record::getRecordCount();
+
+        $stats->stat = 100 * ($cust_with_cdr / $records_count);
 
         return response()->json($stats);
     }

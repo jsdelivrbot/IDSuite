@@ -31,6 +31,8 @@ Route::get('/getAuthUser', 'UserController@getCurrentUser');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/testview', 'TestController@testView');
+
 // test routes //
 Route::get('/test/vidyo', 'TestController@test_vidyo');
 Route::get('/test/add_proxy_endpoint', 'TestController@add_proxy_endpoint');
