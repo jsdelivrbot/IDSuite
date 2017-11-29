@@ -83,6 +83,12 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/measure/stats/customerwithcdr/{options}', 'ProductStatController@getCustomerWithCdrStats');
     Route::get('/measure/stats/customerwithcdrratio/{options}', 'ProductStatController@getCustomerCdrRatioStats');
 
+    // Twilio routes //
+
+    Route::post('/twilio/mms','TwilioController@send');
+
+
+
     //unused atm routes//
 
     Route::get('/measure/webrtc', 'WebRtcController@index');
@@ -94,6 +100,8 @@ Route::group(['middleware' => ['auth:api']], function () {
 
 
     Route::post('/image', 'FileController@storeFile');
+
+
 
 
 

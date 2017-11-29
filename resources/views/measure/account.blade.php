@@ -431,6 +431,9 @@
                 }
             });
             charts.push(chart);
+
+
+            renderChart(chart);
         }
 
 
@@ -816,6 +819,59 @@
             });
 
         });
+
+
+        function renderChart(chart) {
+            chart.addListener("rendered", function (e) {
+
+                // WAIT FOR FABRIC
+                var interval = setInterval(function () {
+                    if (window.fabric) {
+                        clearTimeout(interval);
+
+                        // CAPTURE CHART
+                        e.chart.export.capture({}, function () {
+
+                            // SAVE TO JPG
+                            this.toJPG({}, function (base64) {
+
+                                // LOG IMAGE DATA
+                                console.log(base64);
+
+                                // CREATE LINK TO OPEN BASE64 IMAGE IN NEW TAB
+                                var a = document.createElement("a");
+                                a.setAttribute("href", base64);
+                                a.setAttribute("target", "_blank");
+                                a.setAttribute("style", "display: block; margin-top: 150px;");
+                                a.innerHTML = "Open embedded base64-image";
+
+                                var div = document.createElement("div");
+                                div.setAttribute("style", "position: absolute; width: 100%; top:0; bottom: 0; background-color: rgba(255,255,255,.9); z-index: 1337; display: block;text-align: center;");
+                                div.appendChild(a);
+
+                                this.setup.chart.div.appendChild(div);
+
+                                axios.post('/api/twilio/mms',{
+                                    number: '3173166329',
+                                    message: 'Alert',
+                                    imageUrl: base64
+                                }).then(function(response){
+                                    console.log(response);
+
+                                    alert(response);
+                                });
+
+                            });
+
+
+
+
+
+                        });
+                    }
+                }, 100);
+            });
+        }
 
     </script>
 
