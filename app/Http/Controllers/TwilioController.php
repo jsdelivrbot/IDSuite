@@ -55,7 +55,7 @@ class TwilioController extends Controller
             $filename = md5($imageData) . '.png';
 
             if (imagepng($image, public_path().'/img/' . $filename)) {
-                return 'http://192.35.252.40//img/' . $filename);
+                return 'http://192.35.252.40//img/' . $filename;
             } else {
 
                 return response()->json("could not save the file");
