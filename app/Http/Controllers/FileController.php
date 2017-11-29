@@ -10,8 +10,6 @@ class FileController extends Controller
 
     public function storeFile(request $request)
     {
-
-
         $data = $request->get('image');
 
         if (preg_match('/data:image\/(gif|jpeg|png);base64,(.*)/i', $data, $matches)) {
@@ -26,7 +24,6 @@ class FileController extends Controller
 
                 return response()->json("could not save the file");
 
-//                throw new Exception('Could not save the file.');
             }
         } else {
 
