@@ -325,11 +325,6 @@
             </div>
         </div>
 
-        <div id="header-managers" class="mt-4 text-white">
-            <div class="mb-2">
-                <h3>Account Managers</h3>
-            </div>
-        </div>
 
         <div class="col-lg-12 mt-5 mb-4" style="padding: 0;">
             <div class="row no-gutters">
@@ -790,46 +785,7 @@
                 });
         }
 
-        /**
-         *
-         * getEntityManagers
-         *
-         * gets the entity object's managers (users) and validates it
-         *
-         * @param entity_id
-         */
-        function getEntityManagers(entity_id, el) {
 
-            let options = JSON.stringify({
-                id: entity_id
-            });
-
-            return axios.get('/api/entity/managers/' + options)
-                .then(function (data) {
-                    let managers = data.data;
-
-                    if(!validate(managers)){
-                        return false;
-                    }
-
-                    $.each(managers, function(key, value){
-
-                        el.append(
-                            '<div class="row">' +
-                                '<div class="col-lg-3">' +
-                                    '<span>'+value.name+' : </span>' +
-                                '</div>' +
-                                '<div class="col-lg-3">' +
-                                    '<span>'+value.email+'</span>' +
-                                '</div>' +
-                            '</div>'
-                        )
-
-                    });
-
-                    console.log(managers);
-                });
-        }
 
         let header = "/img/global_presence_heading.png";
         let topbar = "/img/global_presence_top_bar.png";

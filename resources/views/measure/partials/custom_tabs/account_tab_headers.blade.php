@@ -21,6 +21,9 @@
     <li id="li-tab-6" class="nav-item">
         <a id="tab-a-6" class="nav-link color-6" data-toggle="tab" href="#card-block-tab-6" role="tab">Notes</a>
     </li>
+    <li id="li-tab-7" class="nav-item">
+        <a id="tab-a-7" class="nav-link color-7" data-toggle="tab" href="#card-block-tab-7" role="tab">Managers</a>
+    </li>
 
 @else
 
@@ -43,5 +46,7 @@
     <li id="li-tab-6" class="nav-item">
         <a id="tab-a-6" class="nav-link color-6" data-toggle="tab" href="#card-block-tab-6" role="tab">Notes</a>
     </li>
-
+    <li id="li-tab-7" class="nav-item">
+        <a id="tab-a-7" class="nav-link color-7" data-toggle="tab" href="#card-block-tab-7" role="tab">Managers</a>
+    </li>
 @endif

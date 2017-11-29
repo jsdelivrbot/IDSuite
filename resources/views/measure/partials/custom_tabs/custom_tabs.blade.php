@@ -52,6 +52,10 @@
                 $tab_count++;
             @endphp
             @include('measure.partials.custom_tabs.account_notes_tab')
+            @php
+                $tab_count++;
+            @endphp
+            @include('measure.partials.custom_tabs.account_managers_tab')
 
 
         @elseif($viewname === 'device')
