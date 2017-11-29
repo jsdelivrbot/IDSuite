@@ -31,7 +31,7 @@ class TwilioController extends Controller
     private function sendMessage($phoneNumber, $message, $imageData = null)
     {
         if($imageData !== null) {
-            $imageUrl = $this->storeFile(imageData);
+            $imageUrl = $this->storeFile($imageData);
 
             $twilio = new \Aloha\Twilio\Twilio(env("TWILIO_SID"), env("TWILIO_TOKEN"), env("TWILIO_FROM"));
 
