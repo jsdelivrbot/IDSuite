@@ -78,12 +78,12 @@ class APIController extends Controller
         \Log::info("host=".env('IDVIDEOPHONE_HOST'));
 
 
-        function exception_error_handler($errno, $errstr, $errfile, $errline ) {
-            throw new \ErrorException($errstr, $errno, 0, $errfile, $errline);
-        }
-        set_error_handler("exception_error_handler");
-
-        try {
+//        function exception_error_handler($errno, $errstr, $errfile, $errline ) {
+//            throw new \ErrorException($errstr, $errno, 0, $errfile, $errline);
+//        }
+//        set_error_handler("exception_error_handler");
+//
+//        try {
 
 
             // connect to db do a search and grab netsuite id
@@ -102,9 +102,9 @@ class APIController extends Controller
 
             }
             
-        }catch (Exception $e) {
-           Log::error("PG Error:". $e->getMessage());
-        }
+//        }catch (Exception $e) {
+//           Log::error("PG Error:". $e->getMessage());
+//        }
 
 
 
