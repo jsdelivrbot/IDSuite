@@ -3,9 +3,10 @@
         <h5>Total Call Duration</h5>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-12">
-        <div id="totalcallduration"></div>
+<div class="row" style="height: 200px">
+    <div class="col-lg-12 my-auto text-center">
+        <img id="totalcallduration-loader" src="/img/bars.svg" height="70px"/>
+        <div id="totalcallduration" class="chart-custom" style="display: none;"></div>
     </div>
 </div>
 
@@ -16,10 +17,13 @@
     function chartTotalCallDuration(data) {
         if (data !== false) {
 
+            $('#totalcallduration-loader').css('display', 'none');
+            $('#totalcallduration').css('display', 'block');
+
             AmCharts.makeChart("totalcallduration", {
                 type: "serial",
                 startDuration: 2,
-                theme: "dark",
+                theme: "light",
                 labelsEnabled: false,
                 dataProvider: data,
                 valueAxes: [{

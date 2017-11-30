@@ -6,6 +6,7 @@
 
         let myChart = new Chart(el, {
             type: 'line',
+            theme: 'light',
             data: {
                 datasets: [{
                     data: data,

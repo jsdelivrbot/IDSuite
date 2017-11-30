@@ -1,4 +1,18 @@
 /* IDS Custom css*/
+
+.card-custom{
+    background-color: #5C707F !important;
+    border-radius: 20px !important;
+}
+
+.chart-custom{
+    height: 200px !important;
+    width: 500px !important;
+}
+
+
+
+
 .sidebar a::before,
 .sidebar a::after {
     display: inline-block;

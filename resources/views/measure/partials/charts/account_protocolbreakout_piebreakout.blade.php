@@ -3,9 +3,10 @@
         <h5>Protocol Breakdown</h5>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-12">
-        <div id="protocolbreakout"></div>
+<div class="row" style="height:200px;">
+    <div class="col-lg-12 my-auto text-center">
+        <img id="protocolbreakout-loader" src="/img/bars.svg" height="70px"/>
+        <div id="protocolbreakout" class="chart-custom" style="display: none;"></div>
     </div>
 </div>
 
@@ -21,10 +22,12 @@
 
             if (data !== false) {
 
+                $('#protocolbreakout-loader').css('display', 'none');
+                $('#protocolbreakout').css('display', 'block');
+
                 AmCharts.makeChart("protocolbreakout", {
                     "type": "pie",
-                    "theme": "dark",
-
+                    "theme": "light",
                     "dataProvider": processChartData(data, selected),
                     "labelText": "[[title]]: [[value]]",
                     "balloonText": "[[title]]: [[value]]",

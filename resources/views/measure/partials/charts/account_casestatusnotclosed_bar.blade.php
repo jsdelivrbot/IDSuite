@@ -3,9 +3,10 @@
         <h5>Account Cases</h5>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-12">
-        <div id="accountcases"></div>
+<div class="row" style="height: 200px;">
+    <div class="col-lg-12 my-auto text-center">
+        <img id="accountcases-loader" src="/img/bars.svg" height="70px"/>
+        <div id="accountcases" class="chart-custom" style="display: none;"></div>
     </div>
 </div>
 
@@ -16,9 +17,12 @@
     function chartAccountCases(data) {
         if (data !== false) {
 
+            $('#accountcases-loader').css('display', 'none');
+            $('#accountcases').css('display', 'block');
+
             AmCharts.makeChart("accountcases", {
                 "type": "serial",
-                "theme": "dark",
+                "theme": "light",
                 "dataProvider": data,
                 "valueAxes": [{
                     "stackType": "regular",

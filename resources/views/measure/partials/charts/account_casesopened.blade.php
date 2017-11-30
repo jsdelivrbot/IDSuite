@@ -3,9 +3,10 @@
         <h5>Cases Opened</h5>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-12">
-        <div id="casesopened"></div>
+<div class="row" style="height: 200px;">
+    <div class="col-lg-12 my-auto text-center">
+        <img id="casesopened-loader" src="/img/bars.svg" height="70px"/>
+        <div id="casesopened" class="chart-custom" style="display: none;"></div>
     </div>
 </div>
 
@@ -16,10 +17,13 @@
     function chartCasesOpened(data) {
         if (data !== false) {
 
+            $('#casesopened-loader').css('display', 'none');
+            $('#casesopened').css('display', 'block');
+
             AmCharts.makeChart("casesopened", {
                 type: "serial",
                 startDuration: 2,
-                theme: "dark",
+                theme: "light",
                 labelsEnabled: false,
                 dataProvider: data,
                 valueAxes: [{

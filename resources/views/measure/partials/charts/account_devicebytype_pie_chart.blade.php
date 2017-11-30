@@ -3,9 +3,10 @@
         <h5>Count of Devices By Type</h5>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-12">
-        <div id="devicebytype"></div>
+<div class="row" style="height: 200px">
+    <div class="col-lg-12 my-auto text-center">
+        <img id="devicebytype-loader" src="/img/bars.svg" height="70px"/>
+        <div id="devicebytype" class="chart-custom" style="display: none;"></div>
     </div>
 </div>
 
@@ -17,9 +18,13 @@
 
         function chartDeviceByType(data) {
             if (data !== false) {
+
+                $('#devicebytype-loader').css('display', 'none');
+                $('#devicebytype').css('display', 'block');
+
                 AmCharts.makeChart("devicebytype", {
                     type: "pie",
-                    theme: "dark",
+                    theme: "light",
                     fontSize: 18,
                     color: '#000',
                     dataProvider: data,

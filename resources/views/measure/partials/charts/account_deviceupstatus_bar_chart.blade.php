@@ -3,9 +3,10 @@
         <h5>Device Status</h5>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-12">
-        <div id="deviceupstatus"></div>
+<div class="row" style="height: 200px;">
+    <div class="col-lg-12 my-auto text-center">
+        <img id="deviceupstatus-loader" src="/img/bars.svg" height="70px"/>
+        <div id="deviceupstatus" class="chart-custom" style="display: none;"></div>
     </div>
 </div>
 
@@ -15,6 +16,9 @@
 
     function chartDeviceUpStatus(data) {
         if (data !== false) {
+
+            $('#deviceupstatus-loader').css('display', 'none');
+            $('#deviceupstatus').css('display', 'block');
 
             AmCharts.makeChart("deviceupstatus", {
                 theme: "light",

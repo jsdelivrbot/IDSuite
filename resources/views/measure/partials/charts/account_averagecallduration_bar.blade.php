@@ -3,9 +3,10 @@
         <h5>Average Call Duration</h5>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-12">
-        <div id="avergaecallduration"></div>
+<div class="row" style="height: 200px;">
+    <div class="col-lg-12 my-auto text-center">
+        <img id="avergaecallduration-loader" src="/img/bars.svg" height="70px"/>
+        <div id="avergaecallduration" class="chart-custom" style="display: none;"></div>
     </div>
 </div>
 
@@ -16,10 +17,13 @@
     function chartAverageCallDuration(data) {
         if (data !== false) {
 
+            $('#avergaecallduration-loader').css('display', 'none');
+            $('#avergaecallduration').css('display', 'block');
+
             AmCharts.makeChart("avergaecallduration", {
                 type: "serial",
                 startDuration: 2,
-                theme: "dark",
+                theme: "light",
                 labelsEnabled: false,
                 dataProvider: data,
                 valueAxes: [{

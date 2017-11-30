@@ -3,9 +3,10 @@
         <h5>Device Status Percentage</h5>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-8">
-        <div id="deviceupstatuspercentall"></div>
+<div class="row" style="height: 200px">
+    <div class="col-lg-12 my-auto text-center">
+        <img id="deviceupstatuspercentall-loader" src="/img/bars.svg" height="70px"/>
+        <div id="deviceupstatuspercentall" class="chart-custom" style="display: none;"></div>
     </div>
 </div>
 
@@ -16,9 +17,13 @@
     <script>
 
         function chartDeviceUpStatusPercentAll(data) {
+
+            $('#deviceupstatuspercentall-loader').css('display', 'none');
+            $('#deviceupstatuspercentall').css('display', 'block');
+
             AmCharts.makeChart("deviceupstatuspercentall", {
                 type: "pie",
-                theme: "dark",
+                theme: "light",
                 dataProvider: data,
                 titleField: "state",
                 valueField: "count",

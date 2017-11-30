@@ -12,6 +12,8 @@
 
                 if (data !== false) {
 
+
+
                     let status = data.status;
 
                     let value = data.value;
@@ -20,6 +22,7 @@
 
                     let myChart = new Chart(devicebystatus, {
                         type: 'bar',
+                        theme: 'light',
                         data: {
                             datasets: [{
                                 data: status,

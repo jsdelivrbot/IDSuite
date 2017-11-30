@@ -79,9 +79,20 @@
                             <p id="header-title-description" class="card-text text-white"></p>
 
                             <div class="col-md-10 offset-1">
-                                <input type="button" value="Export charts to PDF" onclick="createReport();"/>
-                                <div  class="chart-container">
-                                    <div id="chart1" style="width: 100%; height: 400px;"></div>
+                                <div class="row">
+                                    <button class="btn btn-nav-blue m-3" onclick="createReport();">Export charts to PDF</button>
+                                </div>
+                                <div class="row"  style="height: 400px;">
+                                    <div class="card card-custom w-100 my-auto">
+                                        <div class="chart-container col-lg-12 my-auto">
+                                            <div id="chart1-loader" class="row" style="height: 400px;">
+                                                <div class="col-lg-12 my-auto text-center">
+                                                    <img src="/img/bars.svg" height="70px"/>
+                                                </div>
+                                            </div>
+                                            <div id="chart1" style="display: none; width: 100%; height: 400px;"></div>
+                                        </div>
+                                    </div>
                                 </div>
 
 
@@ -129,9 +140,20 @@
                             <p id="header-title-description" class="card-text text-white"></p>
 
                             <div class="col-md-10 offset-1">
-                                <input type="button" value="Export charts to PDF" onclick="createReport();"/>
-                                <div class="chart-container">
-                                    <div id="chart1" style="width: 100%; height: 400px;"></div>
+                                <div class="row">
+                                    <button class="btn btn-nav-blue m-3" onclick="createReport();">Export charts to PDF</button>
+                                </div>
+                                <div class="row"  style="height: 400px;">
+                                    <div class="card card-custom w-100 my-auto">
+                                        <div class="chart-container col-lg-12 my-auto">
+                                            <div id="chart1-loader" class="row" style="height: 400px;">
+                                                <div class="col-lg-12 my-auto text-center">
+                                                    <img src="/img/bars.svg" height="70px"/>
+                                                </div>
+                                            </div>
+                                            <div id="chart1" style="display: none; width: 100%; height: 400px;"></div>
+                                        </div>
+                                    </div>
                                 </div>
 
 
@@ -179,9 +201,20 @@
                             <p id="header-title-description" class="card-text text-white"></p>
 
                             <div class="col-md-10 offset-1">
-                                <input type="button" value="Export charts to PDF" onclick="createReport();"/>
-                                <div class="chart-container">
-                                    <div id="chart1" style="width: 100%; height: 400px;"></div>
+                                <div class="row">
+                                    <button class="btn btn-nav-blue m-3" onclick="createReport();">Export charts to PDF</button>
+                                </div>
+                                <div class="row"  style="height: 400px;">
+                                    <div class="card card-custom w-100 my-auto">
+                                        <div class="chart-container col-lg-12 my-auto">
+                                            <div id="chart1-loader" class="row" style="height: 400px;">
+                                                <div class="col-lg-12 my-auto text-center">
+                                                    <img src="/img/bars.svg" height="70px"/>
+                                                </div>
+                                            </div>
+                                            <div id="chart1" style="display: none; width: 100%; height: 400px;"></div>
+                                        </div>
+                                    </div>
                                 </div>
 
 
@@ -229,9 +262,20 @@
                             <p id="header-title-description" class="card-text text-white"></p>
 
                             <div class="col-md-10 offset-1">
-                                <input type="button" value="Export charts to PDF" onclick="createReport();"/>
-                                <div class="chart-container">
-                                    <div id="chart1" style="width: 100%; height: 400px;"></div>
+                                <div class="row">
+                                    <button class="btn btn-nav-blue m-3" onclick="createReport();">Export charts to PDF</button>
+                                </div>
+                                <div class="row"  style="height: 400px;">
+                                    <div class="card card-custom w-100 my-auto">
+                                        <div class="chart-container col-lg-12 my-auto">
+                                            <div id="chart1-loader" class="row" style="height: 400px;">
+                                                <div class="col-lg-12 my-auto text-center">
+                                                    <img src="/img/bars.svg" height="70px"/>
+                                                </div>
+                                            </div>
+                                            <div id="chart1" style="display: none; width: 100%; height: 400px;"></div>
+                                        </div>
+                                    </div>
                                 </div>
 
 
@@ -279,9 +323,20 @@
                             <p id="header-title-description" class="card-text text-white"></p>
 
                             <div class="col-md-10 offset-1">
-                                <input type="button" value="Export charts to PDF" onclick="createReport();"/>
-                                <div class="chart-container">
-                                    <div id="chart1" style="width: 100%; height: 400px;"></div>
+                                <div class="row">
+                                    <button class="btn btn-nav-blue m-3" onclick="createReport();">Export charts to PDF</button>
+                                </div>
+                                <div class="row"  style="height: 400px;">
+                                    <div class="card card-custom w-100 my-auto">
+                                        <div class="chart-container col-lg-12 my-auto">
+                                            <div id="chart1-loader" class="row" style="height: 400px;">
+                                                <div class="col-lg-12 my-auto text-center">
+                                                    <img src="/img/bars.svg" height="70px"/>
+                                                </div>
+                                            </div>
+                                            <div id="chart1" style="display: none; width: 100%; height: 400px;"></div>
+                                        </div>
+                                    </div>
                                 </div>
 
 
@@ -373,9 +428,13 @@
          *
          **/
         function setHeaderChart(data) {
+
+            $('#chart1').css('display', 'block');
+            $('#chart1-loader').css('display', 'none');
+
             let chart = AmCharts.makeChart("chart1", {
                 "type": "serial",
-                "theme": "dark",
+                "theme": "light",
                 "pathToImages": "/assets/js/amcharts/images/",
                 "marginTop": 0,
                 "color": "#000",
@@ -748,6 +807,9 @@
             });
 
 
+            $('#hms-count-endpoints-loader').css('display', 'none');
+            $('#hms-count-endpoints').css('display', 'block');
+
             el.append(
                 '<span class="h1 yellow" >'+hms_count+'</span>'
             );
@@ -836,30 +898,30 @@
                             this.toJPG({}, function (base64) {
 
                                 // LOG IMAGE DATA
-                                console.log(base64);
+//                                console.log(base64);
 
                                 // CREATE LINK TO OPEN BASE64 IMAGE IN NEW TAB
                                 var a = document.createElement("a");
-                                a.setAttribute("href", base64);
-                                a.setAttribute("target", "_blank");
-                                a.setAttribute("style", "display: block; margin-top: 150px;");
-                                a.innerHTML = "Open embedded base64-image";
+//                                a.setAttribute("href", base64);
+//                                a.setAttribute("target", "_blank");
+//                                a.setAttribute("style", "display: block; margin-top: 150px;");
+//                                a.innerHTML = "Open embedded base64-image";
 
                                 var div = document.createElement("div");
-                                div.setAttribute("style", "position: absolute; width: 100%; top:0; bottom: 0; background-color: rgba(255,255,255,.9); z-index: 1337; display: block;text-align: center;");
-                                div.appendChild(a);
+//                                div.setAttribute("style", "position: absolute; width: 100%; top:0; bottom: 0; background-color: rgba(255,255,255,.9); z-index: 1337; display: block;text-align: center;");
+//                                div.appendChild(a);
 
                                 this.setup.chart.div.appendChild(div);
 
-                                axios.post('/api/twilio/mms',{
-                                    number: '3175193315',
-                                    message: 'It Works!!!',
-                                    imageUrl: base64
-                                }).then(function(response){
-                                    console.log(response);
+                                // axios.post('/api/twilio/mms',{
+                                //     number: '3175193315',
+                                //     message: 'It Works!!!',
+                                //     imageUrl: base64
+                                // }).then(function(response){
+                                //     console.log(response);
 
-                                    alert(response);
-                                });
+                                //     alert(response);
+                                // });
 
                             });
 
