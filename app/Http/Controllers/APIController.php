@@ -91,7 +91,6 @@ class APIController extends Controller
                     $type iLIKE '" . $record->getTenantName() . "'
                     ORDER BY customerplan.dateadded LIMIT 1 ";
 
-
             $result = pg_query($dbconn, $query);
 
 
@@ -100,10 +99,9 @@ class APIController extends Controller
                 return $row['netsuiteid'];
 
             }
-
-        }catch (\Exception $e) {
-            Log::error("PG Error:". $e->getMessage());
-
+            
+        }catch (Exception $e) {
+           Log::error("PG Error:". $e->getMessage());
         }
 
 
