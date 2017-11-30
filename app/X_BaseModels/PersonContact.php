@@ -15,7 +15,6 @@ use App\Model as Model;
  * @property string|null $email_id
  * @property string|null $location_id
  * @property string|null $phonenumber_id
- * @property string|null $user_id
  * @property string|null $entity_id
  * @property int|null $active
  * @property \Carbon\Carbon|null $created_at

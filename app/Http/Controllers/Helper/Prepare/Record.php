@@ -409,12 +409,20 @@ class Record extends Controller
     }
 
     public function computeAll() {
-        $this->computeRecord();
-        $this->computeEndpoint();
-        $this->computeEntity();
-        $this->computeTimePeriod();
-        $this->computeLocation();
-        $this->saveRecord();
+
+        try
+        {
+            $this->computeRecord();
+            $this->computeEndpoint();
+            $this->computeEntity();
+            $this->computeTimePeriod();
+            $this->computeLocation();
+            $this->saveRecord();
+        }
+        catch(\Illuminate\Database\QueryException $e){
+
+            Log::error("\n\nSQL: ".$e->getSql(). "\nFile:" . $e->getFile(). "\nLine:" .$e->getLine(). "\nMessage" .$e->getMessage(). "\nTrace:" .$e->getTraceAsString());
+        }
 
         return $this->record;
     }

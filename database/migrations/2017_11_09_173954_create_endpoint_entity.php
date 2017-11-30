@@ -22,10 +22,7 @@ class CreateEndpointEntity extends Migration
             $table->timestamps();
         });
 
-        Schema::table('endpoint_entity', function(Blueprint $table){
-            $table->foreign('entity_id')->references('id')->on('entity')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('endpoint_id')->references('id')->on('endpoint')->onDelete('cascade')->onUpdate('cascade');
-        });
+
 
     }
 

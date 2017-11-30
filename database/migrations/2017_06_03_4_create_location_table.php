@@ -20,7 +20,7 @@ class CreateLocationTable extends Migration
             $table->uuid('id');
             $table->primary('id');
             $table->string('class_code');
-            $table->uuid('coordinate_id')->nullable();
+            $table->uuid('coordinate_id')->index()->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();

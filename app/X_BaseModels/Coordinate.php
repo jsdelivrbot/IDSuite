@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Log;
  * @property string $class_code
  * @property float|null $lat
  * @property float|null $lng
- * @property string|null $location_id
  * @property int|null $active
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
@@ -72,6 +71,8 @@ class Coordinate extends Model
     /**
      * relationships
      */
+
+    /*
     public function location(Location $l = null)
     {
 
@@ -81,6 +82,8 @@ class Coordinate extends Model
 
         return $this->belongsTo(Location::class, 'id', 'coordinate_id');
     }
+
+    */
 
     /**
      *

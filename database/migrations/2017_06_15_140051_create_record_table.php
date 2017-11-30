@@ -22,6 +22,9 @@ class CreateRecordTable extends Migration
             $table->primary('id');
             $table->string('class_code');
 
+            $table->string('local_id')->nullable();
+            $table->uuid('row_hash')->nullable();
+
             $table->uuid('endpoint_id')->nullable();
             $table->uuid('entity_id')->nullable();
 
@@ -29,7 +32,6 @@ class CreateRecordTable extends Migration
             $table->uuid('timeperiod_id')->nullable();
             $table->uuid('remote_location_id')->nullable();
 
-            $table->string('local_id')->nullable();
             $table->string('conference_id')->nullable();
             $table->string('local_name')->nullable();
             $table->string('local_number')->nullable();
@@ -42,6 +44,9 @@ class CreateRecordTable extends Migration
             $table->boolean('active')->nullable();
 
             $table->timestamps();
+
+            $table->unique(['endpoint_id', 'local_id']);
+
         });
 
 

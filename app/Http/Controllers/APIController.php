@@ -19,13 +19,19 @@ class APIController extends Controller
 
     public static function validateRequest($proxy_id, $endpoint_address, $key)
     {
+        Log::info("proxy_id: ".$proxy_id);
+        Log::info("endpoint_address: ".$endpoint_address);
+        Log::info("key: ".$key);
+
 
         $query = "SELECT proxy.*,  endpoint.id AS endpoint_id, endpoint.type AS endpoint_type, endpoint.ipaddress AS endpoint_ipaddress FROM proxy
                  LEFT JOIN endpoint ON endpoint.proxy_id = proxy.id
                  WHERE proxy.id='" . $proxy_id . "' AND proxy.pkey='" . $key . "' AND endpoint.ipaddress='" . $endpoint_address . "' LIMIT 0,1";
-        $result = DB::select($query);
+        $result = DB::select($query, [], false);
 
         if ($result == false) {
+            Log::info("Query: ".$query);
+
             Log::info("couldn't validate request");
             die("couldn't validate request");
 
@@ -38,6 +44,8 @@ class APIController extends Controller
     public function getRecords(Request $request)
     {
         \Log::info("getrecords");
+        \Log::info($request->all());
+
         // $key = Crypt::decrypt($key);
 
         $proxy_id = $request->input('proxy_id');
@@ -56,6 +64,8 @@ class APIController extends Controller
 
         $result = DB::select($query);
         // if(!Funcs::is_multi_array($tmp_res)) $result[] = $tmp_res;
+
+
         return json_encode($result);
 
     }
@@ -289,12 +299,15 @@ class APIController extends Controller
 
                     $h_record = new \App\Http\Controllers\Helper\Prepare\Record();
                     $h_record->setEndpointId($endpoint_proxy_details->endpoint_id);
+
+                    $h_record->setLocalId($record->CallID);
+
+
                     $h_record->setType(EnumDataSourceType::vidyo);
 
                     $h_record->setTimeStart($record->JoinTime);
                     $h_record->setTimeEnd($record->LeaveTime);
                     $h_record->setDirection($record->Direction);
-                    $h_record->setLocalId($record->CallID);
                     $h_record->setLocalName($record->CallerName);
                     $h_record->setLocalNumber($record->CallerID);
                     $h_record->setRemoteName($record->ConferenceName);
@@ -319,7 +332,6 @@ class APIController extends Controller
                     $h_record = new \App\Http\Controllers\Helper\Prepare\Record();
                     $h_record->setEndpointId($endpoint_proxy_details->endpoint_id);
                     $h_record->setType(EnumDataSourceType::polycom);
-
                     $h_record->setTimeStart(date_create_from_format('m-d-Y g:i A', $record->start_date . " " . $record->start_time)->format('Y-m-d H:i:s'));
                     $h_record->setTimeEnd(date_create_from_format('m-d-Y g:i A', $record->end_date . " " . $record->end_time)->format('Y-m-d H:i:s'));
                     $h_record->setLocalId($record->serial_number);
@@ -346,7 +358,6 @@ class APIController extends Controller
                     $h_record = new \App\Http\Controllers\Helper\Prepare\Record();
                     $h_record->setEndpointId($endpoint_proxy_details->endpoint_id);
                     $h_record->setType(EnumDataSourceType::lifesize);
-
                     $h_record->setTimeStart($record->start_time);
                     // $h_record->setTimeEnd(date("Y-m-d H:i:s",(strtotime($record->start_time) + strtotime($record->duration)) ));
                     $h_record->setTimeEnd($record->end_time);

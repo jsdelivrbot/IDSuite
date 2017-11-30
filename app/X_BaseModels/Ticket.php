@@ -120,24 +120,30 @@ class Ticket extends Model
 
 
     public function ConvertNs($ns_ticket) {
-        // check if company exist
-        $this->entity_id = $ns_ticket->company->internalId;
 
+        /** check if company exist
+         * @var Entity $entity
+         */
+        $entity = Entity::getObjectByRefId('netsuite', $ns_ticket->company->internalId);
+        if(!$entity) return false;
+        $this->entity_id = $entity->id;
 
-        // check if employee exist
+        /** check if employee exist
+         * @var User $user
+         */
+        $user = User::getObjectByRefId('netsuite', $ns_ticket->assigned->internalId);
+        if(!$user) return false;
         $this->user_id = $ns_ticket->assigned->internalId;
 
-
         $this->ticket_type = $ns_ticket[''];
-        $this->entity();
         $this->subject = $ns_ticket->title;
-        $this->personcontact_id =$ns_ticket[''];
-       // $this->ticket_type =$ns_ticket[''];
-       // $this->priority_type =$ns_ticket[''];
-        $this->status_type =$ns_ticket->status->internalId;
+        $this->message_in = $ns_ticket->incomingMessage;
+        $this->message_out = $ns_ticket->outgoingMessage;
+        $this->status =$ns_ticket->status->internalId;
         $this->incident_date =$ns_ticket->startDate;
         $this->last_message_date = $ns_ticket->lastMessageDate;
 
+        return $this;
     }
 
     /**

@@ -20,12 +20,11 @@ class CreateEntityContactTable extends Migration
             $table->uuid('id');
             $table->primary('id');
             $table->string('class_code');
-            $table->uuid('entityname_id')->nullable();
-            $table->uuid('email_id')->nullable();
-            $table->uuid('location_id')->nullable();
-            $table->uuid('phonenumber_id')->nullable();
-            $table->uuid('website_id')->nullable();
-            $table->uuid('entity_id')->nullable();
+            $table->uuid('entityname_id')->index()->nullable();
+            $table->uuid('email_id')->index()->nullable();
+            $table->uuid('location_id')->index()->nullable();
+            $table->uuid('phonenumber_id')->index()->nullable();
+            $table->uuid('website_id')->index()->nullable();
             $table->boolean('active')->nullable();
             $table->timestamps();
         });

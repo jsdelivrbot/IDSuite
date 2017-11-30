@@ -16,7 +16,6 @@ use App\Model as Model;
  * @property string|null $location_id
  * @property string|null $phonenumber_id
  * @property string|null $website_id
- * @property string|null $entity_id
  * @property int|null $active
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
@@ -119,6 +118,7 @@ class EntityContact extends Model
         return $this->hasOne(PhoneNumber::class, 'id', 'phonenumber_id');
     }
 
+    /*
     public function entity(Entity $e = null)
     {
         if ($e !== null) {
@@ -126,7 +126,7 @@ class EntityContact extends Model
         }
         return $this->belongsTo(Entity::class, 'id', 'contact_id');
     }
-
+*/
 
     /**
      * Contact constructor.

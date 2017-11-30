@@ -70,6 +70,7 @@ class Location extends Model
     public function coordinate(Coordinate $c = null)
     {
 
+
         if ($c !== null) {
             $this->coordinate_id = $c->id;
         }

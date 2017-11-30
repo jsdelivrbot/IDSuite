@@ -27,7 +27,7 @@ class CreateTicketTable extends Migration
             //$table->integer('origin_type')->nullable();
             $table->integer('ticket_type')->nullable();
             $table->integer('priority_type')->nullable();
-            $table->integer('status_type')->nullable();
+            $table->integer('status')->nullable();
 
             $table->string('class_code');
             $table->string('subject')->nullable();

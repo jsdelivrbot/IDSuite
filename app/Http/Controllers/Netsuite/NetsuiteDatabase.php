@@ -210,6 +210,8 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
 
         // if we have more than one page
       //  goto skip_pages;
+
+        $total_pages = 10;
         for($page_counter = 0; $page_counter < $total_pages; $page_counter++) {
 
             $next_page_to_fetch = $page_counter+2;

@@ -282,9 +282,8 @@ class NetsuiteController extends \App\Http\Controllers\Controller
         // Instantiate a search object for customers.
         $CustomerSearch =  new \NetSuite\Classes\CustomerSearch();
         $CustomerSearchBasic =  new \NetSuite\Classes\CustomerSearchBasic ();
-
         $filter_customer_statuses = array(15, 13); // Closed Won and Renewal
-
+        
 
         $SearchMultiSelectField = new \NetSuite\Classes\SearchMultiSelectField();
         $SearchMultiSelectField->operator = 'anyOf';
@@ -300,8 +299,10 @@ class NetsuiteController extends \App\Http\Controllers\Controller
         $SearchMultiSelectField->searchValue = $RecordRefList;
         $CustomerSearchBasic->entityStatus = $SearchMultiSelectField;
         $CustomerSearch->basic =$CustomerSearchBasic;
+
         $request = new \NetSuite\Classes\SearchRequest();
         $request->searchRecord = $CustomerSearch;
+
         $searchResponse = $this->service->search($request);
 
 

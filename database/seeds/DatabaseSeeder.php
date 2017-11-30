@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
 
 //        $this->call('ip2LocationSeeder');
 
-//        $this->call('EnvironmentSeeder');
+        $this->call('EnvironmentSeeder');
 //        $this->call('CaseSeeder');
-        $this->call('EndpointSeeder');
+ //       $this->call('EndpointSeeder');
 //        $this->call('RecordSeeder');
     }
 }

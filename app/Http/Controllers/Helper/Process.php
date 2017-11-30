@@ -181,11 +181,11 @@ class Process {
 
         if($coors == null) {
             $coors = Process::processCoordinate();
-            $location->coordinate($coors)->save($coors);
+            $location->coordinate($coors);
 
 
         }else {
-            $location->coordinate($coors)->save($coors);
+            $location->coordinate($coors);
         }
         $location->save();
         return $location;
@@ -416,7 +416,7 @@ class Process {
 
         $entity->save();
 
-        $entity->contact($entity_contact)->save($entity_contact);
+        $entity->contact($entity_contact);
 
         $entity->save();
 
@@ -442,7 +442,7 @@ class Process {
         $user = new \App\User();
         $user->save();
         $user->contact($person_contact)->save($person_contact);
-        $user->email_address = $person_contact->email->address;
+        $user->email = $person_contact->email->address;
 
         $user->references($dynamic_enum_value);
 
