@@ -224,7 +224,7 @@ class ProductStatController extends Controller
 
         $cust_with_cdr = \App\Record::getEntityCountWithRecords();
 
-        $total_customer = \App\Entity::all();
+        $total_customer = count(\App\Entity::all());
 
         $stats->stat = 100 * ($cust_with_cdr / $total_customer);
 
