@@ -87,7 +87,7 @@ class APIController extends Controller
 
 
             // connect to db do a search and grab netsuite id
-            $dbconn = @pg_connect("host=3".env('IDVIDEOPHONE_HOST')." port=".env('IDVIDEOPHONE_PORT')." dbname=".env('IDVIDEOPHONE_DB')." user=".env('IDVIDEOPHONE_USER')." password=".env('IDVIDEOPHONE_PASSWORD')."");
+            $dbconn = @pg_connect("host=".env('IDVIDEOPHONE_HOST')." port=".env('IDVIDEOPHONE_PORT')." dbname=".env('IDVIDEOPHONE_DB')." user=".env('IDVIDEOPHONE_USER')." password=".env('IDVIDEOPHONE_PASSWORD')."");
             $query = "SELECT customerplan.tenantname, customerplan.tenanturl, customerplan.extensionprefix, customerplan.packagetype, customerplan.plantype, netsuiteinfo.netsuiteid, netsuiteinfo.customerid, netsuiteinfo.subscriptionid
                 FROM customerplan LEFT JOIN netsuiteinfo ON netsuiteinfo.customerid= customerplan.customerid WHERE customerplan.isactiveplan=1 AND customerplan.activestatus=1 AND
                     $type iLIKE '" . $record->getTenantName() . "'
