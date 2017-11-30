@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Helper\Funcs;
 use Illuminate\Support\Facades\Log;
+use Mockery\Exception;
 
 class APIController extends Controller
 {
@@ -76,21 +77,31 @@ class APIController extends Controller
 
         \Log::info("host=".env('IDVIDEOPHONE_HOST'));
 
-        // connect to db do a search and grab netsuite id
-        $dbconn = pg_connect("host=".env('IDVIDEOPHONE_HOST')." port=".env('IDVIDEOPHONE_PORT')." dbname=".env('IDVIDEOPHONE_DB')." user=".env('IDVIDEOPHONE_USER')." password=".env('IDVIDEOPHONE_PASSWORD')."");
-        $query = "SELECT customerplan.tenantname, customerplan.tenanturl, customerplan.extensionprefix, customerplan.packagetype, customerplan.plantype, netsuiteinfo.netsuiteid, netsuiteinfo.customerid, netsuiteinfo.subscriptionid
+        try {
+
+
+            // connect to db do a search and grab netsuite id
+            $dbconn = pg_connect("host=".env('IDVIDEOPHONE_HOST')." port=".env('IDVIDEOPHONE_PORT')." dbname=".env('IDVIDEOPHONE_DB')." user=".env('IDVIDEOPHONE_USER')." password=".env('IDVIDEOPHONE_PASSWORD')."");
+            $query = "SELECT customerplan.tenantname, customerplan.tenanturl, customerplan.extensionprefix, customerplan.packagetype, customerplan.plantype, netsuiteinfo.netsuiteid, netsuiteinfo.customerid, netsuiteinfo.subscriptionid
                 FROM customerplan LEFT JOIN netsuiteinfo ON netsuiteinfo.customerid= customerplan.customerid WHERE customerplan.isactiveplan=1 AND customerplan.activestatus=1 AND
                     $type iLIKE '" . $record->getTenantName() . "'
                     ORDER BY customerplan.dateadded LIMIT 1 ";
 
 
-        $result = pg_query($dbconn, $query);
+            $result = pg_query($dbconn, $query);
 
-        if ($result && pg_num_rows($result) > 0) {
-            $row = pg_fetch_assoc($result);
-            return $row['netsuiteid'];
+
+            if ($result && pg_num_rows($result) > 0) {
+                $row = pg_fetch_assoc($result);
+                return $row['netsuiteid'];
+
+            }
+            
+        }catch (Exception $e) {
+            Log::error("PG Error:". $e->getMessage());
 
         }
+
 
 
         $query = "SELECT entity.id FROM entity
