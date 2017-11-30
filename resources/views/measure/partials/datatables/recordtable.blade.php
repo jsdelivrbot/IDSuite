@@ -1,26 +1,20 @@
     <section class="col-lg-12">
-        <table class="table table-bordered hide" id="records-table" style="border-radius: 15px">
-            <thead>
-            <tr>
-                <th style="border: none">Local Name</th>
-                <th style="border: none">Remote Name</th>
-                <th style="border: none">Start Time</th>
-                <th style="border: none">Duration</th>
-                <th style="border: none">Direction</th>
-                <th style="border: none">Details</th>
-            </tr>
-            </thead>
-            <tfoot>
-                <tr class="text-white">
-                    <th style="border: none"></th>
-                    <th style="border: none"></th>
-                    <th style="border: none"></th>
-                    <th style="border: none"></th>
-                    <th style="border: none"></th>
-                    <th style="border: none"></th>
-                </tr>
-            </tfoot>
-        </table>
+        <div class="row">
+            <div class="col-lg-12 text-white p-2" style="background-color: #5C707F; -webkit-border-radius: 20px;-moz-border-radius: 20px;border-radius: 20px;">
+                <table class="table table-striped table-bordered" cellspacing="0" width="100%" id="records-table" style="border-radius: 20px">
+                    <thead>
+                    <tr>
+                        <th style="border-top-left-radius: 18px;">Local Name</th>
+                        <th>Remote Name</th>
+                        <th>Start Time</th>
+                        <th>Duration</th>
+                        <th>Direction</th>
+                        <th style="border-top-right-radius: 18px;">Details</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
     </section>
 
     <div class="modal" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -363,27 +357,27 @@
 </script>
 
 <style>
-    .dataTables_wrapper .dataTables_info{
-        color: #fff;
-    }
+    /*.dataTables_wrapper .dataTables_info{*/
+        /*color: #fff;*/
+    /*}*/
 
-    .dataTables_wrapper .dataTables_length{
-        color: #fff;
-    }
-    table.dataTable tbody tr{
-        background-color: transparent;
-        color: #fff;
-    }
+    /*.dataTables_wrapper .dataTables_length{*/
+        /*color: #fff;*/
+    /*}*/
+    /*table.dataTable tbody tr{*/
+        /*background-color: transparent;*/
+        /*color: #fff;*/
+    /*}*/
 
-    table.dataTable thead th, table.dataTable thead td{
-        color: #fff;
-    }
+    /*table.dataTable thead th, table.dataTable thead td{*/
+        /*color: #fff;*/
+    /*}*/
 
-    .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate{
-        color: #fff;
-    }
-    .dataTables_wrapper .dataTables_paginate .paginate_button{
-        color: #fff !important;
-    }
+    /*.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate{*/
+        /*color: #fff;*/
+    /*}*/
+    /*.dataTables_wrapper .dataTables_paginate .paginate_button{*/
+        /*color: #fff !important;*/
+    /*}*/
 </style>
 @endpush

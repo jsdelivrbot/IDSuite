@@ -1,5 +1,5 @@
 <link href="{{asset('assets/js/amcharts/plugins/export/export.css')}}" rel="stylesheet" media="all">
-<link href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet"/>
+
 
 
 <script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script>

@@ -28,7 +28,7 @@
 </head>
 <body class="raleway" style="background-color: #293a46;">
 
-    @if($viewname !== 'OAuth')
+    @if($viewname !== 'OAuth' || $viewname !== 'Login')
 
     <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top custom-nav">
             <button class="navbar-toggler navbar-toggler-right custom-border-color-green" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">

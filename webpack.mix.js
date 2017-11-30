@@ -49,7 +49,8 @@ mix.styles([
     'resources/assets/css/app.css',
     'resources/assets/css/sidebar.css',
     'resources/assets/css/bootstrap.css',
-    'resources/assets/css/sass.css'
+    'resources/assets/css/sass.css',
+    'resources/assets/css/datatable.css'
 ], 'public/assets/css/all.css');
 
 mix.styles([
