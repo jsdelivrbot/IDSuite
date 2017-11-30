@@ -79,6 +79,10 @@ class APIController extends Controller
 
         try {
 
+            function exception_error_handler($errno, $errstr, $errfile, $errline ) {
+                throw new \ErrorException($errstr, $errno, 0, $errfile, $errline);
+            }
+            set_error_handler("exception_error_handler");
 
             // connect to db do a search and grab netsuite id
             $dbconn = pg_connect("host=".env('IDVIDEOPHONE_HOST')." port=".env('IDVIDEOPHONE_PORT')." dbname=".env('IDVIDEOPHONE_DB')." user=".env('IDVIDEOPHONE_USER')." password=".env('IDVIDEOPHONE_PASSWORD')."");
@@ -96,8 +100,8 @@ class APIController extends Controller
                 return $row['netsuiteid'];
 
             }
-            
-        }catch (Exception $e) {
+
+        }catch (\Exception $e) {
             Log::error("PG Error:". $e->getMessage());
 
         }
