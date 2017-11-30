@@ -277,7 +277,7 @@
 
                     let stats = data.data;
 
-                    $('#cust_cdr_ratio').text(stats.stat.toFixed(4) + '%');
+                    $('#cust_cdr_ratio').text(stats.stat.toFixed(2) + '%');
                 });
 
         }
