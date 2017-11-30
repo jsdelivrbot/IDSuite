@@ -332,7 +332,7 @@ class Record extends Controller
 
             if($customer_nsid) {
 
-                Log::info($customer_nsid);
+//                Log::info($customer_nsid);
                 $dev = \App\DynamicEnumValue::getByValue($customer_nsid);
 
                 if($dev !== null) {

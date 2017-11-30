@@ -19,9 +19,9 @@ class APIController extends Controller
 
     public static function validateRequest($proxy_id, $endpoint_address, $key)
     {
-        Log::info("proxy_id: ".$proxy_id);
-        Log::info("endpoint_address: ".$endpoint_address);
-        Log::info("key: ".$key);
+//        Log::info("proxy_id: ".$proxy_id);
+//        Log::info("endpoint_address: ".$endpoint_address);
+//        Log::info("key: ".$key);
 
 
         $query = "SELECT proxy.*,  endpoint.id AS endpoint_id, endpoint.type AS endpoint_type, endpoint.ipaddress AS endpoint_ipaddress FROM proxy
@@ -44,7 +44,7 @@ class APIController extends Controller
     public function getRecords(Request $request)
     {
         \Log::info("getrecords");
-        \Log::info($request->all());
+//        \Log::info($request->all());
 
         // $key = Crypt::decrypt($key);
 
@@ -73,6 +73,8 @@ class APIController extends Controller
     /* returns customer netsuite id*/
     public static function searchIdvideophone(\App\Http\Controllers\Helper\Prepare\Record $record, $type = "tenantname")
     {
+
+        \Log::info("host=".env('IDVIDEOPHONE_HOST'));
 
         // connect to db do a search and grab netsuite id
         $dbconn = pg_connect("host=".env('IDVIDEOPHONE_HOST')." port=".env('IDVIDEOPHONE_PORT')." dbname=".env('IDVIDEOPHONE_DB')." user=".env('IDVIDEOPHONE_USER')." password=".env('IDVIDEOPHONE_PASSWORD')."");
