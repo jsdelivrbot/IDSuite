@@ -87,20 +87,24 @@ class APIController extends Controller
 
 
             // connect to db do a search and grab netsuite id
-            $dbconn = pg_connect("host=3".env('IDVIDEOPHONE_HOST')." port=".env('IDVIDEOPHONE_PORT')." dbname=".env('IDVIDEOPHONE_DB')." user=".env('IDVIDEOPHONE_USER')." password=".env('IDVIDEOPHONE_PASSWORD')."");
+            $dbconn = @pg_connect("host=3".env('IDVIDEOPHONE_HOST')." port=".env('IDVIDEOPHONE_PORT')." dbname=".env('IDVIDEOPHONE_DB')." user=".env('IDVIDEOPHONE_USER')." password=".env('IDVIDEOPHONE_PASSWORD')."");
             $query = "SELECT customerplan.tenantname, customerplan.tenanturl, customerplan.extensionprefix, customerplan.packagetype, customerplan.plantype, netsuiteinfo.netsuiteid, netsuiteinfo.customerid, netsuiteinfo.subscriptionid
                 FROM customerplan LEFT JOIN netsuiteinfo ON netsuiteinfo.customerid= customerplan.customerid WHERE customerplan.isactiveplan=1 AND customerplan.activestatus=1 AND
                     $type iLIKE '" . $record->getTenantName() . "'
                     ORDER BY customerplan.dateadded LIMIT 1 ";
 
-            $result = pg_query($dbconn, $query);
 
+            if($dbconn) {
+                $result = pg_query($dbconn, $query);
 
-            if ($result && pg_num_rows($result) > 0) {
-                $row = pg_fetch_assoc($result);
-                return $row['netsuiteid'];
+                if ($result && pg_num_rows($result) > 0) {
+                    $row = pg_fetch_assoc($result);
+                    return $row['netsuiteid'];
 
+                }
             }
+
+
             
 //        }catch (Exception $e) {
 //           Log::error("PG Error:". $e->getMessage());
