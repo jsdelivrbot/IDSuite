@@ -98,7 +98,7 @@ class APIController extends Controller
             }
             
         }catch (Exception $e) {
-            Log::error("PG Error:". $e->getMessage());
+//            Log::error("PG Error:". $e->getMessage());
 
         }
 
