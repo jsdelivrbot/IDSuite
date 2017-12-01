@@ -6,7 +6,7 @@
 <div class="row" style="height: 200px;">
     <div class="col-lg-12 my-auto text-center">
         <img id="avergaecallduration-loader" src="/img/bars.svg" height="70px"/>
-        <div id="avergaecallduration" class="chart-custom" style="display: none;"></div>
+        <div id="avergaecallduration" class="chart-custom text-white" style="display: none;"></div>
     </div>
 </div>
 
@@ -15,11 +15,10 @@
 <script>
 
     function chartAverageCallDuration(data) {
-        if (data !== false) {
+        $('#avergaecallduration-loader').css('display', 'none');
+        $('#avergaecallduration').css('display', 'block');
 
-            $('#avergaecallduration-loader').css('display', 'none');
-            $('#avergaecallduration').css('display', 'block');
-
+        if (data !== false && data.length > 0) {
             AmCharts.makeChart("avergaecallduration", {
                 type: "serial",
                 startDuration: 2,
@@ -54,7 +53,9 @@
                     enabled: true,
                 }
             });
+        } else {
 
+            $('#avergaecallduration').text('Data unavailable or not relevant for this account');
 
         }
     }

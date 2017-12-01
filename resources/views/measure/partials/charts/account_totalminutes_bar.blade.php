@@ -6,7 +6,7 @@
 <div class="row" style="height: 200px">
     <div class="col-lg-12 my-auto text-center">
         <img id="totalcallduration-loader" src="/img/bars.svg" height="70px"/>
-        <div id="totalcallduration" class="chart-custom" style="display: none;"></div>
+        <div id="totalcallduration" class="chart-custom text-white" style="display: none;"></div>
     </div>
 </div>
 
@@ -15,10 +15,11 @@
 <script>
 
     function chartTotalCallDuration(data) {
-        if (data !== false) {
 
-            $('#totalcallduration-loader').css('display', 'none');
-            $('#totalcallduration').css('display', 'block');
+        $('#totalcallduration-loader').css('display', 'none');
+        $('#totalcallduration').css('display', 'block');
+
+        if (data !== false && data.length > 0) {
 
             AmCharts.makeChart("totalcallduration", {
                 type: "serial",
@@ -54,6 +55,8 @@
                     enabled: true
                 }
             });
+        } else {
+            $('#totalcallduration').text('Data unavailable or not relevant for this account');
         }
     }
 

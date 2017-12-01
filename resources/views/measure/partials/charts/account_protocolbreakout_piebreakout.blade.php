@@ -6,7 +6,7 @@
 <div class="row" style="height:200px;">
     <div class="col-lg-12 my-auto text-center">
         <img id="protocolbreakout-loader" src="/img/bars.svg" height="70px"/>
-        <div id="protocolbreakout" class="chart-custom" style="display: none;"></div>
+        <div id="protocolbreakout" class="chart-custom text-white" style="display: none;"></div>
     </div>
 </div>
 
@@ -18,12 +18,22 @@
 
             let selected = undefined;
 
-            console.log(data);
+            $('#protocolbreakout-loader').css('display', 'none');
+            $('#protocolbreakout').css('display', 'block');
 
-            if (data !== false) {
+            let is_valid = true;
 
-                $('#protocolbreakout-loader').css('display', 'none');
-                $('#protocolbreakout').css('display', 'block');
+            let total_count = 0;
+
+            $.each(data, function (key, value){
+                total_count = value.count + total_count;
+            });
+
+            if(total_count === 0){
+                is_valid = false;
+            }
+
+            if (data !== false && data.length > 0 && is_valid) {
 
                 AmCharts.makeChart("protocolbreakout", {
                     "type": "pie",
@@ -56,6 +66,9 @@
                     }
                 });
 
+            } else {
+                $('#protocolbreakout').addClass('my-auto');
+                $('#protocolbreakout').text('Data unavailable or not relevant for this account');
             }
             return selected;
         }

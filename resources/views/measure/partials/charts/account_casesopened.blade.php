@@ -6,7 +6,7 @@
 <div class="row" style="height: 200px;">
     <div class="col-lg-12 my-auto text-center">
         <img id="casesopened-loader" src="/img/bars.svg" height="70px"/>
-        <div id="casesopened" class="chart-custom" style="display: none;"></div>
+        <div id="casesopened" class="chart-custom text-white" style="display: none;"></div>
     </div>
 </div>
 
@@ -15,10 +15,11 @@
 <script>
 
     function chartCasesOpened(data) {
-        if (data !== false) {
 
-            $('#casesopened-loader').css('display', 'none');
-            $('#casesopened').css('display', 'block');
+        $('#casesopened-loader').css('display', 'none');
+        $('#casesopened').css('display', 'block');
+
+        if (data !== false && data.length > 0) {
 
             AmCharts.makeChart("casesopened", {
                 type: "serial",
@@ -54,6 +55,8 @@
                     enabled: true,
                 }
             });
+        } else {
+            $('#casesopened').text('Data unavailable or not relevant for this account');
         }
     }
 

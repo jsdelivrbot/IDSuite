@@ -6,7 +6,7 @@
 <div class="row" style="height: 200px">
     <div class="col-lg-12 my-auto text-center">
         <img id="deviceupstatuspercentall-loader" src="/img/bars.svg" height="70px"/>
-        <div id="deviceupstatuspercentall" class="chart-custom" style="display: none;"></div>
+        <div id="deviceupstatuspercentall" class="chart-custom text-white" style="display: none;"></div>
     </div>
 </div>
 
@@ -18,19 +18,41 @@
 
         function chartDeviceUpStatusPercentAll(data) {
 
+            console.log(data);
+
+            console.log('^^^^^^^^^devicestatuspercent^^^^^^^^^');
+
             $('#deviceupstatuspercentall-loader').css('display', 'none');
             $('#deviceupstatuspercentall').css('display', 'block');
 
-            AmCharts.makeChart("deviceupstatuspercentall", {
-                type: "pie",
-                theme: "light",
-                dataProvider: data,
-                titleField: "state",
-                valueField: "count",
-                export: {
-                    enabled: true
-                }
+            let is_valid = true;
+
+            let total_count = 0;
+
+            $.each(data, function (key, value){
+                total_count = value.count + total_count;
             });
+
+            if(total_count === 0){
+                is_valid = false;
+            }
+
+            if(data !== false && data.length > 0 && is_valid) {
+
+                AmCharts.makeChart("deviceupstatuspercentall", {
+                    type: "pie",
+                    theme: "light",
+                    dataProvider: data,
+                    titleField: "state",
+                    valueField: "count",
+                    export: {
+                        enabled: true
+                    }
+                });
+            } else {
+                $('#deviceupstatuspercentall').addClass('my-auto');
+                $('#deviceupstatuspercentall').text('Data unavailable or not relevant for this account');
+            }
         }
 
         /**

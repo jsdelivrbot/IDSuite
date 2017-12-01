@@ -12,8 +12,6 @@
 
                 if (data !== false) {
 
-
-
                     let status = data.status;
 
                     let value = data.value;

@@ -6,7 +6,7 @@
 <div class="row" style="height: 200px;">
     <div class="col-lg-12 my-auto text-center">
         <img id="deviceupstatus-loader" src="/img/bars.svg" height="70px"/>
-        <div id="deviceupstatus" class="chart-custom" style="display: none;"></div>
+        <div id="deviceupstatus" class="chart-custom text-white" style="display: none;"></div>
     </div>
 </div>
 
@@ -15,11 +15,11 @@
 <script>
 
     function chartDeviceUpStatus(data) {
-        if (data !== false) {
 
-            $('#deviceupstatus-loader').css('display', 'none');
-            $('#deviceupstatus').css('display', 'block');
+        $('#deviceupstatus-loader').css('display', 'none');
+        $('#deviceupstatus').css('display', 'block');
 
+        if (data !== false && data.length > 0) {
             AmCharts.makeChart("deviceupstatus", {
                 theme: "light",
                 type: "serial",
@@ -51,8 +51,8 @@
                 }
 
             });
-
-
+        } else {
+            $('#deviceupstatus').text('Data unavailable or not relevant for this account');
         }
     }
 
