@@ -186,7 +186,7 @@
                     '<div class="card-block"> ' +
                     '<h4 class="card-title text-truncate">' + value.name + '</h4> ' +
                     '<div class="searchfilterterm" style="display: none;">' + value.name.toLowerCase() + '</div> ' +
-                    '<p class="card-text" id="card-text-' + value.id + '"></p> ' +
+                    '<p class="card-text" id="card-text-' + value.id + '">The most recent record is '+value.recent_record_date+'</p> ' +
                     '<a href="' + url + '' + value.id + '" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a> ' +
                     '</div> ' +
                     '</div> ' +
@@ -200,7 +200,7 @@
                     '<div class="card-block"> ' +
                     '<h4 class="card-title text-truncate">' + value.name + '</h4> ' +
                     '<div class="searchfilterterm" style="display: none;">' + value.name.toLowerCase() + '</div> ' +
-                    '<p class="card-text" id="card-text-' + value.id + '"></p> ' +
+                    '<p class="card-text" id="card-text-' + value.id + '">The most recent record is '+value.recent_record_date+'</p> ' +
                     '<a href="' + url + '' + value.id + '" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Account</a> ' +
                     '</div> ' +
                     '</div> ' +
