@@ -107,6 +107,8 @@ class EntityController extends Controller
 
         $entity_obj->contact = $entity->contact;
 
+        $entity_obj->monitor_start_date = $entity->getMonitoredStartDate();
+
         $sites = $entity->sites;
 
         $entity_obj->sites = array();

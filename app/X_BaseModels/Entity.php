@@ -244,8 +244,26 @@ class Entity extends Model
             $start_date = $start_date->toDateString();
             return \DB::select("select record.*, timeperiod.start as timeperiod_start, timeperiod.duration as timeperiod_duration from record LEFT join timeperiod on record.timeperiod_id=timeperiod.id where timeperiod.start > '$start_date' AND record.entity_id = '$this->id'");
         }
+    }
 
 
+    public function getMonitoredStartDate()
+    {
+
+        $record = \DB::select("
+                  SELECT record.*
+                  FROM record 
+                  WHERE record.entity_id = '$this->id'
+                  ORDER BY record.created_at ASC
+                  LIMIT 1
+                  ");
+
+
+        if(count($record) === 0){
+            return 0;
+        } else {
+            return $record[0]->created_at;
+        }
 
     }
 

@@ -414,10 +414,10 @@
          * set headers in cards
          *
          **/
-        function setHeaderCard(name) {
-            $('#header-title').text(name);
+        function setHeaderCard(entity) {
+            $('#header-title').text(entity.name);
 
-            $('#header-title-description').text('This is customer ' + name);
+            $('#header-title-description').text('IDSuite Monitoring started ' + entity.monitor_start_date);
         }
 
         /**
@@ -839,9 +839,8 @@
                     }
 
                     let entity = data.data.entity;
-                    let name = entity.name;
 
-                    setHeaderCard(name);
+                    setHeaderCard(entity);
 
                     setHmsCount(entity, $('#hms-count-endpoints'));
 
