@@ -191,7 +191,7 @@
 
 
 
-                $('#row-' + key).append(
+                $('#row-' + key).prepend(
                     '<div class="col-lg-4"> ' +
                     '<div class="card mb-3 text-center" '+bgColor+'>' +
                     '<div class="card-block"> ' +
@@ -205,7 +205,7 @@
                 )
 
             } else {
-                $('#row-' + rowkey).append('' +
+                $('#row-' + rowkey).append(
                     '<div class="col-lg-4"> ' +
                     '<div class="card mb-3 text-center" '+bgColor+'>' +
                     '<div class="card-block"> ' +
