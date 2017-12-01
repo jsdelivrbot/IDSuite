@@ -380,5 +380,22 @@ class Endpoint extends Model
 
 
 
+    public function getMostRecentRecordDate(){
+        $record = \DB::select("
+                  SELECT record.*, timeperiod.start as timeperiod_start 
+                  FROM record 
+                  LEFT Join timeperiod on record.timeperiod_id = timeperiod.id
+                  WHERE record.endpoint_id = '$this->id'
+                  ORDER BY timeperiod_start DESC
+                  LIMIT 1
+                  ");
+
+        if(count($record) === 0){
+            return 0;
+        } else {
+            return $record[0]->timeperiod_start;
+        }
+    }
+
 
 }

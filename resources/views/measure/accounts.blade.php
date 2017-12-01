@@ -76,16 +76,20 @@
                 .then(function (response) {
                     let entities = response.data;
 
+                    console.log(entities);
+
                     if(!validate(entities)){
                         return false;
                     }
 
-                    if (entities.length > 0) {
+                    if (entities.length !== false) {
                         setQuantity(entities, $('#entities-count'));
                         createCards(entities, '/measure/accounts/');
-                    } else {
-                        alert('Hello {{Auth::user()->contact->name->first_name}} you don\'t seem to have any accounts to manage.');
                     }
+
+                        {{--} else {--}}
+                        {{--alert('Hello {{Auth::user()->contact->name->first_name}} you don\'t seem to have any accounts to manage.');--}}
+                    {{--}--}}
                 });
         }
 

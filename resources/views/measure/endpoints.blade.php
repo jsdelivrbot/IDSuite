@@ -8,8 +8,19 @@
             <h6 class="ml-lg-3 subtle-text" style="color: #c8cad5">Endpoints</h6>
             <h3 class="ml-lg-3 raleway" style="color: white;">Devices</h3>
 
-            <a id="contact-submit" class="btn btn-nav-orange" style="cursor: pointer !important;"
-               href="/measure/device/create"><i class="fa fa-plus"></i> Add Endpoint</a>
+            <a id="contact-submit" class="btn btn-nav-orange mt-3" style="cursor: pointer !important;" href="/measure/device/create"><i class="fa fa-plus"></i> Add Endpoint</a>
+
+            <div class="btn-group mt-3" data-toggle="buttons">
+                <label class="btn btn-nav-blue active">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Endpoints
+                </label>
+                <label class="btn btn-nav-blue">
+                    <input type="radio" name="options" id="option2" autocomplete="off"> Proxies
+                </label>
+                <label class="btn btn-nav-blue">
+                    <input type="radio" name="options" id="option3" autocomplete="off"> Portals
+                </label>
+            </div>
 
         </div>
 

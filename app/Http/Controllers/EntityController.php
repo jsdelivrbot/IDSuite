@@ -51,18 +51,20 @@ class EntityController extends Controller
 
         $accounts = $user->getTeamMembersEntities();
 
-        $accounts_array = array();
+        $accounts_collection = collect();
 
+        /**
+         * @var Entity $a
+         */
         foreach ($accounts as $a) {
             $account = new \stdClass();
+            $account->recent_record_date = $a->getMostRecentRecordDate();
             $account->name = $a->contact->name->name;
             $account->id = $a->id;
-            $accounts_array[] = $account;
+            $accounts_collection->push($account);
         }
 
-
-
-        return response()->json($accounts_array);
+        return response()->json($accounts_collection->sortByDesc('recent_record_date')->values()->all());
     }
 
 

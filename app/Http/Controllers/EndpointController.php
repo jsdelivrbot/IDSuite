@@ -37,14 +37,19 @@ class EndpointController extends Controller
         $this->validateObject($options);
 
         $endpoints = (new Endpoint)->all();
-        $endpoints_array = array();
+
+        $endpoints_collection = collect();
+
+
         foreach ($endpoints as $e) {
             $endpoint = new \stdClass();
             $endpoint->name = $e->name;
+            $endpoint->recent_record_date = $e->getMostRecentRecordDate();
             $endpoint->id = $e->id;
-            $endpoints_array[] = $endpoint;
+            $endpoints_collection->push($endpoint);
         }
-        return response()->json($endpoints_array);
+
+        return response()->json($endpoints_collection->sortByDesc('recent_record_date')->values()->all());
     }
 
 

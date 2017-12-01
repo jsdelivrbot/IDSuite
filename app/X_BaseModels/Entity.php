@@ -171,17 +171,22 @@ class Entity extends Model
      * getByName
      *
      * @param $name
-     * @return \Illuminate\Database\Eloquent\Model|null|static
+     * @return bool
      */
     public static function getByName($name)
     {
-        $name = (new EntityName)->where('name', $name)->first();
+        $name = \DB::select("
+                  SELECT entity.* 
+                  FROM entity 
+                  LEFT JOIN entitycontact on entitycontact.entity_id = entity.id
+                  LEFT JOIN entityname on entitycontact.entityname_id = entityname.id
+                  WHERE entityname.name = '$name'
+                  ");
 
         if ($name === null) {
-            return $name;
+            return false;
         } else {
-            $entity = $name->entitycontact->entity;
-            return $entity;
+            return self::getObjectById($name[0]->id);
         }
 
     }
@@ -208,6 +213,23 @@ class Entity extends Model
     }
 
 
+
+    public function getMostRecentRecordDate(){
+        $record = \DB::select("
+                  SELECT record.*, timeperiod.start as timeperiod_start 
+                  FROM record 
+                  LEFT Join timeperiod on record.timeperiod_id = timeperiod.id
+                  WHERE record.entity_id = '$this->id'
+                  ORDER BY timeperiod_start DESC
+                  LIMIT 1
+                  ");
+
+        if(count($record) === 0){
+            return 0;
+        } else {
+            return $record[0]->timeperiod_start;
+        }
+    }
 
 
     /**
