@@ -3,9 +3,9 @@
         <div class="col-lg-6">
             <h5 class="card-title text-white">Managers</h5>
         </div>
-        <div class="col-lg-6">
-            <a id="manager-modal-btn" href="#" class="btn btn-nav-color-{{$tab_count}} float-right" data-toggle="modal" data-target="#managerModal"><i class="fa fa-plus"></i> Add Manager</a>
-        </div>
+        {{--<div class="col-lg-6">--}}
+            {{--<a id="manager-modal-btn" href="#" class="btn btn-nav-color-{{$tab_count}} float-right" data-toggle="modal" data-target="#managerModal"><i class="fa fa-plus"></i> Add Manager</a>--}}
+        {{--</div>--}}
     </div>
 
     <div id="header-managers" class="card-block text-white">
