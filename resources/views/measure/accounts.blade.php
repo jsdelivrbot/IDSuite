@@ -75,8 +75,7 @@
             return axios.get('/api/entities/' + options)
                 .then(function (response) {
                     let entities = response.data;
-
-                    console.log(entities);
+                    
 
                     if(!validate(entities)){
                         return false;

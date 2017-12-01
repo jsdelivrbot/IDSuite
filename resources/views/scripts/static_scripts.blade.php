@@ -189,8 +189,6 @@
 
                 $('#cards').append('<div class="row" id="row-' + key + '">');
 
-
-
                 $('#row-' + key).prepend(
                     '<div class="col-lg-4"> ' +
                     '<div class="card mb-3 text-center" '+bgColor+'>' +
