@@ -1,8 +1,14 @@
 
 @if(strpos(request()->getQueryString(), 'page' ) !== false)
 <div class="tab-pane card-block active-outline-card-block-color-{{$tab_count}}" id="card-block-tab-{{$tab_count}}" role="tabpanel">
+    <div class="row">
+        <button class="btn btn-nav-blue m-3" onclick="createReport();">Export charts to PDF</button>
+    </div>
 @else
 <div class="tab-pane card-block active active-outline-card-block-color-{{$tab_count}}" id="card-block-tab-{{$tab_count}}" role="tabpanel">
+    <div class="row">
+        <button class="btn btn-nav-blue m-3" onclick="createReport();">Export charts to PDF</button>
+    </div>
 @endif
     <div class="card-deck">
         <div class="card card-custom">

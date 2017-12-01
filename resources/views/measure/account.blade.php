@@ -79,9 +79,6 @@
                             <p id="header-title-description" class="card-text text-white"></p>
 
                             <div class="col-md-10 offset-1">
-                                <div class="row">
-                                    <button class="btn btn-nav-blue m-3" onclick="createReport();">Export charts to PDF</button>
-                                </div>
                                 <div class="row"  style="height: 400px;">
                                     <div class="card card-custom w-100 my-auto">
                                         <div class="chart-container col-lg-12 my-auto">
