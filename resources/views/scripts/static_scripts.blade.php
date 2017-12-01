@@ -169,20 +169,31 @@
      *
      * creates the cards that represent customers in the this view at cards id.
      *
-     * @param objects
+     * @param  objects
      */
     function createCards(objects, url) {
 
         let rowkey;
 
         $.each(objects, function (key, value) {
+            let bgColor;
+
+            if(value.recent_record_date !== 0){
+                bgColor = "style='background-color: #1BC98E;color: #252830 !important;'";
+            } else {
+                bgColor = "style='background-color: #5C707F;color: #252830 !important;'";
+            }
+
             if (key % 3 === 0 || key === objects.length) {
                 rowkey = key;
+
                 $('#cards').append('<div class="row" id="row-' + key + '">');
+
+
 
                 $('#row-' + key).prepend(
                     '<div class="col-lg-4"> ' +
-                    '<div class="card mb-3 text-center" style="background-color: #1BC98E;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">' +
+                    '<div class="card mb-3 text-center" '+bgColor+'>' +
                     '<div class="card-block"> ' +
                     '<h4 class="card-title text-truncate">' + value.name + '</h4> ' +
                     '<div class="searchfilterterm" style="display: none;">' + value.name.toLowerCase() + '</div> ' +
@@ -196,7 +207,7 @@
             } else {
                 $('#row-' + rowkey).prepend('' +
                     '<div class="col-lg-4"> ' +
-                    '<div class="card mb-3 text-center" style="background-color: #1BC98E;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);"> ' +
+                    '<div class="card mb-3 text-center" '+bgColor+'>' +
                     '<div class="card-block"> ' +
                     '<h4 class="card-title text-truncate">' + value.name + '</h4> ' +
                     '<div class="searchfilterterm" style="display: none;">' + value.name.toLowerCase() + '</div> ' +
@@ -207,6 +218,8 @@
                     '</div>'
                 )
             }
+
+
         });
     }
 
