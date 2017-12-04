@@ -72,7 +72,7 @@
         @endif
     </div>
 </div>
-<video poster="http://192.35.252.40/img/login_background.mov" id="bgvid" playsinline autoplay muted loop>
+<video id="bgvid" playsinline preload autoplay muted loop>
 <source src="http://192.35.252.40/img/login_background.mov" type="video/mov">
 </video>
 
