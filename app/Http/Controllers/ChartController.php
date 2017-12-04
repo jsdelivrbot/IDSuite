@@ -416,6 +416,32 @@ class ChartController extends Controller
     }
 
 
+    public function monthlyDeviceUtilization($options)
+    {
+        $options = json_decode($options);
+
+        $start_time = new Carbon('first day of this month');
+
+        $time_now = new Carbon();
+
+        $datediff = $time_now->diffInDays($start_time);
+
+
+        /**
+         * @var Entity $entity
+         */
+        $entity = $this->validateObject($options);
+
+        return response()->json($entity->getRecordsByDate($start_time));
+
+        foreach($entity->getRecordsByDate($start_time) as $records){
+
+
+
+        }
+
+    }
+
     public function totalCallDuration($options)
     {
         $options = json_decode($options);
