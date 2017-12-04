@@ -6,7 +6,7 @@
         @if (auth::guest() && $viewname === 'Login')
         <div class="col-lg-5 col-xs-1 offset-10">
             <div class="card card-inverse" style="background-color: #434857; border-color: rgba(255, 255, 255, 0.2); ">
-                <h3 class="card-header" style="background-color: #434857;">Login</h3>
+                <h3 class="card-header" style="background-color: #434857;">IDSuite</h3>
                 <div class="card-block">
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
