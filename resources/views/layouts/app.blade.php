@@ -28,7 +28,7 @@
 </head>
 <body class="raleway" style="background-color: #293a46;">
 
-    @if($viewname !== 'OAuth')
+    @if($viewname !== 'OAuth' && $viewname !== 'login')
 
     <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top custom-nav">
             <button class="navbar-toggler navbar-toggler-right custom-border-color-green" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,16 +91,9 @@
                             </button>
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                {{--<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>--}}
-                                <a class="dropdown-item" href="{{ route('logout') }}" >Logout</a>
-
-                                {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-                                    {{--{{ csrf_field() }}--}}
-                                {{--</form>--}}
-
                                 <a class="dropdown-item" href="/apps">App Select</a>
-
                                 <a class="dropdown-item" href="/measure/stats">Product Stats</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}" >Logout</a>
                             </div>
                         </li>
 
@@ -121,21 +114,20 @@
         @if (!auth::guest() && $viewname !== 'App Selection' && $viewname !== 'Trust' && $viewname !== 'OAuth')
             <div class="row">
 
-                <div class="col-sm-3 col-md-1 col-lg-1 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important; padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">
+                {{--<div class="col-sm-3 col-md-1 col-lg-1 hidden-xs-down bg-inverse sidebar" style="padding-left: 0px !important; padding-right: 0px;!important;background-color: #434857 !important; border-right: 2px solid rgba(255, 255, 255, 0.2);">--}}
 
-                    <nav>
-                    <ul class="nav nav-pills flex-column" id="measure-links">
+                    {{--<nav>--}}
+                        {{--<ul class="nav nav-pills flex-column" id="measure-links">--}}
+                    {{--</ul>--}}
+                {{--</nav>--}}
 
-                    </ul>
-                </nav>
-
-                    <div style="color:red; position: absolute;bottom: 10px;left:20px;width: 100%;padding-right: 30px;">
-                        <embed id="white-logo" class="w-100" type="image/svg+xml" src="{{ asset('img/logo_white.svg') }}"/>
-                    </div>
-                </div>
+                    {{--<div style="color:red; position: absolute;bottom: 10px;left:20px;width: 100%;padding-right: 30px;">--}}
+                        {{--<embed id="white-logo" class="w-100" type="image/svg+xml" src="{{ asset('img/logo_white.svg') }}"/>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
 
 
-                <main class="col-sm-10 offset-sm-2 col-md-11 offset-md-1 col-lg-11 offset-lg-1 pt-3">
+                <main class="col-sm-12  col-md-12 col-lg-12 pt-3">
                     @yield('content')
                 </main>
 
