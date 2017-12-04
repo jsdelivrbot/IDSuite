@@ -171,25 +171,9 @@ class TestController extends Controller
         $ns_client = new Netsuite\NetsuiteController();
 
 
-        $ns_ticket = $ns_client->getTicketDetails(769549);
+        $ns_tickets = $ns_client->getAllTickets();
+        dd($ns_tickets);
 
-
-
-        dd($ns_ticket);
-
-        $ticket = new \App\Ticket();
-
-
-
-        /*
-         * message
-         *
-         *
-         *
- */
-            $ticket->save();
-
-        //     $service = Netsuite\NetsuiteDatabase::AddUpdateAllCustomers();
 
 
     }

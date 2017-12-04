@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         '\App\Console\Commands\GetUpdateCustomers',
         '\App\Console\Commands\GetUpdateEmployees',
         '\App\Console\Commands\GetUpdateSMSites',
+        '\App\Console\Commands\GetUpdateTickets',
 
     ];
 
@@ -36,6 +37,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('Netsuite:updateemployees') ->dailyAt("1:00");
         $schedule->command('Netsuite:updatecustomers') ->dailyAt("1:30");
         $schedule->command('Netsuite:updatesmsites') ->dailyAt("3:00");
+        $schedule->command('Netsuite:updatetickets') ->dailyAt("5:00");
 
     }
 

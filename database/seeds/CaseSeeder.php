@@ -139,7 +139,7 @@ class CaseSeeder extends Seeder
 
             $incident_date = new DateTime($t[6]);
 
-            $ticket->incident_date = $incident_date;
+            $ticket->ticket_date = $incident_date;
 
             $last_message_date = new DateTime($t[7]);
 

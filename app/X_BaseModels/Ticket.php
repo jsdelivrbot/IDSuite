@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\DB;
  * @property int|null $status_type
  * @property string $class_code
  * @property string|null $subject
- * @property string|null $incident_date
+ * @property string|null $ticket_date
  * @property string|null $last_message_date
  * @property int|null $known
  * @property int|null $active
@@ -121,27 +121,35 @@ class Ticket extends Model
 
     public function ConvertNs($ns_ticket) {
 
+
+
+        if(!isset($ns_ticket->company->internalId) || !isset($ns_ticket->assigned->internalId) || !isset($ns_ticket->internalId))
+            return false;
         /** check if company exist
          * @var Entity $entity
          */
-        $entity = Entity::getObjectByRefId('netsuite', $ns_ticket->company->internalId);
-        if(!$entity) return false;
-        $this->entity_id = $entity->id;
+        $entity = Entity::getObjectByRefId('reference_key', 'netsuite', $ns_ticket->company->internalId);
 
+
+       $this->entity_id = (!$entity)  ? null : $entity->id;
         /** check if employee exist
          * @var User $user
          */
-        $user = User::getObjectByRefId('netsuite', $ns_ticket->assigned->internalId);
-        if(!$user) return false;
-        $this->user_id = $ns_ticket->assigned->internalId;
+        $user = User::getObjectByRefId('reference_key', 'netsuite', $ns_ticket->assigned->internalId);
 
-        $this->ticket_type = $ns_ticket[''];
-        $this->subject = $ns_ticket->title;
-        $this->message_in = $ns_ticket->incomingMessage;
-        $this->message_out = $ns_ticket->outgoingMessage;
-        $this->status =$ns_ticket->status->internalId;
-        $this->incident_date =$ns_ticket->startDate;
-        $this->last_message_date = $ns_ticket->lastMessageDate;
+     //   dd($user);
+        $this->user_id = (!$user) ? null : $user->id;
+
+        $this->ticket_type = (isset($ns_ticket->category->internalId)) ? $ns_ticket->category->internalId : null;
+
+
+        $this->priority_type = (isset($ns_ticket->priority->internalId)) ? $ns_ticket->priority->internalId : null;
+        $this->subject = (isset($ns_ticket->title)) ? $ns_ticket->title : null;
+        $this->message_in = (isset($ns_ticket->incomingMessage)) ? $ns_ticket->incomingMessage : null;
+        $this->message_out = (isset($ns_ticket->outgoingMessage)) ? $ns_ticket->outgoingMessage : null;
+        $this->status = (isset($ns_ticket->status->internalId)) ? $ns_ticket->status->internalId : null;
+        $this->ticket_date = (isset($ns_ticket->startDate)) ? $ns_ticket->startDate : null;
+        $this->last_message_date =(isset($ns_ticket->lastMessageDate)) ? $ns_ticket->lastMessageDate : null;
 
         return $this;
     }
@@ -159,7 +167,7 @@ class Ticket extends Model
      */
     public function duration(\DateTime $time = null){
 
-        $incident_date = new \DateTime($this->incident_date);
+        $incident_date = new \DateTime($this->ticket_date);
 
         if($time === null) {
             $time = new \DateTime();

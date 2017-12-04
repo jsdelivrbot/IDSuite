@@ -177,7 +177,7 @@ class Entity extends Model
     {
         $name = \DB::select("
                   SELECT entity.* 
-                  FROM entity 
+                  FROM entity
                   LEFT JOIN entitycontact on entitycontact.entity_id = entity.id
                   LEFT JOIN entityname on entitycontact.entityname_id = entityname.id
                   WHERE entityname.name = '$name'

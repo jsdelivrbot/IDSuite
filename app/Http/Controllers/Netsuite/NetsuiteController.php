@@ -68,8 +68,6 @@ class NetsuiteController extends \App\Http\Controllers\Controller
         $request->baseRef->internalId = $netsuite_internal_id;
         $request->baseRef->type = "supportCase";
 
-
-
         $getResponse = $this->service->get($request);
 
 
@@ -86,10 +84,32 @@ class NetsuiteController extends \App\Http\Controllers\Controller
 
     public function getTickets($customer_netsuite_internal_id) {
 
+
     }
 
 
-    public function getAllTickets($limit = 1000) {
+    public function getAllTickets($page_size = 100) {
+
+
+        $this->service->setSearchPreferences(false, $page_size);
+
+        $SupportCaseSearch = new \NetSuite\Classes\SupportCaseSearch;
+        $SupportCaseSearchBasic = new \NetSuite\Classes\SupportCaseSearchBasic();
+        $SupportCaseSearch->basic = $SupportCaseSearchBasic;
+
+        $request = new \NetSuite\Classes\SearchRequest();
+        $request->searchRecord = $SupportCaseSearch;
+
+        $searchResponse = $this->service->search($request);
+
+
+        if (!$searchResponse->searchResult->status->isSuccess) {
+            return false;
+        } else {
+            return $searchResponse->searchResult;
+        }
+
+
 
     }
 

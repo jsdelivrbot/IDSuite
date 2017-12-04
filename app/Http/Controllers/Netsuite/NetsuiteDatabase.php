@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers\Netsuite;
 
+use App\DynamicEnum;
 use App\DynamicEnumValue;
 use App\Enums\EnumDataSourceType;
 use App\Http\Controllers\Helper\AddressExtractor;
 use App\Http\Controllers\Helper\Database;
 use App\Http\Controllers\Helper\Funcs;
+use App\Ticket;
 use Illuminate\Support\Facades\Log;
 use App\Analytic;
 use App\Http\Controllers\Helper\Process;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Mockery\Exception;
+use NetSuite\Classes\TransferOrderItemCommitInventory;
 use NetSuite\NetSuiteService;
 use Symfony\Component\VarDumper\Cloner\Data;
 
@@ -21,6 +24,34 @@ use Symfony\Component\VarDumper\Cloner\Data;
  * */
 class NetsuiteDatabase extends \App\Http\Controllers\Controller
 {
+
+
+    public static function AddUpdateTicketFromId($ns_ticket_id) {
+
+        $ns_client = new NetsuiteController();
+        $ns_ticket = $ns_client->getTicketDetails($ns_ticket_id);
+
+        return self::AddUpdateTicketFromNsObj($ns_ticket);
+    }
+
+    public static function AddUpdateTicketFromNsObj($ns_object) {
+
+        $ticket = new Ticket();
+        $flag = $ticket->ConvertNs($ns_object);
+
+        if($flag) {
+
+                $dynamic_enum_value = Process::processDev($ns_object->internalId, 'netsuite', DynamicEnum::getByName("reference_key"));
+                $ticket->references($dynamic_enum_value);
+                $ticket->save();
+
+            $ticket->save();
+            return $ticket;
+
+        }else return false;
+
+
+    }
 
 
     /* grab all sm sites via saved search id */
@@ -184,6 +215,98 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
         echo "**done**";
     }
 
+
+
+    public static function AddUpdateAllTickets() {
+
+        ini_set("memory_limit", "2500M");
+
+        $local_netsuite_tickets = Database::getAllTickets();
+        $internal_ids = array_column($local_netsuite_tickets, 'value');
+
+
+        $service = new NetsuiteController();
+        $result = $service->getAllTickets(200);
+
+        echo ".";
+        $total_pages = $result->totalPages;
+        $all_records = $result->recordList->record;
+        $search_id =    $result->searchId;
+        // insertion time (easy peasy)
+
+        foreach ($all_records as $record) {
+            if (array_search($record->internalId, $internal_ids) === false) {
+
+                try {
+
+                    $tmp_res = self::AddUpdateTicketFromNsObj($record);
+
+                    echo "+";
+                } catch (\Exception $e) {
+                    Log::error("NetsuiteDatabase::AddUpdateAllTickets::insertion error");
+                    Log::error("Line: " . $e->getLine() . " File: " . $e->getFile() . " Code: " . $e->getCode());
+
+                }
+
+            } // end if
+        } // end foreach
+
+
+
+        for($page_counter = 0; $page_counter < $total_pages; $page_counter++) {
+
+
+                $next_page_to_fetch = $page_counter + 2;
+
+                $search_result = [];
+                $retry = 10;
+                do {
+
+                    try {
+                        $search_result = $service->getPage($search_id, $next_page_to_fetch);
+                        $retry = 0; // it was able to continue
+                    } catch (\Exception $e) {
+                        echo "%"; // retry
+                        sleep(5); // give me a second will you
+                        $retry--;
+                    }
+
+                } while ($retry != 0);
+
+                if ($search_result && is_array($search_result->recordList->record)) {
+
+                    // insertion time (easy peasy)
+                    foreach ($search_result->recordList->record as $record) {
+                        if (array_search($record->internalId, $internal_ids) === false) {
+
+                            try {
+
+                                $tmp_res = self::AddUpdateTicketFromNsObj($record);
+                                echo "+";
+                            } catch (Exception $e) {
+                                Log::error("NetsuiteDatabase::AddUpdateAllTickets::insertion error");
+                                Log::error("Line: " . $e->getLine() . " File: " . $e->getFile() . " Code: " . $e->getCode());
+
+                            }
+
+                        } // end if
+
+                    }
+
+                    // $all_records = array_merge($all_records, $search_result->recordList->record);
+                    echo "."; // merged
+                } else
+                    echo "_"; // skipped
+                //
+                //   dd($all_records);
+
+
+        } // end foreach
+
+
+    }
+
+
     /* grab all customers from netsuite and add or update current customer in database */
     public static function AddUpdateAllCustomers() {
 
@@ -211,7 +334,6 @@ class NetsuiteDatabase extends \App\Http\Controllers\Controller
         // if we have more than one page
       //  goto skip_pages;
 
-        $total_pages = 10;
         for($page_counter = 0; $page_counter < $total_pages; $page_counter++) {
 
             $next_page_to_fetch = $page_counter+2;

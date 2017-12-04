@@ -115,7 +115,7 @@ class ChartController extends Controller
 
         foreach ($entity->tickets as $ticket) {
             foreach ($data_array as $time_frame) {
-                if (substr($ticket->incident_date, 0, 4) === $time_frame->year_string && substr($ticket->incident_date, 5, 2) === $time_frame->month_string) {
+                if (substr($ticket->ticket_date, 0, 4) === $time_frame->year_string && substr($ticket->incident_date, 5, 2) === $time_frame->month_string) {
 
                     $time_frame->value = $time_frame->value + 1;
 
