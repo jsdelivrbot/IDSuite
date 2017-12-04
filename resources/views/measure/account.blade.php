@@ -515,6 +515,10 @@
 
                     if (AmCharts.charts[x].div.id === chartids[i]) {
                         charts[chartids[i]] = AmCharts.charts[x];
+                        console.log(charts);
+                        console.log('^^^^^^^charts^^^^^^^^');
+                        console.log(AmCharts.charts);
+                        console.log('^^^^^^^^AmCharts.charts^^^^^^^^');
                     }
 
                 }
@@ -533,7 +537,11 @@
 
                             this.setup.chart.exportedImage = data;
 
+
+
                             charters.push(data);
+
+
 
                             console.log(charters);
 
@@ -542,10 +550,7 @@
                             console.log(charts_remaining);
 
 
-                            if (charts_remaining === 0) {
-
-                                console.log(charters);
-
+                            if (charts_remaining === 1) {
 
                                 generateLayout(header, footer, topbar, bottombar, charters, this, generatePdf);
 
@@ -582,6 +587,21 @@
 
 
             });
+
+        }
+
+
+        function monthlyDeviceUtilization(entity_id){
+            let options = JSON.stringify({
+                id: entity_id
+            })
+
+            return axios.get('/api/chart/monthlydeviceutilization/' + options)
+                .then(function(data){
+                    console.log(data.data);
+
+
+                })
 
         }
 
@@ -681,8 +701,10 @@
             console.log(axiosrequests);
 
             axiosrequests.push = getEntity('{{$entity->id}}');
-            axiosrequests.push = callVolumeOverTime('{{$entity->id}}');
             axiosrequests.push = getEntityManagers('{{$entity->id}}', $('#header-managers'));
+            axiosrequests.push = callVolumeOverTime('{{$entity->id}}');
+            axiosrequests.push = monthlyDeviceUtilization('{{$entity->id}}');
+
 
 
             getDataUri(header, function (dataurl) {

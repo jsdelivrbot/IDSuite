@@ -56,6 +56,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/chart/accountcases/{options}', 'ChartController@accountCases');
     Route::get('/chart/casesopened/{options}', 'ChartController@casesOpened');
     Route::get('/chart/totalcallduration/{options}', 'ChartController@totalCallDuration');
+    Route::get('/chart/monthlydeviceutilization/{options}', 'ChartController@monthlydeviceUtilization');
 
     //Records Routes//
     Route::get('/records/getRecords', 'APIController@getRecords');

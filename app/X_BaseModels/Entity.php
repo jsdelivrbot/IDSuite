@@ -213,7 +213,14 @@ class Entity extends Model
     }
 
 
-
+    /**
+     *
+     * getMostRecentRecordDate
+     *
+     * gets the date of the most recent record
+     *
+     * @return int
+     */
     public function getMostRecentRecordDate(){
         $record = \DB::select("
                   SELECT record.*, timeperiod.start as timeperiod_start 
@@ -233,6 +240,11 @@ class Entity extends Model
 
 
     /**
+     *
+     * getRecordsByDate
+     *
+     * get records by from date to now
+     *
      * @param Carbon $start_date
      * @return mixed
      */
@@ -246,7 +258,41 @@ class Entity extends Model
         }
     }
 
+    /**
+     *
+     * getRecordsBetweenDates
+     *
+     * get the records between two dates
+     *
+     * @param Carbon $start_date
+     * @return mixed
+     */
+    public function getRecordsBetweenDates(Carbon $start_date, Carbon $end_date){
 
+            $start_date = $start_date->toDateString();
+
+            $end_date = $end_date->toDateString();
+
+            return \DB::select("
+              SELECT record.*, timeperiod.start as timeperiod_start, timeperiod.duration as timeperiod_duration 
+              FROM record 
+              LEFT JOIN timeperiod on record.timeperiod_id=timeperiod.id 
+              WHERE timeperiod.start > '$start_date' 
+              AND timeperiod.start < '$end_date' 
+              AND record.entity_id = '$this->id'"
+            );
+
+    }
+
+
+    /**
+     *
+     * getMonitoredStartDate
+     *
+     * gets the date that IDSuite started monitoring customer
+     *
+     * @return int
+     */
     public function getMonitoredStartDate()
     {
 
@@ -258,7 +304,6 @@ class Entity extends Model
                   LIMIT 1
                   ");
 
-
         if(count($record) === 0){
             return 0;
         } else {
@@ -266,5 +311,7 @@ class Entity extends Model
         }
 
     }
+
+
 
 }
