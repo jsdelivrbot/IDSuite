@@ -73,7 +73,7 @@
     </div>
 </div>
 <video poster="http://192.35.252.40/img/login_background.mov" id="bgvid" playsinline autoplay muted loop>
-<source src="http://192.35.252.40/img/login_background.mov" type="video/mp4">
+<source src="http://192.35.252.40/img/login_background.mov" type="video/mov">
 </video>
 
     <style>
