@@ -22,7 +22,7 @@
                                     </span>
                                 @endif
                             </div>
-                            
+
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label for="password" class="control-label">Password</label>
 
@@ -72,8 +72,8 @@
         @endif
     </div>
 </div>
-<video poster="http://idsuite.dev/img/login_background.mp4" id="bgvid" playsinline autoplay muted loop>
-<source src="http://idsuite.dev/img/login_background.mp4" type="video/mp4">
+<video poster="http://192.35.252.40/img/login_background.mp4" id="bgvid" playsinline autoplay muted loop>
+<source src="http://192.35.252.40/img/login_background.mp4" type="video/mp4">
 </video>
 
     <style>

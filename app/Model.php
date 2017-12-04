@@ -52,7 +52,7 @@ abstract class Model extends Eloquent
      * @param $dynamic_enum_name
      * @param $value_type
      * @param $value
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return bool
      * @throws \Exception
      */
     public static function getObjectByRefId($dynamic_enum_name, $value_type, $value)
