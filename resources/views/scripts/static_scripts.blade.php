@@ -251,11 +251,11 @@
     }
 
 
-    function setChartHW(el, width, height){
-        el
-            .width(width)
-            .height(height);
-    }
+//    function setChartHW(el, width, height){
+//        el
+//            .width(width)
+//            .height(height);
+//    }
 
     /**
      *
@@ -303,12 +303,19 @@
      * @param links
      */
     function createSidebarLinks(links) {
+
+        let count = 0;
+
         $.each(links, function (key, value) {
-            $('#measure-links').append(
-                '<li class="nav-item">' +
-                    '<a class="nav-link ' + value.class + ' text-white" href="' + value.url + '">' + key + '</a>' +
-                '</li>'
-            )
+            if(count === 0){
+                $('.dropdown-menu').prepend('<div class="dropdown-divider"></div>');
+            }
+
+            $('.dropdown-menu').prepend(
+                '<a class="dropdown-item" href="' + value.url + '">' + key + '</a>'
+            );
+
+            count++;
         });
     }
 

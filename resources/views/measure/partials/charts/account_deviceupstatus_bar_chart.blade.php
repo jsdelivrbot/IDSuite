@@ -67,7 +67,7 @@
      */
     function deviceUpStatusAll(entity_id, el) {
 
-        setChartHW(el, '500px', '200px');
+        // setChartHW(el, '500px', '200px');
 
         let options = JSON.stringify({
             id: entity_id

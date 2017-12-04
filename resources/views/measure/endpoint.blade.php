@@ -2,9 +2,9 @@
 
 @section('content')
 
-    <div class="container p-lg-1">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12 col-md-12 offset-md-2 offset-lg-0">
+            <div class="col-lg-12 col-md-12">
 
                 @php
                     $number = rand(1,5);

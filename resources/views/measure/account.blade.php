@@ -2,9 +2,9 @@
 
 @section('content')
 
-    <div class="container p-lg-1">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12 col-md-12 offset-md-2 offset-lg-0">
+            <div class="col-lg-10 col-md-10 offset-1 ">
 
                 @php
                     $number = rand(1,5);
@@ -78,7 +78,7 @@
 
                             <p id="header-title-description" class="card-text text-white"></p>
 
-                            <div class="col-md-10 offset-1">
+                            <div class="col-md-12">
                                 <div class="row"  style="height: 400px;">
                                     <div class="card card-custom w-100 my-auto">
                                         <div class="chart-container col-lg-12 my-auto">
@@ -136,7 +136,7 @@
                             <h4 id="header-title" class="card-title teal"></h4>
                             <p id="header-title-description" class="card-text text-white"></p>
 
-                            <div class="col-md-10 offset-1">
+                            <div class="col-md-12">
                                 <div class="row">
                                     <button class="btn btn-nav-blue m-3" onclick="createReport();">Export charts to PDF</button>
                                 </div>
@@ -197,7 +197,7 @@
                             <h4 id="header-title" class="card-title purple"></h4>
                             <p id="header-title-description" class="card-text text-white"></p>
 
-                            <div class="col-md-10 offset-1">
+                            <div class="col-md-12">
                                 <div class="row">
                                     <button class="btn btn-nav-blue m-3" onclick="createReport();">Export charts to PDF</button>
                                 </div>
@@ -258,7 +258,7 @@
                             <h4 id="header-title" class="card-title yellow"></h4>
                             <p id="header-title-description" class="card-text text-white"></p>
 
-                            <div class="col-md-10 offset-1">
+                            <div class="col-md-12">
                                 <div class="row">
                                     <button class="btn btn-nav-blue m-3" onclick="createReport();">Export charts to PDF</button>
                                 </div>
@@ -319,7 +319,7 @@
                             <h4 id="header-title" class="card-title blue"></h4>
                             <p id="header-title-description" class="card-text text-white"></p>
 
-                            <div class="col-md-10 offset-1">
+                            <div class="col-md-12">
                                 <div class="row">
                                     <button class="btn btn-nav-blue m-3" onclick="createReport();">Export charts to PDF</button>
                                 </div>
@@ -380,18 +380,19 @@
 
         <div class="col-lg-12 mt-5 mb-4" style="padding: 0;">
             <div class="row no-gutters">
-                <div class="col-lg-6">
+                <div class="col-lg-5 offset-1">
                     <div id="container_two"></div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-5">
                     <div id="container_one"></div>
                 </div>
             </div>
         </div>
 
-        @include('measure.partials.custom_tabs.custom_tabs');
-
+        <div class="col-lg-10 offset-1">
+            @include('measure.partials.custom_tabs.custom_tabs');
+        </div>
     </div>
 
 @endsection

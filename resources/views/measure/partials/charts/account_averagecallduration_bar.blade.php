@@ -15,6 +15,7 @@
 <script>
 
     function chartAverageCallDuration(data) {
+
         $('#avergaecallduration-loader').css('display', 'none');
         $('#avergaecallduration').css('display', 'block');
 
@@ -70,7 +71,7 @@
      * @param el
      */
     function averageCallDuration(entity_id, el) {
-        setChartHW(el, '500px', '200px');
+//        setChartHW(el, '500px', '200px');
 
         let options = JSON.stringify({
             id: entity_id,

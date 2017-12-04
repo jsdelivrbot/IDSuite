@@ -11,33 +11,34 @@
     </div>
 @endif
     <div class="card-deck">
+
         <div class="card card-custom">
             <div class="card-img-top">
                 @include('measure.partials.charts.account_devicebytype_pie_chart')
             </div>
         </div>
+
         <div class="card card-custom">
             <div class="card-img-top">
                 @include('measure.partials.charts.account_deviceupstatus_bar_chart')
             </div>
         </div>
-    </div>
-    <div class="card-deck mt-4">
+
         <div class="card card-custom">
             <div class="card-img-top">
                 @include('measure.partials.charts.account_deviceupstatuspercent_doughnut_chart')
             </div>
         </div>
 
+    </div>
+    <div class="card-deck mt-4">
 
         <div class="card card-custom">
             <div class="card-img-top">
                 @include('measure.partials.charts.account_totalminutes_bar')
             </div>
         </div>
-    </div>
 
-    <div class="card-deck mt-4">
         <div class="card card-custom">
             <div class="card-img-top">
                 @include('measure.partials.charts.account_averagecallduration_bar')
@@ -50,24 +51,24 @@
                 @include('measure.partials.charts.account_casestatusnotclosed_bar')
             </div>
         </div>
+
     </div>
 
     <div class="card-deck mt-4">
+
         <div class="card card-custom">
             <div class="card-img-top">
                 @include('measure.partials.charts.account_casesopened')
             </div>
         </div>
 
-
         <div class="card card-custom">
             <div class="card-img-top">
                 @include('measure.partials.charts.account_protocolbreakout_piebreakout')
             </div>
         </div>
-    </div>
-    <div class="card-deck mt-4">
-        <div class="card card-custom col-lg-6">
+
+        <div class="card card-custom">
             <div class="row m-1">
                 <div class="col-lg-12 mt-2 text-white">
                     <h5>Count of HMS devices</h5>
@@ -80,21 +81,7 @@
                 </div>
             </div>
         </div>
-
-        {{--<div class="card card-custom">--}}
-            {{--<div class="card-img-top">--}}
-                {{--<div class="row m-1">--}}
-                    {{--<div class="col-lg-12 mt-2 text-white">--}}
-                        {{--<h5>Average Device Utilization Per Month</h5>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="row" style="height: 200px;">--}}
-                    {{--<div class="col-lg-12 text-center my-auto">--}}
-                        {{--<img id="hms-avg-device-utilization-loader" src="/img/bars.svg" height="70px"/>--}}
-                        {{--<div id="hms-avg-device-utilization" style="display: none;"></div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
     </div>
+
+
 </div>
