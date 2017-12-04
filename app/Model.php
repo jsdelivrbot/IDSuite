@@ -75,8 +75,10 @@ abstract class Model extends Eloquent
 
         if($result->count() > 1){
             throw new \Exception("The value parameter has been found in multiple $class_path(s) class objects that's references relationship has duplicated key -> value DynamicEnumValue objects.", "500");
+        } elseif ($result->count() === 1) {
+            return $result[0];
         } else {
-            return $result;
+            return false;
         }
     }
 
