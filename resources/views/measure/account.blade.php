@@ -75,7 +75,6 @@
                          style="border-top: none; border-left: none; background-color: transparent;">
                         <div class="card-block">
                             <h4 id="header-title" class="card-title pink"></h4>
-
                             <p id="header-title-description" class="card-text text-white"></p>
 
                             <div class="col-md-12">
@@ -91,40 +90,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-                                {{--<div class="demo">--}}
-                                    {{--<svg class="loader">--}}
-                                        {{--<filter id="blur">--}}
-                                            {{--<fegaussianblur in="SourceGraphic" stddeviation="2"></fegaussianblur>--}}
-                                        {{--</filter>--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#F4F519" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-2">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#DE2FFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-3">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#FF5932" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-4">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#E97E42" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-5">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="white" stroke-width="6" stroke-linecap="round" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-6">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#00DCA3" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-7">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="purple" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-8">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#AAEA33" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                {{--</div>--}}
-
                             </div>
-
                         </div>
                     </div>
 
@@ -137,9 +103,6 @@
                             <p id="header-title-description" class="card-text text-white"></p>
 
                             <div class="col-md-12">
-                                <div class="row">
-                                    <button class="btn btn-nav-blue m-3" onclick="createReport();">Export charts to PDF</button>
-                                </div>
                                 <div class="row"  style="height: 400px;">
                                     <div class="card card-custom w-100 my-auto">
                                         <div class="chart-container col-lg-12 my-auto">
@@ -152,40 +115,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-                                {{--<div class="demo">--}}
-                                    {{--<svg class="loader">--}}
-                                        {{--<filter id="blur">--}}
-                                            {{--<fegaussianblur in="SourceGraphic" stddeviation="2"></fegaussianblur>--}}
-                                        {{--</filter>--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#F4F519" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-2">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#DE2FFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-3">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#FF5932" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-4">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#E97E42" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-5">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="white" stroke-width="6" stroke-linecap="round" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-6">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#00DCA3" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-7">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="purple" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-8">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#AAEA33" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                {{--</div>--}}
-
                             </div>
-
                         </div>
                     </div>
 
@@ -198,9 +128,6 @@
                             <p id="header-title-description" class="card-text text-white"></p>
 
                             <div class="col-md-12">
-                                <div class="row">
-                                    <button class="btn btn-nav-blue m-3" onclick="createReport();">Export charts to PDF</button>
-                                </div>
                                 <div class="row"  style="height: 400px;">
                                     <div class="card card-custom w-100 my-auto">
                                         <div class="chart-container col-lg-12 my-auto">
@@ -213,40 +140,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-                                {{--<div class="demo">--}}
-                                    {{--<svg class="loader">--}}
-                                        {{--<filter id="blur">--}}
-                                            {{--<fegaussianblur in="SourceGraphic" stddeviation="2"></fegaussianblur>--}}
-                                        {{--</filter>--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#F4F519" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-2">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#DE2FFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-3">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#FF5932" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-4">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#E97E42" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-5">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="white" stroke-width="6" stroke-linecap="round" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-6">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#00DCA3" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-7">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="purple" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-8">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#AAEA33" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                {{--</div>--}}
-
                             </div>
-
                         </div>
                     </div>
 
@@ -259,9 +153,6 @@
                             <p id="header-title-description" class="card-text text-white"></p>
 
                             <div class="col-md-12">
-                                <div class="row">
-                                    <button class="btn btn-nav-blue m-3" onclick="createReport();">Export charts to PDF</button>
-                                </div>
                                 <div class="row"  style="height: 400px;">
                                     <div class="card card-custom w-100 my-auto">
                                         <div class="chart-container col-lg-12 my-auto">
@@ -274,40 +165,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-                                {{--<div class="demo">--}}
-                                    {{--<svg class="loader">--}}
-                                        {{--<filter id="blur">--}}
-                                            {{--<fegaussianblur in="SourceGraphic" stddeviation="2"></fegaussianblur>--}}
-                                        {{--</filter>--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#F4F519" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-2">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#DE2FFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-3">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#FF5932" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-4">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#E97E42" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-5">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="white" stroke-width="6" stroke-linecap="round" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-6">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#00DCA3" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-7">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="purple" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-8">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#AAEA33" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                {{--</div>--}}
-
                             </div>
-
                         </div>
                     </div>
 
@@ -320,9 +178,6 @@
                             <p id="header-title-description" class="card-text text-white"></p>
 
                             <div class="col-md-12">
-                                <div class="row">
-                                    <button class="btn btn-nav-blue m-3" onclick="createReport();">Export charts to PDF</button>
-                                </div>
                                 <div class="row"  style="height: 400px;">
                                     <div class="card card-custom w-100 my-auto">
                                         <div class="chart-container col-lg-12 my-auto">
@@ -335,40 +190,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-                                {{--<div class="demo">--}}
-                                    {{--<svg class="loader">--}}
-                                        {{--<filter id="blur">--}}
-                                            {{--<fegaussianblur in="SourceGraphic" stddeviation="2"></fegaussianblur>--}}
-                                        {{--</filter>--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#F4F519" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-2">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#DE2FFF" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-3">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#FF5932" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-4">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#E97E42" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-5">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="white" stroke-width="6" stroke-linecap="round" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-6">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#00DCA3" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-7">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="purple" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                    {{--<svg class="loader loader-8">--}}
-                                        {{--<circle cx="75" cy="75" r="60" fill="transparent" stroke="#AAEA33" stroke-width="6" stroke-linecap="round" stroke-dasharray="385" stroke-dashoffset="385" filter="url(#blur)"></circle>--}}
-                                    {{--</svg>--}}
-                                {{--</div>--}}
-
                             </div>
-
                         </div>
                     </div>
 
