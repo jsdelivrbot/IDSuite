@@ -542,10 +542,7 @@
                             console.log(charts_remaining);
 
 
-                            if (charts_remaining === 0) {
-
-                                console.log(charters);
-
+                            if (charts_remaining === 1) {
 
                                 generateLayout(header, footer, topbar, bottombar, charters, this, generatePdf);
 
