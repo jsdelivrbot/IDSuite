@@ -7,7 +7,14 @@
 @else
 <div class="tab-pane card-block active active-outline-card-block-color-{{$tab_count}}" id="card-block-tab-{{$tab_count}}" role="tabpanel">
     <div class="row">
-        <button class="btn btn-nav-blue m-3" onclick="createReport();">Generate Report</button>
+        <div class="col-lg-12">
+            <div class="float-left">
+                <span class="h3 pink">Insights</span>
+            </div>
+            <div class="float-right">
+                <button class="btn btn-nav-blue m-3" onclick="createReport();">Generate Report</button>
+            </div>
+        </div>
     </div>
 @endif
     <div class="card-deck">

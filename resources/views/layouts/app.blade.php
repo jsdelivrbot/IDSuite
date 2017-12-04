@@ -71,10 +71,12 @@
                     <li class="nav-item active">
                         <a class="nav-link">
 
-                            @if($viewname === 'account' || $viewname === 'device' || $viewname === 'case')
-                                {{--{{$entity->contact->name}}--}}
+                            @if($viewname === 'account')
+                                {{$entity->contact->name->name}}
+                            @elseif($viewname === 'device')
+                                {{$endpoint->name}}
                             @else
-                                {{$viewname}}
+                                {{ucwords($viewname)}}
                             @endif
 
                             <span class="sr-only">(current)</span></a>
