@@ -3,6 +3,9 @@
 namespace App;
 
 use App\Enums\EnumDataSourceType;
+use App\Enums\EnumOriginType;
+use App\Enums\EnumPriorityType;
+use App\Enums\EnumTicketStatusType;
 use App\Model as Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -121,7 +124,7 @@ class Ticket extends Model
 
     public function ConvertNs($ns_ticket) {
 
-
+dd($ns_ticket);
 
         if(!isset($ns_ticket->company->internalId) || !isset($ns_ticket->assigned->internalId) || !isset($ns_ticket->internalId))
             return false;
@@ -143,12 +146,15 @@ class Ticket extends Model
         $this->ticket_type = (isset($ns_ticket->category->internalId)) ? $ns_ticket->category->internalId : null;
 
 
-        $this->priority_type = (isset($ns_ticket->priority->internalId)) ? $ns_ticket->priority->internalId : null;
+        $this->priority_type = (isset($ns_ticket->priority->name)) ? EnumPriorityType::getKeyByValue($ns_ticket->priority->name)  : EnumPriorityType::getKeyByValue("unknown");
+        $this->status_type = (isset($ns_ticket->status->name)) ? EnumTicketStatusType::getKeyByValue($ns_ticket->status->name) : EnumTicketStatusType::getKeyByValue("unknown");;
+        $this->origin_type = (isset($ns_ticket->origin->name)) ? EnumOriginType::getKeyByValue($ns_ticket->origin->name) : EnumOriginType::getKeyByValue("unknown");
         $this->subject = (isset($ns_ticket->title)) ? $ns_ticket->title : null;
         $this->message_in = (isset($ns_ticket->incomingMessage)) ? $ns_ticket->incomingMessage : null;
         $this->message_out = (isset($ns_ticket->outgoingMessage)) ? $ns_ticket->outgoingMessage : null;
-        $this->status = (isset($ns_ticket->status->internalId)) ? $ns_ticket->status->internalId : null;
-        $this->ticket_date = (isset($ns_ticket->startDate)) ? $ns_ticket->startDate : null;
+        $this->case_number = (isset($ns_ticket->caseNumber)) ? $ns_ticket->caseNumber : null;
+        $this->incident_date = (isset($ns_ticket->startDate)) ? $ns_ticket->startDate : null;
+
         $this->last_message_date =(isset($ns_ticket->lastMessageDate)) ? $ns_ticket->lastMessageDate : null;
 
         return $this;

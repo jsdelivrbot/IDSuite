@@ -171,7 +171,7 @@ class TestController extends Controller
         $ns_client = new Netsuite\NetsuiteController();
 
 
-        $ns_tickets = $ns_client->getAllTickets();
+        $ns_tickets = $ns_client->getTicketDetails(1012216);
         dd($ns_tickets);
 
 

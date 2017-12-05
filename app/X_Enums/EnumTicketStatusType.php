@@ -15,6 +15,7 @@ class EnumTicketStatusType extends Enum
     public static $class_code = 'ETS';
 
     public static $enum = [
+        0       =>  'Unkown',
         1       =>  'Not Started',
         2       =>  'In Progress',
         3       =>  'Escalated',
@@ -31,7 +32,7 @@ class EnumTicketStatusType extends Enum
         15      =>  'RMA - Requires NetSuite Entry Update',
 
     ];
-
+    const UNKNOWN =0;
     const NOT_STARTED =1;
     const IN_PROGRESS =2;
     const ESCALATED =3;
