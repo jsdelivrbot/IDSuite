@@ -35,10 +35,10 @@ class TicketController extends Controller
         if($object->class_code === 'ENT') {
 
             $tickets = $object->tickets;
-
-
         } elseif($object->class_code === 'USR'){
             $tickets = Ticket::all();
+        } else {
+            return response()->json(false);
         }
 
         $tickets_collection = collect();
@@ -56,6 +56,8 @@ class TicketController extends Controller
             $ticket->reference_id = $t->references()['netsuite'];
             $ticket->duration = $t->duration();
 
+
+            $tickets_collection->push($ticket);
 
         }
 
