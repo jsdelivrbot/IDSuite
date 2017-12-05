@@ -41,29 +41,31 @@
 
                                 $('#row-' + key).prepend(
                                     '<div class="col-lg-4 p-lg-3">' +
-                                    '<div class="card mb-3 text-center" style="background-color: #1BC98E;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">' +
-                                    '<div class="card-block">' +
-                                    '<h4 class="card-title text-truncate"></h4>' +
-                                    '<div class="row mt-3">' +
-                                    '<div class="col-lg-6">' +
-                                    '<p class="card-text text-capitalize font-weight-bold">' + value.status_type + '</p>' +
-                                    '</div>' +
-                                    '<div class="col-lg-6">' +
-                                    '<p class="card-text">' + value.duration + ' Day(s)</p>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '<div class="row mt-3">' +
-                                    '<div class="col-lg-12">' +
-                                    '<p class="card-text text-left">' + value.subject + '</p>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '<div class="row mt-3">' +
-                                    '<div class="col-lg-12">' +
-                                    '<a href="/tickets/' + value.id + '" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Case</a>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '</div>' +
+                                        '<div class="card mb-3 text-center" style="background-color: #1BC98E;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">' +
+                                            '<div class="card-block">' +
+                                                '<h4 class="card-title text-truncate"></h4>' +
+                                                '<div class="row mt-3">' +
+                                                    '<div class="col-lg-12">' +
+                                                        '<p class="card-text text-capitalize font-weight-bold">' + value.subject + '</p>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<div class="row">' +
+                                                    '<div class="col-lg-6">' +
+                                                        '<p class="card-text">' + value.duration + ' Day(s)</p>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<div class="row mt-3">' +
+                                                    '<div class="col-lg-12">' +
+                                                        '<p class="card-text text-left">' + value.status_type + '</p>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<div class="row mt-3">' +
+                                                    '<div class="col-lg-12">' +
+                                                        '<a href="/tickets/' + value.id + '" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Case</a>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                            '</div>' +
+                                        '</div>' +
                                     '</div>'
                                 );
                             } else {
