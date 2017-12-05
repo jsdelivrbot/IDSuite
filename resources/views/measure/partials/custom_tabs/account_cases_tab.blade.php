@@ -26,39 +26,79 @@
 
                     console.log(data.data);
 
-                    if (data.data.length > 0) {
-                        $.each(data.data, function (key, value) {
-                            el.append('' +
-                                '<div class="col-lg-4 p-lg-3">' +
+                    let rowkey;
+
+                    let tickets = data.data;
+
+                    if (tickets.length > 0) {
+
+                        $.each(tickets, function (key, value) {
+
+                            if (key % 3 === 0 || key === tickets.length) {
+                                rowkey = key;
+
+                                el.append('<div class="row" id="row-' + key + '">');
+
+                                $('#row-' + key).prepend(
+                                    '<div class="col-lg-4 p-lg-3">' +
                                     '<div class="card mb-3 text-center" style="background-color: #1BC98E;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">' +
-                                        '<div class="card-block">'+
-                                            '<h4 class="card-title text-truncate"></h4>' +
-                                            '<div class="row mt-3">' +
-                                                '<div class="col-lg-6">'+
-                                                    '<p class="card-text text-capitalize font-weight-bold">' + value.status_type + '</p>' +
-                                                '</div>' +
-                                                '<div class="col-lg-6">' +
-                                                    '<p class="card-text">' + value.duration + ' Day(s)</p>' +
-                                                '</div>' +
-                                            '</div>' +
-                                            '<div class="row mt-3">' +
-                                                '<div class="col-lg-12">' +
-                                                    '<p class="card-text text-left">'+value.subject+'</p>' +
-                                                '</div>' +
-                                            '</div>' +
-                                            '<div class="row mt-3">' +
-                                                '<div class="col-lg-12">' +
-                                                    '<a href="/tickets/' + value.id + '" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Case</a>' +
-                                                '</div>' +
-                                            '</div>' +
-                                        '</div>' +
+                                    '<div class="card-block">' +
+                                    '<h4 class="card-title text-truncate"></h4>' +
+                                    '<div class="row mt-3">' +
+                                    '<div class="col-lg-6">' +
+                                    '<p class="card-text text-capitalize font-weight-bold">' + value.status_type + '</p>' +
                                     '</div>' +
-                                '</div>'
-                            );
+                                    '<div class="col-lg-6">' +
+                                    '<p class="card-text">' + value.duration + ' Day(s)</p>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '<div class="row mt-3">' +
+                                    '<div class="col-lg-12">' +
+                                    '<p class="card-text text-left">' + value.subject + '</p>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '<div class="row mt-3">' +
+                                    '<div class="col-lg-12">' +
+                                    '<a href="/tickets/' + value.id + '" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Case</a>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>'
+                                );
+                            } else {
+                                $('#row-' + rowkey).append(
+                                    '<div class="col-lg-4 p-lg-3">' +
+                                    '<div class="card mb-3 text-center" style="background-color: #1BC98E;color: #252830 !important; border: 6px solid rgba(255, 255, 255, 0.2);">' +
+                                    '<div class="card-block">' +
+                                    '<h4 class="card-title text-truncate"></h4>' +
+                                    '<div class="row mt-3">' +
+                                    '<div class="col-lg-6">' +
+                                    '<p class="card-text text-capitalize font-weight-bold">' + value.status_type + '</p>' +
+                                    '</div>' +
+                                    '<div class="col-lg-6">' +
+                                    '<p class="card-text">' + value.duration + ' Day(s)</p>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '<div class="row mt-3">' +
+                                    '<div class="col-lg-12">' +
+                                    '<p class="card-text text-left">' + value.subject + '</p>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '<div class="row mt-3">' +
+                                    '<div class="col-lg-12">' +
+                                    '<a href="/tickets/' + value.id + '" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Case</a>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>'
+                                );
+                            }
                         });
                     } else {
                         el.append(
-                            '<div id="note-default">' +
+                            '<div id="ticket-default">' +
                             '<h4 class="card-title text-white">Hrm...</h4>' +
                             '<p class="card-text text-white">We currently do not have any tickets associated with this account.</p>' +
                             '</div>'
