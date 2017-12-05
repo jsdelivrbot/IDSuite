@@ -142,9 +142,7 @@ class Ticket extends Model
      //   dd($user);
         $this->user_id = (!$user) ? null : $user->id;
 
-        $this->ticket_type = (isset($ns_ticket->category->internalId)) ? $ns_ticket->category->internalId : null;
-
-
+        $this->ticket_type = (isset($ns_ticket->category->name)) ? EnumTicketType::getKeyByValue($ns_ticket->category->name)  : EnumTicketType::getKeyByValue("unknown");
         $this->priority_type = (isset($ns_ticket->priority->name)) ? EnumPriorityType::getKeyByValue($ns_ticket->priority->name)  : EnumPriorityType::getKeyByValue("unknown");
         $this->status_type = (isset($ns_ticket->status->name)) ? EnumTicketStatusType::getKeyByValue($ns_ticket->status->name) : EnumTicketStatusType::getKeyByValue("unknown");;
         $this->origin_type = (isset($ns_ticket->origin->name)) ? EnumOriginType::getKeyByValue($ns_ticket->origin->name) : EnumOriginType::getKeyByValue("unknown");
