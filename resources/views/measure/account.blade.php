@@ -701,7 +701,6 @@
             console.log(axiosrequests);
 
             axiosrequests.push = getEntity('{{$entity->id}}');
-            axiosrequests.push = getEntityManagers('{{$entity->id}}', $('#header-managers'));
             axiosrequests.push = callVolumeOverTime('{{$entity->id}}');
             axiosrequests.push = monthlyDeviceUtilization('{{$entity->id}}');
 

@@ -73,6 +73,10 @@
                             '<div class="row">' +
                             '<div class="col-lg-3">' +
                             '<span>'+value.name+' : </span>' +
+                            '</div>' +
+                            '<div class="col-lg-3">' +
+                            '<span>'+value.email+'</span>' +
+                            '</div>' +
                             '</div>'
                         )
 
