@@ -50,9 +50,8 @@ class TicketController extends Controller
             $ticket->origin = EnumOriginType::getValueByKey($t->origin_type);
             $ticket->type = EnumTicketType::getValueByKey($t->ticket_type);
             $ticket->priority = EnumPriorityType::getValueByKey($t->priority_type);
-            $ticket->status = EnumTicketStatusType::getValueByKey($t->status_type);
+            $ticket->status_type = EnumTicketStatusType::getValueByKey($t->status_type);
             $ticket->subject = $t->subject;
-            $ticket->status_type = $t->status_type;
             $ticket->reference_id = $t->references()['netsuite'];
             $ticket->duration = $t->duration();
 
