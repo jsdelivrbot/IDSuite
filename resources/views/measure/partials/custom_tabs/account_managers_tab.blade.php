@@ -71,7 +71,7 @@
 
                         el.append(
                             '<div class="row">' +
-                            '<div class="col-lg-3">' +
+                            '<div class="col-lg-2">' +
                             '<span>'+value.name+' : </span>' +
                             '</div>' +
                             '<div class="col-lg-3">' +
