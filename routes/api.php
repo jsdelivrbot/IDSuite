@@ -84,6 +84,11 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/measure/stats/customerwithcdr/{options}', 'ProductStatController@getCustomerWithCdrStats');
     Route::get('/measure/stats/customerwithcdrratio/{options}', 'ProductStatController@getCustomerCdrRatioStats');
 
+
+    // Ticket Routes //
+    Route::get('/measure/tickets/{options}', 'TicketController@getTickets');
+
+
     // Twilio routes //
 
     Route::post('/twilio/mms','TwilioController@send');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entity;
 use App\Enums\EnumOriginType;
 use App\Enums\EnumPriorityType;
 use App\Enums\EnumStatusType;
@@ -14,6 +15,54 @@ use Illuminate\Support\Facades\Input;
 
 class TicketController extends Controller
 {
+
+
+    /**
+     *
+     * getTickets
+     *
+     * returns ticket data
+     *
+     * @param $options
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getTickets($options)
+    {
+        $options = json_decode($options);
+
+        $object = $this->validateObject($options);
+
+        if($object->class_code === 'ENT') {
+
+            $tickets = $object->tickets;
+
+
+        } elseif($object->class_code === 'USR'){
+            $tickets = Ticket::all();
+        }
+
+        $tickets_collection = collect();
+
+        foreach($tickets as $t){
+
+            $ticket = new \stdClass();
+
+            $ticket->origin = EnumOriginType::getValueByKey($t->origin_type);
+            $ticket->type = EnumTicketType::getValueByKey($t->ticket_type);
+            $ticket->priority = EnumPriorityType::getValueByKey($t->priority_type);
+            $ticket->status = EnumTicketStatusType::getValueByKey($t->status_type);
+            $ticket->subject = $t->subject;
+            $ticket->status_type = $t->status_type;
+            $ticket->reference_id = $t->references()['netsuite'];
+            $ticket->duration = $t->duration();
+
+
+        }
+
+        return response()->json($tickets_collection);
+
+    }
+
     /**
      * Display a listing of the resource.
      *

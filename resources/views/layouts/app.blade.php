@@ -31,7 +31,7 @@
 
 
 
-    @if($viewname !== 'OAuth' && Request::url() !== 'http://192.35.252.40' && Request::url() !== 'http://192.35.252.40/login')
+    @if($viewname !== 'OAuth' && Request::url() !== 'http://192.35.252.40' && Request::url() !== 'http://192.35.252.40/login' && Request::url() !== 'https://idsuite.dev' && Request::url() !== 'https://idsuite.dev/login')
 
     <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top custom-nav">
             <button class="navbar-toggler navbar-toggler-right custom-border-color-green" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -138,7 +138,7 @@
 
 
         @else
-                    <main class="col-sm-1 col-md-12  col-lg-12  pt-3">
+                    <main class="col-sm-12 col-md-12  col-lg-12  pt-3">
                         @yield('content')
                     </main>
         @endif
@@ -147,6 +147,15 @@
 
 
     </div>
+
+    @if(Request::url() === 'http://192.35.252.40' || Request::url() === 'http://192.35.252.40/login' || Request::url() === 'https://idsuite.dev' || Request::url() === 'https://idsuite.dev/login')
+    <div class="text-white text-center" style="margin-top: 345px;">
+        <h6>&#169 2017 - Interactive Digital Solutions</h6>
+    </div>
+    @else
+
+    @endif
+
     <!-- Scripts -->
 
     @include('scripts.app')
