@@ -49,17 +49,17 @@
                                                         '<p class="card-text text-capitalize font-weight-bold">' + value.subject + '</p>' +
                                                     '</div>' +
                                                 '</div>' +
-                                                '<div class="row">' +
-                                                    '<div class="col-lg-6">' +
+                                                '<div class="row mt-2">' +
+                                                    '<div class="col-lg-12">' +
                                                         '<p class="card-text">' + value.duration + ' Day(s)</p>' +
                                                     '</div>' +
                                                 '</div>' +
-                                                '<div class="row mt-3">' +
+                                                '<div class="row mt-2">' +
                                                     '<div class="col-lg-12">' +
-                                                        '<p class="card-text text-left">' + value.status_type + '</p>' +
+                                                        '<p class="card-text">' + value.status_type + '</p>' +
                                                     '</div>' +
                                                 '</div>' +
-                                                '<div class="row mt-3">' +
+                                                '<div class="row mt-2">' +
                                                     '<div class="col-lg-12">' +
                                                         '<a href="/tickets/' + value.id + '" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Case</a>' +
                                                     '</div>' +
@@ -79,17 +79,17 @@
                                     '<p class="card-text text-capitalize font-weight-bold">' + value.subject + '</p>' +
                                     '</div>' +
                                     '</div>' +
-                                    '<div class="row">' +
-                                    '<div class="col-lg-6">' +
+                                    '<div class="row mt-2">' +
+                                    '<div class="col-lg-12">' +
                                     '<p class="card-text">' + value.duration + ' Day(s)</p>' +
                                     '</div>' +
                                     '</div>' +
-                                    '<div class="row mt-3">' +
+                                    '<div class="row mt-2">' +
                                     '<div class="col-lg-12">' +
-                                    '<p class="card-text text-left">' + value.status_type + '</p>' +
+                                    '<p class="card-text">' + value.status_type + '</p>' +
                                     '</div>' +
                                     '</div>' +
-                                    '<div class="row mt-3">' +
+                                    '<div class="row mt-2">' +
                                     '<div class="col-lg-12">' +
                                     '<a href="/tickets/' + value.id + '" class="btn btn-outline-secondary" style="color: white !important; border-color: white !important;">View Case</a>' +
                                     '</div>' +
