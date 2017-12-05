@@ -513,6 +513,13 @@ class TestController extends Controller
     public function test()
     {
 
+        /**
+         * @var Entity $entity
+         */
+        $entity = Entity::getObjectById('ENT59fb74f9f2b6c');
+
+        dd($entity->tickets);
+
         $endpoints = Endpoint::all();
 
         foreach($endpoints as $endpoint){
