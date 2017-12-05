@@ -221,6 +221,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return (new User)->where('contact_id', $contact->id)->first();
     }
 
+    /**
+     *
+     * getUserByEmail
+     *
+     * get user by email string
+     *
+     * @param $email
+     * @return User|bool|\Illuminate\Database\Eloquent\Model|null
+     */
     public static function getUserByEmail($email)
     {
 

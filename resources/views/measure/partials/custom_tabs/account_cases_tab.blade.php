@@ -3,8 +3,6 @@
     <h4 class="card-title color-{{$tab_count}}">Cases<span id="ticket-count" class="float-right">Qty: </span></h4>
 
 
-    </div>
-
 </div>
 
 @push('account_scripts')

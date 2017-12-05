@@ -343,6 +343,13 @@ class ChartController extends Controller
     }
 
 
+    public function cpuLoadDaily()
+    {
+
+
+
+    }
+
     /**
      *
      * deviceByType
@@ -434,11 +441,11 @@ class ChartController extends Controller
 
         return response()->json($entity->getRecordsByDate($start_time));
 
-        foreach($entity->getRecordsByDate($start_time) as $records){
-
-
-
-        }
+//        foreach($entity->getRecordsByDate($start_time) as $records){
+//
+//
+//
+//        }
 
     }
 
