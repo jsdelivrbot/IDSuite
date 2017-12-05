@@ -6,6 +6,7 @@ use App\Enums\EnumDataSourceType;
 use App\Enums\EnumOriginType;
 use App\Enums\EnumPriorityType;
 use App\Enums\EnumTicketStatusType;
+use App\Enums\EnumTicketType;
 use App\Model as Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
