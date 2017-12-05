@@ -75,16 +75,18 @@
                                     '<div class="card-block">' +
                                     '<h4 class="card-title text-truncate"></h4>' +
                                     '<div class="row mt-3">' +
-                                    '<div class="col-lg-6">' +
-                                    '<p class="card-text text-capitalize font-weight-bold">' + value.status_type + '</p>' +
+                                    '<div class="col-lg-12">' +
+                                    '<p class="card-text text-capitalize font-weight-bold">' + value.subject + '</p>' +
                                     '</div>' +
+                                    '</div>' +
+                                    '<div class="row">' +
                                     '<div class="col-lg-6">' +
                                     '<p class="card-text">' + value.duration + ' Day(s)</p>' +
                                     '</div>' +
                                     '</div>' +
                                     '<div class="row mt-3">' +
                                     '<div class="col-lg-12">' +
-                                    '<p class="card-text text-left">' + value.subject + '</p>' +
+                                    '<p class="card-text text-left">' + value.status_type + '</p>' +
                                     '</div>' +
                                     '</div>' +
                                     '<div class="row mt-3">' +
