@@ -12,12 +12,13 @@ namespace App\Http\Controllers;
 use App\DynamicEnum;
 use App\DynamicEnumValue;
 use App\Endpoint;
+use App\Entity;
 use App\Enums\EnumDataSourceType;
 use Illuminate\Support\Facades\Input;
 
 class ZabbixController extends Controller
 {
-    private $user, $password, $jsonrpc, $url, $group_id;
+    private $user, $password, $jsonrpc, $url, $group_id, $hms_group_id;
 
 
     /**
@@ -31,6 +32,7 @@ class ZabbixController extends Controller
         $this->jsonrpc = env('ZABBIX_JSONRPC');
         $this->url = env('ZABBIX_URL');
         $this->group_id = env('ZABBIX_GROUP_ID');
+        $this->hms_group_id = env('ZABBIX_HMS_GROUP_ID');
 
     }
 
@@ -158,12 +160,12 @@ class ZabbixController extends Controller
     }
 
 
-    public function getHistory($id, $history = 0, $sortfield = "clock", $limit = 10, $sortorder = "DESC", $output = "extend"){
+    public function getHistory($item_id, $limit = 1000, $history = 0, $sortfield = "clock", $sortorder = "DESC", $output = "extend"){
 
         $params = array(
             "output"    => $output,
             "history"   => $history,
-            "itemids"   => $id,
+            "itemids"   => $item_id,
             "sortfield" => $sortfield,
             "sortorder" => $sortorder,
             "limit"     => $limit
@@ -236,16 +238,8 @@ class ZabbixController extends Controller
 
         $search->_key = "icmp";
 
-        $output = array(
-            "itemid",
-            "name",
-            "key_",
-            "lastvalue",
-            "value_type"
-        );
-
         $params = array(
-            "output"    =>  $output,
+            "output"    =>  'extend',
             "hostids"   =>  $hostid,
             "search"    =>  $search,
             "sortfield" =>  "name"
@@ -270,7 +264,7 @@ class ZabbixController extends Controller
 
     public function mapEndpoints(){
 
-        $zendpoints = $this->getHosts();
+        $zendpoints = $this->getHosts(33);
         $count = 0;
         $foundcount = 0;
         $missedcount = 0;
@@ -328,10 +322,52 @@ class ZabbixController extends Controller
     }
 
 
+    /**
+     *
+     * mapEntityToHostId
+     *
+     * maps entity to host id from zabbix
+     *
+     * @param Entity $entity
+     * @return Entity
+     */
+    public function mapEntityToHostId(Entity $entity)
+    {
+        $hosts = $this->getHosts($this->hms_group_id);
 
 
+        foreach($hosts as $host){
+
+            $host_exploded = explode('-', $host->host);
+
+            if($host_exploded[1] === $entity->references()['netsuite']){
+
+                $entity->attachZabbixHostId($host->hostid);
+
+                return $entity;
+
+            } else {
+                continue;
+            }
+        }
+
+    }
 
 
+    /**
+     *
+     * getHmsCustomerSummarizedCalculations
+     *
+     *  return items given zabbix host_id
+     *
+     * @param $host_id
+     * @return array $items
+     */
+    public function getHmsCustomerSummarizedCalculations($host_id)
+    {
+       $items = $this->getItemsByHost($host_id);
 
+       return $items;
+    }
 
 }

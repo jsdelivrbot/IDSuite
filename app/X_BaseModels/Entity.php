@@ -313,5 +313,37 @@ class Entity extends Model
     }
 
 
+    /**
+     * attachZabbixHostId
+     *
+     * attaches zabbix host Id to the entity by creating dynamic enum value.
+     *
+     * @param $host_id
+     * @return $this
+     */
+    public function attachZabbixHostId($host_id)
+    {
+
+        // TODO need to add update if it already exists //
+
+        $dev = new DynamicEnumValue();
+
+        $dev->value = $host_id;
+
+        $de = DynamicEnum::getByName('reference_key');
+
+        $dev->value_type = EnumDataSourceType::getKeyByValue('zabbix');
+
+        $dev->definition($de)->save($de);
+
+        $dev->save();
+
+        $this->references($dev);
+
+        $this->save();
+
+        return $this;
+    }
+
 
 }

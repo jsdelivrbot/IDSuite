@@ -512,6 +512,57 @@ class TestController extends Controller
     public function test()
     {
 
+        $user = User::getObjectById('USR59fb6ca7239f3');
+
+        foreach($user->accounts as $account){
+
+            if($account->id === 'ENT59fb7569a279a'){
+
+                dd($account);
+
+            }
+
+        }
+
+
+
+
+        /**
+         * @var ZabbixController $z
+         */
+        $z = new ZabbixController();
+
+
+        /**
+         * @var Entity $entity
+         */
+        $entity = Entity::getByName('University of Iowa Medical Center');
+
+        $items = $z->getHmsCustomerSummarizedCalculations($entity->references()['zabbix']);
+
+        dd($items);
+
+//        $entity->attachZabbixHostId(){
+//
+//        }
+
+        dd($hosts);
+
+
+        foreach($hosts as $host){
+            if($host->hostid === "10607"){
+                foreach($z->getItemsByHost($host->hostid) as $item){
+
+                    $item_history = $z->getHistory($item->itemid);
+
+                    dd($item_history);
+
+                }
+
+            }
+        }
+
+
         dd(Record::getRecordCount());
 
 
