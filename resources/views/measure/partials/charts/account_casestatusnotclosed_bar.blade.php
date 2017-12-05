@@ -22,6 +22,7 @@
         if (data !== false && data.length > 0) {
 
             AmCharts.makeChart("accountcases", {
+                color: "#ffffff",
                 "type": "serial",
                 "theme": "light",
                 "dataProvider": data,
@@ -37,7 +38,7 @@
                     "lineAlpha": 0.3,
                     "title": "in progress",
                     "type": "column",
-                    "color": "#000000",
+                    "color": "#ffffff",
                     "valueField": "in progress"
                 }, {
                     "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
@@ -46,7 +47,7 @@
                     "lineAlpha": 0.3,
                     "title": "re-opened",
                     "type": "column",
-                    "color": "#000000",
+                    "color": "#ffffff",
                     "valueField": "re-opened"
                 }, {
                     "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
@@ -55,7 +56,7 @@
                     "lineAlpha": 0.3,
                     "title": "pending on-site",
                     "type": "column",
-                    "color": "#000000",
+                    "color": "#ffffff",
                     "valueField": "pending on-site"
                 }, {
                     "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
@@ -64,7 +65,7 @@
                     "lineAlpha": 0.3,
                     "title": "Hold- Awaiting Customer Response",
                     "type": "column",
-                    "color": "#000000",
+                    "color": "#ffffff",
                     "valueField": "Hold- Awaiting Customer Response"
                 }, {
                     "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
@@ -73,7 +74,7 @@
                     "lineAlpha": 0.3,
                     "title": "rma - requires netsuite entry update",
                     "type": "column",
-                    "color": "#000000",
+                    "color": "#ffffff",
                     "valueField": "rma - requires netsuite entry update"
                 }, {
                     "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
@@ -82,7 +83,7 @@
                     "lineAlpha": 0.3,
                     "title": "closed",
                     "type": "column",
-                    "color": "#000000",
+                    "color": "#ffffff",
                     "valueField": "closed"
                 }, {
                     "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
@@ -91,7 +92,7 @@
                     "lineAlpha": 0.3,
                     "title": "non support email",
                     "type": "column",
-                    "color": "#000000",
+                    "color": "#ffffff",
                     "valueField": "non support email"
                 }, {
                     "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
@@ -100,7 +101,7 @@
                     "lineAlpha": 0.3,
                     "title": "closed on first call",
                     "type": "column",
-                    "color": "#000000",
+                    "color": "#ffffff",
                     "valueField": "closed on first call"
                 }, {
                     "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
@@ -109,7 +110,7 @@
                     "lineAlpha": 0.3,
                     "title": "closed - sent back to sales rep",
                     "type": "column",
-                    "color": "#000000",
+                    "color": "#ffffff",
                     "valueField": "closed - sent back to sales rep"
                 }, {
                     "balloonText": "<b>[[title]]</b><br><span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>",
@@ -118,7 +119,7 @@
                     "lineAlpha": 0.3,
                     "title": "closed due to non response",
                     "type": "column",
-                    "color": "#000000",
+                    "color": "#ffffff",
                     "valueField": "closed due to non response"
                 }],
                 "categoryField": "type",

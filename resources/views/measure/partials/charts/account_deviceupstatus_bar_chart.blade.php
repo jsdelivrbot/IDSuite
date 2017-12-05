@@ -21,6 +21,7 @@
 
         if (data !== false && data.length > 0) {
             AmCharts.makeChart("deviceupstatus", {
+                color: "#ffffff",
                 theme: "light",
                 type: "serial",
                 startDuration: 2,

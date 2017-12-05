@@ -36,6 +36,7 @@
             if (data !== false && data.length > 0 && is_valid) {
 
                 AmCharts.makeChart("protocolbreakout", {
+                    color: "#ffffff",
                     "type": "pie",
                     "theme": "light",
                     "dataProvider": processChartData(data, selected),

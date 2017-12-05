@@ -22,6 +22,7 @@
         if (data !== false && data.length > 0) {
 
             AmCharts.makeChart("casesopened", {
+                color: "#ffffff",
                 type: "serial",
                 startDuration: 2,
                 theme: "light",

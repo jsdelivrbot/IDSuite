@@ -13,6 +13,7 @@ use App\EntityName;
 use App\Enums\EnumDataSourceType;
 use App\Enums\EnumDeviceType;
 use App\Enums\EnumMonths;
+use App\Enums\EnumStatusType;
 use App\Http\Controllers\APIController;
 use App\Http\Controllers\Vidyo\VidyoController;
 use App\Ip2Location;
@@ -512,17 +513,31 @@ class TestController extends Controller
     public function test()
     {
 
-        $user = User::getObjectById('USR59fb6ca7239f3');
+        $endpoints = Endpoint::all();
 
-        foreach($user->accounts as $account){
+        foreach($endpoints as $endpoint){
 
-            if($account->id === 'ENT59fb7569a279a'){
+            $endpoint->status = 0;
 
-                dd($account);
-
-            }
+            $endpoint->save();
 
         }
+
+        dd('jobs done');
+
+
+
+//        $user = User::getObjectById('USR59fb6ca7239f3');
+//
+//        foreach($user->accounts as $account){
+//
+//            if($account->id === 'ENT59fb7569a279a'){
+//
+//                dd($account);
+//
+//            }
+//
+//        }
 
 
 

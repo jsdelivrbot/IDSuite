@@ -21,6 +21,7 @@
 
         if (data !== false && data.length > 0) {
             AmCharts.makeChart("avergaecallduration", {
+                color: "#ffffff",
                 type: "serial",
                 startDuration: 2,
                 theme: "light",

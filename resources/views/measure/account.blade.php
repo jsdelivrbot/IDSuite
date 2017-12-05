@@ -257,7 +257,7 @@
                 "theme": "light",
                 "pathToImages": "/assets/js/amcharts/images/",
                 "marginTop": 0,
-                "color": "#000",
+                "color": "#ffffff",
                 "font": 18,
                 "marginRight": 80,
                 "dataProvider": data,

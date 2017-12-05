@@ -107,6 +107,46 @@
             </div>
         </div>
 
+        <div class="card card-custom">
+            <div class="row m-1">
+                <div class="col-lg-12 mt-2 text-white">
+                    <h5>Monthly Device Utilization</h5>
+                </div>
+            </div>
+            <div class="row" style="height: 200px;">
+                <div class="col-lg-12 text-center my-auto">
+                    <img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>
+                    <div class="text-center" id="monthly-device-utilization" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-custom">
+            <div class="row no-gutters mt-5">
+                <div class="col-lg-4 text-center">
+                    <i class="fa fa-3x fa-video-camera" style="color: rgb(255, 102, 0);"></i>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>
+                </div>
+            </div>
+            <div class="row no-gutters mt-5">
+                <div class="col-lg-4 text-center">
+                    <i class="fa fa-3x fa-table" style="color: rgb(255, 102, 0);"></i>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
 

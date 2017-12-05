@@ -27,7 +27,7 @@
                     type: "pie",
                     theme: "light",
                     fontSize: 18,
-                    color: '#000',
+                    color: '#ffffff',
                     dataProvider: data,
                     labelsEnabled: false,
                     valueField: "value",

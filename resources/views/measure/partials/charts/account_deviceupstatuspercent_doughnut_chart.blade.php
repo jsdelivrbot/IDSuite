@@ -40,6 +40,7 @@
             if(data !== false && data.length > 0 && is_valid) {
 
                 AmCharts.makeChart("deviceupstatuspercentall", {
+                    color: "#ffffff",
                     type: "pie",
                     theme: "light",
                     dataProvider: data,
