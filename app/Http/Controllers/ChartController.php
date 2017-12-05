@@ -179,7 +179,7 @@ class ChartController extends Controller
             foreach ($entity->tickets as $ticket) {
 
                 if ($data->less === false) {
-                    
+
                     switch ($ticket->status_type) {
                         case 0:
                             $data->unknown = $data->unknown + $data->unknown;
