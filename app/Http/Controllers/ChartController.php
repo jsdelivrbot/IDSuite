@@ -158,6 +158,8 @@ class ChartController extends Controller
 
             foreach (EnumTicketStatusType::getValues() as $value) {
 
+                $value = strtolower($value);
+
                 if ($data->less === false) {
                     $data->$value = 0;
                 } else {
@@ -177,8 +179,7 @@ class ChartController extends Controller
             foreach ($entity->tickets as $ticket) {
 
                 if ($data->less === false) {
-
-
+                    
                     switch ($ticket->status_type) {
                         case 0:
                             $data->unknown = $data->unknown + $data->unknown;
@@ -244,10 +245,6 @@ class ChartController extends Controller
                             break;
                         case 4:
                             $p = "Hold- Awaiting Customer Response";
-                            $data->$p = $data->$p + 1;
-                            break;
-                        case 5:
-                            $p = "rma - requires netsuite entry update";
                             $data->$p = $data->$p + 1;
                             break;
                     }
