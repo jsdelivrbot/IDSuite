@@ -124,7 +124,6 @@ class Ticket extends Model
 
     public function ConvertNs($ns_ticket) {
 
-dd($ns_ticket);
 
         if(!isset($ns_ticket->company->internalId) || !isset($ns_ticket->assigned->internalId) || !isset($ns_ticket->internalId))
             return false;
