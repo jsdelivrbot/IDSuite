@@ -24,8 +24,6 @@
 
                     $('#ticket-count').text(data.data.length);
 
-                    console.log(data.data);
-
                     let rowkey;
 
                     let tickets = data.data;

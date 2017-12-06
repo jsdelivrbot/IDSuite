@@ -81,8 +81,6 @@
                         )
 
                     });
-
-                    console.log(managers);
                 });
         }
 

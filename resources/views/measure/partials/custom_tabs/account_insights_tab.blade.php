@@ -82,7 +82,7 @@
                 </div>
             </div>
             <div class="row" style="height: 200px;">
-                <div class="col-lg-12 text-center my-auto">
+                <div class="col-lg-12 text-center my-auto text-white">
                     <img id="hms-count-endpoints-loader" src="/img/bars.svg" height="70px"/>
                     <div class="text-center" id="hms-count-endpoints" style="display: none;"></div>
                 </div>
@@ -100,7 +100,7 @@
                 </div>
             </div>
             <div class="row" style="height: 200px;">
-                <div class="col-lg-12 text-center my-auto">
+                <div class="col-lg-12 text-center my-auto text-white">
                     {{--<img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>--}}
                     {{--<div class="text-center" id="monthly-device-utilization" style="display: none;"></div>--}}
                     {{--<img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>--}}
@@ -118,7 +118,7 @@
                 </div>
             </div>
             <div class="row" style="height: 200px;">
-                <div class="col-lg-12 text-center my-auto">
+                <div class="col-lg-12 text-center my-auto text-white">
                     <img id="cpu-usage-hourly-loader" src="/img/bars.svg" height="70px"/>
                     <div class="chart-custom text-white" id="cpu-usage-hourly" style="display: none;"></div>
                 </div>
@@ -132,7 +132,7 @@
                 </div>
             </div>
             <div class="row" style="height: 200px;">
-                <div class="col-lg-12 text-center my-auto">
+                <div class="col-lg-12 text-center my-auto text-white">
                     <img id="cpu-usage-daily-loader" src="/img/bars.svg" height="70px"/>
                     <div class="chart-custom text-white" id="cpu-usage-daily" style="display: none;"></div>
                 </div>
@@ -149,7 +149,7 @@
                 </div>
             </div>
             <div class="row" style="height: 200px;">
-                <div class="col-lg-12 text-center my-auto">
+                <div class="col-lg-12 text-center my-auto text-white">
                     <img id="hd-cap-hourly-loader" src="/img/bars.svg" height="70px"/>
                     <div class="chart-custom text-white" id="hd-cap-hourly" style="display: none;"></div>
                 </div>
@@ -164,7 +164,7 @@
                 </div>
             </div>
             <div class="row" style="height: 200px;">
-                <div class="col-lg-12 text-center my-auto">
+                <div class="col-lg-12 text-center my-auto text-white">
                     <img id="hd-cap-daily-loader" src="/img/bars.svg" height="70px"/>
                     <div class="chart-custom text-white" id="hd-cap-daily" style="display: none;"></div>
                 </div>
@@ -179,7 +179,7 @@
                 </div>
             </div>
             <div class="row" style="height: 200px;">
-                <div class="col-lg-12 text-center my-auto">
+                <div class="col-lg-12 text-center my-auto text-white">
                     <img id="ram-util-hourly-loader" src="/img/bars.svg" height="70px"/>
                     <div class="chart-custom text-white" id="ram-util-hourly" style="display: none;"></div>
                 </div>
@@ -196,7 +196,7 @@
                 </div>
             </div>
             <div class="row" style="height: 200px;">
-                <div class="col-lg-12 text-center my-auto">
+                <div class="col-lg-12 text-center my-auto text-white">
                     <img id="ram-util-daily-loader" src="/img/bars.svg" height="70px"/>
                     <div class="chart-custom text-white" id="ram-util-daily" style="display: none;"></div>
                 </div>
@@ -210,7 +210,7 @@
                 </div>
             </div>
             <div class="row" style="height: 200px;">
-                <div class="col-lg-12 text-center">
+                <div class="col-lg-12 text-center my-auto text-white">
                     <img id="cpu-temp-hourly-loader" src="/img/bars.svg" height="70px"/>
                     <div class="chart-custom text-white" id="cpu-temp-hourly" style="display: none;"></div>
                 </div>
@@ -224,7 +224,7 @@
                 </div>
             </div>
             <div class="row" style="height: 200px;">
-                <div class="col-lg-12 text-center">
+                <div class="col-lg-12 text-center my-auto text-white">
                     <img id="cpu-temp-daily-loader" src="/img/bars.svg" height="70px"/>
                     <div class="chart-custom text-white" id="cpu-temp-daily" style="display: none;"></div>
                 </div>

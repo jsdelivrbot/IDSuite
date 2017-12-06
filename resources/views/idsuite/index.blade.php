@@ -255,7 +255,6 @@
                 "url":      "/test-data",
                 "type":     "GET",
                 "dataSrc":  function(response){
-                    console.log(response);
                     return response;
                 }
             }

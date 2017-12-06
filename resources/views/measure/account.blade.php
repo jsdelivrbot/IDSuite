@@ -252,9 +252,6 @@
             $('#chart1').css('display', 'block');
             $('#chart1-loader').css('display', 'none');
 
-            console.log(data);
-
-            console.log('SetChartheader');
 
             let chart = AmCharts.makeChart("chart1", {
                 "type": "serial",
@@ -511,18 +508,12 @@
 
             let charts_remaining = chartids.length;
 
-            console.log(AmCharts.charts);
-
             for (let i = 0; i < chartids.length; i++) {
 
                 for (let x = 0; x < AmCharts.charts.length; x++) {
 
                     if (AmCharts.charts[x].div.id === chartids[i]) {
                         charts[chartids[i]] = AmCharts.charts[x];
-                        console.log(charts);
-                        console.log('^^^^^^^charts^^^^^^^^');
-                        console.log(AmCharts.charts);
-                        console.log('^^^^^^^^AmCharts.charts^^^^^^^^');
                     }
 
                 }
@@ -541,18 +532,9 @@
 
                             this.setup.chart.exportedImage = data;
 
-
-
                             charters.push(data);
 
-
-
-                            console.log(charters);
-
                             charts_remaining--;
-
-                            console.log(charts_remaining);
-
 
                             if (charts_remaining === 1) {
 
@@ -582,10 +564,7 @@
          */
         function generatePdf(chartobject, layout) {
 
-            console.log(layout);
-
             chartobject.toPDF(layout, function (data) {
-                console.log('chartObject');
 
                 chartobject.download(data, this.defaults.formats.PDF.mimeType, "amcharts.pdf");
 
@@ -602,8 +581,6 @@
 
             return axios.get('/api/chart/monthlydeviceutilization/' + options)
                 .then(function(data){
-                    console.log(data.data);
-
 
                 })
 
@@ -716,15 +693,13 @@
                 .then(function (data) {
                     let response = data.data;
 
-                    if(!validate(response)){
+                    if(!response){
+                        el.parent().text('Data unavailable or not relevant for this account');
+
                         return false;
                     }
 
                     let zabbix_data = data.data;
-
-                    console.log(zabbix_data);
-                    console.log(el.attr("id"));
-                    console.log(item_name);
 
                     createZabbixCard(zabbix_data, el, item_name);
 
@@ -816,18 +791,13 @@
             el.css('display', 'block');
 
         }
-
-
-
+        
         let header = "/img/global_presence_heading.png";
         let topbar = "/img/global_presence_top_bar.png";
         let bottombar = "/img/global_presence_bottom_bar.png";
         let footer = "/img/customer_care_heading.png";
 
         $(document).ready(function () {
-
-            console.log(axiosrequests);
-
             axiosrequests.push = getEntity('{{$entity->id}}');
             axiosrequests.push = callVolumeOverTime('{{$entity->id}}');
             axiosrequests.push = monthlyDeviceUtilization('{{$entity->id}}');

@@ -407,6 +407,10 @@ class Entity extends Model
     {
         $zabbix = new ZabbixController();
 
+        if(!array_key_exists( 'zabbix', $this->references())){
+            return false;
+        }
+
         $zabbix_data = get_object_vars($this->references()['zabbix']);
 
 //        $history_object = new \stdClass();

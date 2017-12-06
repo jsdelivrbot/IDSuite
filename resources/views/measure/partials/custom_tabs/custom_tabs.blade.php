@@ -112,9 +112,6 @@ $(function() {
 
     function customTabs(tabcount) {
 
-        console.log("customTabs fired!!");
-        console.log('tabcount : ' + tabcount);
-
         for (let itemcount = 1; itemcount <= tabcount; itemcount++) {
 
             $('#tab-a-' + itemcount).click(function () {
@@ -140,8 +137,6 @@ $(function() {
 
                     if (count !== itemcount) {
 
-                        console.log("$('#card-block-tab-" + count + "').hasClass('active') : " +  $('#active-outline-card-block-' + count).hasClass('active'));
-
                         if ($('#card-block-tab-' + count).hasClass('active')) {
                             $('#card-block-tab-' + count).removeClass('active');
                         }
@@ -162,13 +157,6 @@ $(function() {
                 bar_two.set(0);
 
                 let color = $('#tab-a-' + itemcount).css("color");
-
-                console.log("$('tab-a-"+ itemcount +"').css('color')");
-
-
-                console.log(color);
-
-                console.log('itemcount : ' + itemcount );
 
                 bar_one.animate(1.0, {to: {color: color}});  // Number from 0.0 to 1.0
                 bar_two.animate(-1.0, {to: {color: color}});  // Number from 0.0 to 1.0

@@ -178,8 +178,6 @@
             return axios.get('/api/endpoints/' + options)
                 .then(function (response) {
 
-                    console.log(response);
-
                     let endpoints = response.data;
 
                     if(!validate(endpoints)){

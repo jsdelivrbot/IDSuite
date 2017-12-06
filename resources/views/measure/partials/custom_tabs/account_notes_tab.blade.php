@@ -63,8 +63,6 @@
                 .then(function (data) {
                     // add note dynamically to note list //
 
-                    console.log(data.data);
-
 
 
                     if(!validate(data.data)){
@@ -113,7 +111,6 @@
                         return false;
                     }
 
-                    console.log(data.data);
 
                     if (data.data.length > 0) {
                         $.each(data.data, function (key, value) {

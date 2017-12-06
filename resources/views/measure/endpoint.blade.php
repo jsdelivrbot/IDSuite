@@ -269,8 +269,6 @@
          **/
         function setHeaderCard(endpoint) {
 
-            console.log(endpoint);
-
             $('#header-title').text(endpoint.name);
 
             $('#header-title-description').text('This is endpoint ' + endpoint.name);
@@ -322,9 +320,6 @@
 
 
         $(document).ready(function () {
-
-
-            console.log('test');
 
             axiosrequests.push = getEndpoint('{{$endpoint->id}}');
 
