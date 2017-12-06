@@ -85,7 +85,21 @@ class DynamicEnum extends Model
      */
     public function getValues()
     {
-        return json_decode($this->values);
+        return json_decode($this->values, true);
+    }
+
+
+    /**
+     *
+     * getKeys
+     *
+     * get keys.
+     *
+     * @return array
+     */
+    public function getKeys()
+    {
+        return array_keys($this->getValues());
     }
 
     /**
@@ -116,13 +130,33 @@ class DynamicEnum extends Model
     {
         $key = array_search($value, $this->getValues());
 
-        if($key === false){
-            throw new \Exception('The value "' . $value . '" is not a value in this Dynamic Enum "' . $this->id . '". The values are ' . print_r($this->getValues(), true) , 500);
+        if ($key === false) {
+            throw new \Exception('The value "' . $value . '" is not a value in this Dynamic Enum "' . $this->id . '". The values are ' . print_r($this->getValues(), true), 500);
         } else {
             return $key;
         }
+    }
 
 
+    /**
+     *
+     * getValueByKey
+     *
+     * get value by key
+     *
+     * @param $key
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getValueByKey($key)
+    {
+        $exist = array_key_exists($key, $this->getValues());
+
+        if(!$exist){
+            throw new \Exception('The key "' . $key . '" is not a key in this Dynamic Enum "' . $this->id . '". The keys are ' . print_r($this->getKeys(), true), 500);
+        } else {
+            return $this->getValues()[$key];
+        }
     }
 
 }

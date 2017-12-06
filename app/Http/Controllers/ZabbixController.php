@@ -128,6 +128,15 @@ class ZabbixController extends Controller
     public $de = 'reference_key';
 
 
+    /**
+     *
+     * http_post
+     *
+     * post request to zabbix given payload
+     *
+     * @param $payload
+     * @return mixed
+     */
     private function http_post($payload){
         $client = new \GuzzleHttp\Client(['verify' => false]);
 
@@ -140,6 +149,11 @@ class ZabbixController extends Controller
 
     /**
      *
+     * login user
+     *
+     * get token by logging into zabbix
+     *
+     * @return mixed
      */
     private function loginUser(){
 
@@ -160,6 +174,20 @@ class ZabbixController extends Controller
     }
 
 
+    /**
+     *
+     * getHistory
+     *
+     * get history given an item_id
+     *
+     * @param $item_id
+     * @param int $limit
+     * @param int $history
+     * @param string $sortfield
+     * @param string $sortorder
+     * @param string $output
+     * @return mixed
+     */
     public function getHistory($item_id, $limit = 1000, $history = 0, $sortfield = "clock", $sortorder = "DESC", $output = "extend"){
 
         $params = array(
@@ -183,6 +211,21 @@ class ZabbixController extends Controller
     }
 
 
+    /**
+     *
+     * getHosts
+     *
+     * gets hosts given a group_id
+     *
+     *
+     * @param null $group_id
+     * @param array|null $host_id_array
+     * @param null $sortfield
+     * @param int $limit
+     * @param string $sortorder
+     * @param string $output
+     * @return mixed
+     */
     public function getHosts($group_id = null, array $host_id_array = null, $sortfield = null, $limit = 10, $sortorder = "DESC", $output = "extend"){
 
         $output = array("hostid","host","group");
@@ -212,7 +255,19 @@ class ZabbixController extends Controller
     }
 
 
-
+    /**
+     *
+     * getHost
+     *
+     * gets host given a host_id
+     *
+     * @param $host_id
+     * @param null $sortfield
+     * @param int $limit
+     * @param string $sortorder
+     * @param string $output
+     * @return mixed
+     */
     public function getHost($host_id, $sortfield = null, $limit = 10, $sortorder = "DESC", $output = "extend"){
 
         $params = array(
@@ -232,6 +287,16 @@ class ZabbixController extends Controller
     }
 
 
+    /**
+     *
+     * getItemByHost
+     *
+     * gets items by a given host id
+     *
+     *
+     * @param $hostid
+     * @return mixed
+     */
     public function getItemsByHost($hostid){
 
         $search = new \stdClass();
@@ -329,12 +394,11 @@ class ZabbixController extends Controller
      * maps entity to host id from zabbix
      *
      * @param Entity $entity
-     * @return Entity
+     * @return Entity|bool
      */
-    public function mapEntityToHostId(Entity $entity)
+    public function mapEntityToZabbix(Entity $entity, $options)
     {
         $hosts = $this->getHosts($this->hms_group_id);
-
 
         foreach($hosts as $host){
 
@@ -342,7 +406,7 @@ class ZabbixController extends Controller
 
             if($host_exploded[1] === $entity->references()['netsuite']){
 
-                $entity->attachZabbixHostId($host->hostid);
+                $entity->attachZabbixReferences($options);
 
                 return $entity;
 
@@ -351,7 +415,74 @@ class ZabbixController extends Controller
             }
         }
 
+        return false;
+
     }
+
+
+    /**
+     *
+     * mapEntityToHostId
+     *
+     * maps entity to host id from zabbix
+     *
+     * @return array
+     */
+    public function mapAllEntitiesToZabbix()
+    {
+        $hosts = $this->getHosts($this->hms_group_id);
+
+        $entity_array = array();
+
+        foreach($hosts as $host){
+
+            $host_exploded = explode('-', $host->host);
+
+            $entity = Entity::getObjectByRefId('reference_key', 'netsuite', $host_exploded[1]);
+
+            if($entity !== false) {
+
+                $items = json_encode(get_object_vars($this->getHmsCustomerSummarizedCalculations($host->hostid)));
+
+                var_dump(json_decode($items, true));
+
+                die();
+                dd(json_encode($items));
+
+                dd(json_encode(get_object_vars($items)));
+
+                /**
+                 * @var Entity $entity
+                 */
+                $entity->attachZabbixReferences($items);
+
+                $entity_array[] = $entity;
+
+            } else {
+
+                continue;
+
+            }
+        }
+
+        return $entity_array;
+
+    }
+
+
+    /**
+     *
+     * getZabbixHmsGroup
+     *
+     * gets hms group hosts
+     *
+     * @return mixed
+     */
+    public function getZabbixHmsGroup()
+    {
+        return $this->getHosts($this->hms_group_id);
+    }
+
 
 
     /**
@@ -361,13 +492,25 @@ class ZabbixController extends Controller
      *  return items given zabbix host_id
      *
      * @param $host_id
-     * @return array $items
+     * @return \stdClass
      */
     public function getHmsCustomerSummarizedCalculations($host_id)
     {
        $items = $this->getItemsByHost($host_id);
 
-       return $items;
+       $items_object = new \stdClass();
+
+       $items_object->hostid = $host_id;
+
+
+       foreach($items as $item){
+           $property = $item->description;
+           if($property !== "") {
+               $items_object->$property = $item->itemid;
+            }
+       }
+
+       return $items_object;
     }
 
 }

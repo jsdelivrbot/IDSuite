@@ -101,8 +101,12 @@
             </div>
             <div class="row" style="height: 200px;">
                 <div class="col-lg-12 text-center my-auto">
-                    <img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>
-                    <div class="text-center" id="monthly-device-utilization" style="display: none;"></div>
+                    {{--<img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>--}}
+                    {{--<div class="text-center" id="monthly-device-utilization" style="display: none;"></div>--}}
+                    {{--<img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>--}}
+                    <div class="text-center text-white" id="monthly-device-utilization">
+                        Data unavailable or not relevant for this account
+                    </div>
                 </div>
             </div>
         </div>
@@ -110,44 +114,150 @@
         <div class="card card-custom">
             <div class="row m-1">
                 <div class="col-lg-12 mt-2 text-white">
-                    <h5>Monthly Device Utilization</h5>
+                    <h5>Cpu Usage Hourly Average</h5>
                 </div>
             </div>
             <div class="row" style="height: 200px;">
                 <div class="col-lg-12 text-center my-auto">
-                    <img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>
-                    <div class="text-center" id="monthly-device-utilization" style="display: none;"></div>
+                    <img id="cpu-usage-hourly-loader" src="/img/bars.svg" height="70px"/>
+                    <div class="chart-custom text-white" id="cpu-usage-hourly" style="display: none;"></div>
                 </div>
             </div>
         </div>
 
         <div class="card card-custom">
-            <div class="row no-gutters mt-5">
-                <div class="col-lg-4 text-center">
-                    <i class="fa fa-3x fa-video-camera" style="color: rgb(255, 102, 0);"></i>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>
+            <div class="row m-1">
+                <div class="col-lg-12 mt-2 text-white">
+                    <h5>Cpu Usage Daily Average</h5>
                 </div>
             </div>
-            <div class="row no-gutters mt-5">
-                <div class="col-lg-4 text-center">
-                    <i class="fa fa-3x fa-table" style="color: rgb(255, 102, 0);"></i>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>
+            <div class="row" style="height: 200px;">
+                <div class="col-lg-12 text-center my-auto">
+                    <img id="cpu-usage-daily-loader" src="/img/bars.svg" height="70px"/>
+                    <div class="chart-custom text-white" id="cpu-usage-daily" style="display: none;"></div>
                 </div>
             </div>
+        </div>
+    </div>
 
+    <div class="card-deck mt-4">
+
+        <div class="card card-custom">
+            <div class="row m-1">
+                <div class="col-lg-12 mt-2 text-white">
+                    <h5>HD Free Capacity Hourly Average</h5>
+                </div>
+            </div>
+            <div class="row" style="height: 200px;">
+                <div class="col-lg-12 text-center my-auto">
+                    <img id="hd-cap-hourly-loader" src="/img/bars.svg" height="70px"/>
+                    <div class="chart-custom text-white" id="hd-cap-hourly" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card card-custom">
+            <div class="row m-1">
+                <div class="col-lg-12 mt-2 text-white">
+                    <h5>HD Free Capacity Daily Average</h5>
+                </div>
+            </div>
+            <div class="row" style="height: 200px;">
+                <div class="col-lg-12 text-center my-auto">
+                    <img id="hd-cap-daily-loader" src="/img/bars.svg" height="70px"/>
+                    <div class="chart-custom text-white" id="hd-cap-daily" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card card-custom">
+            <div class="row m-1">
+                <div class="col-lg-12 mt-2 text-white">
+                    <h5>RAM Utilization Hourly Average</h5>
+                </div>
+            </div>
+            <div class="row" style="height: 200px;">
+                <div class="col-lg-12 text-center my-auto">
+                    <img id="ram-util-hourly-loader" src="/img/bars.svg" height="70px"/>
+                    <div class="chart-custom text-white" id="ram-util-hourly" style="display: none;"></div>
+                </div>
+            </div>
         </div>
 
     </div>
+
+    <div class="card-deck mt-4">
+        <div class="card card-custom">
+            <div class="row m-1">
+                <div class="col-lg-12 mt-2 text-white">
+                    <h5>RAM Utilization Daily Average</h5>
+                </div>
+            </div>
+            <div class="row" style="height: 200px;">
+                <div class="col-lg-12 text-center my-auto">
+                    <img id="ram-util-daily-loader" src="/img/bars.svg" height="70px"/>
+                    <div class="chart-custom text-white" id="ram-util-daily" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-custom">
+            <div class="row m-1">
+                <div class="col-lg-12 mt-2 text-white">
+                    <h5>CPU Temp Hourly Average</h5>
+                </div>
+            </div>
+            <div class="row" style="height: 200px;">
+                <div class="col-lg-12 text-center">
+                    <img id="cpu-temp-hourly-loader" src="/img/bars.svg" height="70px"/>
+                    <div class="chart-custom text-white" id="cpu-temp-hourly" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-custom">
+            <div class="row m-1">
+                <div class="col-lg-12 mt-2 text-white">
+                    <h5>CPU Temp Daily Average</h5>
+                </div>
+            </div>
+            <div class="row" style="height: 200px;">
+                <div class="col-lg-12 text-center">
+                    <img id="cpu-temp-daily-loader" src="/img/bars.svg" height="70px"/>
+                    <div class="chart-custom text-white" id="cpu-temp-daily" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+        {{--<div class="card card-custom">--}}
+            {{--<div class="row no-gutters mt-5">--}}
+                {{--<div class="col-lg-4 text-center">--}}
+                    {{--<i class="fa fa-3x fa-video-camera" style="color: rgb(255, 102, 0);"></i>--}}
+                {{--</div>--}}
+                {{--<div class="col-lg-4 text-center">--}}
+                    {{--<img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>--}}
+                {{--</div>--}}
+                {{--<div class="col-lg-4 text-center">--}}
+                    {{--<img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="row no-gutters mt-5">--}}
+                {{--<div class="col-lg-4 text-center">--}}
+                    {{--<i class="fa fa-3x fa-table" style="color: rgb(255, 102, 0);"></i>--}}
+                {{--</div>--}}
+                {{--<div class="col-lg-4 text-center">--}}
+                    {{--<img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>--}}
+                {{--</div>--}}
+                {{--<div class="col-lg-4 text-center">--}}
+                    {{--<img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
+        {{--</div>--}}
+
+
 
 
 </div>

@@ -513,26 +513,6 @@ class TestController extends Controller
     public function test()
     {
 
-        /**
-         * @var Entity $entity
-         */
-        $entity = Entity::getObjectById('ENT59fb74f9f2b6c');
-
-        dd($entity->tickets);
-
-        $endpoints = Endpoint::all();
-
-        foreach($endpoints as $endpoint){
-
-            $endpoint->status = 0;
-
-            $endpoint->save();
-
-        }
-
-        dd('jobs done');
-
-
 
 //        $user = User::getObjectById('USR59fb6ca7239f3');
 //
@@ -547,22 +527,54 @@ class TestController extends Controller
 //        }
 
 
-
-
         /**
          * @var ZabbixController $z
          */
         $z = new ZabbixController();
 
+//
+//        $entities = $z->mapAllEntitiesToZabbix();
+//
+//
+//        dd($entities);
+
+
+//        dd($z->getZabbixHmsGroup());
+
+
+        /**
+         * @var Entity $entity
+         */
+//        $entity = Entity::getByName('Idsolutions');
+//
+//        dd($entity->id);
 
         /**
          * @var Entity $entity
          */
         $entity = Entity::getByName('University of Iowa Medical Center');
 
-        $items = $z->getHmsCustomerSummarizedCalculations($entity->references()['zabbix']);
+        dd($entity->getZabbixItemsHistory());
 
-        dd($items);
+//        dd($entity->id);
+
+//        $name = 'Temp CPU Daily';
+
+//        $name = 'CPU Load Hourly';
+
+        /**
+         * @var DynamicEnum $de
+         */
+        $de = $entity->getDynamicEnumByType('zabbix');
+//
+//        dd($entity->getDynamicEnumByType('zabbix')->getValueByKey('CPU Load Hourly'));
+
+        $history = $entity->getZabbixItemHistoryByKey($de->getKeys()[2]);
+
+        dd($history);
+
+
+        dd($entity->references()['zabbix']);
 
 //        $entity->attachZabbixHostId(){
 //
@@ -793,4 +805,6 @@ class TestController extends Controller
 
         dd('jobs done');
     }
+
+
 }

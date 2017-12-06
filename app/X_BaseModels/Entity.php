@@ -2,9 +2,11 @@
 
 namespace App;
 
+use App\Http\Controllers\ZabbixController;
 use App\Model as Model;
 use App\Enums\EnumDataSourceType;
 use Carbon\Carbon;
+use Mockery\Exception;
 
 /**
  * App\Entity
@@ -140,7 +142,13 @@ class Entity extends Model
 
         foreach ($references->get() as $reference) {
 
-            $ref_array[EnumDataSourceType::getValueByKey($reference->value_type)] = $reference->value;
+            if(EnumDataSourceType::getValueByKey($reference->value_type) === 'zabbix'){
+
+                $ref_array[EnumDataSourceType::getValueByKey($reference->value_type)] = json_decode($reference->value);
+
+            } else {
+                $ref_array[EnumDataSourceType::getValueByKey($reference->value_type)] = $reference->value;
+            }
         }
 
         return $ref_array;
@@ -314,23 +322,32 @@ class Entity extends Model
 
 
     /**
-     * attachZabbixHostId
+     * attachZabbixReferences
      *
-     * attaches zabbix host Id to the entity by creating dynamic enum value.
+     * attaches zabbix references to the entity by creating dynamic enum value.
      *
-     * @param $host_id
+     * @param $options
      * @return $this
      */
-    public function attachZabbixHostId($host_id)
+    public function attachZabbixReferences($options)
     {
 
         // TODO need to add update if it already exists //
 
+
         $dev = new DynamicEnumValue();
 
-        $dev->value = $host_id;
+        $dev->value = json_encode($options);
 
         $de = DynamicEnum::getByName('reference_key');
+
+        $nested_de = new DynamicEnum();
+
+        $nested_de->setValues($options);
+
+        $nested_de->name = $this->id . "-" . "zabbix";
+
+        $nested_de->save();
 
         $dev->value_type = EnumDataSourceType::getKeyByValue('zabbix');
 
@@ -345,5 +362,97 @@ class Entity extends Model
         return $this;
     }
 
+
+    /**
+     *
+     * getZabbixItemHistory
+     *
+     * gets zabbix item history for the entity it is called on.
+     *
+     * @return array
+     */
+    public function getZabbixItemsHistory()
+    {
+        $zabbix = new ZabbixController();
+
+        $history = array();
+
+        $array = get_object_vars($this->references()['zabbix']);
+
+        $keys = array_keys($array);
+
+        $count = 0;
+
+        foreach ($array as $z_ref) {
+
+            if ($this->references()['zabbix']->hostid !== $z_ref) {
+                $history[$keys[$count]] = $zabbix->getHistory($z_ref);
+            }
+
+            $count++;
+        }
+        return $history;
+    }
+
+
+    /**
+     *
+     * getZabbixItemHistoryByKey
+     *
+     * gets zabbix item history by given Key for the entity it is called on.
+     *
+     * @return \stdClass
+     */
+    public function getZabbixItemHistoryByKey($key)
+    {
+        $zabbix = new ZabbixController();
+
+        $zabbix_data = get_object_vars($this->references()['zabbix']);
+
+//        $history_object = new \stdClass();
+
+        $history_array = array();
+
+        if(array_key_exists($key, $zabbix_data)){
+
+            foreach($zabbix->getHistory($zabbix_data[$key]) as $item){
+                $item_object = new \stdClass();
+
+                $item_object->date = $item->clock;
+
+                $item_object->value = $item->value;
+
+                $history_array[] = $item_object;
+            }
+
+//            $history_object->$key = $history_array;
+
+            return $history_array;
+
+        } else {
+
+            $entity_name = $this->contact->name->name;
+
+            throw new Exception("'$key' does not exist in the zabbix referenced data that relates to this entity: '$entity_name', '$this->id'", 500);
+        }
+    }
+
+
+
+    /**
+     *
+     * getDynamicEnumByType
+     *
+     *
+     *
+     * @param $value_type
+     * @return \Illuminate\Database\Eloquent\Model|null|static
+     */
+    public function getDynamicEnumByType($value_type)
+    {
+
+        return (new DynamicEnum)->where('name', '=', $this->id . "-" . $value_type)->first();
+
+    }
 
 }

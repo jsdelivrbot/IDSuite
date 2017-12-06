@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/chart/casesopened/{options}', 'ChartController@casesOpened');
     Route::get('/chart/totalcallduration/{options}', 'ChartController@totalCallDuration');
     Route::get('/chart/monthlydeviceutilization/{options}', 'ChartController@monthlydeviceUtilization');
+    Route::get('/chart/zabbix/{options}', 'ChartController@getZabbixData');
 
     //Records Routes//
     Route::get('/records/getRecords', 'APIController@getRecords');
@@ -95,6 +96,8 @@ Route::group(['middleware' => ['auth:api']], function () {
 
 
 
+
+
     //unused atm routes//
 
     Route::get('/measure/webrtc', 'WebRtcController@index');
@@ -106,6 +109,8 @@ Route::group(['middleware' => ['auth:api']], function () {
 
 
     Route::post('/image', 'FileController@storeFile');
+
+
 
 
 

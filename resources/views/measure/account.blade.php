@@ -252,6 +252,10 @@
             $('#chart1').css('display', 'block');
             $('#chart1-loader').css('display', 'none');
 
+            console.log(data);
+
+            console.log('SetChartheader');
+
             let chart = AmCharts.makeChart("chart1", {
                 "type": "serial",
                 "theme": "light",
@@ -690,6 +694,130 @@
         }
 
 
+        /**
+         *
+         * getZabbixData
+         *
+         * gets entity object and validates it
+         *
+         * @param entity_id
+         * @param item_name
+         * @param el
+         * @param el_loader
+         */
+        function getZabbixData(entity_id, item_name, el) {
+
+            let options = JSON.stringify({
+                id:         entity_id,
+                item_name:  item_name
+            });
+
+            return axios.get('/api/chart/zabbix/' + options)
+                .then(function (data) {
+                    let response = data.data;
+
+                    if(!validate(response)){
+                        return false;
+                    }
+
+                    let zabbix_data = data.data;
+
+                    console.log(zabbix_data);
+                    console.log(el.attr("id"));
+                    console.log(item_name);
+
+                    createZabbixCard(zabbix_data, el, item_name);
+
+                });
+        }
+
+        /**
+         *
+         * createZabbixCard
+         *
+         * creates zabbix analytic card given data and element
+         *
+         * @param data
+         * @param el
+         */
+        function createZabbixCard(data, el, item_name){
+
+            let chartData = [];
+
+            let el_id = el.attr("id");
+
+            $.each(data.reverse(), function(key, item){
+
+                date = new Date(item.date * 1000);
+
+                let month = date.getMonth() + 1;
+                let day = date.getDate();
+                let hours = date.getHours();
+
+                date = month + '-' + day + ' ' + hours + ':00';
+
+                item_value = parseFloat(item.value);
+
+                chartData.push({
+                    date:       date,
+                    value: item_value
+                });
+
+            });
+
+
+            AmCharts.makeChart(el.attr("id"), {
+                "type": "serial",
+                "theme": "light",
+                "color": "#ffffff",
+                "marginRight": 80,
+                "dataProvider": chartData,
+                "height": "100%",
+                "valueAxes": [{
+                    "position": "left"
+                }],
+                "graphs": [{
+                    "id": "g1",
+                    "fillAlphas": 0.4,
+                    "valueField": "value",
+                    "balloonText": "<div style='margin:5px; font-size:19px;'>"+item_name+":<b>[[value]]</b></div>"
+
+                }],
+                "chartScrollbar": {
+                    "graph": "g1",
+                    "scrollbarHeight": 10,
+                    "backgroundAlpha": 0,
+                    "selectedBackgroundAlpha": 0.1,
+                    "selectedBackgroundColor": "#888888",
+                    "graphFillAlpha": 0,
+                    "graphLineAlpha": 0.5,
+                    "selectedGraphFillAlpha": 0,
+                    "selectedGraphLineAlpha": 1,
+                    "autoGridCount": false,
+                    "color": "#AAAAAA"
+                },
+                "chartCursor": {
+                    "categoryBalloonDateFormat": "JJ:NN, DD MMMM",
+                    "cursorPosition": "mouse"
+                },
+                "categoryField": "date",
+                "categoryAxis": {
+                    "minPeriod": "hh",
+                    "parseDates": false,
+                    "labelRotation": 90,
+                },
+                "export": {
+                    "enabled": true,
+                    "dateFormat": "MM-DD"
+                }
+            });
+
+            $('#' + el_id + '-loader').css('display', 'none');
+            el.css('display', 'block');
+
+        }
+
+
 
         let header = "/img/global_presence_heading.png";
         let topbar = "/img/global_presence_top_bar.png";
@@ -703,8 +831,14 @@
             axiosrequests.push = getEntity('{{$entity->id}}');
             axiosrequests.push = callVolumeOverTime('{{$entity->id}}');
             axiosrequests.push = monthlyDeviceUtilization('{{$entity->id}}');
-
-
+            axiosrequests.push = getZabbixData('{{$entity->id}}', 'CPU Load Hourly', $('#cpu-usage-hourly'));
+            axiosrequests.push = getZabbixData('{{$entity->id}}', 'CPU Load Daily', $('#cpu-usage-daily'));
+            axiosrequests.push = getZabbixData('{{$entity->id}}', 'HD Capacity Free Hourly', $('#hd-cap-hourly'));
+            axiosrequests.push = getZabbixData('{{$entity->id}}', 'HD Capacity Free Daily', $('#hd-cap-daily'));
+            axiosrequests.push = getZabbixData('{{$entity->id}}', 'RAM Utilization Hourly', $('#ram-util-hourly'));
+            axiosrequests.push = getZabbixData('{{$entity->id}}', 'RAM Utilization Daily', $('#ram-util-daily'));
+            axiosrequests.push = getZabbixData('{{$entity->id}}', 'Temp CPU Hourly', $('#cpu-temp-hourly'));
+            axiosrequests.push = getZabbixData('{{$entity->id}}', 'Temp CPU Daily', $('#cpu-temp-daily'));
 
             getDataUri(header, function (dataurl) {
                 header = dataurl;

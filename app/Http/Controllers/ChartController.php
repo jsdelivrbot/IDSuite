@@ -1040,4 +1040,30 @@ endpoint.customer as customer_id, customer.cust_name as customer_name
 
         return array($up_value, $down_value, $rebooting_value, $indeterminate_value);
     }
+
+
+    /**
+     *
+     * getZabbixData
+     *
+     *
+     *
+     * @param $options
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getZabbixData($options)
+    {
+
+        $options = json_decode($options);
+
+        /**
+         * @var Entity $entity
+         */
+        $entity = $this->validateObject($options);
+
+        return response()->json($entity->getZabbixItemHistoryByKey($options->item_name));
+
+    }
+
+
 }

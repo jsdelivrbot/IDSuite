@@ -4,7 +4,7 @@
     </div>
 </div>
 <div class="row" style="height:200px;">
-    <div class="col-lg-12 my-auto text-center">
+    <div class="col-lg-12 my-auto text-center text-white">
         <img id="protocolbreakout-loader" src="/img/bars.svg" height="70px"/>
         <div id="protocolbreakout" class="chart-custom text-white" style="display: none;"></div>
     </div>
@@ -68,8 +68,7 @@
                 });
 
             } else {
-                $('#protocolbreakout').addClass('my-auto');
-                $('#protocolbreakout').text('Data unavailable or not relevant for this account');
+                $('#protocolbreakout').parent().text('Data unavailable or not relevant for this account');
             }
             return selected;
         }

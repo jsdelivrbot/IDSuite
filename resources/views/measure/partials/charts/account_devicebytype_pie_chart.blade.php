@@ -4,7 +4,7 @@
     </div>
 </div>
 <div class="row" style="height: 200px">
-    <div class="col-lg-12 my-auto text-center">
+    <div class="col-lg-12 my-auto text-center text-white">
         <img id="devicebytype-loader" src="/img/bars.svg" height="70px"/>
         <div id="devicebytype" class="chart-custom text-white" style="display: none;"></div>
     </div>
@@ -41,8 +41,7 @@
                 });
 
             } else {
-                $('#devicebytype').addClass('my-auto');
-                $('#devicebytype').text('Data unavailable or not relevant for this account');
+                $('#devicebytype').parent().text('Data unavailable or not relevant for this account');
             }
         }
 

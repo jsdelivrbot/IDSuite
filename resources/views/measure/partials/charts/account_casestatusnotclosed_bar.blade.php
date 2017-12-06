@@ -4,7 +4,7 @@
     </div>
 </div>
 <div class="row" style="height: 200px;">
-    <div class="col-lg-12 my-auto text-center">
+    <div class="col-lg-12 my-auto text-center text-white">
         <img id="accountcases-loader" src="/img/bars.svg" height="70px"/>
         <div id="accountcases" class="chart-custom text-white" style="display: none;"></div>
     </div>
@@ -136,7 +136,7 @@
             });
         } else {
 
-            $('#accountcases').text('Data unavailable or not relevant for this account');
+            $('#accountcases').parent().text('Data unavailable or not relevant for this account');
 
         }
     }

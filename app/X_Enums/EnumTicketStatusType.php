@@ -15,7 +15,7 @@ class EnumTicketStatusType extends Enum
     public static $class_code = 'ETS';
 
     public static $enum = [
-        0       =>  'Unkown',
+        0       =>  'Unknown',
         1       =>  'Not Started',
         2       =>  'In Progress',
         3       =>  'Escalated',

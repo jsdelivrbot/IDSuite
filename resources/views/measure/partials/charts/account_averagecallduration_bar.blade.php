@@ -4,7 +4,7 @@
     </div>
 </div>
 <div class="row" style="height: 200px;">
-    <div class="col-lg-12 my-auto text-center">
+    <div class="col-lg-12 my-auto text-center text-white">
         <img id="avergaecallduration-loader" src="/img/bars.svg" height="70px"/>
         <div id="avergaecallduration" class="chart-custom text-white" style="display: none;"></div>
     </div>
@@ -57,7 +57,7 @@
             });
         } else {
 
-            $('#avergaecallduration').text('Data unavailable or not relevant for this account');
+            $('#avergaecallduration').parent().text('Data unavailable or not relevant for this account');
 
         }
     }
