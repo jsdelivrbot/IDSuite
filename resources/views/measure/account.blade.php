@@ -791,7 +791,7 @@
             el.css('display', 'block');
 
         }
-        
+
         let header = "/img/global_presence_heading.png";
         let topbar = "/img/global_presence_top_bar.png";
         let bottombar = "/img/global_presence_bottom_bar.png";

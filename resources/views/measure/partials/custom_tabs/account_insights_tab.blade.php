@@ -114,7 +114,7 @@
         <div class="card card-custom">
             <div class="row m-1">
                 <div class="col-lg-12 mt-2 text-white">
-                    <h5>Cpu Usage Hourly Average</h5>
+                    <h5>CPU Usage Hourly Average</h5>
                 </div>
             </div>
             <div class="row" style="height: 200px;">
@@ -128,7 +128,7 @@
         <div class="card card-custom">
             <div class="row m-1">
                 <div class="col-lg-12 mt-2 text-white">
-                    <h5>Cpu Usage Daily Average</h5>
+                    <h5>CPU Usage Daily Average</h5>
                 </div>
             </div>
             <div class="row" style="height: 200px;">
