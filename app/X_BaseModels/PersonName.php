@@ -84,4 +84,20 @@ class PersonName extends Model
         return $this;
 
     }
+
+
+    /**
+     *
+     * getFullName
+     *
+     * returns the concatenation of first and last name.
+     *
+     * @return string
+     */
+    public function getFullName()
+    {
+
+        return "$this->first_name $this->last_name";
+
+    }
 }

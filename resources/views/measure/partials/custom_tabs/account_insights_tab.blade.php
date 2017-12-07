@@ -2,7 +2,7 @@
 @if(strpos(request()->getQueryString(), 'page' ) !== false)
 <div class="tab-pane card-block active-outline-card-block-color-{{$tab_count}}" id="card-block-tab-{{$tab_count}}" role="tabpanel">
     <div class="row">
-        <button class="btn btn-nav-blue m-3" onclick="createReport();">Generate Report</button>
+        <button class="btn btn-nav-blue m-3 disabled" id="report-btn" onclick="createReport();">Generate Report</button>
     </div>
 @else
 <div class="tab-pane card-block active active-outline-card-block-color-{{$tab_count}}" id="card-block-tab-{{$tab_count}}" role="tabpanel">
@@ -96,17 +96,13 @@
         <div class="card card-custom">
             <div class="row m-1">
                 <div class="col-lg-12 mt-2 text-white">
-                    <h5>Monthly Device Utilization</h5>
+                    <h5>Total Call Records by Month</h5>
                 </div>
             </div>
             <div class="row" style="height: 200px;">
                 <div class="col-lg-12 text-center my-auto text-white">
-                    {{--<img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>--}}
-                    {{--<div class="text-center" id="monthly-device-utilization" style="display: none;"></div>--}}
-                    {{--<img id="monthly-device-utilization-loader" src="/img/bars.svg" height="70px"/>--}}
-                    <div class="text-center text-white" id="monthly-device-utilization">
-                        Data unavailable or not relevant for this account
-                    </div>
+                    <img id="totalcallcount-loader" src="/img/bars.svg" height="70px"/>
+                    <div class="text-center" id="totalcallcount" style="display: none; height: 200px;"></div>
                 </div>
             </div>
         </div>

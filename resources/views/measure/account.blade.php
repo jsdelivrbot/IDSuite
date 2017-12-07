@@ -253,7 +253,81 @@
             $('#chart1-loader').css('display', 'none');
 
 
-            let chart = AmCharts.makeChart("chart1", {
+            AmCharts.makeChart("chart1", {
+                "type": "serial",
+                "theme": "light",
+                "pathToImages": "/assets/js/amcharts/images/",
+                "marginTop": 0,
+                "color": "#ffffff",
+                "font": 18,
+                "fontSize": 18,
+                "marginRight": 80,
+                "dataProvider": data,
+                "valueAxes": [{
+                    "axisAlpha": 0,
+                    "position": "left"
+                }],
+                "graphs": [{
+                    "id": "g1",
+                    "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
+                    "bullet": "round",
+                    "bulletSize": 8,
+                    "lineColor": "#d1655d",
+                    "lineThickness": 2,
+                    "negativeLineColor": "#637bb6",
+                    "type": "smoothedLine",
+                    "valueField": "value"
+                }],
+                "chartScrollbar": {
+                    "graph": "g1",
+                    "gridAlpha": 0,
+                    "color": "#888888",
+                    "scrollbarHeight": 55,
+                    "backgroundAlpha": 0,
+                    "selectedBackgroundAlpha": 0.1,
+                    "selectedBackgroundColor": "#888888",
+                    "graphFillAlpha": 0,
+                    "autoGridCount": true,
+                    "selectedGraphFillAlpha": 0,
+                    "graphLineAlpha": 0.2,
+                    "graphLineColor": "#c2c2c2",
+                    "selectedGraphLineColor": "#888888",
+                    "selectedGraphLineAlpha": 1
+
+                },
+                "chartScrollbarSettings": {
+                    fontSize: 2
+                },
+                "chartCursor": {
+                    "cursorAlpha": 0,
+                    "valueLineEnabled": true,
+                    "valueLineBalloonEnabled": true,
+                    "valueLineAlpha": 0.5,
+                    "fullWidth": true
+                },
+                "categoryField": "date_string",
+                "export": {
+                    "enabled": true,
+                    "reviver": function(nodeObj) {
+
+                        console.log(nodeObj.className);
+
+                        if (nodeObj.className === 'amcharts-axis-label') {
+                            nodeObj.fill = 'rgba(0,0,0,1)';
+                            nodeObj.fontSize = 18;
+                        }
+
+                    }
+                }
+            });
+
+
+            $('#totalcallcount').css('display', 'block');
+            $('#totalcallcount-loader').css('display', 'none');
+
+
+
+            chart = AmCharts.makeChart("totalcallcount", {
                 "type": "serial",
                 "theme": "light",
                 "pathToImages": "/assets/js/amcharts/images/",
@@ -307,13 +381,23 @@
                 "categoryField": "date_string",
                 "export": {
                     "enabled": true,
-                    "menu": []
+                    "reviver": function(nodeObj) {
+
+                        console.log(nodeObj.className);
+
+                        if (nodeObj.className === 'amcharts-axis-label') {
+                            nodeObj.fill = 'rgba(0,0,0,1)';
+                        }
+
+                    }
                 }
             });
+
             charts.push(chart);
 
-
             renderChart(chart);
+
+
         }
 
 
@@ -383,12 +467,12 @@
                         margin: [-40, 20, 20, 20]
                     },
                     {
-                        text: "Monthly Report",
-                        style: ["header", "safetyDistance"],
+                        text: "Monthly Monitoring Report for {{$entity_name}}",
+                        style: ["header"],
                         alignment: "center"
                     }, {
-                        text: "Generation Detail: by IDSolutions",
-                        style: "safetyDistance",
+                        text: "Reported by {{Auth::user()->contact->name->getFullName()}}",
+                        style: ["safetyDistance","subheader"],
                         alignment: "center"
                     }, {
                         columnGap: 40,
@@ -396,15 +480,23 @@
                             stack: [{
                                 text: "Call Volume Over Time",
                                 style: "subheader"
+                            },{
+                                text: "This Graph shows call volume over time and can be used to indicate the amount of calls made over a month.",
+                                fontSize: 12,
+                                style: "safetyDistance"
                             }, {
                                 image: "chart1",
                                 fit: [( 595.28 / 2 ) - 60, ( 595.28 / 2 ) - 60] // 1 column width incl. margins
                             }]
                         }, {
                             stack: [{
-                                text: "Device Count by Type",
+                                text: "Cases Opened",
                                 style: "subheader"
-                            }, {
+                            },{
+                                text: "This Graph shows the amount of Cases opened over the past year and in which months cases were opened.",
+                                fontSize: 12,
+                                style: "safetyDistance"
+                            },{
                                 image: "chart2",
                                 fit: [( 595.28 / 2 ) - 60, ( 595.28 / 2 ) - 60] // 1 column width incl. margins
                             }]
@@ -414,16 +506,24 @@
                         columnGap: 40,
                         columns: [{
                             stack: [{
-                                text: "Count of Online/Offline Device",
+                                text: "Average Call Duration",
                                 style: "subheader"
-                            }, {
+                            },{
+                                text: "This graph shows the average call time over the course of a month during the past year.",
+                                fontSize: 12,
+                                style: "safetyDistance"
+                            },{
                                 image: "chart3",
                                 fit: [( 595.28 / 2 ) - 60, ( 595.28 / 2 ) - 60] // 1 column width incl. margins
                             }]
                         }, {
                             stack: [{
-                                text: "Count of Online/Offline Device",
+                                text: "Total Call Duration",
                                 style: "subheader"
+                            },{
+                                text: "This graph shows the total call duration over the course of a month during the past year.",
+                                fontSize: 12,
+                                style: "safetyDistance"
                             }, {
                                 image: "chart4",
                                 fit: [( 595.28 / 2 ) - 60, ( 595.28 / 2 ) - 60] // 1 column width incl. margins
@@ -434,7 +534,7 @@
                     {
                         image: "bottombar",
                         fit: [900, 70],
-                        margin: [-40, 185, 20, 20]
+                        margin: [-100, 165, 20, 20]
                     }
 
                 ],
@@ -485,7 +585,6 @@
                     chart4: charts[3]
                 }
             };
-
             callback(chartobject, layout);
         }
 
@@ -502,7 +601,7 @@
             let pdf_images = 0;
             let pdf_layout = layout_1; // loaded from another JS file
 
-            let chartids = ['chart1', 'devicebytype', 'avergaecallduration', 'casesopened'];
+            let chartids = ['totalcallcount', 'casesopened', 'avergaecallduration', 'totalcallduration' ];
 
             let charts = {};
 
@@ -530,13 +629,15 @@
                     chart["export"].capture({}, function () {
                         this.toPNG({}, function (data) {
 
+//                            this.download(data, 'image/png', 'test/')
+
                             this.setup.chart.exportedImage = data;
 
                             charters.push(data);
 
                             charts_remaining--;
 
-                            if (charts_remaining === 1) {
+                            if (charts_remaining === 0) {
 
                                 generateLayout(header, footer, topbar, bottombar, charters, this, generatePdf);
 
@@ -564,11 +665,18 @@
          */
         function generatePdf(chartobject, layout) {
 
+            console.log(layout);
+
+            let download_date = new Date();
+
+            let day = download_date.getDay();
+            let month = download_date.getMonth() + 1;
+            let year = download_date.getFullYear();
+
+            let date_string = year + "_" + month + "_" + day;
+
             chartobject.toPDF(layout, function (data) {
-
-                chartobject.download(data, this.defaults.formats.PDF.mimeType, "amcharts.pdf");
-
-
+                chartobject.download(data, this.defaults.formats.PDF.mimeType, "IDS_Report_" + date_string +".pdf");
             });
 
         }

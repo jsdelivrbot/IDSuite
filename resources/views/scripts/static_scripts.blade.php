@@ -290,7 +290,7 @@
     function axiosAll(requests) {
         axios.all(requests)
             .then(axios.spread(function () {
-
+                $('#report-btn').removeClass("disabled");
             }));
     }
 

@@ -53,6 +53,15 @@
                 },
                 export: {
                     enabled: true,
+                    "reviver": function(nodeObj) {
+
+                        console.log(nodeObj.className);
+
+                        if (nodeObj.className === 'amcharts-axis-label') {
+                            nodeObj.fill = 'rgba(0,0,0,1)';
+                        }
+
+                    }
                 }
             });
         } else {

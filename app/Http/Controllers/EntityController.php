@@ -80,7 +80,9 @@ class EntityController extends Controller
     public function getEntityView($id)
     {
         $entity = Entity::getObjectById($id);
-        return view('measure.account', ['viewname' => 'account', 'entity' => $entity]);
+        $entity_name = $entity->contact->name->name;
+
+        return view('measure.account', ['viewname' => 'account', 'entity' => $entity, 'entity_name' => $entity_name]);
     }
 
     /**
