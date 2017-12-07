@@ -232,7 +232,7 @@ class TestController extends Controller
     public function getZabbixHostData()
     {
         $data = ZabbixController::getHosts();
-//asdfasdfasdf
+
         dd($data);
 
     }
